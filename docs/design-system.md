@@ -95,7 +95,7 @@ WCAG AA contrast; visible focus; semantic headings; marks are decorative (`aria-
 
 ## 10. Known gaps (backlog)
 
-- About 60 hex values remain in inherited Horizon files and AI-generated blocks (`ai_gen_block_*` still carry `#000000`-style defaults); they move to tokens as those sections are rebuilt.
-- 18 `!important` remain in inherited CSS (`base.css` 11, `rtl.css` 2, snippets and sections 18 counting inline styles); `moments.css` has none.
+- **108 hex values** remain in sections, snippets, blocks and the layout (measured): `location-banner` 20 (schema color defaults), `free-shipping-progress` 10, `ai_gen_block_b1c946d` 10, the fragrance-journey section and snippet 18, `theme-styles-variables` 7, `sticky-add-to-cart` 7, the rest in smaller files. They move to tokens as those parts are rebuilt (the cart drawer, journey and sticky add to cart are in the plan).
+- **31 `!important` remain** (measured): `base.css` 11 (Horizon), `rtl.css` 2, and 18 in sections, snippets and blocks (fragrance journey 5, `price` 3, and one or two in each of eight other files). `moments.css` has none.
 - The Moment marks are placeholders; the final set from an illustrator replaces `snippets/moment-marks-sprite.liquid` without code changes if the layer contract in section 6 is kept.
 - Planned and not built yet: header and mega menu, cart drawer, footer, homepage sections, collection and product pages, the rating slot, large mark tiles.
