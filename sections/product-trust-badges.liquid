@@ -1,3 +1,4 @@
+{%- assign free_shipping_amount = settings.moments_free_shipping | times: 100 | money_without_trailing_zeros -%}
 <div class="trust-badges color-{{ section.settings.color_scheme }} section--page-width" style="padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px;">
   <div class="trust-badges__list">
 
@@ -11,8 +12,8 @@
         </svg>
       </span>
       <div class="trust-badges__text">
-        <strong class="trust-badges__title">Free Delivery</strong>
-        <span class="trust-badges__subtitle">On all orders over 2,000 EGP across Egypt</span>
+        <strong class="trust-badges__title">{{ 'homepage.pillars.shipping_title' | t }}</strong>
+        <span class="trust-badges__subtitle">{{ 'homepage.pillars.shipping_text' | t: amount: free_shipping_amount }}</span>
       </div>
     </div>
 
@@ -24,8 +25,8 @@
         </svg>
       </span>
       <div class="trust-badges__text">
-        <strong class="trust-badges__title">100% Authentic</strong>
-        <span class="trust-badges__subtitle">Sourced directly from official distributors</span>
+        <strong class="trust-badges__title">{{ 'homepage.pillars.original_title' | t }}</strong>
+        <span class="trust-badges__subtitle">{{ 'homepage.pillars.original_text' | t }}</span>
       </div>
     </div>
 
@@ -38,8 +39,8 @@
         </svg>
       </span>
       <div class="trust-badges__text">
-        <strong class="trust-badges__title">Easy Returns</strong>
-        <span class="trust-badges__subtitle">Hassle-free returns for damaged or wrong items</span>
+        <strong class="trust-badges__title">{{ 'homepage.pillars.returns_title' | t }}</strong>
+        <span class="trust-badges__subtitle"><a href="/pages/returns-exchange-policy">{{ 'homepage.pillars.returns_text' | t }}</a></span>
       </div>
     </div>
 
