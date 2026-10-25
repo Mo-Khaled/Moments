@@ -461,3 +461,18 @@ html:root {
   color: var(--m-pearl);
 }
 
+
+/* Editor-only draft labels and the berry accent word used in two-weight headings. */
+.m-draft {
+  margin: 0;
+  padding: 6px 10px;
+  border: 1px dashed var(--m-gold-ink);
+  color: var(--m-gold-ink);
+  font-size: 0.75rem;
+  inline-size: fit-content;
+}
+
+.m-accent {
+  color: var(--m-berry-ink);
+}
+

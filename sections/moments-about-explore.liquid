@@ -1,0 +1,375 @@
+{%- comment -%}
+  About v2, parts 2 to 5, built from one calm family of rounded cards (radius token):
+  - "Explore our fragrances.": a split card. Left a moment colour tile with the large mark and the overlay title "Shop by moment."; right the eyebrow,
+    headline, three outlined badges, body and the primary button.
+  - "What we stand for.": four outlined cards with round mark icons (Original, Clear, Made for moments, Easy gifting), heading plus two short
+    paragraphs with bold key phrases. Moment colours for the borders and tints.
+  - A pair of cards: a statement on the left, the six moments as linked chips on the right.
+  All copy is DRAFT for owner approval (label shown in the editor only). No awards, no price or markup claims, no competitor comparison,
+  no distributor claims. "Sourcing details" is a TODO slot that stays hidden until filled.
+{%- endcomment -%}
+
+{%- liquid
+  assign marks = 'allday,gift,night,love' | split: ','
+  assign chips = 'night-moment,gift-moment,all-day-moment,daily-moment,fresh-moment,love-moment' | split: ','
+  assign chip_marks = 'night,gift,allday,daily,fresh,love' | split: ','
+  assign chip_keys = 'moments.night,moments.gift,moments.all_day,moments.daily,moments.fresh,moments.love' | split: ','
+  assign explore_target = section.settings.moments_url | default: '/pages/moments'
+-%}
+
+<section class="m-aex" aria-label="{{ 'about2.eyebrow' | t }}">
+  <div class="m-wrap m-aex__inner">
+    {%- if request.design_mode -%}<p class="m-draft">{{ 'about2.draft' | t }}</p>{%- endif -%}
+
+    <h2 class="m-aex__h2">{{ 'about2.explore_light' | t }} <span class="m-accent">{{ 'about2.explore_accent' | t }}</span></h2>
+    <div class="m-aex__split">
+      <a class="m-aex__tile m-tone--allday" href="{{ explore_target }}" data-moment-host>
+        <span class="m-aex__tile-art" aria-hidden="true">{% render 'moment-mark', mark: 'allday', size: 'lg' %}</span>
+        <span class="m-aex__tile-title">{{ 'about2.tile' | t }}</span>
+      </a>
+      <div class="m-aex__copy">
+        <p class="m-aex__eyebrow">{{ 'about2.eyebrow' | t }}</p>
+        <h3 class="m-aex__head">{{ 'about2.explore_head' | t }}</h3>
+        <ul class="m-aex__badges">
+          <li>{{ 'about2.badge1' | t }}</li>
+          <li>{{ 'about2.badge2' | t }}</li>
+          <li>{{ 'about2.badge3' | t }}</li>
+        </ul>
+        <p class="m-aex__body">{{ 'about2.explore_body' | t }}</p>
+        <a class="m-btn" href="{{ explore_target }}">{{ 'about2.explore_cta' | t }}</a>
+      </div>
+    </div>
+
+    <h2 class="m-aex__h2">{{ 'about2.stand_light' | t }} <span class="m-accent">{{ 'about2.stand_accent' | t }}</span></h2>
+    <ul class="m-aex__stand">
+      {%- for i in (1..4) -%}
+        {%- liquid
+          assign mark = marks[forloop.index0]
+          assign t_key = 'about2.c' | append: i | append: '_title'
+          assign a_key = 'about2.c' | append: i | append: '_a'
+          assign b_key = 'about2.c' | append: i | append: '_b'
+          assign b = b_key | t
+          if i == 1 and section.settings.sourcing != blank
+            assign b = section.settings.sourcing
+          endif
+        -%}
+        <li class="m-aex__card m-tone--{{ mark }}">
+          <span class="m-aex__icon" aria-hidden="true">{% render 'moment-mark', mark: mark, size: 'sm' %}</span>
+          <h3>{{ t_key | t }}</h3>
+          <p>{{ a_key | t }}</p>
+          {%- if b != blank and b != 'translation missing' -%}<p>{{ b }}</p>{%- endif -%}
+        </li>
+      {%- endfor -%}
+    </ul>
+    {%- if request.design_mode and section.settings.sourcing == blank -%}
+      <p class="m-draft">TODO: sourcing details for Original. Hidden until filled.</p>
+    {%- endif -%}
+
+    <div class="m-aex__pair">
+      <p class="m-aex__statement">{{ 'about2.pair_left_a' | t }} <span class="m-accent">{{ 'about2.pair_left_accent' | t }}</span> {{ 'about2.pair_left_b' | t }}</p>
+      <div class="m-aex__pick">
+        <p class="m-aex__eyebrow">{{ 'about2.pair_right' | t }}</p>
+        <ul class="m-aex__chips">
+          {%- for handle in chips -%}
+            {%- assign c = collections[handle] -%}
+            {%- if c != blank -%}
+              <li><a class="m-aex__chip m-tone--{{ chip_marks[forloop.index0] }}" href="{{ c.url }}" data-moment-host>{% render 'moment-mark', mark: chip_marks[forloop.index0], size: 'sm' %}<span>{{ chip_keys[forloop.index0] | t }}</span></a></li>
+            {%- endif -%}
+          {%- endfor -%}
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% stylesheet %}
+  .m-aex {
+    padding-block: clamp(32px, 5vw, 72px);
+    background: var(--m-surface);
+    color: var(--m-text);
+  }
+
+  .m-aex__inner {
+    display: grid;
+    gap: clamp(24px, 3vw, 40px);
+  }
+
+  .m-aex__h2 {
+    margin: clamp(16px, 3vw, 40px) 0 0;
+    font-size: clamp(2.25rem, 5.5vw, 4.25rem);
+    line-height: 1.02;
+  }
+
+  .m-aex__split {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0;
+    overflow: hidden;
+    border: 1px solid var(--m-rule-quiet);
+    border-radius: 28px;
+    background: var(--m-surface-raised);
+  }
+
+  .m-aex__tile {
+    --m-mark-ink: var(--tile-ink);
+    --m-mark-body: var(--tile-body);
+    --m-mark-accent: var(--tile-accent);
+    --m-mark-gold: var(--tile-gold);
+
+    position: relative;
+    display: grid;
+    min-block-size: 320px;
+    padding: 24px;
+    background: var(--tile-bg);
+    color: var(--tile-ink);
+    text-decoration: none;
+  }
+
+  .m-aex__tile-art {
+    place-self: center;
+  }
+
+  .m-aex__tile-art moment-mark {
+    --mm-size: min(56vw, 300px);
+  }
+
+  .m-aex__tile-title {
+    align-self: end;
+    font-family: var(--font-heading--family);
+    font-size: clamp(1.75rem, 3vw, 2.5rem);
+    line-height: 1.1;
+  }
+
+  .m-aex__copy {
+    display: grid;
+    align-content: center;
+    justify-items: start;
+    gap: 16px;
+    padding: clamp(24px, 4vw, 56px);
+  }
+
+  .m-aex__eyebrow {
+    margin: 0;
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--m-text-muted);
+  }
+
+  html[lang='ar'] .m-aex__eyebrow {
+    letter-spacing: 0;
+    text-transform: none;
+  }
+
+  .m-aex__head {
+    margin: 0;
+    max-inline-size: 16ch;
+    font-size: clamp(1.75rem, 3.4vw, 3rem);
+    line-height: 1.08;
+  }
+
+  .m-aex__badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .m-aex__badges li {
+    padding: 8px 14px;
+    border: 1px solid var(--m-badge-ink);
+    color: var(--m-badge-ink);
+    font-size: 0.8125rem;
+    line-height: 1;
+  }
+
+  .m-aex__body {
+    margin: 0;
+    max-inline-size: 48ch;
+    color: var(--m-text-muted);
+    line-height: 1.6;
+  }
+
+  .m-aex__stand {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 12px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .m-aex__card {
+    --m-mark-ink: var(--m-plum);
+    --m-mark-body: var(--m-nude);
+    --m-mark-accent: var(--m-berry);
+    --m-mark-gold: var(--m-gold-ink);
+
+    display: grid;
+    gap: 8px;
+    padding: clamp(20px, 3vw, 36px);
+    border: 2px solid var(--tile-accent);
+    border-radius: 24px;
+    background: var(--m-surface-raised);
+    color: var(--m-text);
+  }
+
+  .m-aex__card.m-tone--night {
+    border-color: var(--m-plum);
+  }
+
+  .m-aex__card.m-tone--allday {
+    border-color: var(--m-gold-ink);
+  }
+
+  .m-aex__card.m-tone--gift {
+    border-color: var(--m-berry);
+  }
+
+  .m-aex__card.m-tone--love {
+    border-color: var(--m-text-secondary);
+  }
+
+  .m-aex__icon {
+    display: grid;
+    place-items: center;
+    inline-size: 56px;
+    block-size: 56px;
+    border-radius: 9999px;
+    background: var(--m-nude);
+  }
+
+  .m-aex__icon moment-mark {
+    --mm-size: 32px;
+  }
+
+  .m-aex__card h3 {
+    margin: 8px 0 0;
+    font-size: 1.75rem;
+    line-height: 1.1;
+  }
+
+  .m-aex__card p {
+    margin: 0;
+    line-height: 1.55;
+  }
+
+  .m-aex__card strong {
+    font-weight: 600;
+  }
+
+  .m-aex__pair {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 12px;
+  }
+
+  .m-aex__statement,
+  .m-aex__pick {
+    margin: 0;
+    padding: clamp(24px, 4vw, 48px);
+    border-radius: 28px;
+  }
+
+  .m-aex__statement {
+    background: var(--m-plum);
+    color: var(--m-pearl);
+    font-family: var(--font-heading--family);
+    font-size: clamp(1.75rem, 3.4vw, 3rem);
+    line-height: 1.1;
+  }
+
+  .m-aex__statement .m-accent {
+    color: var(--m-gold-light);
+  }
+
+  .m-aex__pick {
+    display: grid;
+    align-content: center;
+    gap: 16px;
+    background: var(--m-nude);
+  }
+
+  .m-aex__chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .m-aex__chip {
+    --m-mark-ink: var(--m-plum);
+    --m-mark-body: var(--m-pearl);
+    --m-mark-accent: var(--m-berry);
+    --m-mark-gold: var(--m-gold-ink);
+
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-block-size: 44px;
+    padding-inline: 14px 18px;
+    border: 1px solid var(--m-plum);
+    border-radius: 9999px;
+    background: var(--m-pearl);
+    color: var(--m-plum);
+    text-decoration: none;
+  }
+
+  .m-aex__chip:hover,
+  .m-aex__chip:focus-visible {
+    background: var(--m-plum);
+    color: var(--m-pearl);
+  }
+
+  .m-aex__chip:focus-visible {
+    outline: 2px solid var(--m-berry);
+    outline-offset: 2px;
+  }
+
+  html[lang='ar'] .m-aex__h2,
+  html[lang='ar'] .m-aex__head,
+  html[lang='ar'] .m-aex__card h3 {
+    line-height: 1.35;
+  }
+
+  html[lang='ar'] .m-aex__card p,
+  html[lang='ar'] .m-aex__body {
+    line-height: 1.8;
+  }
+
+  @media screen and (min-width: 750px) {
+    .m-aex__stand {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .m-aex__pair {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media screen and (min-width: 990px) {
+    .m-aex__split {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .m-aex__tile {
+      min-block-size: 440px;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "MOMENTS about explore",
+  "limit": 1,
+  "settings": [
+    { "type": "url", "id": "moments_url", "label": "Shop by moment link", "info": "Defaults to /pages/moments." },
+    { "type": "textarea", "id": "sourcing", "label": "Sourcing details (Original card)", "info": "TODO: owner. Hidden until filled. Do not claim distributor status until confirmed." }
+  ],
+  "presets": [{ "name": "MOMENTS about explore" }]
+}
+{% endschema %}

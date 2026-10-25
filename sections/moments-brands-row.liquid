@@ -1,0 +1,104 @@
+{%- comment -%}
+  About v2, part 2: "Original bottles from N fragrance houses." N is counted from the brand blocks below (the brands the store carries), not typed.
+  A calm, static row of logos, each linking to its brand collection. ASDAF and ASSAF stay separate brands (add both as blocks when both have a
+  collection). No awards, no distributor claims. Logos are the derived pearl files (assets/brand-<handle>.png), shown here in plum.
+{%- endcomment -%}
+
+{%- liquid
+  assign known = 'afnan,khadlaj,lattafa,faan,assaf,rasasi-perfumes,laverne,nabeel-perfumes,ibraq,le-falcone,lattafa-pride,armaf,zimaya,dkhoon-emirates' | split: ','
+  assign n = 0
+  for block in section.blocks
+    if block.settings.collection != blank
+      assign n = n | plus: 1
+    endif
+  endfor
+-%}
+
+{%- if n > 0 -%}
+  <section class="m-brow" aria-labelledby="m-brow-title-{{ section.id }}">
+    <div class="m-wrap">
+      <h2 class="m-brow__title" id="m-brow-title-{{ section.id }}">{{ 'about2.brands' | t: count: n }}</h2>
+      <ul class="m-brow__list">
+        {%- for block in section.blocks -%}
+          {%- assign c = block.settings.collection -%}
+          {%- if c != blank -%}
+            <li {{ block.shopify_attributes }}>
+              <a href="{{ c.url }}">
+                {%- if known contains c.handle -%}
+                  {%- assign logo = 'brand-' | append: c.handle | append: '.png' -%}
+                  <img src="{{ logo | asset_url }}" alt="{{ c.title | escape }}" width="120" height="24" loading="lazy" decoding="async">
+                {%- else -%}
+                  <span>{{ c.title }}</span>
+                {%- endif -%}
+              </a>
+            </li>
+          {%- endif -%}
+        {%- endfor -%}
+      </ul>
+    </div>
+  </section>
+{%- endif -%}
+
+{% stylesheet %}
+  .m-brow {
+    padding-block: clamp(32px, 4vw, 56px);
+    background: var(--m-surface);
+    color: var(--m-text);
+    border-block: 1px solid var(--m-rule-quiet);
+  }
+
+  .m-brow__title {
+    margin: 0 0 24px;
+    font-size: clamp(1.5rem, 2.6vw, 2.25rem);
+    line-height: 1.15;
+  }
+
+  .m-brow__list {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 20px 40px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .m-brow__list a {
+    display: block;
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .m-brow__list img {
+    display: block;
+    inline-size: auto;
+    block-size: 26px;
+    /* pearl logo files shown in plum on the light band */
+    filter: brightness(0) saturate(100%) invert(12%) sepia(23%) saturate(1432%) hue-rotate(264deg) brightness(92%);
+  }
+
+  .m-brow__list a:focus-visible {
+    outline: 2px solid var(--m-plum);
+    outline-offset: 4px;
+  }
+
+  html[lang='ar'] .m-brow__title {
+    line-height: 1.4;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "MOMENTS brands row",
+  "limit": 1,
+  "settings": [],
+  "blocks": [
+    {
+      "type": "brand",
+      "name": "Brand",
+      "settings": [{ "type": "collection", "id": "collection", "label": "Brand collection" }]
+    }
+  ],
+  "presets": [{ "name": "MOMENTS brands row" }]
+}
+{% endschema %}

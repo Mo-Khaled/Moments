@@ -1,108 +1,11 @@
 {
   "sections": {
-    "about_hero": {
-      "type": "moments-about-hero",
-      "settings": {
-        "tone": "night"
-      }
-    },
-    "about_trust": {
-      "type": "moments-trust",
-      "settings": {
-        "returns_url": "/pages/returns-exchange-policy"
-      }
-    },
-    "about_sell": {
-      "type": "moments-split",
-      "blocks": {
-        "b1": {
-          "type": "badge",
-          "settings": {}
-        },
-        "b2": {
-          "type": "badge",
-          "settings": {}
-        },
-        "b3": {
-          "type": "badge",
-          "settings": {}
-        }
-      },
-      "block_order": [
-        "b1",
-        "b2",
-        "b3"
-      ],
-      "settings": {
-        "cta_url": "/pages/moments",
-        "tone": "allday",
-        "reverse": false
-      }
-    },
-    "about_promises": {
-      "type": "moments-promises",
-      "blocks": {
-        "p1": {
-          "type": "promise",
-          "settings": {}
-        },
-        "p2": {
-          "type": "promise",
-          "settings": {}
-        },
-        "p3": {
-          "type": "promise",
-          "settings": {}
-        },
-        "p4": {
-          "type": "promise",
-          "settings": {}
-        }
-      },
-      "block_order": [
-        "p1",
-        "p2",
-        "p3",
-        "p4"
-      ],
-      "settings": {}
-    },
-    "about_steps": {
-      "type": "moments-steps",
-      "settings": {
-        "returns_url": "/pages/returns-exchange-policy"
-      }
-    },
     "about_story": {
-      "type": "moments-chapters",
-      "blocks": {
-        "chapter_1": {
-          "type": "chapter",
-          "settings": {}
-        },
-        "chapter_2": {
-          "type": "chapter",
-          "settings": {}
-        },
-        "chapter_3": {
-          "type": "chapter",
-          "settings": {}
-        },
-        "chapter_4": {
-          "type": "chapter",
-          "settings": {}
-        }
-      },
-      "block_order": [
-        "chapter_1",
-        "chapter_2",
-        "chapter_3",
-        "chapter_4"
-      ],
+      "type": "moments-about-story",
       "settings": {}
     },
     "about_brands": {
-      "type": "moments-brand-marquee",
+      "type": "moments-brands-row",
       "blocks": {
         "brand_afnan": {
           "type": "brand",
@@ -205,9 +108,48 @@
         "brand_zimaya",
         "brand_dkhoon_emirates"
       ],
+      "settings": {}
+    },
+    "about_explore": {
+      "type": "moments-about-explore",
       "settings": {
-        "speed": 40
+        "moments_url": "/pages/moments"
       }
+    },
+    "about_steps": {
+      "type": "moments-steps",
+      "settings": {
+        "heading": "Choose with confidence.",
+        "returns_url": "/pages/returns-exchange-policy"
+      }
+    },
+    "about_timeline": {
+      "type": "moments-chapters",
+      "blocks": {
+        "chapter_1": {
+          "type": "chapter",
+          "settings": {}
+        },
+        "chapter_2": {
+          "type": "chapter",
+          "settings": {}
+        },
+        "chapter_3": {
+          "type": "chapter",
+          "settings": {}
+        },
+        "chapter_4": {
+          "type": "chapter",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "chapter_1",
+        "chapter_2",
+        "chapter_3",
+        "chapter_4"
+      ],
+      "settings": {}
     },
     "about_support": {
       "type": "moments-support",
@@ -329,13 +271,11 @@
     }
   },
   "order": [
-    "about_hero",
-    "about_trust",
-    "about_sell",
-    "about_promises",
-    "about_steps",
     "about_story",
     "about_brands",
+    "about_explore",
+    "about_steps",
+    "about_timeline",
     "about_support",
     "about_signup"
   ]
