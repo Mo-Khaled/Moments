@@ -1,0 +1,63 @@
+{%- doc -%}
+  Previous and next buttons for every product carousel (the product-list section set to "carousel"). The buttons are added to the section header,
+  at the inline-end beside "View all". Scrolls one card at a time, keeps the scroll-snap, is operable with the keyboard (real buttons), disables each
+  button at its end, and mirrors in right-to-left languages. Safe to render once per page; it finds every carousel itself and does nothing
+  when a carousel has no header.
+
+  @example
+  {% render 'moments-carousel-controls' %}
+{%- enddoc -%}
+
+<template data-m-carousel-labels data-prev="{{ 'bundle.prev' | t }}" data-next="{{ 'bundle.next' | t }}"></template>
+
+{% javascript %}
+  (() => {
+    const labels = () => { const t = document.querySelector('[data-m-carousel-labels]'); return t ? t.dataset : { prev: 'Previous', next: 'Next' }; };
+    const chevron = '<svg class="m-chevron" width="14" height="14" viewBox="0 0 14 14" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M5 2l5 5-5 5"/></svg>';
+
+    function setup(section) {
+      if (section.dataset.mCarousel) return;
+      const slides = section.querySelector('slideshow-slides');
+      const header = section.querySelector('.section-resource-list__header .layout-panel-flex');
+      const link = header && header.querySelector('a');
+      if (!slides || !header || !link) return;
+      section.dataset.mCarousel = 'true';
+
+      const end = document.createElement('div');
+      end.className = 'm-carousel-end';
+      link.replaceWith(end);
+      end.appendChild(link);
+      const controls = document.createElement('div');
+      controls.className = 'm-carousel-controls';
+      controls.setAttribute('role', 'group');
+      const make = (dir, text) => { const b = document.createElement('button'); b.type = 'button'; b.dataset.dir = dir; b.setAttribute('aria-label', text); b.innerHTML = chevron; return b; };
+      const prev = make('prev', labels().prev);
+      const next = make('next', labels().next);
+      controls.append(prev, next);
+      end.appendChild(controls);
+
+      const rtl = () => getComputedStyle(slides).direction === 'rtl';
+      const card = () => slides.querySelector('slideshow-slide.resource-list__slide');
+      const step = () => { const c = card(); const gap = parseFloat(getComputedStyle(slides).columnGap) || 0; return (c ? c.getBoundingClientRect().width : slides.clientWidth * 0.8) + gap; };
+      const go = (dir) => slides.scrollBy({ left: dir * (rtl() ? -1 : 1) * step(), behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+      prev.addEventListener('click', () => go(-1));
+      next.addEventListener('click', () => go(1));
+
+      let raf = 0;
+      const update = () => {
+        raf = 0;
+        const pos = Math.abs(slides.scrollLeft);
+        prev.disabled = pos < 2;
+        next.disabled = pos + slides.clientWidth >= slides.scrollWidth - 2;
+      };
+      slides.addEventListener('scroll', () => { if (!raf) raf = requestAnimationFrame(update); }, { passive: true });
+      window.addEventListener('resize', update);
+      update();
+    }
+
+    const run = () => document.querySelectorAll('.section-resource-list').forEach(setup);
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', run); else run();
+    window.addEventListener('load', run);
+    document.addEventListener('shopify:section:load', run);
+  })();
+{% endjavascript %}

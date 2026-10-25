@@ -16,7 +16,7 @@
 {%- if settings.moments_cursor -%}
   <moment-cursor aria-hidden="true" hidden>
     <span class="moment-cursor__token">
-      <svg viewBox="0 0 48 48" width="28" height="28" focusable="false"><use href="#moment-mark-night" data-cursor-use></use></svg>
+      <svg viewBox="0 0 48 48" width="44" height="44" focusable="false"><use href="#moment-mark-night" data-cursor-use></use></svg>
     </span>
   </moment-cursor>
 {%- endif -%}
@@ -39,13 +39,13 @@
     --mc-scale: 1;
 
     position: absolute;
-    inset-block-start: 10px;
-    inset-inline-start: 14px;
+    top: 40px;
+    left: 44px;
     display: grid;
     place-items: center;
-    inline-size: 40px;
-    block-size: 40px;
-    margin: -20px 0 0 -20px;
+    inline-size: 64px;
+    block-size: 64px;
+    margin: -32px 0 0 -32px;
     border: 1px solid var(--m-plum);
     border-radius: 9999px;
     background: var(--m-pearl);
@@ -60,11 +60,11 @@
   }
 
   moment-cursor[data-state='card'] .moment-cursor__token {
-    --mc-scale: 1.45;
+    --mc-scale: 1.2;
   }
 
   moment-cursor[data-state='cta'] .moment-cursor__token {
-    --mc-scale: 1.25;
+    --mc-scale: 1.1;
     border-color: var(--m-berry);
     box-shadow: 0 0 0 5px rgb(183 64 106 / 0.22);
   }

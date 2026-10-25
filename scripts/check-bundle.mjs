@@ -36,9 +36,11 @@ async function open(width, dir) {
   if (crop) fail('grid', `${crop} card images are cover-cropped`);
   log.push(`grid: ${cards} real cards, no cover-cropped image`);
 
-  const text = await page.evaluate(() => document.querySelector('[data-m-bundle]').innerText);
-  if (/\b(save|saving|discount|off)\b|%/i.test(text.replace(/100% original/gi, ''))) fail('tiers off', 'discount wording is visible: ' + (text.match(/.{0,30}(save|saving|discount|%).{0,30}/i) || [''])[0]);
-  else log.push('tiers off: no discount wording on the page');
+  // the bundle's own wording (card, summary, tools, mini bar); product cards carry real compare-at "Save" badges, which are allowed
+  const text = await page.evaluate(() => ['.m-bundle__card', '.m-bundle__tools', '[data-m-bar]'].map((q) => (document.querySelector(q) || {}).innerText || '').join(' '));
+  const dm = /\b(save|saving|discount|off)\b|%/i.exec(text.replace(/100% original/gi, ''));
+  if (dm) fail('tiers off', 'discount wording is visible: ' + text.slice(Math.max(0, dm.index - 30), dm.index + 30).replace(/\s+/g, ' '));
+  else log.push('tiers off: no discount wording in the bundle card, tools or bar');
 
   await page.evaluate(() => { try { localStorage.removeItem('moments-bundle-v1'); } catch (e) {} });
   await page.reload({ waitUntil: 'domcontentloaded' });
