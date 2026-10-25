@@ -2614,7 +2614,7 @@
               "type": "text",
               "name": "t:names.heading",
               "settings": {
-                "text": "<h2>Easy Exchange</h2>",
+                "text": "<h2>Returns &amp; exchange policy</h2>",
                 "width": "100%",
                 "max_width": "normal",
                 "alignment": "center",
@@ -2640,7 +2640,7 @@
               "type": "text",
               "name": "t:names.description",
               "settings": {
-                "text": "<p>See our <a href=\"/pages/returns-exchange-policy\" target=\"_blank\" title=\"Returns & Exchange Policy\">Returns & Exchange Policy</a>.</p>",
+                "text": "<p>Read the <a href=\"/pages/returns-exchange-policy\" title=\"Returns &amp; exchange policy\">full policy</a> before you order.</p>",
                 "width": "100%",
                 "max_width": "normal",
                 "alignment": "center",
