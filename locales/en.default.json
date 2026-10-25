@@ -344,5 +344,11 @@
         "free": "Based on Location"
       }
     }
+  },
+  "sections": {
+    "coming_soon_gate": {
+      "open_collection": "Now open: {{ title }}",
+      "editor_hint": "This coming soon page is active. Turn on \"Line has launched\" and pick a collection to send visitors there."
+    }
   }
 }

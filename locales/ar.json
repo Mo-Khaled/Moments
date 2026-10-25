@@ -4574,5 +4574,11 @@
     "filter": "فلتر",
     "sold_out": "نفذ",
     "payment_methods": "طرق الدفع"
+  },
+  "sections": {
+    "coming_soon_gate": {
+      "open_collection": "متاح الآن: {{ title }}",
+      "editor_hint": "صفحة «قريبًا» مفعّلة حاليًا. فعّل خيار «تم إطلاق الخط» واختر مجموعة لتحويل الزوار إليها."
+    }
   }
 }

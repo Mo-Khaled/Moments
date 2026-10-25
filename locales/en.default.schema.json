@@ -195,6 +195,7 @@
     "work_quickly_to_ship": "<p>We will work quickly to ship your order as soon as possible. Once your order has shipped, you will receive an email with further information. Delivery times vary depending on your location.</p>"
   },
   "info": {
+    "coming_soon_launched": "When on, visitors to this page go straight to the collection below.",
     "applies_on_image_only": "Applies to images only",
     "aspect_ratio_adjusted": "Adjusted in some layouts",
     "auto_open_cart_drawer": "When enabled, the cart drawer will automatically open when a product is added to cart.",
@@ -305,6 +306,7 @@
     "hero": "Hero",
     "hero_bottom_aligned": "Hero: Bottom aligned",
     "hero_marquee": "Hero: Marquee",
+    "coming_soon_gate": "Coming soon redirect",
     "icon": "Icon",
     "icons": "Icons",
     "icons_with_text": "Icons with text",
@@ -718,6 +720,8 @@
     "youtube": "YouTube"
   },
   "settings": {
+    "launched": "Line has launched",
+    "launch_collection": "Collection to open after launch",
     "accordion": "Accordion",
     "account": "Account",
     "alignment": "Alignment",
