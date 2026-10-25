@@ -1,0 +1,707 @@
+{%- comment -%}
+  Bundle builder. A large rounded card holds the title, a row of numbered slots (dashed empty cells, filled ones show the bottle's
+  packshot contained and uncropped with a remove control) and a summary card (count, subtotal, free-shipping progress, Checkout).
+  Below it: filter chips (All, the six moments, For Her, For Him), a search field, and the product grid. The grid uses the REAL product
+  cards (fetched from the collection and search pages), so the card, the moment label, the brand and the contained image are the same
+  everywhere; each card gets a full-width "Add to bundle" button (disabled "Sold out" when nothing is available). "Load more" fetches the
+  next page. No ratings or reviews: none exist.
+
+  Tiers (setting, default OFF): when off there is no discount wording anywhere, only the real subtotal and free-shipping progress.
+  When on, the tier labels show; a saving amount is shown ONLY when "Discount mechanism confirmed" is also on. A bundle-only discount
+  needs a bundle app or a custom discount function (an ordinary automatic discount applies to every cart): see docs/needs-from-owner.md.
+
+  State lives in localStorage (this device only; every access is in try/catch). Checkout posts all lines in ONE /cart/add.js request
+  with the line item property "Bundle": "MOMENTS bundle <id>", then goes to the cart. Nothing here places an order.
+{%- endcomment -%}
+
+{%- liquid
+  assign min_items = section.settings.min_items
+  assign max_items = section.settings.max_items
+  assign chips = 'night-moment,gift-moment,all-day-moment,daily-moment,fresh-moment,love-moment' | split: ','
+  assign chip_marks = 'night,gift,allday,daily,fresh,love' | split: ','
+  assign chip_keys = 'moments.night,moments.gift,moments.all_day,moments.daily,moments.fresh,moments.love' | split: ','
+-%}
+
+<section
+  class="m-bundle"
+  data-m-bundle
+  data-money="{{ shop.money_format | escape }}"
+  data-min="{{ min_items }}"
+  data-max="{{ max_items }}"
+  data-threshold="{{ settings.moments_free_shipping | times: 100 }}"
+  data-tiers="{{ section.settings.tiers_enabled }}"
+  data-tiers-confirmed="{{ section.settings.discount_confirmed }}"
+  data-tier-percent="{{ section.settings.tier_percent }}"
+  data-t-added="{{ 'bundle.added' | t: title: '__T__' | escape }}"
+  data-t-removed="{{ 'bundle.removed' | t: title: '__T__' | escape }}"
+  data-t-remove="{{ 'bundle.remove' | t: title: '__T__' | escape }}"
+  data-t-empty-slot="{{ 'bundle.empty_slot' | t: n: '__N__' | escape }}"
+  data-t-items="{{ 'bundle.items' | t: count: '__C__' | escape }}"
+  data-t-add-more="{{ 'bundle.add_more' | t: count: '__C__' | escape }}"
+  data-t-shipping-hint="{{ 'bundle.shipping_hint' | t: amount: '__A__' | escape }}"
+  data-t-limit="{{ 'bundle.limit' | t: count: max_items | escape }}"
+  data-t-tier="{{ 'bundle.tier' | t: count: '__C__', label: '__L__' | escape }}"
+  data-t-saving="{{ 'bundle.saving' | t: amount: '__A__' | escape }}"
+>
+  <div class="m-wrap m-bundle__inner">
+    <div class="m-bundle__card">
+      <header class="m-bundle__head">
+        <h1 class="m-bundle__title">{{ 'bundle.title' | t }}<span class="m-bundle__dot">.</span></h1>
+        <p class="m-bundle__line">{{ 'bundle.line' | t: count: min_items }}</p>
+        {%- if section.settings.tiers_enabled -%}
+          <p class="m-bundle__tiers">
+            {%- if section.settings.tier1_label != blank -%}<span>{{ 'bundle.tier' | t: count: section.settings.tier1_count, label: section.settings.tier1_label }}</span>{%- endif -%}
+            {%- if section.settings.tier2_label != blank -%}<span>{{ 'bundle.tier' | t: count: section.settings.tier2_count, label: section.settings.tier2_label }}</span>{%- endif -%}
+          </p>
+        {%- endif -%}
+      </header>
+
+      <div class="m-bundle__builder">
+        <div class="m-bundle__slots-wrap">
+          <button class="m-bundle__nav m-bundle__nav--prev" type="button" aria-label="{{ 'bundle.prev' | t }}" data-m-prev>{% render 'moments-chevron' %}</button>
+          <ol class="m-bundle__slots" tabindex="0" aria-label="{{ 'bundle.title' | t }}" data-m-slots></ol>
+          <button class="m-bundle__nav m-bundle__nav--next" type="button" aria-label="{{ 'bundle.next' | t }}" data-m-next>{% render 'moments-chevron' %}</button>
+        </div>
+
+        <aside class="m-bundle__summary" data-m-summary>
+          <p class="m-bundle__count" data-m-count>0</p>
+          <p class="m-bundle__subtotal"><span>{{ 'bundle.subtotal' | t }}</span> <strong data-m-subtotal>0</strong></p>
+          <p class="m-bundle__saving" data-m-saving hidden></p>
+          <p class="m-bundle__hint" data-m-hint></p>
+          <button class="m-btn" type="button" data-m-checkout disabled>{{ 'bundle.checkout' | t }}</button>
+          <p class="m-bundle__stored">{{ 'bundle.stored' | t }}</p>
+        </aside>
+      </div>
+      <p class="m-bundle__status m-sr-only" role="status" aria-live="polite" data-m-status></p>
+      <p class="m-bundle__error" role="alert" data-m-error hidden></p>
+    </div>
+
+    <div class="m-bundle__tools">
+      <div class="m-bundle__chips" role="group" aria-label="{{ 'bundle.filters' | t }}">
+        <button class="m-chip" type="button" data-m-chip="/collections/all" aria-pressed="true">{{ 'bundle.all' | t }}</button>
+        {%- for handle in chips -%}
+          {%- assign c = collections[handle] -%}
+          {%- if c != blank -%}
+            <button class="m-chip" type="button" data-m-chip="{{ c.url }}" aria-pressed="false">{% render 'moment-mark', mark: chip_marks[forloop.index0], size: 'sm' %}<span>{{ chip_keys[forloop.index0] | t }}</span></button>
+          {%- endif -%}
+        {%- endfor -%}
+        {%- if collections['for-her'] != blank -%}<button class="m-chip" type="button" data-m-chip="{{ collections['for-her'].url }}" aria-pressed="false"><span>{{ 'bundle.for_her' | t }}</span></button>{%- endif -%}
+        {%- if collections['for-him'] != blank -%}<button class="m-chip" type="button" data-m-chip="{{ collections['for-him'].url }}" aria-pressed="false"><span>{{ 'bundle.for_him' | t }}</span></button>{%- endif -%}
+      </div>
+      <label class="m-bundle__search">
+        <span class="m-sr-only">{{ 'bundle.search' | t }}</span>
+        <input type="search" placeholder="{{ 'bundle.search' | t }}" autocomplete="off" data-m-search>
+      </label>
+    </div>
+
+    <ul class="m-bundle__grid" data-m-grid aria-live="off"></ul>
+    <p class="m-bundle__none" data-m-none hidden>{{ 'bundle.none' | t }}</p>
+    <p class="m-bundle__more"><button class="m-btn m-btn--ghost" type="button" data-m-more hidden data-loading="{{ 'bundle.loading' | t }}">{{ 'bundle.load_more' | t }}</button></p>
+  </div>
+
+  <div class="m-bundle__bar" data-m-bar hidden>
+    <span data-m-bar-text></span>
+    <button class="m-btn" type="button" data-m-bar-checkout disabled>{{ 'bundle.checkout' | t }}</button>
+  </div>
+
+  <template data-m-add-label data-add="{{ 'bundle.add' | t }}" data-sold="{{ 'bundle.sold_out' | t }}" data-error="{{ 'bundle.error' | t }}" data-unavailable="{{ 'bundle.unavailable' | t }}"></template>
+</section>
+
+{% stylesheet %}
+  .m-bundle {
+    padding-block: clamp(24px, 4vw, 64px) clamp(96px, 10vw, 128px);
+    background: var(--m-surface);
+    color: var(--m-text);
+  }
+
+  .m-bundle__inner {
+    display: grid;
+    gap: 32px;
+  }
+
+  .m-bundle__card {
+    padding: clamp(20px, 3.5vw, 48px);
+    background: var(--m-nude);
+    border-radius: 28px;
+  }
+
+  .m-bundle__title {
+    margin: 0;
+    font-size: clamp(3rem, 8vw, 6rem);
+    line-height: 0.98;
+  }
+
+  .m-bundle__dot {
+    color: var(--m-berry-ink);
+  }
+
+  .m-bundle__line {
+    margin: 8px 0 0;
+    font-size: 1.125rem;
+    color: var(--m-text-muted);
+  }
+
+  .m-bundle__tiers {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 12px 0 0;
+  }
+
+  .m-bundle__tiers span {
+    padding: 6px 12px;
+    border: 1px solid var(--m-gold-ink);
+    color: var(--m-gold-ink);
+    font-size: 0.8125rem;
+  }
+
+  .m-bundle__builder {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 20px;
+    margin-block-start: 28px;
+  }
+
+  .m-bundle__slots-wrap {
+    position: relative;
+    min-inline-size: 0;
+  }
+
+  .m-bundle__slots {
+    display: flex;
+    gap: 12px;
+    margin: 0;
+    padding: 4px;
+    list-style: none;
+    overflow-x: auto;
+    scroll-snap-type: x proximity;
+    scrollbar-width: thin;
+  }
+
+  .m-bundle__slots:focus-visible {
+    outline: 2px solid var(--m-plum);
+    outline-offset: 2px;
+  }
+
+  .m-slot {
+    position: relative;
+    flex: none;
+    inline-size: 132px;
+    aspect-ratio: 3 / 4;
+    scroll-snap-align: start;
+    display: grid;
+    place-items: center;
+    border: 1.5px dashed var(--m-taupe);
+    border-radius: 16px;
+    color: var(--m-taupe-ink);
+  }
+
+  .m-slot__num {
+    position: absolute;
+    inset-block-start: 8px;
+    inset-inline-start: 10px;
+    font-size: 0.8125rem;
+  }
+
+  .m-slot__plus {
+    font-size: 2rem;
+    line-height: 1;
+  }
+
+  .m-slot--filled {
+    border-style: solid;
+    border-color: var(--m-plum);
+    background: var(--m-surface-raised);
+    color: var(--m-text);
+  }
+
+  .m-slot--filled img {
+    inline-size: 100%;
+    block-size: 100%;
+    padding: 28px 10px 10px;
+    object-fit: contain;
+  }
+
+  .m-slot__remove {
+    position: absolute;
+    inset-block-start: 4px;
+    inset-inline-end: 4px;
+    inline-size: 32px;
+    block-size: 32px;
+    border: 0;
+    border-radius: 9999px;
+    background: var(--m-plum);
+    color: var(--m-pearl);
+    font-size: 1rem;
+    line-height: 1;
+    cursor: pointer;
+  }
+
+  .m-slot__remove:focus-visible {
+    outline: 2px solid var(--m-berry);
+    outline-offset: 2px;
+  }
+
+  .m-bundle__nav {
+    position: absolute;
+    inset-block-start: 50%;
+    z-index: 2;
+    inline-size: 40px;
+    block-size: 40px;
+    margin-block-start: -20px;
+    border: 1px solid var(--m-plum);
+    border-radius: 9999px;
+    background: var(--m-pearl);
+    color: var(--m-plum);
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+  }
+
+  .m-bundle__nav--prev {
+    inset-inline-start: -8px;
+  }
+
+  .m-bundle__nav--next {
+    inset-inline-end: -8px;
+  }
+
+  .m-bundle__nav--prev .m-chevron {
+    transform: scaleX(-1);
+  }
+
+  html[dir='rtl'] .m-bundle__nav--prev .m-chevron {
+    transform: none;
+  }
+
+  html[dir='rtl'] .m-bundle__nav--next .m-chevron {
+    transform: scaleX(-1);
+  }
+
+  .m-bundle__summary {
+    display: grid;
+    align-content: start;
+    gap: 8px;
+    padding: 20px;
+    background: var(--m-pearl);
+    border-radius: 20px;
+  }
+
+  .m-bundle__count {
+    margin: 0;
+    font-family: var(--font-heading--family);
+    font-size: 1.5rem;
+  }
+
+  .m-bundle__subtotal {
+    display: flex;
+    justify-content: space-between;
+    margin: 0;
+  }
+
+  .m-bundle__saving {
+    margin: 0;
+    color: var(--m-berry-ink);
+    font-weight: 500;
+  }
+
+  .m-bundle__hint {
+    margin: 0 0 8px;
+    color: var(--m-text-muted);
+    font-size: 0.9375rem;
+  }
+
+  .m-bundle__stored {
+    margin: 4px 0 0;
+    font-size: 0.75rem;
+    color: var(--m-text-muted);
+  }
+
+  .m-btn[disabled] {
+    opacity: 0.45;
+    cursor: not-allowed;
+  }
+
+  .m-bundle__error {
+    margin: 12px 0 0;
+    color: var(--m-berry-ink);
+    font-weight: 500;
+  }
+
+  .m-bundle__tools {
+    display: grid;
+    gap: 12px;
+  }
+
+  .m-bundle__chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .m-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-block-size: 44px;
+    padding-inline: 16px;
+    border: 1px solid var(--m-rule-quiet);
+    border-radius: 9999px;
+    background: transparent;
+    color: var(--m-text);
+    font: inherit;
+    font-size: 0.9375rem;
+    cursor: pointer;
+  }
+
+  .m-chip[aria-pressed='true'] {
+    background: var(--m-plum);
+    border-color: var(--m-plum);
+    color: var(--m-pearl);
+    --m-mark-ink: var(--m-pearl);
+    --m-mark-body: transparent;
+  }
+
+  .m-chip:focus-visible {
+    outline: 2px solid var(--m-plum);
+    outline-offset: 2px;
+  }
+
+  .m-bundle__search input {
+    inline-size: 100%;
+    min-block-size: 48px;
+    padding-inline: 20px;
+    border: 1px solid var(--m-rule-quiet);
+    border-radius: 9999px;
+    background: var(--m-surface-raised);
+    color: inherit;
+    font: inherit;
+  }
+
+  .m-bundle__search input:focus-visible {
+    outline: 2px solid var(--m-plum);
+    outline-offset: 2px;
+  }
+
+  .m-bundle__grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px 8px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .m-bundle__grid > li {
+    display: grid;
+    align-content: start;
+    gap: 8px;
+    min-inline-size: 0;
+  }
+
+  /* The bundle has its own add button; the card's quick add and wishlist are hidden here. */
+  .m-bundle__grid quick-add,
+  .m-bundle__grid .quick-add,
+  .m-bundle__grid [class*='wishlist'] {
+    display: none;
+  }
+
+  .m-add {
+    inline-size: 100%;
+    min-block-size: 44px;
+    border: 0;
+    border-radius: 9999px;
+    background: var(--m-plum);
+    color: var(--m-pearl);
+    font: inherit;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color var(--m-dur-1) var(--m-ease), transform var(--m-dur-1) var(--m-ease);
+  }
+
+  .m-add:hover {
+    background: var(--m-berry);
+  }
+
+  .m-add:active {
+    transform: scale(0.97);
+  }
+
+  .m-add[disabled] {
+    background: var(--m-taupe-light);
+    color: var(--m-taupe-ink);
+    cursor: not-allowed;
+  }
+
+  .m-add:focus-visible {
+    outline: 2px solid var(--m-berry);
+    outline-offset: 2px;
+  }
+
+  .m-bundle__more {
+    margin: 0;
+    text-align: center;
+  }
+
+  .m-bundle__none {
+    text-align: center;
+    color: var(--m-text-muted);
+  }
+
+  .m-bundle__bar {
+    position: fixed;
+    inset-inline: 0;
+    inset-block-end: 0;
+    z-index: 20;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 10px var(--m-gutter);
+    background: var(--m-plum);
+    color: var(--m-pearl);
+  }
+
+  .m-bundle__bar[hidden] {
+    display: none;
+  }
+
+  .m-bundle__bar .m-btn {
+    min-block-size: 44px;
+  }
+
+  html[lang='ar'] .m-bundle__title {
+    line-height: 1.3;
+  }
+
+  @media screen and (min-width: 750px) {
+    .m-bundle__grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 32px 12px;
+    }
+
+    .m-bundle__bar {
+      display: none;
+    }
+  }
+
+  @media screen and (min-width: 990px) {
+    .m-bundle__builder {
+      grid-template-columns: minmax(0, 1fr) 300px;
+      align-items: start;
+    }
+
+    .m-bundle__tools {
+      grid-template-columns: minmax(0, 1fr) 320px;
+      align-items: center;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .m-add {
+      transition: none;
+    }
+  }
+{% endstylesheet %}
+
+{% javascript %}
+  if (!customElements.get('moments-bundle-boot')) {
+    customElements.define('moments-bundle-boot', class extends HTMLElement {});
+    (() => {
+      const root = document.querySelector('[data-m-bundle]');
+      if (!root) return;
+      const $ = (s) => root.querySelector(s);
+      const slotsEl = $('[data-m-slots]');
+      const gridEl = $('[data-m-grid]');
+      const labels = $('[data-m-add-label]').dataset;
+      const KEY = 'moments-bundle-v1';
+      const min = Number(root.dataset.min) || 3;
+      const max = Number(root.dataset.max) || 12;
+      const threshold = Number(root.dataset.threshold) || 0;
+      const tiersOn = root.dataset.tiers === 'true';
+      const confirmed = root.dataset.tiersConfirmed === 'true';
+      const tierPercent = Number(root.dataset.tierPercent) || 0;
+      const T = (k, map) => Object.entries(map || {}).reduce((s, [a, b]) => s.split(a).join(b), root.dataset[k] || '');
+      const money = (cents) => {
+        const fmt = root.dataset.money || 'LE #';
+        const n = (cents / 100).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        return fmt.replace(/\{\{\s*amount\s*\}\}/, n).replace(/\{\{\s*amount_no_decimals\s*\}\}/, Math.round(cents / 100).toLocaleString('en-US')).replace('#', n);
+      };
+      let items = [];
+      let id = '';
+      try { const s = JSON.parse(localStorage.getItem(KEY) || 'null'); if (s && Array.isArray(s.items)) { items = s.items; id = s.id || ''; } } catch (e) { /* storage unavailable: this visit only */ }
+      if (!id) id = Math.random().toString(36).slice(2, 8).toUpperCase();
+      const save = () => { try { localStorage.setItem(KEY, JSON.stringify({ id, items })); } catch (e) { /* ignore */ } };
+      const say = (msg) => { $('[data-m-status]').textContent = ''; setTimeout(() => { $('[data-m-status]').textContent = msg; }, 30); };
+      const showError = (msg) => { const el = $('[data-m-error]'); el.textContent = msg || ''; el.hidden = !msg; };
+
+      const render = () => {
+        const count = items.length;
+        const subtotal = items.reduce((s, i) => s + i.price, 0);
+        // slots
+        const total = Math.max(8, count + 1);
+        slotsEl.textContent = '';
+        for (let n = 1; n <= total; n++) {
+          const it = items[n - 1];
+          const li = document.createElement('li');
+          li.className = 'm-slot' + (it ? ' m-slot--filled' : '');
+          const num = document.createElement('span'); num.className = 'm-slot__num'; num.textContent = n; li.appendChild(num);
+          if (it) {
+            const img = document.createElement('img'); img.src = it.image; img.alt = it.title; img.loading = 'lazy'; li.appendChild(img);
+            const rm = document.createElement('button'); rm.type = 'button'; rm.className = 'm-slot__remove'; rm.textContent = '×';
+            rm.setAttribute('aria-label', T('tRemove', { __T__: it.title }));
+            rm.addEventListener('click', () => { items.splice(n - 1, 1); save(); render(); say(T('tRemoved', { __T__: it.title })); });
+            li.appendChild(rm);
+          } else {
+            const plus = document.createElement('span'); plus.className = 'm-slot__plus'; plus.textContent = '+'; plus.setAttribute('aria-hidden', 'true'); li.appendChild(plus);
+            li.setAttribute('aria-label', T('tEmptySlot', { __N__: n }));
+          }
+          slotsEl.appendChild(li);
+        }
+        // summary
+        $('[data-m-count]').textContent = T('tItems', { __C__: count });
+        $('[data-m-subtotal]').textContent = money(subtotal);
+        const need = Math.max(0, min - count);
+        let hint = '';
+        if (need > 0) hint = T('tAddMore', { __C__: need });
+        else if (threshold && subtotal < threshold) hint = T('tShippingHint', { __A__: money(threshold - subtotal) });
+        $('[data-m-hint]').textContent = hint;
+        const saving = $('[data-m-saving]');
+        if (tiersOn && confirmed && tierPercent > 0 && count >= min) { saving.hidden = false; saving.textContent = T('tSaving', { __A__: money(Math.round(subtotal * tierPercent / 100)) }); } else { saving.hidden = true; }
+        const ok = count >= min;
+        $('[data-m-checkout]').disabled = !ok;
+        const bar = $('[data-m-bar]');
+        bar.hidden = count === 0;
+        $('[data-m-bar-text]').textContent = T('tItems', { __C__: count }) + ' · ' + money(subtotal);
+        $('[data-m-bar-checkout]').disabled = !ok;
+      };
+
+      // ---- slots scrolling (arrows and keyboard)
+      const sign = () => (getComputedStyle(root).direction === 'rtl' ? -1 : 1);
+      $('[data-m-next]').addEventListener('click', () => slotsEl.scrollBy({ left: sign() * 280, behavior: 'smooth' }));
+      $('[data-m-prev]').addEventListener('click', () => slotsEl.scrollBy({ left: -sign() * 280, behavior: 'smooth' }));
+      slotsEl.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowRight') { e.preventDefault(); slotsEl.scrollBy({ left: 140, behavior: 'smooth' }); }
+        if (e.key === 'ArrowLeft') { e.preventDefault(); slotsEl.scrollBy({ left: -140, behavior: 'smooth' }); }
+      });
+
+      // ---- grid: real product cards from the collection and search pages
+      let source = '/collections/all';
+      let page = 1;
+      let sectionId = '';
+      let query = '';
+      let loading = false;
+      let more = false;
+      const buildUrl = (p) => {
+        const base = query ? '/search?q=' + encodeURIComponent(query) + '&type=product' : source;
+        const sep = base.includes('?') ? '&' : '?';
+        return base + sep + 'page=' + p + (sectionId ? '&section_id=' + encodeURIComponent(sectionId) : '');
+      };
+      const decorate = (li) => {
+        const link = li.querySelector('a[href*="/products/"]');
+        if (!link) return null;
+        const handle = (link.getAttribute('href').split('/products/')[1] || '').split('?')[0];
+        const sold = /sold out/i.test(li.textContent);
+        const btn = document.createElement('button');
+        btn.type = 'button'; btn.className = 'm-add'; btn.dataset.handle = handle;
+        btn.textContent = sold ? labels.sold : labels.add; btn.disabled = sold;
+        li.appendChild(btn);
+        return li;
+      };
+      const load = async (reset) => {
+        if (loading) return; loading = true;
+        const moreBtn = $('[data-m-more]'); moreBtn.disabled = true;
+        if (reset) { page = 1; gridEl.textContent = ''; $('[data-m-none]').hidden = true; }
+        try {
+          const res = await fetch(buildUrl(page));
+          const html = await res.text();
+          const doc = new DOMParser().parseFromString(html, 'text/html');
+          if (!sectionId) { const sec = doc.querySelector('[id^="shopify-section-template--"][id$="__main"], [id^="shopify-section-template--"][id*="main"]'); if (sec) sectionId = sec.id.replace('shopify-section-', ''); }
+          const cards = [...doc.querySelectorAll('product-card')].map((c) => c.closest('li') || c);
+          cards.forEach((li) => { const node = document.importNode(li, true); const el = node.tagName === 'LI' ? node : (() => { const w = document.createElement('li'); w.appendChild(node); return w; })(); if (decorate(el)) gridEl.appendChild(el); });
+          more = cards.length >= 12 && !!doc.querySelector('a[href*="page=' + (page + 1) + '"]');
+          if (!gridEl.children.length) $('[data-m-none]').hidden = false;
+        } catch (e) { showError(labels.error); }
+        loading = false; moreBtn.disabled = false; moreBtn.hidden = !more;
+      };
+      $('[data-m-more]').addEventListener('click', () => { page += 1; load(false); });
+
+      const chips = [...root.querySelectorAll('[data-m-chip]')];
+      chips.forEach((chip) => chip.addEventListener('click', () => {
+        chips.forEach((c) => c.setAttribute('aria-pressed', String(c === chip)));
+        source = chip.dataset.mChip; query = ''; $('[data-m-search]').value = ''; sectionId = ''; load(true);
+      }));
+      let timer;
+      $('[data-m-search]').addEventListener('input', (e) => {
+        clearTimeout(timer);
+        timer = setTimeout(() => { query = e.target.value.trim(); sectionId = ''; if (query) chips.forEach((c) => c.setAttribute('aria-pressed', 'false')); else chips[0].setAttribute('aria-pressed', 'true'); load(true); }, 350);
+      });
+
+      // ---- add and checkout
+      gridEl.addEventListener('click', async (e) => {
+        const btn = e.target.closest('.m-add');
+        if (!btn || btn.disabled) return;
+        showError('');
+        if (items.length >= max) { showError(T('tLimit')); return; }
+        btn.disabled = true;
+        try {
+          const res = await fetch('/products/' + btn.dataset.handle + '.js');
+          if (!res.ok) throw new Error('product');
+          const p = await res.json();
+          const v = p.variants.find((x) => x.available);
+          if (!v) { btn.textContent = labels.sold; return; }
+          let img = (v.featured_image && v.featured_image.src) || p.featured_image || (p.images && p.images[0]) || '';
+          if (img) img += (img.includes('?') ? '&' : '?') + 'width=240';
+          items.push({ handle: p.handle, title: p.title, vendor: p.vendor, variantId: v.id, price: v.price, image: img });
+          save(); render(); say(T('tAdded', { __T__: p.title }));
+          btn.disabled = false;
+        } catch (err) { showError(labels.error); btn.disabled = false; }
+      });
+      const checkout = async (btn) => {
+        if (items.length < min) return;
+        showError(''); btn.disabled = true;
+        const lines = {};
+        items.forEach((i) => { lines[i.variantId] = (lines[i.variantId] || 0) + 1; });
+        const payload = { items: Object.entries(lines).map(([vid, q]) => ({ id: Number(vid), quantity: q, properties: { Bundle: 'MOMENTS bundle ' + id } })) };
+        try {
+          const res = await fetch('/cart/add.js', { method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' }, body: JSON.stringify(payload) });
+          if (res.status === 422) { showError(labels.unavailable); btn.disabled = false; return; }
+          if (!res.ok) throw new Error('cart');
+          items = []; save();
+          window.location.href = '/cart';
+        } catch (err) { showError(labels.error); btn.disabled = false; }
+      };
+      $('[data-m-checkout]').addEventListener('click', (e) => checkout(e.currentTarget));
+      $('[data-m-bar-checkout]').addEventListener('click', (e) => checkout(e.currentTarget));
+
+      // mini bar only while the summary is off screen (phones)
+      if ('IntersectionObserver' in window) {
+        new IntersectionObserver((entries) => { root.dataset.summaryVisible = entries.some((en) => en.isIntersecting) ? 'true' : 'false'; const bar = $('[data-m-bar]'); bar.style.display = root.dataset.summaryVisible === 'true' ? 'none' : ''; }).observe($('[data-m-summary]'));
+      }
+
+      render();
+      load(true);
+    })();
+  }
+{% endjavascript %}
+
+{% schema %}
+{
+  "name": "MOMENTS bundle",
+  "limit": 1,
+  "settings": [
+    { "type": "range", "id": "min_items", "label": "Minimum bottles", "min": 2, "max": 6, "step": 1, "default": 3 },
+    { "type": "range", "id": "max_items", "label": "Maximum bottles", "min": 6, "max": 24, "step": 1, "default": 12 },
+    { "type": "header", "content": "Tiers (default off)" },
+    { "type": "paragraph", "content": "Off: no discount wording anywhere. On: the labels show. A saving amount only shows when the discount mechanism is confirmed. A bundle-only discount needs a bundle app or a custom discount function; an ordinary automatic discount applies to every cart." },
+    { "type": "checkbox", "id": "tiers_enabled", "label": "Show tiers", "default": false },
+    { "type": "range", "id": "tier1_count", "label": "Tier 1 bottles", "min": 2, "max": 12, "step": 1, "default": 3, "visible_if": "{{ section.settings.tiers_enabled }}" },
+    { "type": "text", "id": "tier1_label", "label": "Tier 1 label", "visible_if": "{{ section.settings.tiers_enabled }}" },
+    { "type": "range", "id": "tier2_count", "label": "Tier 2 bottles", "min": 3, "max": 12, "step": 1, "default": 5, "visible_if": "{{ section.settings.tiers_enabled }}" },
+    { "type": "text", "id": "tier2_label", "label": "Tier 2 label", "visible_if": "{{ section.settings.tiers_enabled }}" },
+    { "type": "checkbox", "id": "discount_confirmed", "label": "Discount mechanism confirmed", "info": "Turn on only when a real bundle discount is set up in the store.", "default": false, "visible_if": "{{ section.settings.tiers_enabled }}" },
+    { "type": "range", "id": "tier_percent", "label": "Saving shown (percent)", "info": "Used only when the mechanism is confirmed.", "min": 0, "max": 40, "step": 1, "default": 0, "visible_if": "{{ section.settings.discount_confirmed }}" }
+  ],
+  "presets": [{ "name": "MOMENTS bundle" }]
+}
+{% endschema %}
