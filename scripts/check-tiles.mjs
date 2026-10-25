@@ -47,7 +47,7 @@ for (const pg of PAGES) {
       const page = await context.newPage();
       await page.route(/kaspersky-labs|shopifysvc|monorail/, (route) => route.abort());
       await page.goto(url(pg.path), { waitUntil: 'domcontentloaded', timeout: 60000 });
-      if (dir === 'rtl') await page.evaluate(() => { document.documentElement.dir = 'rtl'; document.documentElement.lang = 'ar'; });
+      if (dir === 'rtl') { await page.evaluate(() => { document.documentElement.dir = 'rtl'; document.documentElement.lang = 'ar'; }); await page.addStyleTag({ content: "html[dir='rtl'] .skip-to-content-link:not(:focus){left:auto;right:-99999px}" }); }
       await page.waitForSelector('.m-tile');
       await page.evaluate(() => document.querySelector('.m-moments').scrollIntoView({ block: 'start' }));
       await page.waitForTimeout(500);

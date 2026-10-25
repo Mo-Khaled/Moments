@@ -52,7 +52,7 @@ async function open(width, dir, { hour } = {}) {
   await page.route(/kaspersky-labs|shopifysvc|monorail/, (route) => route.abort());
   await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 60000 });
   await page.waitForSelector('.m-hero .m-slide', { state: 'attached' });
-  if (dir === 'rtl') await page.evaluate(() => { document.documentElement.dir = 'rtl'; document.documentElement.lang = 'ar'; });
+  if (dir === 'rtl') { await page.evaluate(() => { document.documentElement.dir = 'rtl'; document.documentElement.lang = 'ar'; }); await page.addStyleTag({ content: "html[dir='rtl'] .skip-to-content-link:not(:focus){left:auto;right:-99999px}" }); } // rtl.css (real Arabic only) carries this skip-link rule; emulation adds it
   await page.waitForTimeout(1800);
   // Flipping dir after load is part of the emulation, not a real shift: count shifts from here on.
   if (dir === 'rtl') await page.evaluate(() => { window.__cls = 0; });
