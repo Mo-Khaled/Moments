@@ -59,6 +59,26 @@ in the new files (two pre-existing predictive-search class warnings remain, unto
 ⚠️ DEGRADED: single-context (your default; the two-agent run is reserved for the final homepage and product page review).
 See the final report for the list of what is still weak.
 
+## 2026-10-25 (later): v3 simplification, About page, cleanup, image audit, release prep
+
+Skills in use: the official **shopify-liquid**, **shopify-admin**, **shopify-custom-data** and **shopify-dev** skills were listed mid-session.
+This round read store data only through read-only Admin queries (counts, collection membership) and the public feed; no custom data or
+metafields were involved, so **shopify-custom-data** and **shopify-dev** had nothing to apply. **shopify-admin**: the read-only GraphQL I wrote was run
+through the connector (counts by status and publication, best-sellers membership); the skill's `validate.mjs --api admin` was not run because
+the same bundle could not load its validator package (see the first entry). **shopify-liquid**: same bundle, validator unavailable; `shopify theme check` was used.
+
+| Skill | What it told me | What changed because of it |
+| --- | --- | --- |
+| shopify-liquid-themes | Schema limits, LiquidDoc, `t` for strings, conditions cannot hold filters or compound tests, `render` args cannot take filters | Announcement, panels, About sections all carry LiquidDoc and locale keys. Fixed `contains ... == false` (rewritten as `unless`), `collections[handle \| strip]` (assigned first), 26-character schema name, long option labels. |
+| design-system | One shared edge, semantic tokens, no raw hex | `--m-content`/`--m-gutter` shared by announcement bar, header, panels, hero, strip and sections; panel left edge is checked against it. |
+| frontend-design | Spend boldness in one place; remove what does not earn its place | The brief's clutter budget was applied: one announcement message, three nav items, two-column panels, six-label switcher; the nav-bar row, 24-link list and gold separators were removed. |
+| emil-design-eng | Transform and opacity only; ease-out; pause on hover; reduced motion | The announcement rotates with a 10 px slide and fade, paused on hover and focus, first message static under reduced motion. |
+| ui-ux-pro-max | 44 px targets, escape routes, no hover-only, empty states with a path | Switcher and chips are 44 px; panels show no empty heading; About slots are hidden rather than empty; Escape closes panels. |
+| banner-design | Safe zones and contrast | Hero scrim setting, mark clear of the headline, headline checked against the header bottom. |
+| brand | Voice, confirmed claims only | Copy audited: the old trust badges ("official distributors", 2,000 EGP, an invented returns promise) were rewritten; About text uses only "100% original, sealed", COD, the shipping amount and the returns page link. |
+| impeccable | Detector and the critique rubric | Detector clean on new files; critique recorded in docs/final-report.md. |
+| shopify (CLI) | `theme pull` for a read-only diff, `theme push --only` | Live theme pulled read-only to a scratch folder and compared (no editor-managed file differs from the baseline). Nothing was pushed to or changed on the live theme. |
+
 ## Earlier entries (retro)
 
 | Date | Change | Skills |
