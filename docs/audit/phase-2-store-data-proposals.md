@@ -75,7 +75,7 @@ Needed from you: approve the pattern, and whether the 30 "inspired by" products 
 | Menu item | Now | Proposed |
 |---|---|---|
 | Gifts (Main menu) | `/pages/wishlist` | `/collections/gift-moment` (16 products). Alternative: `gift-bags` (4 products). |
-| Skin & Body (Main menu) | `/pages/daily-care` (page "Daily Care", template `dailyyy`, which is a copy of the incense page) | Create a new page `skin-body` with template `skin-body` (built, in the dev theme), point the menu item at it |
+| Skin & Body (Main menu) | `/pages/daily-care` (page "Daily Care", template `dailyyy`). Correction to the Phase 1 audit: this page is not an incense copy. It shows live deodorant and perfume product lists under leftover home-fragrance copy ("...atmosphere into your home"). | Create a new page `skin-body` with template `skin-body` (built, in the dev theme), point the menu item at it. **Side effect:** the deodorants list on Daily Care would no longer be reachable from the menu (the `deodorant` collection has 30 products). Decide where deodorants should live, or keep Daily Care under another menu item. |
 | Empty collections `morning-moments`, `work-moments` (0 products) | Not in any menu and not referenced by theme files | Nothing to hide. Keep them out of nav until filled. |
 
 The Skin & Body template and its "Line has launched" switch (with a collection picker) are in the dev theme. After launch you turn on the switch and pick the collection, and the menu link needn't change.
