@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MOMENTS accent proposal - before / after</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Marcellus&family=Readex+Pro:wght@300;400;500;600&display=swap">
+<style>
+  :root {
+    --plum: #3B1E3A; --berry: #B7406A; --nude: #E9CFC8; --pearl: #FAF6F2; --taupe: #75665E;
+    --gold-ink: #8A6A22;   /* accent on light surfaces: 4.69:1 on pearl */
+    --gold-light: #CDA553; /* accent on plum surfaces:  6.35:1 on plum  */
+  }
+  * { box-sizing: border-box; margin: 0; }
+  body { font-family: 'Readex Pro', sans-serif; background: #d9d2cc; color: var(--plum); padding: 32px; }
+  h1 { font: 400 22px 'Marcellus', serif; margin-bottom: 4px; }
+  .note { color: var(--taupe); font-size: 13px; margin-bottom: 24px; }
+  .row { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .panel { background: var(--pearl); padding: 28px; }
+  .tag { font-size: 12px; color: var(--taupe); margin-bottom: 16px; }
+  h2 { font: 400 28px/1.15 'Marcellus', serif; }
+  .sub { font-size: 14px; color: var(--taupe); margin: 8px 0 18px; max-width: 34ch; }
+  .rule { height: 1px; width: 56px; background: var(--plum); margin: 14px 0 18px; }
+  .after .rule { background: var(--gold-ink); height: 2px; }
+  .cards { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 22px; }
+  .card { background: #fff; padding: 12px; }
+  .img { background: var(--nude); height: 110px; position: relative; }
+  .badge { position: absolute; top: 8px; left: 8px; font-size: 11px; padding: 3px 8px; background: var(--plum); color: var(--pearl); }
+  .after .badge { background: var(--pearl); color: var(--gold-ink); box-shadow: inset 0 0 0 1px var(--gold-ink); }
+  .name { font-size: 13px; margin-top: 10px; }
+  .price { font-size: 13px; margin-top: 2px; }
+  .price s { color: var(--taupe); margin-left: 6px; }
+  .btn { display: inline-block; background: var(--berry); color: #fff; font-size: 14px; padding: 12px 22px; border-radius: 999px; }
+  .band { background: var(--plum); color: var(--pearl); padding: 18px 22px; margin-top: 22px; font-size: 14px; }
+  .after .band { border-top: 2px solid var(--gold-light); }
+  .band b { font-weight: 500; }
+  .after .band b { color: var(--gold-light); }
+  .legend { margin-top: 24px; font-size: 13px; line-height: 1.7; }
+  .legend span { display: inline-block; width: 12px; height: 12px; margin-right: 6px; vertical-align: -1px; }
+</style>
+</head>
+<body>
+  <h1>Accent proposal: aged gold, used sparingly</h1>
+  <p class="note">Base palette unchanged (plum, berry, nude, pearl, taupe). Berry stays the only action color. Gold marks hairlines, the Save badge outline and one highlight on plum bands. Placeholder product data, not real content.</p>
+  <div class="row">
+    <div class="panel before">
+      <p class="tag">BEFORE (current)</p>
+      <h2>Night Moment</h2>
+      <div class="rule"></div>
+      <p class="sub">Evening fragrances with depth that lasts past midnight.</p>
+      <a class="btn">Shop Night Moment</a>
+      <div class="cards">
+        <div class="card"><div class="img"><span class="badge">Sale</span></div><p class="name">9 PM NIGHT OUT</p><p class="price">LE 2,250.00 EGP <s>LE 2,500.00</s></p></div>
+        <div class="card"><div class="img"><span class="badge">Sale</span></div><p class="name">SUPREMACY</p><p class="price">LE 2,650.00 EGP <s>LE 3,200.00</s></p></div>
+      </div>
+      <div class="band"><b>Cash on Delivery</b> available across Egypt</div>
+    </div>
+    <div class="panel after">
+      <p class="tag">AFTER (proposed)</p>
+      <h2>Night Moment</h2>
+      <div class="rule"></div>
+      <p class="sub">Evening fragrances with depth that lasts past midnight.</p>
+      <a class="btn">Shop Night Moment</a>
+      <div class="cards">
+        <div class="card"><div class="img"><span class="badge">Sale</span></div><p class="name">9 PM NIGHT OUT</p><p class="price">LE 2,250.00 EGP <s>LE 2,500.00</s></p></div>
+        <div class="card"><div class="img"><span class="badge">Sale</span></div><p class="name">SUPREMACY</p><p class="price">LE 2,650.00 EGP <s>LE 3,200.00</s></p></div>
+      </div>
+      <div class="band"><b>Cash on Delivery</b> available across Egypt</div>
+    </div>
+  </div>
+  <p class="legend">
+    <span style="background:#8A6A22"></span>gold-ink #8A6A22: 4.69:1 on pearl, 3.41:1 on nude (large text and graphics only on nude)<br>
+    <span style="background:#CDA553"></span>gold-light #CDA553: 6.35:1 on plum (for dark bands only)<br>
+    <span style="background:#B7406A"></span>berry #B7406A: pearl text on it 4.94:1 (CTA fill), but berry text on nude is only 3.60:1
+  </p>
+</body>
+</html>
