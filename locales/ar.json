@@ -2928,7 +2928,8 @@
       "next": "التالي"
     },
     "links": {
-      "learn_more": "يتعلم أكثر"
+      "learn_more": "يتعلم أكثر",
+      "powered_by_shopify": " "
     },
     "feed": {
       "more": "أكثر"
@@ -4301,7 +4302,16 @@
     "reset": "إعادة ضبط",
     "sign_up": "اشتراك",
     "submit": "يُقدِّم",
-    "sort": "نوع"
+    "sort": "نوع",
+    "enter_using_password": "الدخول باستخدام كلمة المرور",
+    "see_items": {
+      "one": "عرض {{ count }} منتج",
+      "other": "عرض {{ count }} منتجات"
+    },
+    "show_all_options": "عرض كل الخيارات",
+    "sign_in_options": "خيارات تسجيل دخول أخرى",
+    "view_in_your_space": "اعرضه في مساحتك",
+    "view_store_information": "عرض معلومات المتجر"
   },
   "content": {
     "account_orders": "طلبات",
@@ -4431,7 +4441,11 @@
     "price_regular": "السعر العادي",
     "product_image": "صورة المنتج",
     "product_information": "معلومات المنتج",
-    "product_total": "إجمالي المنتج"
+    "product_total": "إجمالي المنتج",
+    "account_title_personalized": "مرحبًا {{ first_name }}",
+    "blog_details_separator": "|",
+    "gift_bag_prompt": "أضف كيس هدية",
+    "terms_and_policies": "الشروط والسياسات"
   },
   "placeholders": {
     "search": "يبحث",
@@ -4485,7 +4499,8 @@
     "slideshow_play": "تشغيل عرض الشرائح",
     "slideshow_previous": "الشريحة السابقة",
     "unit_price": "سعر الوحدة",
-    "find_country": "البحث عن البلد"
+    "find_country": "البحث عن البلد",
+    "nested_product": "{{ product_title }} لـ {{ parent_title }}"
   },
   "fields": {
     "separator": "ل"
@@ -4528,7 +4543,16 @@
       "success_moderated": "تم نشر التعليق، في انتظار الموافقة",
       "email": "بريد إلكتروني",
       "message": "رسالة",
-      "name": "اسم"
+      "name": "اسم",
+      "heading": "اترك تعليقًا",
+      "success": "تم نشر التعليق"
+    },
+    "article": {
+      "comment_author_separator": "•",
+      "comments_heading": {
+        "one": "{{ count }} تعليق",
+        "other": "{{ count }} تعليقات"
+      }
     }
   },
   "blocks": {
@@ -4542,10 +4566,12 @@
     },
     "email_signup": {
       "success": "شكرا على الاشتراك!",
-      "label": "بريد إلكتروني"
+      "label": "بريد إلكتروني",
+      "placeholder": "البريد الإلكتروني"
     },
     "load_video": "تحميل الفيديو: {{ description }}",
     "filter": "فلتر",
-    "sold_out": "نفذ"
+    "sold_out": "نفذ",
+    "payment_methods": "طرق الدفع"
   }
 }
