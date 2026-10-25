@@ -312,18 +312,18 @@
 
   .m-slide__art {
     --m-mark-ink: var(--tile-ink);
-    --m-mark-body: var(--tile-body);
+    --m-mark-body: color-mix(in srgb, var(--tile-ink) 16%, transparent);
     --m-mark-accent: var(--tile-accent);
     --m-mark-gold: var(--tile-gold);
 
     position: absolute;
-    inset-block-end: 10%;
-    inset-inline-end: calc(var(--m-gutter) + 2vw);
-    opacity: 0.9;
+    inset-block-end: 16%;
+    inset-inline-end: var(--m-gutter);
   }
 
+  /* The moment's mark at full contrast, on the end side, clear of the headline. */
   .m-slide__art moment-mark {
-    --mm-size: min(46vmin, 520px);
+    --mm-size: min(38vw, 520px);
   }
 
   .m-slide__media {
@@ -491,8 +491,15 @@
     transition: background-color var(--m-dur-2) var(--m-ease), color var(--m-dur-2) var(--m-ease);
   }
 
+  /* Phones: icons only, the name is still read by screen readers. Desktop: every label is visible. */
   .m-switch__label {
-    display: none;
+    position: absolute;
+    inline-size: 1px;
+    block-size: 1px;
+    margin: -1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
   }
 
   .m-switch__btn[aria-pressed='true'] {
@@ -505,7 +512,11 @@
   }
 
   .m-switch__btn[aria-pressed='true'] .m-switch__label {
-    display: inline;
+    position: static;
+    inline-size: auto;
+    block-size: auto;
+    margin: 0;
+    clip-path: none;
   }
 
   .m-switch__btn:focus-visible,
@@ -566,7 +577,20 @@
     }
 
     .m-switch__btn {
-      padding-inline: 12px;
+      min-block-size: 44px;
+      padding-inline: 14px;
+    }
+
+    .m-switch__btn .m-switch__label {
+      position: static;
+      inline-size: auto;
+      block-size: auto;
+      margin: 0;
+      clip-path: none;
+    }
+
+    .m-switch__btn {
+      font-size: 0.875rem;
     }
   }
 
@@ -587,7 +611,7 @@
     }
 
     .m-slide__art moment-mark {
-      --mm-size: min(52vw, 240px);
+      --mm-size: min(56vw, 260px);
     }
 
     .m-slide__packshot {

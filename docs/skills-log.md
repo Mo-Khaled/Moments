@@ -35,6 +35,30 @@ Still weak:
 5. Hover is a quiet gradient shift. It does not tell the shopper which tile has focus beyond the mark's gesture.
 6. RTL was emulated with `dir="rtl"`; real Arabic is not previewable until it is added to the store languages.
 
+## 2026-10-25: homepage identity reset (tickers, header, mega panel, hero, brand marquee, colour blocks)
+
+Installed this session and used: shopify-liquid-themes, shopify (CLI/theme topics), frontend-design, impeccable, emil-design-eng,
+ui-ux-pro-max, design-system, brand, banner-design. The official shopify-liquid, shopify-admin, shopify-custom-data and shopify-dev
+skills were listed mid-session; this round was theme work and read no store data through the Admin API, so only shopify-liquid applies,
+and its validator did not run (the `validate.mjs --api liquid` package is missing from the bundle). `shopify theme check` was run on every touched file: 0 offenses
+in the new files (two pre-existing predictive-search class warnings remain, untouched).
+
+| Skill | What it told me | What changed because of it |
+| --- | --- | --- |
+| shopify-liquid-themes | LiquidDoc on snippets, schema limits (name 25 chars, option labels short), translations through `t`, one `{% stylesheet %}` per file, no filters on `render` arguments | `moments-ticker`, `moments-diamond`, `moments-chevron`, `title-case`, `moments-mega` carry LiquidDoc. The first push failed on a 26-character schema name and a long option label; fixed. `render ... label: 'key' \| t` was rejected by theme check; the value is assigned first. All strings in en.default.json and ar.json. |
+| design-system | Tokens in three layers, no hex in components, semantic names | `--m-content` and `--m-gutter` shared by every band; `--m-live*` registered with `@property`; `.m-tone--*` map moment tokens to tile variables used by tiles, hero slides, gift block and mega cards. Documented in docs/design-system.md. |
+| frontend-design | Spend boldness in one place; avoid default chrome (all-caps eyebrow on everything, identical cards); critique with screenshots | One large idea (the page follows the moment). The only small caps labels are the three mega-panel column headings, which you specified. Hero is the memorable element; the rest stays calm. I looked at the 1440 and 375 screenshots and changed the hero mark into a watermark after seeing it was too timid. |
+| emil-design-eng | Animate transform and opacity; ease-out; stay under 300 ms for UI; pause and respect reduced motion; make it interruptible | Tickers: transform only, linear (constant motion is the one case for linear), paused on hover and focus, static under reduced motion. Hero crossfade 360 ms ease-out through `@starting-style`; drift is transform only and paused with the video; the switcher is instant to operate and never blocks input. |
+| ui-ux-pro-max | Reduced motion, 44 px targets, keyboard order, escape routes, no hover-only, overflow menu rules | Escape closes the panel and returns focus; arrow keys move across items and inside the panel; first touch tap opens, second follows; playback buttons are 44 px with aria labels and aria-pressed; the hero never auto-advances. |
+| banner-design | Safe zones, one primary CTA, 4.5:1 text contrast | Hero scrim at 74% (setting, minimum advised 70%); one filled and one outlined button; tile art keeps the 12% safe area (checked by scripts/check-tiles.mjs). |
+| brand | Voice and palette consistency | Gold stays a hairline; berry is the only action colour; copy uses only confirmed facts ("100% original, sealed"). |
+| impeccable | Detector and slop tests; critique | `detect.mjs` run on the new sections; critique below. |
+| shopify (CLI) | `theme push --only` for small pushes | Used `scripts/push.sh` (traces check first), never the live theme. |
+
+### Impeccable critique of the new homepage (single-context)
+⚠️ DEGRADED: single-context (your default; the two-agent run is reserved for the final homepage and product page review).
+See the final report for the list of what is still weak.
+
 ## Earlier entries (retro)
 
 | Date | Change | Skills |

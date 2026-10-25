@@ -1,0 +1,211 @@
+{%- comment -%}
+  About page hero: a full-width colour band with a very large headline and a slot for a short looping video (muted, lazy, poster
+  first, desktop only; same rules as the homepage hero). "Play our story" opens a longer video in a dialog; the button stays
+  hidden until a story video is set. TODO (owner): the long story video.
+{%- endcomment -%}
+
+{%- liquid
+  assign headline = section.settings.headline
+  if headline == blank
+    assign headline = 'about.hero.headline' | t
+  endif
+  assign text = section.settings.text
+  if text == blank
+    assign text = 'about.hero.text' | t
+  endif
+  assign video = section.settings.video
+  assign story = section.settings.story_video
+-%}
+
+<section class="m-about-hero m-tone--{{ section.settings.tone }}" aria-labelledby="m-about-title-{{ section.id }}">
+  {%- if section.settings.poster != blank -%}
+    <div class="m-about-hero__media" aria-hidden="true">
+      {{ section.settings.poster | image_url: width: 2000 | image_tag: class: 'm-about-hero__poster', alt: '', widths: '768, 1280, 1920', sizes: '100vw', loading: 'eager', fetchpriority: 'high' }}
+      {%- if video != blank -%}
+        <video class="m-about-hero__video" muted loop playsinline preload="none" tabindex="-1" data-m-about-video data-src="{% for source in video.sources %}{% if source.format == 'mp4' %}{{ source.url }}{% endif %}{% endfor %}"></video>
+      {%- endif -%}
+    </div>
+  {%- endif -%}
+  <div class="m-about-hero__inner m-wrap">
+    <h1 class="m-about-hero__title" id="m-about-title-{{ section.id }}">{{ headline }}</h1>
+    <p class="m-about-hero__text">{{ text }}</p>
+    {%- if story != blank -%}
+      <button class="m-btn m-btn--outline" type="button" data-m-story-open>{{ 'about.hero.play' | t }}</button>
+    {%- endif -%}
+  </div>
+  {%- if story != blank -%}
+    <dialog class="m-about-dialog" data-m-story-dialog aria-label="{{ 'about.hero.play' | t }}">
+      <button class="m-about-dialog__close" type="button" data-m-story-close aria-label="{{ 'about.hero.play_close' | t }}">&times;</button>
+      <video controls playsinline preload="none" data-src="{% for source in story.sources %}{% if source.format == 'mp4' %}{{ source.url }}{% endif %}{% endfor %}"></video>
+    </dialog>
+  {%- endif -%}
+</section>
+
+{% stylesheet %}
+  .m-about-hero {
+    --m-mark-ink: var(--tile-ink);
+    --m-mark-body: var(--tile-body);
+    --m-mark-accent: var(--tile-accent);
+    --m-mark-gold: var(--tile-gold);
+
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    display: grid;
+    align-items: end;
+    min-block-size: clamp(420px, 62svh, 680px);
+    background: var(--tile-bg);
+    color: var(--tile-ink);
+  }
+
+  .m-about-hero__media,
+  .m-about-hero__poster,
+  .m-about-hero__video {
+    position: absolute;
+    inset: 0;
+    inline-size: 100%;
+    block-size: 100%;
+    object-fit: cover;
+    z-index: -1;
+  }
+
+  .m-about-hero__media::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgb(37 18 36 / 0.78), rgb(37 18 36 / 0.1) 70%);
+  }
+
+  .m-about-hero__video {
+    opacity: 0;
+    transition: opacity var(--m-dur-3) var(--m-ease);
+  }
+
+  .m-about-hero__video[data-playing] {
+    opacity: 1;
+  }
+
+  .m-about-hero__inner {
+    display: grid;
+    justify-items: start;
+    gap: 20px;
+    padding-block: clamp(48px, 8vw, 96px);
+  }
+
+  .m-about-hero__title {
+    margin: 0;
+    max-inline-size: 10ch;
+    font-size: clamp(3rem, 9vw, 7.5rem);
+    line-height: 0.98;
+    text-wrap: balance;
+  }
+
+  .m-about-hero__text {
+    margin: 0;
+    max-inline-size: 40ch;
+    font-size: clamp(1rem, 1.5vw, 1.25rem);
+    line-height: 1.5;
+  }
+
+  html[lang='ar'] .m-about-hero__title {
+    line-height: 1.3;
+  }
+
+  html[lang='ar'] .m-about-hero__text {
+    line-height: 1.7;
+  }
+
+  .m-about-dialog {
+    inline-size: min(92vw, 1100px);
+    padding: 0;
+    border: 0;
+    background: var(--m-plum-900);
+  }
+
+  .m-about-dialog::backdrop {
+    background: rgb(37 18 36 / 0.8);
+  }
+
+  .m-about-dialog video {
+    display: block;
+    inline-size: 100%;
+    block-size: auto;
+  }
+
+  .m-about-dialog__close {
+    position: absolute;
+    inset-block-start: 8px;
+    inset-inline-end: 8px;
+    z-index: 1;
+    inline-size: 44px;
+    block-size: 44px;
+    border: 0;
+    border-radius: 9999px;
+    background: var(--m-pearl);
+    color: var(--m-plum);
+    font-size: 1.5rem;
+    cursor: pointer;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .m-about-hero__video {
+      display: none;
+    }
+  }
+{% endstylesheet %}
+
+{% javascript %}
+  (() => {
+    const video = document.querySelector('[data-m-about-video]');
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const saveData = !!(navigator.connection && navigator.connection.saveData);
+    if (video && video.dataset.src && !reduced && !saveData && window.matchMedia('(min-width: 750px)').matches && 'IntersectionObserver' in window) {
+      new IntersectionObserver((entries, observer) => {
+        if (!entries.some((e) => e.isIntersecting)) return;
+        observer.disconnect();
+        video.src = video.dataset.src;
+        video.play().then(() => video.setAttribute('data-playing', '')).catch(() => {});
+      }).observe(video);
+      document.addEventListener('visibilitychange', () => { if (document.hidden) video.pause(); else if (video.src) video.play().catch(() => {}); });
+    }
+
+    const dialog = document.querySelector('[data-m-story-dialog]');
+    const open = document.querySelector('[data-m-story-open]');
+    if (dialog && open) {
+      const player = dialog.querySelector('video');
+      open.addEventListener('click', () => { player.src = player.dataset.src; dialog.showModal(); player.play().catch(() => {}); });
+      const close = () => { player.pause(); dialog.close(); open.focus(); };
+      dialog.querySelector('[data-m-story-close]').addEventListener('click', close);
+      dialog.addEventListener('cancel', () => player.pause());
+    }
+  })();
+{% endjavascript %}
+
+{% schema %}
+{
+  "name": "MOMENTS about hero",
+  "limit": 1,
+  "settings": [
+    { "type": "text", "id": "headline", "label": "Headline" },
+    { "type": "textarea", "id": "text", "label": "Text" },
+    {
+      "type": "select",
+      "id": "tone",
+      "label": "Colour",
+      "options": [
+        { "value": "night", "label": "Night" },
+        { "value": "gift", "label": "Gift" },
+        { "value": "allday", "label": "All day" },
+        { "value": "daily", "label": "Daily" },
+        { "value": "fresh", "label": "Fresh" },
+        { "value": "love", "label": "Love" }
+      ],
+      "default": "night"
+    },
+    { "type": "image_picker", "id": "poster", "label": "Poster image", "info": "Shown first. Optional." },
+    { "type": "video", "id": "video", "label": "Looping video", "info": "Muted, 6 to 12 seconds, under 4 MB. Desktop only, after the poster. TODO: none supplied yet." },
+    { "type": "video", "id": "story_video", "label": "Story video", "info": "The long video opened by Play our story. The button stays hidden until one is set. TODO: owner to supply." }
+  ],
+  "presets": [{ "name": "MOMENTS about hero" }]
+}
+{% endschema %}

@@ -1,112 +1,244 @@
 {%- comment -%}
-  Announcement bar as a continuous ticker (replaces the slideshow with arrows). The messages are the store's
-  confirmed facts: sealed originals, cash on delivery, the free shipping threshold (theme setting
-  "Free shipping above"), and the returns and exchange policy (link). They are also the only place these facts live
-  on the homepage now; the footer repeats them.
-  Speed is in px per second. One loop's duration is the estimated width of one group divided by the speed.
+  Announcement bar: a slim rounded bar with ONE message visible at a time (clutter budget).
+  Style "rotate" (default): up to three messages take turns every few seconds with a short vertical slide and fade
+  (CSS only, transform and opacity, paused on hover and focus, no arrows, no dots). Style "marquee": the same messages in the
+  continuous ticker. Reduced motion: the first message, static. Screen readers get one plain list (aria-live is off) and the
+  animated copy is aria-hidden.
+  Messages are blocks: "Original and sealed", "Cash on delivery", "Free shipping" (the amount comes from the theme setting
+  "Free shipping above") or a custom line. The returns policy link lives in the footer, not here.
 {%- endcomment -%}
 
 {%- liquid
   assign threshold = settings.moments_free_shipping | times: 100 | money_without_trailing_zeros
-  assign m1 = 'homepage.pillars.original_title' | t
-  assign m2 = 'homepage.pillars.cod_title' | t
-  assign m3 = 'homepage.ticker.shipping' | t: amount: threshold
-  assign m4 = 'homepage.pillars.returns_title' | t
-  assign chars = m1.size | plus: m2.size | plus: m3.size | plus: m4.size
-  assign group_width = chars | times: 9 | plus: 256 | times: 3
+  assign interval = section.settings.interval | at_least: 3
   assign speed = section.settings.speed | at_least: 10
-  assign duration = group_width | divided_by: speed | at_least: 20
+  assign count = section.blocks.size | at_most: 3
 -%}
 
-{%- capture items -%}
-  <li class="m-ticker__item"><span>{{ m1 }}</span>{% render 'moments-diamond' %}</li>
-  <li class="m-ticker__item"><span>{{ m2 }}</span>{% render 'moments-diamond' %}</li>
-  <li class="m-ticker__item"><span>{{ m3 }}</span>{% render 'moments-diamond' %}</li>
-  <li class="m-ticker__item">
-    {%- if section.settings.returns_url != blank -%}
-      <a href="{{ section.settings.returns_url }}">{{ m4 }}</a>
-    {%- else -%}
-      <span>{{ m4 }}</span>
+{%- capture messages -%}
+  {%- for block in section.blocks limit: 3 -%}
+    {%- liquid
+      assign msg = ''
+      case block.settings.kind
+        when 'original'
+          assign msg = 'homepage.pillars.original_title' | t
+        when 'cod'
+          assign msg = 'homepage.pillars.cod_title' | t
+        when 'shipping'
+          assign msg = 'homepage.ticker.shipping' | t: amount: threshold
+        else
+          assign msg = block.settings.text
+      endcase
+    -%}
+    {%- if msg != blank -%}
+      <li class="m-announce__msg" style="--i: {{ forloop.index0 }}" {{ block.shopify_attributes }}>
+        {%- if block.settings.url != blank and block.settings.kind == 'custom' -%}
+          <a href="{{ block.settings.url }}">{{ msg }}</a>
+        {%- else -%}
+          <span>{{ msg }}</span>
+        {%- endif -%}
+      </li>
     {%- endif -%}
-    {% render 'moments-diamond' %}
-  </li>
+  {%- endfor -%}
 {%- endcapture -%}
 
-<aside class="m-announcement" aria-label="{{ 'homepage.pillars.original_title' | t }}">
-  {% render 'moments-ticker', items: items, duration: duration, mode: 'single', label: 'MOMENTS' %}
+<aside class="m-announce" aria-label="MOMENTS">
+  {%- if section.settings.style == 'marquee' -%}
+    {%- liquid
+      assign chars = 0
+      for block in section.blocks limit: 3
+        assign chars = chars | plus: 24
+      endfor
+      assign group_width = chars | times: 9 | plus: 96 | times: 3
+      assign duration = group_width | divided_by: speed | at_least: 20
+    -%}
+    {%- capture ticker_items -%}
+      {{ messages | replace: 'class="m-announce__msg"', 'class="m-ticker__item"' }}
+    {%- endcapture -%}
+    <div class="m-announce__ticker">
+      {% render 'moments-ticker', items: ticker_items, duration: duration, mode: 'single', label: 'MOMENTS' %}
+    </div>
+  {%- else -%}
+    <div class="m-announce__bar m-announce__bar--n{{ count }}" style="--m-rot-interval: {{ interval }}s; --n: {{ count }}">
+      <ul class="m-sr-only">{{ messages }}</ul>
+      <ul class="m-announce__stage" aria-hidden="true">{{ messages }}</ul>
+    </div>
+  {%- endif -%}
 </aside>
 
 {% stylesheet %}
-  .m-announcement {
+  .m-announce {
+    padding-inline: var(--m-gutter);
+    padding-block: 8px 0;
+    background: var(--m-surface);
+  }
+
+  .m-announce__bar,
+  .m-announce__ticker {
+    position: relative;
+    overflow: hidden;
+    max-inline-size: var(--m-content);
+    margin-inline: auto;
+    border-radius: 9999px;
     background: var(--m-plum);
     color: var(--m-text-on-dark);
     font-size: 0.8125rem;
     line-height: 1;
   }
 
-  .m-announcement .m-ticker {
-    block-size: 40px;
+  .m-announce__bar {
+    block-size: 34px;
   }
 
-  .m-announcement .m-ticker__track,
-  .m-announcement .m-ticker__group,
-  .m-announcement .m-ticker__list {
+  .m-announce__ticker .m-ticker {
+    block-size: 34px;
+  }
+
+  .m-announce__ticker .m-ticker__track,
+  .m-announce__ticker .m-ticker__group,
+  .m-announce__ticker .m-ticker__list {
     block-size: 100%;
     align-items: center;
   }
 
-  .m-announcement .m-ticker__group {
-    justify-content: space-around;
-  }
-
-  .m-announcement .m-ticker__item {
-    display: inline-flex;
-    align-items: center;
-    gap: 28px;
-    padding-inline-start: 28px;
+  .m-announce__ticker .m-ticker__item {
+    padding-inline: 40px;
     white-space: nowrap;
-    letter-spacing: 0.02em;
   }
 
-  .m-announcement a {
+  .m-announce__stage {
+    position: absolute;
+    inset: 0;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .m-announce__msg {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    visibility: hidden;
+    opacity: 0;
+    list-style: none;
+    white-space: nowrap;
+    animation: m-announce-rotate-3 calc(var(--n) * var(--m-rot-interval)) infinite;
+    animation-delay: calc(var(--i) * var(--m-rot-interval));
+  }
+
+  .m-announce__msg a {
     color: inherit;
+    text-decoration: none;
+  }
+
+  .m-announce__msg a:hover,
+  .m-announce__msg a:focus-visible {
     text-decoration: underline;
-    text-decoration-thickness: 1px;
     text-underline-offset: 4px;
   }
 
-  .m-announcement a:focus-visible {
-    outline: 2px solid var(--m-accent-on-dark);
-    outline-offset: 3px;
+  .m-announce__bar:hover .m-announce__msg,
+  .m-announce__bar:focus-within .m-announce__msg {
+    animation-play-state: paused;
   }
 
-  .m-announcement .m-diamond {
-    color: var(--m-accent-on-dark);
+  /* One message only: it never rotates. Two keyframe sets for 2 and 3 messages, because each owns 1/n of the loop. */
+  .m-announce__bar--n1 .m-announce__msg {
+    visibility: visible;
+    opacity: 1;
+    animation: none;
   }
 
-  html[lang='ar'] .m-announcement .m-ticker__item {
+  .m-announce__bar--n2 .m-announce__msg {
+    animation-name: m-announce-rotate-2;
+  }
+
+  @keyframes m-announce-rotate-2 {
+    0% { visibility: visible; opacity: 0; transform: translateY(10px); }
+    5% { opacity: 1; transform: translateY(0); }
+    45% { opacity: 1; transform: translateY(0); }
+    50% { opacity: 0; transform: translateY(-10px); }
+    50.1%, 100% { visibility: hidden; opacity: 0; }
+  }
+
+  @keyframes m-announce-rotate-3 {
+    0% { visibility: visible; opacity: 0; transform: translateY(10px); }
+    3.5% { opacity: 1; transform: translateY(0); }
+    30% { opacity: 1; transform: translateY(0); }
+    33.3% { opacity: 0; transform: translateY(-10px); }
+    33.4%, 100% { visibility: hidden; opacity: 0; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .m-announce__msg {
+      animation: none;
+    }
+
+    .m-announce__stage .m-announce__msg:first-child {
+      visibility: visible;
+      opacity: 1;
+    }
+  }
+
+  html[lang='ar'] .m-announce__bar,
+  html[lang='ar'] .m-announce__ticker {
     letter-spacing: 0;
   }
 {% endstylesheet %}
 
 {% schema %}
 {
-  "name": "MOMENTS ticker",
+  "name": "MOMENTS announcement",
   "limit": 1,
   "enabled_on": { "groups": ["header"] },
   "settings": [
     {
-      "type": "range",
-      "id": "speed",
-      "label": "Speed",
-      "info": "Pixels per second.",
-      "min": 20,
-      "max": 100,
-      "step": 5,
-      "unit": "px",
-      "default": 40
+      "type": "select",
+      "id": "style",
+      "label": "Style",
+      "options": [
+        { "value": "rotate", "label": "Rotate, one at a time" },
+        { "value": "marquee", "label": "Marquee ticker" }
+      ],
+      "default": "rotate"
     },
-    { "type": "url", "id": "returns_url", "label": "Returns and exchange policy page" }
+    { "type": "range", "id": "interval", "label": "Seconds per message", "min": 3, "max": 8, "step": 1, "unit": "s", "default": 4 },
+    { "type": "range", "id": "speed", "label": "Marquee speed", "info": "Pixels per second.", "min": 20, "max": 100, "step": 5, "unit": "px", "default": 40 }
+  ],
+  "blocks": [
+    {
+      "type": "message",
+      "name": "Message",
+      "limit": 3,
+      "settings": [
+        {
+          "type": "select",
+          "id": "kind",
+          "label": "Message",
+          "options": [
+            { "value": "original", "label": "100% original, sealed" },
+            { "value": "cod", "label": "Cash on delivery" },
+            { "value": "shipping", "label": "Free shipping over (theme amount)" },
+            { "value": "custom", "label": "Custom text" }
+          ],
+          "default": "original"
+        },
+        { "type": "text", "id": "text", "label": "Custom text", "visible_if": "{{ block.settings.kind == 'custom' }}" },
+        { "type": "url", "id": "url", "label": "Custom link", "visible_if": "{{ block.settings.kind == 'custom' }}" }
+      ]
+    }
+  ],
+  "max_blocks": 3,
+  "presets": [
+    {
+      "name": "MOMENTS announcement",
+      "blocks": [
+        { "type": "message", "settings": { "kind": "original" } },
+        { "type": "message", "settings": { "kind": "cod" } },
+        { "type": "message", "settings": { "kind": "shipping" } }
+      ]
+    }
   ]
 }
 {% endschema %}

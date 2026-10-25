@@ -99,3 +99,18 @@ WCAG AA contrast; visible focus; semantic headings; marks are decorative (`aria-
 - **31 `!important` remain** (measured): `base.css` 11 (Horizon), `rtl.css` 2, and 18 in sections, snippets and blocks (fragrance journey 5, `price` 3, and one or two in each of eight other files). `moments.css` has none.
 - The Moment marks are placeholders; the final set from an illustrator replaces `snippets/moment-marks-sprite.liquid` without code changes if the layer contract in section 6 is kept.
 - Planned and not built yet: header and mega menu, cart drawer, footer, homepage sections, collection and product pages, the rating slot, large mark tiles.
+
+## Identity reset additions (2026-10-25)
+
+- **Shared edges:** `--m-content` (90rem) and `--m-gutter` (16px, 40px from 750px) feed `.m-wrap` and match the theme's page-width values.
+  Header, hero copy and every section use the same edge. The tickers are full-bleed by design.
+- **Live moment tokens:** `html[data-moment]` sets `--m-live`, `--m-live-ink`, `--m-live-line` (registered with `@property`, so the colour
+  transitions). Used by the story band, the brand-strip hairline and any surface that should follow the moment. Default: Night.
+- **Tone classes:** `.m-tone--night|gift|allday|daily|fresh|love` map `--moment-*` tokens to `--tile-bg/-ink/-body/-accent/-gold`.
+  Used by tiles, hero slides, the gift block and the mega-panel cards. No hex values outside the token file.
+- **Ticker:** `snippets/moments-ticker.liquid` (two identical groups, translate -50%, linear, transform only). Used by the announcement
+  bar and the brand marquee. Reduced motion: static.
+- **Buttons:** `.m-btn` (berry pill), `.m-btn--outline` (on dark or photographic surfaces), `.m-link` (underlined text link).
+- **Type scale:** hero headline fluid 48 to 120px (`clamp(3rem, 9vw, 7.5rem)`), section headings up to 80px, Arabic line-height 1.3 to 1.35.
+  Fonts unchanged (Marcellus, Readex Pro, Alexandria): no change was needed for the performance budget.
+- **Uncropped imagery:** posters in "Fit" mode show the whole photograph over a blurred copy; packshots use `object-fit: contain`.

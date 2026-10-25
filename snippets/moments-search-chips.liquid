@@ -1,0 +1,88 @@
+{%- doc -%}
+  Six chips, one per moment, shown in the search overlay before anything is typed. Each links to its moment collection.
+  Marks are the small Moment marks. 44px touch targets. Wraps on small screens. Nothing is rendered if a collection is missing.
+
+  @example
+  {% render 'moments-search-chips' %}
+{%- enddoc -%}
+
+{%- liquid
+  assign chip_handles = 'night-moment,gift-moment,all-day-moment,daily-moment,fresh-moment,love-moment' | split: ','
+  assign chip_marks = 'night,gift,allday,daily,fresh,love' | split: ','
+  assign chip_keys = 'moments.night,moments.gift,moments.all_day,moments.daily,moments.fresh,moments.love' | split: ','
+-%}
+
+<div class="m-chips">
+  <p class="m-chips__title">{{ 'homepage.moments.heading' | t }}</p>
+  <ul class="m-chips__list">
+    {%- for handle in chip_handles -%}
+      {%- assign chip_collection = collections[handle] -%}
+      {%- if chip_collection != blank -%}
+        {%- assign chip_label_key = chip_keys[forloop.index0] -%}
+        <li>
+          <a class="m-chips__chip" href="{{ chip_collection.url }}" data-moment-host>
+            {% render 'moment-mark', mark: chip_marks[forloop.index0], size: 'sm' %}
+            <span>{{ chip_label_key | t }}</span>
+          </a>
+        </li>
+      {%- endif -%}
+    {%- endfor -%}
+  </ul>
+</div>
+
+{% stylesheet %}
+  .m-chips {
+    padding-block-end: 16px;
+  }
+
+  .m-chips__title {
+    margin: 0 0 10px;
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  html[lang='ar'] .m-chips__title {
+    letter-spacing: 0;
+    text-transform: none;
+  }
+
+  .m-chips__list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .m-chips__chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-block-size: 44px;
+    padding-inline: 14px 18px;
+    border: 1px solid var(--m-rule-quiet);
+    border-radius: 9999px;
+    color: var(--m-text);
+    font-size: 0.9375rem;
+    text-decoration: none;
+    transition: background-color var(--m-dur-1) var(--m-ease);
+  }
+
+  .m-chips__chip:hover,
+  .m-chips__chip:focus-visible {
+    background: var(--m-nude);
+  }
+
+  .m-chips__chip:focus-visible {
+    outline: 2px solid var(--m-plum);
+    outline-offset: 2px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .m-chips__chip {
+      transition: none;
+    }
+  }
+{% endstylesheet %}

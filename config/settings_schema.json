@@ -2303,8 +2303,8 @@
         "type": "text",
         "id": "moments_primary_nav",
         "label": "Primary navigation items",
-        "info": "Comma-separated menu titles (no spaces after the commas), in any case. The other menu links appear in the Shop by Moment panel under Discover.",
-        "default": "shop by moment,gifts,for her,for him,brands"
+        "info": "At most three menu titles, comma-separated with no spaces, in the order they appear. Gifts is shown as an accent link. All other menu links stay in the store menu and the footer.",
+        "default": "shop by moment,brands,gifts"
       },
       {
         "type": "text",

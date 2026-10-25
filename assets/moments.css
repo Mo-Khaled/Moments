@@ -393,3 +393,36 @@ html[data-moment='love'] { --m-live: var(--m-text-secondary); --m-live-ink: var(
     margin-inline: 0;
   }
 }
+
+/* No layout shift from the header menu: until the overflow script has run, keep the menu on one clipped row instead of
+   letting it wrap onto extra rows and collapse later (at 750 to 1100px that pushed the whole page down by about 75px). */
+header-menu overflow-list[defer]::part(list) {
+  flex-wrap: nowrap;
+  overflow: hidden;
+}
+
+/* The cart button carries padding around its icon; pull the actions column out so the icon lines up with the content edge. */
+@media screen and (min-width: 750px) {
+  .header__column--right {
+    margin-inline-end: -11px;
+  }
+}
+
+/* Visually hidden, still read by screen readers. */
+.m-sr-only {
+  position: absolute;
+  inline-size: 1px;
+  block-size: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  list-style: none;
+}
+
+/* Gifts: an accent link in the primary navigation (a direct link, no panel). */
+.menu-list__link--accent .menu-list__link-title {
+  color: var(--m-berry-ink);
+  font-weight: 500;
+}

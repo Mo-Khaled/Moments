@@ -446,7 +446,66 @@
       "bestsellers": "Best sellers",
       "new": "New arrivals",
       "gifts": "Gifts",
-      "discover": "Discover"
+      "discover": "Discover",
+      "all_brands": "All brands",
+      "shop_by": "Shop by"
+    }
+  },
+  "about": {
+    "hero": {
+      "headline": "Fragrance for every moment",
+      "text": "MOMENTS is a fragrance store in Egypt. We sort every bottle by when you will wear it.",
+      "play": "Play our story",
+      "play_close": "Close video"
+    },
+    "trust": {
+      "cod_link": "Cash on delivery",
+      "shipping_link": "Shipping policy"
+    },
+    "sell": {
+      "heading": "What we sell",
+      "text": "Original fragrances from the brands you know, sorted into six moments: Night, Gift, All day, Daily, Fresh and Love. Pick the moment you are dressing for and we show you what fits.",
+      "badge_1": "100% original, sealed",
+      "badge_2": "Six moments",
+      "badge_3": "Prices in EGP",
+      "cta": "Shop by moment"
+    },
+    "promises": {
+      "heading": "Four promises",
+      "draft": "DRAFT, needs owner approval",
+      "p1_title": "Original and sealed",
+      "p1_text": "Every bottle arrives in its original sealed packaging.",
+      "p2_title": "Sorted by moment, not by brand name",
+      "p2_text": "Start from the moment you are dressing for.",
+      "p3_title": "Clear prices in EGP",
+      "p3_text": "The price you see is the price in Egyptian pounds.",
+      "p4_title": "Easy to choose a gift",
+      "p4_text": "A whole moment of gift sets, ready to hand over."
+    },
+    "steps": {
+      "heading": "How it works",
+      "s1_title": "Choose a moment",
+      "s1_text": "Night, Gift, All day, Daily, Fresh or Love.",
+      "s2_title": "Order and pay on delivery",
+      "s2_text": "Cash on delivery is available.",
+      "s3_title": "Receive your sealed bottle",
+      "s3_text": "It arrives in its original sealed packaging.",
+      "fine": "Returns and exchange policy"
+    },
+    "story": {
+      "heading": "Our story",
+      "todo": "TODO: write this chapter and add a photograph. Only confirmed facts."
+    },
+    "support": {
+      "heading": "Shipping and support",
+      "shipping": "Shipping policy",
+      "phone": "Phone",
+      "email": "Email",
+      "areas": "Where we deliver"
+    },
+    "signup": {
+      "heading": "Be the first to know",
+      "text": "New moments, new arrivals and the occasional offer."
     }
   }
 }

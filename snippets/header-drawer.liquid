@@ -98,7 +98,9 @@
           {%- comment -%}
             Handle menus with fewer than 3 levels of links
           {%- endcomment -%}
-          {% if linklist.levels < 3 %}
+          {% if data_header_drawer_type == 'mobile-drawer' %}
+            {% render 'moments-drawer-list', linklist: linklist %}
+          {% elsif linklist.levels < 3 %}
             {% assign first_accordion_open = false %}
             {% assign animation_index = 0 %}
             {%- for link in linklist.links -%}

@@ -1,0 +1,342 @@
+{
+  "sections": {
+    "about_hero": {
+      "type": "moments-about-hero",
+      "settings": {
+        "tone": "night"
+      }
+    },
+    "about_trust": {
+      "type": "moments-trust",
+      "settings": {
+        "returns_url": "/pages/returns-exchange-policy"
+      }
+    },
+    "about_sell": {
+      "type": "moments-split",
+      "blocks": {
+        "b1": {
+          "type": "badge",
+          "settings": {}
+        },
+        "b2": {
+          "type": "badge",
+          "settings": {}
+        },
+        "b3": {
+          "type": "badge",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "b1",
+        "b2",
+        "b3"
+      ],
+      "settings": {
+        "cta_url": "/pages/moments",
+        "tone": "allday",
+        "reverse": false
+      }
+    },
+    "about_promises": {
+      "type": "moments-promises",
+      "blocks": {
+        "p1": {
+          "type": "promise",
+          "settings": {}
+        },
+        "p2": {
+          "type": "promise",
+          "settings": {}
+        },
+        "p3": {
+          "type": "promise",
+          "settings": {}
+        },
+        "p4": {
+          "type": "promise",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "p1",
+        "p2",
+        "p3",
+        "p4"
+      ],
+      "settings": {}
+    },
+    "about_steps": {
+      "type": "moments-steps",
+      "settings": {
+        "returns_url": "/pages/returns-exchange-policy"
+      }
+    },
+    "about_story": {
+      "type": "moments-chapters",
+      "blocks": {
+        "chapter_1": {
+          "type": "chapter",
+          "settings": {}
+        },
+        "chapter_2": {
+          "type": "chapter",
+          "settings": {}
+        },
+        "chapter_3": {
+          "type": "chapter",
+          "settings": {}
+        },
+        "chapter_4": {
+          "type": "chapter",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "chapter_1",
+        "chapter_2",
+        "chapter_3",
+        "chapter_4"
+      ],
+      "settings": {}
+    },
+    "about_brands": {
+      "type": "moments-brand-marquee",
+      "blocks": {
+        "brand_afnan": {
+          "type": "brand",
+          "settings": {
+            "collection": "afnan"
+          }
+        },
+        "brand_khadlaj": {
+          "type": "brand",
+          "settings": {
+            "collection": "khadlaj"
+          }
+        },
+        "brand_lattafa": {
+          "type": "brand",
+          "settings": {
+            "collection": "lattafa"
+          }
+        },
+        "brand_faan": {
+          "type": "brand",
+          "settings": {
+            "collection": "faan"
+          }
+        },
+        "brand_assaf": {
+          "type": "brand",
+          "settings": {
+            "collection": "assaf"
+          }
+        },
+        "brand_rasasi_perfumes": {
+          "type": "brand",
+          "settings": {
+            "collection": "rasasi-perfumes"
+          }
+        },
+        "brand_laverne": {
+          "type": "brand",
+          "settings": {
+            "collection": "laverne"
+          }
+        },
+        "brand_nabeel_perfumes": {
+          "type": "brand",
+          "settings": {
+            "collection": "nabeel-perfumes"
+          }
+        },
+        "brand_ibraq": {
+          "type": "brand",
+          "settings": {
+            "collection": "ibraq"
+          }
+        },
+        "brand_le_falcone": {
+          "type": "brand",
+          "settings": {
+            "collection": "le-falcone"
+          }
+        },
+        "brand_lattafa_pride": {
+          "type": "brand",
+          "settings": {
+            "collection": "lattafa-pride"
+          }
+        },
+        "brand_armaf": {
+          "type": "brand",
+          "settings": {
+            "collection": "armaf"
+          }
+        },
+        "brand_zimaya": {
+          "type": "brand",
+          "settings": {
+            "collection": "zimaya"
+          }
+        },
+        "brand_dkhoon_emirates": {
+          "type": "brand",
+          "settings": {
+            "collection": "dkhoon-emirates"
+          }
+        }
+      },
+      "block_order": [
+        "brand_afnan",
+        "brand_khadlaj",
+        "brand_lattafa",
+        "brand_faan",
+        "brand_assaf",
+        "brand_rasasi_perfumes",
+        "brand_laverne",
+        "brand_nabeel_perfumes",
+        "brand_ibraq",
+        "brand_le_falcone",
+        "brand_lattafa_pride",
+        "brand_armaf",
+        "brand_zimaya",
+        "brand_dkhoon_emirates"
+      ],
+      "settings": {
+        "speed": 40
+      }
+    },
+    "about_support": {
+      "type": "moments-support",
+      "settings": {}
+    },
+    "about_signup": {
+      "type": "section",
+      "blocks": {
+        "text_yX4M3d": {
+          "type": "text",
+          "name": "t:names.heading",
+          "settings": {
+            "text": "<h2>Be the first to know</h2>",
+            "width": "100%",
+            "max_width": "normal",
+            "alignment": "center",
+            "type_preset": "rte",
+            "font": "var(--font-body--family)",
+            "font_size": "1rem",
+            "line_height": "normal",
+            "letter_spacing": "normal",
+            "case": "none",
+            "wrap": "pretty",
+            "color": "var(--color-foreground)",
+            "background": false,
+            "background_color": "#00000026",
+            "corner_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        },
+        "text_nxjANA": {
+          "type": "text",
+          "settings": {
+            "text": "<p>New moments, new arrivals and the occasional offer.</p>",
+            "width": "100%",
+            "max_width": "normal",
+            "alignment": "center",
+            "type_preset": "paragraph",
+            "font": "var(--font-body--family)",
+            "font_size": "1rem",
+            "line_height": "normal",
+            "letter_spacing": "normal",
+            "case": "none",
+            "wrap": "pretty",
+            "color": "var(--color-foreground)",
+            "background": false,
+            "background_color": "#00000026",
+            "corner_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        },
+        "email_signup_UarjTK": {
+          "type": "email-signup",
+          "settings": {
+            "width": "custom",
+            "custom_width": 50,
+            "inherit_color_scheme": true,
+            "color_scheme": "",
+            "heading": "",
+            "heading_preset": "h3",
+            "border_style": "all",
+            "border_width": 1,
+            "border_radius": 100,
+            "input_type_preset": "paragraph",
+            "style_class": "button-unstyled",
+            "display_type": "text",
+            "label": "Sign up",
+            "integrated_button": true,
+            "button_type_preset": "paragraph",
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "text_yX4M3d",
+        "text_nxjANA",
+        "email_signup_UarjTK"
+      ],
+      "name": "t:names.email_signup",
+      "settings": {
+        "content_direction": "column",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "flex-start",
+        "vertical_alignment": "center",
+        "align_baseline": false,
+        "horizontal_alignment_flex_direction_column": "center",
+        "vertical_alignment_flex_direction_column": "center",
+        "gap": 16,
+        "section_width": "page-width",
+        "section_height": "",
+        "section_height_custom": 50,
+        "color_scheme": "scheme-3",
+        "background_media": "none",
+        "video_position": "cover",
+        "background_image_position": "cover",
+        "border": "none",
+        "border_width": 1,
+        "border_opacity": 100,
+        "border_radius": 0,
+        "toggle_overlay": false,
+        "overlay_color": "#00000026",
+        "overlay_style": "solid",
+        "gradient_direction": "to top",
+        "padding-block-start": 64,
+        "padding-block-end": 64
+      }
+    }
+  },
+  "order": [
+    "about_hero",
+    "about_trust",
+    "about_sell",
+    "about_promises",
+    "about_steps",
+    "about_story",
+    "about_brands",
+    "about_support",
+    "about_signup"
+  ]
+}

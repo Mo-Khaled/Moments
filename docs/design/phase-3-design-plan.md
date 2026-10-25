@@ -38,23 +38,15 @@ Contrast (checked): plum on pearl 13.6:1; berry-ink on nude 5.45:1; text-muted o
 3. **One badge style** (gold outline, square corners) and **one radius rule:** pills for actions, square for media and badges.
 4. **One motion language** (section 7).
 
-## 5. Layout concepts
+## 5. Layout concepts (revised 2026-10-25: identity reset)
 
-**Header and mega menu.** Left-to-right (mirrored in Arabic): Shop by Moment, For Her, For Him, Brands, Home & Incense, Skin & Body; logo centered; search, EN | ع switcher, account, cart on the other side. Shop by Moment opens a panel: six rows (mark, name, one line, "View all") on the inline-start, a photo slot for the hovered moment and two short link columns on the other. Brands opens a two-column list with logos or names; Skin & Body is a two-item dropdown. Mobile: the same hierarchy in the drawer, moments first. Search opens with chips for the six moments.
-
-**Homepage** (top to bottom):
-```
-[hero: left copy | right photo slot]  max 560px tall, static headline, 1 primary + 1 text link
-[value pillars]  one ruled strip, 4 text items, each links to its policy page
-[Shop by Moment] big Night tile + Gift / All day / Daily / Fresh / Love banner (no empty cells)
-[Most loved]     4 signature cards
-[Gift a Moment]  sets, with tier messaging only if a real discount exists
-[Brand story]    TODO: real, verifiable story and authenticity facts from you
-[plum band]      Skin Moments signup with one gold highlight
-```
-Left-aligned content throughout (it mirrors in RTL). The hero headline is static (no marquee), which fixes the cropped text and the 1,500 px hero.
-
-**Collection:** title and description left, filters as a left rail on desktop and a bottom sheet on mobile, sorting top-right, 4 columns desktop and 2 mobile, same card everywhere. **Product:** gallery left, details right (sticky on desktop), then fragrance journey and scent notes as two separate quiet sections, trust badges as the same ruled strip as the pillars, sticky add to cart on mobile. **Cart drawer:** line items with the name device, a free-shipping bar (threshold is a theme setting, default 3,000 EGP), one EGP format (`LE 2,250.00`), estimated total, "Shipping is calculated at checkout" (never a wrong shipping amount at an empty cart).
+The homepage is organised around one idea: **the site changes with the moment.** Six moments (Night, Gift, All day, Daily, Fresh, Love).
+Order: continuous announcement ticker, header, full-bleed hero (one slide per moment, opening on the visitor's local hour), brand
+marquee, Shop by Moment (large colour blocks), best sellers carousel, a full-bleed Gift colour block, a story band that takes the
+active moment's colour, email band. The pillar strip is gone as its own row: its facts live in the ticker and the footer.
+One content width and one gutter (`--m-content`, `--m-gutter`) are shared by every band so edges line up. Left-aligned content
+throughout (it mirrors in RTL). Photography, when it exists, is shown uncropped (fit mode, contain frames); colour fields and the
+Moment marks carry the page until then.
 
 ## 6. Moment marks (placeholders until an illustrator delivers)
 
@@ -65,9 +57,15 @@ Six object marks, no characters: Night (lantern with crescent), Gift (ribbon-tie
 - Touch: runs once when the mark scrolls into view (IntersectionObserver), otherwise static. `prefers-reduced-motion`: always static. RTL-safe (transforms are symmetric or mirrored via logical properties).
 - Merchant editing: a block setting per menu item or collection card for the SVG or image and a "gesture" select, so a new moment needs no code.
 
-## 7. Motion (only where it explains state)
+## 7. Motion (revised 2026-10-25: lively motion is now allowed, still purposeful)
 
-Tokens: `--ease-moment: cubic-bezier(0.22, 1, 0.36, 1)`, durations 160 / 240 / 360 ms; exits at about 65% of the enter time. Used for: add-to-cart confirmation (button label swaps and the drawer slides in), drawer and menu open and close, the Moment mark gestures, one image reveal on collection tiles. No scroll-jacking, no marquees, no parallax, no hover transitions on every card. Everything off under `prefers-reduced-motion`.
+Allowed and built: two continuous tickers (announcement bar and brand marquee; CSS transform only, pause on hover and focus,
+reversed in RTL, static under reduced motion), the hero (looping video on desktop after the poster, very slow transform-only drift
+on slides without footage, crossfade between moments), the accent takeover (colour transitions on `--m-live`), the Moment mark
+gestures, press feedback on tiles and buttons. After approval: the Moment cursor companion and the search-overlay shortcuts.
+Rules unchanged: transform, opacity and colour only; nothing moves under `prefers-reduced-motion`; no layout shift; no
+scroll-jacking; no parallax; nothing auto-advances faster than 6 s (the hero does not auto-advance at all).
+Tokens: `--m-ease: cubic-bezier(0.23, 1, 0.32, 1)`, durations 160 / 240 / 360 ms.
 
 ## 8. Voice (EN now; AR needs a native pass)
 
@@ -83,9 +81,12 @@ Short, confident, a little playful, no filler. Name things by what the shopper d
 
 Avoid: "elevate", "discover the magic", fake urgency, countdowns. No copy borrowed from the dossier.eu reference; only its structure (pillars, intent navigation, name device, progress bar, rating slot) is adapted.
 
-## 9. What I am deliberately not doing
+## 9. What I am deliberately not doing (revised 2026-10-25)
 
-Purple or blue gradient heroes, glass cards, glows, a row of identical icon-title-text cards, emoji icons, one shadow on every card, a headline marquee, stacked popups, countdown timers, fake ratings or testimonials, and motion on everything. The one gold device per band and the name treatment are the only flourishes.
+Purple or blue gradient heroes, glass cards, glows, a row of identical icon-title-text cards, emoji icons, one shadow on every card,
+stacked popups, countdown timers, fake ratings or testimonials, motion on everything, cover-cropped product photographs.
+No longer excluded: marquees (the two tickers), a video hero, lively motion (section 7). Moment gradient fills are surfaces tied
+to the six moments, not decoration. The one gold device per band and the name treatment remain the only flourishes.
 
 ## 10. Build order (after your approval)
 

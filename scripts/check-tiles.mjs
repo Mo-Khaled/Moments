@@ -76,7 +76,7 @@ for (const pg of PAGES) {
       const tiles = await page.$$('.m-tile');
       for (let t = 0; t < tiles.length; t++) {
         const tile = tiles[t];
-        const tone = await tile.evaluate((a) => [...a.classList].find((c) => c.startsWith('m-tile--')).replace('m-tile--', ''));
+        const tone = await tile.evaluate((a) => [...a.classList].find((c) => c.startsWith('m-tone--')).replace('m-tone--', ''));
         const tctx = `${ctxName} ${tone}`;
 
         const measure = () => tile.evaluate((a) => {

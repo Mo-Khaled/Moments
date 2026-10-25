@@ -1,0 +1,44 @@
+{%- doc -%}
+  The phone menu drawer list, in the order the brief asks for: the six moments first, then Brands, Gifts, For Her, For Him.
+  Plain links (no nested accordions), using the drawer's own classes so spacing and motion match. The moments come from the
+  moment collections; the other four are found in the store menu by title and are left out if the menu has no such item.
+  Nothing here edits store navigation.
+
+  @param {object} linklist - The header menu link list.
+
+  @example
+  {% render 'moments-drawer-list', linklist: linklist %}
+{%- enddoc -%}
+
+{%- liquid
+  assign moment_handles = 'night-moment,gift-moment,all-day-moment,daily-moment,fresh-moment,love-moment' | split: ','
+  assign moment_keys = 'moments.night,moments.gift,moments.all_day,moments.daily,moments.fresh,moments.love' | split: ','
+  assign order = 'brands,gifts,for her,for him' | split: ','
+  assign index = 0
+-%}
+
+{%- for handle in moment_handles -%}
+  {%- assign drawer_collection = collections[handle] -%}
+  {%- if drawer_collection != blank -%}
+    {%- assign index = index | plus: 1 -%}
+    <li class="menu-drawer__list-item--flat menu-drawer__list-item--divider" style="--menu-drawer-animation-index: {{ index }};">
+      <a href="{{ drawer_collection.url }}" class="menu-drawer__menu-item menu-drawer__menu-item--mainlist menu-drawer__animated-element focus-inset">
+        <span class="menu-drawer__menu-item-text wrap-text">{{ moment_keys[forloop.index0] | t }}</span>
+      </a>
+    </li>
+  {%- endif -%}
+{%- endfor -%}
+
+{%- for key in order -%}
+  {%- for link in linklist.links -%}
+    {%- assign link_key = link.title | downcase | strip -%}
+    {%- if link_key == key -%}
+      {%- assign index = index | plus: 1 -%}
+      <li class="menu-drawer__list-item--flat menu-drawer__list-item--divider" style="--menu-drawer-animation-index: {{ index }};">
+        <a href="{{ link.url }}" class="menu-drawer__menu-item menu-drawer__menu-item--mainlist menu-drawer__animated-element focus-inset{% if link.current %} menu-drawer__menu-item--active{% endif %}">
+          <span class="menu-drawer__menu-item-text wrap-text">{% render 'title-case', text: link.title %}</span>
+        </a>
+      </li>
+    {%- endif -%}
+  {%- endfor -%}
+{%- endfor -%}

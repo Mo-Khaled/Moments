@@ -1,0 +1,114 @@
+{%- comment -%}
+  Shipping and support. Every slot is a TODO the owner fills (governorates we deliver to, support phone, support email).
+  An empty slot is hidden on the storefront and shown as a TODO in the theme editor. The link to the shipping policy is shown
+  only when the store's shipping policy page has content; if it is empty (or still carries returns wording) the link is hidden and
+  the problem is listed in docs/needs-from-owner.md.
+{%- endcomment -%}
+
+{%- liquid
+  assign has_policy = false
+  if shop.shipping_policy.body != blank
+    assign has_policy = true
+  endif
+  assign any = false
+  if section.settings.areas != blank or section.settings.phone != blank or section.settings.email != blank or has_policy
+    assign any = true
+  endif
+-%}
+
+{%- if any or request.design_mode -%}
+  <section class="m-support" aria-labelledby="m-support-title-{{ section.id }}">
+    <div class="m-support__inner m-wrap">
+      <h2 class="m-support__title" id="m-support-title-{{ section.id }}">{{ 'about.support.heading' | t }}</h2>
+      <dl class="m-support__list">
+        {%- if section.settings.areas != blank -%}
+          <div><dt>{{ 'about.support.areas' | t }}</dt><dd>{{ section.settings.areas }}</dd></div>
+        {%- elsif request.design_mode -%}
+          <div class="m-support__todo"><dt>{{ 'about.support.areas' | t }}</dt><dd>TODO</dd></div>
+        {%- endif -%}
+        {%- if section.settings.phone != blank -%}
+          <div><dt>{{ 'about.support.phone' | t }}</dt><dd><a href="tel:{{ section.settings.phone | remove: ' ' }}">{{ section.settings.phone }}</a></dd></div>
+        {%- elsif request.design_mode -%}
+          <div class="m-support__todo"><dt>{{ 'about.support.phone' | t }}</dt><dd>TODO</dd></div>
+        {%- endif -%}
+        {%- if section.settings.email != blank -%}
+          <div><dt>{{ 'about.support.email' | t }}</dt><dd><a href="mailto:{{ section.settings.email }}">{{ section.settings.email }}</a></dd></div>
+        {%- elsif request.design_mode -%}
+          <div class="m-support__todo"><dt>{{ 'about.support.email' | t }}</dt><dd>TODO</dd></div>
+        {%- endif -%}
+        {%- if has_policy -%}
+          <div><dt>{{ 'about.support.shipping' | t }}</dt><dd><a href="{{ shop.shipping_policy.url }}">{{ 'about.trust.shipping_link' | t }}</a></dd></div>
+        {%- endif -%}
+      </dl>
+    </div>
+  </section>
+{%- endif -%}
+
+{% stylesheet %}
+  .m-support {
+    padding-block: clamp(48px, 7vw, 96px);
+    background: var(--m-nude);
+    color: var(--m-plum);
+  }
+
+  .m-support__inner {
+    display: grid;
+    gap: 24px;
+  }
+
+  .m-support__title {
+    margin: 0;
+    font-size: clamp(2.25rem, 5vw, 4rem);
+    line-height: 1.02;
+  }
+
+  .m-support__list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 24px;
+    margin: 0;
+  }
+
+  .m-support__list dt {
+    margin-block-end: 6px;
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .m-support__list dd {
+    margin: 0;
+    font-size: 1.125rem;
+  }
+
+  .m-support__list a {
+    color: inherit;
+    text-underline-offset: 4px;
+  }
+
+  .m-support__todo dd {
+    opacity: 0.6;
+  }
+
+  html[lang='ar'] .m-support__title {
+    line-height: 1.35;
+  }
+
+  html[lang='ar'] .m-support__list dt {
+    letter-spacing: 0;
+    text-transform: none;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "MOMENTS support",
+  "limit": 1,
+  "settings": [
+    { "type": "textarea", "id": "areas", "label": "Governorates we deliver to", "info": "TODO: owner to supply. Hidden on the storefront until filled." },
+    { "type": "text", "id": "phone", "label": "Support phone", "info": "TODO: owner to supply. Hidden until filled." },
+    { "type": "text", "id": "email", "label": "Support email", "info": "TODO: owner to supply. Hidden until filled." }
+  ],
+  "presets": [{ "name": "MOMENTS support" }]
+}
+{% endschema %}

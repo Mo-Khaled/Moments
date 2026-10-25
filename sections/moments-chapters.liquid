@@ -1,0 +1,152 @@
+{%- comment -%}
+  Our story as alternating text and image chapters. Every chapter is a block with a heading, text and an image.
+  TODO slots (the owner supplies): how MOMENTS started, why moments, where we operate, what changed. A chapter with no heading and
+  no text is hidden on the storefront and shown as a TODO in the theme editor. No years, numbers or maps unless supplied.
+  An image, when set, is shown uncropped on a moment colour field.
+{%- endcomment -%}
+
+{%- assign any_filled = false -%}
+{%- for block in section.blocks -%}
+  {%- if block.settings.heading != blank or block.settings.text != blank -%}
+    {%- assign any_filled = true -%}
+  {%- endif -%}
+{%- endfor -%}
+
+{%- if any_filled or request.design_mode -%}
+<section class="m-chapters" aria-labelledby="m-chapters-title-{{ section.id }}">
+  <div class="m-wrap">
+    <h2 class="m-chapters__title" id="m-chapters-title-{{ section.id }}">
+      {%- if section.settings.heading != blank -%}{{ section.settings.heading }}{%- else -%}{{ 'about.story.heading' | t }}{%- endif -%}
+    </h2>
+  </div>
+  {%- assign tones = 'daily,allday,fresh,love' | split: ',' -%}
+  {%- for block in section.blocks -%}
+    {%- assign filled = false -%}
+    {%- if block.settings.heading != blank or block.settings.text != blank -%}
+      {%- assign filled = true -%}
+    {%- endif -%}
+    {%- if filled or request.design_mode -%}
+      <article class="m-chapter m-tone--{{ tones[forloop.index0] | default: 'daily' }}{% unless filled %} m-chapter--todo{% endunless %}" {{ block.shopify_attributes }}>
+        <div class="m-chapter__inner m-wrap">
+          <div class="m-chapter__copy">
+            {%- if filled -%}
+              <h3 class="m-chapter__heading">{{ block.settings.heading }}</h3>
+              <p class="m-chapter__text">{{ block.settings.text }}</p>
+            {%- else -%}
+              <p class="m-chapter__todo">{{ 'about.story.todo' | t }}</p>
+            {%- endif -%}
+          </div>
+          {%- if block.settings.image != blank -%}
+            <div class="m-chapter__media">
+              {{ block.settings.image | image_url: width: 1000 | image_tag: class: 'm-chapter__image', alt: block.settings.image_alt, loading: 'lazy', widths: '400, 700, 1000', sizes: '(min-width: 990px) 45vw, 100vw' }}
+            </div>
+          {%- endif -%}
+        </div>
+      </article>
+    {%- endif -%}
+  {%- endfor -%}
+</section>
+{%- endif -%}
+
+{% stylesheet %}
+  .m-chapters {
+    background: var(--m-surface);
+    color: var(--m-text);
+  }
+
+  .m-chapters__title {
+    margin: 0;
+    padding-block: clamp(48px, 7vw, 96px) clamp(24px, 3vw, 40px);
+    font-size: clamp(2.25rem, 5vw, 4rem);
+    line-height: 1.02;
+  }
+
+  .m-chapter {
+    background: var(--tile-bg);
+    color: var(--tile-ink);
+    padding-block: clamp(40px, 6vw, 88px);
+  }
+
+  .m-chapter__inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 32px;
+    align-items: center;
+  }
+
+  .m-chapter__heading {
+    margin: 0 0 12px;
+    max-inline-size: 16ch;
+    font-size: clamp(1.75rem, 3.6vw, 3rem);
+    line-height: 1.05;
+  }
+
+  .m-chapter__text {
+    margin: 0;
+    max-inline-size: 46ch;
+    font-size: 1.0625rem;
+    line-height: 1.6;
+  }
+
+  .m-chapter__todo {
+    margin: 0;
+    padding: 8px 12px;
+    border: 1px dashed currentcolor;
+    font-size: 0.8125rem;
+  }
+
+  .m-chapter__media {
+    display: grid;
+    place-items: center;
+  }
+
+  .m-chapter__image {
+    inline-size: 100%;
+    block-size: auto;
+    max-block-size: 520px;
+    object-fit: contain;
+  }
+
+  html[lang='ar'] .m-chapter__heading,
+  html[lang='ar'] .m-chapters__title {
+    line-height: 1.35;
+  }
+
+  html[lang='ar'] .m-chapter__text {
+    line-height: 1.75;
+  }
+
+  @media screen and (min-width: 990px) {
+    .m-chapter__inner {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 96px;
+    }
+
+    .m-chapter:nth-of-type(even) .m-chapter__media {
+      order: -1;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "MOMENTS story chapters",
+  "limit": 1,
+  "settings": [{ "type": "text", "id": "heading", "label": "Heading" }],
+  "blocks": [
+    {
+      "type": "chapter",
+      "name": "Chapter",
+      "limit": 4,
+      "settings": [
+        { "type": "text", "id": "heading", "label": "Heading", "info": "TODO: how MOMENTS started, why moments, where we operate, what changed. Confirmed facts only." },
+        { "type": "textarea", "id": "text", "label": "Text" },
+        { "type": "image_picker", "id": "image", "label": "Image", "info": "Shown uncropped." },
+        { "type": "text", "id": "image_alt", "label": "Image description" }
+      ]
+    }
+  ],
+  "max_blocks": 4,
+  "presets": [{ "name": "MOMENTS story chapters" }]
+}
+{% endschema %}

@@ -44,7 +44,15 @@
             "color_scheme_navigation_bar": "scheme-3",
             "drawer_accordion": true,
             "drawer_accordion_expand_first": true,
-            "drawer_dividers": true
+            "drawer_dividers": true,
+            "brand_1": "afnan",
+            "brand_2": "khadlaj",
+            "brand_3": "lattafa",
+            "brand_4": "faan",
+            "brand_5": "assaf",
+            "brand_6": "rasasi-perfumes",
+            "brand_7": "nabeel-perfumes",
+            "brand_8": "armaf"
           },
           "blocks": {}
         }
@@ -82,9 +90,35 @@
     },
     "moments_announcement": {
       "type": "moments-announcement",
+      "blocks": {
+        "msg_original": {
+          "type": "message",
+          "settings": {
+            "kind": "original"
+          }
+        },
+        "msg_cod": {
+          "type": "message",
+          "settings": {
+            "kind": "cod"
+          }
+        },
+        "msg_shipping": {
+          "type": "message",
+          "settings": {
+            "kind": "shipping"
+          }
+        }
+      },
+      "block_order": [
+        "msg_original",
+        "msg_cod",
+        "msg_shipping"
+      ],
       "settings": {
-        "speed": 40,
-        "returns_url": "/pages/returns-exchange-policy"
+        "style": "rotate",
+        "interval": 4,
+        "speed": 40
       }
     }
   },

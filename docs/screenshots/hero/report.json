@@ -1,0 +1,14 @@
+{
+  "failures": [],
+  "log": [
+    "hero at 21:00 opens on night",
+    "hero at 07:00 opens on fresh",
+    "hero at 13:00 opens on allday",
+    "ticker announcement ltr: 32 px/s, groups 2583 px, loops forever",
+    "ticker brands ltr: 40 px/s, groups 9225 px, loops forever",
+    "ticker announcement rtl: 31 px/s, groups 2514 px, loops forever",
+    "ticker brands rtl: 40 px/s, groups 9225 px, loops forever",
+    "CLS at 1440: 0.000",
+    "video pause off-screen: not testable, no hero video exists yet (the IntersectionObserver and visibilitychange paths are in place)"
+  ]
+}
