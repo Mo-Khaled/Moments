@@ -324,7 +324,13 @@
     display: grid;
     grid-template-columns: minmax(auto, 200px) 1fr;
     grid-template-areas: 'left right';
-    grid-template-rows: max-content;
+
+    /*
+     * Link rows size to their content. The trailing 1fr row takes the height of the open submenu, so the
+     * links never spread apart. Row count is a fixed cap instead of --overflow-count, because the header
+     * section hydration morph removes that inline variable after load.
+     */
+    grid-template-rows: repeat(16, max-content) 1fr;
     grid-gap: 0;
   }
 
@@ -358,10 +364,11 @@
     }
 
     .menu-list__submenu {
+      /* Only the open item's submenu takes up space, otherwise a closed mega menu props the whole panel open */
+      display: none;
       visibility: hidden;
-      grid-row: 1;
       grid-area: right;
-      grid-row-end: span calc(var(--overflow-count) + 1);
+      grid-row: 1 / -1;
       padding-inline-start: var(--menu-horizontal-gap);
 
       .menu-list__submenu-inner {
@@ -371,6 +378,7 @@
     }
 
     .menu-list__link[aria-expanded='true'] + .menu-list__submenu {
+      display: block;
       visibility: visible;
     }
   }
