@@ -1,37 +1,145 @@
-/* MOMENTS brand layer: colors live in theme color schemes; this file sets fonts + brand details */
-html:root {
-  --m-plum: #3B1E3A; --m-plum-900: #251224; --m-berry: #B7406A; --m-berry-600: #9E385D;
-  --m-mauve: #9C6B8A; --m-nude: #E9CFC8; --m-pearl: #FAF6F2; --m-taupe: #75665E; --m-taupe-light: #E6DED8;
-  --m-text-secondary: #6B4A63;
-  /* berry as text: 5.45:1 on nude, 7.49:1 on pearl. Berry itself stays the action (button) color. */
-  --m-berry-ink: #8A2F52;
+/* MOMENTS brand layer.
+   Three token layers: 1 primitive (raw values), 2 semantic (what a value is for), 3 component.
+   Sections, blocks and snippets use semantic or component tokens only, never a hex value.
+   Theme color schemes (Customize > Theme settings > Colors) stay the source of truth for page backgrounds;
+   these tokens cover the brand details the schemes do not. Documented in docs/design-system.md. */
 
+html:root {
+  /* 1. Primitive */
+  --m-plum: #3B1E3A;
+  --m-plum-900: #251224;
+  --m-berry: #B7406A;
+  --m-berry-600: #9E385D;
+  --m-berry-ink: #8A2F52;     /* berry used as text: 5.45:1 on nude, 7.49:1 on pearl */
+  --m-mauve: #9C6B8A;
+  --m-nude: #E9CFC8;
+  --m-nude-deep: #DCB9B0;
+  --m-pearl: #FAF6F2;
+  --m-white: #FFFFFF;
+  --m-taupe: #75665E;
+  --m-taupe-ink: #5E5048;     /* taupe used as text: 7.2:1 on pearl */
+  --m-taupe-light: #E6DED8;
+  --m-text-secondary: #6B4A63;
+  --m-gold-ink: #8A6A22;      /* accent on light surfaces: 4.69:1 on pearl */
+  --m-gold-light: #CDA553;    /* accent on plum: 6.35:1 */
+
+  --m-ease: cubic-bezier(0.23, 1, 0.32, 1);
+  --m-dur-1: 160ms;
+  --m-dur-2: 240ms;
+  --m-dur-3: 360ms;
+
+  /* 2. Semantic */
+  --m-surface: var(--m-pearl);
+  --m-surface-raised: var(--m-white);
+  --m-surface-tint: var(--m-nude);
+  --m-surface-dark: var(--m-plum);
+  --m-text: var(--m-plum);
+  --m-text-muted: var(--m-taupe-ink);
+  --m-text-on-dark: var(--m-pearl);
+  --m-action: var(--m-berry);
+  --m-action-text: var(--m-white);
+  --m-accent-rule: var(--m-gold-ink);
+  --m-accent-on-dark: var(--m-gold-light);
+  --m-rule-quiet: var(--m-nude-deep);
+  --m-price-sale: var(--m-berry-ink);
+
+  /* 3. Component */
+  --m-badge-ink: var(--m-gold-ink);
+  --m-badge-bg: var(--m-surface);
+  --m-badge-ink-muted: var(--m-text-muted);
+  --m-badge-radius: 0;
+  --m-mark-ink: var(--m-plum);
+  --m-mark-body: var(--m-nude);
+  --m-mark-accent: var(--m-berry);
+  --m-mark-gold: var(--m-gold-ink);
+  --m-card-name-first: var(--m-text);
+  --m-card-name-rest: var(--m-text-muted);
+  --m-card-meta: var(--m-text-muted);
+
+  /* Type (the families come from Shopify's font system and snippets/brand-fonts.liquid) */
   --font-body--family: 'Readex Pro', system-ui, sans-serif;
   --font-subheading--family: 'Readex Pro', system-ui, sans-serif;
   --font-accent--family: 'Readex Pro', system-ui, sans-serif;
   --font-heading--family: 'Marcellus', Georgia, serif;
   --font-heading--weight: 400;
 }
+
+/* Arabic: Alexandria headings, no letter-spacing and no uppercase anywhere (they break Arabic letter joining),
+   roomier line-height. Variables first, then a selector for blocks that set their own spacing.
+   The selectors below are more specific than the theme's single-class rules, so no override flags are needed. */
 html:root[lang="ar"] {
   --font-heading--family: 'Alexandria', 'Readex Pro', sans-serif;
   --font-heading--weight: 500;
+  --font-h1--spacing: 0;
+  --font-h2--spacing: 0;
+  --font-h3--spacing: 0;
+  --font-h4--spacing: 0;
+  --font-h5--spacing: 0;
+  --font-h6--spacing: 0;
+  --font-paragraph--spacing: 0;
+  --font-body--case: none;
+  --button-text-case: none;
+  --button-text-case-primary: none;
+  --button-text-case-secondary: none;
 }
-html[lang="ar"] :is(h1, h2, h3, .h1, .h2, .h3) { letter-spacing: 0 !important; text-transform: none !important; }
-html:not([lang="ar"]) :is(h1, h2, .h1, .h2) { letter-spacing: 0.03em; }
 
-body { -webkit-font-smoothing: antialiased; }
+html[lang="ar"] body {
+  line-height: 1.7;
+}
 
-/* price + sale in brand berry */
-.price, .price__regular, product-price .price { font-weight: 600; }
-.price--on-sale .price-item--sale, .price__sale .price-item--last { color: var(--m-berry-ink); }
+html[lang="ar"] body :is(h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6, .custom-typography, .rte) {
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+html[lang="ar"] body :is(h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6) {
+  line-height: 1.35;
+}
+
+html:not([lang="ar"]) :is(h1, h2, .h1, .h2) {
+  letter-spacing: 0.03em;
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+}
+
+/* price: sale price in berry ink */
+.price,
+.price__regular,
+product-price .price {
+  font-weight: 600;
+}
+
+.price--on-sale .price-item--sale,
+.price__sale .price-item--last {
+  color: var(--m-price-sale);
+}
 
 /* header logo (inline brand SVG, colored by the header scheme) */
-.m-logo { display: block; height: 26px; width: auto; color: currentColor; }
-@media screen and (min-width: 750px) { .m-logo { height: 34px; } }
+.m-logo {
+  display: block;
+  height: 26px;
+  width: auto;
+  color: currentcolor;
+}
 
-/* language bar in brand colors */
-#top-lang-bar { background: var(--m-pearl) !important; border-bottom-color: rgba(59, 30, 58, 0.10) !important; }
-#top-lang-bar .tlb-current { color: var(--m-plum) !important; }
-#top-lang-bar .tlb-switch { color: var(--m-text-secondary) !important; font-family: 'Readex Pro', sans-serif !important; }
+@media screen and (min-width: 750px) {
+  .m-logo {
+    height: 34px;
+  }
+}
 
-::selection { background: var(--m-nude); color: var(--m-plum); }
+::selection {
+  background: var(--m-nude);
+  color: var(--m-plum);
+}
+
+/* Motion: everything the brand animates ends here under reduced motion. */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --m-dur-1: 0.01ms;
+    --m-dur-2: 0.01ms;
+    --m-dur-3: 0.01ms;
+  }
+}

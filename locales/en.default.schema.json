@@ -32,6 +32,7 @@
     "text": "Text"
   },
   "content": {
+    "moments_intro": "This list orders the moment collections from most specific to broadest. A product in several moments shows the first one in the list on its card.",
     "visible_if_collection_has_more_products": "Visible if collection has more products than shown",
     "adjustments_affect_all_content": "Applies to all content in this block",
     "advanced": "Advanced",
@@ -196,6 +197,8 @@
   },
   "info": {
     "coming_soon_launched": "When on, visitors to this page go straight to the collection below.",
+    "moments_handles": "Collection handles, comma separated, most specific first. A handle such as night-moment gives the night mark and word; any other handle shows the collection title with no mark.",
+    "card_only": "Shows on product cards only, not on the product page.",
     "applies_on_image_only": "Applies to images only",
     "aspect_ratio_adjusted": "Adjusted in some layouts",
     "auto_open_cart_drawer": "When enabled, the cart drawer will automatically open when a product is added to cart.",
@@ -307,6 +310,7 @@
     "hero_bottom_aligned": "Hero: Bottom aligned",
     "hero_marquee": "Hero: Marquee",
     "coming_soon_gate": "Coming soon redirect",
+    "moments": "Moments",
     "icon": "Icon",
     "icons": "Icons",
     "icons_with_text": "Icons with text",
@@ -722,6 +726,10 @@
   "settings": {
     "launched": "Line has launched",
     "launch_collection": "Collection to open after launch",
+    "moments_handles": "Moment collections",
+    "split_name": "Split the name in two parts",
+    "show_moment": "Show the moment",
+    "show_brand": "Show the brand",
     "accordion": "Accordion",
     "account": "Account",
     "alignment": "Alignment",

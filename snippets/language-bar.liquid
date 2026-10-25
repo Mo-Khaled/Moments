@@ -1,0 +1,94 @@
+{%- doc -%}
+  Mobile-only language switch shown above the header when the store has more than one language.
+  Uses brand tokens from assets/moments.css, so no color is set here and no override is needed.
+  Language names are shown in their own language on purpose.
+
+  @example
+  {% render 'language-bar' %}
+{%- enddoc -%}
+
+{%- if localization.available_languages.size > 1 -%}
+  <div class="lang-bar">
+    {%- form 'localization', id: 'TopLangForm' -%}
+      <div class="lang-bar__inner">
+        <svg class="lang-bar__globe" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2c2.5 2.7 4 6.2 4 10s-1.5 7.3-4 10c-2.5-2.7-4-6.2-4-10s1.5-7.3 4-10z"/></svg>
+        {%- if request.locale.iso_code == 'ar' -%}
+          <span class="lang-bar__current" lang="ar">العربية</span>
+          <span class="lang-bar__sep" aria-hidden="true"></span>
+          <button type="submit" name="locale_code" value="en" class="lang-bar__switch" lang="en" aria-label="{{ 'accessibility.switch_to_english' | t }}">English</button>
+        {%- else -%}
+          <span class="lang-bar__current" lang="en">English</span>
+          <span class="lang-bar__sep" aria-hidden="true"></span>
+          <button type="submit" name="locale_code" value="ar" class="lang-bar__switch" lang="ar" aria-label="{{ 'accessibility.switch_to_arabic' | t }}">العربية</button>
+        {%- endif -%}
+      </div>
+    {%- endform -%}
+  </div>
+{%- endif -%}
+
+{% stylesheet %}
+  .lang-bar {
+    display: none;
+    background: var(--m-surface);
+    border-block-end: 1px solid var(--m-rule-quiet);
+  }
+
+  .lang-bar form {
+    margin: 0;
+  }
+
+  .lang-bar__inner {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding-block: 10px;
+    padding-inline: 18px;
+  }
+
+  .lang-bar__globe {
+    inline-size: 15px;
+    block-size: 15px;
+    flex-shrink: 0;
+    color: var(--m-text-muted);
+  }
+
+  .lang-bar__current {
+    color: var(--m-text);
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1;
+  }
+
+  .lang-bar__sep {
+    inline-size: 1px;
+    block-size: 13px;
+    flex-shrink: 0;
+    background: var(--m-rule-quiet);
+  }
+
+  .lang-bar__switch {
+    padding-block: 2px;
+    padding-inline: 0;
+    border: 0;
+    background: none;
+    color: var(--m-text-muted);
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 1;
+    cursor: pointer;
+    font-family: inherit;
+    appearance: none;
+    transition: color var(--m-dur-1, 160ms) var(--m-ease, ease-out);
+  }
+
+  .lang-bar__switch:hover,
+  .lang-bar__switch:active {
+    color: var(--m-text);
+  }
+
+  @media screen and (max-width: 749px) {
+    .lang-bar {
+      display: block;
+    }
+  }
+{% endstylesheet %}

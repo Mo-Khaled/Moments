@@ -4445,7 +4445,8 @@
     "account_title_personalized": "مرحبًا {{ first_name }}",
     "blog_details_separator": "|",
     "gift_bag_prompt": "أضف كيس هدية",
-    "terms_and_policies": "الشروط والسياسات"
+    "terms_and_policies": "الشروط والسياسات",
+    "product_badge_save": "وفّر {{ amount }}"
   },
   "placeholders": {
     "search": "يبحث",
@@ -4501,7 +4502,9 @@
     "slideshow_previous": "الشريحة السابقة",
     "unit_price": "سعر الوحدة",
     "find_country": "البحث عن البلد",
-    "nested_product": "{{ product_title }} لـ {{ parent_title }}"
+    "nested_product": "{{ product_title }} لـ {{ parent_title }}",
+    "switch_to_english": "التبديل إلى الإنجليزية",
+    "switch_to_arabic": "التبديل إلى العربية"
   },
   "fields": {
     "separator": "ل"
@@ -4580,5 +4583,13 @@
       "open_collection": "متاح الآن: {{ title }}",
       "editor_hint": "صفحة «قريبًا» مفعّلة حاليًا. فعّل خيار «تم إطلاق الخط» واختر مجموعة لتحويل الزوار إليها."
     }
+  },
+  "moments": {
+    "night": "الليل",
+    "gift": "هدية",
+    "all_day": "طوال اليوم",
+    "daily": "يومي",
+    "fresh": "منعش",
+    "love": "حب"
   }
 }

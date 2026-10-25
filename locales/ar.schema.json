@@ -129,7 +129,8 @@
     "visibility": "الظهور",
     "width": "العرض",
     "width_is_automatically_optimized": "يتم تحسين العرض تلقائيًا للجوال.",
-    "app_required_for_ratings": "يلزم تطبيق لتقييمات المنتجات. [اعرف المزيد](https://help.shopify.com/manual/apps)"
+    "app_required_for_ratings": "يلزم تطبيق لتقييمات المنتجات. [اعرف المزيد](https://help.shopify.com/manual/apps)",
+    "moments_intro": "ترتب هذه القائمة مجموعات اللحظات من الأكثر تحديدًا إلى الأعم. إذا كان المنتج في أكثر من لحظة تظهر الأولى في القائمة على بطاقته."
   },
   "html_defaults": {
     "join_our_email_list": "<h2>انضم إلى قائمتنا البريدية</h2>",
@@ -202,7 +203,9 @@
     "video_autoplay": "تُكتم الفيديوهات افتراضيًا",
     "video_external": "استخدم رابط YouTube أو Vimeo",
     "pills_usage": "يُستخدم لعوامل التصفية المطبقة ورموز الخصم واقتراحات البحث",
-    "media_type_info": "تُملأ الميزات من روابط القائمة"
+    "media_type_info": "تُملأ الميزات من روابط القائمة",
+    "moments_handles": "معرّفات (handles) المجموعات مفصولة بفواصل. اسم المجموعة night-moment يعطي الرسمة والكلمة night؛ أي معرّف آخر يظهر بعنوان المجموعة دون رسمة.",
+    "card_only": "يظهر على بطاقات المنتجات فقط، وليس على صفحة المنتج."
   },
   "names": {
     "column": "عمود",
@@ -381,7 +384,8 @@
     "video": "فيديو",
     "video_section": "فيديو",
     "view_all_button": "زر عرض الكل",
-    "pills": "حبوب"
+    "pills": "حبوب",
+    "moments": "اللحظات"
   },
   "options": {
     "above_carousel": "فوق شريط التمرير",
@@ -1022,7 +1026,11 @@
     "product_corner_radius": "استدارة زوايا المنتج",
     "card_corner_radius": "استدارة زوايا البطاقة",
     "media_type_1": "نوع الوسائط",
-    "media_type_2": "نوع الوسائط 2"
+    "media_type_2": "نوع الوسائط 2",
+    "moments_handles": "مجموعات اللحظات",
+    "split_name": "تقسيم الاسم إلى جزأين",
+    "show_moment": "إظهار اللحظة",
+    "show_brand": "إظهار العلامة التجارية"
   },
   "text_defaults": {
     "accordion_heading": "عنوان الأكورديون",

@@ -50,7 +50,9 @@
     "slideshow_play": "Play slideshow",
     "slideshow_previous": "Previous slide",
     "unit_price": "Unit price",
-    "find_country": "Find country"
+    "find_country": "Find country",
+    "switch_to_english": "Switch to English",
+    "switch_to_arabic": "Switch to Arabic"
   },
   "actions": {
     "add": "Add",
@@ -263,7 +265,8 @@
     "recipient_form_fields_hidden": "Recipient form fields are now hidden",
     "recipient_form_error": "There was an error with the form submission",
     "product_custom_property_character_count": "{{ used_chars }}/{{ max_chars }} characters used",
-    "gift_bag_prompt": "Add a gift bag"
+    "gift_bag_prompt": "Add a gift bag",
+    "product_badge_save": "Save {{ amount }}"
   },
   "fields": {
     "separator": "to"
@@ -350,5 +353,13 @@
       "open_collection": "Now open: {{ title }}",
       "editor_hint": "This coming soon page is active. Turn on \"Line has launched\" and pick a collection to send visitors there."
     }
+  },
+  "moments": {
+    "night": "Night",
+    "gift": "Gift",
+    "all_day": "All day",
+    "daily": "Daily",
+    "fresh": "Fresh",
+    "love": "Love"
   }
 }
