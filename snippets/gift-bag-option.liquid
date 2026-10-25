@@ -1,0 +1,44 @@
+{%- comment -%}
+  Renders one radio option for a single gift bag product.
+  Expects: product (the gift bag product object)
+{%- endcomment -%}
+{%- assign variant = product.selected_or_first_available_variant -%}
+
+{%- assign is_in_cart = false -%}
+{%- for item in cart.items -%}
+  {%- if item.properties._gift_bag == 'true' and item.variant_id == variant.id -%}
+    {%- assign is_in_cart = true -%}
+  {%- endif -%}
+{%- endfor -%}
+
+<label class="gift-bag-option {% if is_in_cart %}gift-bag-option--selected{% endif %}">
+  <span class="gift-bag-option__radio-wrap">
+    <input
+      type="radio"
+      name="gift_bag_choice"
+      value="{{ variant.id }}"
+      class="gift-bag-option__input"
+      data-gift-bag-radio
+      {% if is_in_cart %}checked{% endif %}
+    >
+    <span
+      class="gift-bag-option__radio-dot"
+      aria-hidden="true"
+    ></span>
+  </span>
+  {%- if product.featured_image -%}
+    <img
+      class="gift-bag-option__image"
+      src="{{ product.featured_image | image_url: width: 96 }}"
+      srcset="{{ product.featured_image | image_url: width: 96 }} 1x, {{ product.featured_image | image_url: width: 192 }} 2x"
+      alt="{{ product.title | escape }}"
+      width="40"
+      height="40"
+      loading="lazy"
+    >
+  {%- endif -%}
+  <span class="gift-bag-option__text">
+    <span class="gift-bag-option__title">{{ product.title }}</span>
+    <span class="gift-bag-option__price">{{ variant.price | money }}</span>
+  </span>
+</label>

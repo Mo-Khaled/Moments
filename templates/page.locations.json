@@ -1,0 +1,33 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "location_banner_main": {
+      "type": "location-banner",
+      "name": "Location Banner",
+      "settings": {
+        "eyebrow": "Visit Us",
+        "heading": "Our Locations",
+        "subheading": "We welcome you to MOMENTS",
+        "branch_name": "",
+        "branch_address": "",
+        "whatsapp_number": "",
+        "maps_url": "",
+        "embed_url": "",
+        "map_title": "",
+        "show_since": false,
+        "since_text": ""
+      }
+    }
+  },
+  "order": [
+    "location_banner_main"
+  ]
+}

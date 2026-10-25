@@ -1,0 +1,158 @@
+{% comment %}
+  Scent Notes — lightweight display for non-perfume products (room sprays, etc.)
+{% endcomment %}
+
+{% capture sn_svg_sprites %}
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none" id="sn-sprites-{{ section.id }}">
+  <symbol id="fji-citrus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="13" r="7"/><path d="M12 6V2M9 3.5l3 2.5 3-2.5"/><path d="M8 13h8M12 9v8"/></symbol>
+  <symbol id="fji-floral" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="2.5"/><ellipse cx="12" cy="6" rx="2" ry="3"/><ellipse cx="12" cy="18" rx="2" ry="3"/><ellipse cx="6" cy="12" rx="3" ry="2"/><ellipse cx="18" cy="12" rx="3" ry="2"/></symbol>
+  <symbol id="fji-rose" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22v-8"/><path d="M12 14c-4 0-7-2-7-5s3-5 7-5 7 2 7 5-3 5-7 5z"/><path d="M12 9c0-2-1-5-3-6"/><path d="M12 9c0-2 1-5 3-6"/></symbol>
+  <symbol id="fji-herbal" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22V12"/><path d="M12 12C12 12 6 10 5 4c3 0 6 2 7 8z"/><path d="M12 12c0 0 6-2 7-8-3 0-6 2-7 8z"/></symbol>
+  <symbol id="fji-spice" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2c0 0-6 4-6 10a6 6 0 0012 0C18 6 12 2 12 2z"/><path d="M12 8v6M9.5 11h5"/></symbol>
+  <symbol id="fji-woody" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l3 6h4l-3.5 4 1.5 6L12 16l-5 3 1.5-6L5 9h4z"/></symbol>
+  <symbol id="fji-oud" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2c-4 0-7 3-7 7 0 5 7 13 7 13s7-8 7-13c0-4-3-7-7-7z"/><path d="M9 9c0-1.7 1.3-3 3-3s3 1.3 3 3"/><path d="M12 6v3"/></symbol>
+  <symbol id="fji-amber" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l4 7h4l-3 5 1 7-6-3-6 3 1-7-3-5h4z"/></symbol>
+  <symbol id="fji-musk" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3c5 0 8 3.5 8 7 0 5-4 8-8 11C8 18 4 15 4 10c0-3.5 3-7 8-7z"/><circle cx="12" cy="10" r="2"/></symbol>
+  <symbol id="fji-moss" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M2 20c2-4 4-6 6-6s3 2 4 2 3-3 5-3 3 2 5 7"/><path d="M5 20c1-3 2-5 4-6"/></symbol>
+  <symbol id="fji-incense" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21V9"/><path d="M12 9c0 0-3-3-3-5.5S10.5 1 12 1s3 1 3 3.5S12 9 12 9z"/><path d="M9 21h6"/></symbol>
+  <symbol id="fji-aquatic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M2 14s2-3 5-3 5 3 5 3 2-3 5-3 5 3 5 3"/><path d="M2 19s2-3 5-3 5 3 5 3 2-3 5-3 5 3 5 3"/><path d="M12 2l-3 8h6l-3-8z"/></symbol>
+  <symbol id="fji-gourmand" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3h8l1 5H7L8 3z"/><path d="M7 8l-1 13h12L17 8"/><path d="M10 13c0 1.1.9 2 2 2s2-.9 2-2"/></symbol>
+  <symbol id="fji-fruity" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20a7 7 0 100-14 7 7 0 000 14z"/><path d="M12 6s1-4 4-4M12 6s-1-4-4-4"/></symbol>
+  <symbol id="fji-tobacco" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15h13a3 3 0 000-6h-1a3 3 0 00-3-3"/><path d="M4 19h13"/><path d="M20 15v4"/></symbol>
+  <symbol id="fji-leather" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18"/><path d="M8 6V4a2 2 0 014 0v2"/></symbol>
+  <symbol id="fji-coffee" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2v4M10 2v4M14 2v4"/><path d="M4 6h12l-1.5 10H5.5L4 6z"/><path d="M16 10h2a2 2 0 000-4h-2"/></symbol>
+  <symbol id="fji-default" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/></symbol>
+</svg>
+{% endcapture %}
+
+{%- liquid
+  assign note_keys = 'top_notes_1,top_notes_2,top_notes_3,top_notes_4,top_notes_5,top_notes_6,heart_notes_1,heart_notes_2,heart_notes_3,heart_notes_4,heart_notes_5,heart_notes_6,base_notes_1,base_notes_2,base_notes_3,base_notes_4,base_notes_5,base_notes_6' | split: ','
+  assign has_notes = false
+  for key in note_keys
+    assign val = product.metafields.custom[key].value
+    if val and val != blank
+      assign has_notes = true
+      break
+    endif
+  endfor
+-%}
+
+{% if has_notes %}
+{{ sn_svg_sprites }}
+
+<div class="sn" id="sn-{{ section.id }}">
+  <div class="sn__title-bar">
+    <span class="sn__title">{{ section.settings.title }}</span>
+    <span class="sn__rule" aria-hidden="true"></span>
+  </div>
+  <div class="sn__chips">
+    {%- for key in note_keys -%}
+      {%- assign note_val = product.metafields.custom[key].value -%}
+      {%- if note_val and note_val != blank -%}
+        <span class="sn__chip">
+          <span class="sn__chip-icon" data-note="{{ note_val | downcase | escape }}"></span>{{ note_val }}
+        </span>
+      {%- endif -%}
+    {%- endfor -%}
+  </div>
+</div>
+
+<style>
+.sn {
+  padding: 28px 20px;
+  max-width: var(--page-width, 1200px);
+  margin: 0 auto;
+}
+.sn__title-bar {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 18px;
+}
+.sn__title {
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-foreground);
+  opacity: 0.45;
+  white-space: nowrap;
+}
+.sn__rule {
+  flex: 1;
+  height: 1px;
+  background: currentColor;
+  opacity: 0.1;
+}
+.sn__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.sn__chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 14px;
+  border-radius: 50px;
+  font-size: 0.82rem;
+  border: 1px solid currentColor;
+  color: var(--color-foreground);
+  opacity: 0.72;
+  line-height: 1;
+}
+.sn__chip-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+}
+.sn__chip-svg {
+  width: 14px;
+  height: 14px;
+  stroke: currentColor;
+  opacity: 0.65;
+  fill: none;
+}
+</style>
+
+<script>
+(function(){
+  var map = {
+    'bergamot':'citrus','lemon':'citrus','lime':'citrus','grapefruit':'citrus','orange':'citrus','mandarin':'citrus','tangerine':'citrus','lemongrass':'citrus','blood orange':'citrus',
+    'neroli':'floral','jasmine':'floral','freesia':'floral','lily':'floral','muguet':'floral','tuberose':'floral','ylang':'floral','gardenia':'floral','magnolia':'floral','peony':'floral','orchid':'floral','iris':'floral','violet':'floral','blossom':'floral','flower':'floral','lotus':'floral','geranium':'floral','orange blossom':'floral','orange flower':'floral',
+    'rose':'rose','turkish rose':'rose','damask rose':'rose',
+    'lavender':'herbal','mint':'herbal','rosemary':'herbal','sage':'herbal','basil':'herbal','thyme':'herbal','petitgrain':'herbal','fig leaf':'herbal',
+    'cardamom':'spice','cinnamon':'spice','nutmeg':'spice','saffron':'spice','clove':'spice','ginger':'spice','pepper':'spice','pimento':'spice','pink pepper':'spice','black pepper':'spice',
+    'cedarwood':'woody','cedar':'woody','sandalwood':'woody','patchouli':'woody','guaiac wood':'woody','vetiver':'woody','akigalawood':'woody','amberwood':'woody',
+    'oud':'oud','agarwood':'oud','oud wood':'oud',
+    'amber':'amber','dry amber':'amber','grey amber':'amber',
+    'musk':'musk','white musk':'musk','ambergris':'musk','ambroxan':'musk','cashmeran':'musk',
+    'oakmoss':'moss','moss':'moss','crystal moss':'moss',
+    'incense':'incense','frankincense':'incense','benzoin':'incense','labdanum':'incense','myrrh':'incense','cistus':'incense',
+    'tobacco':'tobacco','smoke':'tobacco',
+    'leather':'leather','suede':'leather',
+    'marine':'aquatic','sea':'aquatic','aquatic':'aquatic','ozonic':'aquatic','dewdrop':'aquatic',
+    'vanilla':'gourmand','caramel':'gourmand','praline':'gourmand','honey':'gourmand','tonka':'gourmand','milk':'gourmand','cream':'gourmand',
+    'raspberry':'fruity','peach':'fruity','apple':'fruity','pear':'fruity','pineapple':'fruity','cherry':'fruity','plum':'fruity','coconut':'fruity','mango':'fruity','lychee':'fruity','berries':'fruity','fig':'fruity','strawberry':'fruity','blackcurrant':'fruity','cassis':'fruity','dates':'fruity',
+    'coffee':'coffee','cacao':'coffee','cocoa':'coffee','dark chocolate':'coffee'
+  };
+  function getIcon(n){
+    if(!n) return 'default';
+    n = n.toLowerCase().trim();
+    if(map[n]) return map[n];
+    var keys = Object.keys(map);
+    for(var i=0;i<keys.length;i++){
+      if(n.indexOf(keys[i])!==-1) return map[keys[i]];
+    }
+    return 'default';
+  }
+  document.querySelectorAll('#sn-{{ section.id }} .sn__chip-icon').forEach(function(s){
+    var key = getIcon(s.getAttribute('data-note'));
+    s.innerHTML = '<svg class="sn__chip-svg"><use href="#fji-'+key+'"/></svg>';
+  });
+})();
+</script>
+{% endif %}

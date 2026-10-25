@@ -1,0 +1,220 @@
+{%- comment -%}
+  GIFT BAG SELECTOR
+  ------------------------------------------------------------------
+  Shows an "add a gift bag" radio group in the cart — each bag option
+  only appears if the cart currently contains a product from that
+  bag's vendor. If none of the 3 vendors are in the cart, nothing
+  renders.
+
+  This is an OPTIONAL choice, not a required one: clicking the
+  currently-selected bag again deselects it and removes it from the
+  cart (handled in gift-bag-selector.js). data-selected-variant below
+  is the source of truth the JS reads to know what's currently picked.
+
+  USAGE: {% render 'gift-bag-selector' %}
+  Rendered from snippets/cart-summary.liquid, so it shows in both the
+  cart drawer and the cart page.
+{%- endcomment -%}
+
+<script
+  src="{{ 'gift-bag-selector.js' | asset_url }}"
+  type="module"
+  fetchpriority="low"
+></script>
+
+{%- comment -%} ===== CONFIG — edit here if you add/remove bags ===== {%- endcomment -%}
+{%- assign bag_vendor_match_afnan = 'afnan' -%}
+{%- assign bag_handles_afnan = 'afnan-gift-bag,afnan-orange-gift-bag' | split: ',' -%}
+
+{%- assign bag_vendor_match_assaf = 'assaf' -%}
+{%- assign bag_handles_assaf = 'assaf-gift-bag' | split: ',' -%}
+
+{%- assign bag_vendor_match_ibraq = 'ibraq' -%}
+{%- assign bag_handles_ibraq = 'ibraq-premium-gift-bag-large' | split: ',' -%}
+
+{%- comment -%} ===== Detect which vendors are currently in the cart ===== {%- endcomment -%}
+{%- assign cart_vendor_list = '' -%}
+{%- for item in cart.items -%}
+  {%- assign v = item.product.vendor | downcase -%}
+  {%- unless cart_vendor_list contains v -%}
+    {%- assign cart_vendor_list = cart_vendor_list | append: v | append: '|' -%}
+  {%- endunless -%}
+{%- endfor -%}
+
+{%- assign show_afnan = false -%}
+{%- if cart_vendor_list contains bag_vendor_match_afnan -%}
+  {%- assign show_afnan = true -%}
+{%- endif -%}
+
+{%- assign show_assaf = false -%}
+{%- if cart_vendor_list contains bag_vendor_match_assaf -%}
+  {%- assign show_assaf = true -%}
+{%- endif -%}
+
+{%- assign show_ibraq = false -%}
+{%- if cart_vendor_list contains bag_vendor_match_ibraq -%}
+  {%- assign show_ibraq = true -%}
+{%- endif -%}
+
+{%- comment -%} Which bag (if any) is currently selected, for the JS to compare against {%- endcomment -%}
+{%- assign selected_bag_variant = '' -%}
+{%- for item in cart.items -%}
+  {%- if item.properties._gift_bag == 'true' -%}
+    {%- assign selected_bag_variant = item.variant_id -%}
+  {%- endif -%}
+{%- endfor -%}
+
+{%- if show_afnan or show_assaf or show_ibraq -%}
+<div
+  class="gift-bag-selector"
+  data-gift-bag-selector
+  data-selected-variant="{{ selected_bag_variant }}"
+>
+  <p class="gift-bag-selector__title">{{ 'content.gift_bag_prompt' | t }}</p>
+  <div class="gift-bag-selector__options">
+    {%- if show_afnan -%}
+      {%- for handle in bag_handles_afnan -%}
+        {%- assign bag_product = all_products[handle] -%}
+        {%- if bag_product != blank -%}
+          {%- render 'gift-bag-option', product: bag_product -%}
+        {%- endif -%}
+      {%- endfor -%}
+    {%- endif -%}
+
+    {%- if show_assaf -%}
+      {%- for handle in bag_handles_assaf -%}
+        {%- assign bag_product = all_products[handle] -%}
+        {%- if bag_product != blank -%}
+          {%- render 'gift-bag-option', product: bag_product -%}
+        {%- endif -%}
+      {%- endfor -%}
+    {%- endif -%}
+
+    {%- if show_ibraq -%}
+      {%- for handle in bag_handles_ibraq -%}
+        {%- assign bag_product = all_products[handle] -%}
+        {%- if bag_product != blank -%}
+          {%- render 'gift-bag-option', product: bag_product -%}
+        {%- endif -%}
+      {%- endfor -%}
+    {%- endif -%}
+  </div>
+</div>
+{%- endif -%}
+
+{% stylesheet %}
+  .gift-bag-selector {
+    border-top: var(--style-border-width, 1px) solid var(--color-border);
+    margin-top: var(--margin-md, 16px);
+    padding-top: var(--padding-md, 16px);
+  }
+
+  .gift-bag-selector--loading {
+    opacity: 0.6;
+    pointer-events: none;
+  }
+
+  .gift-bag-selector__title {
+    font-size: var(--font-size-sm, 14px);
+    font-weight: 600;
+    color: var(--color-foreground);
+    margin: 0 0 var(--margin-sm, 10px);
+  }
+
+  .gift-bag-selector__options {
+    display: flex;
+    flex-direction: column;
+    gap: var(--padding-xs, 8px);
+  }
+
+  .gift-bag-option {
+    display: flex;
+    align-items: center;
+    gap: var(--padding-sm, 10px);
+    padding: var(--padding-sm, 8px) var(--padding-md, 10px);
+    border: var(--style-border-width, 1px) solid var(--color-border);
+    border-radius: var(--style-border-radius-inputs, 8px);
+    background: var(--color-input-background);
+    cursor: pointer;
+    transition: border-color 0.15s ease;
+  }
+
+  .gift-bag-option:hover {
+    border-color: var(--color-foreground);
+  }
+
+  .gift-bag-option--selected {
+    border-color: var(--color-foreground);
+    border-width: 2px;
+  }
+
+  .gift-bag-option__radio-wrap {
+    position: relative;
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+  }
+
+  .gift-bag-option__input {
+    position: absolute;
+    inset: 0;
+    width: 18px;
+    height: 18px;
+    margin: 0;
+    opacity: 0;
+    cursor: pointer;
+  }
+
+  .gift-bag-option__radio-dot {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    border: 1.5px solid var(--color-border);
+    background: var(--color-background);
+    pointer-events: none;
+  }
+
+  .gift-bag-option__radio-dot::after {
+    content: '';
+    position: absolute;
+    inset: 4px;
+    border-radius: 50%;
+    background: var(--color-foreground);
+    transform: scale(0);
+    transition: transform 0.15s ease;
+  }
+
+  .gift-bag-option__input:checked + .gift-bag-option__radio-dot {
+    border-color: var(--color-foreground);
+  }
+
+  .gift-bag-option__input:checked + .gift-bag-option__radio-dot::after {
+    transform: scale(1);
+  }
+
+  .gift-bag-option__image {
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
+    max-width: 40px;
+    border-radius: var(--style-border-radius-inputs, 4px);
+    object-fit: cover;
+    flex-shrink: 0;
+    display: block;
+  }
+
+  .gift-bag-option__text {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex: 1;
+    font-size: var(--font-size-xs, 13px);
+    color: var(--color-foreground);
+    gap: var(--padding-xs, 8px);
+  }
+
+  .gift-bag-option__price {
+    font-weight: 600;
+    white-space: nowrap;
+  }
+{% endstylesheet %}

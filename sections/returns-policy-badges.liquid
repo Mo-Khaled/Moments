@@ -1,0 +1,138 @@
+<div class="rpb color-{{ section.settings.color_scheme }} section--page-width" style="padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px;">
+  <div class="rpb__list">
+
+    <div class="rpb__item">
+      <span class="rpb__icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+          <path d="m9 12 2 2 4-4"/>
+        </svg>
+      </span>
+      <div class="rpb__text">
+        <strong class="rpb__title">Sealed Packaging Only</strong>
+        <span class="rpb__subtitle">Items must be unopened &amp; in original packaging</span>
+      </div>
+    </div>
+
+    <div class="rpb__item">
+      <span class="rpb__icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"/>
+          <polyline points="12 6 12 12 16 14"/>
+        </svg>
+      </span>
+      <div class="rpb__text">
+        <strong class="rpb__title">24-Hour Window</strong>
+        <span class="rpb__subtitle">Report any issue within 24 hrs of receiving your order</span>
+      </div>
+    </div>
+
+    <div class="rpb__item">
+      <span class="rpb__icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"/>
+          <line x1="6" y1="6" x2="18" y2="18"/>
+        </svg>
+      </span>
+      <div class="rpb__text">
+        <strong class="rpb__title">No Exchanges</strong>
+        <span class="rpb__subtitle">Exchange service is not available on any orders</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+{% stylesheet %}
+.rpb {
+  padding-left: var(--page-width-padding, 1.5rem);
+  padding-right: var(--page-width-padding, 1.5rem);
+  margin: 0 auto;
+  max-width: var(--page-width, 1200px);
+}
+
+.rpb__list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  border: 1px solid rgba(60, 18, 23, 0.12);
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--color-background, #fff);
+}
+
+.rpb__item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.125rem 1.25rem;
+  background: transparent;
+}
+
+.rpb__item:not(:last-child) {
+  border-bottom: 1px solid rgba(60, 18, 23, 0.08);
+}
+
+.rpb__icon {
+  flex-shrink: 0;
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #3c1217;
+  opacity: 0.75;
+}
+
+.rpb__icon svg {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.rpb__text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.rpb__title {
+  font-weight: 600;
+  font-size: 0.875rem;
+  color: #22070a;
+  line-height: 1.3;
+  font-family: var(--font-body--family, inherit);
+}
+
+.rpb__subtitle {
+  font-size: 0.775rem;
+  color: rgba(60, 18, 23, 0.6);
+  line-height: 1.4;
+  font-family: var(--font-body--family, inherit);
+}
+
+@media screen and (min-width: 750px) {
+  .rpb__list {
+    flex-direction: row;
+  }
+  .rpb__item {
+    flex: 1;
+  }
+  .rpb__item:not(:last-child) {
+    border-bottom: none;
+    border-right: 1px solid rgba(60, 18, 23, 0.08);
+  }
+}
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Returns Policy Badges",
+  "disabled_on": { "groups": ["header", "footer"] },
+  "settings": [
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" },
+    { "type": "range", "id": "padding_top", "label": "Top padding", "min": 0, "max": 60, "step": 4, "unit": "px", "default": 0 },
+    { "type": "range", "id": "padding_bottom", "label": "Bottom padding", "min": 0, "max": 60, "step": 4, "unit": "px", "default": 32 }
+  ],
+  "presets": []
+}
+{% endschema %}

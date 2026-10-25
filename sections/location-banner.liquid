@@ -1,0 +1,286 @@
+{% comment %}Haramain Location Banner{% endcomment %}
+
+<style>
+  .hm-loc-wrap {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 48px 20px 64px;
+    font-family: var(--font-body--family, sans-serif);
+  }
+  .hm-loc-eyebrow {
+    text-align: center;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #9e7b5a;
+    margin-bottom: 10px;
+  }
+  .hm-loc-title {
+    text-align: center;
+    font-size: clamp(26px, 5vw, 40px);
+    font-weight: 500;
+    color: #22070A;
+    margin: 0 0 6px;
+    font-family: var(--font-heading--family, var(--font-body--family, serif));
+    line-height: 1.2;
+  }
+  .hm-loc-subtitle {
+    text-align: center;
+    font-size: 14px;
+    color: #8a7060;
+    margin: 0 0 40px;
+    letter-spacing: 0.05em;
+  }
+  .hm-loc-card {
+    border: 1px solid #e8ddd5;
+    border-radius: 16px;
+    overflow: hidden;
+    background: #fff;
+  }
+  .hm-loc-map {
+    width: 100%;
+    height: 280px;
+    display: block;
+    border: none;
+  }
+  .hm-loc-info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 20px 24px;
+    flex-wrap: wrap;
+    border-top: 1px solid #f0e8e0;
+    background: #fffdf9;
+  }
+  .hm-loc-details {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+  }
+  .hm-loc-pin {
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
+    background: #f5ece4;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .hm-loc-pin svg {
+    width: 18px;
+    height: 18px;
+    fill: none;
+    stroke: #22070A;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  .hm-loc-name {
+    font-size: 15px;
+    font-weight: 600;
+    color: #22070A;
+    margin: 0 0 4px;
+    line-height: 1.3;
+  }
+  .hm-loc-addr {
+    font-size: 12.5px;
+    color: #9e8878;
+    line-height: 1.7;
+    margin: 0;
+  }
+  .hm-loc-actions {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    flex-shrink: 0;
+  }
+  .hm-loc-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12.5px;
+    padding: 9px 16px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-family: inherit;
+    transition: opacity 0.15s;
+    white-space: nowrap;
+  }
+  .hm-loc-btn:hover { opacity: 0.82; }
+  .hm-loc-btn svg {
+    width: 15px;
+    height: 15px;
+    fill: none;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    flex-shrink: 0;
+  }
+  .hm-loc-btn-wa {
+    border: 1px solid #d5c8be;
+    background: #fff;
+    color: #22070A;
+  }
+  .hm-loc-btn-wa svg { stroke: #22070A; }
+  .hm-loc-btn-map {
+    background: #22070A;
+    color: #FAF9F1;
+    border: 1px solid #22070A;
+  }
+  .hm-loc-btn-map svg { stroke: #FAF9F1; }
+  .hm-loc-since {
+    text-align: center;
+    margin-top: 24px;
+    font-size: 12px;
+    color: #b8a898;
+    letter-spacing: 0.08em;
+  }
+  @media (max-width: 500px) {
+    .hm-loc-info { flex-direction: column; align-items: flex-start; }
+    .hm-loc-map { height: 220px; }
+    .hm-loc-title { font-size: 26px; }
+  }
+</style>
+
+<div class="hm-loc-wrap">
+  <p class="hm-loc-eyebrow">{{ section.settings.eyebrow }}</p>
+  <h2 class="hm-loc-title">{{ section.settings.heading }}</h2>
+  <p class="hm-loc-subtitle">{{ section.settings.subheading }}</p>
+
+  <div class="hm-loc-card">
+    <iframe
+      class="hm-loc-map"
+      src="{{ section.settings.embed_url }}"
+      allowfullscreen=""
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade"
+      title="{{ section.settings.map_title }}"
+    ></iframe>
+
+    <div class="hm-loc-info">
+      <div class="hm-loc-details">
+        <div class="hm-loc-pin">
+          <svg viewBox="0 0 24 24"><path d="M12 2C8.686 2 6 4.686 6 8c0 4.418 6 12 6 12s6-7.582 6-12c0-3.314-2.686-6-6-6z"/><circle cx="12" cy="8" r="2"/></svg>
+        </div>
+        <div>
+          <p class="hm-loc-name">{{ section.settings.branch_name }}</p>
+          <p class="hm-loc-addr">{{ section.settings.branch_address | newline_to_br }}</p>
+        </div>
+      </div>
+
+      <div class="hm-loc-actions">
+        <a class="hm-loc-btn hm-loc-btn-wa" href="https://wa.me/{{ section.settings.whatsapp_number }}" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24"><path d="M20.52 3.48A11.93 11.93 0 0 0 12 0C5.373 0 0 5.373 0 12a11.93 11.93 0 0 0 1.6 5.988L0 24l6.188-1.623A11.95 11.95 0 0 0 12 24c6.627 0 12-5.373 12-12 0-3.205-1.248-6.219-3.48-8.52zm-8.52 18.44a9.9 9.9 0 0 1-5.047-1.376l-.362-.215-3.674.963.98-3.584-.236-.368A9.9 9.9 0 0 1 2.1 12c0-5.463 4.447-9.9 9.9-9.9 2.645 0 5.13 1.03 6.998 2.902A9.849 9.849 0 0 1 21.9 12c0 5.453-4.437 9.92-9.9 9.92zm5.43-7.424c-.297-.149-1.758-.867-2.031-.966-.272-.1-.47-.148-.669.15-.198.296-.768.966-.942 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.463-2.39-1.476-.883-.788-1.48-1.76-1.653-2.057-.173-.298-.018-.459.13-.607.134-.133.298-.347.446-.521.149-.173.198-.297.298-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.61-.917-2.207-.241-.578-.486-.5-.669-.51-.173-.008-.372-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.29.173-1.413-.074-.124-.272-.198-.57-.347z"/></svg>
+          WhatsApp
+        </a>
+        <a class="hm-loc-btn hm-loc-btn-map" href="{{ section.settings.maps_url }}" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+          Open in Maps
+        </a>
+      </div>
+    </div>
+  </div>
+
+  {% if section.settings.show_since %}
+  <p class="hm-loc-since">{{ section.settings.since_text }}</p>
+  {% endif %}
+</div>
+
+{% schema %}
+{
+  "name": "Location Banner",
+  "tag": "section",
+  "class": "section-location-banner",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Heading"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow text",
+      "default": "Visit Us"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Main heading",
+      "default": "Our Locations"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "We welcome you to Haramain Perfumes"
+    },
+    {
+      "type": "header",
+      "content": "Branch Info"
+    },
+    {
+      "type": "text",
+      "id": "branch_name",
+      "label": "Branch name",
+      "default": "Haramain Perfumes — El Ataba"
+    },
+    {
+      "type": "textarea",
+      "id": "branch_address",
+      "label": "Branch address",
+      "default": "In front of Garage 7, El Bosta St.\nEl Ataba, El Mosky\nCairo 11541, Egypt"
+    },
+    {
+      "type": "text",
+      "id": "whatsapp_number",
+      "label": "WhatsApp number",
+      "default": "201103305575"
+    },
+    {
+      "type": "text",
+      "id": "maps_url",
+      "label": "Google Maps link",
+      "default": "https://maps.google.com/?q=Haramain+Perfumes+El+Ataba+Cairo"
+    },
+    {
+      "type": "header",
+      "content": "Map Embed"
+    },
+    {
+      "type": "text",
+      "id": "embed_url",
+      "label": "Google Maps embed URL",
+      "default": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d866.4!2d31.24866!3d30.04833!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x145840c2ad67d921%3A0x8226d4ef22ac8de9!2z2KfZhYfYsdmF2YrZhiDZhYfYudum2Ormg!5e1!3m2!1sar!2seg!4v1"
+    },
+    {
+      "type": "text",
+      "id": "map_title",
+      "label": "Map title (accessibility)",
+      "default": "Haramain Perfumes location on the map"
+    },
+    {
+      "type": "header",
+      "content": "Footer Note"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_since",
+      "label": "Show since text",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "since_text",
+      "label": "Since text",
+      "default": "Est. 2002 · El Ataba · Cairo, Egypt"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Location Banner"
+    }
+  ]
+}
+{% endschema %}

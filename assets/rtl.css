@@ -1,0 +1,288 @@
+/* =========================================================================
+   RTL Stylesheet — haramaineg.com
+   Loaded only when request.locale.iso_code == 'ar'
+   NOTE: @import MUST be the first rule in the file or browsers ignore it.
+   ========================================================================= */
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@200..1000&display=swap');
+
+/* ------------------------------------------------------------------ */
+/* 0a. CRITICAL RTL overflow fix — skip-to-content link                */
+/* ------------------------------------------------------------------ */
+html[dir='rtl'] .skip-to-content-link:not(:focus) {
+  left: auto;
+  right: -99999px;
+}
+
+html[dir='rtl'] .skip-to-content-link:focus {
+  left: auto;
+  right: var(--margin-lg);
+}
+
+/* ------------------------------------------------------------------ */
+/* 0b. Overflow / zoom protection                                      */
+/* ------------------------------------------------------------------ */
+html[dir='rtl'],
+html[dir='rtl'] body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+html[dir='rtl'] body {
+  position: relative;
+}
+
+/* ------------------------------------------------------------------ */
+/* 1. Arabic font — Cairo                                              */
+/* ------------------------------------------------------------------ */
+:root {
+  --font-ar: 'Cairo', -apple-system, system-ui, 'Segoe UI', Tahoma, Arial, sans-serif;
+}
+
+html[dir='rtl'],
+html[dir='rtl'] body {
+  --font-body--family: var(--font-ar);
+  --font-heading--family: var(--font-ar);
+  --font-subheading--family: var(--font-ar);
+  --font-primary--family: var(--font-ar);
+  --font-secondary--family: var(--font-ar);
+  --font-accent--family: var(--font-ar);
+  --font-paragraph--family: var(--font-ar);
+  --font-h1--family: var(--font-ar);
+  --font-h2--family: var(--font-ar);
+  --font-h3--family: var(--font-ar);
+  --font-h4--family: var(--font-ar);
+  --font-h5--family: var(--font-ar);
+  --font-h6--family: var(--font-ar);
+  --button-font-family-primary: var(--font-ar);
+  --button-font-family-secondary: var(--font-ar);
+}
+
+html[dir='rtl'] body,
+html[dir='rtl'] p,
+html[dir='rtl'] a,
+html[dir='rtl'] li,
+html[dir='rtl'] label,
+html[dir='rtl'] summary,
+html[dir='rtl'] h1,
+html[dir='rtl'] h2,
+html[dir='rtl'] h3,
+html[dir='rtl'] h4,
+html[dir='rtl'] h5,
+html[dir='rtl'] h6,
+html[dir='rtl'] .h1,
+html[dir='rtl'] .h2,
+html[dir='rtl'] .h3,
+html[dir='rtl'] .h4,
+html[dir='rtl'] .h5,
+html[dir='rtl'] .h6,
+html[dir='rtl'] button,
+html[dir='rtl'] .button,
+html[dir='rtl'] .button-secondary,
+html[dir='rtl'] input,
+html[dir='rtl'] textarea,
+html[dir='rtl'] select {
+  font-family: var(--font-ar);
+}
+
+html[dir='rtl'] {
+  --font-h1--letter-spacing: 0;
+  --font-h2--letter-spacing: 0;
+  --font-h3--letter-spacing: 0;
+  --font-h4--letter-spacing: 0;
+  --font-h5--letter-spacing: 0;
+  --font-h6--letter-spacing: 0;
+}
+
+html[dir='rtl'] p,
+html[dir='rtl'] .paragraph,
+html[dir='rtl'] li {
+  line-height: 1.85;
+}
+
+html[dir='rtl'] h1,
+html[dir='rtl'] h2,
+html[dir='rtl'] h3,
+html[dir='rtl'] h4,
+html[dir='rtl'] h5,
+html[dir='rtl'] h6,
+html[dir='rtl'] .h1,
+html[dir='rtl'] .h2,
+html[dir='rtl'] .h3,
+html[dir='rtl'] .h4,
+html[dir='rtl'] .h5,
+html[dir='rtl'] .h6,
+html[dir='rtl'] .button,
+html[dir='rtl'] .button-secondary {
+  text-transform: none;
+}
+
+/* ------------------------------------------------------------------ */
+/* 2. Text alignment (scoped to text elements, NOT the whole body)     */
+/* ------------------------------------------------------------------ */
+html[dir='rtl'] p,
+html[dir='rtl'] h1,
+html[dir='rtl'] h2,
+html[dir='rtl'] h3,
+html[dir='rtl'] h4,
+html[dir='rtl'] h5,
+html[dir='rtl'] h6,
+html[dir='rtl'] li,
+html[dir='rtl'] .rte {
+  text-align: right;
+}
+
+html[dir='rtl'] .field__input {
+  text-align: right;
+}
+
+html[dir='rtl'] .field__label {
+  left: auto;
+  right: var(--input-padding-x);
+}
+
+/* ------------------------------------------------------------------ */
+/* 3. Drawer (mobile menu / cart)                                      */
+/* ------------------------------------------------------------------ */
+html[dir='rtl'] .drawer {
+  left: auto;
+  right: 0;
+  transform: translateX(120%);
+}
+
+html[dir='rtl'] .drawer[data-open='true'] {
+  transform: translateX(0);
+}
+
+/* ------------------------------------------------------------------ */
+/* 4. WhatsApp widget — flip to the left in RTL                        */
+/* ------------------------------------------------------------------ */
+html[dir='rtl'] #wa-widget {
+  right: auto;
+  left: 48px;
+  align-items: flex-start;
+}
+
+html[dir='rtl'] #wa-tip {
+  right: auto;
+  left: calc(100% + 10px);
+  transform: translateY(-50%) translateX(-5px);
+}
+
+html[dir='rtl'] #wa-tip.wa-tip-on {
+  transform: translateY(-50%) translateX(0);
+}
+
+html[dir='rtl'] #wa-close {
+  left: auto;
+  right: 10px;
+}
+
+@media (max-width: 480px) {
+  html[dir='rtl'] #wa-widget {
+    left: 12px !important;
+    right: auto !important;
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* 5. Icon direction flips                                             */
+/* ------------------------------------------------------------------ */
+html[dir='rtl'] .icon-caret--forward svg {
+  transform: rotate(90deg);
+}
+
+html[dir='rtl'] .icon-caret--backward svg {
+  transform: rotate(-90deg);
+}
+
+html[dir='rtl'] .slideshow-control .icon-caret {
+  rotate: 90deg;
+}
+
+/* ------------------------------------------------------------------ */
+/* 6. Numbers, prices — keep them LTR                                  */
+/* ------------------------------------------------------------------ */
+html[dir='rtl'] .price,
+html[dir='rtl'] .compare-at-price,
+html[dir='rtl'] .unit-price,
+html[dir='rtl'] product-price,
+html[dir='rtl'] .quantity-selector input[type='number'],
+html[dir='rtl'] .cart-bubble__text,
+html[dir='rtl'] .slideshow-controls__counter {
+  direction: ltr;
+  unicode-bidi: isolate;
+}
+
+html[dir='rtl'] .price,
+html[dir='rtl'] .compare-at-price,
+html[dir='rtl'] .unit-price {
+  text-align: right;
+}
+
+/* ------------------------------------------------------------------ */
+/* 6b. Price block alignment in RTL                                    */
+/* ------------------------------------------------------------------ */
+html[dir='rtl'] .price-container {
+  align-items: flex-end;
+}
+
+html[dir='rtl'] .price-wrapper--sale,
+html[dir='rtl'] .price-wrapper--single,
+html[dir='rtl'] .price-wrapper--original {
+  flex-direction: row-reverse;
+  justify-content: flex-start;
+}
+
+html[dir='rtl'] .price-badge {
+  direction: rtl;
+  unicode-bidi: isolate;
+}
+
+/* ------------------------------------------------------------------ */
+/* 6c. Buy buttons — icon + label ordering                             */
+/* ------------------------------------------------------------------ */
+html[dir='rtl'] .add-to-cart-button,
+html[dir='rtl'] .product-form-buttons button {
+  flex-direction: row-reverse;
+}
+
+html[dir='rtl'] .add-to-cart-button .svg-wrapper {
+  margin-inline: 0 var(--gap-xs, 0.5rem);
+}
+
+html[dir='rtl'] .quantity-selector {
+  flex-direction: row-reverse;
+}
+
+/* ------------------------------------------------------------------ */
+/* 7. Swatch / pill spacing fix                                        */
+/* ------------------------------------------------------------------ */
+html[dir='rtl'] .pills__pill--swatch .swatch {
+  margin-right: 0;
+  margin-left: -4px;
+}
+
+/* ------------------------------------------------------------------ */
+/* 9. Latin text inside Arabic (brand names, SKUs) stay LTR            */
+/* ------------------------------------------------------------------ */
+html[dir='rtl'] .latin,
+html[dir='rtl'] [lang='en'] {
+  direction: ltr;
+  unicode-bidi: isolate;
+}
+
+/* ------------------------------------------------------------------ */
+/* 10. Mobile overflow guard (RTL)                                     */
+/* ------------------------------------------------------------------ */
+@media (max-width: 749px) {
+  html[dir='rtl'] .product-information,
+  html[dir='rtl'] .product-details,
+  html[dir='rtl'] .group,
+  html[dir='rtl'] .price-container,
+  html[dir='rtl'] .fragrance-journey,
+  html[dir='rtl'] .pills,
+  html[dir='rtl'] section {
+    max-width: 100%;
+    overflow-x: clip;
+  }
+}

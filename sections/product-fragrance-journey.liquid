@@ -1,0 +1,235 @@
+{% if section.settings.enabled %}
+  <div class="fj-wrap">
+    {%- render 'product-fragrance-journey', section: section -%}
+  </div>
+{% endif %}
+
+<script>
+  (function () {
+    var root = document.getElementById('fj-{{ section.id }}');
+    if (!root) return;
+    root.addEventListener('click', function (evt) {
+      var btn = evt.target.closest('.fj__layer-hd');
+      if (!btn) return;
+      var layer = btn.closest('.fj__layer');
+      var isOpen = layer.classList.toggle('fj__layer--open');
+      btn.setAttribute('aria-expanded', String(isOpen));
+      layer.querySelector('.fj__body').setAttribute('aria-hidden', String(!isOpen));
+    });
+  })();
+</script>
+
+{% stylesheet %}
+.fj-wrap {
+  max-width: var(--page-width, 1440px);
+  margin: 0 auto;
+  padding: 2rem 1.5rem 1.25rem;
+}
+@media screen and (max-width: 749px) {
+  .fj-wrap { padding: 1.5rem 1rem 1rem; }
+}
+.fj {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  color: #22070a;
+  font-family: var(--font-body--family, 'Platypi', Georgia, serif);
+}
+.fj__title-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.875rem;
+  margin-bottom: 1rem;
+}
+.fj__title {
+  font-size: 0.625rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #7a5a60;
+  font-weight: 400;
+  white-space: nowrap;
+}
+.fj__rule {
+  flex: 1;
+  display: block;
+  height: 1px;
+  background: rgba(122, 90, 96, 0.18);
+}
+.fj__layer {
+  border-top: 1px solid rgba(122, 90, 96, 0.15);
+  overflow: hidden;
+}
+.fj__layer:last-of-type {
+  border-bottom: 1px solid rgba(122, 90, 96, 0.15);
+}
+.fj__layer-hd {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 1rem 0;
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  text-align: left;
+  font-family: inherit;
+  transition: opacity 0.15s ease;
+}
+.fj__layer-hd:hover { opacity: 0.8; }
+.fj__layer-hd:focus-visible { outline: 2px solid #7a5a60; outline-offset: 2px; }
+.fj__layer--top .fj__layer-hd,
+.fj__layer--heart .fj__layer-hd,
+.fj__layer--base .fj__layer-hd { background: transparent; }
+/* Fix alignment — no icon slot */
+.fj__layer-hd--custom {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  width: 100% !important;
+  text-align: left !important;
+}
+.fj__layer-hd--custom .fj__lh-copy {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  flex: 1;
+}
+.fj__layer-hd--custom .fj__lh-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+.fj__lh-eyebrow {
+  font-size: 0.6rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #7a5a60;
+  font-weight: 400;
+  line-height: 1;
+}
+.fj__lh-name {
+  font-family: 'Platypi', var(--font-heading--family, Georgia, serif);
+  font-style: italic;
+  font-size: 1.375rem;
+  font-weight: 400;
+  color: #22070a;
+  line-height: 1.25;
+  display: block;
+}
+.fj__lh-right {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  flex-shrink: 0;
+}
+.fj__lh-timing {
+  font-style: italic;
+  font-size: 0.8125rem;
+  color: #7a5a60;
+  white-space: nowrap;
+}
+.fj__lh-arrow {
+  font-size: 0.55rem;
+  color: #7a5a60;
+  display: inline-block;
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.fj__layer:not(.fj__layer--open) .fj__lh-arrow { transform: rotate(-90deg); }
+.fj__body {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.38s cubic-bezier(0.4, 0, 0.2, 1);
+  background: transparent;
+}
+.fj__layer--open .fj__body { max-height: 400px; }
+.fj__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  padding: 0 0 1rem 0;
+}
+.fj__chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.375rem 0.9rem;
+  border-radius: 999px;
+  border: 1px solid rgba(122, 90, 96, 0.22);
+  background: rgba(250, 249, 241, 0.85);
+  font-size: 0.875rem;
+  color: #22070a;
+  white-space: nowrap;
+  line-height: 1.5;
+  font-family: var(--font-body--family, inherit);
+}
+.fj__chip--star {
+  background: #fff3c4;
+  border-color: rgba(180, 130, 40, 0.3);
+}
+.fj__chip--meta {
+  background: transparent;
+  border-color: rgba(122, 90, 96, 0.18);
+}
+.fj__chip-emoji {
+  font-size: 0.9rem;
+  line-height: 1;
+  flex-shrink: 0;
+}
+.fj__chip-em { line-height: 1; display: inline-block; }
+.fj__meta-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  padding-top: 0.875rem;
+  border-top: 1px solid rgba(122, 90, 96, 0.14);
+}
+@media screen and (max-width: 749px) {
+  .fj__lh-name { font-size: 1.125rem; }
+  .fj__lh-timing { display: none; }
+}
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Fragrance Journey",
+  "disabled_on": { "groups": ["header", "footer"] },
+  "settings": [
+    { "type": "checkbox", "id": "enabled", "label": "Show Fragrance Journey", "default": true },
+    { "type": "header", "content": "Top Notes Layer" },
+    { "type": "text", "id": "top_icon", "label": "Icon", "default": "-" },
+    { "type": "text", "id": "top_name", "label": "Poetic name", "default": "The First Impression" },
+    { "type": "text", "id": "top_timing", "label": "Timing label", "default": "0 – 15 min" },
+    { "type": "header", "content": "Heart Notes Layer" },
+    { "type": "text", "id": "heart_icon", "label": "Icon", "default": "-" },
+    { "type": "text", "id": "heart_name", "label": "Poetic name", "default": "The Character" },
+    { "type": "text", "id": "heart_timing", "label": "Timing label", "default": "15 – 60 min" },
+    { "type": "header", "content": "Base Notes Layer" },
+    { "type": "text", "id": "base_icon", "label": "Icon", "default": "-" },
+    { "type": "text", "id": "base_name", "label": "Poetic name", "default": "The Memory" },
+    { "type": "text", "id": "base_timing", "label": "Timing label", "default": "1h+ lasting" }
+  ],
+  "blocks": [
+    {
+      "type": "note",
+      "name": "Note",
+      "settings": [
+        { "type": "select", "id": "layer", "label": "Layer", "options": [ { "value": "top", "label": "Top Notes" }, { "value": "heart", "label": "Heart Notes" }, { "value": "base", "label": "Base Notes" } ], "default": "top" },
+        { "type": "text", "id": "name", "label": "Note name", "default": "Bergamot" },
+        { "type": "text", "id": "emoji", "label": "Emoji", "default": "-" },
+        { "type": "checkbox", "id": "is_star", "label": "Star note", "default": false }
+      ]
+    },
+    {
+      "type": "meta_tag",
+      "name": "Meta Tag",
+      "settings": [
+        { "type": "text", "id": "emoji", "label": "Emoji", "default": "-" },
+        { "type": "text", "id": "label", "label": "Label", "default": "Daytime" }
+      ]
+    }
+  ],
+  "presets": []
+}
+{% endschema %}

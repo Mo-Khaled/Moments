@@ -1,0 +1,151 @@
+{%- doc -%}
+  This snippet is used to render a product card.
+  It is used in the product block,featured product block, and the product card block.
+
+  @param {product} product_resource - The product to render
+  @param {boolean} [show_unit_price] - Whether to show the unit price
+  @param {boolean} [show_sale_price_first] - Whether to show the sale price first
+{%- enddoc -%}
+
+{%- liquid
+  assign show_unit_price = show_unit_price | default: false
+  assign show_sale_price_first = show_sale_price_first | default: false
+  assign selected_variant = product_resource.selected_or_first_available_variant
+  assign price = selected_variant.price
+  assign compare_at_price = selected_variant.compare_at_price
+  assign price_raw = price
+  assign compare_at_price_raw = compare_at_price
+
+  assign show_compare_price = false
+  if compare_at_price > price
+    assign show_compare_price = true
+  endif
+
+  assign show_discount_badge = false
+  if show_compare_price and template.name == 'product'
+    assign show_discount_badge = true
+  endif
+
+  assign discount_percent = 0
+  if compare_at_price_raw > price_raw
+    assign discount_percent = compare_at_price_raw | minus: price_raw | times: 100 | divided_by: compare_at_price_raw | round
+  endif
+
+assign discount_amount = 0
+if compare_at_price_raw > price_raw
+  assign discount_amount = compare_at_price_raw | minus: price_raw
+endif
+  if product_resource == blank
+    assign price = 1999
+  endif
+
+  # Checks if product handle matches the closest product's handle (i.e. product page)
+  # and if the currency code is enabled for product pages
+  if product.handle == closest.product.handle and settings.currency_code_enabled_product_pages
+    assign price = price | money_with_currency
+    assign compare_at_price = compare_at_price | money_with_currency
+
+    # Checks if product handle does not match the closest product's handle (i.e. product card)
+    # and if the currency code is enabled for product cards
+  elsif product.handle != closest.product.handle and settings.currency_code_enabled_product_cards
+    assign price = price | money_with_currency
+    assign compare_at_price = compare_at_price | money_with_currency
+
+  else
+    assign price = price | money
+    assign compare_at_price = compare_at_price | money
+  endif
+-%}
+
+<div ref="priceContainer" class="price-container">
+  {% if show_compare_price %}
+    <!-- Sale price on top, bold with discount badge -->
+    <div class="price-wrapper price-wrapper--sale">
+      <span role="group">
+        <span class="visually-hidden">{{ 'content.price_sale' | t }}&nbsp;</span>
+        <span class="price price--sale">{{ price | default: '&nbsp;' }}</span>
+      </span>
+      {% if show_discount_badge %}
+<span class="price-badge">
+  Save {{ discount_amount | money_without_trailing_zeros }}
+</span>
+      {% endif %}
+    </div>
+    
+    <!-- Original price below, smaller with strikethrough -->
+    <div class="price-wrapper price-wrapper--original">
+      <span role="group">
+        <span class="visually-hidden">{{ 'content.price_regular' | t }}&nbsp;</span>
+        <span class="compare-at-price compare-at-price--strikethrough">{{- compare_at_price -}}</span>
+      </span>
+    </div>
+  {% else %}
+    <div class="price-wrapper price-wrapper--single">
+      <span class="price">{{ price | default: '&nbsp;' }}</span>
+    </div>
+  {% endif %}
+  {%- if selected_variant.unit_price and show_unit_price %}
+    {%- liquid
+      if product.handle == closest.product.handle and settings.currency_code_enabled_product_pages
+        assign unit_price = selected_variant.unit_price | money_with_currency
+      elsif product.handle != closest.product.handle and settings.currency_code_enabled_product_cards
+        assign unit_price = selected_variant.unit_price | money_with_currency
+      else
+        assign unit_price = selected_variant.unit_price | money
+      endif
+    -%}
+    {% render 'unit-price', price: unit_price, measurement: selected_variant.unit_price_measurement %}
+  {%- endif -%}
+</div>
+
+{% stylesheet %}
+  /* Price container styling */
+  .price-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.10rem;
+  }
+
+  .price-wrapper--sale {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    flex-wrap: wrap;
+  }
+
+  .price-wrapper--sale .price--sale {
+    font-weight: 700;
+    color: var(--color-foreground);
+    display: inline-block;
+  }
+
+  .price-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.25rem 0.6rem;
+    border-radius: 9999px;
+    background: #8b0000;
+    color: #ffffff;
+    font-size: 0.60em;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+  }
+
+  product-price .price-wrapper--original .compare-at-price--strikethrough,
+  .price-wrapper--original .compare-at-price--strikethrough {
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    font-family: inherit !important;
+    color: rgb(var(--color-foreground-rgb) / var(--opacity-subdued-text));
+    text-decoration: line-through;
+    display: inline-block;
+    line-height: 1.2;
+  }
+
+  .price-wrapper--single .price {
+    font-weight: 600;
+    color: var(--color-foreground);
+    display: inline-block;
+  }
+{% endstylesheet %}

@@ -1,0 +1,21 @@
+{% render 'product-scent-notes', section: section %}
+
+{% schema %}
+{
+  "name": "Scent Notes",
+  "tag": "div",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Section title",
+      "default": "Scent Notes"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Scent Notes"
+    }
+  ]
+}
+{% endschema %}

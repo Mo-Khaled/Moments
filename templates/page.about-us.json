@@ -1,0 +1,538 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "section_ChWrHG": {
+      "type": "section",
+      "blocks": {
+        "image_W68aXF": {
+          "type": "image",
+          "name": "t:names.image",
+          "settings": {
+            "image": "shopify://shop_images/1_8da3d658-f766-41ca-adc1-bc2411c15f28.png",
+            "image_ratio": "adapt",
+            "width": "fill",
+            "padding-block-start": 0,
+            "padding-block-end": 0
+          }
+        },
+        "text_B6UPW6": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Your scent is your identity</p>",
+            "alignment": "center",
+            "type_preset": "custom",
+            "font": "var(--font-heading--family)",
+            "font_size": "1.125rem",
+            "background": false,
+            "background_color": "#FAF6F2",
+            "padding-block-start": 0,
+            "padding-block-end": 0
+          }
+        },
+        "text_yCkapf": {
+          "type": "text",
+          "settings": {
+            "text": "<p>MOMENTS — Authentic fragrances for every moment</p>",
+            "alignment": "center",
+            "type_preset": "custom",
+            "font": "var(--font-body--family)",
+            "font_size": "1.125rem",
+            "background": false,
+            "background_color": "#FAF6F2",
+            "padding-block-start": 0,
+            "padding-block-end": 0
+          }
+        },
+        "button_jw3efr": {
+          "type": "button",
+          "settings": {
+            "label": "Shop now",
+            "link": "shopify://collections/all",
+            "style_class": "link",
+            "width_mobile": "fit-content"
+          }
+        }
+      },
+      "block_order": [
+        "image_W68aXF",
+        "text_B6UPW6",
+        "text_yCkapf",
+        "button_jw3efr"
+      ],
+      "name": "t:names.pull_quote",
+      "settings": {
+        "content_direction": "column",
+        "horizontal_alignment": "flex-start",
+        "horizontal_alignment_flex_direction_column": "flex-start",
+        "vertical_alignment_flex_direction_column": "center",
+        "gap": 12,
+        "section_width": "page-width",
+        "color_scheme": "scheme-3",
+        "background_image": "",
+        "padding-block-start": 48,
+        "padding-block-end": 64
+      }
+    },
+    "section_jFV8F6": {
+      "type": "section",
+      "blocks": {
+        "image_eUi9zK": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/4_ff5f2ad1-de41-4c42-8f0a-47947b66a581.png",
+            "image_ratio": "adapt",
+            "width": "fill",
+            "padding-block-start": 0,
+            "padding-block-end": 0
+          }
+        },
+        "group_7yiRUT": {
+          "type": "group",
+          "settings": {
+            "content_direction": "column",
+            "horizontal_alignment": "flex-start",
+            "horizontal_alignment_flex_direction_column": "flex-start",
+            "vertical_alignment_flex_direction_column": "center",
+            "gap": 12,
+            "width": "fill",
+            "color_scheme": "",
+            "padding-block-start": 0,
+            "padding-block-end": 0
+          },
+          "blocks": {
+            "text_6Wfp7k": {
+              "type": "text",
+              "name": "t:names.heading",
+              "settings": {
+                "text": "<h2>Authentic Fragrances from the Finest Houses</h2>",
+                "alignment": "left",
+                "type_preset": "custom",
+                "font": "var(--font-heading--family)",
+                "font_size": "1rem",
+                "background": false,
+                "padding-block-start": 0,
+                "padding-block-end": 0
+              }
+            },
+            "text_FcN8bf": {
+              "type": "text",
+              "settings": {
+                "text": "<p>MOMENTS brings you authentic fragrances from the largest Arabic houses such as Khadlaj, Nabeel, Lattafa, Afnan and Assaf, among others. 100% original, at a fair price, from a source you can trust.</p>",
+                "max_width": "narrow",
+                "alignment": "left",
+                "type_preset": "rte",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "background": false,
+                "padding-block-start": 0,
+                "padding-block-end": 0
+              }
+            },
+            "button_kTX98e": {
+              "type": "button",
+              "settings": {
+                "label": "Shop brands",
+                "link": "shopify://collections/all",
+                "style_class": "button",
+                "width_mobile": "fit-content"
+              }
+            }
+          },
+          "block_order": [
+            "text_6Wfp7k",
+            "text_FcN8bf",
+            "button_kTX98e"
+          ]
+        }
+      },
+      "block_order": [
+        "image_eUi9zK",
+        "group_7yiRUT"
+      ],
+      "name": "t:names.image_with_text",
+      "settings": {
+        "content_direction": "row",
+        "horizontal_alignment": "flex-end",
+        "horizontal_alignment_flex_direction_column": "flex-start",
+        "vertical_alignment_flex_direction_column": "center",
+        "gap": 12,
+        "section_width": "page-width",
+        "color_scheme": "scheme-4",
+        "padding-block-start": 56,
+        "padding-block-end": 56
+      }
+    },
+    "collection_list_69M9AB": {
+      "type": "collection-list",
+      "blocks": {
+        "group_k36xTG": {
+          "type": "group",
+          "name": "t:names.header",
+          "settings": {
+            "content_direction": "row",
+            "vertical_on_mobile": false,
+            "horizontal_alignment": "center",
+            "horizontal_alignment_flex_direction_column": "center",
+            "vertical_alignment_flex_direction_column": "center",
+            "gap": 16,
+            "width": "fill",
+            "custom_width": 52,
+            "width_mobile": "fit-content",
+            "color_scheme": "",
+            "padding-block-start": 10,
+            "padding-block-end": 15
+          },
+          "blocks": {
+            "text_D8FKYy": {
+              "type": "text",
+              "name": "t:names.text",
+              "settings": {
+                "text": "<h5>BRANDS</h5>",
+                "max_width": "narrow",
+                "alignment": "center",
+                "type_preset": "custom",
+                "font": "var(--font-body--family)",
+                "font_size": "1.125rem",
+                "wrap": "balance",
+                "background": false,
+                "padding-block-start": 0,
+                "padding-block-end": 0
+              }
+            },
+            "button_8K8tUM": {
+              "type": "button",
+              "name": "t:names.button",
+              "settings": {
+                "label": "View All",
+                "link": "shopify://pages/brands",
+                "style_class": "link",
+                "width": "custom",
+                "custom_width": 5,
+                "width_mobile": "fit-content",
+                "custom_width_mobile": 5
+              }
+            }
+          },
+          "block_order": [
+            "text_D8FKYy",
+            "button_8K8tUM"
+          ]
+        },
+        "static-collection-card": {
+          "type": "_collection-card",
+          "name": "t:names.collection_card",
+          "static": true,
+          "settings": {
+            "placement": "below_image",
+            "horizontal_alignment": "flex-start",
+            "vertical_alignment": "flex-end",
+            "collection_card_gap": 8,
+            "color_scheme": ""
+          },
+          "blocks": {
+            "collection-card-image": {
+              "type": "_collection-card-image",
+              "name": "t:names.collection_card_image",
+              "static": true,
+              "settings": {
+                "image_ratio": "adapt"
+              }
+            }
+          },
+          "block_order": []
+        }
+      },
+      "block_order": [
+        "group_k36xTG"
+      ],
+      "name": "t:names.collections_bento",
+      "settings": {
+        "collection_list": [
+          "khadlaj",
+          "nabeel-perfumes",
+          "afnan",
+          "assaf",
+          "lattafa",
+          "laverne",
+          "le-bonheur",
+          "le-falcone",
+          "lattafa-pride",
+          "rasasi-perfumes",
+          "zimaya",
+          "ibraq",
+          "dkhoon-emirates",
+          "asdaf",
+          "armaf"
+        ],
+        "layout_type": "carousel",
+        "carousel_on_mobile": true,
+        "columns": 8,
+        "mobile_columns": "2",
+        "mobile_card_size": "44cqw",
+        "columns_gap": 8,
+        "bento_gap": 8,
+        "rows_gap": 8,
+        "max_collections": 9,
+        "icons_style": "arrow",
+        "icons_shape": "circle",
+        "section_width": "page-width",
+        "gap": 5,
+        "color_scheme": "scheme-8",
+        "padding-block-start": 15,
+        "padding-block-end": 0
+      }
+    },
+    "section_why": {
+      "type": "section",
+      "blocks": {
+        "why_heading": {
+          "type": "text",
+          "settings": {
+            "text": "<h2>Why MOMENTS</h2>",
+            "alignment": "center",
+            "type_preset": "custom",
+            "font": "var(--font-heading--family)",
+            "font_size": "1.5rem",
+            "background": false
+          },
+          "name": "t:names.heading"
+        },
+        "why_row": {
+          "type": "group",
+          "settings": {
+            "content_direction": "row",
+            "horizontal_alignment": "center",
+            "vertical_alignment": "flex-start",
+            "gap": 24,
+            "width": "fill"
+          },
+          "blocks": {
+            "wp1": {
+              "type": "group",
+              "settings": {
+                "content_direction": "column",
+                "horizontal_alignment_flex_direction_column": "center",
+                "vertical_alignment_flex_direction_column": "flex-start",
+                "gap": 8,
+                "width": "fill"
+              },
+              "blocks": {
+                "wh1": {
+                  "type": "text",
+                  "settings": {
+                    "text": "<h3>100% Authentic</h3>",
+                    "alignment": "center",
+                    "type_preset": "custom",
+                    "font": "var(--font-heading--family)",
+                    "font_size": "1.125rem",
+                    "background": false
+                  },
+                  "name": "t:names.heading"
+                },
+                "wt1": {
+                  "type": "text",
+                  "settings": {
+                    "text": "<p>Every product is original, sourced through official agency and distribution.</p>",
+                    "alignment": "center",
+                    "type_preset": "rte",
+                    "font": "var(--font-body--family)",
+                    "font_size": "1rem",
+                    "background": false
+                  }
+                },
+                "i_wp1": {
+                  "type": "icon",
+                  "settings": {
+                    "icon": "lock",
+                    "width": 32
+                  }
+                }
+              },
+              "block_order": [
+                "i_wp1",
+                "wh1",
+                "wt1"
+              ]
+            },
+            "wp2": {
+              "type": "group",
+              "settings": {
+                "content_direction": "column",
+                "horizontal_alignment_flex_direction_column": "center",
+                "vertical_alignment_flex_direction_column": "flex-start",
+                "gap": 8,
+                "width": "fill"
+              },
+              "blocks": {
+                "wh2": {
+                  "type": "text",
+                  "settings": {
+                    "text": "<h3>Fair Prices</h3>",
+                    "alignment": "center",
+                    "type_preset": "custom",
+                    "font": "var(--font-heading--family)",
+                    "font_size": "1.125rem",
+                    "background": false
+                  },
+                  "name": "t:names.heading"
+                },
+                "wt2": {
+                  "type": "text",
+                  "settings": {
+                    "text": "<p>Real value, without inflated retail markups.</p>",
+                    "alignment": "center",
+                    "type_preset": "rte",
+                    "font": "var(--font-body--family)",
+                    "font_size": "1rem",
+                    "background": false
+                  }
+                },
+                "i_wp2": {
+                  "type": "icon",
+                  "settings": {
+                    "icon": "price_tag",
+                    "width": 32
+                  }
+                }
+              },
+              "block_order": [
+                "i_wp2",
+                "wh2",
+                "wt2"
+              ]
+            },
+            "wp3": {
+              "type": "group",
+              "settings": {
+                "content_direction": "column",
+                "horizontal_alignment_flex_direction_column": "center",
+                "vertical_alignment_flex_direction_column": "flex-start",
+                "gap": 8,
+                "width": "fill"
+              },
+              "blocks": {
+                "wh3": {
+                  "type": "text",
+                  "settings": {
+                    "text": "<h3>Fast Delivery</h3>",
+                    "alignment": "center",
+                    "type_preset": "custom",
+                    "font": "var(--font-heading--family)",
+                    "font_size": "1.125rem",
+                    "background": false
+                  },
+                  "name": "t:names.heading"
+                },
+                "wt3": {
+                  "type": "text",
+                  "settings": {
+                    "text": "<p>Quick, reliable shipping across Egypt, right to your door.</p>",
+                    "alignment": "center",
+                    "type_preset": "rte",
+                    "font": "var(--font-body--family)",
+                    "font_size": "1rem",
+                    "background": false
+                  }
+                },
+                "i_wp3": {
+                  "type": "icon",
+                  "settings": {
+                    "icon": "truck",
+                    "width": 32
+                  }
+                }
+              },
+              "block_order": [
+                "i_wp3",
+                "wh3",
+                "wt3"
+              ]
+            },
+            "wp4": {
+              "type": "group",
+              "settings": {
+                "content_direction": "column",
+                "horizontal_alignment_flex_direction_column": "center",
+                "vertical_alignment_flex_direction_column": "flex-start",
+                "gap": 8,
+                "width": "fill"
+              },
+              "blocks": {
+                "wh4": {
+                  "type": "text",
+                  "settings": {
+                    "text": "<h3>Carefully Curated</h3>",
+                    "alignment": "center",
+                    "type_preset": "custom",
+                    "font": "var(--font-heading--family)",
+                    "font_size": "1.125rem",
+                    "background": false
+                  },
+                  "name": "t:names.heading"
+                },
+                "wt4": {
+                  "type": "text",
+                  "settings": {
+                    "text": "<p>Every fragrance we carry is chosen with care.</p>",
+                    "alignment": "center",
+                    "type_preset": "rte",
+                    "font": "var(--font-body--family)",
+                    "font_size": "1rem",
+                    "background": false
+                  }
+                },
+                "i_wp4": {
+                  "type": "icon",
+                  "settings": {
+                    "icon": "clipboard",
+                    "width": 32
+                  }
+                }
+              },
+              "block_order": [
+                "i_wp4",
+                "wh4",
+                "wt4"
+              ]
+            }
+          },
+          "block_order": [
+            "wp1",
+            "wp2",
+            "wp3",
+            "wp4"
+          ]
+        }
+      },
+      "block_order": [
+        "why_heading",
+        "why_row"
+      ],
+      "name": "t:names.group",
+      "settings": {
+        "content_direction": "column",
+        "horizontal_alignment_flex_direction_column": "center",
+        "vertical_alignment_flex_direction_column": "center",
+        "gap": 28,
+        "section_width": "page-width",
+        "color_scheme": "scheme-3",
+        "padding-block-start": 56,
+        "padding-block-end": 56
+      }
+    }
+  },
+  "order": [
+    "section_ChWrHG",
+    "collection_list_69M9AB",
+    "section_jFV8F6",
+    "section_why"
+  ]
+}
