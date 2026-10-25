@@ -4456,7 +4456,8 @@
     "blog_post_title": "عنوان",
     "blog_post_author": "مؤلف",
     "blog_post_date": "تاريخ",
-    "blog_post_description": "مقتطف من محتوى مدونتك"
+    "blog_post_description": "مقتطف من محتوى مدونتك",
+    "hero_image_todo": "مطلوب: أضف صورة البانر الرئيسية (2400 × 1350 بكسل)"
   },
   "accessibility": {
     "account": "حسابي",

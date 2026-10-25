@@ -1,0 +1,40 @@
+{%- doc -%}
+  Placeholder shown in a hero when no image or video is set. It stands in for the
+  Shopify demo illustration until real fragrance photography is uploaded in the
+  theme editor. The label is visible on purpose, so an unfinished slot can't be
+  published unnoticed.
+
+  @param {string} [class] - CSS classes added to the slot (pass the hero image classes for sizing).
+
+  @example
+  {% render 'hero-image-slot', class: 'hero__image' %}
+{%- enddoc -%}
+
+<div
+  class="hero-image-slot {{ class }}"
+  role="img"
+  aria-label="{{ 'placeholders.hero_image_todo' | t }}"
+>
+  <span class="hero-image-slot__label">{{ 'placeholders.hero_image_todo' | t }}</span>
+</div>
+
+{% stylesheet %}
+  .hero-image-slot {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--padding-lg, 24px);
+    background: var(--m-nude);
+    color: var(--m-plum);
+    text-align: center;
+  }
+
+  .hero-image-slot__label {
+    max-width: 28ch;
+    padding-block: var(--padding-xs, 8px);
+    padding-inline: var(--padding-md, 16px);
+    border: 1px dashed currentcolor;
+    font-size: var(--font-size--sm, 0.875rem);
+    line-height: 1.5;
+  }
+{% endstylesheet %}

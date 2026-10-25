@@ -291,7 +291,8 @@
     "blog_post_title": "Title",
     "blog_post_author": "Author",
     "blog_post_date": "Date",
-    "blog_post_description": "An excerpt of your blog post's content"
+    "blog_post_description": "An excerpt of your blog post's content",
+    "hero_image_todo": "TODO: add hero photography (2400 x 1350 px)"
   },
   "products": {
     "product": {

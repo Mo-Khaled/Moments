@@ -183,7 +183,7 @@
   {%- endif -%}
 
   {% if media_count == 0 %}
-    {{ 'hero-apparel-1' | placeholder_svg_tag: 'hero__image' }}
+    {% render 'hero-image-slot', class: 'hero__image' %}
   {%- endif -%}
 
   {%- comment -%} Mobile Media {%- endcomment -%}
@@ -282,7 +282,7 @@
     }}
   {% endif %}
   {% if media_count == 0 %}
-    {{ 'hero-apparel-1' | placeholder_svg_tag: 'hero__image' }}
+    {% render 'hero-image-slot', class: 'hero__image' %}
   {% endif %}
 {% endcapture %}
 
@@ -366,7 +366,7 @@
             }}
         {% endif %}
         {% if media_count == 0 %}
-          {{ 'hero-apparel-1' | placeholder_svg_tag: 'hero__image hero__image--mobile' }}
+          {% render 'hero-image-slot', class: 'hero__image hero__image--mobile' %}
         {% endif %}
       {% endif %}
     {% endif %}
