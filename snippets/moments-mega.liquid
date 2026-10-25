@@ -67,6 +67,7 @@
     <ul class="m-mega__moments">
       {%- assign moment_handles = 'night-moment,gift-moment,all-day-moment,daily-moment,fresh-moment,love-moment' | split: ',' -%}
       {%- assign moment_marks = 'night,gift,allday,daily,fresh,love' | split: ',' -%}
+      {%- assign moment_keys = 'moments.night,moments.gift,moments.all_day,moments.daily,moments.fresh,moments.love' | split: ',' -%}
       {%- for handle in moment_handles -%}
         {%- assign moment_collection = collections[handle] -%}
         {%- if moment_collection != blank -%}
@@ -74,7 +75,7 @@
           <li class="m-mega__moment-item">
             <a class="m-mega__moment m-tone--{{ mark }}" href="{{ moment_collection.url }}" data-moment-host>
               <span class="m-mega__moment-art" aria-hidden="true">{% render 'moment-mark', mark: mark, size: 'lg' %}</span>
-              <span class="m-mega__moment-name">{{ moment_collection.title | replace: ' Moment', '' }}</span>
+              <span class="m-mega__moment-name">{{ moment_keys[forloop.index0] | t }}</span>
               <span class="m-mega__moment-count">{{ 'homepage.moments.count' | t: count: moment_collection.products_count }}</span>
             </a>
           </li>

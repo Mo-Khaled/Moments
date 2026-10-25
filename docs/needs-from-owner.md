@@ -22,7 +22,7 @@ Nothing below is guessed or invented; each item is a slot that is hidden on the 
 - **Shipping policy**: `/policies/shipping-policy` has no content on the store; the link is hidden until it has some (and it must not carry returns wording).
 - **The old About page text** (`page.about-us` template, the one assigned today) still says "Fair Prices ... without inflated retail markups" and "Fast Delivery across Egypt". Both are unverified claims. Either confirm them, edit the text, or assign the new `page.about` template (which avoids them).
 - **Haramain leftovers in store data** (each needs your approval of the exact change): vendor "Haramain Perfumes" on 4 gift products (the theme shows MOMENTS for now), the `haramain-perfumes` collection (proposed: unpublish and redirect to /collections/all), the "Dolby" product (no image, proposed: set to draft, not delete), alt texts that name the other shop (538), and the watermarked gift-bag images.
-- **Vendor and image data**: vendor names ("Haramain Perfumes" still appears as a vendor on gift bags), product images that carry another shop's watermark, and the products not published to the Online Store channel (see the image audit).
+- **Draft products**: 51 products are drafts (not in the image audit because they have no public images); say if they should be audited too.
 - **Backup theme** "MOMENTS - Backup before redesign": creating it is a store change, so it needs your yes.
 - **Publishing**: not done. It happens only when you send the word "publish".
 

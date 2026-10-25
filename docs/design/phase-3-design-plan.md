@@ -48,6 +48,14 @@ One content width and one gutter (`--m-content`, `--m-gutter`) are shared by eve
 throughout (it mirrors in RTL). Photography, when it exists, is shown uncropped (fit mode, contain frames); colour fields and the
 Moment marks carry the page until then.
 
+
+### Clutter budget (enforced by `scripts/check-home.mjs`)
+- Announcement bar: one message visible at a time (a slim rounded bar, rotating, three messages at most).
+- Header: at most three primary items (Shop by Moment, Brands, Gifts as the accent link), plus search, account and cart.
+- Panels: at most three columns, at most four links per column, no empty heading, nothing outside the shared gutter.
+- Hero: one headline, one filled button, one outlined button, one pill tag, and the moment switcher with visible labels. Nothing else on the media.
+- No separators, icons or underlines used as decoration where spacing does the job.
+
 ## 6. Moment marks (placeholders until an illustrator delivers)
 
 Six object marks, no characters: Night (lantern with crescent), Gift (ribbon-tied bottle), All day (sun over a wave line), Daily (lotus bud), Fresh (palm leaf with drops), Love (rose with a drifting petal). One 1.5 px plum stroke, nude body, berry accent, gold at most once per mark (All day only, in the placeholders).
