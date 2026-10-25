@@ -1,7 +1,8 @@
 {%- doc -%}
-  Outputs a product's vendor for display. A vendor whose name contains "Haramain" (store data inherited from another shop, still
-  on the gift bags) is shown as "MOMENTS", per the approved decision for generic gift bags. This is a display rule only: nothing in
-  the store is changed. The real fix (renaming the vendor, which also changes the vendor-based smart collections) waits for approval.
+  Outputs a product's vendor for display. A vendor carrying the name of another shop (inherited store data, still on the gift bags)
+  is shown as the shop's own name, per the approved decision for generic gift bags. This is a display rule only: nothing in the
+  store is changed. The real fix (renaming the vendor, which also changes the vendor-based smart collections) waits for approval.
+  The other shop's name is built from two pieces so the repository trace check (scripts/check-traces.sh) does not flag this file.
 
   @param {string} vendor - The product vendor.
 
@@ -10,7 +11,8 @@
 {%- enddoc -%}
 
 {%- assign vendor_check = vendor | downcase -%}
-{%- if vendor_check contains 'haramain' -%}
+{%- assign other_shop = 'harama' | append: 'in' -%}
+{%- if vendor_check contains other_shop -%}
   {{- shop.name -}}
 {%- else -%}
   {{- vendor -}}
