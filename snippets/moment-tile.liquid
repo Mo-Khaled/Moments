@@ -1,0 +1,201 @@
+{%- doc -%}
+  One Moment tile: a full-colour field, the large Moment mark and a label. Used by the homepage and /pages/moments
+  through sections/moments-shop-by-moment.liquid, so both always look the same.
+
+  Every tile has the same aspect ratio, padding, mark size and mark position. All of it is measured against the
+  tile's own width (container units), so the layout holds at any column width:
+    mark box: 40% of the tile width, 8% from the top and 12% from the end edge; the art inside it keeps 12.5% padding, so it
+              is 13% from the edges and the gesture never leaves the tile
+    label: 12% from the start and bottom edges
+  No photograph is ever cropped in a tile. Colours come from the moment tokens in assets/moments.css
+  (--moment-night, --moment-night-ink, and so on); there is no photograph setting on purpose.
+
+  @param {object} collection - The collection the tile links to.
+  @param {string} mark - night, gift, allday, daily, fresh or love. It also picks the colours.
+  @param {string} [label] - Overrides the default label (the moment name from the locale files).
+  @param {string} [class] - Extra classes.
+
+  @example
+  {% render 'moment-tile', collection: collection, mark: 'night' %}
+{%- enddoc -%}
+
+{%- liquid
+  assign tone = mark | downcase | remove: '-' | remove: '_'
+  assign tile_label = label
+  if tile_label == blank
+    case tone
+      when 'night'
+        assign tile_label = 'moments.night' | t
+      when 'gift'
+        assign tile_label = 'moments.gift' | t
+      when 'allday'
+        assign tile_label = 'moments.all_day' | t
+      when 'daily'
+        assign tile_label = 'moments.daily' | t
+      when 'fresh'
+        assign tile_label = 'moments.fresh' | t
+      when 'love'
+        assign tile_label = 'moments.love' | t
+      else
+        assign tile_label = collection.title
+    endcase
+  endif
+-%}
+
+<a class="m-tile m-tile--{{ tone }} {{ class }}" href="{{ collection.url }}" data-moment-host>
+  <span class="m-tile__art">
+    {% render 'moment-mark', mark: tone, size: 'lg' %}
+  </span>
+  <span class="m-tile__label">
+    <span class="m-tile__name">{{ tile_label }}</span>
+    <span class="m-tile__count">{{ 'homepage.moments.count' | t: count: collection.products_count }}</span>
+  </span>
+</a>
+
+{% stylesheet %}
+  .m-tile-item {
+    container-type: inline-size;
+    min-inline-size: 0;
+  }
+
+  .m-tile {
+    --m-mark-ink: var(--tile-ink);
+    --m-mark-body: var(--tile-body);
+    --m-mark-accent: var(--tile-accent);
+    --m-mark-gold: var(--tile-gold);
+
+    position: relative;
+    display: block;
+    aspect-ratio: 1 / 1;
+    background: var(--tile-bg);
+    background-size: 100% 140%;
+    background-position: 0 0;
+    color: var(--tile-ink);
+    text-decoration: none;
+    transition: background-position var(--m-dur-3) var(--m-ease), transform var(--m-dur-1) var(--m-ease);
+  }
+
+  .m-tile:hover {
+    background-position: 0 100%;
+  }
+
+  /* Press feedback: transform only. */
+  .m-tile:active {
+    transform: scale(0.985);
+  }
+
+  .m-tile:focus-visible {
+    outline: 2px solid var(--tile-ink);
+    outline-offset: -8px;
+  }
+
+  /* The mark box is fixed. The drawing sits inside 12.5% of padding in its own viewBox, so the art is 13% from the
+     tile edges and the gesture has room to move inside the tile. */
+  .m-tile__art {
+    position: absolute;
+    inset-block-start: 8cqi;
+    inset-inline-end: 12cqi;
+    inline-size: 40cqi;
+    block-size: 40cqi;
+  }
+
+  .m-tile__art moment-mark {
+    --mm-size: 100%;
+  }
+
+  .m-tile__label {
+    position: absolute;
+    inset-inline-start: 12cqi;
+    inset-block-end: 12cqi;
+    display: grid;
+    gap: 4px;
+  }
+
+  /* Gold hairline above the label: the only accent in a tile. */
+  .m-tile__label::before {
+    content: '';
+    inline-size: 32px;
+    block-size: 1px;
+    margin-block-end: 8px;
+    background: var(--tile-gold);
+  }
+
+  .m-tile__name {
+    font-family: var(--font-heading--family);
+    font-size: clamp(1.5rem, 9cqi, 2.5rem);
+    line-height: 1.1;
+  }
+
+  .m-tile__count {
+    font-size: 0.8125rem;
+    line-height: 1.3;
+  }
+
+  html[lang='ar'] .m-tile__name {
+    line-height: 1.35;
+  }
+
+  .m-tile--night {
+    --tile-bg: var(--moment-night);
+    --tile-ink: var(--moment-night-ink);
+    --tile-body: var(--moment-night-body);
+    --tile-accent: var(--moment-night-accent);
+    --tile-gold: var(--moment-night-gold);
+  }
+
+  .m-tile--gift {
+    --tile-bg: var(--moment-gift);
+    --tile-ink: var(--moment-gift-ink);
+    --tile-body: var(--moment-gift-body);
+    --tile-accent: var(--moment-gift-accent);
+    --tile-gold: var(--moment-gift-gold);
+  }
+
+  .m-tile--allday {
+    --tile-bg: var(--moment-allday);
+    --tile-ink: var(--moment-allday-ink);
+    --tile-body: var(--moment-allday-body);
+    --tile-accent: var(--moment-allday-accent);
+    --tile-gold: var(--moment-allday-gold);
+  }
+
+  .m-tile--daily {
+    --tile-bg: var(--moment-daily);
+    --tile-ink: var(--moment-daily-ink);
+    --tile-body: var(--moment-daily-body);
+    --tile-accent: var(--moment-daily-accent);
+    --tile-gold: var(--moment-daily-gold);
+  }
+
+  .m-tile--fresh {
+    --tile-bg: var(--moment-fresh);
+    --tile-ink: var(--moment-fresh-ink);
+    --tile-body: var(--moment-fresh-body);
+    --tile-accent: var(--moment-fresh-accent);
+    --tile-gold: var(--moment-fresh-gold);
+  }
+
+  .m-tile--love {
+    --tile-bg: var(--moment-love);
+    --tile-ink: var(--moment-love-ink);
+    --tile-body: var(--moment-love-body);
+    --tile-accent: var(--moment-love-accent);
+    --tile-gold: var(--moment-love-gold);
+  }
+
+  @media screen and (min-width: 750px) {
+    .m-tile {
+      aspect-ratio: 5 / 4;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .m-tile {
+      transition: none;
+    }
+
+    .m-tile:hover {
+      background-position: 0 0;
+    }
+  }
+{% endstylesheet %}

@@ -384,7 +384,9 @@
       "heading": "Shop by Moment",
       "text": "Six ways to wear a fragrance. Start with the one you are dressing for.",
       "count": "{{ count }} products",
-      "image_todo": "TODO: moment photograph"
+      "image_todo": "TODO: moment photograph",
+      "total": "{{ count }} moments",
+      "find": "Find your moment"
     },
     "story": {
       "heading": "Fragrance, sorted by the moment",

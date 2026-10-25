@@ -219,3 +219,44 @@ html .compare-at-price {
   opacity: 1;
   color: var(--m-price-compare);
 }
+
+/* Moment tokens: one full-colour field per moment (used by snippets/moment-tile.liquid).
+   Fills are brand palette only, plus the gold accent for All day. Each pairs with an ink (text and mark lines),
+   a body fill, an accent and a hairline colour, chosen so the label stays AA on its own field. */
+html:root {
+  --moment-night: linear-gradient(155deg, var(--m-plum), var(--m-plum-900));
+  --moment-night-ink: var(--m-pearl);
+  --moment-night-body: color-mix(in srgb, var(--m-plum) 62%, var(--m-pearl));
+  --moment-night-accent: var(--m-gold-light);
+  --moment-night-gold: var(--m-gold-light);
+
+  --moment-gift: linear-gradient(155deg, var(--m-berry-600), var(--m-berry-ink));
+  --moment-gift-ink: var(--m-pearl);
+  --moment-gift-body: color-mix(in srgb, var(--m-berry-600) 55%, var(--m-pearl));
+  --moment-gift-accent: var(--m-gold-light);
+  --moment-gift-gold: var(--m-gold-light);
+
+  --moment-allday: linear-gradient(155deg, var(--m-nude), var(--m-gold-light));
+  --moment-allday-ink: var(--m-plum);
+  --moment-allday-body: var(--m-pearl);
+  --moment-allday-accent: var(--m-berry-ink);
+  --moment-allday-gold: var(--m-berry-ink);
+
+  --moment-daily: linear-gradient(155deg, var(--m-pearl), var(--m-nude));
+  --moment-daily-ink: var(--m-plum);
+  --moment-daily-body: var(--m-nude);
+  --moment-daily-accent: var(--m-berry);
+  --moment-daily-gold: var(--m-gold-ink);
+
+  --moment-fresh: linear-gradient(155deg, var(--m-taupe), var(--m-taupe-ink));
+  --moment-fresh-ink: var(--m-pearl);
+  --moment-fresh-body: color-mix(in srgb, var(--m-taupe) 55%, var(--m-pearl));
+  --moment-fresh-accent: var(--m-gold-light);
+  --moment-fresh-gold: var(--m-gold-light);
+
+  --moment-love: linear-gradient(155deg, var(--m-text-secondary), color-mix(in srgb, var(--m-text-secondary) 65%, var(--m-plum)));
+  --moment-love-ink: var(--m-pearl);
+  --moment-love-body: color-mix(in srgb, var(--m-text-secondary) 55%, var(--m-pearl));
+  --moment-love-accent: var(--m-nude);
+  --moment-love-gold: var(--m-gold-light);
+}

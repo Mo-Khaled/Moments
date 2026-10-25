@@ -1,0 +1,725 @@
+{
+  "failures": [],
+  "notes": [
+    {
+      "ctx": "home 1920px ltr night",
+      "moved": 22,
+      "minMarginPx": 72,
+      "tileW": 472
+    },
+    {
+      "ctx": "home 1920px ltr gift",
+      "moved": 0,
+      "minMarginPx": 96.7,
+      "tileW": 472
+    },
+    {
+      "ctx": "home 1920px ltr allday",
+      "moved": 17.7,
+      "minMarginPx": 70.2,
+      "tileW": 472
+    },
+    {
+      "ctx": "home 1920px ltr daily",
+      "moved": 223.9,
+      "minMarginPx": 93.8,
+      "tileW": 472
+    },
+    {
+      "ctx": "home 1920px ltr fresh",
+      "moved": 15.2,
+      "minMarginPx": 91.3,
+      "tileW": 472
+    },
+    {
+      "ctx": "home 1920px ltr love",
+      "moved": 50.8,
+      "minMarginPx": 63.7,
+      "tileW": 472
+    },
+    {
+      "ctx": "home 1920px rtl night",
+      "moved": 22,
+      "minMarginPx": 72,
+      "tileW": 472
+    },
+    {
+      "ctx": "home 1920px rtl gift",
+      "moved": 0,
+      "minMarginPx": 96.7,
+      "tileW": 472
+    },
+    {
+      "ctx": "home 1920px rtl allday",
+      "moved": 17.7,
+      "minMarginPx": 70.2,
+      "tileW": 472
+    },
+    {
+      "ctx": "home 1920px rtl daily",
+      "moved": 263.9,
+      "minMarginPx": 93.8,
+      "tileW": 472
+    },
+    {
+      "ctx": "home 1920px rtl fresh",
+      "moved": 15.2,
+      "minMarginPx": 91.3,
+      "tileW": 472
+    },
+    {
+      "ctx": "home 1920px rtl love",
+      "moved": 50.8,
+      "minMarginPx": 89.5,
+      "tileW": 472
+    },
+    {
+      "ctx": "home 1440px ltr night",
+      "moved": 20.5,
+      "minMarginPx": 67.3,
+      "tileW": 441
+    },
+    {
+      "ctx": "home 1440px ltr gift",
+      "moved": 0,
+      "minMarginPx": 90.5,
+      "tileW": 441
+    },
+    {
+      "ctx": "home 1440px ltr allday",
+      "moved": 16.5,
+      "minMarginPx": 65.6,
+      "tileW": 441
+    },
+    {
+      "ctx": "home 1440px ltr daily",
+      "moved": 123.3,
+      "minMarginPx": 87.7,
+      "tileW": 441
+    },
+    {
+      "ctx": "home 1440px ltr fresh",
+      "moved": 14.2,
+      "minMarginPx": 85.4,
+      "tileW": 441
+    },
+    {
+      "ctx": "home 1440px ltr love",
+      "moved": 47.5,
+      "minMarginPx": 59.6,
+      "tileW": 441
+    },
+    {
+      "ctx": "home 1440px rtl night",
+      "moved": 20.5,
+      "minMarginPx": 67.3,
+      "tileW": 441
+    },
+    {
+      "ctx": "home 1440px rtl gift",
+      "moved": 0,
+      "minMarginPx": 90.5,
+      "tileW": 441
+    },
+    {
+      "ctx": "home 1440px rtl allday",
+      "moved": 16.5,
+      "minMarginPx": 65.6,
+      "tileW": 441
+    },
+    {
+      "ctx": "home 1440px rtl daily",
+      "moved": 163.3,
+      "minMarginPx": 87.7,
+      "tileW": 441
+    },
+    {
+      "ctx": "home 1440px rtl fresh",
+      "moved": 14.2,
+      "minMarginPx": 85.4,
+      "tileW": 441
+    },
+    {
+      "ctx": "home 1440px rtl love",
+      "moved": 47.5,
+      "minMarginPx": 83.7,
+      "tileW": 441
+    },
+    {
+      "ctx": "home 1024px ltr night",
+      "moved": 14.5,
+      "minMarginPx": 47.5,
+      "tileW": 311
+    },
+    {
+      "ctx": "home 1024px ltr gift",
+      "moved": 0,
+      "minMarginPx": 63.8,
+      "tileW": 311
+    },
+    {
+      "ctx": "home 1024px ltr allday",
+      "moved": 11.7,
+      "minMarginPx": 46.3,
+      "tileW": 312
+    },
+    {
+      "ctx": "home 1024px ltr daily",
+      "moved": 6.5,
+      "minMarginPx": 61.9,
+      "tileW": 311
+    },
+    {
+      "ctx": "home 1024px ltr fresh",
+      "moved": 10,
+      "minMarginPx": 60.3,
+      "tileW": 311
+    },
+    {
+      "ctx": "home 1024px ltr love",
+      "moved": 33.5,
+      "minMarginPx": 42.1,
+      "tileW": 312
+    },
+    {
+      "ctx": "home 1024px rtl night",
+      "moved": 14.5,
+      "minMarginPx": 47.5,
+      "tileW": 311
+    },
+    {
+      "ctx": "home 1024px rtl gift",
+      "moved": 0,
+      "minMarginPx": 63.8,
+      "tileW": 311
+    },
+    {
+      "ctx": "home 1024px rtl allday",
+      "moved": 11.7,
+      "minMarginPx": 46.3,
+      "tileW": 312
+    },
+    {
+      "ctx": "home 1024px rtl daily",
+      "moved": 6.5,
+      "minMarginPx": 61.9,
+      "tileW": 311
+    },
+    {
+      "ctx": "home 1024px rtl fresh",
+      "moved": 10,
+      "minMarginPx": 60.3,
+      "tileW": 311
+    },
+    {
+      "ctx": "home 1024px rtl love",
+      "moved": 33.5,
+      "minMarginPx": 59.1,
+      "tileW": 312
+    },
+    {
+      "ctx": "home 768px ltr night",
+      "moved": 16.4,
+      "minMarginPx": 53.9,
+      "tileW": 353
+    },
+    {
+      "ctx": "home 768px ltr gift",
+      "moved": 0,
+      "minMarginPx": 72.4,
+      "tileW": 353
+    },
+    {
+      "ctx": "home 768px ltr allday",
+      "moved": 13.3,
+      "minMarginPx": 52.6,
+      "tileW": 353
+    },
+    {
+      "ctx": "home 768px ltr daily",
+      "moved": 7.4,
+      "minMarginPx": 70.2,
+      "tileW": 353
+    },
+    {
+      "ctx": "home 768px ltr fresh",
+      "moved": 262.6,
+      "minMarginPx": 68.4,
+      "tileW": 353
+    },
+    {
+      "ctx": "home 768px ltr love",
+      "moved": 38.1,
+      "minMarginPx": 47.7,
+      "tileW": 353
+    },
+    {
+      "ctx": "home 768px rtl night",
+      "moved": 16.4,
+      "minMarginPx": 53.9,
+      "tileW": 353
+    },
+    {
+      "ctx": "home 768px rtl gift",
+      "moved": 0,
+      "minMarginPx": 72.4,
+      "tileW": 353
+    },
+    {
+      "ctx": "home 768px rtl allday",
+      "moved": 13.3,
+      "minMarginPx": 52.6,
+      "tileW": 353
+    },
+    {
+      "ctx": "home 768px rtl daily",
+      "moved": 7.4,
+      "minMarginPx": 70.2,
+      "tileW": 353
+    },
+    {
+      "ctx": "home 768px rtl fresh",
+      "moved": 292.6,
+      "minMarginPx": 68.4,
+      "tileW": 353
+    },
+    {
+      "ctx": "home 768px rtl love",
+      "moved": 38.1,
+      "minMarginPx": 67,
+      "tileW": 353
+    },
+    {
+      "ctx": "home 375px ltr night",
+      "moved": 7.8,
+      "minMarginPx": 25.5,
+      "tileW": 168
+    },
+    {
+      "ctx": "home 375px ltr gift",
+      "moved": 0,
+      "minMarginPx": 34.3,
+      "tileW": 168
+    },
+    {
+      "ctx": "home 375px ltr allday",
+      "moved": 6.3,
+      "minMarginPx": 24.9,
+      "tileW": 168
+    },
+    {
+      "ctx": "home 375px ltr daily",
+      "moved": 3.5,
+      "minMarginPx": 33.3,
+      "tileW": 168
+    },
+    {
+      "ctx": "home 375px ltr fresh",
+      "moved": 5.4,
+      "minMarginPx": 32.4,
+      "tileW": 168
+    },
+    {
+      "ctx": "home 375px ltr love",
+      "moved": 18,
+      "minMarginPx": 22.6,
+      "tileW": 168
+    },
+    {
+      "ctx": "home 375px rtl night",
+      "moved": 7.8,
+      "minMarginPx": 25.5,
+      "tileW": 168
+    },
+    {
+      "ctx": "home 375px rtl gift",
+      "moved": 0,
+      "minMarginPx": 34.3,
+      "tileW": 168
+    },
+    {
+      "ctx": "home 375px rtl allday",
+      "moved": 6.3,
+      "minMarginPx": 24.9,
+      "tileW": 168
+    },
+    {
+      "ctx": "home 375px rtl daily",
+      "moved": 3.5,
+      "minMarginPx": 33.3,
+      "tileW": 168
+    },
+    {
+      "ctx": "home 375px rtl fresh",
+      "moved": 5.4,
+      "minMarginPx": 32.4,
+      "tileW": 168
+    },
+    {
+      "ctx": "home 375px rtl love",
+      "moved": 18,
+      "minMarginPx": 31.8,
+      "tileW": 168
+    },
+    {
+      "ctx": "moments 1920px ltr night",
+      "moved": 22,
+      "minMarginPx": 72,
+      "tileW": 472
+    },
+    {
+      "ctx": "moments 1920px ltr gift",
+      "moved": 0,
+      "minMarginPx": 96.7,
+      "tileW": 472
+    },
+    {
+      "ctx": "moments 1920px ltr allday",
+      "moved": 17.7,
+      "minMarginPx": 70.2,
+      "tileW": 472
+    },
+    {
+      "ctx": "moments 1920px ltr daily",
+      "moved": 279.9,
+      "minMarginPx": 93.8,
+      "tileW": 472
+    },
+    {
+      "ctx": "moments 1920px ltr fresh",
+      "moved": 15.2,
+      "minMarginPx": 91.3,
+      "tileW": 472
+    },
+    {
+      "ctx": "moments 1920px ltr love",
+      "moved": 50.8,
+      "minMarginPx": 63.7,
+      "tileW": 472
+    },
+    {
+      "ctx": "moments 1920px rtl night",
+      "moved": 22,
+      "minMarginPx": 72,
+      "tileW": 472
+    },
+    {
+      "ctx": "moments 1920px rtl gift",
+      "moved": 0,
+      "minMarginPx": 96.7,
+      "tileW": 472
+    },
+    {
+      "ctx": "moments 1920px rtl allday",
+      "moved": 17.7,
+      "minMarginPx": 70.2,
+      "tileW": 472
+    },
+    {
+      "ctx": "moments 1920px rtl daily",
+      "moved": 329.9,
+      "minMarginPx": 93.8,
+      "tileW": 472
+    },
+    {
+      "ctx": "moments 1920px rtl fresh",
+      "moved": 15.2,
+      "minMarginPx": 91.3,
+      "tileW": 472
+    },
+    {
+      "ctx": "moments 1920px rtl love",
+      "moved": 50.8,
+      "minMarginPx": 89.5,
+      "tileW": 472
+    },
+    {
+      "ctx": "moments 1440px ltr night",
+      "moved": 20.5,
+      "minMarginPx": 67.3,
+      "tileW": 441
+    },
+    {
+      "ctx": "moments 1440px ltr gift",
+      "moved": 0,
+      "minMarginPx": 90.5,
+      "tileW": 441
+    },
+    {
+      "ctx": "moments 1440px ltr allday",
+      "moved": 16.5,
+      "minMarginPx": 65.6,
+      "tileW": 441
+    },
+    {
+      "ctx": "moments 1440px ltr daily",
+      "moved": 179.3,
+      "minMarginPx": 87.7,
+      "tileW": 441
+    },
+    {
+      "ctx": "moments 1440px ltr fresh",
+      "moved": 14.2,
+      "minMarginPx": 85.4,
+      "tileW": 441
+    },
+    {
+      "ctx": "moments 1440px ltr love",
+      "moved": 47.5,
+      "minMarginPx": 59.6,
+      "tileW": 441
+    },
+    {
+      "ctx": "moments 1440px rtl night",
+      "moved": 20.5,
+      "minMarginPx": 67.3,
+      "tileW": 441
+    },
+    {
+      "ctx": "moments 1440px rtl gift",
+      "moved": 0,
+      "minMarginPx": 90.5,
+      "tileW": 441
+    },
+    {
+      "ctx": "moments 1440px rtl allday",
+      "moved": 16.5,
+      "minMarginPx": 65.6,
+      "tileW": 441
+    },
+    {
+      "ctx": "moments 1440px rtl daily",
+      "moved": 227.3,
+      "minMarginPx": 87.7,
+      "tileW": 441
+    },
+    {
+      "ctx": "moments 1440px rtl fresh",
+      "moved": 14.2,
+      "minMarginPx": 85.4,
+      "tileW": 441
+    },
+    {
+      "ctx": "moments 1440px rtl love",
+      "moved": 47.5,
+      "minMarginPx": 83.7,
+      "tileW": 441
+    },
+    {
+      "ctx": "moments 1024px ltr night",
+      "moved": 14.5,
+      "minMarginPx": 47.5,
+      "tileW": 311
+    },
+    {
+      "ctx": "moments 1024px ltr gift",
+      "moved": 0,
+      "minMarginPx": 63.8,
+      "tileW": 311
+    },
+    {
+      "ctx": "moments 1024px ltr allday",
+      "moved": 11.7,
+      "minMarginPx": 46.3,
+      "tileW": 312
+    },
+    {
+      "ctx": "moments 1024px ltr daily",
+      "moved": 6.5,
+      "minMarginPx": 61.9,
+      "tileW": 311
+    },
+    {
+      "ctx": "moments 1024px ltr fresh",
+      "moved": 10,
+      "minMarginPx": 60.3,
+      "tileW": 311
+    },
+    {
+      "ctx": "moments 1024px ltr love",
+      "moved": 33.5,
+      "minMarginPx": 42.1,
+      "tileW": 312
+    },
+    {
+      "ctx": "moments 1024px rtl night",
+      "moved": 14.5,
+      "minMarginPx": 47.5,
+      "tileW": 311
+    },
+    {
+      "ctx": "moments 1024px rtl gift",
+      "moved": 0,
+      "minMarginPx": 63.8,
+      "tileW": 311
+    },
+    {
+      "ctx": "moments 1024px rtl allday",
+      "moved": 11.7,
+      "minMarginPx": 46.3,
+      "tileW": 312
+    },
+    {
+      "ctx": "moments 1024px rtl daily",
+      "moved": 6.5,
+      "minMarginPx": 61.9,
+      "tileW": 311
+    },
+    {
+      "ctx": "moments 1024px rtl fresh",
+      "moved": 10,
+      "minMarginPx": 60.3,
+      "tileW": 311
+    },
+    {
+      "ctx": "moments 1024px rtl love",
+      "moved": 33.5,
+      "minMarginPx": 59.1,
+      "tileW": 312
+    },
+    {
+      "ctx": "moments 768px ltr night",
+      "moved": 16.4,
+      "minMarginPx": 53.9,
+      "tileW": 353
+    },
+    {
+      "ctx": "moments 768px ltr gift",
+      "moved": 0,
+      "minMarginPx": 72.4,
+      "tileW": 353
+    },
+    {
+      "ctx": "moments 768px ltr allday",
+      "moved": 13.3,
+      "minMarginPx": 52.6,
+      "tileW": 353
+    },
+    {
+      "ctx": "moments 768px ltr daily",
+      "moved": 7.4,
+      "minMarginPx": 70.2,
+      "tileW": 353
+    },
+    {
+      "ctx": "moments 768px ltr fresh",
+      "moved": 318.6,
+      "minMarginPx": 68.4,
+      "tileW": 353
+    },
+    {
+      "ctx": "moments 768px ltr love",
+      "moved": 38.1,
+      "minMarginPx": 47.7,
+      "tileW": 353
+    },
+    {
+      "ctx": "moments 768px rtl night",
+      "moved": 16.4,
+      "minMarginPx": 53.9,
+      "tileW": 353
+    },
+    {
+      "ctx": "moments 768px rtl gift",
+      "moved": 0,
+      "minMarginPx": 72.4,
+      "tileW": 353
+    },
+    {
+      "ctx": "moments 768px rtl allday",
+      "moved": 13.3,
+      "minMarginPx": 52.6,
+      "tileW": 353
+    },
+    {
+      "ctx": "moments 768px rtl daily",
+      "moved": 7.4,
+      "minMarginPx": 70.2,
+      "tileW": 353
+    },
+    {
+      "ctx": "moments 768px rtl fresh",
+      "moved": 358.6,
+      "minMarginPx": 68.4,
+      "tileW": 353
+    },
+    {
+      "ctx": "moments 768px rtl love",
+      "moved": 38.1,
+      "minMarginPx": 67,
+      "tileW": 353
+    },
+    {
+      "ctx": "moments 375px ltr night",
+      "moved": 7.8,
+      "minMarginPx": 25.5,
+      "tileW": 168
+    },
+    {
+      "ctx": "moments 375px ltr gift",
+      "moved": 0,
+      "minMarginPx": 34.3,
+      "tileW": 168
+    },
+    {
+      "ctx": "moments 375px ltr allday",
+      "moved": 6.3,
+      "minMarginPx": 24.9,
+      "tileW": 168
+    },
+    {
+      "ctx": "moments 375px ltr daily",
+      "moved": 3.5,
+      "minMarginPx": 33.3,
+      "tileW": 168
+    },
+    {
+      "ctx": "moments 375px ltr fresh",
+      "moved": 5.4,
+      "minMarginPx": 32.4,
+      "tileW": 168
+    },
+    {
+      "ctx": "moments 375px ltr love",
+      "moved": 18,
+      "minMarginPx": 22.6,
+      "tileW": 168
+    },
+    {
+      "ctx": "moments 375px rtl night",
+      "moved": 7.8,
+      "minMarginPx": 25.5,
+      "tileW": 168
+    },
+    {
+      "ctx": "moments 375px rtl gift",
+      "moved": 0,
+      "minMarginPx": 34.3,
+      "tileW": 168
+    },
+    {
+      "ctx": "moments 375px rtl allday",
+      "moved": 6.3,
+      "minMarginPx": 24.9,
+      "tileW": 168
+    },
+    {
+      "ctx": "moments 375px rtl daily",
+      "moved": 3.5,
+      "minMarginPx": 33.3,
+      "tileW": 168
+    },
+    {
+      "ctx": "moments 375px rtl fresh",
+      "moved": 5.4,
+      "minMarginPx": 32.4,
+      "tileW": 168
+    },
+    {
+      "ctx": "moments 375px rtl love",
+      "moved": 18,
+      "minMarginPx": 31.8,
+      "tileW": 168
+    }
+  ]
+}

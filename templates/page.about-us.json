@@ -125,7 +125,7 @@
             "text_FcN8bf": {
               "type": "text",
               "settings": {
-                "text": "<p>MOMENTS brings you authentic fragrances from the largest Arabic houses such as Khadlaj, Nabeel, Lattafa, Afnan and Assaf, among others. 100% original, at a fair price, from a source you can trust.</p>",
+                "text": "<p>MOMENTS brings you authentic fragrances from the largest Arabic houses such as Khadlaj, Nabeel, Lattafa, Afnan and Assaf, among others. 100% original and sealed.</p>",
                 "max_width": "narrow",
                 "alignment": "left",
                 "type_preset": "rte",
@@ -340,7 +340,7 @@
                 "wt1": {
                   "type": "text",
                   "settings": {
-                    "text": "<p>Every product is original, sourced through official agency and distribution.</p>",
+                    "text": "<p>Every bottle is 100% original and arrives in its original sealed packaging.</p>",
                     "alignment": "center",
                     "type_preset": "rte",
                     "font": "var(--font-body--family)",

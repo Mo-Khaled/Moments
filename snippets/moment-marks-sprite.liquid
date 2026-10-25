@@ -16,7 +16,7 @@
 
 <svg width="0" height="0" style="position: absolute" aria-hidden="true" focusable="false">
   <defs>
-    <symbol id="moment-mark-night" viewBox="0 0 48 48">
+    <symbol id="moment-mark-night" viewBox="-8 -8 64 64">
       <g class="mm-body">
         <path class="mm-line mm-fill" d="M24 5v5M18 10h12l4 7v12l-5 7H19l-5-7V17z"/><path class="mm-line" d="M19 41h10"/>
         <g class="mm-accent-static"><path class="mm-accent-fill" d="M24 16a6 6 0 1 0 5 9 5 5 0 1 1-5-9z"/></g>
@@ -24,35 +24,35 @@
       </g>
       <g class="mm-accent"></g>
     </symbol>
-    <symbol id="moment-mark-gift" viewBox="0 0 48 48">
+    <symbol id="moment-mark-gift" viewBox="-8 -8 64 64">
       <g class="mm-body">
         <rect class="mm-line mm-fill" x="15" y="20" width="18" height="21" rx="3"/><path class="mm-line" d="M21 20v-6h6v6M20 12h8"/>
         <g class="mm-detail"><path class="mm-line" d="M18 34h12M18 37h7"/></g>
       </g>
       <g class="mm-accent"><path class="mm-line mm-accent-fill" d="M24 29l-6-4v8zM24 29l6-4v8z"/></g>
     </symbol>
-    <symbol id="moment-mark-allday" viewBox="0 0 48 48">
+    <symbol id="moment-mark-allday" viewBox="-8 -8 64 64">
       <g class="mm-accent">
         <path class="mm-line mm-fill" d="M12 30a12 12 0 0 1 24 0z"/><path class="mm-line mm-gold" d="M24 9v4M11 16l3 3M37 16l-3 3"/>
         <g class="mm-detail"><path class="mm-line mm-gold" d="M5 25h4M39 25h4"/></g>
       </g>
       <g class="mm-body"><path class="mm-line" d="M6 35q4-4 8 0t8 0 8 0 8 0 4 0M10 41q4-4 8 0t8 0 8 0 6 0"/></g>
     </symbol>
-    <symbol id="moment-mark-daily" viewBox="0 0 48 48">
+    <symbol id="moment-mark-daily" viewBox="-8 -8 64 64">
       <g class="mm-body">
         <path class="mm-line mm-fill" d="M24 11c-6 6-6 16 0 23 6-7 6-17 0-23z"/><path class="mm-line" d="M24 34v8M16 42h16"/>
         <g class="mm-detail"><path class="mm-line" d="M24 15v15M20 22q4 4 8 0"/></g>
       </g>
       <g class="mm-accent"><path class="mm-line mm-accent-fill mm-soft" d="M24 34c-8-1-13-7-14-14 6 0 11 3 14 8M24 34c8-1 13-7 14-14-6 0-11 3-14 8"/></g>
     </symbol>
-    <symbol id="moment-mark-fresh" viewBox="0 0 48 48">
+    <symbol id="moment-mark-fresh" viewBox="-8 -8 64 64">
       <g class="mm-body">
         <path class="mm-line mm-fill" d="M9 38C11 22 24 12 38 10c-1 14-9 26-24 29z"/><path class="mm-line" d="M12 36L34 14"/>
         <g class="mm-detail"><path class="mm-line" d="M18 31l1-7M23 26l1-7M28 21l1-6M16 32l7 1M21 27l7 1"/></g>
       </g>
       <g class="mm-accent"><path class="mm-accent-fill" d="M39 27c-2 3-3 4-3 6a3 3 0 0 0 6 0c0-2-1-3-3-6z"/></g>
     </symbol>
-    <symbol id="moment-mark-love" viewBox="0 0 48 48">
+    <symbol id="moment-mark-love" viewBox="-8 -8 64 64">
       <g class="mm-body">
         <circle class="mm-line mm-fill" cx="22" cy="21" r="9"/><path class="mm-line" d="M22 21c-3-3-6-1-5 2M22 21c3-3 6-1 5 2M22 21c0-3-2-5-5-4M22 30v11M22 36c-4-1-6-3-6-6M22 38c3-1 5-3 6-5"/>
         <g class="mm-detail"><path class="mm-line" d="M14 20c1-4 5-7 8-7M30 22c-1 4-4 7-8 8"/></g>
@@ -63,6 +63,11 @@
 </svg>
 
 {% stylesheet %}
+  symbol,
+  use {
+    overflow: visible;
+  }
+
   .mm-line {
     fill: none;
     stroke: var(--m-mark-ink);

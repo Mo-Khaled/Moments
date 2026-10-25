@@ -1,26 +1,30 @@
 {%- comment -%}
-  Shop by Moment: one tile treatment for all six moments. Same field, same crop, same label style and the large
-  Moment mark in every tile. A tile never mixes product shots, illustrations and stock photos.
-
-  Each tile is a block (collection, mark, label, optional photograph). Without a photograph the tile is the nude
-  field with the large mark, which is the finished look until moment photography exists. With a photograph the
-  same plum overlay is used on every tile, so photographs can be added one at a time without the grid looking mixed.
-  TODO: moment photography for every tile (see docs/design/phase-3-plan, "tiles that still need images").
-
-  Layout "feature": the first tile is tall, the next four fill a 2 x 2, and the last runs full width as a banner.
-  Layout "even": a plain 3 x 2 grid.
+  The six Moment tiles, shared by the homepage and /pages/moments. One tile component (snippets/moment-tile.liquid),
+  one strict grid: 3 x 2 on desktop, 2 x 3 on tablet, 2 columns on phones. Six tiles always fill it, so there is
+  never an orphan cell. Tiles are colour fields with the large Moment mark. They never hold a cropped photograph.
+  Photography for moments can be added later as a separate, uncropped treatment once normalised images exist.
 {%- endcomment -%}
+
+{%- liquid
+  assign tag = section.settings.heading_level | default: 'h2'
+  assign tile_count = 0
+  for block in section.blocks
+    if block.settings.collection != blank
+      assign tile_count = tile_count | plus: 1
+    endif
+  endfor
+-%}
 
 <section class="m-moments" aria-labelledby="m-moments-title-{{ section.id }}">
   <div class="m-wrap">
     <header class="m-moments__head">
-      <h2 class="m-moments__title" id="m-moments-title-{{ section.id }}">
+      <{{ tag }} class="m-moments__title" id="m-moments-title-{{ section.id }}">
         {%- if section.settings.heading != blank -%}
           {{ section.settings.heading }}
         {%- else -%}
           {{ 'homepage.moments.heading' | t }}
         {%- endif -%}
-      </h2>
+      </{{ tag }}>
       <p class="m-moments__text">
         {%- if section.settings.text != blank -%}
           {{ section.settings.text }}
@@ -28,49 +32,20 @@
           {{ 'homepage.moments.text' | t }}
         {%- endif -%}
       </p>
+      {%- if section.settings.show_count -%}
+        <p class="m-moments__total">{{ 'homepage.moments.total' | t: count: tile_count }}</p>
+      {%- endif -%}
     </header>
 
-    <ul class="m-moments__grid m-moments__grid--{{ section.settings.layout }}">
+    <ul class="m-moments__grid">
       {%- for block in section.blocks -%}
-        {%- liquid
-          assign collection = block.settings.collection
-          assign label = block.settings.label
-          if label == blank
-            assign label = collection.title
-          endif
-          assign photo = block.settings.image
-        -%}
-        {%- if collection != blank -%}
+        {%- if block.settings.collection != blank -%}
           <li class="m-tile-item" {{ block.shopify_attributes }}>
-            <a class="m-tile{% if photo != blank %} m-tile--photo{% endif %}" href="{{ collection.url }}" data-moment-host>
-              {%- if photo != blank -%}
-                {{
-                  photo
-                  | image_url: width: 900
-                  | image_tag:
-                    class: 'm-tile__photo',
-                    widths: '300, 450, 600, 900',
-                    sizes: '(min-width: 990px) 33vw, 50vw',
-                    loading: 'lazy',
-                    alt: ''
-                }}
-              {%- endif -%}
-              <span class="m-tile__mark">
-                {% render 'moment-mark', mark: block.settings.mark, size: 'lg' %}
-              </span>
-              <span class="m-tile__label">
-                <span class="m-tile__name">{{ label }}</span>
-                <span class="m-tile__count">{{ 'homepage.moments.count' | t: count: collection.products_count }}</span>
-              </span>
-            </a>
+            {% render 'moment-tile', collection: block.settings.collection, mark: block.settings.mark, label: block.settings.label %}
           </li>
         {%- endif -%}
       {%- endfor -%}
     </ul>
-
-    {%- if request.design_mode -%}
-      <p class="m-moments__todo">{{ 'homepage.moments.image_todo' | t }}</p>
-    {%- endif -%}
   </div>
 </section>
 
@@ -89,8 +64,8 @@
   .m-moments__title {
     margin: 0;
     color: var(--m-text);
-    font-size: clamp(1.875rem, 4vw, 2.75rem);
-    line-height: 1.1;
+    font-size: clamp(2rem, 4.6vw, 3.25rem);
+    line-height: 1.05;
   }
 
   .m-moments__text {
@@ -99,6 +74,12 @@
     color: var(--m-text-muted);
     font-size: 1rem;
     line-height: 1.55;
+  }
+
+  .m-moments__total {
+    margin: 0;
+    color: var(--m-text-muted);
+    font-size: 0.875rem;
   }
 
   html[lang='ar'] .m-moments__title {
@@ -118,169 +99,15 @@
     list-style: none;
   }
 
-  .m-tile-item {
-    display: flex;
-    min-inline-size: 0;
-  }
-
-  .m-tile {
-    --m-mark-body: var(--m-pearl);
-
-    position: relative;
-    isolation: isolate;
-    display: flex;
-    flex: 1;
-    flex-direction: column;
-    justify-content: flex-end;
-    min-block-size: 240px;
-    padding: 16px;
-    overflow: hidden;
-    background: var(--m-nude);
-    color: var(--m-text);
-    text-decoration: none;
-    transition: background-color var(--m-dur-2) var(--m-ease);
-  }
-
-  .m-tile:hover {
-    background: var(--m-nude-deep);
-  }
-
-  .m-tile:focus-visible {
-    outline: 2px solid var(--m-plum);
-    outline-offset: -4px;
-  }
-
-  /* The large mark sits in the upper corner, scaled down inside small tiles. */
-  .m-tile__mark {
-    position: absolute;
-    inset-block-start: 8px;
-    inset-inline-end: 8px;
-    z-index: 1;
-    transform: scale(0.72);
-    transform-origin: top right;
-  }
-
-  html[dir='rtl'] .m-tile__mark {
-    transform-origin: top left;
-  }
-
-  .m-tile__photo {
-    position: absolute;
-    inset: 0;
-    z-index: -2;
-    inline-size: 100%;
-    block-size: 100%;
-    object-fit: cover;
-  }
-
-  /* One overlay for every photograph, so mixed sources still read as one set. */
-  .m-tile--photo::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    z-index: -1;
-    background: linear-gradient(to top, rgb(37 18 36 / 0.82), rgb(37 18 36 / 0.1) 62%);
-  }
-
-  .m-tile--photo {
-    color: var(--m-text-on-dark);
-  }
-
-  .m-tile__label {
-    display: grid;
-    gap: 4px;
-  }
-
-  /* Gold hairline above the label: the only accent in a tile. */
-  .m-tile__label::before {
-    content: '';
-    inline-size: 32px;
-    block-size: 1px;
-    margin-block-end: 8px;
-    background: var(--m-gold-ink);
-  }
-
-  .m-tile--photo .m-tile__label::before {
-    background: var(--m-accent-on-dark);
-  }
-
-  .m-tile__name {
-    font-family: var(--font-heading--family);
-    font-size: 1.375rem;
-    line-height: 1.15;
-  }
-
-  .m-tile__count {
-    color: var(--m-text-muted);
-    font-size: 0.8125rem;
-  }
-
-  .m-tile--photo .m-tile__count {
-    color: var(--m-nude);
-  }
-
-  html[lang='ar'] .m-tile__name {
-    line-height: 1.35;
-  }
-
-  .m-moments__todo {
-    margin: 12px 0 0;
-    color: var(--m-text-muted);
-    font-size: 0.75rem;
-  }
-
-  /* Phones: the first and last tile run across both columns. */
-  .m-moments__grid--feature > .m-tile-item:first-child,
-  .m-moments__grid--feature > .m-tile-item:last-child {
-    grid-column: 1 / -1;
-  }
-
   @media screen and (min-width: 750px) {
     .m-moments__grid {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 12px;
-    }
-
-    .m-tile {
-      min-block-size: 280px;
-      padding: 24px;
-    }
-
-    .m-tile__mark {
-      inset-block-start: 16px;
-      inset-inline-end: 16px;
-      transform: none;
-    }
-
-    .m-tile__name {
-      font-size: 1.625rem;
-    }
-
-    /* Feature: the first tile is tall, the last is a full-width banner. */
-    .m-moments__grid--feature > .m-tile-item:first-child {
-      grid-column: 1;
-      grid-row: span 2;
-    }
-
-    .m-moments__grid--feature > .m-tile-item:last-child {
-      grid-column: 1 / -1;
-    }
-
-    .m-moments__grid--feature > .m-tile-item:last-child .m-tile {
-      min-block-size: 200px;
-    }
-
-    /* The tall tile has room for a bigger mark. */
-    .m-moments__grid--feature > .m-tile-item:first-child .m-tile__mark {
-      transform: scale(1.6);
-      inset-block-start: 56px;
-      inset-inline-end: 72px;
     }
   }
 
-  @media (prefers-reduced-motion: reduce) {
-    .m-tile {
-      transition: none;
+  @media screen and (min-width: 990px) {
+    .m-moments__grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
     }
   }
 {% endstylesheet %}
@@ -291,17 +118,19 @@
   "limit": 1,
   "settings": [
     { "type": "text", "id": "heading", "label": "Heading" },
-    { "type": "textarea", "id": "text", "label": "Text" },
     {
       "type": "select",
-      "id": "layout",
-      "label": "Layout",
+      "id": "heading_level",
+      "label": "Heading level",
+      "info": "Use H1 when the section is the main heading of a page.",
       "options": [
-        { "value": "feature", "label": "Feature: tall first tile, full-width last tile" },
-        { "value": "even", "label": "Even: 3 x 2 grid" }
+        { "value": "h2", "label": "H2" },
+        { "value": "h1", "label": "H1" }
       ],
-      "default": "feature"
-    }
+      "default": "h2"
+    },
+    { "type": "textarea", "id": "text", "label": "Intro line" },
+    { "type": "checkbox", "id": "show_count", "label": "Show the number of moments", "default": false }
   ],
   "blocks": [
     {
@@ -313,7 +142,7 @@
         {
           "type": "select",
           "id": "mark",
-          "label": "Moment mark",
+          "label": "Moment mark and colour",
           "options": [
             { "value": "night", "label": "Night (lantern)" },
             { "value": "gift", "label": "Gift (ribbon bottle)" },
@@ -324,13 +153,7 @@
           ],
           "default": "night"
         },
-        { "type": "text", "id": "label", "label": "Label", "info": "Leave empty to use the collection title." },
-        {
-          "type": "image_picker",
-          "id": "image",
-          "label": "Photograph (optional)",
-          "info": "TODO: moment photography. Same crop for all tiles, the plum overlay is added automatically."
-        }
+        { "type": "text", "id": "label", "label": "Label", "info": "Leave empty to use the moment name." }
       ]
     }
   ],
