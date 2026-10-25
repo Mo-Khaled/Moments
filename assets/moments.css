@@ -438,8 +438,17 @@ html:root {
   background: var(--m-card-backdrop);
 }
 
+.card-gallery,
+.card-gallery .product-media-container,
+.card-gallery slideshow-slide,
+.card-gallery .slideshow-slide {
+  --product-media-fit: contain;
+}
+
+.card-gallery .product-media-container.media-fit img,
 .card-gallery .product-media__image,
-.card-gallery product-media img {
+.card-gallery product-media img,
+.card-gallery img {
   object-fit: contain;
 }
 
