@@ -17,6 +17,7 @@
     assign on_sale = true
   endif
   assign saving = product.compare_at_price | minus: product.price
+  assign saving_text = saving | money
 -%}
 
 <div class="product-badges product-badges--{{ settings.badge_position }}">
@@ -26,7 +27,7 @@
     </div>
   {%- elsif on_sale -%}
     <div class="product-badges__badge">
-      {{- 'content.product_badge_save' | t: amount: saving | money -}}
+      {{- 'content.product_badge_save' | t: amount: saving_text -}}
     </div>
   {%- endif -%}
 </div>
