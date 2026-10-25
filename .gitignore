@@ -2,3 +2,13 @@
 node_modules/
 .DS_Store
 *.log
+
+# Dev tooling and generated output (not part of the theme)
+build/
+dist/
+*.tmp
+scratch/
+raw-video/
+*.mov
+*.mp4.raw
+scripts/node_modules/
