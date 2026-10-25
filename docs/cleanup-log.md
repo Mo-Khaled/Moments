@@ -8,12 +8,20 @@ Every group below is one commit and can be reverted with `git revert <commit>` (
 
 | Group | Items | Why safe | Restore |
 | --- | --- | --- | --- |
-| Unused snippets | `mega-menu`, `mega-menu-list`, `util-mega-menu-img-sizes-attr`, `filters-toggle` | The header now renders `moments-mega`; no file renders the old four. Found by scanning every `render` and `include` tag, iterating until nothing new was orphaned. | `git revert bcb3929` |
+| Unused snippets | `mega-menu`, `mega-menu-list`, `util-mega-menu-img-sizes-attr` | The header now renders `moments-mega`; no file renders the old three. Found by scanning every `render` and `include` tag, iterating until nothing new was orphaned. Verified by the before/after screenshots (see below). | `git revert bcb3929` (then re-add `filters-toggle` is NOT needed: it was restored) |
 | Superseded section | `sections/moments-pillars.liquid` | Replaced by the announcement bar and the About trust strip; no template references it (the pillar row was removed by request). It had no editor presets in use. | same commit |
 | Orphan locale keys | 11 keys under `homepage.*` and `about.*` in `en.default.json` and `ar.json` (hero headline/primary/photo_todo, moments image_todo/find, mega moments/brands/discover, trust cod_link, signup heading/text) | No file references them (static or built dynamically). Both locale files changed together. | same commit |
 | Removed earlier in this branch of work | `snippets/moments-diamond` (orphaned after the ticker change) | `theme check` reported it orphaned | git history |
 
+## A removal that was wrong, and was reverted
+`snippets/filters-toggle.liquid` looked unused: no `render` or `include` anywhere in the baseline names it. The before/after screenshot
+diff caught that removing it changed the desktop collection layout (the filter sidebar became a "Filter" toggle and the page grew
+from 3404 to 3705 px at 1920). Restoring it brought the page back to 3404 px. **Lesson: a snippet no file names is not proof it is unused in this theme (the theme
+reaches it indirectly).** It is kept. The same visual-diff check is the gate for any further removal.
+
 ## Candidates (kept, not proven unused)
+
+- `filters-toggle` (see above): kept, used indirectly.
 
 - `ZooomyListWishlistColl`, `ZooomyListWishlistProduct`: wishlist app snippets, pending your confirmation of whether the app is installed.
 - Every block and section a merchant could still add from the theme editor, and anything referenced by editor-managed JSON

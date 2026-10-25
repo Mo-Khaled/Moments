@@ -10,6 +10,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const label = process.argv[2];
+const only = process.argv[3] ? new RegExp(process.argv[3]) : null; // optional filter on <page>-<width>-<dir>
 if (!label) { console.error('usage: node scripts/visual-snapshot.mjs <label>'); process.exit(1); }
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const OUT = path.join(ROOT, 'docs', 'screenshots', 'cleanup', label);
@@ -32,6 +33,7 @@ for (const width of [1920, 1440, 375]) {
     await context.addInitScript(() => { window.__MOMENTS_HOUR__ = 21; try { sessionStorage.clear(); } catch (e) { /* ignore */ } });
     await context.route(/kaspersky-labs|shopifysvc|monorail|\.mp4|\.webm|\.m3u8/, (route) => route.abort());
     for (const [name, p] of PAGES) {
+      if (only && !only.test(`${name}-${width}-${dir}`)) continue;
       const page = await context.newPage();
       const url = `${BASE}${p}${p.includes('?') ? '&' : '?'}preview_theme_id=${THEME}&pb=0`;
       try {
