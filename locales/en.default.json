@@ -368,7 +368,40 @@
       "text": "100% original fragrances, curated for every moment of your day.",
       "primary": "Shop fragrance",
       "link": "Find your moment",
-      "photo_todo": "TODO: replace with the final hero photograph"
+      "photo_todo": "TODO: replace with the final hero photograph",
+      "label": "Featured moments",
+      "switcher": "Choose a moment",
+      "pause": "Pause video",
+      "play": "Play video",
+      "mute": "Mute video",
+      "unmute": "Unmute video",
+      "shop_moment": "Shop {{ moment }}",
+      "slides": {
+        "night": {
+          "headline": "Made for the night",
+          "text": "Deep, warm and unmistakable. Fragrance for after dark."
+        },
+        "gift": {
+          "headline": "Give a moment",
+          "text": "Fragrance sets, ready to hand over."
+        },
+        "allday": {
+          "headline": "Bright from first light",
+          "text": "Easy fragrance that keeps up with your whole day."
+        },
+        "daily": {
+          "headline": "Your everyday ritual",
+          "text": "The one you reach for without thinking."
+        },
+        "fresh": {
+          "headline": "Fresh from the start",
+          "text": "Clean, cool and wide awake."
+        },
+        "love": {
+          "headline": "Say it with a scent",
+          "text": "Soft, warm and a little bold."
+        }
+      }
     },
     "pillars": {
       "original_title": "100% original, sealed",
@@ -393,6 +426,27 @@
       "text": "MOMENTS is a fragrance store in Egypt. We sort every bottle by when you will wear it, so you can start from the moment you are dressing for instead of a brand name.",
       "link": "Explore the moments",
       "todo": "TODO: add the real brand story, founding year and team photograph. Only confirmed facts."
+    },
+    "ticker": {
+      "shipping": "Free shipping over {{ amount }}"
+    },
+    "brands": {
+      "label": "Our brands"
+    },
+    "gift": {
+      "heading": "Give a moment",
+      "text": "Fragrance sets, ready to hand over. Pick the moment, we have the scent.",
+      "cta": "Shop gifts"
+    },
+    "mega": {
+      "all": "All fragrances",
+      "moments": "Shop by moment",
+      "brands": "Brands",
+      "edits": "The edits",
+      "bestsellers": "Best sellers",
+      "new": "New arrivals",
+      "gifts": "Gifts",
+      "discover": "Discover"
     }
   }
 }

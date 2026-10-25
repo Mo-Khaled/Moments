@@ -1,0 +1,138 @@
+{%- comment -%}
+  Gift a Moment: a full-bleed colour block in the Gift tone, big type, one button, the large Gift mark.
+  No product photographs here: the gift bags in the store carry a watermark from another shop in their images, and no
+  normalised gift packshots exist yet. Add one in "Packshot" later (shown uncropped).
+{%- endcomment -%}
+
+<section class="m-gift m-tone--gift" aria-labelledby="m-gift-title-{{ section.id }}">
+  <div class="m-gift__inner m-wrap">
+    <div class="m-gift__copy">
+      <p class="m-gift__tag">{{ 'moments.gift' | t }}</p>
+      <h2 class="m-gift__title" id="m-gift-title-{{ section.id }}">
+        {%- if section.settings.heading != blank -%}
+          {{ section.settings.heading }}
+        {%- else -%}
+          {{ 'homepage.gift.heading' | t }}
+        {%- endif -%}
+      </h2>
+      <p class="m-gift__text">
+        {%- if section.settings.text != blank -%}
+          {{ section.settings.text }}
+        {%- else -%}
+          {{ 'homepage.gift.text' | t }}
+        {%- endif -%}
+      </p>
+      {%- assign target = section.settings.collection -%}
+      <a class="m-btn m-btn--outline" href="{{ target.url | default: routes.collections_url }}">{{ 'homepage.gift.cta' | t }}</a>
+    </div>
+    <div class="m-gift__art" aria-hidden="true" data-moment-host>
+      {%- if section.settings.packshot != blank -%}
+        {{
+          section.settings.packshot
+          | image_url: width: 900
+          | image_tag: class: 'm-gift__packshot', alt: '', loading: 'lazy', widths: '400, 600, 900', sizes: '(min-width: 990px) 40vw, 70vw'
+        }}
+      {%- else -%}
+        {% render 'moment-mark', mark: 'gift', size: 'lg' %}
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% stylesheet %}
+  .m-gift {
+    --m-mark-ink: var(--tile-ink);
+    --m-mark-body: var(--tile-body);
+    --m-mark-accent: var(--tile-accent);
+    --m-mark-gold: var(--tile-gold);
+
+    background: var(--tile-bg);
+    color: var(--tile-ink);
+    padding-block: clamp(56px, 9vw, 128px);
+  }
+
+  .m-gift__inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 32px;
+    align-items: center;
+  }
+
+  .m-gift__copy {
+    display: grid;
+    justify-items: start;
+    gap: 20px;
+  }
+
+  .m-gift__tag {
+    margin: 0;
+    padding: 6px 14px;
+    border: 1px solid currentcolor;
+    border-radius: 9999px;
+    font-size: 0.8125rem;
+    line-height: 1;
+  }
+
+  .m-gift__title {
+    margin: 0;
+    max-inline-size: 9ch;
+    font-size: clamp(3rem, 8vw, 6.5rem);
+    line-height: 0.98;
+    text-wrap: balance;
+  }
+
+  .m-gift__text {
+    margin: 0;
+    max-inline-size: 36ch;
+    font-size: clamp(1rem, 1.4vw, 1.25rem);
+    line-height: 1.5;
+  }
+
+  html[lang='ar'] .m-gift__title {
+    line-height: 1.3;
+  }
+
+  html[lang='ar'] .m-gift__text {
+    line-height: 1.7;
+  }
+
+  .m-gift__art {
+    display: grid;
+    justify-items: center;
+  }
+
+  .m-gift__art moment-mark {
+    --mm-size: min(70vw, 360px);
+  }
+
+  .m-gift__packshot {
+    inline-size: auto;
+    block-size: min(60vw, 480px);
+    max-inline-size: 100%;
+    object-fit: contain;
+  }
+
+  @media screen and (min-width: 990px) {
+    .m-gift__inner {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .m-gift__art moment-mark {
+      --mm-size: min(34vw, 520px);
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "MOMENTS gift block",
+  "limit": 1,
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading" },
+    { "type": "textarea", "id": "text", "label": "Text" },
+    { "type": "collection", "id": "collection", "label": "Gift collection" },
+    { "type": "image_picker", "id": "packshot", "label": "Packshot (optional)", "info": "A clean gift packshot, shown uncropped. TODO: none exists yet." }
+  ],
+  "presets": [{ "name": "MOMENTS gift block" }]
+}
+{% endschema %}

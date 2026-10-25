@@ -1,0 +1,100 @@
+{
+ "afnan": {
+  "w": 488,
+  "h": 96,
+  "aspect": 5.08,
+  "kb": 21.2,
+  "bg_luma": 38
+ },
+ "khadlaj": {
+  "w": 498,
+  "h": 96,
+  "aspect": 5.19,
+  "kb": 19.6,
+  "bg_luma": 38
+ },
+ "lattafa": {
+  "w": 333,
+  "h": 96,
+  "aspect": 3.47,
+  "kb": 15.7,
+  "bg_luma": 38
+ },
+ "faan": {
+  "w": 555,
+  "h": 96,
+  "aspect": 5.78,
+  "kb": 16.0,
+  "bg_luma": 38
+ },
+ "assaf": {
+  "w": 473,
+  "h": 96,
+  "aspect": 4.93,
+  "kb": 20.1,
+  "bg_luma": 38
+ },
+ "rasasi-perfumes": {
+  "w": 357,
+  "h": 96,
+  "aspect": 3.72,
+  "kb": 23.3,
+  "bg_luma": 38
+ },
+ "laverne": {
+  "w": 618,
+  "h": 96,
+  "aspect": 6.44,
+  "kb": 24.0,
+  "bg_luma": 38
+ },
+ "nabeel-perfumes": {
+  "w": 291,
+  "h": 96,
+  "aspect": 3.03,
+  "kb": 18.1,
+  "bg_luma": 38
+ },
+ "ibraq": {
+  "w": 423,
+  "h": 96,
+  "aspect": 4.41,
+  "kb": 20.0,
+  "bg_luma": 38
+ },
+ "le-falcone": {
+  "w": 400,
+  "h": 96,
+  "aspect": 4.17,
+  "kb": 15.3,
+  "bg_luma": 38
+ },
+ "lattafa-pride": {
+  "w": 563,
+  "h": 96,
+  "aspect": 5.86,
+  "kb": 10.8,
+  "bg_luma": 38
+ },
+ "armaf": {
+  "w": 504,
+  "h": 96,
+  "aspect": 5.25,
+  "kb": 15.4,
+  "bg_luma": 38
+ },
+ "zimaya": {
+  "w": 286,
+  "h": 96,
+  "aspect": 2.98,
+  "kb": 15.3,
+  "bg_luma": 38
+ },
+ "dkhoon-emirates": {
+  "w": 297,
+  "h": 96,
+  "aspect": 3.09,
+  "kb": 19.7,
+  "bg_luma": 38
+ }
+}

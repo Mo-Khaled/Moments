@@ -30,7 +30,85 @@ class HeaderMenu extends Component {
     });
 
     onDocumentLoaded(this.#preloadImages);
+
+    // Keyboard: Escape closes and gives focus back, arrows move between items and inside the panel.
+    this.addEventListener('keydown', this.#onKeydown, { signal: this.#abortController.signal });
+
+    // Touch: the first tap on an item that owns a panel opens it, the second tap follows the link.
+    this.addEventListener('pointerdown', this.#onPointerdown, { signal: this.#abortController.signal });
+    this.addEventListener('click', this.#onClick, { signal: this.#abortController.signal });
   }
+
+  #touchOpenedBefore = false;
+
+  /**
+   * @param {PointerEvent} event
+   */
+  #onPointerdown = (event) => {
+    if (event.pointerType !== 'touch') return;
+    const link = event.target instanceof Element ? event.target.closest('.menu-list__link') : null;
+    this.#touchOpenedBefore = !!link && link.getAttribute('aria-expanded') === 'true';
+  };
+
+  /**
+   * @param {MouseEvent} event
+   */
+  #onClick = (event) => {
+    const link = event.target instanceof Element ? event.target.closest('.menu-list__link') : null;
+    if (!link || !link.hasAttribute('aria-controls')) return;
+    const pointerType = /** @type {PointerEvent} */ (event).pointerType;
+    if (pointerType === 'touch' && !this.#touchOpenedBefore) event.preventDefault();
+  };
+
+  /**
+   * @param {KeyboardEvent} event
+   */
+  #onKeydown = (event) => {
+    const target = event.target instanceof Element ? event.target : null;
+    if (!target) return;
+
+    if (event.key === 'Escape') {
+      const item = this.#state.activeItem;
+      if (!item) return;
+      this.#debouncedActivateHandler.cancel();
+      this.#debouncedDeactivate.cancel();
+      this.#deactivate(item, true);
+      item.focus();
+      event.preventDefault();
+      return;
+    }
+
+    const rtl = getComputedStyle(this).direction === 'rtl';
+    const link = target.closest('.menu-list__link');
+    const panel = target.closest('.menu-list__submenu');
+
+    // Top-level item: left and right move between items, down opens the panel and moves into it.
+    if (link && !panel) {
+      const items = [...this.querySelectorAll('.menu-list__list-item:not([slot="more"]) > .menu-list__link')];
+      const index = items.indexOf(/** @type {HTMLElement} */ (link));
+      if (event.key === 'ArrowRight' || event.key === 'ArrowLeft') {
+        const step = (event.key === 'ArrowRight') !== rtl ? 1 : -1;
+        const next = items[index + step];
+        if (next) { next.focus(); event.preventDefault(); }
+      } else if (event.key === 'ArrowDown' && link.hasAttribute('aria-controls')) {
+        const li = link.closest('li');
+        this.#debouncedDeactivate.cancel();
+        this.#activateHandler({ target: li });
+        const first = li?.querySelector('.menu-list__submenu a');
+        if (first instanceof HTMLElement) first.focus();
+        event.preventDefault();
+      }
+      return;
+    }
+
+    // Inside a panel: up and down walk its links in reading order.
+    if (panel && (event.key === 'ArrowDown' || event.key === 'ArrowUp')) {
+      const links = [...panel.querySelectorAll('a')];
+      const index = links.indexOf(/** @type {HTMLAnchorElement} */ (target.closest('a')));
+      const next = links[index + (event.key === 'ArrowDown' ? 1 : -1)];
+      if (next) { next.focus(); event.preventDefault(); }
+    }
+  };
 
   disconnectedCallback() {
     super.disconnectedCallback();
@@ -146,10 +224,11 @@ class HeaderMenu extends Component {
   /**
    * Deactivate the active item immediately
    * @param {HTMLElement | null} [item]
+   * @param {boolean} [force] - Close even while the pointer is over the overflow panel (Escape).
    */
-  #deactivate = (item = this.#state.activeItem) => {
+  #deactivate = (item = this.#state.activeItem, force = false) => {
     if (!item || item != this.#state.activeItem) return;
-    if (this.overflowHovered) return;
+    if (!force && this.overflowHovered) return;
 
     this.style.setProperty('--submenu-height', '0px');
     this.style.setProperty('--submenu-opacity', '0');

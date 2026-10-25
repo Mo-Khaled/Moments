@@ -1,0 +1,112 @@
+{%- comment -%}
+  Announcement bar as a continuous ticker (replaces the slideshow with arrows). The messages are the store's
+  confirmed facts: sealed originals, cash on delivery, the free shipping threshold (theme setting
+  "Free shipping above"), and the returns and exchange policy (link). They are also the only place these facts live
+  on the homepage now; the footer repeats them.
+  Speed is in px per second. One loop's duration is the estimated width of one group divided by the speed.
+{%- endcomment -%}
+
+{%- liquid
+  assign threshold = settings.moments_free_shipping | times: 100 | money_without_trailing_zeros
+  assign m1 = 'homepage.pillars.original_title' | t
+  assign m2 = 'homepage.pillars.cod_title' | t
+  assign m3 = 'homepage.ticker.shipping' | t: amount: threshold
+  assign m4 = 'homepage.pillars.returns_title' | t
+  assign chars = m1.size | plus: m2.size | plus: m3.size | plus: m4.size
+  assign group_width = chars | times: 9 | plus: 256 | times: 3
+  assign speed = section.settings.speed | at_least: 10
+  assign duration = group_width | divided_by: speed | at_least: 20
+-%}
+
+{%- capture items -%}
+  <li class="m-ticker__item"><span>{{ m1 }}</span>{% render 'moments-diamond' %}</li>
+  <li class="m-ticker__item"><span>{{ m2 }}</span>{% render 'moments-diamond' %}</li>
+  <li class="m-ticker__item"><span>{{ m3 }}</span>{% render 'moments-diamond' %}</li>
+  <li class="m-ticker__item">
+    {%- if section.settings.returns_url != blank -%}
+      <a href="{{ section.settings.returns_url }}">{{ m4 }}</a>
+    {%- else -%}
+      <span>{{ m4 }}</span>
+    {%- endif -%}
+    {% render 'moments-diamond' %}
+  </li>
+{%- endcapture -%}
+
+<aside class="m-announcement" aria-label="{{ 'homepage.pillars.original_title' | t }}">
+  {% render 'moments-ticker', items: items, duration: duration, mode: 'single', label: 'MOMENTS' %}
+</aside>
+
+{% stylesheet %}
+  .m-announcement {
+    background: var(--m-plum);
+    color: var(--m-text-on-dark);
+    font-size: 0.8125rem;
+    line-height: 1;
+  }
+
+  .m-announcement .m-ticker {
+    block-size: 40px;
+  }
+
+  .m-announcement .m-ticker__track,
+  .m-announcement .m-ticker__group,
+  .m-announcement .m-ticker__list {
+    block-size: 100%;
+    align-items: center;
+  }
+
+  .m-announcement .m-ticker__group {
+    justify-content: space-around;
+  }
+
+  .m-announcement .m-ticker__item {
+    display: inline-flex;
+    align-items: center;
+    gap: 28px;
+    padding-inline-start: 28px;
+    white-space: nowrap;
+    letter-spacing: 0.02em;
+  }
+
+  .m-announcement a {
+    color: inherit;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 4px;
+  }
+
+  .m-announcement a:focus-visible {
+    outline: 2px solid var(--m-accent-on-dark);
+    outline-offset: 3px;
+  }
+
+  .m-announcement .m-diamond {
+    color: var(--m-accent-on-dark);
+  }
+
+  html[lang='ar'] .m-announcement .m-ticker__item {
+    letter-spacing: 0;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "MOMENTS ticker",
+  "limit": 1,
+  "enabled_on": { "groups": ["header"] },
+  "settings": [
+    {
+      "type": "range",
+      "id": "speed",
+      "label": "Speed",
+      "info": "Pixels per second.",
+      "min": 20,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 40
+    },
+    { "type": "url", "id": "returns_url", "label": "Returns and exchange policy page" }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,212 @@
+{%- comment -%}
+  Brand marquee, directly under the hero. Same ticker technique as the announcement bar (snippets/moments-ticker.liquid):
+  continuous, seamless, constant speed, pause on hover and focus, reversed in RTL, static wrapped row under reduced motion.
+  Every logo links to its brand collection. Logos are the store's own collection logos, derived to transparent, trimmed,
+  single-colour (pearl) files by scripts/prepare-brand-logos.py (assets/brand-<handle>.png), so they share one optical height
+  and the Laverne silhouette and the baked-in backgrounds are gone. A brand without a derived file falls back to its collection image.
+{%- endcomment -%}
+
+{%- liquid
+  assign logo_h = 32
+  assign list_width = 0
+  assign speed = section.settings.speed | at_least: 10
+-%}
+
+{%- capture items -%}
+  {%- for block in section.blocks -%}
+    {%- liquid
+      assign collection = block.settings.collection
+      assign has_logo = false
+      assign aspect = 3
+      case collection.handle
+      when 'afnan'
+        assign aspect = 5.08
+        assign has_logo = true
+      when 'khadlaj'
+        assign aspect = 5.19
+        assign has_logo = true
+      when 'lattafa'
+        assign aspect = 3.47
+        assign has_logo = true
+      when 'faan'
+        assign aspect = 5.78
+        assign has_logo = true
+      when 'assaf'
+        assign aspect = 4.93
+        assign has_logo = true
+      when 'rasasi-perfumes'
+        assign aspect = 3.72
+        assign has_logo = true
+      when 'laverne'
+        assign aspect = 6.44
+        assign has_logo = true
+      when 'nabeel-perfumes'
+        assign aspect = 3.03
+        assign has_logo = true
+      when 'ibraq'
+        assign aspect = 4.41
+        assign has_logo = true
+      when 'le-falcone'
+        assign aspect = 4.17
+        assign has_logo = true
+      when 'lattafa-pride'
+        assign aspect = 5.86
+        assign has_logo = true
+      when 'armaf'
+        assign aspect = 5.25
+        assign has_logo = true
+      when 'zimaya'
+        assign aspect = 2.98
+        assign has_logo = true
+      when 'dkhoon-emirates'
+        assign aspect = 3.09
+        assign has_logo = true
+      endcase
+      assign h = logo_h
+      if aspect > 5.25
+        assign h = logo_h | times: 5.25 | divided_by: aspect
+      endif
+      assign w = aspect | times: h
+      assign list_width = list_width | plus: w | plus: 80
+    -%}
+    {%- if collection != blank -%}
+      <li class="m-brands__item" {{ block.shopify_attributes }}>
+        <a class="m-brands__link" href="{{ collection.url }}">
+          {%- if has_logo -%}
+            {%- assign logo_file = 'brand-' | append: collection.handle | append: '.png' -%}
+            <img
+              src="{{ logo_file | asset_url }}"
+              alt="{{ collection.title | escape }}"
+              width="{{ w | round }}"
+              height="{{ h | round }}"
+              style="--m-logo-h: {{ h | round }}px"
+              loading="eager"
+              decoding="async"
+            >
+          {%- elsif collection.image != blank -%}
+            {{ collection.image | image_url: width: 400 | image_tag: alt: collection.title, class: 'm-brands__fallback', loading: 'eager' }}
+          {%- else -%}
+            <span class="m-brands__name">{{ collection.title }}</span>
+          {%- endif -%}
+        </a>
+      </li>
+    {%- endif -%}
+  {%- endfor -%}
+{%- endcapture -%}
+
+{%- assign duration = list_width | times: 3 | divided_by: speed | at_least: 20 -%}
+
+{%- assign region_label = 'homepage.brands.label' | t -%}
+
+<section class="m-brands" aria-label="{{ region_label }}">
+  {% render 'moments-ticker', items: items, duration: duration, mode: 'wrap', label: region_label %}
+</section>
+
+{% stylesheet %}
+  .m-brands {
+    margin: 0;
+    background: var(--m-plum-900);
+    border-block-end: 1px solid var(--m-live-line);
+  }
+
+  .m-brands .m-ticker {
+    padding-block: 28px;
+  }
+
+  .m-brands .m-ticker__group {
+    align-items: center;
+    justify-content: space-around;
+  }
+
+  .m-brands .m-ticker__list {
+    align-items: center;
+  }
+
+  .m-brands__item {
+    flex: none;
+    padding-inline: 40px;
+  }
+
+  .m-brands__link {
+    display: flex;
+    align-items: center;
+    opacity: 0.86;
+    transition: opacity var(--m-dur-2) var(--m-ease);
+  }
+
+  .m-brands__link:hover,
+  .m-brands__link:focus-visible {
+    opacity: 1;
+  }
+
+  .m-brands__link:focus-visible {
+    outline: 2px solid var(--m-accent-on-dark);
+    outline-offset: 6px;
+  }
+
+  .m-brands__link img {
+    display: block;
+    inline-size: auto;
+    block-size: var(--m-logo-h, 32px);
+    max-block-size: none;
+  }
+
+  .m-brands__fallback {
+    block-size: 32px;
+    inline-size: auto;
+  }
+
+  .m-brands__name {
+    color: var(--m-pearl);
+    font-family: var(--font-heading--family);
+    font-size: 1.25rem;
+  }
+
+  @media screen and (max-width: 749px) {
+    .m-brands .m-ticker {
+      padding-block: 20px;
+    }
+
+    .m-brands__item {
+      padding-inline: 28px;
+    }
+
+    .m-brands__link img {
+      block-size: calc(var(--m-logo-h, 32px) * 0.85);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .m-brands .m-ticker__list {
+      gap: 24px 8px;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "MOMENTS brand marquee",
+  "limit": 1,
+  "settings": [
+    {
+      "type": "range",
+      "id": "speed",
+      "label": "Speed",
+      "info": "Pixels per second.",
+      "min": 20,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 40
+    }
+  ],
+  "blocks": [
+    {
+      "type": "brand",
+      "name": "Brand",
+      "settings": [{ "type": "collection", "id": "collection", "label": "Brand collection" }]
+    }
+  ],
+  "presets": [{ "name": "MOMENTS brand marquee" }]
+}
+{% endschema %}

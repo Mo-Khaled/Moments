@@ -1,7 +1,5 @@
 {% liquid
   assign block_settings = block.settings
-  assign menu_content_type = block_settings.menu_style | default: 'text'
-  assign image_border_radius = block_settings.image_border_radius
   assign color_scheme_classes = ''
   assign color_scheme_setting_id = 'color_scheme_' | append: section.settings.menu_row
   assign current_color_scheme = block_settings.color_scheme
@@ -16,15 +14,31 @@
     assign color_scheme_classes = color_scheme_classes | append: ' color-scheme-matches-parent'
   endif
 
-  if block_settings.menu_style == 'featured_collections'
-    assign ratio = block_settings.featured_collections_aspect_ratio
-  elsif block_settings.menu_style == 'featured_products'
-    assign ratio = block_settings.featured_products_aspect_ratio
-  endif
+%}
+
+{% liquid
+  assign primary_keys = settings.moments_primary_nav | downcase | replace: ', ', ',' | split: ','
+  assign all_links = block_settings.menu.links
 %}
 
 {% capture children %}
   {% for link in block_settings.menu.links %}
+    {% liquid
+      assign link_key = link.title | downcase | strip
+      assign show_link = false
+      if primary_keys contains link_key
+        assign show_link = true
+      endif
+      assign panel_mode = 'list'
+      if link_key contains 'moment' and link_key contains 'shop'
+        assign panel_mode = 'moments'
+      endif
+      assign has_panel = false
+      if link.links != blank or panel_mode == 'moments'
+        assign has_panel = true
+      endif
+    %}
+    {% if show_link %}
     <li
       role="presentation"
       class="menu-list__list-item"
@@ -37,35 +51,28 @@
         href="{{ link.url }}"
         data-skip-node-update="true"
         class="menu-list__link{% if link.active %} menu-list__link--active{% endif %}"
-        {%- if link.links != blank -%}
+        {%- if has_panel -%}
           aria-controls="submenu-{{ forloop.index }}"
           aria-haspopup="true"
           aria-expanded="false"
         {%- endif -%}
         ref="menuitem"
       >
-        <span class="menu-list__link-title">{{- link.title -}}</span>
+        <span class="menu-list__link-title">{% render 'title-case', text: link.title %}</span>
       </a>
-      {%- if link.links != blank -%}
+      {%- if has_panel -%}
         <div class="menu-list__submenu{{ color_scheme_classes }}" ref="submenu[]">
           <div
             id="submenu-{{ forloop.index }}"
             class="menu-list__submenu-inner"
             style="{% render 'submenu-font-styles', settings: block_settings %}"
           >
-            {% assign list_id = 'MegaMenuList-' | append: forloop.index %}
-            {% render 'mega-menu',
-              section: section,
-              parent_link: link,
-              id: list_id,
-              menu_content_type: menu_content_type,
-              content_aspect_ratio: ratio,
-              image_border_radius: image_border_radius
-            %}
+            {% render 'moments-mega', link: link, mode: panel_mode, all_links: all_links %}
           </div>
         </div>
       {%- endif -%}
     </li>
+    {% endif %}
   {% endfor %}
   <li
     class="menu-list__list-item"

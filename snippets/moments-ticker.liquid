@@ -1,0 +1,124 @@
+{%- doc -%}
+  A continuous ticker (news-bar style): no arrows, no manual control, CSS only.
+
+  Technique: the track holds two identical groups; each group repeats the items so it is at least as wide as the
+  screen. The track slides by exactly one group (-50%), so the loop has no jump. Transform only, linear, constant speed.
+  Speed is constant in px per second: the caller passes the duration (estimated group width divided by the speed).
+  Pause on hover and on keyboard focus. Reversed in right-to-left languages. The clone lists are aria-hidden and inert,
+  so screen readers and the tab order only see the first real list.
+  Reduced motion: no movement. A "single" ticker shows one centred message; a "wrap" ticker shows a static wrapped row.
+
+  @param {string} items - The <li> items for one repetition (markup).
+  @param {number} duration - Seconds for one full loop, already computed from the speed setting.
+  @param {string} [mode] - single (reduced motion shows the first item only) or wrap (reduced motion shows a wrapped row). Default single.
+  @param {string} [class] - Extra classes on the root.
+  @param {string} [label] - Accessible name of the region.
+
+  @example
+  {% capture items %}<li class="m-ticker__item">Hello</li>{% endcapture %}
+  {% render 'moments-ticker', items: items, duration: 30, label: 'Notices' %}
+{%- enddoc -%}
+
+{%- liquid
+  assign ticker_mode = mode | default: 'single'
+  assign copies = 3
+-%}
+
+<div
+  class="m-ticker m-ticker--{{ ticker_mode }} {{ class }}"
+  style="--m-ticker-duration: {{ duration | default: 40 }}s"
+  role="group"
+  {% if label != blank %}
+    aria-label="{{ label | escape }}"
+  {% endif %}
+>
+  <div class="m-ticker__track">
+    <div class="m-ticker__group">
+      <ul class="m-ticker__list">{{ items }}</ul>
+      {%- for i in (2..copies) -%}
+        <ul class="m-ticker__list" aria-hidden="true" inert>{{ items }}</ul>
+      {%- endfor -%}
+    </div>
+    <div class="m-ticker__group" aria-hidden="true" inert>
+      {%- for i in (1..copies) -%}
+        <ul class="m-ticker__list">{{ items }}</ul>
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+
+{% stylesheet %}
+  .m-ticker {
+    --m-ticker-dir: 1;
+
+    position: relative;
+    overflow: hidden;
+    inline-size: 100%;
+  }
+
+  html[dir='rtl'] .m-ticker {
+    --m-ticker-dir: -1;
+  }
+
+  .m-ticker__track {
+    display: flex;
+    inline-size: max-content;
+    animation: m-ticker-slide var(--m-ticker-duration) linear infinite;
+    will-change: transform;
+  }
+
+  .m-ticker:hover .m-ticker__track,
+  .m-ticker:focus-within .m-ticker__track {
+    animation-play-state: paused;
+  }
+
+  .m-ticker__group {
+    display: flex;
+    flex: none;
+    min-inline-size: 100vw;
+  }
+
+  .m-ticker__list {
+    display: flex;
+    flex: none;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  @keyframes m-ticker-slide {
+    to {
+      transform: translateX(calc(-50% * var(--m-ticker-dir)));
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .m-ticker__track {
+      animation: none;
+      inline-size: 100%;
+      justify-content: center;
+    }
+
+    .m-ticker__group:nth-child(2),
+    .m-ticker__group > .m-ticker__list:nth-child(n + 2) {
+      display: none;
+    }
+
+    .m-ticker__group {
+      min-inline-size: 0;
+      inline-size: 100%;
+      justify-content: center;
+    }
+
+    .m-ticker--single .m-ticker__list > :nth-child(n + 2) {
+      display: none;
+    }
+
+    .m-ticker--wrap .m-ticker__list {
+      flex-wrap: wrap;
+      justify-content: center;
+      row-gap: 12px;
+    }
+  }
+{% endstylesheet %}

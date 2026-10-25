@@ -1,0 +1,20 @@
+{%- doc -%}
+  A small chevron that points to the inline end (it flips in right-to-left languages). Decorative.
+
+  @example
+  {% render 'moments-chevron' %}
+{%- enddoc -%}
+
+<svg class="m-chevron" width="14" height="14" viewBox="0 0 14 14" aria-hidden="true" focusable="false">
+  <path fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M5 2l5 5-5 5"/>
+</svg>
+
+{% stylesheet %}
+  .m-chevron {
+    flex: none;
+  }
+
+  html[dir='rtl'] .m-chevron {
+    transform: scaleX(-1);
+  }
+{% endstylesheet %}

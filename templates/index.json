@@ -50,11 +50,11 @@
               "type": "_product-list-text",
               "name": "t:names.collection_title",
               "settings": {
-                "text": "<h3>Most Loved Moments</h3>",
+                "text": "<h2>Most loved</h2>",
                 "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
-                "type_preset": "rte",
+                "type_preset": "h2",
                 "font": "var(--font-body--family)",
                 "font_size": "",
                 "line_height": "normal",
@@ -185,10 +185,10 @@
       "name": "t:names.products_grid",
       "settings": {
         "collection": "best-sellers",
-        "layout_type": "grid",
-        "carousel_on_mobile": false,
-        "max_products": 8,
-        "columns": 4,
+        "layout_type": "carousel",
+        "carousel_on_mobile": true,
+        "max_products": 10,
+        "columns": 3,
         "mobile_columns": "2",
         "mobile_card_size": "60cqw",
         "columns_gap": 8,
@@ -198,9 +198,9 @@
         "section_width": "page-width",
         "horizontal_alignment": "flex-start",
         "gap": 28,
-        "color_scheme": "scheme-1",
-        "padding-block-start": 48,
-        "padding-block-end": 48
+        "color_scheme": "scheme-4",
+        "padding-block-start": 72,
+        "padding-block-end": 72
       }
     },
     "section_xCc7xR": {
@@ -317,363 +317,87 @@
         "padding-block-end": 64
       }
     },
-    "product_list_rNDbYW": {
-      "type": "product-list",
+    "moments_hero": {
+      "type": "moments-hero",
       "blocks": {
-        "static-header": {
-          "type": "_product-list-content",
-          "name": "t:names.header",
-          "static": true,
+        "slide_night": {
+          "type": "slide",
           "settings": {
-            "content_direction": "row",
-            "vertical_on_mobile": false,
-            "horizontal_alignment": "space-between",
-            "vertical_alignment": "flex-end",
-            "align_baseline": true,
-            "horizontal_alignment_flex_direction_column": "flex-start",
-            "vertical_alignment_flex_direction_column": "center",
-            "gap": 12,
-            "width": "fill",
-            "custom_width": 100,
-            "width_mobile": "fill",
-            "custom_width_mobile": 100,
-            "height": "fit",
-            "custom_height": 100,
-            "inherit_color_scheme": true,
-            "color_scheme": "",
-            "background_media": "none",
-            "video_position": "cover",
-            "background_image_position": "cover",
-            "border": "none",
-            "border_width": 1,
-            "border_opacity": 100,
-            "border_radius": 0,
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {
-            "product_list_text_CtHLgx": {
-              "type": "_product-list-text",
-              "name": "t:names.collection_title",
-              "settings": {
-                "text": "<h3>Gift a Moment</h3>",
-                "width": "fit-content",
-                "max_width": "normal",
-                "alignment": "left",
-                "type_preset": "rte",
-                "font": "var(--font-body--family)",
-                "font_size": "",
-                "line_height": "normal",
-                "letter_spacing": "normal",
-                "case": "none",
-                "wrap": "pretty",
-                "color": "var(--color-foreground)",
-                "background": false,
-                "background_color": "#00000026",
-                "corner_radius": 0,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            },
-            "product_list_button_qT3QgK": {
-              "type": "_product-list-button",
-              "name": "t:names.product_list_button",
-              "settings": {
-                "label": "View all",
-                "open_in_new_tab": false,
-                "style_class": "link",
-                "width": "fit-content",
-                "custom_width": 100,
-                "width_mobile": "fit-content",
-                "custom_width_mobile": 100
-              },
-              "blocks": {}
-            }
-          },
-          "block_order": [
-            "product_list_text_CtHLgx",
-            "product_list_button_qT3QgK"
-          ]
+            "moment": "night",
+            "from_hour": 18,
+            "to_hour": 5,
+            "poster_fit": "fit",
+            "primary_url": "/collections/night-moment",
+            "secondary_url": "/pages/moments"
+          }
         },
-        "static-product-card": {
-          "type": "_product-card",
-          "name": "t:names.product_card",
-          "static": true,
+        "slide_fresh": {
+          "type": "slide",
           "settings": {
-            "product_card_gap": 4,
-            "inherit_color_scheme": true,
-            "color_scheme": "",
-            "border": "none",
-            "border_width": 1,
-            "border_opacity": 100,
-            "border_radius": 0,
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {
-            "product_card_gallery_tgdLDR": {
-              "type": "_product-card-gallery",
-              "name": "t:names.product_card_media",
-              "settings": {
-                "image_ratio": "square",
-                "border": "none",
-                "border_width": 1,
-                "border_opacity": 100,
-                "border_radius": 0,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            },
-            "product_title_iDdRc9": {
-              "type": "product-title",
-              "name": "t:names.product_title",
-              "settings": {
-                "width": "fit-content",
-                "max_width": "normal",
-                "alignment": "left",
-                "type_preset": "rte",
-                "font": "var(--font-body--family)",
-                "font_size": "1rem",
-                "line_height": "normal",
-                "letter_spacing": "normal",
-                "case": "none",
-                "wrap": "pretty",
-                "color": "var(--color-foreground)",
-                "background": false,
-                "background_color": "#00000026",
-                "corner_radius": 0,
-                "padding-block-start": 4,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            },
-            "price_6jBfrD": {
-              "type": "price",
-              "name": "t:names.product_price",
-              "settings": {
-                "show_sale_price_first": true,
-                "show_installments": false,
-                "show_tax_info": false,
-                "type_preset": "h6",
-                "width": "100%",
-                "alignment": "left",
-                "font": "var(--font-body--family)",
-                "font_size": "1rem",
-                "line_height": "normal",
-                "letter_spacing": "normal",
-                "case": "none",
-                "color": "var(--color-foreground)",
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            }
-          },
-          "block_order": [
-            "product_card_gallery_tgdLDR",
-            "product_title_iDdRc9",
-            "price_6jBfrD"
-          ]
-        }
-      },
-      "name": "t:names.products_grid",
-      "settings": {
-        "collection": "bundles",
-        "layout_type": "grid",
-        "carousel_on_mobile": false,
-        "max_products": 4,
-        "columns": 3,
-        "mobile_columns": "2",
-        "mobile_card_size": "60cqw",
-        "columns_gap": 8,
-        "rows_gap": 24,
-        "icons_style": "arrow",
-        "icons_shape": "none",
-        "section_width": "page-width",
-        "horizontal_alignment": "flex-start",
-        "gap": 28,
-        "color_scheme": "scheme-1",
-        "padding-block-start": 48,
-        "padding-block-end": 48
-      }
-    },
-    "brands": {
-      "type": "collection-list",
-      "blocks": {
-        "group_LWkgYp": {
-          "type": "group",
-          "name": "t:names.header",
-          "settings": {
-            "content_direction": "row",
-            "vertical_on_mobile": false,
-            "horizontal_alignment": "center",
-            "vertical_alignment": "center",
-            "align_baseline": false,
-            "horizontal_alignment_flex_direction_column": "center",
-            "vertical_alignment_flex_direction_column": "center",
-            "gap": 16,
-            "width": "fill",
-            "custom_width": 52,
-            "width_mobile": "fill",
-            "custom_width_mobile": 100,
-            "height": "fit",
-            "custom_height": 100,
-            "inherit_color_scheme": true,
-            "color_scheme": "",
-            "background_media": "none",
-            "video_position": "cover",
-            "background_image_position": "cover",
-            "border": "none",
-            "border_width": 1,
-            "border_opacity": 100,
-            "border_radius": 0,
-            "toggle_overlay": false,
-            "overlay_color": "#00000026",
-            "overlay_style": "solid",
-            "gradient_direction": "to top",
-            "link": "",
-            "open_in_new_tab": false,
-            "placeholder": "",
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {
-            "text_wjjTbm": {
-              "type": "text",
-              "name": "t:names.text",
-              "settings": {
-                "text": "<h5>BRANDS</h5>",
-                "width": "fit-content",
-                "max_width": "narrow",
-                "alignment": "center",
-                "type_preset": "custom",
-                "font": "var(--font-body--family)",
-                "font_size": "1.125rem",
-                "line_height": "normal",
-                "letter_spacing": "normal",
-                "case": "none",
-                "wrap": "balance",
-                "color": "var(--color-foreground)",
-                "background": false,
-                "background_color": "#00000026",
-                "corner_radius": 0,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            }
-          },
-          "block_order": [
-            "text_wjjTbm"
-          ]
+            "moment": "fresh",
+            "from_hour": 5,
+            "to_hour": 10,
+            "poster_fit": "fit",
+            "primary_url": "/collections/fresh-moment",
+            "secondary_url": "/pages/moments"
+          }
         },
-        "static-collection-card": {
-          "type": "_collection-card",
-          "name": "t:names.collection_card",
-          "static": true,
+        "slide_allday": {
+          "type": "slide",
           "settings": {
-            "placement": "below_image",
-            "horizontal_alignment": "flex-start",
-            "vertical_alignment": "flex-end",
-            "collection_card_gap": 8,
-            "inherit_color_scheme": true,
-            "color_scheme": "",
-            "border": "none",
-            "border_width": 1,
-            "border_opacity": 100,
-            "border_radius": 0
-          },
-          "blocks": {
-            "collection-card-image": {
-              "type": "_collection-card-image",
-              "name": "t:names.collection_card_image",
-              "static": true,
-              "settings": {
-                "image_ratio": "adapt",
-                "toggle_overlay": false,
-                "overlay_color": "#00000026",
-                "overlay_style": "solid",
-                "gradient_direction": "to top",
-                "border": "none",
-                "border_width": 1,
-                "border_opacity": 100,
-                "border_radius": 0
-              },
-              "blocks": {}
-            }
-          },
-          "block_order": []
+            "moment": "allday",
+            "from_hour": 10,
+            "to_hour": 18,
+            "poster_fit": "fit",
+            "primary_url": "/collections/all-day-moment",
+            "secondary_url": "/pages/moments"
+          }
+        },
+        "slide_gift": {
+          "type": "slide",
+          "settings": {
+            "moment": "gift",
+            "from_hour": 0,
+            "to_hour": 0,
+            "poster_fit": "fit",
+            "primary_url": "/collections/gift-moment",
+            "secondary_url": "/pages/moments"
+          }
+        },
+        "slide_daily": {
+          "type": "slide",
+          "settings": {
+            "moment": "daily",
+            "from_hour": 0,
+            "to_hour": 0,
+            "poster_fit": "fit",
+            "primary_url": "/collections/daily-moment",
+            "secondary_url": "/pages/moments"
+          }
+        },
+        "slide_love": {
+          "type": "slide",
+          "settings": {
+            "moment": "love",
+            "from_hour": 0,
+            "to_hour": 0,
+            "poster_fit": "fit",
+            "primary_url": "/collections/love-moment",
+            "secondary_url": "/pages/moments"
+          }
         }
       },
       "block_order": [
-        "group_LWkgYp"
+        "slide_night",
+        "slide_fresh",
+        "slide_allday",
+        "slide_gift",
+        "slide_daily",
+        "slide_love"
       ],
-      "name": "BRANDS",
       "settings": {
-        "collection_list": [
-          "afnan",
-          "khadlaj",
-          "lattafa",
-          "faan",
-          "assaf",
-          "rasasi-perfumes",
-          "laverne",
-          "nabeel-perfumes",
-          "ibraq",
-          "le-falcone",
-          "lattafa-pride",
-          "armaf",
-          "zimaya",
-          "dkhoon-emirates"
-        ],
-        "layout_type": "carousel",
-        "carousel_on_mobile": true,
-        "columns": 8,
-        "mobile_columns": "2",
-        "mobile_card_size": "44cqw",
-        "columns_gap": 0,
-        "bento_gap": 8,
-        "rows_gap": 8,
-        "max_collections": 9,
-        "icons_style": "arrow",
-        "icons_shape": "circle",
-        "section_width": "full-width",
-        "gap": 5,
-        "color_scheme": "scheme-8",
-        "padding-block-start": 5,
-        "padding-block-end": 0
-      }
-    },
-    "moments_hero": {
-      "type": "moments-hero",
-      "settings": {
-        "primary_url": "/collections/all",
-        "link_url": "/pages/moments"
-      }
-    },
-    "moments_pillars": {
-      "type": "moments-pillars",
-      "settings": {
-        "free_shipping_threshold": 3000,
-        "returns_url": "/pages/returns-exchange-policy"
+        "override": "auto",
+        "scrim_strength": 74
       }
     },
     "moments_shop": {
@@ -736,19 +460,184 @@
     },
     "moments_story": {
       "type": "moments-story",
+      "blocks": {
+        "row_night": {
+          "type": "moment",
+          "settings": {
+            "collection": "night-moment",
+            "mark": "night"
+          }
+        },
+        "row_gift": {
+          "type": "moment",
+          "settings": {
+            "collection": "gift-moment",
+            "mark": "gift"
+          }
+        },
+        "row_allday": {
+          "type": "moment",
+          "settings": {
+            "collection": "all-day-moment",
+            "mark": "allday"
+          }
+        },
+        "row_daily": {
+          "type": "moment",
+          "settings": {
+            "collection": "daily-moment",
+            "mark": "daily"
+          }
+        },
+        "row_fresh": {
+          "type": "moment",
+          "settings": {
+            "collection": "fresh-moment",
+            "mark": "fresh"
+          }
+        },
+        "row_love": {
+          "type": "moment",
+          "settings": {
+            "collection": "love-moment",
+            "mark": "love"
+          }
+        }
+      },
+      "block_order": [
+        "row_night",
+        "row_gift",
+        "row_allday",
+        "row_daily",
+        "row_fresh",
+        "row_love"
+      ],
       "settings": {
         "link_url": "/pages/moments"
+      }
+    },
+    "moments_brands": {
+      "type": "moments-brand-marquee",
+      "blocks": {
+        "brand_afnan": {
+          "type": "brand",
+          "settings": {
+            "collection": "afnan"
+          }
+        },
+        "brand_khadlaj": {
+          "type": "brand",
+          "settings": {
+            "collection": "khadlaj"
+          }
+        },
+        "brand_lattafa": {
+          "type": "brand",
+          "settings": {
+            "collection": "lattafa"
+          }
+        },
+        "brand_faan": {
+          "type": "brand",
+          "settings": {
+            "collection": "faan"
+          }
+        },
+        "brand_assaf": {
+          "type": "brand",
+          "settings": {
+            "collection": "assaf"
+          }
+        },
+        "brand_rasasi_perfumes": {
+          "type": "brand",
+          "settings": {
+            "collection": "rasasi-perfumes"
+          }
+        },
+        "brand_laverne": {
+          "type": "brand",
+          "settings": {
+            "collection": "laverne"
+          }
+        },
+        "brand_nabeel_perfumes": {
+          "type": "brand",
+          "settings": {
+            "collection": "nabeel-perfumes"
+          }
+        },
+        "brand_ibraq": {
+          "type": "brand",
+          "settings": {
+            "collection": "ibraq"
+          }
+        },
+        "brand_le_falcone": {
+          "type": "brand",
+          "settings": {
+            "collection": "le-falcone"
+          }
+        },
+        "brand_lattafa_pride": {
+          "type": "brand",
+          "settings": {
+            "collection": "lattafa-pride"
+          }
+        },
+        "brand_armaf": {
+          "type": "brand",
+          "settings": {
+            "collection": "armaf"
+          }
+        },
+        "brand_zimaya": {
+          "type": "brand",
+          "settings": {
+            "collection": "zimaya"
+          }
+        },
+        "brand_dkhoon_emirates": {
+          "type": "brand",
+          "settings": {
+            "collection": "dkhoon-emirates"
+          }
+        }
+      },
+      "block_order": [
+        "brand_afnan",
+        "brand_khadlaj",
+        "brand_lattafa",
+        "brand_faan",
+        "brand_assaf",
+        "brand_rasasi_perfumes",
+        "brand_laverne",
+        "brand_nabeel_perfumes",
+        "brand_ibraq",
+        "brand_le_falcone",
+        "brand_lattafa_pride",
+        "brand_armaf",
+        "brand_zimaya",
+        "brand_dkhoon_emirates"
+      ],
+      "settings": {
+        "speed": 40
+      }
+    },
+    "moments_gift": {
+      "type": "moments-gift-block",
+      "settings": {
+        "collection": "gift-moment"
       }
     }
   },
   "order": [
     "moments_hero",
-    "moments_pillars",
+    "moments_brands",
     "moments_shop",
     "product_list_CYd9gQ",
-    "product_list_rNDbYW",
+    "moments_gift",
     "moments_story",
-    "brands",
     "section_xCc7xR"
   ]
 }

@@ -41,7 +41,7 @@
       {%- for block in section.blocks -%}
         {%- if block.settings.collection != blank -%}
           <li class="m-tile-item" {{ block.shopify_attributes }}>
-            {% render 'moment-tile', collection: block.settings.collection, mark: block.settings.mark, label: block.settings.label %}
+            {% render 'moment-tile', collection: block.settings.collection, mark: block.settings.mark, label: block.settings.label, packshot: block.settings.packshot %}
           </li>
         {%- endif -%}
       {%- endfor -%}
@@ -51,8 +51,9 @@
 
 {% stylesheet %}
   .m-moments {
-    padding-block: clamp(40px, 6vw, 88px);
-    background: var(--m-surface);
+    padding-block: clamp(56px, 8vw, 120px);
+    background: var(--m-plum);
+    color: var(--m-text-on-dark);
   }
 
   .m-moments__head {
@@ -63,22 +64,22 @@
 
   .m-moments__title {
     margin: 0;
-    color: var(--m-text);
-    font-size: clamp(2rem, 4.6vw, 3.25rem);
-    line-height: 1.05;
+    color: var(--m-pearl);
+    font-size: clamp(2.5rem, 6vw, 5rem);
+    line-height: 1;
   }
 
   .m-moments__text {
     margin: 0;
     max-inline-size: 48ch;
-    color: var(--m-text-muted);
-    font-size: 1rem;
+    color: var(--m-nude);
+    font-size: 1.0625rem;
     line-height: 1.55;
   }
 
   .m-moments__total {
     margin: 0;
-    color: var(--m-text-muted);
+    color: var(--m-nude);
     font-size: 0.875rem;
   }
 
@@ -153,7 +154,13 @@
           ],
           "default": "night"
         },
-        { "type": "text", "id": "label", "label": "Label", "info": "Leave empty to use the moment name." }
+        { "type": "text", "id": "label", "label": "Label", "info": "Leave empty to use the moment name." },
+        {
+          "type": "image_picker",
+          "id": "packshot",
+          "label": "Bottle packshot (optional)",
+          "info": "A normalised, uncropped packshot of a real best seller of this moment (for example 9 PM for Night). Leave empty until such an image exists."
+        }
       ]
     }
   ],

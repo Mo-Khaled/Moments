@@ -1,8 +1,8 @@
 {%- comment -%}
-  Brand story. Only facts that are confirmed are written here: MOMENTS is a fragrance store in Egypt and sorts
-  its bottles by moment. Everything else (founding year, team, sourcing story, photograph) stays a TODO, shown
-  to the merchant in the theme editor only, and never to shoppers.
-  TODO: real brand story, founding year, team photograph. Do not add authenticity or distributor claims until confirmed.
+  Brand story band. The band takes the colour of the active moment (--m-live), so it changes when the hero moment changes.
+  Left: the confirmed facts and a link. Right: the six moments as large type, each linking to its collection.
+  Only confirmed facts: MOMENTS is a fragrance store in Egypt and sorts its bottles by moment.
+  TODO (shown in the theme editor only): the real brand story, founding year and team photograph.
 {%- endcomment -%}
 
 <section class="m-story" aria-labelledby="m-story-title-{{ section.id }}">
@@ -30,57 +30,73 @@
       {%- endif -%}
     </div>
 
-    <div class="m-story__media">
-      {%- if section.settings.image != blank -%}
-        {{
-          section.settings.image
-          | image_url: width: 1000
-          | image_tag: class: 'm-story__image', widths: '400, 600, 800, 1000', sizes: '(min-width: 990px) 45vw, 100vw', loading: 'lazy', alt: section.settings.image_alt
-        }}
-      {%- else -%}
-        <ul class="m-story__marks" aria-hidden="true" data-moment-host>
-          {%- assign mark_list = 'night,gift,allday,daily,fresh,love' | split: ',' -%}
-          {%- for mark in mark_list -%}
-            <li>{% render 'moment-mark', mark: mark, size: 'lg' %}</li>
-          {%- endfor -%}
-        </ul>
-      {%- endif -%}
-    </div>
+    <ul class="m-story__index">
+      {%- for block in section.blocks -%}
+        {%- if block.settings.collection != blank -%}
+          <li {{ block.shopify_attributes }}>
+            <a class="m-story__row" href="{{ block.settings.collection.url }}" data-moment-host>
+              {% render 'moment-mark', mark: block.settings.mark, size: 'sm', class: 'm-story__mark' %}
+              <span class="m-story__name">
+                {%- case block.settings.mark -%}
+                  {%- when 'night' -%}
+                    {{ 'moments.night' | t }}
+                  {%- when 'gift' -%}
+                    {{ 'moments.gift' | t }}
+                  {%- when 'allday' -%}
+                    {{ 'moments.all_day' | t }}
+                  {%- when 'daily' -%}
+                    {{ 'moments.daily' | t }}
+                  {%- when 'fresh' -%}
+                    {{ 'moments.fresh' | t }}
+                  {%- else -%}
+                    {{ 'moments.love' | t }}
+                {%- endcase -%}
+              </span>
+              <span class="m-story__count">{{ block.settings.collection.products_count }}</span>
+            </a>
+          </li>
+        {%- endif -%}
+      {%- endfor -%}
+    </ul>
   </div>
 </section>
 
 {% stylesheet %}
   .m-story {
-    padding-block: clamp(40px, 6vw, 88px);
-    background: var(--m-nude);
-    color: var(--m-text);
+    --m-mark-ink: var(--m-live-ink);
+    --m-mark-body: transparent;
+    --m-mark-accent: var(--m-live-ink);
+    --m-mark-gold: var(--m-live-ink);
+
+    background: var(--m-live);
+    color: var(--m-live-ink);
+    padding-block: clamp(56px, 8vw, 112px);
   }
 
   .m-story__inner {
     display: grid;
     grid-template-columns: minmax(0, 1fr);
-    gap: 32px;
-    align-items: center;
+    gap: 40px;
+    align-items: start;
   }
 
   .m-story__copy {
     display: grid;
     justify-items: start;
-    gap: 16px;
+    gap: 20px;
   }
 
   .m-story__title {
     margin: 0;
-    max-inline-size: 16ch;
-    font-size: clamp(1.875rem, 4vw, 2.75rem);
-    line-height: 1.1;
+    max-inline-size: 12ch;
+    font-size: clamp(2.5rem, 6vw, 5rem);
+    line-height: 1;
     text-wrap: balance;
   }
 
   .m-story__text {
     margin: 0;
-    max-inline-size: 46ch;
-    color: var(--m-text-muted);
+    max-inline-size: 44ch;
     font-size: 1.0625rem;
     line-height: 1.6;
     text-wrap: pretty;
@@ -89,64 +105,70 @@
   .m-story__todo {
     margin: 0;
     padding: 8px 12px;
-    border: 1px dashed var(--m-gold-ink);
-    color: var(--m-text-muted);
+    border: 1px dashed currentcolor;
     font-size: 0.8125rem;
   }
 
-  .m-story__image {
-    inline-size: 100%;
-    block-size: auto;
-    aspect-ratio: 4 / 3;
-    object-fit: cover;
-  }
-
-  .m-story__marks {
-    --m-mark-body: var(--m-pearl);
-
+  .m-story__index {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 8px;
     margin: 0;
     padding: 0;
     list-style: none;
+    border-block-start: 1px solid currentcolor;
   }
 
-  /* The large marks are 160 px wide. On phones each sits in a 104 px cell and is scaled down to fit it. */
-  .m-story__marks li {
+  moment-mark.m-story__mark {
+    --mm-size: 40px;
+  }
+
+  .m-story__row {
     display: grid;
-    place-items: center;
-    block-size: 104px;
+    grid-template-columns: 56px minmax(0, 1fr) auto;
+    align-items: center;
+    column-gap: 16px;
+    padding-block: 14px;
+    border-block-end: 1px solid currentcolor;
+    color: inherit;
+    text-decoration: none;
   }
 
-  .m-story__marks li > * {
-    transform: scale(0.62);
+  .m-story__name {
+    font-family: var(--font-heading--family);
+    font-size: clamp(1.75rem, 4vw, 3rem);
+    line-height: 1.1;
+  }
+
+  .m-story__count {
+    font-size: 0.875rem;
+  }
+
+  .m-story__row:hover .m-story__name {
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 8px;
+  }
+
+  .m-story__row:focus-visible {
+    outline: 2px solid currentcolor;
+    outline-offset: 2px;
   }
 
   html[lang='ar'] .m-story__title {
-    line-height: 1.35;
+    line-height: 1.3;
   }
 
   html[lang='ar'] .m-story__text {
     line-height: 1.75;
   }
 
+  html[lang='ar'] .m-story__name {
+    line-height: 1.35;
+  }
+
   @media screen and (min-width: 990px) {
     .m-story__inner {
       grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 80px;
-    }
-
-    .m-story__marks {
-      gap: 24px 16px;
-    }
-
-    .m-story__marks li {
-      block-size: auto;
-    }
-
-    .m-story__marks li > * {
-      transform: none;
+      gap: 96px;
     }
   }
 {% endstylesheet %}
@@ -158,10 +180,33 @@
   "settings": [
     { "type": "text", "id": "heading", "label": "Heading" },
     { "type": "textarea", "id": "text", "label": "Text", "info": "Only confirmed facts." },
-    { "type": "url", "id": "link_url", "label": "Link" },
-    { "type": "image_picker", "id": "image", "label": "Photograph", "info": "TODO: team or workshop photograph. Without one, the six Moment marks are shown." },
-    { "type": "text", "id": "image_alt", "label": "Image description" }
+    { "type": "url", "id": "link_url", "label": "Link" }
   ],
+  "blocks": [
+    {
+      "type": "moment",
+      "name": "Moment row",
+      "limit": 6,
+      "settings": [
+        { "type": "collection", "id": "collection", "label": "Collection" },
+        {
+          "type": "select",
+          "id": "mark",
+          "label": "Moment mark",
+          "options": [
+            { "value": "night", "label": "Night" },
+            { "value": "gift", "label": "Gift" },
+            { "value": "allday", "label": "All day" },
+            { "value": "daily", "label": "Daily" },
+            { "value": "fresh", "label": "Fresh" },
+            { "value": "love", "label": "Love" }
+          ],
+          "default": "night"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 6,
   "presets": [{ "name": "MOMENTS brand story" }]
 }
 {% endschema %}

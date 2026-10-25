@@ -4,8 +4,8 @@
 
   Every tile has the same aspect ratio, padding, mark size and mark position. All of it is measured against the
   tile's own width (container units), so the layout holds at any column width:
-    mark box: 40% of the tile width, 8% from the top and 12% from the end edge; the art inside it keeps 12.5% padding, so it
-              is 13% from the edges and the gesture never leaves the tile
+    mark box: 66% of the tile width, 4% from the top and the end edge; the art inside it keeps 12.5% padding, so the art is
+              50% of the tile width and 12% from the edges. Tiles are 5:6 so the label never meets the mark.
     label: 12% from the start and bottom edges
   No photograph is ever cropped in a tile. Colours come from the moment tokens in assets/moments.css
   (--moment-night, --moment-night-ink, and so on); there is no photograph setting on purpose.
@@ -13,6 +13,7 @@
   @param {object} collection - The collection the tile links to.
   @param {string} mark - night, gift, allday, daily, fresh or love. It also picks the colours.
   @param {string} [label] - Overrides the default label (the moment name from the locale files).
+  @param {image} [packshot] - Optional normalised bottle image, shown uncropped (object-fit contain) at the bottom end.
   @param {string} [class] - Extra classes.
 
   @example
@@ -42,10 +43,13 @@
   endif
 -%}
 
-<a class="m-tile m-tile--{{ tone }} {{ class }}" href="{{ collection.url }}" data-moment-host>
+<a class="m-tile m-tone--{{ tone }} {{ class }}" href="{{ collection.url }}" data-moment-host>
   <span class="m-tile__art">
     {% render 'moment-mark', mark: tone, size: 'lg' %}
   </span>
+  {%- if packshot != blank -%}
+    {{ packshot | image_url: width: 500 | image_tag: class: 'm-tile__packshot', alt: '', loading: 'lazy', widths: '200, 300, 500', sizes: '30vw' }}
+  {%- endif -%}
   <span class="m-tile__label">
     <span class="m-tile__name">{{ tile_label }}</span>
     <span class="m-tile__count">{{ 'homepage.moments.count' | t: count: collection.products_count }}</span>
@@ -66,7 +70,8 @@
 
     position: relative;
     display: block;
-    aspect-ratio: 1 / 1;
+    aspect-ratio: 5 / 6;
+    box-shadow: inset 0 0 0 1px rgb(250 246 242 / 0.12);
     background: var(--tile-bg);
     background-size: 100% 140%;
     background-position: 0 0;
@@ -93,14 +98,24 @@
      tile edges and the gesture has room to move inside the tile. */
   .m-tile__art {
     position: absolute;
-    inset-block-start: 8cqi;
-    inset-inline-end: 12cqi;
-    inline-size: 40cqi;
-    block-size: 40cqi;
+    inset-block-start: 4cqi;
+    inset-inline-end: 4cqi;
+    inline-size: 66cqi;
+    block-size: 66cqi;
   }
 
   .m-tile__art moment-mark {
     --mm-size: 100%;
+    --mm-amp: 1.2;
+  }
+
+  .m-tile__packshot {
+    position: absolute;
+    inset-block-end: 12cqi;
+    inset-inline-end: 12cqi;
+    inline-size: 26cqi;
+    block-size: 34cqi;
+    object-fit: contain;
   }
 
   .m-tile__label {
@@ -133,60 +148,6 @@
 
   html[lang='ar'] .m-tile__name {
     line-height: 1.35;
-  }
-
-  .m-tile--night {
-    --tile-bg: var(--moment-night);
-    --tile-ink: var(--moment-night-ink);
-    --tile-body: var(--moment-night-body);
-    --tile-accent: var(--moment-night-accent);
-    --tile-gold: var(--moment-night-gold);
-  }
-
-  .m-tile--gift {
-    --tile-bg: var(--moment-gift);
-    --tile-ink: var(--moment-gift-ink);
-    --tile-body: var(--moment-gift-body);
-    --tile-accent: var(--moment-gift-accent);
-    --tile-gold: var(--moment-gift-gold);
-  }
-
-  .m-tile--allday {
-    --tile-bg: var(--moment-allday);
-    --tile-ink: var(--moment-allday-ink);
-    --tile-body: var(--moment-allday-body);
-    --tile-accent: var(--moment-allday-accent);
-    --tile-gold: var(--moment-allday-gold);
-  }
-
-  .m-tile--daily {
-    --tile-bg: var(--moment-daily);
-    --tile-ink: var(--moment-daily-ink);
-    --tile-body: var(--moment-daily-body);
-    --tile-accent: var(--moment-daily-accent);
-    --tile-gold: var(--moment-daily-gold);
-  }
-
-  .m-tile--fresh {
-    --tile-bg: var(--moment-fresh);
-    --tile-ink: var(--moment-fresh-ink);
-    --tile-body: var(--moment-fresh-body);
-    --tile-accent: var(--moment-fresh-accent);
-    --tile-gold: var(--moment-fresh-gold);
-  }
-
-  .m-tile--love {
-    --tile-bg: var(--moment-love);
-    --tile-ink: var(--moment-love-ink);
-    --tile-body: var(--moment-love-body);
-    --tile-accent: var(--moment-love-accent);
-    --tile-gold: var(--moment-love-gold);
-  }
-
-  @media screen and (min-width: 750px) {
-    .m-tile {
-      aspect-ratio: 5 / 4;
-    }
   }
 
   @media (prefers-reduced-motion: reduce) {

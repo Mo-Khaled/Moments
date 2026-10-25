@@ -1,0 +1,29 @@
+{%- doc -%}
+  Outputs a menu label in Title Case: every word capitalised except the small words (by, of, and, the, in, for when not first).
+  Used for the primary navigation so "FOR HER" and "Shop by Moment" follow one casing rule, whatever the menu data holds.
+  Not for brand names (they keep their own casing).
+
+  @param {string} text - The label.
+
+  @example
+  {% render 'title-case', text: link.title %}
+{%- enddoc -%}
+
+{%- liquid
+  assign small = 'by,of,and,the,in' | split: ','
+  assign words = text | downcase | split: ' '
+  assign out = ''
+  for word in words
+    if forloop.first == false and small contains word
+      assign piece = word
+    else
+      assign piece = word | capitalize
+    endif
+    if forloop.first
+      assign out = piece
+    else
+      assign out = out | append: ' ' | append: piece
+    endif
+  endfor
+-%}
+{{- out -}}

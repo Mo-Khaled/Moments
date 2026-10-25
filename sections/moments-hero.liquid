@@ -1,259 +1,710 @@
 {%- comment -%}
-  Homepage hero. A static headline, one primary button and one text link, 560 px tall at most on desktop.
-  The image is the LCP element: it is rendered eagerly with fetchpriority high and responsive widths.
+  Homepage hero: edge to edge, one slide per moment (Night, Gift, All day, Daily, Fresh, Love), added as editor blocks.
+  The page opens on the moment that matches the visitor's local hour, and the active moment sets the page accent
+  (html[data-moment] drives --m-live in assets/moments.css). A switcher lets the visitor change it.
 
-  Image: pick one in the section settings. Until then it falls back to the Khadlaj Island Sun lifestyle photograph
-  from Settings > Files (island-sun-grid_05.png), and to a labelled placeholder if that file is missing.
-  TODO: replace with the final hero photograph.
+  How the first paint stays clean: an inline script at the top of this section picks the moment from the hour and sets
+  html[data-moment] before any slide is parsed. Without JavaScript the first block is shown. Only the active slide is displayed
+  (display: none on the others, so their images and videos are not fetched). The first block's poster is the preloaded
+  LCP image (fetchpriority high); the active slide's poster is promoted to eager if it is another one.
 
-  Video (optional): upload a short loop in "Looping video". Keep it under 2 MB, no sound, about 6 to 10 seconds.
-  It stays hidden behind the poster image until it is playing. It loads only when the hero is in view, and never
-  loads for shoppers who prefer reduced motion or have data saver on.
+  Slide media: a video (desktop only, loaded after the poster paints, paused off screen and in a hidden tab) over a poster.
+  Phones, Save-Data and reduced motion get the poster only. A slide with no video and no poster is a moment gradient, the large
+  Moment mark and an optional packshot (object-fit contain, never cropped), with a very slow transform-only drift.
+  Posters shot as a square photograph use "Fit": the whole photo is shown at the end side over a blurred copy of itself, so the
+  bottle is never cropped. A 16:9 photograph or video uses "Fill".
+
+  EXPERIMENTAL: the All day slide uses the Island Sun Khadlaj photo from Files until real footage exists.
 {%- endcomment -%}
 
 {%- liquid
-  assign hero_image = section.settings.image
-  if hero_image == blank
-    assign hero_image = images['island-sun-grid_05.png']
-  endif
-  assign video = section.settings.video
-
-  assign headline = section.settings.headline
-  if headline == blank
-    assign headline = 'homepage.hero.headline' | t
-  endif
-  assign text = section.settings.text
-  if text == blank
-    assign text = 'homepage.hero.text' | t
-  endif
-  assign primary_label = section.settings.primary_label
-  if primary_label == blank
-    assign primary_label = 'homepage.hero.primary' | t
-  endif
-  assign link_label = section.settings.link_label
-  if link_label == blank
-    assign link_label = 'homepage.hero.link' | t
-  endif
+  assign cfg_override = section.settings.override
 -%}
 
-<section class="m-hero" aria-labelledby="m-hero-title-{{ section.id }}">
-  <div class="m-hero__inner m-wrap">
-    <div class="m-hero__copy">
-      <h1 class="m-hero__title" id="m-hero-title-{{ section.id }}">
-        {{ headline }}
-      </h1>
-      <p class="m-hero__text">{{ text }}</p>
-      <div class="m-hero__actions">
-        <a class="m-btn" href="{{ section.settings.primary_url | default: routes.all_products_collection_url }}">
-          {{- primary_label -}}
-        </a>
-        {%- if section.settings.link_url != blank -%}
-          <a class="m-link" href="{{ section.settings.link_url }}">
-            {{- link_label -}}
-          </a>
+<section class="m-hero" data-m-hero aria-label="{{ 'homepage.hero.label' | t }}" style="--m-hero-scrim: {{ section.settings.scrim_strength }}%">
+  <script type="application/json" data-m-hero-config>
+    {
+      "override": {{ cfg_override | json }},
+      "slides": [
+        {%- for block in section.blocks -%}
+          { "moment": {{ block.settings.moment | json }}, "from": {{ block.settings.from_hour }}, "to": {{ block.settings.to_hour }} }{% unless forloop.last %},{% endunless %}
+        {%- endfor -%}
+      ]
+    }
+  </script>
+  <script>
+    (function () {
+      try {
+        var cfg = JSON.parse(document.currentScript.previousElementSibling.textContent);
+        if (!cfg.slides.length) return;
+        var hour = typeof window.__MOMENTS_HOUR__ === 'number' ? window.__MOMENTS_HOUR__ : new Date().getHours();
+        var has = function (m) { return cfg.slides.some(function (s) { return s.moment === m; }); };
+        var pick = cfg.override && cfg.override !== 'auto' && has(cfg.override) ? cfg.override : null;
+        if (!pick) { try { var saved = sessionStorage.getItem('mMoment'); if (saved && has(saved)) pick = saved; } catch (e) {} }
+        if (!pick) {
+          cfg.slides.forEach(function (s) {
+            if (pick || s.from === s.to) return;
+            var inside = s.from < s.to ? hour >= s.from && hour < s.to : hour >= s.from || hour < s.to;
+            if (inside) pick = s.moment;
+          });
+        }
+        var root = document.documentElement;
+        root.dataset.moment = pick || cfg.slides[0].moment;
+        root.classList.add('m-js');
+      } catch (e) {}
+    })();
+  </script>
+
+  <div class="m-hero__stage">
+    {%- for block in section.blocks -%}
+      {%- liquid
+        assign key = block.settings.moment
+        assign tint = block.settings.tint
+        if tint == 'moment' or tint == blank
+          assign tint = key
+        endif
+        case key
+          when 'night'
+            assign label = 'moments.night' | t
+          when 'gift'
+            assign label = 'moments.gift' | t
+          when 'allday'
+            assign label = 'moments.all_day' | t
+          when 'daily'
+            assign label = 'moments.daily' | t
+          when 'fresh'
+            assign label = 'moments.fresh' | t
+          else
+            assign label = 'moments.love' | t
+        endcase
+
+        assign headline = block.settings.headline
+        assign subline = block.settings.subline
+        assign primary_label = block.settings.primary_label
+        assign secondary_label = block.settings.secondary_label
+        case key
+          when 'night'
+            if headline == blank
+              assign headline = 'homepage.hero.slides.night.headline' | t
+            endif
+            if subline == blank
+              assign subline = 'homepage.hero.slides.night.text' | t
+            endif
+          when 'gift'
+            if headline == blank
+              assign headline = 'homepage.hero.slides.gift.headline' | t
+            endif
+            if subline == blank
+              assign subline = 'homepage.hero.slides.gift.text' | t
+            endif
+          when 'allday'
+            if headline == blank
+              assign headline = 'homepage.hero.slides.allday.headline' | t
+            endif
+            if subline == blank
+              assign subline = 'homepage.hero.slides.allday.text' | t
+            endif
+          when 'daily'
+            if headline == blank
+              assign headline = 'homepage.hero.slides.daily.headline' | t
+            endif
+            if subline == blank
+              assign subline = 'homepage.hero.slides.daily.text' | t
+            endif
+          when 'fresh'
+            if headline == blank
+              assign headline = 'homepage.hero.slides.fresh.headline' | t
+            endif
+            if subline == blank
+              assign subline = 'homepage.hero.slides.fresh.text' | t
+            endif
+          else
+            if headline == blank
+              assign headline = 'homepage.hero.slides.love.headline' | t
+            endif
+            if subline == blank
+              assign subline = 'homepage.hero.slides.love.text' | t
+            endif
+        endcase
+        if primary_label == blank
+          assign primary_label = 'homepage.hero.shop_moment' | t: moment: label
+        endif
+        if secondary_label == blank
+          assign secondary_label = 'homepage.hero.link'  | t
+        endif
+
+        assign poster = block.settings.poster
+        if poster == blank and key == 'allday'
+          assign poster = images['island-sun-grid_05.png']
+        endif
+        assign video = block.settings.video
+        assign video_mobile = block.settings.video_mobile
+        assign poster_loading = 'lazy'
+        assign poster_priority = 'auto'
+        if forloop.first
+          assign poster_loading = 'eager'
+          assign poster_priority = 'high'
+        endif
+      -%}
+
+      <article
+        class="m-slide m-tone--{{ tint }}"
+        data-moment="{{ key }}"
+        data-has-video="{% if video != blank %}true{% else %}false{% endif %}"
+        {{ block.shopify_attributes }}
+      >
+        <div class="m-slide__bg" aria-hidden="true"></div>
+
+        {%- if poster != blank -%}
+          <div class="m-slide__media m-slide__media--{{ block.settings.poster_fit }}" aria-hidden="true">
+            {%- if block.settings.poster_fit == 'fit' -%}
+              {{
+                poster
+                | image_url: width: 480
+                | image_tag: class: 'm-slide__blur', loading: 'lazy', alt: '', widths: '480'
+              }}
+            {%- endif -%}
+            {{
+              poster
+              | image_url: width: 2000
+              | image_tag:
+                class: 'm-slide__poster',
+                alt: '',
+                widths: '768, 1280, 1920, 2560',
+                sizes: '100vw',
+                loading: poster_loading,
+                fetchpriority: poster_priority
+            }}
+            {%- if video != blank -%}
+              <video
+                class="m-slide__video"
+                muted
+                loop
+                playsinline
+                preload="none"
+                tabindex="-1"
+                data-desktop-src="{% for source in video.sources %}{% if source.format == 'mp4' %}{{ source.url }}{% endif %}{% endfor %}"
+                {% if video_mobile != blank %}
+                  data-mobile-src="{% for source in video_mobile.sources %}{% if source.format == 'mp4' %}{{ source.url }}{% endif %}{% endfor %}"
+                {% endif %}
+              ></video>
+            {%- endif -%}
+          </div>
+        {%- else -%}
+          <div class="m-slide__art" aria-hidden="true">
+            {% render 'moment-mark', mark: key, size: 'lg' %}
+          </div>
         {%- endif -%}
-      </div>
+
+        {%- if block.settings.packshot != blank -%}
+          {{
+            block.settings.packshot
+            | image_url: width: 1000
+            | image_tag: class: 'm-slide__packshot', alt: block.settings.packshot_alt, loading: 'lazy', widths: '400, 600, 800, 1000', sizes: '(min-width: 750px) 40vw, 70vw'
+          }}
+        {%- endif -%}
+
+        <div class="m-slide__scrim" aria-hidden="true"></div>
+
+        <div class="m-slide__copy m-wrap">
+          <p class="m-slide__tag">{{ label }}</p>
+          <div class="m-slide__title" role="heading" aria-level="1">{{ headline }}</div>
+          <p class="m-slide__text">{{ subline }}</p>
+          <div class="m-slide__actions">
+            <a class="m-btn" href="{{ block.settings.primary_url | default: routes.collections_url }}">{{ primary_label }}</a>
+            {%- if block.settings.secondary_url != blank -%}
+              <a class="m-btn m-btn--outline" href="{{ block.settings.secondary_url }}">{{ secondary_label }}</a>
+            {%- endif -%}
+          </div>
+        </div>
+      </article>
+    {%- endfor -%}
+  </div>
+
+  <div class="m-hero__controls m-wrap">
+    <div class="m-switch" role="group" aria-label="{{ 'homepage.hero.switcher' | t }}">
+      {%- for block in section.blocks -%}
+        {%- liquid
+          case block.settings.moment
+            when 'night'
+              assign label = 'moments.night' | t
+            when 'gift'
+              assign label = 'moments.gift' | t
+            when 'allday'
+              assign label = 'moments.all_day' | t
+            when 'daily'
+              assign label = 'moments.daily' | t
+            when 'fresh'
+              assign label = 'moments.fresh' | t
+            else
+              assign label = 'moments.love' | t
+          endcase
+        -%}
+        <button class="m-switch__btn" type="button" data-moment-switch="{{ block.settings.moment }}" aria-pressed="false">
+          {% render 'moment-mark', mark: block.settings.moment, size: 'sm', class: 'm-switch__mark' %}
+          <span class="m-switch__label">{{ label }}</span>
+        </button>
+      {%- endfor -%}
     </div>
 
-    <div class="m-hero__media">
-      {%- if hero_image != blank -%}
-        {{
-          hero_image
-          | image_url: width: 1120
-          | image_tag:
-            class: 'm-hero__image',
-            widths: '420, 560, 840, 1120',
-            sizes: '(min-width: 750px) 560px, 100vw',
-            loading: 'eager',
-            fetchpriority: 'high',
-            alt: section.settings.image_alt
-        }}
-      {%- else -%}
-        {% render 'hero-image-slot', class: 'm-hero__image' %}
-      {%- endif -%}
-
-      {%- if video != blank -%}
-        <video
-          class="m-hero__video"
-          muted
-          loop
-          playsinline
-          preload="none"
-          aria-hidden="true"
-          tabindex="-1"
-          {% if hero_image != blank %}
-            poster="{{ hero_image | image_url: width: 1120 }}"
-          {% endif %}
-          data-m-hero-video
-        >
-          {%- for source in video.sources -%}
-            <source src="{{ source.url }}" type="{{ source.mime_type }}">
-          {%- endfor -%}
-        </video>
-      {%- endif -%}
-
-      {%- if request.design_mode and section.settings.image == blank -%}
-        <p class="m-hero__todo">{{ 'homepage.hero.photo_todo' | t }}</p>
-      {%- endif -%}
+    <div class="m-playback" data-m-playback hidden>
+      <button class="m-playback__btn" type="button" data-m-pause aria-pressed="false" aria-label="{{ 'homepage.hero.pause' | t }}" data-label-pause="{{ 'homepage.hero.pause' | t }}" data-label-play="{{ 'homepage.hero.play' | t }}">
+        <svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true" focusable="false">
+          <g data-icon-pause fill="currentColor"><rect x="3" y="2" width="3.5" height="12"/><rect x="9.5" y="2" width="3.5" height="12"/></g>
+          <path data-icon-play fill="currentColor" d="M4 2l10 6-10 6z" hidden/>
+        </svg>
+      </button>
+      <button class="m-playback__btn" type="button" data-m-mute aria-pressed="true" aria-label="{{ 'homepage.hero.unmute' | t }}" data-label-mute="{{ 'homepage.hero.mute' | t }}" data-label-unmute="{{ 'homepage.hero.unmute' | t }}">
+        <svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true" focusable="false">
+          <path fill="currentColor" d="M2 6v4h3l4 3V3L5 6z"/>
+          <path data-icon-on fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" d="M11.5 5.5a3.5 3.5 0 0 1 0 5" hidden/>
+          <path data-icon-off fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" d="M11 6l4 4M15 6l-4 4"/>
+        </svg>
+      </button>
     </div>
   </div>
 </section>
 
 {% stylesheet %}
   .m-hero {
-    background: var(--m-plum);
-    color: var(--m-text-on-dark);
-  }
-
-  .m-hero__inner {
-    display: grid;
-    grid-template-columns: 1fr;
-  }
-
-  .m-hero__media {
     position: relative;
-    order: -1;
-    aspect-ratio: 4 / 3;
-    max-block-size: 300px;
+    isolation: isolate;
     overflow: hidden;
     background: var(--m-plum-900);
+    color: var(--m-text-on-dark);
+    block-size: max(520px, 75svh);
   }
 
-  .m-hero__image,
-  .m-hero__video {
+  .m-hero__stage,
+  .m-slide {
+    position: absolute;
+    inset: 0;
+  }
+
+  /* Only the active slide is displayed, so the others cost nothing. No JavaScript: the first slide. */
+  .m-slide {
+    display: none;
+  }
+
+  html:not(.m-js) .m-slide:first-child,
+  html[data-moment='night'] .m-slide[data-moment='night'],
+  html[data-moment='gift'] .m-slide[data-moment='gift'],
+  html[data-moment='allday'] .m-slide[data-moment='allday'],
+  html[data-moment='daily'] .m-slide[data-moment='daily'],
+  html[data-moment='fresh'] .m-slide[data-moment='fresh'],
+  html[data-moment='love'] .m-slide[data-moment='love'] {
+    display: block;
+    opacity: 1;
+    transition: opacity var(--m-dur-3) var(--m-ease), display var(--m-dur-3) allow-discrete;
+
+    @starting-style {
+      opacity: 0;
+    }
+  }
+
+  /* Without JavaScript only the first slide may show, even if an html[data-moment] value was set. */
+  .m-slide__bg {
+    position: absolute;
+    inset: 0;
+    background: var(--tile-bg);
+    transform-origin: 70% 60%;
+  }
+
+  .m-slide__art {
+    --m-mark-ink: var(--tile-ink);
+    --m-mark-body: var(--tile-body);
+    --m-mark-accent: var(--tile-accent);
+    --m-mark-gold: var(--tile-gold);
+
+    position: absolute;
+    inset-block-end: 10%;
+    inset-inline-end: calc(var(--m-gutter) + 2vw);
+    opacity: 0.9;
+  }
+
+  .m-slide__art moment-mark {
+    --mm-size: min(46vmin, 520px);
+  }
+
+  .m-slide__media {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+  }
+
+  .m-slide__poster,
+  .m-slide__video {
     position: absolute;
     inset: 0;
     inline-size: 100%;
     block-size: 100%;
     object-fit: cover;
-    object-position: 50% 32%;
   }
 
-  .m-hero__video {
+  /* Fit: the whole photograph at the end side, over a blurred copy of itself. Nothing is cropped. */
+  .m-slide__media--fit .m-slide__blur {
+    position: absolute;
+    inset: -8%;
+    inline-size: 116%;
+    block-size: 116%;
+    object-fit: cover;
+    filter: blur(32px) saturate(1.1);
+    opacity: 0.9;
+  }
+
+  .m-slide__media--fit .m-slide__poster {
+    inset-inline-start: auto;
+    inline-size: auto;
+    aspect-ratio: 1 / 1;
+    max-inline-size: 100%;
+    object-fit: contain;
+  }
+
+  .m-slide__video {
     opacity: 0;
     transition: opacity var(--m-dur-3) var(--m-ease);
   }
 
-  .m-hero__video[data-playing] {
+  .m-slide__video[data-playing] {
     opacity: 1;
   }
 
-  .m-hero__copy {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: center;
-    gap: 16px;
-    padding-block: 32px 40px;
+  .m-slide__packshot {
+    position: absolute;
+    inset-block-end: 6%;
+    inset-inline-end: calc(var(--m-gutter) + 4vw);
+    inline-size: auto;
+    block-size: 64%;
+    max-inline-size: 42%;
+    object-fit: contain;
+    filter: drop-shadow(0 12px 18px rgb(37 18 36 / 0.28));
   }
 
-  /* The single gold accent in this band. */
-  .m-hero__copy::before {
-    content: '';
-    inline-size: 48px;
-    block-size: 1px;
-    background: var(--m-accent-on-dark);
+  .m-slide__scrim {
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(to top, rgb(37 18 36 / calc(var(--m-hero-scrim, 78%) + 8%)) 0%, rgb(37 18 36 / 0.45) 38%, rgb(37 18 36 / 0) 70%),
+      linear-gradient(to right, rgb(37 18 36 / 0.5), rgb(37 18 36 / 0) 62%);
   }
 
-  .m-hero__title {
-    margin: 0;
-    max-inline-size: 14ch;
-    color: inherit;
-    font-size: clamp(2.25rem, 9vw, 3.75rem);
-    line-height: 1.05;
-    text-wrap: balance;
+  html[dir='rtl'] .m-slide__scrim {
+    background:
+      linear-gradient(to top, rgb(37 18 36 / calc(var(--m-hero-scrim, 78%) + 8%)) 0%, rgb(37 18 36 / 0.45) 38%, rgb(37 18 36 / 0) 70%),
+      linear-gradient(to left, rgb(37 18 36 / 0.5), rgb(37 18 36 / 0) 62%);
   }
 
-  .m-hero__text {
-    margin: 0;
-    max-inline-size: 36ch;
-    color: var(--m-nude);
-    font-size: 1.0625rem;
-    line-height: 1.55;
-    text-wrap: pretty;
-  }
-
-  .m-hero__actions {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 16px 28px;
-    margin-block-start: 8px;
-  }
-
-  .m-hero__todo {
+  .m-slide__copy {
     position: absolute;
     inset-inline: 0;
     inset-block-end: 0;
-    margin: 0;
-    padding: 4px 12px;
-    background: var(--m-plum-900);
+    display: grid;
+    justify-items: start;
+    gap: 16px;
+    margin-inline: auto;
+    padding-block-end: 112px;
     color: var(--m-pearl);
-    font-size: 0.75rem;
-    text-align: center;
   }
 
-  html[lang='ar'] .m-hero__title {
-    line-height: 1.35;
-    max-inline-size: 12ch;
+  .m-slide__tag {
+    margin: 0;
+    padding: 6px 14px;
+    border: 1px solid currentcolor;
+    border-radius: 9999px;
+    font-size: 0.8125rem;
+    line-height: 1;
   }
 
-  html[lang='ar'] .m-hero__text {
+  .m-slide__title {
+    max-inline-size: min(100%, 7em);
+    font-family: var(--font-heading--family);
+    font-size: clamp(3rem, 9vw, 7.5rem);
+    line-height: 0.98;
+    text-wrap: balance;
+  }
+
+  .m-slide__text {
+    margin: 0;
+    max-inline-size: 38ch;
+    font-size: clamp(1rem, 1.4vw, 1.25rem);
+    line-height: 1.5;
+    text-wrap: pretty;
+  }
+
+  .m-slide__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-block-start: 8px;
+  }
+
+  html[lang='ar'] .m-slide__title {
+    line-height: 1.3;
+    max-inline-size: min(100%, 6em);
+  }
+
+  html[lang='ar'] .m-slide__text {
     line-height: 1.7;
   }
 
-  @media screen and (min-width: 750px) {
-    .m-hero__inner {
-      grid-template-columns: minmax(0, 1fr) 560px;
-      block-size: 560px;
+  /* Controls: moment switcher at the start edge, playback at the end edge. */
+  .m-hero__controls {
+    position: absolute;
+    inset-inline: 0;
+    inset-block-end: 24px;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin-inline: auto;
+  }
+
+  .m-switch {
+    display: flex;
+    gap: 4px;
+    padding: 4px;
+    border: 1px solid rgb(250 246 242 / 0.4);
+    border-radius: 9999px;
+    background: rgb(37 18 36 / 0.5);
+  }
+
+  .m-switch__btn {
+    --m-mark-ink: var(--m-pearl);
+    --m-mark-body: transparent;
+    --m-mark-accent: var(--m-gold-light);
+    --m-mark-gold: var(--m-gold-light);
+    --mm-size: 22px;
+
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-block-size: 40px;
+    padding-inline: 10px;
+    border: 0;
+    border-radius: 9999px;
+    background: transparent;
+    color: var(--m-pearl);
+    font: inherit;
+    font-size: 0.8125rem;
+    cursor: pointer;
+    transition: background-color var(--m-dur-2) var(--m-ease), color var(--m-dur-2) var(--m-ease);
+  }
+
+  .m-switch__label {
+    display: none;
+  }
+
+  .m-switch__btn[aria-pressed='true'] {
+    background: var(--m-pearl);
+    color: var(--m-plum);
+    --m-mark-ink: var(--m-plum);
+    --m-mark-body: var(--m-nude);
+    --m-mark-accent: var(--m-berry);
+    --m-mark-gold: var(--m-gold-ink);
+  }
+
+  .m-switch__btn[aria-pressed='true'] .m-switch__label {
+    display: inline;
+  }
+
+  .m-switch__btn:focus-visible,
+  .m-playback__btn:focus-visible {
+    outline: 2px solid var(--m-gold-light);
+    outline-offset: 2px;
+  }
+
+  .m-playback {
+    display: flex;
+    gap: 8px;
+  }
+
+  .m-playback[hidden] {
+    display: none;
+  }
+
+  .m-playback__btn {
+    display: grid;
+    place-items: center;
+    inline-size: 44px;
+    block-size: 44px;
+    border: 1px solid rgb(250 246 242 / 0.5);
+    border-radius: 9999px;
+    background: rgb(37 18 36 / 0.5);
+    color: var(--m-pearl);
+    cursor: pointer;
+  }
+
+  /* Very slow transform-only drift on slides without a video. */
+  @media (prefers-reduced-motion: no-preference) {
+    .m-slide[data-has-video='false'] .m-slide__bg,
+    .m-slide[data-has-video='false'] .m-slide__poster,
+    .m-slide[data-has-video='false'] .m-slide__art {
+      animation: m-hero-drift 36s ease-in-out infinite alternate;
     }
 
-    .m-hero__media {
-      order: 0;
-      aspect-ratio: auto;
-      max-block-size: none;
-    }
-
-    .m-hero__copy {
-      gap: 24px;
-      padding-block: 48px;
-      padding-inline-end: 48px;
-    }
-
-    .m-hero__title {
-      font-size: clamp(2.75rem, 4.4vw, 4rem);
+    .m-hero[data-paused] .m-slide__bg,
+    .m-hero[data-paused] .m-slide__poster,
+    .m-hero[data-paused] .m-slide__art {
+      animation-play-state: paused;
     }
   }
 
-  @media (prefers-reduced-motion: reduce) {
-    .m-hero__video {
-      display: none;
+  @keyframes m-hero-drift {
+    to {
+      transform: scale(1.06) translate3d(-1%, -1%, 0);
+    }
+  }
+
+  @media screen and (min-width: 750px) {
+    .m-hero {
+      block-size: clamp(560px, 88svh, 960px);
+    }
+
+    .m-slide__copy {
+      padding-block-end: 120px;
+    }
+
+    .m-switch__btn {
+      padding-inline: 12px;
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    .m-slide__copy {
+      padding-block-end: 96px;
+    }
+
+    .m-slide__media--fit .m-slide__poster {
+      inset-inline-start: 0;
+      inline-size: 100%;
+      block-size: 62%;
+    }
+
+    .m-slide__art {
+      inset-block-start: 8%;
+      inset-block-end: auto;
+    }
+
+    .m-slide__art moment-mark {
+      --mm-size: min(52vw, 240px);
+    }
+
+    .m-slide__packshot {
+      block-size: 40%;
+      inset-block-end: 30%;
     }
   }
 {% endstylesheet %}
 
 {% javascript %}
   (() => {
-    const video = document.querySelector('[data-m-hero-video]');
-    if (!video) return;
+    const hero = document.querySelector('[data-m-hero]');
+    if (!hero) return;
 
+    const root = document.documentElement;
+    const slides = [...hero.querySelectorAll('.m-slide')];
+    const switches = [...hero.querySelectorAll('[data-moment-switch]')];
+    const playback = hero.querySelector('[data-m-playback]');
+    const pauseBtn = hero.querySelector('[data-m-pause]');
+    const muteBtn = hero.querySelector('[data-m-mute]');
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const saveData = navigator.connection && navigator.connection.saveData;
-    if (reduced || saveData) return;
+    const saveData = !!(navigator.connection && navigator.connection.saveData);
+    const desktop = window.matchMedia('(min-width: 750px)');
+    const state = { paused: false, muted: true, visible: true, tabVisible: !document.hidden };
 
-    const play = () => {
-      video.preload = 'auto';
-      video.play().then(() => video.setAttribute('data-playing', '')).catch(() => {});
+    const activeSlide = () => slides.find((s) => s.dataset.moment === root.dataset.moment) || slides[0];
+    const videoOf = (slide) => slide && slide.querySelector('.m-slide__video');
+
+    const loadVideo = (video) => {
+      if (!video || video.dataset.loaded || reduced || saveData) return false;
+      const src = desktop.matches ? video.dataset.desktopSrc : video.dataset.mobileSrc;
+      if (!src) return false;
+      video.dataset.loaded = 'true';
+      video.preload = 'metadata';
+      video.src = src;
+      return true;
     };
 
-    if (!('IntersectionObserver' in window)) return;
+    const syncPlayback = () => {
+      slides.forEach((slide) => {
+        const video = videoOf(slide);
+        if (!video || !video.dataset.loaded) return;
+        const shouldPlay = slide === activeSlide() && !state.paused && state.visible && state.tabVisible;
+        if (shouldPlay) {
+          video.play().then(() => video.setAttribute('data-playing', '')).catch(() => {});
+        } else {
+          video.pause();
+        }
+      });
+      hero.toggleAttribute('data-paused', state.paused || !state.visible || !state.tabVisible);
+    };
 
-    new IntersectionObserver((entries, observer) => {
-      if (entries.some((entry) => entry.isIntersecting)) {
-        observer.disconnect();
-        play();
+    const activate = (moment, user) => {
+      root.dataset.moment = moment;
+      if (user) { try { sessionStorage.setItem('mMoment', moment); } catch (e) {} }
+      slides.forEach((slide) => {
+        const on = slide.dataset.moment === moment;
+        slide.toggleAttribute('inert', !on);
+        slide.setAttribute('aria-hidden', on ? 'false' : 'true');
+        if (on) {
+          const poster = slide.querySelector('.m-slide__poster');
+          if (poster && poster.loading === 'lazy') { poster.loading = 'eager'; poster.fetchPriority = 'high'; }
+          const blur = slide.querySelector('.m-slide__blur');
+          if (blur) blur.loading = 'eager';
+          const packshot = slide.querySelector('.m-slide__packshot');
+          if (packshot) packshot.loading = 'eager';
+        }
+      });
+      switches.forEach((btn) => btn.setAttribute('aria-pressed', String(btn.dataset.momentSwitch === moment)));
+      const slide = activeSlide();
+      const video = videoOf(slide);
+      if (video && !video.dataset.loaded) {
+        // Desktop video starts only after the poster has painted.
+        const start = () => { if (loadVideo(video)) syncPlayback(); };
+        const poster = slide.querySelector('.m-slide__poster');
+        if (poster && !poster.complete) poster.addEventListener('load', () => requestAnimationFrame(start), { once: true });
+        else requestAnimationFrame(() => setTimeout(start, 200));
       }
-    }).observe(video);
+      if (playback) playback.hidden = !(video && video.dataset.desktopSrc && !reduced && !saveData);
+      syncPlayback();
+    };
+
+    switches.forEach((btn) => btn.addEventListener('click', () => activate(btn.dataset.momentSwitch, true)));
+
+    if (pauseBtn) {
+      pauseBtn.addEventListener('click', () => {
+        state.paused = !state.paused;
+        pauseBtn.setAttribute('aria-pressed', String(state.paused));
+        pauseBtn.setAttribute('aria-label', state.paused ? pauseBtn.dataset.labelPlay : pauseBtn.dataset.labelPause);
+        pauseBtn.querySelector('[data-icon-pause]').toggleAttribute('hidden', state.paused);
+        pauseBtn.querySelector('[data-icon-play]').toggleAttribute('hidden', !state.paused);
+        syncPlayback();
+      });
+    }
+
+    if (muteBtn) {
+      muteBtn.addEventListener('click', () => {
+        state.muted = !state.muted;
+        slides.forEach((slide) => { const v = videoOf(slide); if (v) v.muted = state.muted; });
+        muteBtn.setAttribute('aria-pressed', String(state.muted));
+        muteBtn.setAttribute('aria-label', state.muted ? muteBtn.dataset.labelUnmute : muteBtn.dataset.labelMute);
+        muteBtn.querySelector('[data-icon-on]').toggleAttribute('hidden', state.muted);
+        muteBtn.querySelector('[data-icon-off]').toggleAttribute('hidden', !state.muted);
+      });
+    }
+
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver((entries) => {
+        state.visible = entries.some((entry) => entry.isIntersecting);
+        syncPlayback();
+      }, { threshold: 0.15 }).observe(hero);
+    }
+
+    document.addEventListener('visibilitychange', () => { state.tabVisible = !document.hidden; syncPlayback(); });
+    desktop.addEventListener('change', () => activate(root.dataset.moment, false));
+
+    activate(root.dataset.moment || (slides[0] && slides[0].dataset.moment), false);
   })();
 {% endjavascript %}
 
@@ -264,29 +715,117 @@
   "class": "m-hero-section",
   "limit": 1,
   "settings": [
-    { "type": "header", "content": "Image" },
     {
-      "type": "image_picker",
-      "id": "image",
-      "label": "Hero image",
-      "info": "TODO: final photograph. Square or 4:3 works best, the bottle should sit near the centre. Left empty it uses the Island Sun photo from Files."
+      "type": "select",
+      "id": "override",
+      "label": "Opening moment",
+      "info": "Auto picks the moment from the visitor's local hour (each slide's hours). Choose one to run a campaign.",
+      "options": [
+        { "value": "auto", "label": "Auto (by local hour)" },
+        { "value": "night", "label": "Night" },
+        { "value": "gift", "label": "Gift" },
+        { "value": "allday", "label": "All day" },
+        { "value": "daily", "label": "Daily" },
+        { "value": "fresh", "label": "Fresh" },
+        { "value": "love", "label": "Love" }
+      ],
+      "default": "auto"
     },
-    { "type": "text", "id": "image_alt", "label": "Image description", "info": "Leave empty if the photo is decorative." },
-    { "type": "header", "content": "Looping video (optional)" },
     {
-      "type": "video",
-      "id": "video",
-      "label": "Looping video",
-      "info": "Muted, 6 to 10 seconds, under 2 MB. The hero image is shown until it plays. Not played with reduced motion or data saver."
-    },
-    { "type": "header", "content": "Text" },
-    { "type": "text", "id": "headline", "label": "Headline" },
-    { "type": "textarea", "id": "text", "label": "Text" },
-    { "type": "text", "id": "primary_label", "label": "Button label" },
-    { "type": "url", "id": "primary_url", "label": "Button link" },
-    { "type": "text", "id": "link_label", "label": "Text link label" },
-    { "type": "url", "id": "link_url", "label": "Text link" }
+      "type": "range",
+      "id": "scrim_strength",
+      "label": "Text scrim strength",
+      "info": "Darkens the bottom of the slide so the headline stays readable. Keep it at 70% or more.",
+      "min": 60,
+      "max": 90,
+      "step": 2,
+      "unit": "%",
+      "default": 74
+    }
   ],
-  "presets": [{ "name": "MOMENTS hero" }]
+  "blocks": [
+    {
+      "type": "slide",
+      "name": "Moment slide",
+      "limit": 6,
+      "settings": [
+        {
+          "type": "select",
+          "id": "moment",
+          "label": "Moment",
+          "options": [
+            { "value": "night", "label": "Night" },
+            { "value": "gift", "label": "Gift" },
+            { "value": "allday", "label": "All day" },
+            { "value": "daily", "label": "Daily" },
+            { "value": "fresh", "label": "Fresh" },
+            { "value": "love", "label": "Love" }
+          ],
+          "default": "night"
+        },
+        { "type": "range", "id": "from_hour", "label": "Opens from hour", "info": "Local hour, 0 to 23. Leave From and To equal to keep this moment out of the automatic rotation.", "min": 0, "max": 23, "step": 1, "default": 0 },
+        { "type": "range", "id": "to_hour", "label": "Until hour", "info": "Up to, not including. A range that wraps midnight is fine (18 to 5).", "min": 0, "max": 23, "step": 1, "default": 0 },
+        { "type": "header", "content": "Video and poster" },
+        {
+          "type": "video",
+          "id": "video",
+          "label": "Video",
+          "info": "Muted loop, 6 to 12 seconds, 1920x1080, H.264, under 4 MB. Plays on desktop only, after the poster. EXPERIMENTAL footage is marked in docs/assets/image-credits.md."
+        },
+        { "type": "video", "id": "video_mobile", "label": "Mobile video (optional)", "info": "9:16. Not used on phones yet: phones show the poster." },
+        { "type": "image_picker", "id": "poster", "label": "Poster image", "info": "The first thing shown and the LCP image. The All day slide falls back to the Island Sun Khadlaj photo (EXPERIMENTAL placeholder)." },
+        {
+          "type": "select",
+          "id": "poster_fit",
+          "label": "Poster fit",
+          "info": "Fit shows the whole photo, never cropped (square photos, bottle shots). Fill is for 16:9 photography.",
+          "options": [
+            { "value": "fit", "label": "Fit (whole photo)" },
+            { "value": "fill", "label": "Fill (edge to edge)" }
+          ],
+          "default": "fit"
+        },
+        { "type": "image_picker", "id": "packshot", "label": "Bottle packshot (optional)", "info": "Shown uncropped. Use a clean, transparent or evenly backed image." },
+        { "type": "text", "id": "packshot_alt", "label": "Packshot description" },
+        {
+          "type": "select",
+          "id": "tint",
+          "label": "Colour",
+          "info": "The gradient behind the slide when there is no poster.",
+          "options": [
+            { "value": "moment", "label": "Same as the moment" },
+            { "value": "night", "label": "Night" },
+            { "value": "gift", "label": "Gift" },
+            { "value": "allday", "label": "All day" },
+            { "value": "daily", "label": "Daily" },
+            { "value": "fresh", "label": "Fresh" },
+            { "value": "love", "label": "Love" }
+          ],
+          "default": "moment"
+        },
+        { "type": "header", "content": "Text" },
+        { "type": "text", "id": "headline", "label": "Headline" },
+        { "type": "textarea", "id": "subline", "label": "Subline" },
+        { "type": "text", "id": "primary_label", "label": "Button label" },
+        { "type": "url", "id": "primary_url", "label": "Button link" },
+        { "type": "text", "id": "secondary_label", "label": "Outlined button label" },
+        { "type": "url", "id": "secondary_url", "label": "Outlined button link" }
+      ]
+    }
+  ],
+  "max_blocks": 6,
+  "presets": [
+    {
+      "name": "MOMENTS hero",
+      "blocks": [
+        { "type": "slide", "settings": { "moment": "night", "from_hour": 18, "to_hour": 5 } },
+        { "type": "slide", "settings": { "moment": "fresh", "from_hour": 5, "to_hour": 10 } },
+        { "type": "slide", "settings": { "moment": "allday", "from_hour": 10, "to_hour": 18 } },
+        { "type": "slide", "settings": { "moment": "gift" } },
+        { "type": "slide", "settings": { "moment": "daily" } },
+        { "type": "slide", "settings": { "moment": "love" } }
+      ]
+    }
+  ]
 }
 {% endschema %}

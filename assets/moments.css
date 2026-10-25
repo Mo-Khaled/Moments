@@ -147,16 +147,25 @@ product-price .price {
 
 /* Homepage building blocks (used by sections/moments-*.liquid) ------------------------------ */
 
-/* Page container: 90rem content, fluid gutter. */
-.m-wrap {
-  inline-size: 100%;
-  max-inline-size: calc(90rem + 2 * var(--m-gutter));
-  margin-inline: auto;
-  padding-inline: var(--m-gutter);
+/* Page container. One content width and one gutter, shared by the announcement ticker, header, hero copy,
+   brand strip and every section, so all edges line up. They match the theme's own page-width values
+   (90rem of content, 16px gutter, 40px from 750px up). */
+html:root {
+  --m-content: 90rem;
+  --m-gutter: 16px;
 }
 
-html:root {
-  --m-gutter: clamp(16px, 3.2vw, 48px);
+@media screen and (min-width: 750px) {
+  html:root {
+    --m-gutter: 40px;
+  }
+}
+
+.m-wrap {
+  inline-size: 100%;
+  max-inline-size: calc(var(--m-content) + 2 * var(--m-gutter));
+  margin-inline: auto;
+  padding-inline: var(--m-gutter);
 }
 
 /* Primary action: berry pill, white text. */
@@ -259,4 +268,128 @@ html:root {
   --moment-love-body: color-mix(in srgb, var(--m-text-secondary) 55%, var(--m-pearl));
   --moment-love-accent: var(--m-nude);
   --moment-love-gold: var(--m-gold-light);
+}
+
+/* The active moment. The hero script sets data-moment on <html>; everything that should follow the moment reads
+   --m-live (accent colour), --m-live-ink (text on it) and --m-live-soft (a light surface tint). Colour and opacity
+   transitions only. Without JS the page opens on Night. */
+html:root {
+  --m-live: var(--m-plum);
+  --m-live-ink: var(--m-pearl);
+  --m-live-soft: color-mix(in srgb, var(--m-live) 14%, var(--m-pearl));
+  --m-live-line: var(--m-gold-light);
+}
+
+html[data-moment='night'] { --m-live: var(--m-plum); --m-live-ink: var(--m-pearl); --m-live-line: var(--m-gold-light); }
+html[data-moment='gift'] { --m-live: var(--m-berry-600); --m-live-ink: var(--m-pearl); --m-live-line: var(--m-gold-light); }
+html[data-moment='allday'] { --m-live: var(--m-gold-light); --m-live-ink: var(--m-plum); --m-live-line: var(--m-plum); }
+html[data-moment='daily'] { --m-live: var(--m-nude); --m-live-ink: var(--m-plum); --m-live-line: var(--m-gold-ink); }
+html[data-moment='fresh'] { --m-live: var(--m-taupe); --m-live-ink: var(--m-pearl); --m-live-line: var(--m-gold-light); }
+html[data-moment='love'] { --m-live: var(--m-text-secondary); --m-live-ink: var(--m-pearl); --m-live-line: var(--m-gold-light); }
+
+/* Registered so the accent can transition (an unregistered custom property switches instantly). */
+@property --m-live {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #3b1e3a;
+}
+
+@property --m-live-line {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #cda553;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    transition: --m-live var(--m-dur-3) var(--m-ease), --m-live-line var(--m-dur-3) var(--m-ease);
+  }
+}
+
+/* Tone classes: map a moment's tokens to the generic tile variables. Used by the tiles and the hero slides. */
+.m-tone--night {
+  --tile-bg: var(--moment-night);
+  --tile-ink: var(--moment-night-ink);
+  --tile-body: var(--moment-night-body);
+  --tile-accent: var(--moment-night-accent);
+  --tile-gold: var(--moment-night-gold);
+}
+
+.m-tone--gift {
+  --tile-bg: var(--moment-gift);
+  --tile-ink: var(--moment-gift-ink);
+  --tile-body: var(--moment-gift-body);
+  --tile-accent: var(--moment-gift-accent);
+  --tile-gold: var(--moment-gift-gold);
+}
+
+.m-tone--allday {
+  --tile-bg: var(--moment-allday);
+  --tile-ink: var(--moment-allday-ink);
+  --tile-body: var(--moment-allday-body);
+  --tile-accent: var(--moment-allday-accent);
+  --tile-gold: var(--moment-allday-gold);
+}
+
+.m-tone--daily {
+  --tile-bg: var(--moment-daily);
+  --tile-ink: var(--moment-daily-ink);
+  --tile-body: var(--moment-daily-body);
+  --tile-accent: var(--moment-daily-accent);
+  --tile-gold: var(--moment-daily-gold);
+}
+
+.m-tone--fresh {
+  --tile-bg: var(--moment-fresh);
+  --tile-ink: var(--moment-fresh-ink);
+  --tile-body: var(--moment-fresh-body);
+  --tile-accent: var(--moment-fresh-accent);
+  --tile-gold: var(--moment-fresh-gold);
+}
+
+.m-tone--love {
+  --tile-bg: var(--moment-love);
+  --tile-ink: var(--moment-love-ink);
+  --tile-body: var(--moment-love-body);
+  --tile-accent: var(--moment-love-accent);
+  --tile-gold: var(--moment-love-gold);
+}
+
+/* Outlined action, for the second button next to .m-btn on a dark or photographic surface. */
+.m-btn--outline {
+  background: transparent;
+  box-shadow: inset 0 0 0 1.5px currentcolor;
+  color: var(--m-pearl);
+}
+
+.m-btn--outline:hover {
+  background: var(--m-pearl);
+  color: var(--m-plum);
+}
+
+/* Header: search as a pill on desktop (icon only on phones). One hairline under the header. */
+.search-modal__label {
+  display: none;
+}
+
+@media screen and (min-width: 750px) {
+  .search-action .search-modal__button {
+    inline-size: auto;
+    min-inline-size: 200px;
+    justify-content: flex-start;
+    gap: 10px;
+    padding-inline: 14px 20px;
+    border: 1px solid var(--m-rule-quiet);
+    border-radius: 9999px;
+    color: var(--m-text-muted);
+  }
+
+  .search-action .search-modal__label {
+    display: inline;
+    font-size: 0.875rem;
+  }
+
+  .header__column--right .search-action {
+    margin-inline: 0;
+  }
 }
