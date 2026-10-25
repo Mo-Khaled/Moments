@@ -52,7 +52,7 @@ Also found: the `ai_gen_block_*` blocks were generated from prompts written for 
 |---|---|---|---|
 | I1 | `ibraq1bag.png` (product `ibraq-premium-gift-bag-large`, image 1) | A large faint watermark baked into the picture reads "HARAMAIN" and, under it, "…FINE FRAGRANCES · SINCE 2002" across the top of the bag. Visible on the product page and the gift-bags collection. | `watermark-ibraq-gift-bag.png`, `collection-gift-bags.png` |
 | I2 | `afnan-1.png` (product `afnan-gift-bag`, image 1) | Same baked watermark, "HARAMAIN … FRAGRANCES · SINCE 2002", across the lower front of the bag. | `watermark-afnan-gift-bag.png` |
-| I3 | `assaf-24.png`, `assa_f-24.png`, `assaf-23.png`, `afnan2.png`, `ibraq-2-bag.png` | **Not checked at full size.** No watermark visible at card size for the Assaf and orange Afnan bags. The second image of each bag is likely the same source. | needs a full-size check |
+| I3 | `afnan2.png`, both orange Afnan images, `assaf-24.png`, `ibraq-2-bag.png` | **Update after the full-size review:** the same watermark is present on all of these. **7 of the 8 bag images carry it**; only `assaf-23.png` is clean. See `image-ocr-report.md`. | **Needs new images** (7, not 2) |
 | I4 | About 60 product images (Afnan, Lattafa, home and ambiance) and the 6 moment tiles | No logo, watermark, URL, or phone visible at card size. Watermarks as faint as I1 and I2 could hide at thumbnail size. | I cannot OCR; a full-size review of the whole catalogue would be needed to rule them out |
 | I5 | Homepage hero | Shopify's demo illustration (already replaced in the dev theme) | n/a |
 
