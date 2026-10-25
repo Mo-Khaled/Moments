@@ -1,0 +1,352 @@
+{%- comment -%}
+  Shop by Moment: one tile treatment for all six moments. Same field, same crop, same label style and the large
+  Moment mark in every tile. A tile never mixes product shots, illustrations and stock photos.
+
+  Each tile is a block (collection, mark, label, optional photograph). Without a photograph the tile is the nude
+  field with the large mark, which is the finished look until moment photography exists. With a photograph the
+  same plum overlay is used on every tile, so photographs can be added one at a time without the grid looking mixed.
+  TODO: moment photography for every tile (see docs/design/phase-3-plan, "tiles that still need images").
+
+  Layout "feature": the first tile is tall, the next four fill a 2 x 2, and the last runs full width as a banner.
+  Layout "even": a plain 3 x 2 grid.
+{%- endcomment -%}
+
+<section class="m-moments" aria-labelledby="m-moments-title-{{ section.id }}">
+  <div class="m-wrap">
+    <header class="m-moments__head">
+      <h2 class="m-moments__title" id="m-moments-title-{{ section.id }}">
+        {%- if section.settings.heading != blank -%}
+          {{ section.settings.heading }}
+        {%- else -%}
+          {{ 'homepage.moments.heading' | t }}
+        {%- endif -%}
+      </h2>
+      <p class="m-moments__text">
+        {%- if section.settings.text != blank -%}
+          {{ section.settings.text }}
+        {%- else -%}
+          {{ 'homepage.moments.text' | t }}
+        {%- endif -%}
+      </p>
+    </header>
+
+    <ul class="m-moments__grid m-moments__grid--{{ section.settings.layout }}">
+      {%- for block in section.blocks -%}
+        {%- liquid
+          assign collection = block.settings.collection
+          assign label = block.settings.label
+          if label == blank
+            assign label = collection.title
+          endif
+          assign photo = block.settings.image
+        -%}
+        {%- if collection != blank -%}
+          <li class="m-tile-item" {{ block.shopify_attributes }}>
+            <a class="m-tile{% if photo != blank %} m-tile--photo{% endif %}" href="{{ collection.url }}" data-moment-host>
+              {%- if photo != blank -%}
+                {{
+                  photo
+                  | image_url: width: 900
+                  | image_tag:
+                    class: 'm-tile__photo',
+                    widths: '300, 450, 600, 900',
+                    sizes: '(min-width: 990px) 33vw, 50vw',
+                    loading: 'lazy',
+                    alt: ''
+                }}
+              {%- endif -%}
+              <span class="m-tile__mark">
+                {% render 'moment-mark', mark: block.settings.mark, size: 'lg' %}
+              </span>
+              <span class="m-tile__label">
+                <span class="m-tile__name">{{ label }}</span>
+                <span class="m-tile__count">{{ 'homepage.moments.count' | t: count: collection.products_count }}</span>
+              </span>
+            </a>
+          </li>
+        {%- endif -%}
+      {%- endfor -%}
+    </ul>
+
+    {%- if request.design_mode -%}
+      <p class="m-moments__todo">{{ 'homepage.moments.image_todo' | t }}</p>
+    {%- endif -%}
+  </div>
+</section>
+
+{% stylesheet %}
+  .m-moments {
+    padding-block: clamp(40px, 6vw, 88px);
+    background: var(--m-surface);
+  }
+
+  .m-moments__head {
+    display: grid;
+    gap: 8px;
+    margin-block-end: clamp(24px, 3vw, 40px);
+  }
+
+  .m-moments__title {
+    margin: 0;
+    color: var(--m-text);
+    font-size: clamp(1.875rem, 4vw, 2.75rem);
+    line-height: 1.1;
+  }
+
+  .m-moments__text {
+    margin: 0;
+    max-inline-size: 48ch;
+    color: var(--m-text-muted);
+    font-size: 1rem;
+    line-height: 1.55;
+  }
+
+  html[lang='ar'] .m-moments__title {
+    line-height: 1.35;
+  }
+
+  html[lang='ar'] .m-moments__text {
+    line-height: 1.7;
+  }
+
+  .m-moments__grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .m-tile-item {
+    display: flex;
+    min-inline-size: 0;
+  }
+
+  .m-tile {
+    --m-mark-body: var(--m-pearl);
+
+    position: relative;
+    isolation: isolate;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: flex-end;
+    min-block-size: 240px;
+    padding: 16px;
+    overflow: hidden;
+    background: var(--m-nude);
+    color: var(--m-text);
+    text-decoration: none;
+    transition: background-color var(--m-dur-2) var(--m-ease);
+  }
+
+  .m-tile:hover {
+    background: var(--m-nude-deep);
+  }
+
+  .m-tile:focus-visible {
+    outline: 2px solid var(--m-plum);
+    outline-offset: -4px;
+  }
+
+  /* The large mark sits in the upper corner, scaled down inside small tiles. */
+  .m-tile__mark {
+    position: absolute;
+    inset-block-start: 8px;
+    inset-inline-end: 8px;
+    z-index: 1;
+    transform: scale(0.72);
+    transform-origin: top right;
+  }
+
+  html[dir='rtl'] .m-tile__mark {
+    transform-origin: top left;
+  }
+
+  .m-tile__photo {
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+    inline-size: 100%;
+    block-size: 100%;
+    object-fit: cover;
+  }
+
+  /* One overlay for every photograph, so mixed sources still read as one set. */
+  .m-tile--photo::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: linear-gradient(to top, rgb(37 18 36 / 0.82), rgb(37 18 36 / 0.1) 62%);
+  }
+
+  .m-tile--photo {
+    color: var(--m-text-on-dark);
+  }
+
+  .m-tile__label {
+    display: grid;
+    gap: 4px;
+  }
+
+  /* Gold hairline above the label: the only accent in a tile. */
+  .m-tile__label::before {
+    content: '';
+    inline-size: 32px;
+    block-size: 1px;
+    margin-block-end: 8px;
+    background: var(--m-gold-ink);
+  }
+
+  .m-tile--photo .m-tile__label::before {
+    background: var(--m-accent-on-dark);
+  }
+
+  .m-tile__name {
+    font-family: var(--font-heading--family);
+    font-size: 1.375rem;
+    line-height: 1.15;
+  }
+
+  .m-tile__count {
+    color: var(--m-text-muted);
+    font-size: 0.8125rem;
+  }
+
+  .m-tile--photo .m-tile__count {
+    color: var(--m-nude);
+  }
+
+  html[lang='ar'] .m-tile__name {
+    line-height: 1.35;
+  }
+
+  .m-moments__todo {
+    margin: 12px 0 0;
+    color: var(--m-text-muted);
+    font-size: 0.75rem;
+  }
+
+  /* Phones: the first and last tile run across both columns. */
+  .m-moments__grid--feature > .m-tile-item:first-child,
+  .m-moments__grid--feature > .m-tile-item:last-child {
+    grid-column: 1 / -1;
+  }
+
+  @media screen and (min-width: 750px) {
+    .m-moments__grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .m-tile {
+      min-block-size: 280px;
+      padding: 24px;
+    }
+
+    .m-tile__mark {
+      inset-block-start: 16px;
+      inset-inline-end: 16px;
+      transform: none;
+    }
+
+    .m-tile__name {
+      font-size: 1.625rem;
+    }
+
+    /* Feature: the first tile is tall, the last is a full-width banner. */
+    .m-moments__grid--feature > .m-tile-item:first-child {
+      grid-column: 1;
+      grid-row: span 2;
+    }
+
+    .m-moments__grid--feature > .m-tile-item:last-child {
+      grid-column: 1 / -1;
+    }
+
+    .m-moments__grid--feature > .m-tile-item:last-child .m-tile {
+      min-block-size: 200px;
+    }
+
+    /* The tall tile has room for a bigger mark. */
+    .m-moments__grid--feature > .m-tile-item:first-child .m-tile__mark {
+      transform: scale(1.6);
+      inset-block-start: 56px;
+      inset-inline-end: 72px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .m-tile {
+      transition: none;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "MOMENTS shop by moment",
+  "limit": 1,
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading" },
+    { "type": "textarea", "id": "text", "label": "Text" },
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "Layout",
+      "options": [
+        { "value": "feature", "label": "Feature: tall first tile, full-width last tile" },
+        { "value": "even", "label": "Even: 3 x 2 grid" }
+      ],
+      "default": "feature"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "moment",
+      "name": "Moment tile",
+      "limit": 6,
+      "settings": [
+        { "type": "collection", "id": "collection", "label": "Collection" },
+        {
+          "type": "select",
+          "id": "mark",
+          "label": "Moment mark",
+          "options": [
+            { "value": "night", "label": "Night (lantern)" },
+            { "value": "gift", "label": "Gift (ribbon bottle)" },
+            { "value": "allday", "label": "All day (sun over waves)" },
+            { "value": "daily", "label": "Daily (lotus)" },
+            { "value": "fresh", "label": "Fresh (palm leaf)" },
+            { "value": "love", "label": "Love (rose)" }
+          ],
+          "default": "night"
+        },
+        { "type": "text", "id": "label", "label": "Label", "info": "Leave empty to use the collection title." },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Photograph (optional)",
+          "info": "TODO: moment photography. Same crop for all tiles, the plum overlay is added automatically."
+        }
+      ]
+    }
+  ],
+  "max_blocks": 6,
+  "presets": [
+    {
+      "name": "MOMENTS shop by moment",
+      "blocks": [
+        { "type": "moment", "settings": { "mark": "night" } },
+        { "type": "moment", "settings": { "mark": "gift" } },
+        { "type": "moment", "settings": { "mark": "allday" } },
+        { "type": "moment", "settings": { "mark": "daily" } },
+        { "type": "moment", "settings": { "mark": "fresh" } },
+        { "type": "moment", "settings": { "mark": "love" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

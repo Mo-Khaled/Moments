@@ -361,5 +361,36 @@
     "daily": "Daily",
     "fresh": "Fresh",
     "love": "Love"
+  },
+  "homepage": {
+    "hero": {
+      "headline": "Every moment deserves its scent",
+      "text": "100% original fragrances, curated for every moment of your day.",
+      "primary": "Shop fragrance",
+      "link": "Find your moment",
+      "photo_todo": "TODO: replace with the final hero photograph"
+    },
+    "pillars": {
+      "original_title": "100% original, sealed",
+      "original_text": "Every bottle arrives in its original sealed packaging.",
+      "cod_title": "Cash on delivery",
+      "cod_text": "Pay when your order arrives.",
+      "shipping_title": "Free shipping",
+      "shipping_text": "On orders over {{ amount }}.",
+      "returns_title": "Returns & exchange policy",
+      "returns_text": "Read the full policy before you order."
+    },
+    "moments": {
+      "heading": "Shop by Moment",
+      "text": "Six ways to wear a fragrance. Start with the one you are dressing for.",
+      "count": "{{ count }} products",
+      "image_todo": "TODO: moment photograph"
+    },
+    "story": {
+      "heading": "Fragrance, sorted by the moment",
+      "text": "MOMENTS is a fragrance store in Egypt. We sort every bottle by when you will wear it, so you can start from the moment you are dressing for instead of a brand name.",
+      "link": "Explore the moments",
+      "todo": "TODO: add the real brand story, founding year and team photograph. Only confirmed facts."
+    }
   }
 }

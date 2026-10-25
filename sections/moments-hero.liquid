@@ -1,0 +1,292 @@
+{%- comment -%}
+  Homepage hero. A static headline, one primary button and one text link, 560 px tall at most on desktop.
+  The image is the LCP element: it is rendered eagerly with fetchpriority high and responsive widths.
+
+  Image: pick one in the section settings. Until then it falls back to the Khadlaj Island Sun lifestyle photograph
+  from Settings > Files (island-sun-grid_05.png), and to a labelled placeholder if that file is missing.
+  TODO: replace with the final hero photograph.
+
+  Video (optional): upload a short loop in "Looping video". Keep it under 2 MB, no sound, about 6 to 10 seconds.
+  It stays hidden behind the poster image until it is playing. It loads only when the hero is in view, and never
+  loads for shoppers who prefer reduced motion or have data saver on.
+{%- endcomment -%}
+
+{%- liquid
+  assign hero_image = section.settings.image
+  if hero_image == blank
+    assign hero_image = images['island-sun-grid_05.png']
+  endif
+  assign video = section.settings.video
+
+  assign headline = section.settings.headline
+  if headline == blank
+    assign headline = 'homepage.hero.headline' | t
+  endif
+  assign text = section.settings.text
+  if text == blank
+    assign text = 'homepage.hero.text' | t
+  endif
+  assign primary_label = section.settings.primary_label
+  if primary_label == blank
+    assign primary_label = 'homepage.hero.primary' | t
+  endif
+  assign link_label = section.settings.link_label
+  if link_label == blank
+    assign link_label = 'homepage.hero.link' | t
+  endif
+-%}
+
+<section class="m-hero" aria-labelledby="m-hero-title-{{ section.id }}">
+  <div class="m-hero__inner m-wrap">
+    <div class="m-hero__copy">
+      <h1 class="m-hero__title" id="m-hero-title-{{ section.id }}">
+        {{ headline }}
+      </h1>
+      <p class="m-hero__text">{{ text }}</p>
+      <div class="m-hero__actions">
+        <a class="m-btn" href="{{ section.settings.primary_url | default: routes.all_products_collection_url }}">
+          {{- primary_label -}}
+        </a>
+        {%- if section.settings.link_url != blank -%}
+          <a class="m-link" href="{{ section.settings.link_url }}">
+            {{- link_label -}}
+          </a>
+        {%- endif -%}
+      </div>
+    </div>
+
+    <div class="m-hero__media">
+      {%- if hero_image != blank -%}
+        {{
+          hero_image
+          | image_url: width: 1120
+          | image_tag:
+            class: 'm-hero__image',
+            widths: '420, 560, 840, 1120',
+            sizes: '(min-width: 750px) 560px, 100vw',
+            loading: 'eager',
+            fetchpriority: 'high',
+            alt: section.settings.image_alt
+        }}
+      {%- else -%}
+        {% render 'hero-image-slot', class: 'm-hero__image' %}
+      {%- endif -%}
+
+      {%- if video != blank -%}
+        <video
+          class="m-hero__video"
+          muted
+          loop
+          playsinline
+          preload="none"
+          aria-hidden="true"
+          tabindex="-1"
+          {% if hero_image != blank %}
+            poster="{{ hero_image | image_url: width: 1120 }}"
+          {% endif %}
+          data-m-hero-video
+        >
+          {%- for source in video.sources -%}
+            <source src="{{ source.url }}" type="{{ source.mime_type }}">
+          {%- endfor -%}
+        </video>
+      {%- endif -%}
+
+      {%- if request.design_mode and section.settings.image == blank -%}
+        <p class="m-hero__todo">{{ 'homepage.hero.photo_todo' | t }}</p>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% stylesheet %}
+  .m-hero {
+    background: var(--m-plum);
+    color: var(--m-text-on-dark);
+  }
+
+  .m-hero__inner {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .m-hero__media {
+    position: relative;
+    order: -1;
+    aspect-ratio: 4 / 3;
+    max-block-size: 300px;
+    overflow: hidden;
+    background: var(--m-plum-900);
+  }
+
+  .m-hero__image,
+  .m-hero__video {
+    position: absolute;
+    inset: 0;
+    inline-size: 100%;
+    block-size: 100%;
+    object-fit: cover;
+    object-position: 50% 32%;
+  }
+
+  .m-hero__video {
+    opacity: 0;
+    transition: opacity var(--m-dur-3) var(--m-ease);
+  }
+
+  .m-hero__video[data-playing] {
+    opacity: 1;
+  }
+
+  .m-hero__copy {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 16px;
+    padding-block: 32px 40px;
+  }
+
+  /* The single gold accent in this band. */
+  .m-hero__copy::before {
+    content: '';
+    inline-size: 48px;
+    block-size: 1px;
+    background: var(--m-accent-on-dark);
+  }
+
+  .m-hero__title {
+    margin: 0;
+    max-inline-size: 14ch;
+    color: inherit;
+    font-size: clamp(2.25rem, 9vw, 3.75rem);
+    line-height: 1.05;
+    text-wrap: balance;
+  }
+
+  .m-hero__text {
+    margin: 0;
+    max-inline-size: 36ch;
+    color: var(--m-nude);
+    font-size: 1.0625rem;
+    line-height: 1.55;
+    text-wrap: pretty;
+  }
+
+  .m-hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 16px 28px;
+    margin-block-start: 8px;
+  }
+
+  .m-hero__todo {
+    position: absolute;
+    inset-inline: 0;
+    inset-block-end: 0;
+    margin: 0;
+    padding: 4px 12px;
+    background: var(--m-plum-900);
+    color: var(--m-pearl);
+    font-size: 0.75rem;
+    text-align: center;
+  }
+
+  html[lang='ar'] .m-hero__title {
+    line-height: 1.35;
+    max-inline-size: 12ch;
+  }
+
+  html[lang='ar'] .m-hero__text {
+    line-height: 1.7;
+  }
+
+  @media screen and (min-width: 750px) {
+    .m-hero__inner {
+      grid-template-columns: minmax(0, 1fr) 560px;
+      block-size: 560px;
+    }
+
+    .m-hero__media {
+      order: 0;
+      aspect-ratio: auto;
+      max-block-size: none;
+    }
+
+    .m-hero__copy {
+      gap: 24px;
+      padding-block: 48px;
+      padding-inline-end: 48px;
+    }
+
+    .m-hero__title {
+      font-size: clamp(2.75rem, 4.4vw, 4rem);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .m-hero__video {
+      display: none;
+    }
+  }
+{% endstylesheet %}
+
+{% javascript %}
+  (() => {
+    const video = document.querySelector('[data-m-hero-video]');
+    if (!video) return;
+
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const saveData = navigator.connection && navigator.connection.saveData;
+    if (reduced || saveData) return;
+
+    const play = () => {
+      video.preload = 'auto';
+      video.play().then(() => video.setAttribute('data-playing', '')).catch(() => {});
+    };
+
+    if (!('IntersectionObserver' in window)) return;
+
+    new IntersectionObserver((entries, observer) => {
+      if (entries.some((entry) => entry.isIntersecting)) {
+        observer.disconnect();
+        play();
+      }
+    }).observe(video);
+  })();
+{% endjavascript %}
+
+{% schema %}
+{
+  "name": "MOMENTS hero",
+  "tag": "div",
+  "class": "m-hero-section",
+  "limit": 1,
+  "settings": [
+    { "type": "header", "content": "Image" },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Hero image",
+      "info": "TODO: final photograph. Square or 4:3 works best, the bottle should sit near the centre. Left empty it uses the Island Sun photo from Files."
+    },
+    { "type": "text", "id": "image_alt", "label": "Image description", "info": "Leave empty if the photo is decorative." },
+    { "type": "header", "content": "Looping video (optional)" },
+    {
+      "type": "video",
+      "id": "video",
+      "label": "Looping video",
+      "info": "Muted, 6 to 10 seconds, under 2 MB. The hero image is shown until it plays. Not played with reduced motion or data saver."
+    },
+    { "type": "header", "content": "Text" },
+    { "type": "text", "id": "headline", "label": "Headline" },
+    { "type": "textarea", "id": "text", "label": "Text" },
+    { "type": "text", "id": "primary_label", "label": "Button label" },
+    { "type": "url", "id": "primary_url", "label": "Button link" },
+    { "type": "text", "id": "link_label", "label": "Text link label" },
+    { "type": "url", "id": "link_url", "label": "Text link" }
+  ],
+  "presets": [{ "name": "MOMENTS hero" }]
+}
+{% endschema %}

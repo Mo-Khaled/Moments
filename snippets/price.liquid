@@ -134,11 +134,13 @@ endif
 
   product-price .price-wrapper--original .compare-at-price--strikethrough,
   .price-wrapper--original .compare-at-price--strikethrough {
-    font-size: 14px !important;
+    font-size: 0.9375rem !important;
     font-weight: 600 !important;
     font-family: inherit !important;
-    color: rgb(var(--color-foreground-rgb) / var(--opacity-subdued-text));
+    color: var(--m-price-compare, #5e5048);
+    opacity: 1;
     text-decoration: line-through;
+    text-decoration-thickness: 1px;
     display: inline-block;
     line-height: 1.2;
   }
