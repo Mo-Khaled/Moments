@@ -13,13 +13,15 @@
       >
     {%- endif -%}
 
-    {% comment %} This a way to wait for main content to load when navigating to a new page so that the view transitions can work consistently {% endcomment %}
-    <link
-      rel="expect"
-      href="#MainContent"
-      blocking="render"
-      id="view-transition-render-blocker"
-    >
+    {% comment %} This a way to wait for main content to load when navigating to a new page so that the view transitions can work consistently. It blocks first paint, so it is only output when a view transition is switched on. {% endcomment %}
+    {%- if settings.page_transition_enabled or settings.transition_to_main_product -%}
+      <link
+        rel="expect"
+        href="#MainContent"
+        blocking="render"
+        id="view-transition-render-blocker"
+      >
+    {%- endif -%}
 
     {%- render 'meta-tags' -%}
     {%- render 'stylesheets' -%}
