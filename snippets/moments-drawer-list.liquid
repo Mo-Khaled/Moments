@@ -42,3 +42,22 @@
     {%- endif -%}
   {%- endfor -%}
 {%- endfor -%}
+
+{%- comment -%} About group at the bottom of the phone drawer: only pages that exist (set in Theme settings, Moments). {%- endcomment -%}
+{%- if settings.moments_page_about != blank or settings.moments_page_refer != blank or settings.moments_page_contact != blank or settings.moments_page_faq != blank -%}
+  <li class="menu-drawer__list-item--flat" style="--menu-drawer-animation-index: {{ index | plus: 1 }};">
+    <p class="menu-drawer__menu-item menu-drawer__animated-element" style="margin-block: 16px 0; font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; opacity: 0.8;">{{ 'about_menu.label' | t }}</p>
+  </li>
+  {%- assign about_pairs = 'moments_page_about|about_menu.about_us,moments_page_refer|about_menu.refer,moments_page_contact|about_menu.contact,moments_page_faq|about_menu.faq' | split: ',' -%}
+  {%- for pair in about_pairs -%}
+    {%- assign parts = pair | split: '|' -%}
+    {%- assign page_setting = settings[parts[0]] -%}
+    {%- if page_setting != blank -%}
+      <li class="menu-drawer__list-item--flat" style="--menu-drawer-animation-index: {{ index | plus: forloop.index | plus: 1 }};">
+        <a href="{{ page_setting.url }}" class="menu-drawer__menu-item menu-drawer__menu-item--mainlist menu-drawer__animated-element focus-inset">
+          <span class="menu-drawer__menu-item-text wrap-text">{{ parts[1] | t }}</span>
+        </a>
+      </li>
+    {%- endif -%}
+  {%- endfor -%}
+{%- endif -%}

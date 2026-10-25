@@ -2314,6 +2314,35 @@
         "default": true
       },
       {
+        "type": "header",
+        "content": "About menu (header) and footer"
+      },
+      {
+        "type": "page",
+        "id": "moments_page_about",
+        "label": "About page"
+      },
+      {
+        "type": "page",
+        "id": "moments_page_refer",
+        "label": "Refer a friend page"
+      },
+      {
+        "type": "page",
+        "id": "moments_page_contact",
+        "label": "Contact page"
+      },
+      {
+        "type": "page",
+        "id": "moments_page_faq",
+        "label": "FAQ page"
+      },
+      {
+        "type": "page",
+        "id": "moments_page_bundle",
+        "label": "Bundle page"
+      },
+      {
         "type": "text",
         "id": "moments_handles",
         "label": "t:settings.moments_handles",

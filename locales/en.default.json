@@ -494,5 +494,14 @@
       "email": "Email",
       "areas": "Where we deliver"
     }
+  },
+  "about_menu": {
+    "label": "About",
+    "who": "Who we are",
+    "help": "Help",
+    "about_us": "About us",
+    "refer": "Refer a friend",
+    "contact": "Contact us",
+    "faq": "FAQ"
   }
 }

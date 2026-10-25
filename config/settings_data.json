@@ -381,7 +381,9 @@
           "selected_variant_hover_border_color": "#251224"
         }
       }
-    }
+    },
+    "moments_page_about": "about-us",
+    "moments_page_contact": "contact"
   },
   "presets": {
     "Tinker": {}

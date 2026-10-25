@@ -1,0 +1,210 @@
+{%- doc -%}
+  The "About" dropdown at the inline-end of the header, beside search, account and cart (desktop; the phone drawer has an About group instead).
+  Two short columns: "Who we are" (About us, Refer a friend) and "Help" (Contact us, FAQ).
+  Links come from four page settings in Theme settings, Moments (About page, Refer page, Contact page, FAQ page), not from store menus.
+  A page that is not set (or does not exist yet) is not rendered, and a column with no links is not rendered at all, heading included.
+  Keyboard: Enter or Space opens, Down arrow opens and moves into the list, Up and Down walk the links, Escape closes and returns focus,
+  Tab leaves. aria-expanded on the trigger. Opens on click and tap everywhere, and on hover with a fine pointer. Mirrors in RTL.
+  Nothing is rendered if no page is set.
+
+  @example
+  {% render 'moments-about-menu' %}
+{%- enddoc -%}
+
+{%- liquid
+  assign p_about = settings.moments_page_about
+  assign p_refer = settings.moments_page_refer
+  assign p_contact = settings.moments_page_contact
+  assign p_faq = settings.moments_page_faq
+  assign has_who = false
+  if p_about != blank or p_refer != blank
+    assign has_who = true
+  endif
+  assign has_help = false
+  if p_contact != blank or p_faq != blank
+    assign has_help = true
+  endif
+-%}
+
+{%- if has_who or has_help -%}
+  <moments-about-menu class="mobile:hidden">
+    <button type="button" class="m-about-menu__trigger" aria-expanded="false" aria-controls="m-about-panel" aria-haspopup="true">
+      <span>{{ 'about_menu.label' | t }}</span>
+      <svg class="m-about-menu__chev" width="12" height="12" viewBox="0 0 12 12" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M2 4l4 4 4-4"/></svg>
+    </button>
+    <div class="m-about-menu__panel" id="m-about-panel" hidden>
+      {%- if has_who -%}
+        <div class="m-about-menu__col">
+          <p class="m-about-menu__heading">{{ 'about_menu.who' | t }}</p>
+          <ul>
+            {%- if p_about != blank -%}<li><a href="{{ p_about.url }}">{{ 'about_menu.about_us' | t }}</a></li>{%- endif -%}
+            {%- if p_refer != blank -%}<li><a href="{{ p_refer.url }}">{{ 'about_menu.refer' | t }}</a></li>{%- endif -%}
+          </ul>
+        </div>
+      {%- endif -%}
+      {%- if has_help -%}
+        <div class="m-about-menu__col">
+          <p class="m-about-menu__heading">{{ 'about_menu.help' | t }}</p>
+          <ul>
+            {%- if p_contact != blank -%}<li><a href="{{ p_contact.url }}">{{ 'about_menu.contact' | t }}</a></li>{%- endif -%}
+            {%- if p_faq != blank -%}<li><a href="{{ p_faq.url }}">{{ 'about_menu.faq' | t }}</a></li>{%- endif -%}
+          </ul>
+        </div>
+      {%- endif -%}
+    </div>
+  </moments-about-menu>
+{%- endif -%}
+
+{% stylesheet %}
+  moments-about-menu {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    margin-inline-end: 8px;
+  }
+
+  .m-about-menu__trigger {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    min-block-size: 44px;
+    padding-inline: 12px;
+    border: 0;
+    background: transparent;
+    color: var(--color-foreground);
+    font: inherit;
+    font-size: 1rem;
+    cursor: pointer;
+  }
+
+  .m-about-menu__trigger:focus-visible {
+    outline: 2px solid var(--m-plum);
+    outline-offset: 2px;
+  }
+
+  .m-about-menu__chev {
+    transition: transform var(--m-dur-2) var(--m-ease);
+  }
+
+  .m-about-menu__trigger[aria-expanded='true'] .m-about-menu__chev {
+    transform: rotate(180deg);
+  }
+
+  .m-about-menu__panel {
+    position: absolute;
+    inset-block-start: calc(100% + 8px);
+    inset-inline-end: 0;
+    z-index: 30;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(150px, 1fr));
+    gap: 24px;
+    min-inline-size: 360px;
+    padding: 20px 24px 12px;
+    background: var(--m-surface);
+    color: var(--m-text);
+    border: 1px solid var(--m-rule-quiet);
+  }
+
+  .m-about-menu__panel[hidden] {
+    display: none;
+  }
+
+  .m-about-menu__panel ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .m-about-menu__heading {
+    margin: 0 0 8px;
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  html[lang='ar'] .m-about-menu__heading {
+    letter-spacing: 0;
+    text-transform: none;
+  }
+
+  .m-about-menu__panel a {
+    display: block;
+    padding-block: 8px;
+    color: inherit;
+    font-size: 1rem;
+    text-decoration: none;
+  }
+
+  .m-about-menu__panel a:hover {
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+
+  .m-about-menu__panel a:focus-visible {
+    outline: 2px solid var(--m-plum);
+    outline-offset: 2px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .m-about-menu__chev {
+      transition: none;
+    }
+  }
+{% endstylesheet %}
+
+{% javascript %}
+  if (!customElements.get('moments-about-menu')) {
+    class MomentsAboutMenu extends HTMLElement {
+      connectedCallback() {
+        this.trigger = this.querySelector('.m-about-menu__trigger');
+        this.panel = this.querySelector('.m-about-menu__panel');
+        if (!this.trigger || !this.panel) return;
+        this.ac = new AbortController();
+        const o = { signal: this.ac.signal };
+        this.trigger.addEventListener('click', () => this.toggle(), o);
+        this.trigger.addEventListener('keydown', (e) => {
+          if (e.key === 'ArrowDown') { e.preventDefault(); this.open(); this.links()[0]?.focus(); }
+        }, o);
+        this.panel.addEventListener('keydown', (e) => this.onPanelKey(e), o);
+        this.addEventListener('focusout', (e) => { if (!this.contains(e.relatedTarget)) this.close(); }, o);
+        document.addEventListener('click', (e) => { if (!this.contains(e.target)) this.close(); }, o);
+        this.hoverMq = window.matchMedia('(hover: hover) and (pointer: fine)');
+        this.addEventListener('pointerenter', (e) => { if (e.pointerType === 'mouse' && this.hoverMq.matches) this.open(); }, o);
+        this.addEventListener('pointerleave', (e) => { if (e.pointerType === 'mouse' && this.hoverMq.matches) this.close(); }, o);
+      }
+
+      disconnectedCallback() {
+        if (this.ac) this.ac.abort();
+      }
+
+      links() {
+        return [...this.panel.querySelectorAll('a')];
+      }
+
+      open() {
+        this.panel.hidden = false;
+        this.trigger.setAttribute('aria-expanded', 'true');
+      }
+
+      close() {
+        if (this.panel.hidden) return;
+        this.panel.hidden = true;
+        this.trigger.setAttribute('aria-expanded', 'false');
+      }
+
+      toggle() {
+        if (this.panel.hidden) this.open(); else this.close();
+      }
+
+      onPanelKey(e) {
+        const list = this.links();
+        const i = list.indexOf(document.activeElement);
+        if (e.key === 'Escape') { e.preventDefault(); this.close(); this.trigger.focus(); }
+        else if (e.key === 'ArrowDown') { e.preventDefault(); list[Math.min(list.length - 1, i + 1)]?.focus(); }
+        else if (e.key === 'ArrowUp') { e.preventDefault(); if (i <= 0) this.trigger.focus(); else list[i - 1].focus(); }
+      }
+    }
+
+    customElements.define('moments-about-menu', MomentsAboutMenu);
+  }
+{% endjavascript %}
