@@ -111,7 +111,7 @@
           "type": "button",
           "settings": {
             "label": "Find Your Moment",
-            "link": "shopify://collections/all",
+            "link": "shopify://pages/moments",
             "open_in_new_tab": false,
             "style_class": "button",
             "width": "fit-content",
