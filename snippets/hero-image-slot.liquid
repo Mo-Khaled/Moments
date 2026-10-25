@@ -22,18 +22,18 @@
   .hero-image-slot {
     display: flex;
     align-items: flex-end;
-    justify-content: flex-start;
-    padding: var(--padding-lg, 24px);
     background: var(--m-plum);
     color: var(--m-pearl);
   }
 
+  /* A thin strip along the bottom edge: it sits inside the hero's bottom padding, so it never overlaps the buttons. */
   .hero-image-slot__label {
-    max-width: 28ch;
-    padding-block: var(--padding-xs, 8px);
-    padding-inline: var(--padding-md, 16px);
-    border: 1px dashed currentcolor;
-    font-size: var(--font-size--sm, 0.875rem);
-    line-height: 1.5;
+    inline-size: 100%;
+    padding-block: var(--padding-2xs, 4px);
+    padding-inline: var(--padding-sm, 12px);
+    border-block-start: 1px dashed currentcolor;
+    font-size: var(--font-size--xs, 0.75rem);
+    line-height: 1.4;
+    text-align: center;
   }
 {% endstylesheet %}
