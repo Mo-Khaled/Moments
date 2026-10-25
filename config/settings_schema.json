@@ -2307,6 +2307,13 @@
         "default": "shop by moment,brands,gifts"
       },
       {
+        "type": "checkbox",
+        "id": "moments_cursor",
+        "label": "Moment cursor companion",
+        "info": "A small token with the active moment's mark follows the mouse on desktop. Never on touch screens, under 768px, or with reduced motion.",
+        "default": true
+      },
+      {
         "type": "text",
         "id": "moments_handles",
         "label": "t:settings.moments_handles",

@@ -428,3 +428,17 @@ header-menu overflow-list[defer]::part(list) {
   color: var(--m-berry-ink);
   font-weight: 500;
 }
+
+/* Product cards: the bottle is never cropped. Images sit contained on a backdrop token inside the card frame. */
+html:root {
+  --m-card-backdrop: var(--m-surface-raised);
+}
+
+.card-gallery {
+  background: var(--m-card-backdrop);
+}
+
+.card-gallery .product-media__image,
+.card-gallery product-media img {
+  object-fit: contain;
+}
