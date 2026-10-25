@@ -91,4 +91,18 @@
     padding-inline-start: 12px;
     border-inline-start: 1px solid var(--m-rule-quiet);
   }
+
+  /* Two-column cards are too narrow for one row: the brand drops to its own line and the rule goes. */
+  @media screen and (max-width: 749px) {
+    .card-meta {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 2px;
+    }
+
+    .card-meta__moment + .card-meta__brand {
+      padding-inline-start: 0;
+      border-inline-start: 0;
+    }
+  }
 {% endstylesheet %}
