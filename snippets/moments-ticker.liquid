@@ -11,6 +11,7 @@
   @param {string} items - The <li> items for one repetition (markup).
   @param {number} duration - Seconds for one full loop, already computed from the speed setting.
   @param {string} [mode] - single (reduced motion shows the first item only) or wrap (reduced motion shows a wrapped row). Default single.
+  @param {number} [copies] - How many times the items repeat inside one group. Default 3. Use 1 when one repetition is already wider than the screen (the logo strip).
   @param {string} [class] - Extra classes on the root.
   @param {string} [label] - Accessible name of the region.
 
@@ -21,7 +22,7 @@
 
 {%- liquid
   assign ticker_mode = mode | default: 'single'
-  assign copies = 3
+  assign copy_count = copies | default: 3
 -%}
 
 <div
@@ -35,12 +36,12 @@
   <div class="m-ticker__track">
     <div class="m-ticker__group">
       <ul class="m-ticker__list">{{ items }}</ul>
-      {%- for i in (2..copies) -%}
+      {%- for i in (2..copy_count) -%}
         <ul class="m-ticker__list" aria-hidden="true" inert>{{ items }}</ul>
       {%- endfor -%}
     </div>
     <div class="m-ticker__group" aria-hidden="true" inert>
-      {%- for i in (1..copies) -%}
+      {%- for i in (1..copy_count) -%}
         <ul class="m-ticker__list">{{ items }}</ul>
       {%- endfor -%}
     </div>

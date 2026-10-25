@@ -80,11 +80,11 @@
               width="{{ w | round }}"
               height="{{ h | round }}"
               style="--m-logo-h: {{ h | round }}px"
-              loading="eager"
+              loading="lazy"
               decoding="async"
             >
           {%- elsif collection.image != blank -%}
-            {{ collection.image | image_url: width: 400 | image_tag: alt: collection.title, class: 'm-brands__fallback', loading: 'eager' }}
+            {{ collection.image | image_url: width: 400 | image_tag: alt: collection.title, class: 'm-brands__fallback', loading: 'lazy' }}
           {%- else -%}
             <span class="m-brands__name">{{ collection.title }}</span>
           {%- endif -%}
@@ -94,12 +94,12 @@
   {%- endfor -%}
 {%- endcapture -%}
 
-{%- assign duration = list_width | times: 3 | divided_by: speed | at_least: 20 -%}
+{%- assign duration = list_width | divided_by: speed | at_least: 20 -%}
 
 {%- assign region_label = 'homepage.brands.label' | t -%}
 
 <section class="m-brands" aria-label="{{ region_label }}">
-  {% render 'moments-ticker', items: items, duration: duration, mode: 'wrap', label: region_label %}
+  {% render 'moments-ticker', items: items, duration: duration, mode: 'wrap', copies: 1, label: region_label %}
 </section>
 
 {% stylesheet %}
