@@ -1,0 +1,73 @@
+{%- comment -%}
+  A row of footer links for items that are not in the header any more (Skin & Body, New Moments, Offers).
+  The links are read from an existing store menu by title (setting "Titles to show"), so no store menu is edited, and a title
+  that is not in the menu is simply not shown. If nothing matches, the section renders nothing.
+{%- endcomment -%}
+
+{%- liquid
+  assign wanted = section.settings.titles | downcase | replace: ', ', ',' | split: ','
+  assign source = section.settings.menu
+  assign shown = 0
+-%}
+
+{%- capture items -%}
+  {%- for key in wanted -%}
+    {%- for link in source.links -%}
+      {%- assign link_key = link.title | downcase | strip -%}
+      {%- if link_key == key -%}
+        {%- assign shown = shown | plus: 1 -%}
+        <li><a href="{{ link.url }}">{% render 'title-case', text: link.title %}</a></li>
+      {%- endif -%}
+    {%- endfor -%}
+  {%- endfor -%}
+{%- endcapture -%}
+
+{%- if shown > 0 -%}
+  <nav class="m-footer-links" aria-label="{{ 'about_menu.explore' | t }}">
+    <div class="m-wrap">
+      <ul class="m-footer-links__list">{{ items }}</ul>
+    </div>
+  </nav>
+{%- endif -%}
+
+{% stylesheet %}
+  .m-footer-links {
+    background: var(--m-plum);
+    color: var(--m-pearl);
+    border-block-start: 1px solid rgb(250 246 242 / 0.18);
+  }
+
+  .m-footer-links__list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 32px;
+    margin: 0;
+    padding: 20px 0;
+    list-style: none;
+  }
+
+  .m-footer-links__list a {
+    display: inline-block;
+    padding-block: 6px;
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .m-footer-links__list a:hover,
+  .m-footer-links__list a:focus-visible {
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "MOMENTS footer links",
+  "limit": 1,
+  "settings": [
+    { "type": "link_list", "id": "menu", "label": "Menu to read from", "default": "main-menu" },
+    { "type": "text", "id": "titles", "label": "Titles to show", "info": "Menu titles, comma-separated, no spaces after the commas.", "default": "skin & body,new moments,offers" }
+  ],
+  "presets": [{ "name": "MOMENTS footer links" }]
+}
+{% endschema %}

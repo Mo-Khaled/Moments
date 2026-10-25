@@ -442,3 +442,7 @@ html:root {
 .card-gallery product-media img {
   object-fit: contain;
 }
+
+html:root {
+  --m-radius-card: 16px;
+}

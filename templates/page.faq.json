@@ -1,0 +1,97 @@
+{
+  "sections": {
+    "faq": {
+      "type": "moments-faq",
+      "blocks": {
+        "q_ship": {
+          "type": "question",
+          "settings": {
+            "topic": "ship"
+          }
+        },
+        "q_cod": {
+          "type": "question",
+          "settings": {
+            "topic": "cod"
+          }
+        },
+        "q_orig": {
+          "type": "question",
+          "settings": {
+            "topic": "orig"
+          }
+        },
+        "q_returns": {
+          "type": "question",
+          "settings": {
+            "topic": "returns"
+          }
+        },
+        "q_gift": {
+          "type": "question",
+          "settings": {
+            "topic": "gift"
+          }
+        },
+        "q_areas": {
+          "type": "question",
+          "settings": {
+            "topic": "custom",
+            "group": "orders",
+            "question": "Which governorates do you deliver to?"
+          }
+        },
+        "q_time": {
+          "type": "question",
+          "settings": {
+            "topic": "custom",
+            "group": "orders",
+            "question": "How long does delivery take?"
+          }
+        },
+        "q_source": {
+          "type": "question",
+          "settings": {
+            "topic": "custom",
+            "group": "authenticity",
+            "question": "Where do your fragrances come from?"
+          }
+        },
+        "q_exchange": {
+          "type": "question",
+          "settings": {
+            "topic": "custom",
+            "group": "returns",
+            "question": "How do I ask for an exchange?"
+          }
+        },
+        "q_pay": {
+          "type": "question",
+          "settings": {
+            "topic": "custom",
+            "group": "payment",
+            "question": "Which other payment methods can I use?"
+          }
+        }
+      },
+      "block_order": [
+        "q_ship",
+        "q_cod",
+        "q_orig",
+        "q_returns",
+        "q_gift",
+        "q_areas",
+        "q_time",
+        "q_source",
+        "q_exchange",
+        "q_pay"
+      ],
+      "settings": {
+        "returns_url": "/pages/returns-exchange-policy"
+      }
+    }
+  },
+  "order": [
+    "faq"
+  ]
+}

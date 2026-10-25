@@ -295,12 +295,20 @@
         "padding-block-start": 20,
         "padding-block-end": 18
       }
+    },
+    "moments_footer_links": {
+      "type": "moments-footer-links",
+      "settings": {
+        "menu": "main-menu",
+        "titles": "skin & body,new moments,offers"
+      }
     }
   },
   "order": [
     "footer",
     "17650693132fb9bb25",
     "footer_PEjxWb",
+    "moments_footer_links",
     "utilities"
   ]
 }

@@ -1,0 +1,235 @@
+{%- comment -%}
+  Contact page: Shopify's own contact form ({% form 'contact' %}) with name, email, optional phone, optional order number and a message,
+  with success and error states. Next to it, a details block: support phone, support email, WhatsApp and delivery areas. Each of those is a
+  TODO slot that stays hidden on the storefront until it is filled (shown in the theme editor). No invented hours or numbers.
+  The FAQ link comes first, when a FAQ page is set in Theme settings.
+{%- endcomment -%}
+
+<section class="m-contact" aria-labelledby="m-contact-title-{{ section.id }}">
+  <div class="m-wrap m-contact__inner">
+    <div class="m-contact__intro">
+      <h1 class="m-contact__title" id="m-contact-title-{{ section.id }}">
+        {%- if section.settings.heading != blank -%}{{ section.settings.heading }}{%- else -%}{{ 'contact.heading' | t }}{%- endif -%}
+      </h1>
+      <p class="m-contact__text">{{ 'contact.text' | t }}</p>
+      {%- if settings.moments_page_faq != blank -%}
+        <p><a class="m-link" href="{{ settings.moments_page_faq.url }}">{{ 'contact.faq' | t }}</a></p>
+      {%- endif -%}
+
+      {%- liquid
+        assign phone = section.settings.phone
+        assign email = section.settings.email
+        assign whatsapp = section.settings.whatsapp
+        assign areas = section.settings.areas
+        assign has_details = false
+        if phone != blank or email != blank or whatsapp != blank or areas != blank
+          assign has_details = true
+        endif
+      -%}
+      {%- if has_details or request.design_mode -%}
+        <div class="m-contact__details">
+          <h2 class="m-contact__subtitle">{{ 'contact.details' | t }}</h2>
+          <dl>
+            {%- if phone != blank -%}<div><dt>{{ 'about_menu.contact' | t }}</dt><dd><a href="tel:{{ phone | remove: ' ' }}">{{ phone }}</a></dd></div>{%- elsif request.design_mode -%}<div class="m-contact__todo"><dt>Phone</dt><dd>TODO</dd></div>{%- endif -%}
+            {%- if email != blank -%}<div><dt>{{ 'contact.email' | t }}</dt><dd><a href="mailto:{{ email }}">{{ email }}</a></dd></div>{%- elsif request.design_mode -%}<div class="m-contact__todo"><dt>Email</dt><dd>TODO</dd></div>{%- endif -%}
+            {%- if whatsapp != blank -%}<div><dt>{{ 'contact.whatsapp' | t }}</dt><dd><a href="https://wa.me/{{ whatsapp | remove: ' ' | remove: '+' }}" rel="noopener" target="_blank">{{ whatsapp }}</a></dd></div>{%- elsif request.design_mode -%}<div class="m-contact__todo"><dt>WhatsApp</dt><dd>TODO</dd></div>{%- endif -%}
+            {%- if areas != blank -%}<div><dt>{{ 'contact.areas' | t }}</dt><dd>{{ areas }}</dd></div>{%- elsif request.design_mode -%}<div class="m-contact__todo"><dt>{{ 'contact.areas' | t }}</dt><dd>TODO</dd></div>{%- endif -%}
+          </dl>
+        </div>
+      {%- endif -%}
+    </div>
+
+    <div class="m-contact__form">
+      {%- form 'contact', id: 'm-contact-form', novalidate: 'novalidate' -%}
+        {%- if form.posted_successfully? -%}
+          <p class="m-contact__ok" role="status" tabindex="-1" autofocus>{{ 'contact.success' | t }}</p>
+        {%- endif -%}
+        {%- if form.errors -%}
+          <div class="m-contact__errors" role="alert" tabindex="-1" autofocus>
+            <p>{{ 'contact.error' | t }}</p>
+            <ul>
+              {%- for field in form.errors -%}
+                <li><a href="#m-contact-{{ field }}">{{ form.errors.translated_fields[field] | capitalize }} {{ form.errors.messages[field] }}</a></li>
+              {%- endfor -%}
+            </ul>
+          </div>
+        {%- endif -%}
+
+        <div class="m-field">
+          <label for="m-contact-name">{{ 'contact.name' | t }}</label>
+          <input id="m-contact-name" name="contact[name]" type="text" autocomplete="name" required value="{% if form.name %}{{ form.name }}{% elsif customer %}{{ customer.name }}{% endif %}" {% if form.errors contains 'name' %}aria-invalid="true"{% endif %}>
+        </div>
+        <div class="m-field">
+          <label for="m-contact-email">{{ 'contact.email' | t }}</label>
+          <input id="m-contact-email" name="contact[email]" type="email" autocomplete="email" required spellcheck="false" value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}" {% if form.errors contains 'email' %}aria-invalid="true"{% endif %}>
+        </div>
+        <div class="m-field">
+          <label for="m-contact-phone">{{ 'contact.phone' | t }}</label>
+          <input id="m-contact-phone" name="contact[phone]" type="tel" autocomplete="tel" value="{{ form.phone }}">
+        </div>
+        <div class="m-field">
+          <label for="m-contact-order">{{ 'contact.order' | t }}</label>
+          <input id="m-contact-order" name="contact[Order number]" type="text" inputmode="numeric" value="">
+        </div>
+        <div class="m-field">
+          <label for="m-contact-body">{{ 'contact.message' | t }}</label>
+          <textarea id="m-contact-body" name="contact[body]" rows="6" required {% if form.errors contains 'body' %}aria-invalid="true"{% endif %}>{{ form.body }}</textarea>
+        </div>
+        <button class="m-btn" type="submit">{{ 'contact.send' | t }}</button>
+      {%- endform -%}
+    </div>
+  </div>
+</section>
+
+{% stylesheet %}
+  .m-contact {
+    padding-block: clamp(40px, 6vw, 96px);
+    background: var(--m-surface);
+    color: var(--m-text);
+  }
+
+  .m-contact__inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 40px;
+  }
+
+  .m-contact__title {
+    margin: 0 0 12px;
+    font-size: clamp(2.25rem, 5vw, 4rem);
+    line-height: 1.02;
+  }
+
+  .m-contact__text {
+    margin: 0 0 16px;
+    max-inline-size: 44ch;
+    color: var(--m-text-muted);
+    line-height: 1.55;
+  }
+
+  .m-contact__subtitle {
+    margin: 32px 0 12px;
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  html[lang='ar'] .m-contact__subtitle {
+    letter-spacing: 0;
+    text-transform: none;
+  }
+
+  .m-contact dl {
+    display: grid;
+    gap: 12px;
+    margin: 0;
+  }
+
+  .m-contact dt {
+    font-size: 0.8125rem;
+    color: var(--m-text-muted);
+  }
+
+  .m-contact dd {
+    margin: 0;
+    font-size: 1.0625rem;
+  }
+
+  .m-contact dd a {
+    color: inherit;
+    text-underline-offset: 4px;
+  }
+
+  .m-contact__todo {
+    opacity: 0.55;
+  }
+
+  .m-contact__form {
+    padding: clamp(20px, 3vw, 40px);
+    background: var(--m-surface-raised);
+    border: 1px solid var(--m-rule-quiet);
+    border-radius: var(--m-radius-card, 16px);
+  }
+
+  .m-field {
+    display: grid;
+    gap: 6px;
+    margin-block-end: 16px;
+  }
+
+  .m-field label {
+    font-size: 0.875rem;
+  }
+
+  .m-field input,
+  .m-field textarea {
+    inline-size: 100%;
+    min-block-size: 48px;
+    padding: 12px 16px;
+    border: 1px solid var(--m-rule-quiet);
+    border-radius: 12px;
+    background: var(--m-surface);
+    color: inherit;
+    font: inherit;
+  }
+
+  .m-field input[aria-invalid='true'],
+  .m-field textarea[aria-invalid='true'] {
+    border-color: var(--m-berry-ink);
+    box-shadow: 0 0 0 1px var(--m-berry-ink);
+  }
+
+  .m-field input:focus-visible,
+  .m-field textarea:focus-visible {
+    outline: 2px solid var(--m-plum);
+    outline-offset: 2px;
+  }
+
+  .m-contact__ok,
+  .m-contact__errors {
+    margin: 0 0 20px;
+    padding: 12px 16px;
+    border-radius: 12px;
+  }
+
+  .m-contact__ok {
+    background: var(--m-nude);
+  }
+
+  .m-contact__errors {
+    border: 1px solid var(--m-berry-ink);
+    color: var(--m-berry-ink);
+  }
+
+  .m-contact__errors ul {
+    margin: 8px 0 0;
+    padding-inline-start: 20px;
+  }
+
+  .m-contact__errors a {
+    color: inherit;
+  }
+
+  @media screen and (min-width: 990px) {
+    .m-contact__inner {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 96px;
+      align-items: start;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "MOMENTS contact",
+  "limit": 1,
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading" },
+    { "type": "text", "id": "phone", "label": "Support phone", "info": "TODO: owner. Hidden until filled." },
+    { "type": "text", "id": "email", "label": "Support email", "info": "TODO: owner. Hidden until filled." },
+    { "type": "text", "id": "whatsapp", "label": "WhatsApp number", "info": "International format, for example +20... TODO: owner. Hidden until filled." },
+    { "type": "textarea", "id": "areas", "label": "Governorates we deliver to", "info": "TODO: owner. Hidden until filled." }
+  ],
+  "presets": [{ "name": "MOMENTS contact" }]
+}
+{% endschema %}

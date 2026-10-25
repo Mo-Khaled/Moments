@@ -1,0 +1,343 @@
+{%- comment -%}
+  FAQ: grouped accordions (native details and summary, so they work with the keyboard and without JavaScript), a search field that
+  filters on the client, and FAQPage structured data for the answered questions only.
+  Answers are written only from claims the store can stand behind: 100% original and sealed, cash on delivery, the free shipping amount
+  (theme setting "Free shipping above"), and a link to the returns and exchange policy page. A question with no answer (a TODO slot) is
+  hidden on the storefront and shown in the theme editor. Nothing here states a return window or any delivery time.
+  Standard topics have translated question and answer text; "Custom" blocks carry their own.
+{%- endcomment -%}
+
+{%- liquid
+  assign threshold = settings.moments_free_shipping | times: 100 | money_without_trailing_zeros
+  assign group_keys = 'orders,authenticity,returns,payment,gifting' | split: ','
+-%}
+
+{%- capture items_json -%}
+  {%- for block in section.blocks -%}
+    {%- liquid
+      assign q = block.settings.question
+      assign a = block.settings.answer
+      case block.settings.topic
+        when 'ship'
+          assign q = 'faq.topic_ship_q' | t
+          assign a = 'faq.topic_ship_a' | t: amount: threshold
+          assign g = 'orders'
+        when 'cod'
+          assign q = 'faq.topic_cod_q' | t
+          assign a = 'faq.topic_cod_a' | t
+          assign g = 'payment'
+        when 'orig'
+          assign q = 'faq.topic_orig_q' | t
+          assign a = 'faq.topic_orig_a' | t
+          assign g = 'authenticity'
+        when 'returns'
+          assign q = 'faq.topic_returns_q' | t
+          assign a = 'faq.topic_returns_a' | t
+          assign g = 'returns'
+        when 'gift'
+          assign q = 'faq.topic_gift_q' | t
+          assign a = 'faq.topic_gift_a' | t
+          assign g = 'gifting'
+        else
+          assign g = block.settings.group
+      endcase
+      assign a_plain = a | strip_html | strip
+    -%}
+    {%- if q != blank and a_plain != blank -%}
+      {"@type":"Question","name":{{ q | json }},"acceptedAnswer":{"@type":"Answer","text":{{ a_plain | json }}}},
+    {%- endif -%}
+  {%- endfor -%}
+{%- endcapture -%}
+
+<section class="m-faq" aria-labelledby="m-faq-title-{{ section.id }}" data-m-faq>
+  <div class="m-wrap m-faq__inner">
+    <header class="m-faq__head">
+      <h1 class="m-faq__title" id="m-faq-title-{{ section.id }}">
+        {%- if section.settings.heading != blank -%}{{ section.settings.heading }}{%- else -%}{{ 'faq.heading' | t }}{%- endif -%}
+      </h1>
+      <p class="m-faq__text">{{ 'faq.text' | t }}</p>
+      <label class="m-faq__search">
+        <span class="m-sr-only">{{ 'faq.search' | t }}</span>
+        <input type="search" placeholder="{{ 'faq.search' | t }}" autocomplete="off" data-m-faq-search>
+      </label>
+    </header>
+
+    {%- for group in group_keys -%}
+      {%- capture group_items -%}
+        {%- for block in section.blocks -%}
+          {%- liquid
+            assign q = block.settings.question
+            assign a = block.settings.answer
+            assign g = block.settings.group
+            assign link_to_returns = false
+            case block.settings.topic
+              when 'ship'
+                assign q = 'faq.topic_ship_q' | t
+                assign a = 'faq.topic_ship_a' | t: amount: threshold
+                assign g = 'orders'
+              when 'cod'
+                assign q = 'faq.topic_cod_q' | t
+                assign a = 'faq.topic_cod_a' | t
+                assign g = 'payment'
+              when 'orig'
+                assign q = 'faq.topic_orig_q' | t
+                assign a = 'faq.topic_orig_a' | t
+                assign g = 'authenticity'
+              when 'returns'
+                assign q = 'faq.topic_returns_q' | t
+                assign a = 'faq.topic_returns_a' | t
+                assign g = 'returns'
+                assign link_to_returns = true
+              when 'gift'
+                assign q = 'faq.topic_gift_q' | t
+                assign a = 'faq.topic_gift_a' | t
+                assign g = 'gifting'
+            endcase
+            assign a_plain = a | strip_html | strip
+            assign show = false
+            if q != blank and a_plain != blank
+              assign show = true
+            endif
+          -%}
+          {%- if g == group and q != blank -%}
+            {%- if show or request.design_mode -%}
+              <details class="m-faq__item{% unless show %} m-faq__item--todo{% endunless %}" data-m-faq-item {{ block.shopify_attributes }}>
+                <summary>{{ q }}</summary>
+                <div class="m-faq__answer">
+                  {%- if show -%}
+                    <p>{{ a }}</p>
+                    {%- if link_to_returns and section.settings.returns_url != blank -%}
+                      <p><a href="{{ section.settings.returns_url }}">{{ 'faq.topic_returns_link' | t }}</a></p>
+                    {%- endif -%}
+                  {%- else -%}
+                    <p>{{ 'faq.todo' | t }}</p>
+                  {%- endif -%}
+                </div>
+              </details>
+            {%- endif -%}
+          {%- endif -%}
+        {%- endfor -%}
+      {%- endcapture -%}
+      {%- assign group_trim = group_items | strip -%}
+      {%- if group_trim != blank -%}
+        {%- assign group_label_key = 'faq.group_' | append: group -%}
+        <div class="m-faq__group" data-m-faq-group>
+          <h2 class="m-faq__group-title">{{ group_label_key | t }}</h2>
+          {{ group_items }}
+        </div>
+      {%- endif -%}
+    {%- endfor -%}
+
+    <p class="m-faq__empty" data-m-faq-empty hidden>{{ 'faq.no_results' | t }}</p>
+
+    {%- if settings.moments_page_contact != blank -%}
+      <p class="m-faq__more"><a class="m-btn" href="{{ settings.moments_page_contact.url }}">{{ 'faq.contact' | t }}</a></p>
+    {%- endif -%}
+  </div>
+</section>
+
+{%- assign items_clean = items_json | strip -%}
+{%- if items_clean != blank -%}
+  <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{{ items_clean | strip | remove_last: ',' }}]}
+  </script>
+{%- endif -%}
+
+{% stylesheet %}
+  .m-faq {
+    padding-block: clamp(40px, 6vw, 96px);
+    background: var(--m-surface);
+    color: var(--m-text);
+  }
+
+  .m-faq__inner {
+    display: grid;
+    gap: 32px;
+    max-inline-size: calc(52rem + 2 * var(--m-gutter));
+  }
+
+  .m-faq__title {
+    margin: 0;
+    font-size: clamp(2.25rem, 5vw, 4rem);
+    line-height: 1.02;
+  }
+
+  .m-faq__text {
+    margin: 8px 0 20px;
+    max-inline-size: 50ch;
+    color: var(--m-text-muted);
+    line-height: 1.55;
+  }
+
+  .m-faq__search input {
+    inline-size: 100%;
+    min-block-size: 48px;
+    padding-inline: 20px;
+    border: 1px solid var(--m-rule-quiet);
+    border-radius: 9999px;
+    background: var(--m-surface-raised);
+    color: inherit;
+    font: inherit;
+  }
+
+  .m-faq__search input:focus-visible {
+    outline: 2px solid var(--m-plum);
+    outline-offset: 2px;
+  }
+
+  .m-faq__group-title {
+    margin: 0 0 8px;
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--m-text-muted);
+  }
+
+  html[lang='ar'] .m-faq__group-title {
+    letter-spacing: 0;
+    text-transform: none;
+  }
+
+  .m-faq__item {
+    border-block-end: 1px solid var(--m-rule-quiet);
+  }
+
+  .m-faq__item summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    min-block-size: 56px;
+    padding-block: 12px;
+    font-family: var(--font-heading--family);
+    font-size: 1.25rem;
+    line-height: 1.25;
+    cursor: pointer;
+    list-style: none;
+  }
+
+  .m-faq__item summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .m-faq__item summary::after {
+    content: '+';
+    flex: none;
+    font-family: var(--font-body--family);
+    font-size: 1.5rem;
+    line-height: 1;
+  }
+
+  .m-faq__item[open] summary::after {
+    content: '\2212';
+  }
+
+  .m-faq__item summary:focus-visible {
+    outline: 2px solid var(--m-plum);
+    outline-offset: 2px;
+  }
+
+  .m-faq__answer {
+    padding-block-end: 16px;
+    max-inline-size: 60ch;
+    line-height: 1.6;
+  }
+
+  .m-faq__answer p {
+    margin: 0 0 8px;
+  }
+
+  .m-faq__answer a {
+    color: var(--m-berry-ink);
+    text-underline-offset: 4px;
+  }
+
+  .m-faq__item--todo {
+    opacity: 0.6;
+  }
+
+  html[lang='ar'] .m-faq__item summary {
+    line-height: 1.5;
+  }
+
+  html[lang='ar'] .m-faq__answer {
+    line-height: 1.8;
+  }
+
+  .m-faq__more {
+    margin: 8px 0 0;
+  }
+{% endstylesheet %}
+
+{% javascript %}
+  (() => {
+    const root = document.querySelector('[data-m-faq]');
+    if (!root) return;
+    const input = root.querySelector('[data-m-faq-search]');
+    const items = [...root.querySelectorAll('[data-m-faq-item]')];
+    const groups = [...root.querySelectorAll('[data-m-faq-group]')];
+    const empty = root.querySelector('[data-m-faq-empty]');
+    input.addEventListener('input', () => {
+      const q = input.value.trim().toLowerCase();
+      let shown = 0;
+      items.forEach((item) => {
+        const hit = !q || item.textContent.toLowerCase().includes(q);
+        item.hidden = !hit;
+        if (hit) shown++;
+        if (q && hit) item.open = true;
+      });
+      groups.forEach((g) => { g.hidden = ![...g.querySelectorAll('[data-m-faq-item]')].some((i) => !i.hidden); });
+      empty.hidden = shown > 0;
+    });
+  })();
+{% endjavascript %}
+
+{% schema %}
+{
+  "name": "MOMENTS FAQ",
+  "limit": 1,
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading" },
+    { "type": "url", "id": "returns_url", "label": "Returns and exchange policy page" }
+  ],
+  "blocks": [
+    {
+      "type": "question",
+      "name": "Question",
+      "settings": [
+        {
+          "type": "select",
+          "id": "topic",
+          "label": "Topic",
+          "info": "Standard topics have translated, confirmed answers. Choose Custom to write your own.",
+          "options": [
+            { "value": "ship", "label": "Shipping cost (from theme setting)" },
+            { "value": "cod", "label": "Cash on delivery" },
+            { "value": "orig", "label": "Original and sealed" },
+            { "value": "returns", "label": "Returns policy (link only)" },
+            { "value": "gift", "label": "Choosing a gift" },
+            { "value": "custom", "label": "Custom" }
+          ],
+          "default": "custom"
+        },
+        {
+          "type": "select",
+          "id": "group",
+          "label": "Group (custom only)",
+          "options": [
+            { "value": "orders", "label": "Orders and delivery" },
+            { "value": "authenticity", "label": "Authenticity" },
+            { "value": "returns", "label": "Returns and exchange" },
+            { "value": "payment", "label": "Payment" },
+            { "value": "gifting", "label": "Gifting" }
+          ],
+          "default": "orders"
+        },
+        { "type": "text", "id": "question", "label": "Question (custom only)" },
+        { "type": "richtext", "id": "answer", "label": "Answer (custom only)", "info": "TODO slots: leave empty to hide until you have a confirmed answer." }
+      ]
+    }
+  ],
+  "presets": [{ "name": "MOMENTS FAQ" }]
+}
+{% endschema %}

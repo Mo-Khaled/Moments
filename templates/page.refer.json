@@ -1,0 +1,11 @@
+{
+  "sections": {
+    "refer": {
+      "type": "moments-refer",
+      "settings": {}
+    }
+  },
+  "order": [
+    "refer"
+  ]
+}
