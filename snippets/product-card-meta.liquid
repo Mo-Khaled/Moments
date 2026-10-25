@@ -59,7 +59,7 @@
       </span>
     {%- endif -%}
     {%- if want_brand and product.vendor != blank -%}
-      <span class="card-meta__brand">{{ product.vendor }}</span>
+      <span class="card-meta__brand">{% render 'vendor-name', vendor: product.vendor %}</span>
     {%- endif -%}
   </div>
 {%- endif -%}

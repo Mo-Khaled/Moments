@@ -158,7 +158,7 @@
                   </p>
                   {% if item.product.vendor and block_settings.vendor %}
                     <p>
-                      {{ item.product.vendor }}
+                      {% render 'vendor-name', vendor: item.product.vendor %}
                     </p>
                   {% endif %}
 

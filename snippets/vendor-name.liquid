@@ -1,0 +1,17 @@
+{%- doc -%}
+  Outputs a product's vendor for display. A vendor whose name contains "Haramain" (store data inherited from another shop, still
+  on the gift bags) is shown as "MOMENTS", per the approved decision for generic gift bags. This is a display rule only: nothing in
+  the store is changed. The real fix (renaming the vendor, which also changes the vendor-based smart collections) waits for approval.
+
+  @param {string} vendor - The product vendor.
+
+  @example
+  {% render 'vendor-name', vendor: product.vendor %}
+{%- enddoc -%}
+
+{%- assign vendor_check = vendor | downcase -%}
+{%- if vendor_check contains 'haramain' -%}
+  {{- shop.name -}}
+{%- else -%}
+  {{- vendor -}}
+{%- endif -%}
