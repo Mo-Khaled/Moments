@@ -1,0 +1,121 @@
+{%- doc -%}
+  The two-part product name, the signature device of the MOMENTS card.
+  The first word names the line (Rare, Supremacy, 9 PM) in the heading font; the rest names the variant
+  (Reef, Collector's Edition, Night Out) in a lighter, wider style. One-word names show only the first part.
+
+  Split rule: the first word, or the first two words when the name starts with a number and the next word is
+  one or two letters (9 PM, 9 AM). Titles typed in capitals are normalised to capitalised words, short
+  words of one or two letters (AM, PM, XO) stay in capitals. A title with lowercase letters keeps its own casing.
+  Arabic titles split the same way and take no uppercase or letter-spacing.
+
+  @param {object} product - The product.
+  @param {string} [class] - Extra classes.
+
+  @example
+  {% render 'product-name', product: product %}
+{%- enddoc -%}
+
+{%- liquid
+  assign raw_title = product.title | strip | escape_once
+  assign words = raw_title | split: ' '
+  assign upper_title = raw_title | upcase
+  assign has_lowercase = false
+  if raw_title != upper_title
+    assign has_lowercase = true
+  endif
+
+  assign first_count = 1
+  if words.size > 2
+    assign second = words[1]
+    assign starts_numeric = words[0] | plus: 0
+    if starts_numeric > 0 and second.size < 3
+      assign first_count = 2
+    endif
+  elsif words.size == 2
+    assign second = words[1]
+    assign starts_numeric = words[0] | plus: 0
+    if starts_numeric > 0 and second.size < 3
+      assign first_count = 2
+    endif
+  endif
+
+  capture first_part
+    for word in words limit: first_count
+      unless forloop.first
+        echo ' '
+      endunless
+      if has_lowercase
+        echo word
+      elsif word.size < 3
+        echo word | upcase
+      else
+        echo word | downcase
+      endif
+    endfor
+  endcapture
+
+  capture rest_part
+    for word in words offset: first_count
+      unless forloop.first
+        echo ' '
+      endunless
+      if has_lowercase
+        echo word
+      elsif word.size < 3
+        echo word | upcase
+      else
+        echo word | downcase
+      endif
+    endfor
+  endcapture
+  assign rest_part = rest_part | strip
+-%}
+
+<span class="product-name {{ class }}">
+  <span class="product-name__first">{{ first_part | strip }}</span>
+  {%- if rest_part != blank %} <span class="product-name__rest">{{ rest_part }}</span>{% endif -%}
+</span>
+
+{% stylesheet %}
+  .product-name {
+    display: block;
+    line-height: 1.15;
+    text-wrap: balance;
+  }
+
+  .product-name__first {
+    display: block;
+    color: var(--m-card-name-first);
+    font-family: var(--font-heading--family);
+    font-weight: var(--font-heading--weight);
+    font-size: 1.375rem;
+    text-transform: capitalize;
+  }
+
+  .product-name__rest {
+    display: block;
+    margin-block-start: 2px;
+    color: var(--m-card-name-rest);
+    font-family: var(--font-body--family);
+    font-weight: 300;
+    font-size: 0.8125rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  /* Arabic joins its letters: no capitals, no letter-spacing. */
+  html[lang='ar'] .product-name__first,
+  html[lang='ar'] .product-name__rest {
+    text-transform: none;
+    letter-spacing: 0;
+  }
+
+  html[lang='ar'] .product-name__first {
+    font-size: 1.25rem;
+    line-height: 1.35;
+  }
+
+  html[lang='ar'] .product-name__rest {
+    font-size: 0.875rem;
+  }
+{% endstylesheet %}

@@ -1,0 +1,94 @@
+{%- doc -%}
+  The small label row above a product name on a card: the moment mark and word, then the brand.
+
+  The moment comes from the six moment collections. They are manual collections (not tag based), so the
+  product's collection handles are compared with the ordered list in the theme setting "Moment collections".
+  When a product is in several moments the first handle in that list wins: the list runs from the most
+  specific moment (Gift) to the broadest (Daily), which is the fixed tiebreak.
+  A handle is turned into its mark and label by name: night-moment gives the night mark and the label
+  from the locale key moments.night, all-day-moment gives allday and moments.all_day. Any other handle
+  falls back to the collection title and no mark, so a new moment needs no code.
+
+  @param {object} product - The product.
+  @param {boolean} [show_moment] - Show the moment label. Default true.
+  @param {boolean} [show_brand] - Show the vendor. Default true.
+
+  @example
+  {% render 'product-card-meta', product: product, show_moment: true, show_brand: true %}
+{%- enddoc -%}
+
+{%- liquid
+  assign want_moment = show_moment | default: true
+  assign want_brand = show_brand | default: true
+  assign moment_collection = null
+  assign moment_label = ''
+  assign moment_key = ''
+
+  if want_moment and settings.moments_handles != blank
+    assign handles = settings.moments_handles | split: ','
+    for handle in handles
+      assign handle = handle | strip
+      assign hit = product.collections | where: 'handle', handle | first
+      if hit != blank
+        assign moment_collection = hit
+        assign moment_key = handle | remove: '-moment' | replace: '-', '_'
+        break
+      endif
+    endfor
+
+    if moment_collection != blank
+      assign label_key = 'moments.' | append: moment_key
+      assign moment_label = label_key | t
+      if moment_label contains 'translation missing'
+        assign moment_label = moment_collection.title
+        assign moment_key = ''
+      endif
+    endif
+  endif
+-%}
+
+{%- if moment_label != blank or want_brand and product.vendor != blank -%}
+  <div class="card-meta">
+    {%- if moment_label != blank -%}
+      <span class="card-meta__moment">
+        {%- if moment_key != '' -%}
+          {%- assign mark_name = moment_key | remove: '_' -%}
+          {% render 'moment-mark', mark: mark_name %}
+        {%- endif -%}
+        <span>{{ moment_label }}</span>
+      </span>
+    {%- endif -%}
+    {%- if want_brand and product.vendor != blank -%}
+      <span class="card-meta__brand">{{ product.vendor }}</span>
+    {%- endif -%}
+  </div>
+{%- endif -%}
+
+{% stylesheet %}
+  .card-meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 4px 12px;
+    margin-block-end: 6px;
+    color: var(--m-card-meta);
+    font-size: 0.8125rem;
+    line-height: 1.3;
+  }
+
+  .card-meta__moment {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .card-meta__brand {
+    color: var(--m-card-meta);
+  }
+
+  /* A thin rule between the moment and the brand, not a dot. */
+  .card-meta__moment + .card-meta__brand {
+    padding-inline-start: 12px;
+    border-inline-start: 1px solid var(--m-rule-quiet);
+  }
+{% endstylesheet %}

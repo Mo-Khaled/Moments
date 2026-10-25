@@ -2284,5 +2284,21 @@
         "default": "equal-width-buttons"
       }
     ]
+  },
+  {
+    "name": "t:names.moments",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "t:content.moments_intro"
+      },
+      {
+        "type": "text",
+        "id": "moments_handles",
+        "label": "t:settings.moments_handles",
+        "info": "t:info.moments_handles",
+        "default": "gift-moment,love-moment,night-moment,all-day-moment,fresh-moment,daily-moment"
+      }
+    ]
   }
 ]
