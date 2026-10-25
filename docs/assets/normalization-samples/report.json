@@ -1,0 +1,56 @@
+[
+ {
+  "handle": "samou-al-oud-40gm",
+  "title": "OUD MUATTAR SAMOU AL OUD",
+  "vendor": "KHADLAJ",
+  "source": "1071x1499",
+  "bottle_px_before": 480,
+  "upscale": 3.33,
+  "needs_better_source": true
+ },
+ {
+  "handle": "for-men-only",
+  "title": "FAQAT LIL RIJAL",
+  "vendor": "RASASI PERFUMES",
+  "source": "800x1066",
+  "bottle_px_before": 524,
+  "upscale": 3.05,
+  "needs_better_source": true
+ },
+ {
+  "handle": "mamoul-oud-azraq",
+  "title": "MAMOUL OUD AZRAQ",
+  "vendor": "ALMAS PERFUMES",
+  "source": "660x900",
+  "bottle_px_before": 402,
+  "upscale": 3.98,
+  "needs_better_source": true
+ },
+ {
+  "handle": "club-de-nuit-imperiale",
+  "title": "CLUB DE NUIT IMPERIALE",
+  "vendor": "ARMAF",
+  "source": "800x800",
+  "bottle_px_before": 544,
+  "upscale": 2.94,
+  "needs_better_source": true
+ },
+ {
+  "handle": "9-pm-night-out",
+  "title": "9 PM NIGHT OUT",
+  "vendor": "AFNAN",
+  "source": "1600x1600",
+  "bottle_px_before": 1157,
+  "upscale": 1.38,
+  "needs_better_source": true
+ },
+ {
+  "handle": "hawas-ice",
+  "title": "HAWAS ICE",
+  "vendor": "RASASI PERFUMES",
+  "source": "800x800",
+  "bottle_px_before": 714,
+  "upscale": 2.24,
+  "needs_better_source": true
+ }
+]
