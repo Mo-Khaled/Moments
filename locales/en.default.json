@@ -364,11 +364,8 @@
   },
   "homepage": {
     "hero": {
-      "headline": "Every moment deserves its scent",
       "text": "100% original fragrances, curated for every moment of your day.",
-      "primary": "Shop fragrance",
       "link": "Find your moment",
-      "photo_todo": "TODO: replace with the final hero photograph",
       "label": "Featured moments",
       "switcher": "Choose a moment",
       "pause": "Pause video",
@@ -417,9 +414,7 @@
       "heading": "Shop by Moment",
       "text": "Six ways to wear a fragrance. Start with the one you are dressing for.",
       "count": "{{ count }} products",
-      "image_todo": "TODO: moment photograph",
-      "total": "{{ count }} moments",
-      "find": "Find your moment"
+      "total": "{{ count }} moments"
     },
     "story": {
       "heading": "Fragrance, sorted by the moment",
@@ -440,13 +435,10 @@
     },
     "mega": {
       "all": "All fragrances",
-      "moments": "Shop by moment",
-      "brands": "Brands",
       "edits": "The edits",
       "bestsellers": "Best sellers",
       "new": "New arrivals",
       "gifts": "Gifts",
-      "discover": "Discover",
       "all_brands": "All brands",
       "shop_by": "Shop by"
     }
@@ -459,7 +451,6 @@
       "play_close": "Close video"
     },
     "trust": {
-      "cod_link": "Cash on delivery",
       "shipping_link": "Shipping policy"
     },
     "sell": {
@@ -502,10 +493,6 @@
       "phone": "Phone",
       "email": "Email",
       "areas": "Where we deliver"
-    },
-    "signup": {
-      "heading": "Be the first to know",
-      "text": "New moments, new arrivals and the occasional offer."
     }
   }
 }
