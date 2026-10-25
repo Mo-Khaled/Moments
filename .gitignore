@@ -1,14 +1,47 @@
+# Shopify CLI
 .shopify/
+
+# Dependencies
 node_modules/
+scripts/node_modules/
+
+# OS and editor files
 .DS_Store
+Thumbs.db
+desktop.ini
+.idea/
+.vscode/*
+!.vscode/extensions.json
+*.swp
+
+# Secrets and local settings: never commit tokens, keys or per-machine settings
+.env
+.env.*
+*.pem
+*.key
+.claude/settings.local.json
+.claude/*.local.json
+shopify.theme.toml.local
+
+# Logs and temporary files
 *.log
+*.tmp
+*.bak
 
 # Dev tooling and generated output (not part of the theme)
 build/
 dist/
-*.tmp
 scratch/
+__pycache__/
+*.pyc
+
+# Raw media: video clips go through scripts/prepare-video.mjs, only the finished loop belongs in the theme
 raw-video/
 *.mov
 *.mp4.raw
-scripts/node_modules/
+*.mkv
+*.avi
+
+# Throwaway probes and one-off scratch scripts (keep real checks in scripts/ without this prefix)
+scripts/_*.mjs
+scripts/_*.py
