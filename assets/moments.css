@@ -3,6 +3,8 @@ html:root {
   --m-plum: #3B1E3A; --m-plum-900: #251224; --m-berry: #B7406A; --m-berry-600: #9E385D;
   --m-mauve: #9C6B8A; --m-nude: #E9CFC8; --m-pearl: #FAF6F2; --m-taupe: #75665E; --m-taupe-light: #E6DED8;
   --m-text-secondary: #6B4A63;
+  /* berry as text: 5.45:1 on nude, 7.49:1 on pearl. Berry itself stays the action (button) color. */
+  --m-berry-ink: #8A2F52;
 
   --font-body--family: 'Readex Pro', system-ui, sans-serif;
   --font-subheading--family: 'Readex Pro', system-ui, sans-serif;
@@ -21,7 +23,7 @@ body { -webkit-font-smoothing: antialiased; }
 
 /* price + sale in brand berry */
 .price, .price__regular, product-price .price { font-weight: 600; }
-.price--on-sale .price-item--sale, .price__sale .price-item--last { color: var(--m-berry); }
+.price--on-sale .price-item--sale, .price__sale .price-item--last { color: var(--m-berry-ink); }
 
 /* header logo (inline brand SVG, colored by the header scheme) */
 .m-logo { display: block; height: 26px; width: auto; color: currentColor; }
