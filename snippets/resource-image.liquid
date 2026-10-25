@@ -78,14 +78,26 @@
   # Generate responsive image attributes
   assign sizes = '(min-width: 750px) 50vw, 100vw'
   assign lazy_sizes = 'auto, ' | append: sizes
-  assign loading = 'eager'
+
+  # Only images in the first two sections can be above the fold; everything else loads lazily.
+  assign loading = 'lazy'
+  if section.index and section.index < 3
+    assign loading = 'eager'
+  endif
 
   # Layout-aware sizing for resource lists
   if section_settings.layout_type
     case section_settings.layout_type
       when 'grid', 'carousel'
         assign calculated_width = 100 | divided_by: section_settings.columns | append: 'vw'
-        assign sizes = '(min-width: 750px) [calc-width], 100vw' | replace: '[calc-width]', calculated_width
+        assign mobile_width = '100vw'
+        if section_settings.mobile_columns
+          assign mobile_columns_count = section_settings.mobile_columns | plus: 0
+          if mobile_columns_count > 0
+            assign mobile_width = 100.0 | divided_by: mobile_columns_count | append: 'vw'
+          endif
+        endif
+        assign sizes = '(min-width: 750px) [calc-width], [mobile-width]' | replace: '[calc-width]', calculated_width | replace: '[mobile-width]', mobile_width
       when 'editorial', 'bento'
         assign loading = 'lazy'
         assign sizes = lazy_sizes

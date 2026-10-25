@@ -30,7 +30,14 @@
     assign image_sizes = sizes_attribute | strip
   elsif section.settings.columns and section.settings.layout_type != 'editorial'
     assign viewport_width = 100.0 | divided_by: section.settings.columns
-    assign sizes_attribute = '(min-width: 750px) [viewport_width]vw, 100vw' | replace: '[viewport_width]', viewport_width
+    assign mobile_width = 100
+    if section.settings.mobile_columns
+      assign mobile_columns_count = section.settings.mobile_columns | plus: 0
+      if mobile_columns_count > 0
+        assign mobile_width = 100.0 | divided_by: mobile_columns_count
+      endif
+    endif
+    assign sizes_attribute = '(min-width: 750px) [viewport_width]vw, [mobile_width]vw' | replace: '[viewport_width]', viewport_width | replace: '[mobile_width]', mobile_width
     assign image_sizes = sizes_attribute | strip
   endif
 
@@ -175,7 +182,7 @@
             continue
           endif
 
-          if forloop.first and section.index == null or section.index < 5
+          if forloop.first and section.index == null or section.index < 3
             assign loading = 'eager'
             assign sizes = image_sizes
           endif
