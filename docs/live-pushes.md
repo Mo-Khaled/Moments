@@ -30,3 +30,9 @@ Every push to the live theme (#161294745791), newest last. Command: `shopify the
 ### Pending: cart batch (built, tested on staging #161340850367; NOT pushed: the store's edge is rate limiting my test traffic, no smoke test possible)
 Files: snippets/moments-free-shipping-bar.liquid, snippets/cart-summary.liquid, snippets/cart-products.liquid, sections/moments-cart-empty.liquid, templates/cart.json (copy of templates/cart.new.json), assets/moments.css, assets/moment-toast.js, snippets/moment-toast.liquid, layout/theme.liquid, config/settings_data.json (cart_type page), locales/en.default.json, locales/ar.json.
 Order: push everything except templates/cart.json and settings_data.json, smoke test, check-cart.mjs with --theme absent; then cart.json; smoke; then settings_data.json (cart type page); smoke and an add-to-cart toast check.
+
+### 2026-10-27 cart batch, part 1 (live, smoke passed)
+Pushed: snippets/moments-free-shipping-bar, cart-summary, cart-products, sections/moments-cart-empty, assets/moments.css, moment-toast.js, snippets/moment-toast, layout/theme.liquid, locales en + ar. Live had no drift on these files. templates/cart.json and settings_data.json (cart_type page) still pending.
+
+### 2026-10-27 header-menu.js (mega panel half-open fix, live, smoke passed)
+Pushed assets/header-menu.js: panel height follows its content (ResizeObserver), a 250 ms guard closes an open panel when the pointer/focus is away, and a lost-state reset. 40 hover trials clean on live.

@@ -47,13 +47,46 @@ class HeaderMenu extends Component {
    * @param {PointerEvent} event
    */
   #onDocumentPointermove = (event) => {
-    if (!this.#state.activeItem || event.pointerType === 'touch' || this.#watchdog) return;
+    if (event.pointerType === 'touch' || this.#watchdog) return;
+    // no active item but the panel still looks open (state lost): reset it once the pointer is away
+    if (!this.#state.activeItem) {
+      const stale = (parseFloat(this.style.getPropertyValue('--submenu-height')) || 0) > 0 || this.querySelector('[aria-expanded="true"]');
+      if (stale && !this.matches(':hover') && !this.matches(':focus-within')) {
+        this.style.setProperty('--submenu-height', '0px');
+        this.style.setProperty('--submenu-opacity', '0');
+        this.ariaExpanded = 'false';
+        this.querySelectorAll('[aria-expanded="true"]').forEach((e) => e.setAttribute('aria-expanded', 'false'));
+      }
+      return;
+    }
 
     this.#watchdog = window.setTimeout(() => {
       this.#watchdog = 0;
       if (this.#state.activeItem && !this.matches(':hover') && !this.matches(':focus-within')) this.#deactivate();
     }, 450);
   };
+
+  // MOMENTS fix: second safety net, independent of pointer events. While a panel is open, every 250 ms check that the pointer (or focus) is still
+  // inside the menu, that the stored height matches the panel, and close it when not. A panel can no longer stay half open.
+  #guard = 0;
+
+  #startGuard() {
+    if (this.#guard) return;
+    this.#guard = window.setInterval(() => {
+      const item = this.#state.activeItem;
+      if (!item) { this.#stopGuard(); return; }
+      if (!this.matches(':hover') && !this.matches(':focus-within')) { this.#deactivate(); return; }
+      const submenu = findSubmenu(item) ?? this.overflowMenu;
+      const want = submenu ? Math.max(submenu.offsetHeight, this.overflowMenu?.offsetHeight ?? 0) : 0;
+      const have = parseFloat(this.style.getPropertyValue('--submenu-height')) || 0;
+      if (want && Math.abs(want - have) > 1) this.style.setProperty('--submenu-height', `${want}px`);
+    }, 250);
+  }
+
+  #stopGuard() {
+    window.clearInterval(this.#guard);
+    this.#guard = 0;
+  }
 
   #touchOpenedBefore = false;
 
@@ -215,7 +248,21 @@ class HeaderMenu extends Component {
 
     this.style.setProperty('--submenu-height', `${submenuHeight}px`);
     this.style.setProperty('--submenu-opacity', '1');
+    this.#startGuard();
+
+    // MOMENTS fix: the height is read once, at activation. When the panel's images or fonts had not laid out yet it read a few dozen pixels, and the header
+    // stayed open at that height with the tiles cut off (a sliver under the header). Keep the height in step with the panel while it is open.
+    this.#heightObserver?.disconnect();
+    if (submenu && typeof ResizeObserver === 'function') {
+      this.#heightObserver = new ResizeObserver(() => {
+        if (this.#state.activeItem !== item) return;
+        this.style.setProperty('--submenu-height', `${Math.max(submenu.offsetHeight, this.overflowMenu?.offsetHeight ?? 0)}px`);
+      });
+      this.#heightObserver.observe(submenu);
+    }
   };
+
+  #heightObserver = null;
 
   #debouncedActivateHandler = debounce(this.#activateHandler, ACTIVATE_DELAY);
 
@@ -247,6 +294,8 @@ class HeaderMenu extends Component {
     if (!item || item != this.#state.activeItem) return;
     if (!force && this.overflowHovered) return;
 
+    this.#stopGuard();
+    this.#heightObserver?.disconnect();
     this.style.setProperty('--submenu-height', '0px');
     this.style.setProperty('--submenu-opacity', '0');
     this.dataset.overflowExpanded = 'false';
