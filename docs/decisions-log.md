@@ -19,3 +19,9 @@ Each entry: decision, alternatives, why, how to revert.
 | 13 | `filters-toggle` was removed in the cleanup, found to change the collection layout, and restored. | Keep removed. | The screenshot diff showed a real layout change; the static reference scan cannot see indirect use. | Already reverted. |
 | 14 | The Haramain vendor name is mapped to the shop name for display (cards, cart, product text block) with no store write. | Wait for the vendor rename. | Keeps the other shop's name off the storefront now; the real rename also changes smart collections, so it still needs approval. | Delete `snippets/vendor-name.liquid` and the replace in `snippets/text.liquid`. |
 | 15 | The old product trust badges were rewritten (confirmed wording, shared 3,000 threshold). | Leave them. | They claimed 'official distributors', 2,000 EGP and an invented returns promise. | `git revert` the commit. |
+
+## 2026-10-26: edit the live theme directly
+- Found that the pinned dev theme `moments-redesign` #161294745791 had become the live theme (role main); #161251229887 is now unpublished. Two earlier small pushes (announcement bar) went to it before this was noticed.
+- Owner decision: edit live directly under the LIVE-SAFETY RULES (branch `live-enhance`, checks before push, `--only` pushes of specific files, new features shipped dark, smoke test after every push, rollback by pushing previous versions, every push logged in `docs/live-pushes.md`).
+- Backup: #161251229887 kept; new unpublished duplicate #161334263999 "MOMENTS - Backup 2026-10-26 11-47" created (approved). `shopify.theme.toml` now has environment `live` only.
+- Still needs approval: any store-data write (products, collections, menus, pages, policies, discounts, languages, redirects, apps), deleting themes, placing orders.

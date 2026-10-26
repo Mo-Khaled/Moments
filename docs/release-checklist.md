@@ -1,3 +1,8 @@
+> **STATUS 2026-10-26 (supersedes the dev/live wording below).** The owner approved editing the LIVE theme directly.
+> **Live = `moments-redesign` #161294745791 (role main).** Previous live theme, kept as a backup, never deleted: #161251229887 "MOMENTS - Homepage v2".
+> Fresh backup of the live theme made before the enhancement pass: #161334263999 "MOMENTS - Backup 2026-10-26 11-47" (refresh before each risky batch).
+> Pushes go file by file: `shopify theme push -e live --only <files> --live --allow-live`, one feature per push, logged in `docs/live-pushes.md`.
+
 # Release checklist (dev theme `moments-redesign` #161294745791)
 
 Prepared only. **Nothing has been published.** Publishing happens only when you send a message that says "publish".

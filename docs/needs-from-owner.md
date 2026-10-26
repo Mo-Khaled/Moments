@@ -33,3 +33,13 @@ Nothing below is guessed or invented; each item is a slot that is hidden on the 
 
 ## Tools
 - ffmpeg (for the experimental video and your own clips).
+
+## Make a bundle (header link)
+- **Create the page**: Online Store, Pages, add a page titled "Make a bundle", handle `make-a-bundle`, template `page.bundle`. The header ("Make a bundle", accent link) and the phone drawer show the link only once that page exists (theme setting `moments_page_bundle`, default `make-a-bundle`). Gifts left the top bar (it stays inside Shop by Moment and the drawer); the primary nav default is now "shop by moment,brands".
+- Bundle discount tiers stay off until you choose a mechanism (see the bundle options above).
+
+## Bundle discount plan (supplied by the owner)
+- Plan shown on /pages/make-a-bundle: **free delivery from the 2nd bottle, 10% off from the 3rd**. The page only displays it. **A real discount must exist at checkout**: an automatic discount applies to every cart, so a bundle-only rule needs a bundle app or a discount function (the cart line property "Bundle" is already sent). Until it exists, shoppers would see an offer the checkout does not honour: create it before this goes out, or turn off "Show tiers" in the bundle section.
+
+- **Returns title (2026-10-26 live audit):** the page and footer link say "Returns & Exchange Policy" but the policy says exchanges are not available. Rename to "Returns Policy" (page title and menu label are store data), or supply an exchange policy.
+- **Legal policies and FAQ:** /policies/refund-policy and /policies/shipping-policy return 404 and /pages/faq does not exist. Decide whether to fill them in or leave the pages as they are.

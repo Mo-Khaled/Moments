@@ -1,4 +1,7 @@
-# Pinned to the unpublished dev theme. The live theme (#161251229887) is never a target.
-[environments.redesign]
+# LIVE theme: moments-redesign #161294745791 (role main). The owner approved editing it directly (2026-10-26).
+# Backup of the previous live theme: #161251229887 "MOMENTS - Homepage v2" (keep, do not delete).
+# Fresh backup before risky batches: #161334263999 "MOMENTS - Backup 2026-10-26 11-47".
+# Push specific files only: shopify theme push -e live --only <files> --live --allow-live
+[environments.live]
 store = "dezrva-2z.myshopify.com"
 theme = "161294745791"
