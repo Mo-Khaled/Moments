@@ -10,7 +10,7 @@
     {
       "ctx": "home 1920px ltr gift",
       "moved": 0,
-      "minMarginPx": 116.2,
+      "minMarginPx": 87,
       "tileW": 472
     },
     {
@@ -21,7 +21,7 @@
     },
     {
       "ctx": "home 1920px ltr daily",
-      "moved": 1105.8,
+      "moved": 1127.8,
       "minMarginPx": 101.6,
       "tileW": 472
     },
@@ -46,7 +46,7 @@
     {
       "ctx": "home 1920px rtl gift",
       "moved": 0,
-      "minMarginPx": 116.2,
+      "minMarginPx": 87,
       "tileW": 472
     },
     {
@@ -82,7 +82,7 @@
     {
       "ctx": "home 1440px ltr gift",
       "moved": 0,
-      "minMarginPx": 109.7,
+      "minMarginPx": 82.1,
       "tileW": 445
     },
     {
@@ -93,7 +93,7 @@
     },
     {
       "ctx": "home 1440px ltr daily",
-      "moved": 963.3,
+      "moved": 973.3,
       "minMarginPx": 95.8,
       "tileW": 445
     },
@@ -118,7 +118,7 @@
     {
       "ctx": "home 1440px rtl gift",
       "moved": 0,
-      "minMarginPx": 109.7,
+      "minMarginPx": 82.1,
       "tileW": 445
     },
     {
@@ -154,7 +154,7 @@
     {
       "ctx": "home 1024px ltr gift",
       "moved": 0,
-      "minMarginPx": 75.5,
+      "minMarginPx": 56.5,
       "tileW": 307
     },
     {
@@ -165,7 +165,7 @@
     },
     {
       "ctx": "home 1024px ltr daily",
-      "moved": 174.4,
+      "moved": 182.4,
       "minMarginPx": 66,
       "tileW": 307
     },
@@ -190,7 +190,7 @@
     {
       "ctx": "home 1024px rtl gift",
       "moved": 0,
-      "minMarginPx": 75.5,
+      "minMarginPx": 56.5,
       "tileW": 307
     },
     {
@@ -226,12 +226,12 @@
     {
       "ctx": "home 768px ltr gift",
       "moved": 0,
-      "minMarginPx": 83.2,
+      "minMarginPx": 62.3,
       "tileW": 338
     },
     {
       "ctx": "home 768px ltr allday",
-      "moved": 254.5,
+      "moved": 246.5,
       "minMarginPx": 58.8,
       "tileW": 338
     },
@@ -262,12 +262,12 @@
     {
       "ctx": "home 768px rtl gift",
       "moved": 0,
-      "minMarginPx": 83.2,
+      "minMarginPx": 62.3,
       "tileW": 338
     },
     {
       "ctx": "home 768px rtl allday",
-      "moved": 288.5,
+      "moved": 290.5,
       "minMarginPx": 58.8,
       "tileW": 338
     },
@@ -298,7 +298,7 @@
     {
       "ctx": "home 375px ltr gift",
       "moved": 0,
-      "minMarginPx": 41.2,
+      "minMarginPx": 30.9,
       "tileW": 168
     },
     {
@@ -334,7 +334,7 @@
     {
       "ctx": "home 375px rtl gift",
       "moved": 0,
-      "minMarginPx": 41.2,
+      "minMarginPx": 30.9,
       "tileW": 168
     },
     {
@@ -370,7 +370,7 @@
     {
       "ctx": "moments 1920px ltr gift",
       "moved": 0,
-      "minMarginPx": 116.2,
+      "minMarginPx": 87,
       "tileW": 472
     },
     {
@@ -406,7 +406,7 @@
     {
       "ctx": "moments 1920px rtl gift",
       "moved": 0,
-      "minMarginPx": 116.2,
+      "minMarginPx": 87,
       "tileW": 472
     },
     {
@@ -442,7 +442,7 @@
     {
       "ctx": "moments 1440px ltr gift",
       "moved": 0,
-      "minMarginPx": 109.7,
+      "minMarginPx": 82.1,
       "tileW": 445
     },
     {
@@ -478,7 +478,7 @@
     {
       "ctx": "moments 1440px rtl gift",
       "moved": 0,
-      "minMarginPx": 109.7,
+      "minMarginPx": 82.1,
       "tileW": 445
     },
     {
@@ -514,7 +514,7 @@
     {
       "ctx": "moments 1024px ltr gift",
       "moved": 0,
-      "minMarginPx": 75.5,
+      "minMarginPx": 56.5,
       "tileW": 307
     },
     {
@@ -550,7 +550,7 @@
     {
       "ctx": "moments 1024px rtl gift",
       "moved": 0,
-      "minMarginPx": 75.5,
+      "minMarginPx": 56.5,
       "tileW": 307
     },
     {
@@ -586,7 +586,7 @@
     {
       "ctx": "moments 768px ltr gift",
       "moved": 0,
-      "minMarginPx": 83.2,
+      "minMarginPx": 62.3,
       "tileW": 338
     },
     {
@@ -622,7 +622,7 @@
     {
       "ctx": "moments 768px rtl gift",
       "moved": 0,
-      "minMarginPx": 83.2,
+      "minMarginPx": 62.3,
       "tileW": 338
     },
     {
@@ -658,7 +658,7 @@
     {
       "ctx": "moments 375px ltr gift",
       "moved": 0,
-      "minMarginPx": 41.2,
+      "minMarginPx": 30.9,
       "tileW": 168
     },
     {
@@ -694,7 +694,7 @@
     {
       "ctx": "moments 375px rtl gift",
       "moved": 0,
-      "minMarginPx": 41.2,
+      "minMarginPx": 30.9,
       "tileW": 168
     },
     {

@@ -626,6 +626,12 @@
     },
     "moments_gift": {
       "type": "moments-gift-block",
+      "blocks": {
+        "set_1": { "type": "gift_set", "settings": { "product": "khamrah-gift-set" } },
+        "set_2": { "type": "gift_set", "settings": { "product": "fakhar-man-gift-set" } },
+        "set_3": { "type": "gift_set", "settings": { "product": "yara-candy-gift-set" } }
+      },
+      "block_order": ["set_1", "set_2", "set_3"],
       "settings": {
         "collection": "gift-moment"
       }

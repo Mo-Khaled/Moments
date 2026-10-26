@@ -1,0 +1,11 @@
+# Colour flow: gift
+
+Page /. Every pixel row of a gutter column, OKLab step x100 between consecutive rows. Limit 1.2 per row, no 1px lines, at most 3 resting surface tones (tones within dE 10 are one family). Hero media and header chrome are not measured.
+
+## 1440px LTR: PASS
+Height 5854px. Largest step 0.75 at y=2587. Resting surface tones: 2 (#3b1e3a, #faf6f2).
+
+
+## 375px RTL: PASS
+Height 5075px. Largest step 0.93 at y=3244. Resting surface tones: 2 (#3b1e3a, #faf6f2).
+

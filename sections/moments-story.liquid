@@ -34,8 +34,8 @@
       {%- for block in section.blocks -%}
         {%- if block.settings.collection != blank -%}
           <li {{ block.shopify_attributes }}>
-            <a class="m-story__row" href="{{ block.settings.collection.url }}" data-moment-host>
-              {% render 'moment-mark', mark: block.settings.mark, size: 'sm', class: 'm-story__mark' %}
+            <a class="m-story__row m-tone--{{ block.settings.mark }}" href="{{ block.settings.collection.url }}" data-moment-host>
+              <span class="m-story__chip" aria-hidden="true">{% render 'moment-mark', mark: block.settings.mark, size: 'sm', class: 'm-story__mark' %}</span>
               <span class="m-story__name">
                 {%- case block.settings.mark -%}
                   {%- when 'night' -%}
@@ -52,7 +52,8 @@
                     {{ 'moments.love' | t }}
                 {%- endcase -%}
               </span>
-              <span class="m-story__count">{{ block.settings.collection.products_count }}</span>
+              <span class="m-story__count">{{ 'homepage.moments.count' | t: count: block.settings.collection.products_count }}</span>
+              <span class="m-story__go" aria-hidden="true"><svg viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10h11M10.5 5l5 5-5 5"/></svg></span>
             </a>
           </li>
         {%- endif -%}
@@ -109,43 +110,116 @@
     font-size: 0.8125rem;
   }
 
+  /* The six moments as rounded rows: a colour chip with the mark, the name, how many bottles, and an arrow. Same card radius as everything else. */
   .m-story__index {
     display: grid;
+    gap: 10px;
     margin: 0;
     padding: 0;
     list-style: none;
-    border-block-start: 1px solid currentcolor;
+  }
+
+  .m-story__chip {
+    --m-mark-ink: var(--tile-ink);
+    --m-mark-body: var(--tile-body);
+    --m-mark-accent: var(--tile-accent);
+    --m-mark-gold: var(--tile-gold);
+
+    display: grid;
+    place-items: center;
+    inline-size: 60px;
+    block-size: 60px;
+    border-radius: 14px;
+    background: var(--tile-bg);
+    transition: transform var(--m-dur-2) var(--m-ease);
   }
 
   moment-mark.m-story__mark {
-    --mm-size: 40px;
+    --mm-size: 58px;
   }
 
   .m-story__row {
     display: grid;
-    grid-template-columns: 56px minmax(0, 1fr) auto;
+    grid-template-columns: 60px minmax(0, 1fr) auto auto;
     align-items: center;
     column-gap: 16px;
-    padding-block: 14px;
-    border-block-end: 1px solid currentcolor;
+    padding: 10px 16px 10px 10px;
+    border: 1px solid rgb(250 246 242 / 0.16);
+    border-radius: var(--m-radius-card);
+    background: rgb(250 246 242 / 0.05);
     color: inherit;
     text-decoration: none;
+    transition: background-color var(--m-dur-2) var(--m-ease), border-color var(--m-dur-2) var(--m-ease), transform var(--m-dur-2) var(--m-ease);
+  }
+
+  html[dir='rtl'] .m-story__row {
+    padding: 10px 10px 10px 16px;
   }
 
   .m-story__name {
     font-family: var(--font-heading--family);
-    font-size: clamp(1.75rem, 4vw, 3rem);
+    font-size: clamp(1.625rem, 3.2vw, 2.25rem);
     line-height: 1.1;
   }
 
   .m-story__count {
     font-size: 0.875rem;
+    color: rgb(250 246 242 / 0.78);
   }
 
-  .m-story__row:hover .m-story__name {
-    text-decoration: underline;
-    text-decoration-thickness: 1px;
-    text-underline-offset: 8px;
+  .m-story__go {
+    display: grid;
+    place-items: center;
+    inline-size: 40px;
+    block-size: 40px;
+    border: 1px solid rgb(250 246 242 / 0.4);
+    border-radius: 9999px;
+    transition: transform var(--m-dur-2) var(--m-ease), background-color var(--m-dur-2) var(--m-ease), color var(--m-dur-2) var(--m-ease);
+  }
+
+  html[dir='rtl'] .m-story__go svg {
+    transform: scaleX(-1);
+  }
+
+  @media (hover: hover) and (prefers-reduced-motion: no-preference) {
+    .m-story__row:hover {
+      background: rgb(250 246 242 / 0.1);
+      border-color: rgb(250 246 242 / 0.4);
+      transform: translateY(-2px);
+    }
+
+    .m-story__row:hover .m-story__chip {
+      transform: scale(1.04);
+    }
+
+    .m-story__row:hover .m-story__go {
+      transform: translateX(3px);
+      background: var(--m-pearl);
+      color: var(--m-plum);
+    }
+
+    html[dir='rtl'] .m-story__row:hover .m-story__go {
+      transform: translateX(-3px);
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    .m-story__row {
+      grid-template-columns: 52px minmax(0, 1fr) auto;
+    }
+
+    .m-story__chip {
+      inline-size: 52px;
+      block-size: 52px;
+    }
+
+    moment-mark.m-story__mark {
+      --mm-size: 50px;
+    }
+
+    .m-story__count {
+      display: none;
+    }
   }
 
   .m-story__row:focus-visible {
