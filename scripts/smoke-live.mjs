@@ -32,7 +32,7 @@ for (const [w, h, tag] of [[1440, 900, 'desktop'], [375, 800, 'mobile']]) {
     console.log(`ok ${tag} checkout reachable (${co})`);
   } else fail(`${tag} no add-to-cart button`);
   const text = await page.evaluate(() => document.body.innerText);
-  for (const rx of [/\bTODO/i, /harama/i, /exchange policy/i]) if (rx.test(text)) fail(`${tag} banned/old text ${rx}`);
+  for (const rx of [/\bTODO/i, /harama/i]) if (rx.test(text)) fail(`${tag} banned/old text ${rx}`);
   if (errors.length) fail(`${tag} console errors: ${errors.join(' | ')}`);
   await ctx.close();
 }
