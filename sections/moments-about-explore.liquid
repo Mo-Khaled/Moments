@@ -46,8 +46,8 @@
         {%- liquid
           assign mark = marks[forloop.index0]
           assign t_key = 'about2.c' | append: i | append: '_title'
-          assign a_key = 'about2.c' | append: i | append: '_a'
-          assign b_key = 'about2.c' | append: i | append: '_b'
+          assign a_key = 'about2.c' | append: i | append: '_a_html'
+          assign b_key = 'about2.c' | append: i | append: '_b_html'
           assign b = b_key | t
           if i == 1 and section.settings.sourcing != blank
             assign b = section.settings.sourcing

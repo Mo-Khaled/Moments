@@ -45,3 +45,14 @@ raw-video/
 # Throwaway probes and one-off scratch scripts (keep real checks in scripts/ without this prefix)
 scripts/_*.mjs
 scripts/_*.py
+
+# Generated output: regenerate with the scripts, do not commit
+build/
+docs/screenshots/*
+!docs/screenshots/README.md
+!docs/screenshots/moment-marks.png
+docs/design/colour-flow-*-*.md
+docs/design/card-layout-*.md
+docs/performance/perf-*-run*.md
+scripts/.*
+lighthouse-*.json

@@ -1,6 +1,6 @@
 # Seams audit (before)
 
-Every join between two consecutive sections: what paints each side, and anything sitting on the join (border, shadow, outline, thin pseudo-element, margin, overflow, isolation, z-index). Crops: docs/screenshots/colour-flow/before-joins/ (400px tall, centred on the join).
+Every join between two consecutive sections: what paints each side, and anything sitting on the join (border, shadow, outline, thin pseudo-element, margin, overflow, isolation, z-index). Crops: docs/screenshots/colour-flow/before-joins/ (regenerate with scripts/audit-seams.mjs) (400px tall, centred on the join).
 
 ## / at 1440px
 

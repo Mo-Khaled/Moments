@@ -108,6 +108,7 @@
     margin: 0;
     padding: 0;
     list-style: none;
+    pointer-events: none;
   }
 
   .m-announce__msg {
@@ -115,7 +116,6 @@
     inset: 0;
     display: grid;
     place-items: center;
-    visibility: hidden;
     opacity: 0;
     list-style: none;
     white-space: nowrap;
@@ -128,6 +128,7 @@
     text-decoration: none;
   }
 
+  /* the rotating copy is decoration for sighted visitors (the stage ignores the pointer); links work in the ticker style */
   .m-announce__msg a:hover,
   .m-announce__msg a:focus-visible {
     text-decoration: underline;
@@ -141,7 +142,6 @@
 
   /* One message only: it never rotates. Two keyframe sets for 2 and 3 messages, because each owns 1/n of the loop. */
   .m-announce__bar--n1 .m-announce__msg {
-    visibility: visible;
     opacity: 1;
     animation: none;
   }
@@ -150,20 +150,23 @@
     animation-name: m-announce-rotate-2;
   }
 
+  /* Opacity and transform only. These keyframes used to switch `visibility` too, which cannot run on the compositor: the page recalculated styles
+     about 145 times a second, forever, on every page (22% of the main thread while idle). The rotating copy is aria-hidden and the real text is in
+     the screen-reader list, so a faded-out message needs no visibility change. */
   @keyframes m-announce-rotate-2 {
-    0% { visibility: visible; opacity: 0; transform: translateY(10px); }
+    0% { opacity: 0; transform: translateY(10px); }
     5% { opacity: 1; transform: translateY(0); }
     45% { opacity: 1; transform: translateY(0); }
     50% { opacity: 0; transform: translateY(-10px); }
-    50.1%, 100% { visibility: hidden; opacity: 0; }
+    100% { opacity: 0; transform: translateY(-10px); }
   }
 
   @keyframes m-announce-rotate-3 {
-    0% { visibility: visible; opacity: 0; transform: translateY(10px); }
+    0% { opacity: 0; transform: translateY(10px); }
     3.5% { opacity: 1; transform: translateY(0); }
     30% { opacity: 1; transform: translateY(0); }
     33.3% { opacity: 0; transform: translateY(-10px); }
-    33.4%, 100% { visibility: hidden; opacity: 0; }
+    100% { opacity: 0; transform: translateY(-10px); }
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -172,7 +175,6 @@
     }
 
     .m-announce__stage .m-announce__msg:first-child {
-      visibility: visible;
       opacity: 1;
     }
   }

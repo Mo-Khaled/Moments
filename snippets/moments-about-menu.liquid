@@ -105,6 +105,15 @@
     border: 1px solid var(--m-rule-quiet);
   }
 
+  /* Invisible bridge over the gap so the pointer can travel from the trigger to the links without leaving the menu. */
+  .m-about-menu__panel::before {
+    content: '';
+    position: absolute;
+    inset-block-end: 100%;
+    inset-inline: 0;
+    block-size: 16px;
+  }
+
   .m-about-menu__panel[hidden] {
     display: none;
   }
@@ -161,7 +170,7 @@
         if (!this.trigger || !this.panel) return;
         this.ac = new AbortController();
         const o = { signal: this.ac.signal };
-        this.trigger.addEventListener('click', () => this.toggle(), o);
+        this.trigger.addEventListener('click', () => { if (this.hovered) { this.hovered = false; return; } this.toggle(); }, o);
         this.trigger.addEventListener('keydown', (e) => {
           if (e.key === 'ArrowDown') { e.preventDefault(); this.open(); this.links()[0]?.focus(); }
         }, o);
@@ -169,11 +178,12 @@
         this.addEventListener('focusout', (e) => { if (!this.contains(e.relatedTarget)) this.close(); }, o);
         document.addEventListener('click', (e) => { if (!this.contains(e.target)) this.close(); }, o);
         this.hoverMq = window.matchMedia('(hover: hover) and (pointer: fine)');
-        this.addEventListener('pointerenter', (e) => { if (e.pointerType === 'mouse' && this.hoverMq.matches) this.open(); }, o);
-        this.addEventListener('pointerleave', (e) => { if (e.pointerType === 'mouse' && this.hoverMq.matches) this.close(); }, o);
+        this.addEventListener('pointerenter', (e) => { if (e.pointerType === 'mouse' && this.hoverMq.matches) { clearTimeout(this.timer); if (this.panel.hidden) this.hovered = true; this.open(); } }, o);
+        this.addEventListener('pointerleave', (e) => { if (e.pointerType === 'mouse' && this.hoverMq.matches) { clearTimeout(this.timer); this.timer = setTimeout(() => { this.hovered = false; this.close(); }, 250); } }, o);
       }
 
       disconnectedCallback() {
+        clearTimeout(this.timer);
         if (this.ac) this.ac.abort();
       }
 

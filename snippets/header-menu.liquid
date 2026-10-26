@@ -18,6 +18,13 @@
   # of that setting. Every other menu link stays in the store menu and in the footer; nothing here edits the menu.
   assign primary_keys = settings.moments_primary_nav | downcase | replace: ', ', ',' | split: ','
   assign all_links = block_settings.menu.links
+  assign bundle_listed = false
+  for l in all_links
+    assign lk = l.title | downcase
+    if lk contains 'bundle'
+      assign bundle_listed = true
+    endif
+  endfor
 %}
 
 {% capture children %}
@@ -70,6 +77,13 @@
       {% endif %}
     {% endfor %}
   {% endfor %}
+  {%- if settings.moments_page_bundle != blank and bundle_listed == false -%}
+    <li role="presentation" class="menu-list__list-item">
+      <a href="{{ settings.moments_page_bundle.url }}" data-skip-node-update="true" class="menu-list__link menu-list__link--accent{% if request.path == settings.moments_page_bundle.url %} menu-list__link--active{% endif %}" ref="menuitem">
+        <span class="menu-list__link-title">{{ 'bundle.nav' | t }}</span>
+      </a>
+    </li>
+  {%- endif -%}
   <li
     class="menu-list__list-item"
     role="presentation"

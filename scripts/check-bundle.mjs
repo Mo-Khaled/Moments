@@ -8,7 +8,7 @@
 // usage: node scripts/check-bundle.mjs
 import { chromium } from 'playwright-core';
 
-const URL = 'https://momentseg.com/pages/about-us?view=bundle&preview_theme_id=161294745791&pb=0';
+const URL = 'https://momentseg.com/pages/make-a-bundle?pb=0';
 const failures = [];
 const log = [];
 const fail = (c, m) => failures.push(`${c}: ${m}`);
@@ -36,11 +36,12 @@ async function open(width, dir) {
   if (crop) fail('grid', `${crop} card images are cover-cropped`);
   log.push(`grid: ${cards} real cards, no cover-cropped image`);
 
-  // the bundle's own wording (card, summary, tools, mini bar); product cards carry real compare-at "Save" badges, which are allowed
-  const text = await page.evaluate(() => ['.m-bundle__card', '.m-bundle__tools', '[data-m-bar]'].map((q) => (document.querySelector(q) || {}).innerText || '').join(' '));
-  const dm = /\b(save|saving|discount|off)\b|%/i.exec(text.replace(/100% original/gi, ''));
-  if (dm) fail('tiers off', 'discount wording is visible: ' + text.slice(Math.max(0, dm.index - 30), dm.index + 30).replace(/\s+/g, ' '));
-  else log.push('tiers off: no discount wording in the bundle card, tools or bar');
+  // the owner's plan: free delivery on bottle 2, 10% off on bottle 3, shown as slot badges and in the line
+  const perks = await page.$$eval('.m-slot__perk', (e) => e.map((x) => x.textContent.trim()));
+  const line = await page.textContent('.m-bundle__line');
+  if (perks[0] !== 'Free delivery' || perks[1] !== '10% off') fail('perks', 'slot badges are ' + JSON.stringify(perks));
+  else if (!/Free delivery from bottle 2/.test(line) || !/10% off from bottle 3/.test(line)) fail('perks', 'line does not match the plan: ' + line.trim());
+  else log.push('perks: bottle 2 free delivery, bottle 3 10% off, line matches');
 
   await page.evaluate(() => { try { localStorage.removeItem('moments-bundle-v1'); } catch (e) {} });
   await page.reload({ waitUntil: 'domcontentloaded' });

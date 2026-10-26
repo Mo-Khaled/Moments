@@ -61,7 +61,7 @@
     "mobile_quick_add": true,
     "quick_add_color_scheme": "scheme-1",
     "show_second_image_on_hover": true,
-    "product_card_carousel": true,
+    "product_card_carousel": false,
     "product_corner_radius": 12,
     "card_corner_radius": 12,
     "variant_button_border_width": 1,
@@ -383,7 +383,8 @@
       }
     },
     "moments_page_about": "about-us",
-    "moments_page_contact": "contact"
+    "moments_page_contact": "contact",
+    "moments_page_bundle": "make-a-bundle"
   },
   "presets": {
     "Tinker": {}

@@ -182,7 +182,10 @@
             continue
           endif
 
-          if forloop.first and section.index == null or section.index < 3
+          # MOMENTS: the original condition (`first and index == null or index < 3`) made EVERY card image eager, at the fallback 100vw size, on any
+          # page where the grid is one of the first three sections (every collection page). Only cards fetched through the Section Rendering API
+          # (index null: the bundle builder and "load more") load eagerly now; the rest are lazy with the browser's real layout size.
+          if forloop.first and section.index == null
             assign loading = 'eager'
             assign sizes = image_sizes
           endif
@@ -193,7 +196,7 @@
           endif
 
           capture slideshow_children
-            render 'product-media', media: media, sizes: sizes, loading: loading, preview_image_only: true
+            render 'product-media', media: media, sizes: sizes, loading: loading, preview_image_only: true, widths: '240, 352, 480, 640, 832, 1200'
           endcapture
 
           render 'slideshow-slide', slide_id: media.id, index: forloop.index, hidden: hidden, class: class, attributes: attributes, children: slideshow_children, media_fit: media_fit

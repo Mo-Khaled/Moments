@@ -43,6 +43,15 @@
   {%- endfor -%}
 {%- endfor -%}
 
+{%- if settings.moments_page_bundle != blank -%}
+  {%- assign index = index | plus: 1 -%}
+  <li class="menu-drawer__list-item--flat menu-drawer__list-item--divider" style="--menu-drawer-animation-index: {{ index }};">
+    <a href="{{ settings.moments_page_bundle.url }}" class="menu-drawer__menu-item menu-drawer__menu-item--mainlist menu-drawer__animated-element focus-inset">
+      <span class="menu-drawer__menu-item-text wrap-text">{{ 'bundle.nav' | t }}</span>
+    </a>
+  </li>
+{%- endif -%}
+
 {%- comment -%} About group at the bottom of the phone drawer: only pages that exist (set in Theme settings, Moments). {%- endcomment -%}
 {%- if settings.moments_page_about != blank or settings.moments_page_refer != blank or settings.moments_page_contact != blank or settings.moments_page_faq != blank -%}
   <li class="menu-drawer__list-item--flat" style="--menu-drawer-animation-index: {{ index | plus: 1 }};">

@@ -34,3 +34,11 @@ reaches it indirectly).** It is kept. The same visual-diff check is the gate for
 ## Not touched on purpose
 No locale file was deleted. `docs/audit` and `docs/screenshots` are kept as evidence. No media was moved or deleted.
 `.gitignore` now also covers build output, scratch folders and raw video.
+
+## 2026-10-26: repo cleanup (branch repo-cleanup)
+- docs/screenshots: 168 MB of generated screenshots removed from the tree (regenerable with the scripts; still in git history). One reference image kept (moment-marks.png) and a README saying which script makes which set. `docs/screenshots/*` is now git-ignored.
+- docs/design and docs/performance: 33 intermediate run reports removed (colour-flow drafts and re-runs, card-layout runs); the latest of each kept (colour-flow-baseline.md, colour-flow-home.md, card-layout.md, contrast-report.md, card-matrix.md, seams-audit.md) plus the before and after performance reports. Generated report patterns are git-ignored.
+- scripts: 21 one-off probes and screenshot helpers removed (probe-card*, probe-bundle*, probe-recs*, probe-corners, probe-rtl, probe-terms, probe-cls, probe-carousel, probe-section-api, shot-desktop-menus, shot-pagination, shot-recs-iphone, shots-final, append-carousel-css.py, blend-draft.css, blend-test-overrides.css); probe-menu-stuck.mjs became check-menu-hover.mjs. A scripts/README.md lists what remains.
+- sections: moments-promises, moments-split, moments-trust and moments-about-hero removed (superseded, referenced by no template). Not pushed: the live theme still has its copies; they can be removed from the store later.
+- build/ (ignored build output, 1.6 MB) deleted; regenerate with scripts/normalize-images.py.
+- Left alone on purpose: the theme's own sections, blocks and snippets (the theme editor offers them), the brand logo and cursor files (loaded by computed names), filters-toggle (used indirectly), the Zooomy wishlist snippets (written by an app), `.claude/skills` (project skills).
