@@ -2303,8 +2303,15 @@
         "type": "text",
         "id": "moments_primary_nav",
         "label": "Primary navigation items",
-        "info": "At most three menu titles, comma-separated with no spaces, in the order they appear. Gifts is shown as an accent link. All other menu links stay in the store menu and the footer.",
-        "default": "shop by moment,brands,gifts"
+        "info": "At most three menu titles, comma-separated with no spaces, in the order they appear. \"Make a bundle\" is added as the accent link when a Bundle page is set. All other menu links stay in the store menu and the footer.",
+        "default": "shop by moment,brands"
+      },
+      {
+        "type": "checkbox",
+        "id": "moments_pointer",
+        "label": "Custom pointer",
+        "info": "Replaces the system arrow with the MOMENTS diamond pointer on desktop (mouse only). Text fields, disabled controls and forced-colors mode keep the native cursor.",
+        "default": true
       },
       {
         "type": "checkbox",

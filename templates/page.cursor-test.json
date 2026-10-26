@@ -1,0 +1,6 @@
+{
+  "sections": {
+    "main": { "type": "moments-cursor-test", "settings": {} }
+  },
+  "order": ["main"]
+}

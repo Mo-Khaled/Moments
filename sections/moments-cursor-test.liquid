@@ -1,0 +1,81 @@
+{%- comment -%}
+  Diagnostic only: reached with ?view=cursor-test on any page. Lists sample elements, their computed cursor and a thumbnail of each
+  cursor image with its natural size and hotspot. Not linked from anywhere. noindex.
+{%- endcomment -%}
+{%- render 'moment-pointer' -%}
+<section class="m-ctest m-wrap" data-cursor-test>
+  <meta name="robots" content="noindex">
+  <h1>Cursor test</h1>
+  <p>Setting "Custom pointer": <strong>{% if settings.moments_pointer %}on{% else %}off{% endif %}</strong>. Hard refresh (Ctrl+Shift+R) if you still see the old arrow.</p>
+  <div class="m-ctest__samples">
+    <a href="#top" data-sample="link">Link</a>
+    <button type="button" data-sample="button">Button</button>
+    <button type="button" disabled data-sample="disabled button">Disabled button</button>
+    <span role="button" tabindex="0" data-sample="role=button">Role button</span>
+    <label data-sample="label">Label <input type="checkbox" data-sample="checkbox"></label>
+    <select data-sample="select"><option>Select</option></select>
+    <input type="text" value="Text input" data-sample="text input">
+    <textarea data-sample="textarea">Textarea</textarea>
+    <details><summary data-sample="summary">Summary</summary>Body</details>
+    <p data-sample="paragraph text">Paragraph text</p>
+    <div class="m-ctest__card" data-sample="card (div)">A card</div>
+    <a class="m-btn" href="#top" data-sample="m-btn link">Shop button</a>
+  </div>
+  <table class="m-ctest__table"><thead><tr><th>Element</th><th>Computed cursor</th><th>Image</th><th>Natural size</th><th>OK</th></tr></thead><tbody></tbody></table>
+  <p data-summary></p>
+</section>
+
+{% stylesheet %}
+  .m-ctest { padding-block: 40px; }
+  .m-ctest__samples { display: flex; flex-wrap: wrap; gap: 16px; align-items: center; margin-block: 24px; }
+  .m-ctest__card { padding: 24px; border-radius: 16px; background: var(--m-nude); }
+  .m-ctest__table { inline-size: 100%; border-collapse: collapse; font-size: 0.875rem; }
+  .m-ctest__table th, .m-ctest__table td { padding: 6px 8px; border-block-end: 1px solid var(--m-nude-deep); text-align: start; vertical-align: middle; }
+  .m-ctest__table img { display: block; background: repeating-conic-gradient(#ddd 0 25%, #fff 0 50%) 0 0 / 12px 12px; }
+{% endstylesheet %}
+
+<script>
+  (() => {
+    const root = document.querySelector('[data-cursor-test]');
+    if (!root) return;
+    const rows = [];
+    const probe = (el, name) => {
+      const cur = getComputedStyle(el).cursor;
+      const urls = [...cur.matchAll(/url\(["']?([^"')]+)["']?\)/g)].map((m) => m[1]);
+      const hot = cur.match(/\)\s+(\d+)\s+(\d+)/);
+      return { name, cur, urls, hot: hot ? [Number(hot[1]), Number(hot[2])] : null };
+    };
+    const targets = [[document.documentElement, 'html'], [document.body, 'body'], ...[...root.querySelectorAll('[data-sample]')].map((e) => [e, e.dataset.sample])];
+    const tbody = root.querySelector('tbody');
+    window.__cursorTest = [];
+    let pending = 0;
+    const done = () => { if (--pending <= 0) root.querySelector('[data-summary]').textContent = 'Done: ' + window.__cursorTest.filter((r) => r.ok).length + ' of ' + window.__cursorTest.length + ' as expected.'; };
+    pending = targets.length;
+    targets.forEach(([el, name]) => {
+      const r = probe(el, name);
+      const tr = document.createElement('tr');
+      const td = (t) => { const c = document.createElement('td'); c.textContent = t; tr.appendChild(c); return c; };
+      td(name); td(r.cur.length > 90 ? r.cur.slice(0, 90) + '…' : r.cur);
+      const imgCell = td(''); const sizeCell = td(''); const okCell = td('');
+      const native = ['text', 'not-allowed', 'auto', 'default', 'pointer'].includes(r.cur.split(',').pop().trim()) && !r.urls.length;
+      const wantCustom = !['text input', 'textarea', 'disabled button', 'paragraph text', 'card (div)'].includes(name);
+      const finish = (ok, size) => { r.size = size; r.ok = ok; sizeCell.textContent = size || '-'; okCell.textContent = ok ? 'yes' : 'NO'; window.__cursorTest.push(r); done(); };
+      if (r.urls.length) {
+        const img = new Image(); img.width = 32;
+        img.onload = () => { img.removeAttribute('width'); const w = img.naturalWidth, h = img.naturalHeight; finish(w <= 64 && h <= 64 && r.hot && r.hot[0] < w && r.hot[1] < h, w + 'x' + h); };
+        img.onerror = () => finish(false, 'failed to load');
+        imgCell.appendChild(img); img.src = r.urls[0];
+      } else finish(!wantCustom || !window.matchMedia('(pointer: fine)').matches ? true : native && false, '');
+      tbody.appendChild(tr);
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "MOMENTS cursor test",
+  "limit": 1,
+  "settings": [],
+  "presets": []
+}
+{% endschema %}

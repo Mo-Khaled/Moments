@@ -30,3 +30,8 @@ Each entry: decision, alternatives, why, how to revert.
 - field L0.50 C0.12, deep L0.40 C0.10, soft L0.93 C0.035, ink L0.30 C0.07; hues Night 318, Gift 345, All day 82, Daily 48, Fresh 152, Love 12 (`scripts/moment-palette.mjs`). Daily no longer matches the page background, Fresh is a clean green, Love a clear rose. Gold stays the accent and hairline.
 - The live accent (`--m-live`) now takes each moment's deep step with pearl text (8:1 or better).
 - Baseline colour flow (`docs/design/colour-flow-baseline.md`): 4 hard seams, 6 surface colours at 1440 and 375, LTR and RTL. Still to do: the band changes.
+
+## 2026-10-26: custom pointer
+- Diagnosis: the arrow pointer was never built or pushed. Only the follower token existed (snippets/moment-cursor.liquid); nothing in the theme set a cursor image, so the system arrow always showed. The theme's own `cursor:` rules are class-level pointer/grab/not-allowed values.
+- Fix: PNG cursors (32 and 64px) built from committed SVGs by scripts/build-cursors.mjs, tied to the tip hotspot (3,2). One snippet (moment-pointer) sets `--m-pointer-default` and `--m-pointer-link` with image-set, a -webkit-image-set fallback and native keywords, scoped to `(pointer: fine)`, off under forced-colors, theme setting "Custom pointer" (default on). Applied with `html:root:root :where(...)` so it beats theme class rules without !important. Inputs, textareas and disabled controls keep native cursors.
+- Follower token moved to +62px/+56px so it never sits on the tip. Test page: /pages/about-us?view=cursor-test. If the old arrow still shows, hard-refresh (Ctrl+Shift+R).
