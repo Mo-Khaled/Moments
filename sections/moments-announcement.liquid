@@ -68,30 +68,26 @@
 
 {% stylesheet %}
   .m-announce {
-    padding-inline: var(--m-gutter);
-    padding-block: 8px 0;
-    background: var(--m-surface);
+    background: var(--m-plum);
+    color: var(--m-text-on-dark);
   }
 
   .m-announce__bar,
   .m-announce__ticker {
     position: relative;
     overflow: hidden;
-    max-inline-size: var(--m-content);
-    margin-inline: auto;
-    border-radius: 9999px;
-    background: var(--m-plum);
-    color: var(--m-text-on-dark);
-    font-size: 0.8125rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
     line-height: 1;
   }
 
   .m-announce__bar {
-    block-size: 34px;
+    block-size: 32px;
   }
 
   .m-announce__ticker .m-ticker {
-    block-size: 34px;
+    block-size: 32px;
   }
 
   .m-announce__ticker .m-ticker__track,
