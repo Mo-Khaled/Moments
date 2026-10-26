@@ -25,3 +25,8 @@ Each entry: decision, alternatives, why, how to revert.
 - Owner decision: edit live directly under the LIVE-SAFETY RULES (branch `live-enhance`, checks before push, `--only` pushes of specific files, new features shipped dark, smoke test after every push, rollback by pushing previous versions, every push logged in `docs/live-pushes.md`).
 - Backup: #161251229887 kept; new unpublished duplicate #161334263999 "MOMENTS - Backup 2026-10-26 11-47" created (approved). `shopify.theme.toml` now has environment `live` only.
 - Still needs approval: any store-data write (products, collections, menus, pages, policies, discounts, languages, redirects, apps), deleting themes, placing orders.
+
+## 2026-10-26: moment palette from one OKLCH recipe
+- field L0.50 C0.12, deep L0.40 C0.10, soft L0.93 C0.035, ink L0.30 C0.07; hues Night 318, Gift 345, All day 82, Daily 48, Fresh 152, Love 12 (`scripts/moment-palette.mjs`). Daily no longer matches the page background, Fresh is a clean green, Love a clear rose. Gold stays the accent and hairline.
+- The live accent (`--m-live`) now takes each moment's deep step with pearl text (8:1 or better).
+- Baseline colour flow (`docs/design/colour-flow-baseline.md`): 4 hard seams, 6 surface colours at 1440 and 375, LTR and RTL. Still to do: the band changes.

@@ -39,7 +39,7 @@
     },
     {
       "ctx": "home 1920px rtl night",
-      "moved": 22.2,
+      "moved": 39.3,
       "minMarginPx": 78.1,
       "tileW": 472
     },
@@ -201,7 +201,7 @@
     },
     {
       "ctx": "home 1024px rtl daily",
-      "moved": 228.4,
+      "moved": 226.4,
       "minMarginPx": 66,
       "tileW": 307
     },
