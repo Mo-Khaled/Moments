@@ -230,43 +230,69 @@ html .compare-at-price {
 }
 
 /* Moment tokens: one full-colour field per moment (used by snippets/moment-tile.liquid).
-   Fills are brand palette only, plus the gold accent for All day. Each pairs with an ink (text and mark lines),
-   a body fill, an accent and a hairline colour, chosen so the label stays AA on its own field. */
+   ONE tonal recipe in OKLCH (scripts/moment-palette.mjs): the same lightness and chroma steps for every moment, only the hue changes.
+   field L0.50 C0.12, deep L0.40 C0.10, soft L0.93 C0.035, ink L0.30 C0.07. Pearl text on field and deep is 5.3:1 or better; ink on soft is 11:1.
+   Night 318, Gift 345, All day 82, Daily 48, Fresh 152, Love 12. Each moment has a field (card and hero colour), a deep step
+   (text, marks, the live accent) and a soft step (card tint). The accent and hairline stay aged gold. */
 html:root {
-  --moment-night: linear-gradient(155deg, var(--m-plum), var(--m-plum-900));
+  --moment-night: linear-gradient(155deg, #7f4b8f, #5e346a);
+  --moment-night-field: #7f4b8f;
+  --moment-night-deep: #5e346a;
+  --moment-night-soft: #f2e1f7;
+  --moment-night-soft-ink: #3c2144;
   --moment-night-ink: var(--m-pearl);
-  --moment-night-body: color-mix(in srgb, var(--m-plum) 62%, var(--m-pearl));
+  --moment-night-body: color-mix(in oklch, #7f4b8f 62%, var(--m-pearl));
   --moment-night-accent: var(--m-gold-light);
   --moment-night-gold: var(--m-gold-light);
 
-  --moment-gift: linear-gradient(155deg, var(--m-berry-600), var(--m-berry-ink));
+  --moment-gift: linear-gradient(155deg, #914373, #6c2e54);
+  --moment-gift-field: #914373;
+  --moment-gift-deep: #6c2e54;
+  --moment-gift-soft: #fadfed;
+  --moment-gift-soft-ink: #461e36;
   --moment-gift-ink: var(--m-pearl);
-  --moment-gift-body: color-mix(in srgb, var(--m-berry-600) 55%, var(--m-pearl));
+  --moment-gift-body: color-mix(in oklch, #914373 62%, var(--m-pearl));
   --moment-gift-accent: var(--m-gold-light);
   --moment-gift-gold: var(--m-gold-light);
 
-  --moment-allday: linear-gradient(155deg, var(--m-nude), var(--m-gold-light));
-  --moment-allday-ink: var(--m-plum);
-  --moment-allday-body: var(--m-pearl);
-  --moment-allday-accent: var(--m-berry-ink);
-  --moment-allday-gold: var(--m-berry-ink);
+  --moment-allday: linear-gradient(155deg, #855a00, #624000);
+  --moment-allday-field: #855a00;
+  --moment-allday-deep: #624000;
+  --moment-allday-soft: #f4e6ce;
+  --moment-allday-soft-ink: #3f2900;
+  --moment-allday-ink: var(--m-pearl);
+  --moment-allday-body: color-mix(in oklch, #855a00 62%, var(--m-pearl));
+  --moment-allday-accent: var(--m-gold-light);
+  --moment-allday-gold: var(--m-gold-light);
 
-  --moment-daily: linear-gradient(155deg, var(--m-pearl), var(--m-nude));
-  --moment-daily-ink: var(--m-plum);
-  --moment-daily-body: var(--m-nude);
-  --moment-daily-accent: var(--m-berry);
-  --moment-daily-gold: var(--m-gold-ink);
+  --moment-daily: linear-gradient(155deg, #984a1a, #71330c);
+  --moment-daily-field: #984a1a;
+  --moment-daily-deep: #71330c;
+  --moment-daily-soft: #fde2d4;
+  --moment-daily-soft-ink: #492109;
+  --moment-daily-ink: var(--m-pearl);
+  --moment-daily-body: color-mix(in oklch, #984a1a 62%, var(--m-pearl));
+  --moment-daily-accent: var(--m-gold-light);
+  --moment-daily-gold: var(--m-gold-light);
 
-  --moment-fresh: linear-gradient(155deg, var(--m-taupe), var(--m-taupe-ink));
+  --moment-fresh: linear-gradient(155deg, #1a763f, #0a562b);
+  --moment-fresh-field: #1a763f;
+  --moment-fresh-deep: #0a562b;
+  --moment-fresh-soft: #d8efdd;
+  --moment-fresh-soft-ink: #0a371b;
   --moment-fresh-ink: var(--m-pearl);
-  --moment-fresh-body: color-mix(in srgb, var(--m-taupe) 55%, var(--m-pearl));
+  --moment-fresh-body: color-mix(in oklch, #1a763f 62%, var(--m-pearl));
   --moment-fresh-accent: var(--m-gold-light);
   --moment-fresh-gold: var(--m-gold-light);
 
-  --moment-love: linear-gradient(155deg, var(--m-text-secondary), color-mix(in srgb, var(--m-text-secondary) 65%, var(--m-plum)));
+  --moment-love: linear-gradient(155deg, #9b4251, #732d39);
+  --moment-love-field: #9b4251;
+  --moment-love-deep: #732d39;
+  --moment-love-soft: #fedfe2;
+  --moment-love-soft-ink: #4b1d24;
   --moment-love-ink: var(--m-pearl);
-  --moment-love-body: color-mix(in srgb, var(--m-text-secondary) 55%, var(--m-pearl));
-  --moment-love-accent: var(--m-nude);
+  --moment-love-body: color-mix(in oklch, #9b4251 62%, var(--m-pearl));
+  --moment-love-accent: var(--m-gold-light);
   --moment-love-gold: var(--m-gold-light);
 }
 
@@ -280,12 +306,12 @@ html:root {
   --m-live-line: var(--m-gold-light);
 }
 
-html[data-moment='night'] { --m-live: var(--m-plum); --m-live-ink: var(--m-pearl); --m-live-line: var(--m-gold-light); }
-html[data-moment='gift'] { --m-live: var(--m-berry-600); --m-live-ink: var(--m-pearl); --m-live-line: var(--m-gold-light); }
-html[data-moment='allday'] { --m-live: var(--m-gold-light); --m-live-ink: var(--m-plum); --m-live-line: var(--m-plum); }
-html[data-moment='daily'] { --m-live: var(--m-nude); --m-live-ink: var(--m-plum); --m-live-line: var(--m-gold-ink); }
-html[data-moment='fresh'] { --m-live: var(--m-taupe); --m-live-ink: var(--m-pearl); --m-live-line: var(--m-gold-light); }
-html[data-moment='love'] { --m-live: var(--m-text-secondary); --m-live-ink: var(--m-pearl); --m-live-line: var(--m-gold-light); }
+html[data-moment='night'] { --m-live: var(--moment-night-deep); --m-live-ink: var(--m-pearl); --m-live-line: var(--m-gold-light); }
+html[data-moment='gift'] { --m-live: var(--moment-gift-deep); --m-live-ink: var(--m-pearl); --m-live-line: var(--m-gold-light); }
+html[data-moment='allday'] { --m-live: var(--moment-allday-deep); --m-live-ink: var(--m-pearl); --m-live-line: var(--m-gold-light); }
+html[data-moment='daily'] { --m-live: var(--moment-daily-deep); --m-live-ink: var(--m-pearl); --m-live-line: var(--m-gold-light); }
+html[data-moment='fresh'] { --m-live: var(--moment-fresh-deep); --m-live-ink: var(--m-pearl); --m-live-line: var(--m-gold-light); }
+html[data-moment='love'] { --m-live: var(--moment-love-deep); --m-live-ink: var(--m-pearl); --m-live-line: var(--m-gold-light); }
 
 /* Registered so the accent can transition (an unregistered custom property switches instantly). */
 @property --m-live {
@@ -633,4 +659,14 @@ html:root {
   .m-carousel-controls button {
     transition: none;
   }
+}
+
+/* Header panels close at once: the theme's 200ms clip and background transitions left the old panel (headings and tile tops) hanging over the hero. */
+.menu-list__list-item:where(:not([slot='overflow'])) > .menu-list__submenu,
+.overflow-menu::after {
+  transition: none;
+}
+
+.menu-list__list-item:has([aria-expanded='true']) > .menu-list__submenu {
+  transition: clip-path var(--submenu-animation-speed) var(--ease-out-cubic);
 }
