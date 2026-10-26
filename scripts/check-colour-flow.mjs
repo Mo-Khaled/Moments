@@ -1,19 +1,23 @@
-// Colour flow of the homepage: colour difference at every section boundary (last pixel row above vs first row below),
-// hard boundaries per 1000px of scroll, distinct full-bleed surface colours. Dev tool, not part of the theme.
-// usage: node scripts/check-colour-flow.mjs [--path /] [--query ?view=x] [--tag before] [--max-hard 1] [--max-surfaces 3]
+// Colour flow proof. Samples a 1px column in the empty gutter (x=24 at 1440, x=8 at 375) on EVERY pixel row down the page, plus a second
+// column at the edge of the content width, and computes the OKLab colour step between consecutive rows (delta E x100).
+// FAILS when: any step is above STEP (a smooth gradient over 200px changes about 0.4 per row), a single row differs from both neighbours
+// like a 1px line, or more than 3 distinct full-bleed surface tones rest on the page (a tone = 40+ rows of flat colour; tones within
+// dE 10 are one family). Rows inside the hero (photo/video) and the header chrome are not measured.
+// usage: node scripts/check-colour-flow.mjs [--path /] [--tag run] [--inject file.css] [--step 1.2] [--modes 1440:ltr,375:ltr,1440:rtl,375:rtl]
+// Output: docs/design/colour-flow-<tag>.md, filmstrip and join crops in docs/screenshots/colour-flow/.
 import { chromium } from 'playwright-core';
-import { mkdirSync, writeFileSync } from 'node:fs';
+import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 
 const arg = (n, d) => { const i = process.argv.indexOf('--' + n); return i > -1 ? process.argv[i + 1] : d; };
 const BASE = 'https://momentseg.com';
 const PATH = arg('path', '/');
-const QUERY = arg('query', '');
 const TAG = arg('tag', 'run');
-const HARD = 8;                              // OKLab delta x100 above which a boundary is a visible seam
-const MAX_HARD_PER_1000 = Number(arg('max-hard', 1));
-const MAX_SURFACES = Number(arg('max-surfaces', 3));
+const INJECT = arg('inject', null);
+const STEP = Number(arg('step', 1.2));
+const MODES = arg('modes', '1440:ltr,375:ltr,1440:rtl,375:rtl').split(',').map((m) => m.split(':'));
 const OUT = 'docs/screenshots/colour-flow';
 mkdirSync(OUT, { recursive: true });
+const slug = PATH === '/' ? 'home' : PATH.replace(/[^a-z0-9]+/gi, '_').replace(/^_|_$/g, '');
 
 const lin = (c) => { c /= 255; return c <= 0.04045 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4; };
 const oklab = ([r, g, b]) => {
@@ -23,77 +27,96 @@ const oklab = ([r, g, b]) => {
   const s = Math.cbrt(0.0883024619 * R + 0.2817188376 * G + 0.6299787005 * B);
   return [0.2104542553 * l + 0.793617785 * m - 0.0040720468 * s, 1.9779984951 * l - 2.428592205 * m + 0.4505937099 * s, 0.0259040371 * l + 0.7827717662 * m - 0.808675766 * s];
 };
-const dE = (a, b) => { const A = oklab(a), B = oklab(b); return 100 * Math.hypot(A[0] - B[0], A[1] - B[1], A[2] - B[2]); };
+const dE = (A, B) => 100 * Math.hypot(A[0] - B[0], A[1] - B[1], A[2] - B[2]);
 const hex = (c) => '#' + c.map((v) => Math.round(v).toString(16).padStart(2, '0')).join('');
 
 const browser = await chromium.launch({ channel: 'chrome', headless: true });
-const report = [];
+const md = [`# Colour flow: ${TAG}`, '', `Page ${PATH}${INJECT ? ` (draft CSS injected: ${INJECT})` : ''}. Every pixel row of a gutter column, OKLab step x100 between consecutive rows. Limit ${STEP} per row, no 1px lines, at most 3 resting surface tones (tones within dE 10 are one family). Hero media and header chrome are not measured.`, ''];
 let failed = false;
-for (const [w, h] of [[1440, 900], [375, 800]]) {
-  for (const dir of ['ltr', 'rtl']) {
-    const ctx = await browser.newContext({ viewport: { width: w, height: h } });
-    await ctx.route(/kaspersky-labs|shopifysvc|monorail/, (r) => r.abort());
-    const page = await ctx.newPage();
-    await page.goto(`${BASE}${PATH}${QUERY}${QUERY.includes('?') ? '&' : '?'}pb=0`, { waitUntil: 'domcontentloaded', timeout: 60000 });
-    if (dir === 'rtl') await page.evaluate(() => { document.documentElement.dir = 'rtl'; document.documentElement.lang = 'ar'; }).then(() => page.addStyleTag({ content: "html[dir='rtl'] .skip-to-content-link:not(:focus){left:auto;right:-99999px}" }));
-    await page.waitForTimeout(2000);
-    // scroll through once so lazy media and reveals settle, then back to the top
-    const total = await page.evaluate(() => document.documentElement.scrollHeight);
-    for (let y = 0; y < total; y += h * 0.8) { await page.evaluate((yy) => window.scrollTo(0, yy), y); await page.waitForTimeout(150); }
-    await page.evaluate(() => window.scrollTo(0, 0)); await page.waitForTimeout(800);
-    const height = await page.evaluate(() => document.documentElement.scrollHeight);
-    const secs = await page.evaluate(() => [...document.querySelectorAll('main > .shopify-section, #MainContent > .shopify-section, .shopify-section-group-footer-group .shopify-section, body > .shopify-section')]
-      .map((el) => { const r = el.getBoundingClientRect(); return { id: el.id.replace('shopify-section-', ''), top: Math.round(r.top + scrollY), bottom: Math.round(r.bottom + scrollY) }; })
-      .filter((s) => s.bottom - s.top > 8).sort((a, b) => a.top - b.top));
-    // The sticky header would cover the sampled rows: pin it static for the measurement only.
-    await page.addStyleTag({ content: '.header, header-component, [class*="sticky"] { position: static !important; }' });
-    const ys = secs.flatMap((s) => [s.top + 2, s.bottom - 3]);
-    const shots = [];
-    for (const y of ys) {
-      await page.evaluate((yy) => window.scrollTo(0, Math.max(0, yy - 200)), y);
-      await page.waitForTimeout(90);
-      const off = await page.evaluate((yy) => yy - scrollY, y);
-      shots.push((await page.screenshot({ clip: { x: 0, y: Math.max(0, Math.min(h - 1, off)), width: w, height: 1 } })).toString('base64'));
-    }
-    // filmstrip: viewport shots down the page (at most 12), for looking at
-    for (let i = 0, y = 0; y < height && i < 12; i++, y += h) {
-      await page.evaluate((yy) => window.scrollTo(0, yy), y); await page.waitForTimeout(300);
-      await page.screenshot({ path: `${OUT}/${TAG}-${w}-${dir}-${String(i).padStart(2, '0')}.png` });
-    }
-    const rows = await page.evaluate(async (list) => {
-      const out = [];
-      for (const b64 of list) {
-        const img = await createImageBitmap(await (await fetch('data:image/png;base64,' + b64)).blob());
-        const c = new OffscreenCanvas(img.width, 1); const g = c.getContext('2d', { willReadFrequently: true });
-        g.drawImage(img, 0, 0); const d = g.getImageData(0, 0, img.width, 1).data; let r = 0, gg = 0, bb = 0;
-        for (let i = 0; i < img.width; i++) { r += d[i * 4]; gg += d[i * 4 + 1]; bb += d[i * 4 + 2]; }
-        out.push([r / img.width, gg / img.width, bb / img.width]);
-      }
-      return out;
-    }, shots);
-    const dpr = 1; // screenshot is at css px
-    const bounds = []; let hard = 0;
-    for (let i = 1; i < secs.length; i++) {
-      const above = rows[(i - 1) * 2 + 1], below = rows[i * 2];
-      const d = dE(above, below);
-      const isHard = d > HARD; if (isHard) hard++;
-      bounds.push({ from: secs[i - 1].id, to: secs[i].id, y: secs[i].top, dE: +d.toFixed(1), above: hex(above), below: hex(below), hard: isHard });
-    }
-    const surfaces = [...new Set(secs.map((_, i) => hex(rows[i * 2].map((v) => Math.round(v / 6) * 6))))];
-    const per1000 = hard / (height / 1000);
-    const ok = per1000 <= MAX_HARD_PER_1000 && surfaces.length <= MAX_SURFACES;
-    if (!ok) failed = true;
-    report.push({ w, dir, height, sections: secs.length, hard, per1000: +per1000.toFixed(2), surfaces, bounds, ok });
-    console.log(`${w} ${dir}: ${secs.length} sections, ${height}px, hard boundaries ${hard} (${per1000.toFixed(2)}/1000px), distinct surface colours ${surfaces.length} ${ok ? 'PASS' : 'FAIL'}`);
-    await ctx.close();
+for (const [ws, dir] of MODES) {
+  const w = Number(ws), h = w === 375 ? 800 : 900;
+  const ctx = await browser.newContext({ viewport: { width: w, height: h } });
+  await ctx.route(/kaspersky-labs|shopifysvc|monorail/, (r) => r.abort());
+  const page = await ctx.newPage();
+  await page.goto(`${BASE}${PATH}${PATH.includes('?') ? '&' : '?'}pb=0`, { waitUntil: 'domcontentloaded', timeout: 60000 });
+  if (dir === 'rtl') {
+    await page.evaluate(() => { document.documentElement.dir = 'rtl'; document.documentElement.lang = 'ar'; });
+    await page.addStyleTag({ content: "html[dir='rtl'] .skip-to-content-link:not(:focus){left:auto;right:-99999px}" });
   }
+  if (INJECT) await page.addStyleTag({ content: readFileSync(INJECT, 'utf8') });
+  await page.waitForTimeout(2500);
+  const total0 = await page.evaluate(() => document.documentElement.scrollHeight);
+  for (let y = 0; y < Math.min(total0, 12000); y += h * 0.8) { await page.evaluate((yy) => window.scrollTo({ top: yy, behavior: 'instant' }), y); await page.waitForTimeout(110); }
+  await page.evaluate(() => window.scrollTo({ top: 0, behavior: 'instant' })); await page.waitForTimeout(500);
+  await page.addStyleTag({ content: '#header-group, #header-group *, .header, header-component, moment-cursor, [class*="sticky"] { position: static !important; } moment-cursor { display: none !important; } .m-announce { position: static !important; }' });
+  await page.waitForTimeout(300);
+  const meta = await page.evaluate(() => {
+    const secs = [...document.querySelectorAll('body > .shopify-section, #MainContent > .shopify-section, #header-group > .shopify-section, body > header.shopify-section')].map((e) => { const r = e.getBoundingClientRect(); return { id: e.id.replace('shopify-section-', '').slice(-26), top: Math.round(r.top + scrollY), bottom: Math.round(r.bottom + scrollY), hero: !!e.querySelector('.m-hero, .m-brands'), chrome: e.classList.contains('shopify-section-group-header-group') }; }).filter((s) => s.bottom - s.top > 4).sort((a, b) => a.top - b.top);
+    return { height: document.documentElement.scrollHeight, secs };
+  });
+  const H = meta.height;
+  // read both columns row by row in viewport-high strips
+  // Desktop: both gutters (x=24 and x=w-24). Phones: only the start-side gutter (x=8), because the carousels deliberately peek into the end side.
+  const cols = w === 375 ? [dir === 'ltr' ? 8 : w - 9] : [24, w - 25];
+  const data = cols.map(() => []);
+  for (let y = 0; y < H; y += h) {
+    await page.evaluate((yy) => window.scrollTo({ top: yy, behavior: 'instant' }), y);
+    await page.waitForTimeout(140);
+    const sy = await page.evaluate(() => scrollY);
+    const rows = Math.min(h, H - sy);
+    for (let c = 0; c < cols.length; c++) {
+      const shot = await page.screenshot({ clip: { x: cols[c], y: 0, width: 1, height: rows } });
+      const px = await page.evaluate(async ({ b64, rows }) => { const img = await createImageBitmap(await (await fetch('data:image/png;base64,' + b64)).blob()); const cv = new OffscreenCanvas(1, rows); const g = cv.getContext('2d', { willReadFrequently: true }); g.drawImage(img, 0, 0); const d = g.getImageData(0, 0, 1, rows).data; const o = []; for (let i = 0; i < rows; i++) o.push([d[i * 4], d[i * 4 + 1], d[i * 4 + 2]]); return o; }, { b64: shot.toString('base64'), rows });
+      for (let i = 0; i < rows; i++) data[c][sy + i] = px[i];
+    }
+  }
+  // exempt: hero media, header chrome
+  const ex = meta.secs.filter((s) => s.hero || s.chrome).map((s) => [s.top, s.bottom]);
+  const exempt = (y) => ex.some(([a, b]) => y >= a - 2 && y <= b + 2);
+  const problems = [];
+  let maxStep = 0, maxAt = 0;
+  const tones = [];
+  for (let c = 0; c < cols.length; c++) {
+    const lab = data[c].map((p) => (p ? oklab(p) : null));
+    let flat = 0, start = 0;
+    for (let y = 1; y < H; y++) {
+      if (!lab[y] || !lab[y - 1] || exempt(y)) { flat = 0; continue; }
+      const d = dE(lab[y], lab[y - 1]);
+      if (d > maxStep) { maxStep = d; maxAt = y; }
+      if (d > STEP) problems.push(`step ${d.toFixed(2)} at y=${y} (col x=${cols[c]}) ${hex(data[c][y - 1])} -> ${hex(data[c][y])}`);
+      if (y > 1 && y < H - 1 && lab[y + 1] && !exempt(y + 1)) {
+        const a = dE(lab[y], lab[y - 1]), b = dE(lab[y], lab[y + 1]), around = dE(lab[y - 1], lab[y + 1]);
+        if (a > 0.6 && b > 0.6 && around < Math.min(a, b) * 0.5) problems.push(`1px line at y=${y} (col x=${cols[c]}) ${hex(data[c][y])} between ${hex(data[c][y - 1])} and ${hex(data[c][y + 1])}`);
+      }
+      if (d < 0.05) { if (!flat) start = y; flat++; if (flat === 40) tones.push(data[c][y]); } else flat = 0;
+    }
+  }
+  const fam = [];
+  for (const t of tones) { const L = oklab(t); if (!fam.some((f) => dE(f.lab, L) < 10)) fam.push({ lab: L, hex: hex(t) }); }
+  const ok = problems.length === 0 && fam.length <= 3;
+  if (!ok) failed = true;
+  console.log(`${PATH} ${w} ${dir}: height ${H}, max step ${maxStep.toFixed(2)} at y=${maxAt}, problems ${problems.length}, resting tones ${fam.length} (${fam.map((f) => f.hex).join(' ')}) ${ok ? 'PASS' : 'FAIL'}`);
+  md.push(`## ${w}px ${dir.toUpperCase()}: ${ok ? 'PASS' : 'FAIL'}`, `Height ${H}px. Largest step ${maxStep.toFixed(2)} at y=${maxAt}. Resting surface tones: ${fam.length} (${fam.map((f) => f.hex).join(', ')}).`, '');
+  const uniq = [...new Set(problems)].slice(0, 12);
+  for (const p of uniq) md.push('- ' + p);
+  if (problems.length > uniq.length) md.push(`- ... ${problems.length - uniq.length} more`);
+  md.push('');
+  // filmstrip (viewport shots) and a 400px crop at each join
+  for (let i = 0, y = 0; y < H && i < 14; i++, y += h) {
+    await page.evaluate((yy) => window.scrollTo({ top: yy, behavior: 'instant' }), y); await page.waitForTimeout(250);
+    await page.screenshot({ path: `${OUT}/${TAG}-${slug}-${w}-${dir}-strip${String(i).padStart(2, '0')}.png` });
+  }
+  if (dir === 'ltr') {
+    const joins = meta.secs.filter((s) => !s.chrome && !s.hero).map((s) => s.top);
+    for (const [i, y] of joins.entries()) {
+      await page.evaluate((yy) => window.scrollTo({ top: Math.max(0, yy - 200), behavior: 'instant' }), y); await page.waitForTimeout(220);
+      const off = await page.evaluate((yy) => yy - scrollY, y);
+      await page.screenshot({ path: `${OUT}/${TAG}-${slug}-${w}-join${String(i).padStart(2, '0')}.png`, clip: { x: 0, y: Math.max(0, Math.min(h - 400, off - 200)), width: w, height: 400 } });
+    }
+  }
+  await ctx.close();
 }
 await browser.close();
-const md = [`# Colour flow ${TAG}`, '', `Page ${PATH}${QUERY}. Hard boundary = OKLab delta x100 above ${HARD} between the last row of a section and the first row of the next. Limits: ${MAX_HARD_PER_1000} hard per 1000px, ${MAX_SURFACES} distinct surfaces.`, ''];
-for (const r of report) {
-  md.push(`## ${r.w}px ${r.dir.toUpperCase()}: ${r.ok ? 'PASS' : 'FAIL'}`, `${r.sections} sections, ${r.height}px tall, ${r.hard} hard boundaries (${r.per1000} per 1000px), ${r.surfaces.length} surface colours: ${r.surfaces.join(' ')}`, '', '| from | to | y | dE | above | below |', '|---|---|---|---|---|---|');
-  for (const b of r.bounds) md.push(`| ${b.from} | ${b.to} | ${b.y} | ${b.dE}${b.hard ? ' **hard**' : ''} | ${b.above} | ${b.below} |`);
-  md.push('');
-}
-writeFileSync(`docs/design/colour-flow-${TAG}.md`, md.join('\n'));
+writeFileSync(`docs/design/colour-flow-${TAG}-${slug}.md`, md.join('\n'));
+console.log(failed ? 'COLOUR FLOW FAILED' : 'COLOUR FLOW OK');
 process.exit(failed ? 1 : 0);

@@ -21,7 +21,7 @@
     },
     {
       "ctx": "home 1920px ltr daily",
-      "moved": 1101.8,
+      "moved": 1105.8,
       "minMarginPx": 101.6,
       "tileW": 472
     },
@@ -39,7 +39,7 @@
     },
     {
       "ctx": "home 1920px rtl night",
-      "moved": 39.3,
+      "moved": 22.2,
       "minMarginPx": 78.1,
       "tileW": 472
     },
@@ -93,7 +93,7 @@
     },
     {
       "ctx": "home 1440px ltr daily",
-      "moved": 965.3,
+      "moved": 963.3,
       "minMarginPx": 95.8,
       "tileW": 445
     },
@@ -129,7 +129,7 @@
     },
     {
       "ctx": "home 1440px rtl daily",
-      "moved": 1029.3,
+      "moved": 1035.3,
       "minMarginPx": 95.8,
       "tileW": 445
     },
@@ -165,7 +165,7 @@
     },
     {
       "ctx": "home 1024px ltr daily",
-      "moved": 172.4,
+      "moved": 176.4,
       "minMarginPx": 66,
       "tileW": 307
     },
@@ -201,7 +201,7 @@
     },
     {
       "ctx": "home 1024px rtl daily",
-      "moved": 226.4,
+      "moved": 230.4,
       "minMarginPx": 66,
       "tileW": 307
     },
@@ -231,7 +231,7 @@
     },
     {
       "ctx": "home 768px ltr allday",
-      "moved": 244.5,
+      "moved": 260.5,
       "minMarginPx": 58.8,
       "tileW": 338
     },
@@ -267,7 +267,7 @@
     },
     {
       "ctx": "home 768px rtl allday",
-      "moved": 288.5,
+      "moved": 290.5,
       "minMarginPx": 58.8,
       "tileW": 338
     },

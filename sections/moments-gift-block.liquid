@@ -5,7 +5,8 @@
 {%- endcomment -%}
 
 <section class="m-gift m-tone--gift" aria-labelledby="m-gift-title-{{ section.id }}">
-  <div class="m-gift__inner m-wrap">
+  <div class="m-wrap">
+  <div class="m-gift__inner">
     <div class="m-gift__copy">
       <p class="m-gift__tag">{{ 'moments.gift' | t }}</p>
       <h2 class="m-gift__title" id="m-gift-title-{{ section.id }}">
@@ -37,31 +38,36 @@
       {%- endif -%}
     </div>
   </div>
+  </div>
 </section>
 
 {% stylesheet %}
   .m-gift {
+    padding-block: clamp(32px, 5vw, 72px);
+    background: var(--m-surface);
+  }
+
+  /* A contained card, not a full-bleed wall of colour: it sits on the page like the other content blocks. */
+  .m-gift__inner {
     --m-mark-ink: var(--tile-ink);
     --m-mark-body: var(--tile-body);
     --m-mark-accent: var(--tile-accent);
     --m-mark-gold: var(--tile-gold);
 
-    background: var(--tile-bg);
-    color: var(--tile-ink);
-    padding-block: clamp(56px, 9vw, 128px);
-  }
-
-  .m-gift__inner {
     display: grid;
     grid-template-columns: minmax(0, 1fr);
-    gap: 32px;
+    gap: 24px;
     align-items: center;
+    padding: clamp(28px, 5vw, 64px);
+    border-radius: 16px;
+    background: var(--tile-bg);
+    color: var(--tile-ink);
   }
 
   .m-gift__copy {
     display: grid;
     justify-items: start;
-    gap: 20px;
+    gap: 16px;
   }
 
   .m-gift__tag {
@@ -75,8 +81,8 @@
 
   .m-gift__title {
     margin: 0;
-    max-inline-size: 9ch;
-    font-size: clamp(3rem, 8vw, 6.5rem);
+    max-inline-size: 10ch;
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
     line-height: 0.98;
     text-wrap: balance;
   }
@@ -102,7 +108,7 @@
   }
 
   .m-gift__art moment-mark {
-    --mm-size: min(70vw, 360px);
+    --mm-size: min(48vw, 220px);
   }
 
   .m-gift__packshot {
@@ -114,11 +120,11 @@
 
   @media screen and (min-width: 990px) {
     .m-gift__inner {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
     }
 
     .m-gift__art moment-mark {
-      --mm-size: min(34vw, 520px);
+      --mm-size: min(22vw, 280px);
     }
   }
 {% endstylesheet %}

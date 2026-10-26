@@ -230,48 +230,48 @@ html .compare-at-price {
 }
 
 /* Moment tokens: one full-colour field per moment (used by snippets/moment-tile.liquid).
-   ONE tonal recipe in OKLCH (scripts/moment-palette.mjs): the same lightness and chroma steps for every moment, only the hue changes.
-   field L0.50 C0.12, deep L0.40 C0.10, soft L0.93 C0.035, ink L0.30 C0.07. Pearl text on field and deep is 5.3:1 or better; ink on soft is 11:1.
-   Night 318, Gift 345, All day 82, Daily 48, Fresh 152, Love 12. Each moment has a field (card and hero colour), a deep step
-   (text, marks, the live accent) and a soft step (card tint). The accent and hairline stay aged gold. */
+   ONE tonal recipe in OKLCH (scripts/moment-palette.mjs): field L0.50 C0.12, deep L0.40 C0.10, soft L0.93 C0.035, ink L0.30 C0.07,
+   with a small per-moment lightness and chroma nudge so neighbouring rose and clay hues stay apart (closest pair dE 11.4, checked in the script).
+   All day is the one light moment: a golden sand with plum ink, so it no longer reads as a second brown beside Daily.
+   Hues: Night 300, Gift 338, All day 88, Daily 42, Fresh 152, Love 10. Pearl text on every deep field is 4.8:1 or better; plum on sand is 9:1. */
 html:root {
-  --moment-night: linear-gradient(155deg, #7f4b8f, #5e346a);
-  --moment-night-field: #7f4b8f;
-  --moment-night-deep: #5e346a;
-  --moment-night-soft: #f2e1f7;
-  --moment-night-soft-ink: #3c2144;
+  --moment-night: linear-gradient(155deg, #5f4589, #422e62);
+  --moment-night-field: #5f4589;
+  --moment-night-deep: #422e62;
+  --moment-night-soft: #ebe3fc;
+  --moment-night-soft-ink: #33244b;
   --moment-night-ink: var(--m-pearl);
-  --moment-night-body: color-mix(in oklch, #7f4b8f 62%, var(--m-pearl));
+  --moment-night-body: color-mix(in oklab, #5f4589 62%, var(--m-pearl));
   --moment-night-accent: var(--m-gold-light);
   --moment-night-gold: var(--m-gold-light);
 
-  --moment-gift: linear-gradient(155deg, #914373, #6c2e54);
-  --moment-gift-field: #914373;
-  --moment-gift-deep: #6c2e54;
-  --moment-gift-soft: #fadfed;
-  --moment-gift-soft-ink: #461e36;
+  --moment-gift: linear-gradient(155deg, #a44d8e, #7e376c);
+  --moment-gift-field: #a44d8e;
+  --moment-gift-deep: #7e376c;
+  --moment-gift-soft: #f8dff0;
+  --moment-gift-soft-ink: #441e3a;
   --moment-gift-ink: var(--m-pearl);
-  --moment-gift-body: color-mix(in oklch, #914373 62%, var(--m-pearl));
+  --moment-gift-body: color-mix(in oklab, #a44d8e 62%, var(--m-pearl));
   --moment-gift-accent: var(--m-gold-light);
   --moment-gift-gold: var(--m-gold-light);
 
-  --moment-allday: linear-gradient(155deg, #855a00, #624000);
-  --moment-allday-field: #855a00;
-  --moment-allday-deep: #624000;
-  --moment-allday-soft: #f4e6ce;
-  --moment-allday-soft-ink: #3f2900;
-  --moment-allday-ink: var(--m-pearl);
-  --moment-allday-body: color-mix(in oklch, #855a00 62%, var(--m-pearl));
-  --moment-allday-accent: var(--m-gold-light);
-  --moment-allday-gold: var(--m-gold-light);
+  --moment-allday: linear-gradient(155deg, #e6c77c, #d0ad54);
+  --moment-allday-field: #e6c77c;
+  --moment-allday-deep: #d0ad54;
+  --moment-allday-soft: #f7eed8;
+  --moment-allday-soft-ink: #3c2b00;
+  --moment-allday-ink: var(--m-plum);
+  --moment-allday-body: color-mix(in oklab, #e6c77c 62%, var(--m-pearl));
+  --moment-allday-accent: var(--m-berry-ink);
+  --moment-allday-gold: var(--m-berry-ink);
 
-  --moment-daily: linear-gradient(155deg, #984a1a, #71330c);
-  --moment-daily-field: #984a1a;
-  --moment-daily-deep: #71330c;
-  --moment-daily-soft: #fde2d4;
-  --moment-daily-soft-ink: #492109;
+  --moment-daily: linear-gradient(155deg, #9c5132, #753a22);
+  --moment-daily-field: #9c5132;
+  --moment-daily-deep: #753a22;
+  --moment-daily-soft: #fee1d6;
+  --moment-daily-soft-ink: #4a200e;
   --moment-daily-ink: var(--m-pearl);
-  --moment-daily-body: color-mix(in oklch, #984a1a 62%, var(--m-pearl));
+  --moment-daily-body: color-mix(in oklab, #9c5132 62%, var(--m-pearl));
   --moment-daily-accent: var(--m-gold-light);
   --moment-daily-gold: var(--m-gold-light);
 
@@ -281,17 +281,17 @@ html:root {
   --moment-fresh-soft: #d8efdd;
   --moment-fresh-soft-ink: #0a371b;
   --moment-fresh-ink: var(--m-pearl);
-  --moment-fresh-body: color-mix(in oklch, #1a763f 62%, var(--m-pearl));
+  --moment-fresh-body: color-mix(in oklab, #1a763f 62%, var(--m-pearl));
   --moment-fresh-accent: var(--m-gold-light);
   --moment-fresh-gold: var(--m-gold-light);
 
-  --moment-love: linear-gradient(155deg, #9b4251, #732d39);
-  --moment-love-field: #9b4251;
-  --moment-love-deep: #732d39;
+  --moment-love: linear-gradient(155deg, #921f3f, #6a0628);
+  --moment-love-field: #921f3f;
+  --moment-love-deep: #6a0628;
   --moment-love-soft: #fedfe2;
-  --moment-love-soft-ink: #4b1d24;
+  --moment-love-soft-ink: #4a1d26;
   --moment-love-ink: var(--m-pearl);
-  --moment-love-body: color-mix(in oklch, #9b4251 62%, var(--m-pearl));
+  --moment-love-body: color-mix(in oklab, #921f3f 62%, var(--m-pearl));
   --moment-love-accent: var(--m-gold-light);
   --moment-love-gold: var(--m-gold-light);
 }
@@ -308,7 +308,7 @@ html:root {
 
 html[data-moment='night'] { --m-live: var(--moment-night-deep); --m-live-ink: var(--m-pearl); --m-live-line: var(--m-gold-light); }
 html[data-moment='gift'] { --m-live: var(--moment-gift-deep); --m-live-ink: var(--m-pearl); --m-live-line: var(--m-gold-light); }
-html[data-moment='allday'] { --m-live: var(--moment-allday-deep); --m-live-ink: var(--m-pearl); --m-live-line: var(--m-gold-light); }
+html[data-moment='allday'] { --m-live: var(--moment-allday-deep); --m-live-ink: var(--m-plum); --m-live-line: var(--m-plum); }
 html[data-moment='daily'] { --m-live: var(--moment-daily-deep); --m-live-ink: var(--m-pearl); --m-live-line: var(--m-gold-light); }
 html[data-moment='fresh'] { --m-live: var(--moment-fresh-deep); --m-live-ink: var(--m-pearl); --m-live-line: var(--m-gold-light); }
 html[data-moment='love'] { --m-live: var(--moment-love-deep); --m-live-ink: var(--m-pearl); --m-live-line: var(--m-gold-light); }
@@ -681,4 +681,107 @@ html:root {
 html:root:root,
 html:root:root [class*="color-scheme-"] {
   --color-foreground-muted: rgb(var(--color-foreground-rgb) / 0.78);
+}
+
+/* ---------- Colour flow: no seam where one full-bleed colour meets another ----------
+   Three surface tones only: deep and plum (one family: hero, brand strip, Shop by Moment, story, marquee, footer) and the pearl base.
+   Where two different tones meet, the LOWER band opens with a soft strip (::before on its wrapper) that fades from the colour above to its
+   own colour through a bridge tone (mauve), interpolated in oklab, so the join has no line and no muddy midpoint. The strip is its own
+   box above the band's content, so no text ever sits in the fade, nothing overlaps and nothing needs a mask. Pure CSS, resilient to
+   editor reordering: the tone of a band is read from its own class or colour scheme, the strip follows the pair that actually meets.
+   Flat (no gradient) under forced-colors and reduced data is not needed: a gradient is not motion. */
+html:root {
+  --blend: 200px;
+  --s-deep: #251224;
+  --s-plum: #3B1E3A;
+  --s-pearl: #FAF6F2;
+  --s-mauve: #9C6B8A;
+}
+
+@media screen and (max-width: 749px) {
+  html:root {
+    --blend: 120px;
+  }
+}
+
+/* Tone of a band. deep: hero and brand strip. plum: Shop by Moment, story, scheme-3 sections (marquee, signup, footer). light: the rest. */
+:is(.shopify-section):has(> :is(.m-hero, .m-brands)) { --tone: deep; }
+:is(.shopify-section):has(> :is(.m-moments, .m-story, .m-steps, .section-background.color-scheme-3)) { --tone: plum; }
+
+/* light band after a dark band: dark -> mauve -> pearl */
+.shopify-section:is(:has(> :is(.m-hero, .m-brands, .m-moments, .m-story, .m-steps, .section-background.color-scheme-3))) + .shopify-section:not(:has(> :is(.m-hero, .m-brands, .m-moments, .m-story, .m-steps, .section-background.color-scheme-3)))::before {
+  content: '';
+  display: block;
+  block-size: var(--blend);
+  background: linear-gradient(var(--s-plum), var(--s-mauve) 48%, var(--s-pearl));
+  background: linear-gradient(in oklab, var(--s-plum), var(--s-mauve) 48%, var(--s-pearl));
+}
+
+/* dark band after a light band (including the footer after the last section of main): pearl -> mauve -> plum */
+.shopify-section:not(:has(> :is(.m-hero, .m-brands, .m-moments, .m-story, .m-steps, .section-background.color-scheme-3))) + .shopify-section:has(> :is(.m-moments, .m-story, .m-steps, .section-background.color-scheme-3))::before,
+main:not(:has(> .shopify-section:last-child > :is(.m-hero, .m-brands, .m-moments, .m-story, .m-steps, .section-background.color-scheme-3))) + .shopify-section:has(> .section-background.color-scheme-3)::before,
+#header-group + main > .shopify-section:first-child:has(> :is(.m-moments, .m-story))::before {
+  content: '';
+  display: block;
+  block-size: var(--blend);
+  background: linear-gradient(var(--s-pearl), var(--s-mauve) 52%, var(--s-plum));
+  background: linear-gradient(in oklab, var(--s-pearl), var(--s-mauve) 52%, var(--s-plum));
+}
+
+/* deep strip into the plum band (brand strip into Shop by Moment): a short, quiet step, no hairline */
+.shopify-section:has(> .m-brands) + .shopify-section:has(> .m-moments)::before {
+  content: '';
+  display: block;
+  block-size: 96px;
+  background: linear-gradient(var(--s-deep), var(--s-plum));
+  background: linear-gradient(in oklab, var(--s-deep), var(--s-plum));
+}
+
+/* header into the hero: the hero's top fades up out of the header colour (an overlay inside the hero, no change to its height) */
+.m-hero::before {
+  content: '';
+  position: absolute;
+  inset-inline: 0;
+  inset-block-start: 0;
+  z-index: 1;
+  block-size: min(var(--blend), 22%);
+  pointer-events: none;
+  background: linear-gradient(var(--s-pearl), transparent);
+  background: linear-gradient(in oklab, var(--s-pearl), rgb(250 246 242 / 0));
+}
+
+@media (forced-colors: active) {
+  .shopify-section::before,
+  .m-hero::before {
+    display: none;
+  }
+}
+
+/* ---------- Product card: immune to colour-scheme differences ----------
+   Real browsers can adapt colours that a headless test never sees (Chrome's auto dark mode, a forced scheme, an extension, a scheme class
+   from a different section leaking onto the card). The card's text area therefore states its own colours: `color-scheme: only light`
+   (also on the page, plus the meta tag in theme.liquid), explicit scheme variables on the card and on every scheme class inside it, and an
+   explicit surface and text colour with enough specificity to beat any `.color-scheme-N` rule. Plum text on pearl is 14:1. */
+html:root {
+  color-scheme: only light;
+}
+
+html:root:root product-card,
+html:root:root product-card .product-card__content,
+html:root:root product-card [class*='color-scheme-'] {
+  color-scheme: only light;
+  --color-background: #FAF6F2;
+  --color-background-rgb: 250 246 242;
+  --color-foreground: #3B1E3A;
+  --color-foreground-rgb: 59 30 58;
+  --color-foreground-heading: #3B1E3A;
+  --color-foreground-heading-rgb: 59 30 58;
+  --color-foreground-muted: #5E5048;
+  --color-border: #DCB9B0;
+  --color-border-rgb: 220 185 176;
+}
+
+html:root:root product-card .product-card__content {
+  background-color: #FAF6F2;
+  color: #3B1E3A;
 }

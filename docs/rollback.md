@@ -30,3 +30,8 @@ Fast path, one file or a batch: push the previous commit's versions of the same 
 `shopify theme push -e live --only <files> --live --allow-live`, then re-run the smoke test.
 Whole-theme path: Admin, Themes, publish **MOMENTS - Backup 2026-10-26 11-47** (#161334263999), or the older #161251229887.
 Nothing in store data is touched by theme pushes.
+
+## 6. Backups (newest first)
+- #161337540799 "MOMENTS - Backup 2026-10-26 13-43 pre colour-flow" (unpublished): live as it was before the colour-flow work.
+- #161334263999 "MOMENTS - Backup 2026-10-26 11-47" (unpublished).
+- #161251229887 "MOMENTS - Homepage v2" (the original live theme).

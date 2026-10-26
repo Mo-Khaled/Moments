@@ -5,6 +5,7 @@
   {% if request.locale.iso_code == 'ar' %}dir="rtl"{% else %}dir="ltr"{% endif %}
 >
   <head>
+    <meta name="color-scheme" content="only light">
     {%- if settings.favicon != blank -%}
       <link
         rel="icon"
@@ -48,6 +49,7 @@
     {%- render 'moment-marks-sprite' -%}
     {%- render 'moment-cursor' -%}
     {%- render 'moment-pointer' -%}
+    {%- render 'moment-card-diagnostic' -%}
     {%- render 'moments-carousel-controls' -%}
     {%- render 'language-bar' -%}
 

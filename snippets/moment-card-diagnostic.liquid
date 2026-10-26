@@ -1,0 +1,79 @@
+{%- doc -%}
+  Card diagnostic. Does nothing for normal visitors. Open any page with ?card-diagnostic=1 (for example
+  /pages/make-a-bundle?card-diagnostic=1) and a panel appears at the bottom with a "Copy report" button. The report describes the FIRST product card on
+  the page in THIS browser: computed colours, color-scheme, the ancestors and their colour-scheme classes, matchMedia results, the device, saved
+  state (localStorage keys, cookie names) and the stylesheet rules that win for the text area's background. Nothing is sent anywhere.
+
+  @example
+  {% render 'moment-card-diagnostic' %}
+{%- enddoc -%}
+
+<script>
+  (() => {
+    if (!/[?&](card-diagnostic|view=card-diagnostic)(=|&|$)/.test(location.search)) return;
+    const run = () => {
+      const card = document.querySelector('product-card');
+      const out = [];
+      const log = (...a) => out.push(a.join(' '));
+      const cs = (el) => getComputedStyle(el);
+      const eff = (el) => { for (let e = el; e; e = e.parentElement) { const c = cs(e).backgroundColor; if (c && !/rgba\(0, 0, 0, 0\)|transparent/.test(c)) return c + ' (from ' + e.tagName.toLowerCase() + '.' + String(e.className).split(' ').slice(0, 2).join('.') + ')'; } return 'none (page)'; };
+      const desc = (name, el) => el ? log(name.padEnd(12), 'bg=' + cs(el).backgroundColor, '| effective bg=' + eff(el), '| color=' + cs(el).color, '| color-scheme=' + cs(el).colorScheme, '| display=' + cs(el).display, '| text="' + (el.textContent || '').trim().replace(/\s+/g, ' ').slice(0, 40) + '"') : log(name.padEnd(12), '(not found)');
+      log('MOMENTS card diagnostic', new Date().toISOString());
+      log('url', location.href);
+      log('ua', navigator.userAgent);
+      log('viewport', innerWidth + 'x' + innerHeight, 'dpr', devicePixelRatio, 'html lang/dir', document.documentElement.lang, document.documentElement.dir, 'data-moment', document.documentElement.dataset.moment || '-');
+      log('root color-scheme', cs(document.documentElement).colorScheme, '| meta color-scheme', (document.querySelector('meta[name=color-scheme]') || {}).content || '-');
+      for (const q of ['(prefers-color-scheme: dark)', '(prefers-color-scheme: light)', '(forced-colors: active)', '(prefers-contrast: more)', '(prefers-contrast: less)', '(prefers-reduced-motion: reduce)', '(pointer: fine)', '(hover: hover)', '(inverted-colors: inverted)']) log('matchMedia', q, matchMedia(q).matches);
+      try { log('localStorage keys', Object.keys(localStorage).map((k) => k + '(' + (localStorage.getItem(k) || '').length + ')').join(', ') || '-'); } catch (e) { log('localStorage', 'unavailable'); }
+      try { log('sessionStorage keys', Object.keys(sessionStorage).map((k) => k + '=' + String(sessionStorage.getItem(k)).slice(0, 20)).join(', ') || '-'); } catch (e) { log('sessionStorage', 'unavailable'); }
+      log('cookie names', document.cookie.split(';').map((c) => c.split('=')[0].trim()).filter(Boolean).join(', ') || '-', '| preview_theme_id cookie:', /preview_theme_id|_shopify_preview/.test(document.cookie));
+      log('Shopify.theme', (window.Shopify && Shopify.theme && (Shopify.theme.id + ' ' + Shopify.theme.name + ' role=' + Shopify.theme.role)) || '-', '| designMode', !!(window.Shopify && Shopify.designMode));
+      log('html classes', document.documentElement.className, '| body classes', document.body.className);
+      if (!card) { log('NO product-card on this page'); return out.join('\n'); }
+      const content = card.querySelector('.product-card__content') || card;
+      const meta = card.querySelector('.card-meta');
+      const textArea = (meta && meta.parentElement) || content;
+      log('--- first card', '(' + card.getBoundingClientRect().width.toFixed(0) + 'x' + card.getBoundingClientRect().height.toFixed(0) + ')');
+      desc('card', card); desc('content', content); desc('textArea', textArea);
+      desc('moment', card.querySelector('.card-meta__moment')); desc('brand', card.querySelector('.card-meta__brand'));
+      const leaves = [...textArea.querySelectorAll('*')].filter((e) => !e.children.length && (e.textContent || '').trim()).slice(0, 8);
+      leaves.forEach((e, i) => desc('text' + (i + 1), e));
+      desc('vars', content);
+      log('vars on content', ['--color-background', '--color-foreground', '--color-foreground-muted', '--m-card-backdrop', '--m-live'].map((v) => v + '=' + cs(content).getPropertyValue(v).trim()).join(' | '));
+      log('--- ancestors (card up to its section)');
+      for (let e = card; e && e !== document.body; e = e.parentElement) {
+        const sch = [...e.classList].filter((c) => /color-scheme|scheme-|^color-/.test(c));
+        log((e.tagName.toLowerCase() + '.' + String(e.className).split(' ').slice(0, 3).join('.')).slice(0, 60).padEnd(60), 'bg=' + cs(e).backgroundColor, 'color=' + cs(e).color, sch.length ? 'SCHEME CLASSES: ' + sch.join(' ') : '');
+        if (e.classList.contains('shopify-section')) break;
+      }
+      const sec = card.closest('.shopify-section');
+      if (sec) log('section', sec.id, '| scheme classes inside:', [...new Set([...sec.querySelectorAll('[class*=color-scheme]')].flatMap((x) => [...x.classList].filter((c) => /color-scheme/.test(c))))].join(' ') || '-');
+      log('--- stylesheet rules that set a background on the text area (last = winning if specificity ties)');
+      const hits = [];
+      const walk = (rules, href) => { for (const r of rules) { if (r.cssRules && !r.selectorText) walk(r.cssRules, href); else if (r.selectorText && r.style && (r.style.backgroundColor || r.style.background)) { try { if (textArea.matches(r.selectorText) || content.matches(r.selectorText)) hits.push((r.selectorText.slice(0, 90)) + ' { background: ' + (r.style.backgroundColor || r.style.background) + ' } ' + (href || 'inline <style>').split('/').pop().split('?')[0]); } catch (e) { /* ignore */ } } } };
+      for (const ss of document.styleSheets) { try { walk(ss.cssRules, ss.href); } catch (e) { hits.push('(cross-origin sheet skipped) ' + ss.href); } }
+      hits.slice(-12).forEach((h) => log('  ' + h));
+      log('inline style on content:', content.getAttribute('style') ? content.getAttribute('style').slice(0, 160) : '-');
+      log('forced dark / extensions hint: html filter=' + cs(document.documentElement).filter + ' | body filter=' + cs(document.body).filter + ' | mix-blend on card=' + cs(card).mixBlendMode);
+      log('--- card HTML (first 900 chars)'); log(card.outerHTML.replace(/\s+/g, ' ').slice(0, 900));
+      return out.join('\n');
+    };
+    const mount = () => {
+      const box = document.createElement('div');
+      box.style.cssText = 'position:fixed;inset-inline:8px;inset-block-end:8px;z-index:2147483647;background:#fff;color:#111;border:2px solid #b7406a;border-radius:12px;padding:10px;font:12px/1.4 system-ui,sans-serif;box-shadow:0 8px 30px rgba(0,0,0,.35);max-block-size:60vh;display:grid;gap:8px';
+      const row = document.createElement('div'); row.style.cssText = 'display:flex;gap:8px;align-items:center;flex-wrap:wrap';
+      const b1 = document.createElement('button'); b1.textContent = 'Copy report'; b1.style.cssText = 'min-block-size:44px;padding:0 16px;border:0;border-radius:999px;background:#3b1e3a;color:#fff;font:600 14px system-ui';
+      const b2 = document.createElement('button'); b2.textContent = 'Run again'; b2.style.cssText = 'min-block-size:44px;padding:0 16px;border:1px solid #3b1e3a;border-radius:999px;background:#fff;color:#3b1e3a;font:600 14px system-ui';
+      const b3 = document.createElement('button'); b3.textContent = 'Close'; b3.style.cssText = b2.style.cssText;
+      const msg = document.createElement('span'); msg.textContent = 'Wait for the cards to appear, then copy.';
+      const ta = document.createElement('textarea'); ta.readOnly = true; ta.style.cssText = 'inline-size:100%;block-size:28vh;font:11px/1.35 ui-monospace,monospace;color:#111;background:#f6f6f6;border:1px solid #ccc;border-radius:6px';
+      const fill = () => { ta.value = run(); };
+      b1.onclick = async () => { fill(); try { await navigator.clipboard.writeText(ta.value); msg.textContent = 'Copied. Paste it into the chat.'; } catch (e) { ta.focus(); ta.select(); msg.textContent = 'Select all and copy manually.'; } };
+      b2.onclick = () => { fill(); msg.textContent = 'Updated.'; };
+      b3.onclick = () => box.remove();
+      row.append(b1, b2, b3, msg); box.append(row, ta); document.body.append(box);
+      setTimeout(fill, 2500);
+    };
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', mount); else mount();
+  })();
+</script>

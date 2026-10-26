@@ -1,0 +1,73 @@
+/* ---------- Colour flow: no seam where one full-bleed colour meets another ----------
+   Three surface tones only: deep and plum (one family: hero, brand strip, Shop by Moment, story, marquee, footer) and the pearl base.
+   Where two different tones meet, the LOWER band opens with a soft strip (::before on its wrapper) that fades from the colour above to its
+   own colour through a bridge tone (mauve), interpolated in oklab, so the join has no line and no muddy midpoint. The strip is its own
+   box above the band's content, so no text ever sits in the fade, nothing overlaps and nothing needs a mask. Pure CSS, resilient to
+   editor reordering: the tone of a band is read from its own class or colour scheme, the strip follows the pair that actually meets.
+   Flat (no gradient) under forced-colors and reduced data is not needed: a gradient is not motion. */
+html:root {
+  --blend: 200px;
+  --s-deep: #251224;
+  --s-plum: #3B1E3A;
+  --s-pearl: #FAF6F2;
+  --s-mauve: #9C6B8A;
+}
+
+@media screen and (max-width: 749px) {
+  html:root {
+    --blend: 120px;
+  }
+}
+
+/* Tone of a band. deep: hero and brand strip. plum: Shop by Moment, story, scheme-3 sections (marquee, signup, footer). light: the rest. */
+:is(.shopify-section):has(> :is(.m-hero, .m-brands)) { --tone: deep; }
+:is(.shopify-section):has(> :is(.m-moments, .m-story, .m-steps, .section-background.color-scheme-3)) { --tone: plum; }
+
+/* light band after a dark band: dark -> mauve -> pearl */
+.shopify-section:is(:has(> :is(.m-hero, .m-brands, .m-moments, .m-story, .m-steps, .section-background.color-scheme-3))) + .shopify-section:not(:has(> :is(.m-hero, .m-brands, .m-moments, .m-story, .m-steps, .section-background.color-scheme-3)))::before {
+  content: '';
+  display: block;
+  block-size: var(--blend);
+  background: linear-gradient(var(--s-plum), var(--s-mauve) 48%, var(--s-pearl));
+  background: linear-gradient(in oklab, var(--s-plum), var(--s-mauve) 48%, var(--s-pearl));
+}
+
+/* dark band after a light band (including the footer after the last section of main): pearl -> mauve -> plum */
+.shopify-section:not(:has(> :is(.m-hero, .m-brands, .m-moments, .m-story, .m-steps, .section-background.color-scheme-3))) + .shopify-section:has(> :is(.m-moments, .m-story, .m-steps, .section-background.color-scheme-3))::before,
+main:not(:has(> .shopify-section:last-child > :is(.m-hero, .m-brands, .m-moments, .m-story, .m-steps, .section-background.color-scheme-3))) + .shopify-section:has(> .section-background.color-scheme-3)::before,
+#header-group + main > .shopify-section:first-child:has(> :is(.m-moments, .m-story))::before {
+  content: '';
+  display: block;
+  block-size: var(--blend);
+  background: linear-gradient(var(--s-pearl), var(--s-mauve) 52%, var(--s-plum));
+  background: linear-gradient(in oklab, var(--s-pearl), var(--s-mauve) 52%, var(--s-plum));
+}
+
+/* deep strip into the plum band (brand strip into Shop by Moment): a short, quiet step, no hairline */
+.shopify-section:has(> .m-brands) + .shopify-section:has(> .m-moments)::before {
+  content: '';
+  display: block;
+  block-size: 96px;
+  background: linear-gradient(var(--s-deep), var(--s-plum));
+  background: linear-gradient(in oklab, var(--s-deep), var(--s-plum));
+}
+
+/* header into the hero: the hero's top fades up out of the header colour (an overlay inside the hero, no change to its height) */
+.m-hero::before {
+  content: '';
+  position: absolute;
+  inset-inline: 0;
+  inset-block-start: 0;
+  z-index: 1;
+  block-size: min(var(--blend), 22%);
+  pointer-events: none;
+  background: linear-gradient(var(--s-pearl), transparent);
+  background: linear-gradient(in oklab, var(--s-pearl), rgb(250 246 242 / 0));
+}
+
+@media (forced-colors: active) {
+  .shopify-section::before,
+  .m-hero::before {
+    display: none;
+  }
+}

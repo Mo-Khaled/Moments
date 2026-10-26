@@ -93,3 +93,5 @@ the same bundle could not load its validator package (see the first entry). **sh
 - design-system: OKLCH moment recipe (scripts/moment-palette.mjs), token-level contrast fixes (--opacity-subdued-text, --color-foreground-muted).
 - ui-ux-pro-max: contrast checks (4.5:1 normal, 3:1 large), 44px targets, pointer scoped to fine pointers and off under forced-colors.
 - Not yet run: frontend-design, emil-design-eng, banner-design, brand audits for the remaining parts of the brief.
+- design-system / frontend-design / impeccable / emil-design-eng (colour flow): tokens (--blend, --s-*), fade strips, no hairlines at joins, hero overlay, the proof script; motion unchanged.
+- ui-ux-pro-max / shopify-liquid (card hotfix): colour-scheme opt-out, scheme variable pinning, diagnostic snippet.
