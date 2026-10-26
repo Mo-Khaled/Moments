@@ -43,3 +43,4 @@ Nothing below is guessed or invented; each item is a slot that is hidden on the 
 
 - **Returns title (2026-10-26 live audit):** the page and footer link say "Returns & Exchange Policy" but the policy says exchanges are not available. Rename to "Returns Policy" (page title and menu label are store data), or supply an exchange policy.
 - **Legal policies and FAQ:** /policies/refund-policy and /policies/shipping-policy return 404 and /pages/faq does not exist. Decide whether to fill them in or leave the pages as they are.
+- **Footer menu label:** the footer menu item still reads "Returns & Exchange Policy" (menu = store data). Rename it to "Returns policy". The theme's own labels were already changed. Also listed: /policies/refund-policy and /policies/shipping-policy return 404 and /pages/faq does not exist; the theme links to none of them.
