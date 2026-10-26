@@ -420,14 +420,7 @@
 
   /* Cards in a row end level: the card takes the free height and the button sits at the bottom of every cell. The photo frame is a
      soft tint with a rounded edge, and the photo is multiplied onto it, so a white or grey photo background never shows as a box. */
-  .m-bundle__grid {
-    --m-card-backdrop: color-mix(in srgb, var(--m-nude) 32%, var(--m-pearl));
-  }
-
-  .m-bundle__grid .card-gallery {
-    border-radius: 12px;
-    overflow: hidden;
-  }
+  /* (the photo frame and its corners are styled once, for every placement, in assets/moments.css) */
 
   /* The bundle has its own add button; the card's quick add and wishlist are hidden here. */
   .m-bundle__grid quick-add,

@@ -785,3 +785,216 @@ html:root:root product-card .product-card__content {
   background-color: #FAF6F2;
   color: #3B1E3A;
 }
+
+/* ---------- Product card: one bordered container, shared by every placement ----------
+   Home carousels, collections, search, bundle, recommendations and the cart all render snippets/product-card.liquid, so this is the one
+   place the card is styled. The card is a bordered, clipped container (nothing can draw outside it) on a surface a shade lighter than the
+   page; the image frame spans its full width on a tinted backdrop; the badge and the add button sit INSIDE the frame, 12px from its edges
+   (logical properties, so RTL mirrors); the text area has the card's own padding and the price is pinned to the bottom so cards in a row end
+   level without dead space. Hover and keyboard focus lift 4px (transform only) and darken the border. */
+html:root {
+  --m-card-surface: #FFFDFB;
+  --m-card-border: #D9BFB6;
+  --m-card-border-strong: #A98A9C;
+  --m-card-frame: #FFFDFB;   /* the same as the card surface: photos with a baked-in light backdrop show no box inside the card */
+  --m-card-pad: 14px;
+  --m-card-inset: 12px;
+  --m-card-backdrop: var(--m-card-frame);
+}
+
+@media screen and (max-width: 749px) {
+  html:root {
+    /* 1.04 cards: the card is about 84% of the phone width and the next one peeks. */
+    --m-cols: 1.04;
+  }
+}
+
+html:root:root product-card {
+  display: flex;
+  flex-direction: column;
+  block-size: 100%;
+  border: 1px solid var(--m-card-border);
+  border-radius: var(--m-radius-card);
+  background: var(--m-card-surface);
+  overflow: clip;
+  transition: transform var(--m-dur-2) var(--m-ease), box-shadow var(--m-dur-2) var(--m-ease), border-color var(--m-dur-2) var(--m-ease);
+}
+
+html:root:root product-card .product-card__content {
+  flex: 1 1 auto;
+  min-block-size: 0;
+  gap: 0;
+  background-color: var(--m-card-surface);
+}
+
+html:root:root product-card .card-gallery {
+  flex: 0 0 auto;
+  box-sizing: border-box;
+  inline-size: 100%;
+  margin: 0;
+  border: 0;
+  border-radius: 0;
+  background: var(--m-card-frame);
+}
+
+/* text area. The theme nests the text in wrappers that carry 24px of their own padding, and on some placements the meta row is a direct child of
+   the card content. Both shapes end up the same: wrappers above the meta row are padding-free and fill the free height, the wrapper that holds
+   the meta row carries the card's padding, and the price block sits at the bottom, so cards in a row end level with no dead space. */
+html:root:root product-card .product-card__content {
+  padding: 0;
+  border: 0;
+}
+
+html:root:root product-card .product-card__content > :not(.card-gallery):not(.card-meta):has(.card-meta) {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  gap: 0;
+  padding: 0;
+}
+
+html:root:root product-card :has(> .card-meta):not(.product-card__content) {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  gap: 0;
+  padding: 12px var(--m-card-pad) var(--m-card-pad);
+}
+
+html:root:root product-card :has(> .card-meta):not(.product-card__content) > * {
+  padding-inline: 0;
+}
+
+/* meta row as a direct child of the content */
+html:root:root product-card .product-card__content > .card-meta {
+  padding: 12px var(--m-card-pad) 0;
+}
+
+html:root:root product-card .product-card__content > :not(.card-gallery):not(.card-meta):not(.product-card__link):not(.product-grid-view-zoom-out--details):not(:has(.card-meta)):not(.contents) {
+  padding-inline: var(--m-card-pad);
+}
+
+/* the name block lives in a display:contents link, which cannot carry padding: inset its block instead */
+html:root:root product-card .product-card__content > .contents > * {
+  margin-inline: var(--m-card-pad);
+}
+
+html:root:root product-card .product-card__content > product-price {
+  padding-block-end: var(--m-card-pad);
+}
+
+html:root:root product-card product-price {
+  margin-block-start: auto;
+  padding-block-start: 8px;
+}
+
+/* overlays live inside the frame */
+html:root:root product-card .product-badges--top-left,
+html:root:root product-card .product-badges {
+  inset-block-start: var(--m-card-inset);
+  inset-inline-start: var(--m-card-inset);
+  inset-inline-end: auto;
+  inset-block-end: auto;
+  max-inline-size: calc(100% - 2 * var(--m-card-inset));
+}
+
+html:root:root product-card .product-badges__badge {
+  max-inline-size: 100%;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  line-height: 1.25;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+
+html:root:root product-card quick-add-component.quick-add {
+  inset: var(--m-card-inset);
+}
+
+html:root:root product-card .quick-add__button {
+  min-inline-size: 44px;
+  min-block-size: 44px;
+}
+
+/* states: hover and keyboard focus lift 4px and darken the border; selected (in a bundle) is berry */
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  html:root:root product-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--m-card-border-strong);
+    box-shadow: 0 14px 24px -16px rgb(59 30 58 / 0.35);
+  }
+}
+
+html:root:root product-card:has(.product-card__link:focus-visible) {
+  border-color: var(--m-plum);
+  outline: 2px solid var(--m-berry);
+  outline-offset: 2px;
+}
+
+html:root:root product-card[data-selected] {
+  border-color: var(--m-berry);
+  box-shadow: inset 0 0 0 1px var(--m-berry);
+}
+
+/* grid and carousel cells give the card the full cell height so a row ends level */
+html:root:root .product-grid__item,
+html:root:root .resource-list__slide {
+  display: flex;
+  flex-direction: column;
+}
+
+html:root:root .product-grid__item > product-card,
+html:root:root .resource-list__slide > product-card,
+html:root:root .resource-list__slide > * {
+  flex: 1 1 auto;
+}
+
+@media (forced-colors: active) {
+  html:root:root product-card {
+    border-color: CanvasText;
+  }
+}
+
+/* One layout for every placement: the theme's recommendation cards add a full-width buy-buttons block and centre the text. The card already has the
+   round add button inside the frame, so the in-flow block is hidden; the frame never shrinks; text and prices start at the inline start. */
+html:root:root product-card .buy-buttons-block {
+  display: none;
+}
+
+html:root:root product-card .product-card__content,
+html:root:root product-card .product-card__content :is(.group-block, .group-block-content, .text-block, .price-container, .card-meta) {
+  text-align: start;
+}
+
+html:root:root product-card .product-card__content :is(.group-block-content, .price-container) {
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+html:root:root product-card .card-gallery img,
+html:root:root product-card .card-gallery .product-media-container {
+  border-radius: 0;
+  background: transparent;
+}
+
+/* Recommendation cards add a second brand (a centred rich-text heading) and centre the name and prices. The brand shows once, in the moment row;
+   every text block starts at the inline start. */
+html:root:root product-card .group-block-content > rte-formatter {
+  display: none;
+}
+
+html:root:root product-card .product-card__content :is(p, h3, h4, h5, h6, span) {
+  text-align: start;
+}
+
+html:root:root product-card .product-card__content :is(.text-block, product-price, .price-wrapper) {
+  align-items: flex-start;
+  justify-content: flex-start;
+  text-align: start;
+}
+
+/* One frame shape for every card: square, whatever ratio the section was set to (the packshot is contained and centred inside it). */
+html:root:root product-card .card-gallery {
+  --gallery-aspect-ratio: 1 !important;
+  aspect-ratio: 1 / 1;
+}
