@@ -86,3 +86,10 @@ the same bundle could not load its validator package (see the first entry). **sh
 | 2026-10-25 | Header "More" overflow panel (blocks/_header-menu.liquid) | shopify-liquid-themes, diagnose (cause: wiped --overflow-count, closed submenu reserving height) |
 | 2026-10-25 | Homepage hero, value strip, tiles v1, story, signup band, compare-at price contrast | shopify-liquid-themes, design-system, frontend-design, ui-ux-pro-max, impeccable |
 | 2026-10-25 | Product image audit (read-only): scripts and docs/audit/image-audit.csv | shopify (read-only public feed; no GraphQL authored, so no schema validation applied) |
+
+## 2026-10-26
+- impeccable: critique of the announcement bar and the Gift block (flat strip; contained card, 16px radius, per the skill's card-radius cap); used its slop checklist for the pointer and bundle cards.
+- shopify-liquid / shopify-dev: Liquid doc headers, theme-setting schema, `asset_url` for the cursor PNGs, `{% doc %}` blocks on new snippets.
+- design-system: OKLCH moment recipe (scripts/moment-palette.mjs), token-level contrast fixes (--opacity-subdued-text, --color-foreground-muted).
+- ui-ux-pro-max: contrast checks (4.5:1 normal, 3:1 large), 44px targets, pointer scoped to fine pointers and off under forced-colors.
+- Not yet run: frontend-design, emil-design-eng, banner-design, brand audits for the remaining parts of the brief.

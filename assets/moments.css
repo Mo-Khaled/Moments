@@ -670,3 +670,15 @@ html:root {
 .menu-list__list-item:has([aria-expanded='true']) > .menu-list__submenu {
   transition: clip-path var(--submenu-animation-speed) var(--ease-out-cubic);
 }
+
+/* Muted text (the product count, filter labels, small captions) was foreground at 60% opacity, 4.0:1 on pearl.
+   One token, 78%: 6:1 on pearl, still clearly quieter than the main text. */
+html:root {
+  --opacity-subdued-text: 0.78;
+}
+
+/* The scheme token behind filter labels and the product count was 60% (4.0:1). Same 78%. It is set per colour scheme, so it is set on the scheme classes too. */
+html:root:root,
+html:root:root [class*="color-scheme-"] {
+  --color-foreground-muted: rgb(var(--color-foreground-rgb) / 0.78);
+}

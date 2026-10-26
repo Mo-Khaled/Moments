@@ -30,6 +30,7 @@
   data-max="{{ max_items }}"
   data-threshold="{{ settings.moments_free_shipping | times: 100 }}"
   data-tiers="{{ section.settings.tiers_enabled }}"
+  data-perks="{%- if section.settings.tiers_enabled -%}{{ section.settings.tier1_count }}|{{ section.settings.tier1_label | escape }}~{{ section.settings.tier2_count }}|{{ section.settings.tier2_label | escape }}{%- endif -%}"
   data-tiers-confirmed="{{ section.settings.discount_confirmed }}"
   data-tier-percent="{{ section.settings.tier_percent }}"
   data-t-added="{{ 'bundle.added' | t: title: '__T__' | escape }}"
@@ -47,13 +48,13 @@
     <div class="m-bundle__card">
       <header class="m-bundle__head">
         <h1 class="m-bundle__title">{{ 'bundle.title' | t }}<span class="m-bundle__dot">.</span></h1>
-        <p class="m-bundle__line">{{ 'bundle.line' | t: count: min_items }}</p>
-        {%- if section.settings.tiers_enabled -%}
-          <p class="m-bundle__tiers">
-            {%- if section.settings.tier1_label != blank -%}<span>{{ 'bundle.tier' | t: count: section.settings.tier1_count, label: section.settings.tier1_label }}</span>{%- endif -%}
-            {%- if section.settings.tier2_label != blank -%}<span>{{ 'bundle.tier' | t: count: section.settings.tier2_count, label: section.settings.tier2_label }}</span>{%- endif -%}
-          </p>
-        {%- endif -%}
+        <p class="m-bundle__line">
+          {%- if section.settings.tiers_enabled and section.settings.tier1_label != blank and section.settings.tier2_label != blank -%}
+            {{ 'bundle.line_tiers' | t: count: min_items, first: section.settings.tier1_label, n1: section.settings.tier1_count, second: section.settings.tier2_label, n2: section.settings.tier2_count }}
+          {%- else -%}
+            {{ 'bundle.line' | t: count: min_items }}
+          {%- endif -%}
+        </p>
       </header>
 
       <div class="m-bundle__builder">
@@ -203,6 +204,20 @@
     font-size: 0.8125rem;
   }
 
+  .m-slot__perk {
+    position: absolute;
+    inset-inline: 6px;
+    inset-block-end: 8px;
+    padding: 3px 6px;
+    border: 1px solid var(--m-berry);
+    border-radius: 9999px;
+    background: var(--m-surface);
+    color: var(--m-berry);
+    font-size: 0.75rem;
+    line-height: 1.2;
+    text-align: center;
+  }
+
   .m-slot__plus {
     font-size: 2rem;
     line-height: 1;
@@ -317,8 +332,11 @@
     color: var(--m-text-muted);
   }
 
+  /* Disabled is a real colour pair (taupe ink on a light taupe, 7:1), not a faded button. */
   .m-btn[disabled] {
-    opacity: 0.45;
+    background: var(--m-taupe-light);
+    color: var(--m-taupe-ink);
+    opacity: 1;
     cursor: not-allowed;
   }
 
@@ -394,9 +412,21 @@
 
   .m-bundle__grid > li {
     display: grid;
-    align-content: start;
+    grid-template-rows: 1fr auto;
+    align-content: stretch;
     gap: 8px;
     min-inline-size: 0;
+  }
+
+  /* Cards in a row end level: the card takes the free height and the button sits at the bottom of every cell. The photo frame is a
+     soft tint with a rounded edge, and the photo is multiplied onto it, so a white or grey photo background never shows as a box. */
+  .m-bundle__grid {
+    --m-card-backdrop: color-mix(in srgb, var(--m-nude) 32%, var(--m-pearl));
+  }
+
+  .m-bundle__grid .card-gallery {
+    border-radius: 12px;
+    overflow: hidden;
   }
 
   /* The bundle has its own add button; the card's quick add and wishlist are hidden here. */
@@ -519,6 +549,8 @@
       const max = Number(root.dataset.max) || 12;
       const threshold = Number(root.dataset.threshold) || 0;
       const tiersOn = root.dataset.tiers === 'true';
+      const perks = {};
+      (root.dataset.perks || '').split('~').forEach((x) => { const [n, l] = x.split('|'); if (n && l) perks[Number(n)] = l; });
       const confirmed = root.dataset.tiersConfirmed === 'true';
       const tierPercent = Number(root.dataset.tierPercent) || 0;
       const T = (k, map) => Object.entries(map || {}).reduce((s, [a, b]) => s.split(a).join(b), root.dataset[k] || '');
@@ -556,6 +588,8 @@
             const plus = document.createElement('span'); plus.className = 'm-slot__plus'; plus.textContent = '+'; plus.setAttribute('aria-hidden', 'true'); li.appendChild(plus);
             li.setAttribute('aria-label', T('tEmptySlot', { __N__: n }));
           }
+          const perk = perks[n];
+          if (perk) { const b = document.createElement('span'); b.className = 'm-slot__perk'; b.textContent = perk; li.appendChild(b); }
           slotsEl.appendChild(li);
         }
         // summary

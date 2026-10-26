@@ -1,1 +1,1 @@
-{"name":"moments-theme-checks","private":true,"description":"Dev-only checks, not part of the theme","scripts":{"tiles":"node check-tiles.mjs"},"devDependencies":{"playwright-core":"^1.49.1"}}
+{"name":"moments-theme-checks","private":true,"description":"Dev-only checks, not part of the theme","scripts":{"tiles":"node check-tiles.mjs"},"devDependencies":{"@axe-core/playwright":"^4.14.0","playwright-core":"^1.49.1"}}

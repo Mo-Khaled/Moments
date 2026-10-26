@@ -1,5 +1,5 @@
 // Builds the pointer PNGs from the committed SVG sources (assets/cursor-*.svg): 32x32 (1x) and 64x64 (2x), transparent background.
-// Hotspot is the arrow tip at (3, 2) in 1x pixels, (6, 4) in 2x. usage: node scripts/build-cursors.mjs
+// Hotspots (1x pixels): arrow tip (8, 3), hand fingertip (18, 3) (see snippets/moment-pointer.liquid). usage: node scripts/build-cursors.mjs
 import { chromium } from 'playwright-core';
 import { readFileSync } from 'node:fs';
 

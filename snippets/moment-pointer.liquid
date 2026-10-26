@@ -1,7 +1,7 @@
 {%- doc -%}
-  The MOMENTS pointer: a small diamond arrow in plum with a thin white outline (default) and the same shape in berry with a ring
-  (links and buttons). Original artwork from the logo's diamond ornament: assets/cursor-*.svg, built into PNG by scripts/build-cursors.mjs
-  at 32x32 and 64x64 (2x). The hotspot is the arrow tip, (3, 2) in 1x pixels and (6, 4) in 2x.
+  The MOMENTS pointer: a plum arrow with a thin white outline for the page (Fluent UI System Icons "cursor-24-filled", MIT) and a berry
+  OK-hand for links and buttons (Hugeicons "ok-finger", MIT). Sources: assets/cursor-*.svg, built into PNG by scripts/build-cursors.mjs
+  at 32x32 and 64x64 (2x). Hotspots in 1x pixels: the arrow tip (8, 3) and the raised fingertip of the hand (18, 3).
   Only for fine pointers (a mouse), never under forced-colors, and off with the theme setting "Custom pointer". Text fields, textareas,
   video controls, disabled controls and anything the theme already marks as grab, zoom or resize keep the native cursor.
   A native keyword always follows the images, so the cursor falls back to the system one if an image fails.
@@ -20,21 +20,21 @@
   <style id="moment-pointer-css">
     @media (pointer: fine) and (not (forced-colors: active)) {
       html:root {
-        --m-pointer-default: url('{{ d1 }}') 3 2, auto;
-        --m-pointer-link: url('{{ l1 }}') 3 2, pointer;
+        --m-pointer-default: url('{{ d1 }}') 8 3, auto;
+        --m-pointer-link: url('{{ l1 }}') 18 3, pointer;
       }
 
-      @supports (cursor: image-set(url('{{ d1 }}') 1x) 3 2) {
+      @supports (cursor: image-set(url('{{ d1 }}') 1x) 8 3) {
         html:root {
-          --m-pointer-default: image-set(url('{{ d1 }}') 1x, url('{{ d2 }}') 2x) 3 2, auto;
-          --m-pointer-link: image-set(url('{{ l1 }}') 1x, url('{{ l2 }}') 2x) 3 2, pointer;
+          --m-pointer-default: image-set(url('{{ d1 }}') 1x, url('{{ d2 }}') 2x) 8 3, auto;
+          --m-pointer-link: image-set(url('{{ l1 }}') 1x, url('{{ l2 }}') 2x) 18 3, pointer;
         }
       }
 
-      @supports (cursor: -webkit-image-set(url('{{ d1 }}') 1x) 3 2) and (not (cursor: image-set(url('{{ d1 }}') 1x) 3 2)) {
+      @supports (cursor: -webkit-image-set(url('{{ d1 }}') 1x) 8 3) and (not (cursor: image-set(url('{{ d1 }}') 1x) 8 3)) {
         html:root {
-          --m-pointer-default: -webkit-image-set(url('{{ d1 }}') 1x, url('{{ d2 }}') 2x) 3 2, auto;
-          --m-pointer-link: -webkit-image-set(url('{{ l1 }}') 1x, url('{{ l2 }}') 2x) 3 2, pointer;
+          --m-pointer-default: -webkit-image-set(url('{{ d1 }}') 1x, url('{{ d2 }}') 2x) 8 3, auto;
+          --m-pointer-link: -webkit-image-set(url('{{ l1 }}') 1x, url('{{ l2 }}') 2x) 18 3, pointer;
         }
       }
 

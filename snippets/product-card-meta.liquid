@@ -24,6 +24,19 @@
   assign moment_label = ''
   assign moment_key = ''
 
+  comment
+    The brand is shown once: when the product title already starts with the brand (for example "Afnan Gift Bag"), the card does not repeat it.
+  endcomment
+  assign vendor_text = product.vendor | downcase | strip
+  assign title_text = product.title | downcase | strip
+  assign vendor_len = vendor_text | size
+  if want_brand and vendor_len > 0 and title_text contains vendor_text
+    assign title_start = title_text | slice: 0, vendor_len
+    if title_start == vendor_text
+      assign want_brand = false
+    endif
+  endif
+
   if want_moment and settings.moments_handles != blank
     assign handles = settings.moments_handles | split: ','
     for handle in handles
