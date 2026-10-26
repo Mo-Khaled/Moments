@@ -1,0 +1,651 @@
+{%- doc -%}
+  The phone and tablet menu sheet (below the desktop breakpoint). One full-height sheet:
+    header row   logo at the start, a 44px close button at the end
+    search pill  opens the existing search overlay (its chips already hold the six moments)
+    moments      the six moments as a 2 x 3 grid of colour tiles, each with its mark and product count: the hero of the menu
+    links        Brands, Make a bundle, For Her, For Him (the Gifts link is not repeated: it opens the same collection as the Gift tile)
+    About        a collapsed accordion (About us, Refer a friend, Contact us, FAQ), only pages that exist in Theme settings
+    bottom bar   account, cart with count, language switch (only when the store has more than one language), the free-shipping line
+  The sheet uses 100dvh with safe-area padding, a scrolling middle between the header and the pinned bottom bar, logical properties
+  (RTL mirrors), and transform and opacity only for motion. It is rendered inside the theme's header-drawer component, which keeps
+  doing the opening, closing, Escape and focus trapping; this snippet adds inert on the page behind, the accordion, swipe to close and
+  the search hand-off. Nothing here edits store navigation.
+
+  @param {object} linklist - The header menu link list.
+
+  @example
+  {% render 'moments-mobile-menu', linklist: linklist %}
+{%- enddoc -%}
+
+{%- liquid
+  assign moment_handles = 'night-moment,gift-moment,all-day-moment,daily-moment,fresh-moment,love-moment' | split: ','
+  assign moment_marks = 'night,gift,allday,daily,fresh,love' | split: ','
+  assign moment_keys = 'moments.night,moments.gift,moments.all_day,moments.daily,moments.fresh,moments.love' | split: ','
+  assign link_order = 'brands,for her,for him' | split: ','
+  assign threshold = settings.moments_free_shipping | times: 100 | money_without_trailing_zeros
+  assign step = 0
+-%}
+
+<div class="mm">
+  <div class="mm__head mm-reveal" style="--i: 0;">
+    <a class="mm__logo" href="{{ routes.root_url }}" aria-label="{{ shop.name | escape }}">{% render 'moments-logo' %}</a>
+    <button class="mm__close" type="button" aria-label="{{ 'actions.close' | t }}" on:click="/close">
+      <span class="svg-wrapper" aria-hidden="true">{{- 'icon-close.svg' | inline_asset_content -}}</span>
+    </button>
+  </div>
+
+  <div class="mm__scroll" data-mm-scroll>
+    <button class="mm__search mm-reveal" type="button" data-mm-search style="--i: 1;">
+      <span>{{ 'mobile_menu.search' | t }}</span>
+      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4.5 4.5"/></svg>
+    </button>
+
+    <section class="mm__section" aria-labelledby="mm-moments-title">
+      <h2 class="mm__title mm-reveal" id="mm-moments-title" style="--i: 2;">{{ 'mobile_menu.moments' | t }}</h2>
+      <ul class="mm__tiles" role="list">
+        {%- for handle in moment_handles -%}
+          {%- assign c = collections[handle] -%}
+          {%- if c != blank -%}
+            {%- assign step = step | plus: 1 -%}
+            <li class="mm-reveal" style="--i: {{ step | plus: 2 }};">
+              <a class="mm-tile m-tone--{{ moment_marks[forloop.index0] }}" href="{{ c.url }}" data-moment-host>
+                <span class="mm-tile__mark" aria-hidden="true">{% render 'moment-mark', mark: moment_marks[forloop.index0], size: 'lg' %}</span>
+                <span class="mm-tile__name">{{ moment_keys[forloop.index0] | t }}</span>
+                <span class="mm-tile__count">{{ 'mobile_menu.products' | t: count: c.products_count }}</span>
+              </a>
+            </li>
+          {%- endif -%}
+        {%- endfor -%}
+      </ul>
+    </section>
+
+    {%- liquid
+      assign about_pairs = 'moments_page_about|about_menu.about_us,moments_page_refer|about_menu.refer,moments_page_contact|about_menu.contact,moments_page_faq|about_menu.faq' | split: ','
+      assign has_about = false
+      for pair in about_pairs
+        assign parts = pair | split: '|'
+        if settings[parts[0]] != blank
+          assign has_about = true
+        endif
+      endfor
+    -%}
+    <nav class="mm__links" aria-label="{{ 'mobile_menu.more' | t }}">
+      <section class="mm__group">
+        <h2 class="mm__title mm-reveal" style="--i: {{ step | plus: 3 }};">{{ 'mobile_menu.shop_by' | t }}</h2>
+        <ul role="list">
+          {%- for key in link_order -%}
+            {%- for link in linklist.links -%}
+              {%- assign link_key = link.title | downcase | strip -%}
+              {%- if link_key == key -%}
+                {%- assign step = step | plus: 1 -%}
+                <li class="mm-reveal" style="--i: {{ step | plus: 3 }};">
+                  <a class="mm-link" href="{{ link.url }}"{% if link.current %} aria-current="page"{% endif %}>{% render 'title-case', text: link.title %}</a>
+                </li>
+              {%- endif -%}
+            {%- endfor -%}
+          {%- endfor -%}
+        </ul>
+      </section>
+
+      {%- if settings.moments_page_bundle != blank or has_about -%}
+        <section class="mm__group">
+          <h2 class="mm__title mm-reveal" style="--i: {{ step | plus: 4 }};">{{ 'mobile_menu.more_ways' | t }}</h2>
+          <ul role="list">
+            {%- if settings.moments_page_bundle != blank -%}
+              <li class="mm-reveal" style="--i: {{ step | plus: 5 }};">
+                <a class="mm-link mm-link--accent" href="{{ settings.moments_page_bundle.url }}">{{ 'bundle.nav' | t }}</a>
+              </li>
+            {%- endif -%}
+            {%- if has_about -%}
+              <li class="mm-reveal" style="--i: {{ step | plus: 6 }};">
+                <button class="mm-link mm-acc" type="button" aria-expanded="false" aria-controls="mm-about" data-mm-acc>
+                  <span>{{ 'mobile_menu.about' | t }}</span>
+                  <svg class="mm-chev mm-chev--down" viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4.5 7.5 5.5 5.5 5.5-5.5"/></svg>
+                </button>
+                <div class="mm-panel" id="mm-about" data-mm-panel>
+                  <ul role="list">
+                    {%- for pair in about_pairs -%}
+                      {%- assign parts = pair | split: '|' -%}
+                      {%- assign page_setting = settings[parts[0]] -%}
+                      {%- if page_setting != blank -%}
+                        <li><a class="mm-sublink" href="{{ page_setting.url }}">{{ parts[1] | t }}</a></li>
+                      {%- endif -%}
+                    {%- endfor -%}
+                  </ul>
+                </div>
+              </li>
+            {%- endif -%}
+          </ul>
+        </section>
+      {%- endif -%}
+    </nav>
+  </div>
+
+  <div class="mm__bar">
+    {%- if settings.moments_free_shipping > 0 -%}
+      <p class="mm__ship">{{ 'homepage.ticker.shipping' | t: amount: threshold }}</p>
+    {%- endif -%}
+    <div class="mm__bar-row">
+      <a class="mm__util" href="{{ routes.account_url }}">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="8.5" r="3.5"/><path d="M5 20c.8-3.6 3.6-5.5 7-5.5s6.2 1.9 7 5.5"/></svg>
+        <span>{{ 'mobile_menu.account' | t }}</span>
+      </a>
+      <a class="mm__util" href="{{ routes.cart_url }}">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5.5 8.5h13l-1 11h-11z"/><path d="M9 8.5V7a3 3 0 0 1 6 0v1.5"/></svg>
+        <span>{{ 'mobile_menu.cart' | t }}</span>
+        <span class="mm__count" data-mm-count{% if cart.item_count == 0 %} hidden{% endif %}>{{ cart.item_count }}</span>
+      </a>
+      {%- if localization.available_languages.size > 1 -%}
+        {%- form 'localization', id: 'MobileMenuLangForm', class: 'mm__lang' -%}
+          {%- if request.locale.iso_code == 'ar' -%}
+            <span class="mm__lang-current" lang="ar">ع</span><span class="mm__lang-sep" aria-hidden="true">|</span>
+            <button class="mm__lang-switch" type="submit" name="locale_code" value="en" lang="en" aria-label="{{ 'accessibility.switch_to_english' | t }}">EN</button>
+          {%- else -%}
+            <span class="mm__lang-current" lang="en">EN</span><span class="mm__lang-sep" aria-hidden="true">|</span>
+            <button class="mm__lang-switch" type="submit" name="locale_code" value="ar" lang="ar" aria-label="{{ 'accessibility.switch_to_arabic' | t }}">ع</button>
+          {%- endif -%}
+        {%- endform -%}
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+<script>
+  (() => {
+    const root = document.currentScript.previousElementSibling;
+    if (!root || root.dataset.mmReady) return;
+    root.dataset.mmReady = 'true';
+    const sheet = root.closest('.menu-drawer');
+    const details = root.closest('details');
+    const closeBtn = root.querySelector('.mm__close');
+    const acc = root.querySelector('[data-mm-acc]');
+    const panel = root.querySelector('[data-mm-panel]');
+    const scroller = root.querySelector('[data-mm-scroll]');
+    const behind = () => [document.getElementById('MainContent'), ...document.querySelectorAll('.shopify-section-group-footer-group')].filter(Boolean);
+
+    // the page behind is inert while the menu is open (screen readers and keyboard stay in the sheet)
+    const sync = () => {
+      const open = details.classList.contains('menu-open');
+      behind().forEach((el) => { if (open) { el.setAttribute('inert', ''); } else { el.removeAttribute('inert'); } });
+      if (open) {
+        fetch('/cart.js').then((r) => r.json()).then((c) => setCount(c.item_count)).catch(() => {});
+      } else {
+        if (acc && acc.getAttribute('aria-expanded') === 'true') setAcc(false);
+        // focus goes back to the menu button when the sheet closes (the theme's trap does not always restore it)
+        const summary = details.querySelector('summary');
+        requestAnimationFrame(() => { const a = document.activeElement; if (summary && (!a || a === document.body || sheet.contains(a))) summary.focus({ preventScroll: true }); });
+      }
+    };
+    new MutationObserver(sync).observe(details, { attributes: true, attributeFilter: ['class', 'open'] });
+
+    const countEl = root.querySelector('[data-mm-count]');
+    const setCount = (n) => { if (!countEl) return; countEl.textContent = n; countEl.hidden = !n; };
+    document.addEventListener('cart:update', (e) => { const n = e.detail && e.detail.resource && e.detail.resource.item_count; if (typeof n === 'number') setCount(n); });
+
+    // About accordion: the panel animates its height (grid rows 0fr to 1fr) and is never clipped: it scrolls into view when it opens
+    const setAcc = (open) => {
+      acc.setAttribute('aria-expanded', String(open));
+      panel.classList.toggle('is-open', open);
+      // once the panel has finished growing, scroll so its last link sits above the bottom bar (the transition end is reliable across browsers)
+      if (open) {
+        const toEnd = () => scroller.scrollTo({ top: scroller.scrollHeight - scroller.clientHeight, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+        const onEnd = (e) => { if (e.propertyName !== 'grid-template-rows') return; panel.removeEventListener('transitionend', onEnd); toEnd(); };
+        panel.addEventListener('transitionend', onEnd);
+        setTimeout(() => { panel.removeEventListener('transitionend', onEnd); toEnd(); }, 900);
+      }
+    };
+    if (acc) { panel.inert = true; acc.addEventListener('click', () => { const open = acc.getAttribute('aria-expanded') !== 'true'; panel.inert = !open; setAcc(open); }); }
+
+    // search: close the sheet, then open the existing search overlay
+    root.querySelector('[data-mm-search]').addEventListener('click', () => {
+      closeBtn.click();
+      setTimeout(() => { const m = document.getElementById('search-modal'); if (m && typeof m.showDialog === 'function') m.showDialog(); }, 220);
+    });
+
+    // swipe toward the inline-start edge closes the sheet
+    let sx = 0, sy = 0, tracking = false;
+    sheet.addEventListener('touchstart', (e) => { const t = e.touches[0]; sx = t.clientX; sy = t.clientY; tracking = true; }, { passive: true });
+    sheet.addEventListener('touchend', (e) => {
+      if (!tracking) return; tracking = false;
+      const t = e.changedTouches[0]; const dx = t.clientX - sx, dy = t.clientY - sy;
+      const toStart = document.documentElement.dir === 'rtl' ? dx > 70 : dx < -70;
+      if (toStart && Math.abs(dx) > Math.abs(dy) * 1.6) closeBtn.click();
+    }, { passive: true });
+    scroller.addEventListener('wheel', (e) => e.stopPropagation(), { passive: true });
+  })();
+</script>
+
+{% stylesheet %}
+  /* ---- the sheet itself ---- */
+  .menu-drawer.menu-drawer--moments {
+    --mm-pad: 20px;
+    --mm-dur: 300ms;
+
+    inset-block: 0;
+    inset-inline-start: 0;
+    inset-inline-end: auto;
+    inline-size: 100%;
+    max-inline-size: 100%;
+    block-size: 100dvh;
+    max-block-size: 100dvh;
+    overflow: hidden;
+    border: 0;
+    border-radius: 0;
+    background: var(--m-pearl);
+    color: var(--m-plum);
+    box-shadow: none;
+    overscroll-behavior: contain;
+    color-scheme: only light;
+    transition: transform var(--mm-dur) var(--m-ease), visibility var(--mm-dur) var(--m-ease);
+  }
+
+  @media screen and (min-width: 600px) {
+    .menu-drawer.menu-drawer--moments {
+      max-inline-size: 420px;
+      box-shadow: 0 0 60px rgb(37 18 36 / 0.25);
+    }
+  }
+
+  html[dir='rtl'] .menu-drawer.menu-drawer--moments {
+    left: auto;
+    right: 0;
+    transform: translateX(100%);
+  }
+
+  .menu-open > .menu-drawer.menu-drawer--moments,
+  html[dir='rtl'] .menu-open > .menu-drawer.menu-drawer--moments {
+    transform: translateX(0);
+  }
+
+  /* leaving is quicker than arriving (about 65%) */
+  details:not(.menu-open) > .menu-drawer.menu-drawer--moments {
+    transition-duration: 195ms;
+  }
+
+  .menu-drawer--moments .mm {
+    display: flex;
+    flex-direction: column;
+    block-size: 100%;
+    min-block-size: 0;
+    padding-block-start: env(safe-area-inset-top);
+  }
+
+  .mm__head {
+    flex: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 12px var(--mm-pad);
+    background: var(--m-pearl);
+  }
+
+  .mm__logo {
+    display: block;
+    inline-size: min(210px, 56vw);
+    color: var(--m-plum);
+  }
+
+  .mm__logo .m-logo {
+    display: block;
+    inline-size: 100%;
+    block-size: auto;
+  }
+
+  .mm__close {
+    display: grid;
+    place-items: center;
+    inline-size: 44px;
+    block-size: 44px;
+    padding: 0;
+    border: 0;
+    border-radius: 9999px;
+    background: transparent;
+    color: var(--m-plum);
+    cursor: pointer;
+  }
+
+  .mm__close:hover {
+    background: color-mix(in srgb, var(--m-nude) 50%, var(--m-pearl));
+  }
+
+  .mm__close .svg-wrapper,
+  .mm__close svg {
+    inline-size: 20px;
+    block-size: 20px;
+  }
+
+  .mm__scroll {
+    flex: 1 1 auto;
+    min-block-size: 0;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+    padding: 4px var(--mm-pad) 24px;
+  }
+
+  .mm__search {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    inline-size: 100%;
+    min-block-size: 48px;
+    justify-content: space-between;
+    padding-inline: 20px;
+    border: 0;
+    border-radius: 9999px;
+    background: color-mix(in srgb, var(--m-nude) 38%, var(--m-pearl));
+    color: var(--m-text-muted);
+    font: inherit;
+    font-size: 1rem;
+    text-align: start;
+    cursor: pointer;
+  }
+
+  .mm__section {
+    margin-block-start: 26px;
+  }
+
+  .mm__title {
+    margin: 0 0 8px;
+    font-family: var(--font-body--family);
+    font-size: 0.9375rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    color: var(--m-plum);
+  }
+
+  html[lang='ar'] .mm__title {
+    letter-spacing: 0;
+    text-transform: none;
+    font-size: 1.0625rem;
+  }
+
+  .mm__group {
+    margin-block-start: 26px;
+  }
+
+  /* ---- the six moments ---- */
+  .mm__tiles {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .mm-tile {
+    --m-mark-ink: var(--tile-ink);
+    --m-mark-body: var(--tile-body);
+    --m-mark-accent: var(--tile-accent);
+    --m-mark-gold: var(--tile-gold);
+
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    align-content: start;
+    gap: 2px;
+    block-size: 100%;
+    min-block-size: 132px;
+    padding: 12px 14px 12px;
+    border-radius: 14px;
+    background: var(--tile-bg);
+    color: var(--tile-ink);
+    text-decoration: none;
+    overflow: clip;
+    transition: transform 160ms var(--m-ease);
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .mm-tile:active {
+    transform: scale(0.97);
+  }
+
+  .mm-tile:focus-visible,
+  .mm-link:focus-visible,
+  .mm-sublink:focus-visible,
+  .mm__search:focus-visible,
+  .mm__close:focus-visible,
+  .mm__util:focus-visible,
+  .mm__lang-switch:focus-visible {
+    outline: 2px solid var(--m-berry);
+    outline-offset: 2px;
+  }
+
+  /* the theme forces every svg inside the drawer to 14px: the sheet states its own icon sizes */
+  .menu-drawer .mm__search svg { inline-size: 20px; block-size: 20px; }
+  .menu-drawer .mm .mm-chev { inline-size: 18px; block-size: 18px; }
+  .menu-drawer .mm__util svg { inline-size: 22px; block-size: 22px; }
+  .menu-drawer .mm__close svg { inline-size: 20px; block-size: 20px; }
+  .menu-drawer .mm-tile__mark svg { inline-size: 100%; block-size: 100%; }
+
+  /* the mark is about half the tile's content width (at least 40% of the tile), square, inside the tile's padding */
+  .mm-tile {
+    container-type: inline-size;
+  }
+
+  .mm-tile__mark {
+    display: block;
+    justify-self: start;
+    inline-size: 52cqi;
+    aspect-ratio: 1;
+  }
+
+  .mm-tile__mark moment-mark {
+    --mm-size: 100%;
+  }
+
+  .mm-tile__name {
+    align-self: end;
+    font-family: var(--font-heading--family);
+    font-size: 1.25rem;
+    line-height: 1.1;
+  }
+
+  .mm-tile__count {
+    font-size: 0.75rem;
+    line-height: 1.3;
+    opacity: 0.92;
+  }
+
+  /* ---- primary links ---- */
+  .mm__links {
+    margin-block-start: 4px;
+  }
+
+  .mm__links ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .mm-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    inline-size: 100%;
+    min-block-size: 52px;
+    padding: 0 0 0 6px;
+    border: 0;
+    background: transparent;
+    color: var(--m-plum);
+    font-family: var(--font-body--family);
+    font-size: 1.1875rem;
+    font-weight: 400;
+    line-height: 1.3;
+    text-align: start;
+    text-decoration: none;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  html[dir='rtl'] .mm-link {
+    padding: 0 6px 0 0;
+  }
+
+  .mm-link--accent {
+    color: var(--m-berry-ink);
+    font-weight: 500;
+  }
+
+  .mm-link:active {
+    opacity: 0.7;
+  }
+
+  .mm-chev {
+    flex: none;
+    color: var(--m-taupe-ink);
+    transition: transform 220ms var(--m-ease);
+  }
+
+  html[dir='rtl'] .mm-chev:not(.mm-chev--down) {
+    transform: scaleX(-1);
+  }
+
+  [aria-expanded='true'] > .mm-chev--down {
+    transform: rotate(180deg);
+  }
+
+  .mm-panel {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 260ms var(--m-ease);
+  }
+
+  .mm-panel.is-open {
+    grid-template-rows: 1fr;
+  }
+
+  .mm-panel > ul {
+    min-block-size: 0;
+    overflow: hidden;
+  }
+
+  .mm-sublink {
+    display: flex;
+    align-items: center;
+    min-block-size: 48px;
+    padding-inline-start: 22px;
+    color: var(--m-taupe-ink);
+    font-size: 1.0625rem;
+    text-decoration: none;
+  }
+
+  /* ---- bottom bar ---- */
+  .mm__bar {
+    flex: none;
+    padding: 10px var(--mm-pad) calc(10px + env(safe-area-inset-bottom));
+    border-block-start: 1px solid var(--m-rule-quiet);
+    background: var(--m-pearl);
+  }
+
+  .mm__ship {
+    margin: 0 0 6px;
+    font-size: 0.8125rem;
+    color: var(--m-text-muted);
+  }
+
+  .mm__bar-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .mm__util {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-block-size: 44px;
+    padding-inline: 12px;
+    border-radius: 9999px;
+    color: var(--m-plum);
+    font-size: 0.9375rem;
+    text-decoration: none;
+  }
+
+  .mm__count {
+    display: inline-grid;
+    place-items: center;
+    min-inline-size: 20px;
+    block-size: 20px;
+    padding-inline: 5px;
+    border-radius: 9999px;
+    background: var(--m-berry-ink);
+    color: var(--m-white);
+    font-size: 0.75rem;
+    font-weight: 600;
+    line-height: 1;
+  }
+
+  .mm__count[hidden] {
+    display: none;
+  }
+
+  .mm__lang {
+    margin: 0;
+    margin-inline-start: auto;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    min-block-size: 44px;
+    font-size: 0.9375rem;
+  }
+
+  .mm__lang-current {
+    font-weight: 600;
+  }
+
+  .mm__lang-sep {
+    color: var(--m-taupe-ink);
+  }
+
+  .mm__lang-switch {
+    min-inline-size: 44px;
+    min-block-size: 44px;
+    padding: 0 6px;
+    border: 0;
+    background: transparent;
+    color: var(--m-plum);
+    font: inherit;
+    cursor: pointer;
+  }
+
+  /* ---- motion: items rise 8px and fade in, 40ms apart; only transform and opacity ---- */
+  @media (prefers-reduced-motion: no-preference) {
+    .menu-drawer--moments .mm-reveal {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+
+    .menu-open > .menu-drawer--moments .mm-reveal {
+      opacity: 1;
+      transform: none;
+      transition: opacity 280ms var(--m-ease) calc(var(--i, 0) * 40ms + 120ms), transform 280ms var(--m-ease) calc(var(--i, 0) * 40ms + 120ms);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .menu-drawer.menu-drawer--moments,
+    details:not(.menu-open) > .menu-drawer.menu-drawer--moments,
+    .mm-panel,
+    .mm-tile,
+    .mm-chev {
+      transition: none;
+    }
+  }
+
+  @media (forced-colors: active) {
+    .mm-tile {
+      border: 1px solid CanvasText;
+    }
+  }
+
+  /* on phones the sheet covers the screen: no scrim, no header strip beside it */
+  @media screen and (max-width: 599px) {
+    .menu-drawer--moments ~ .menu-drawer__backdrop {
+      display: none;
+    }
+  }
+{% endstylesheet %}

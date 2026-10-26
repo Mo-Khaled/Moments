@@ -72,8 +72,10 @@
         menu-drawer
         motion-reduce
         color-{{ block_settings.color_scheme }}
+        {% if data_header_drawer_type == 'mobile-drawer' %}menu-drawer--moments{% endif %}
       "
     >
+      {%- if data_header_drawer_type == 'mobile-drawer' -%}{%- render 'moments-mobile-menu', linklist: linklist -%}{%- else -%}
       <button
         class="button button-unstyled close-button menu-drawer__close-button"
         type="button"
@@ -638,6 +640,7 @@
           </ul>
         </div>
       {% endif %}
+      {%- endif -%}
     </div>
     <div
       class="menu-drawer__backdrop"

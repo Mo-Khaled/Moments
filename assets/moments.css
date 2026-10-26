@@ -709,7 +709,7 @@ html:root {
 :is(.shopify-section):has(> :is(.m-moments, .m-story, .m-steps, .section-background.color-scheme-3)) { --tone: plum; }
 
 /* light band after a dark band: dark -> mauve -> pearl */
-.shopify-section:is(:has(> :is(.m-hero, .m-brands, .m-moments, .m-story, .m-steps, .section-background.color-scheme-3))) + .shopify-section:not(:has(> :is(.m-hero, .m-brands, .m-moments, .m-story, .m-steps, .section-background.color-scheme-3)))::before {
+.shopify-section:is(:has(> :is(.m-hero, .m-brands, .m-moments, .m-story, .m-steps, .section-background.color-scheme-3))) + .shopify-section:not(:has(> :is(.m-hero, .m-brands, .m-moments, .m-story, .m-steps, .section-background.color-scheme-3))):not(.shopify-section-group-footer-group)::before {
   content: '';
   display: block;
   block-size: var(--blend);
@@ -718,7 +718,7 @@ html:root {
 }
 
 /* dark band after a light band (including the footer after the last section of main): pearl -> mauve -> plum */
-.shopify-section:not(:has(> :is(.m-hero, .m-brands, .m-moments, .m-story, .m-steps, .section-background.color-scheme-3))) + .shopify-section:has(> :is(.m-moments, .m-story, .m-steps, .section-background.color-scheme-3))::before,
+.shopify-section:not(:has(> :is(.m-hero, .m-brands, .m-moments, .m-story, .m-steps, .section-background.color-scheme-3))):not(.shopify-section-group-footer-group) + .shopify-section:has(> :is(.m-moments, .m-story, .m-steps, .section-background.color-scheme-3))::before,
 main:not(:has(> .shopify-section:last-child > :is(.m-hero, .m-brands, .m-moments, .m-story, .m-steps, .section-background.color-scheme-3))) + .shopify-section:has(> .section-background.color-scheme-3)::before,
 #header-group + main > .shopify-section:first-child:has(> :is(.m-moments, .m-story))::before {
   content: '';

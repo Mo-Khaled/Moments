@@ -160,6 +160,8 @@
     gap: 2px;
     aspect-ratio: 5 / 4;
     padding: 12cqi;
+    border-radius: var(--m-radius-card);
+    overflow: clip;
     background: var(--tile-bg);
     color: var(--tile-ink);
     box-shadow: inset 0 0 0 1px rgb(250 246 242 / 0.12);
@@ -229,10 +231,12 @@
     text-underline-offset: 4px;
   }
 
+  /* "All brands" follows the last logo on the same line (it used to sit alone at the far edge of the panel), set off by a hairline */
   .m-mega--brands {
-    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-columns: auto auto;
+    justify-content: start;
     align-items: center;
-    gap: 32px;
+    gap: 16px 32px;
   }
 
   .m-mega__logos {
@@ -258,6 +262,9 @@
     display: inline-flex;
     align-items: center;
     gap: 8px;
+    min-block-size: 44px;
+    padding-inline-start: 32px;
+    border-inline-start: 1px solid var(--m-rule-quiet);
     font-weight: 500;
     white-space: nowrap;
   }

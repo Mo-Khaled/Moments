@@ -95,3 +95,4 @@ the same bundle could not load its validator package (see the first entry). **sh
 - Not yet run: frontend-design, emil-design-eng, banner-design, brand audits for the remaining parts of the brief.
 - design-system / frontend-design / impeccable / emil-design-eng (colour flow): tokens (--blend, --s-*), fade strips, no hairlines at joins, hero overlay, the proof script; motion unchanged.
 - ui-ux-pro-max / shopify-liquid (card hotfix): colour-scheme opt-out, scheme variable pinning, diagnostic snippet.
+- frontend-design / emil-design-eng / ui-ux-pro-max / impeccable (mobile menu): sheet structure from the owner's reference, 44px targets, focus and inert handling, motion limits, reduced motion, RTL; shopify-liquid: doc blocks, container queries for the tile marks, locale keys in en and ar.

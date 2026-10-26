@@ -52,7 +52,9 @@ for (const [ws, dir] of MODES) {
   await page.waitForTimeout(300);
   const meta = await page.evaluate(() => {
     const secs = [...document.querySelectorAll('body > .shopify-section, #MainContent > .shopify-section, #header-group > .shopify-section, body > header.shopify-section')].map((e) => { const r = e.getBoundingClientRect(); return { id: e.id.replace('shopify-section-', '').slice(-26), top: Math.round(r.top + scrollY), bottom: Math.round(r.bottom + scrollY), hero: !!e.querySelector('.m-hero, .m-brands'), chrome: e.classList.contains('shopify-section-group-header-group') }; }).filter((s) => s.bottom - s.top > 4).sort((a, b) => a.top - b.top);
-    return { height: document.documentElement.scrollHeight, secs };
+    const f = document.querySelector('.shopify-section-group-footer-group');
+    const blend = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--blend')) || 200;
+    return { height: document.documentElement.scrollHeight, secs, footerTop: f ? Math.round(f.getBoundingClientRect().top + scrollY) : null, blend };
   });
   const H = meta.height;
   // read both columns row by row in viewport-high strips
@@ -89,6 +91,14 @@ for (const [ws, dir] of MODES) {
         if (a > 0.6 && b > 0.6 && around < Math.min(a, b) * 0.5) problems.push(`1px line at y=${y} (col x=${cols[c]}) ${hex(data[c][y])} between ${hex(data[c][y - 1])} and ${hex(data[c][y + 1])}`);
       }
       if (d < 0.05) { if (!flat) start = y; flat++; if (flat === 40) tones.push(data[c][y]); } else flat = 0;
+    }
+  }
+  // everything below the footer's own entry fade must be plum: a pearl band inside the footer is a bug even when the fade is smooth
+  if (meta.footerTop !== null) {
+    for (let c = 0; c < cols.length; c++) {
+      const bad = [];
+      for (let y = Math.round(meta.footerTop + meta.blend + 12); y < H; y++) { const px = data[c][y]; if (px && oklab(px)[0] > 0.5) bad.push(y); }
+      if (bad.length) problems.push(`light rows inside the footer: ${bad.length} rows from y=${bad[0]} (col x=${cols[c]})`);
     }
   }
   const fam = [];

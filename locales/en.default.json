@@ -505,6 +505,17 @@
     "faq": "FAQ",
     "explore": "More to explore"
   },
+  "mobile_menu": {
+    "shop_by": "Shop by",
+    "more_ways": "More ways to shop",
+    "search": "Search",
+    "moments": "Shop by moment",
+    "products": "{{ count }} products",
+    "more": "Menu links",
+    "about": "About",
+    "account": "Account",
+    "cart": "Cart"
+  },
   "faq": {
     "heading": "Questions, answered",
     "text": "Short answers about orders, authenticity and gifting. Can't find yours? Ask us.",
