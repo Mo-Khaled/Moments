@@ -505,6 +505,15 @@
     "faq": "FAQ",
     "explore": "More to explore"
   },
+  "brands_index": {
+    "title": "Brands",
+    "text": "100% original, sealed. Find the scent that fits your moment.",
+    "count": "{{ count }} brands",
+    "products": {
+      "one": "{{ count }} product",
+      "other": "{{ count }} products"
+    }
+  },
   "mobile_menu": {
     "shop_by": "Shop by",
     "more_ways": "More ways to shop",

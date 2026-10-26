@@ -36,8 +36,24 @@ class HeaderMenu extends Component {
 
     // Touch: the first tap on an item that owns a panel opens it, the second tap follows the link.
     this.addEventListener('pointerdown', this.#onPointerdown, { signal: this.#abortController.signal });
+    // Safety net: a panel that is open while the pointer is nowhere near the menu (and focus is not inside it) is closed.
+    document.addEventListener('pointermove', this.#onDocumentPointermove, { signal: this.#abortController.signal, passive: true });
     this.addEventListener('click', this.#onClick, { signal: this.#abortController.signal });
   }
+
+  #watchdog = 0;
+
+  /**
+   * @param {PointerEvent} event
+   */
+  #onDocumentPointermove = (event) => {
+    if (!this.#state.activeItem || event.pointerType === 'touch' || this.#watchdog) return;
+
+    this.#watchdog = window.setTimeout(() => {
+      this.#watchdog = 0;
+      if (this.#state.activeItem && !this.matches(':hover') && !this.matches(':focus-within')) this.#deactivate();
+    }, 450);
+  };
 
   #touchOpenedBefore = false;
 
@@ -214,9 +230,10 @@ class HeaderMenu extends Component {
 
     const item = findMenuItem(event.target);
 
-    // Make sure the item to be deactivated is still the active one. Ideally
-    // we cancelled the debounce before the item was changed, but just in case.
-    if (item === this.#state.activeItem) {
+    // MOMENTS fix: the panel must close when the pointer leaves ANY nav item while a panel is open. The original only closed when the item being
+    // left was the active one, so sliding from one item to the next and out again before the next item's (delayed) activation ran left the
+    // first panel open for good (activate() had cancelled its pending close, and the item just left was never active).
+    if (this.#state.activeItem && (item === this.#state.activeItem || item !== this.#state.activeItem)) {
       this.#debouncedDeactivate();
     }
   }

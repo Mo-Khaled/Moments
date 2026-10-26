@@ -5,7 +5,11 @@
       "settings": {
         "min_items": 3,
         "max_items": 12,
-        "tiers_enabled": false,
+        "tiers_enabled": true,
+      "tier1_count": 2,
+      "tier1_label": "Free delivery",
+      "tier2_count": 3,
+      "tier2_label": "10% off",
         "discount_confirmed": false
       }
     }

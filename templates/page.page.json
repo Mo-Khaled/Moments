@@ -1,0 +1,49 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "brands_index": {
+      "type": "moments-brands-index",
+      "settings": {
+        "collection_list": [
+          "afnan",
+          "armaf",
+          "asdaf",
+          "assaf",
+          "banafa-for-oud",
+          "dkhoon-emirates",
+          "faan",
+          "ibraq",
+          "khadlaj",
+          "lattafa",
+          "lattafa-pride",
+          "laverne",
+          "le-bonheur",
+          "le-falcone",
+          "nabeel-perfumes",
+          "rasasi-perfumes",
+          "zimaya",
+          "amarah-perfumes",
+          "french-avenue",
+          "almas-perfumes",
+          "arabiyat-sugar"
+        ]
+      }
+    },
+    "main": {
+      "type": "main-page",
+      "settings": {}
+    }
+  },
+  "order": [
+    "brands_index",
+    "main"
+  ]
+}

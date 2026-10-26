@@ -998,3 +998,24 @@ html:root:root product-card .card-gallery {
   --gallery-aspect-ratio: 1 !important;
   aspect-ratio: 1 / 1;
 }
+
+/* Page numbers (collections and search): 44px targets, round, brand type; the current page is a plum disc. */
+html:root:root .pagination {
+  --pagination-size: 44px;
+  --pagination-radius: 22;
+
+  margin-block: clamp(32px, 5vw, 56px) clamp(8px, 2vw, 24px);
+}
+
+html:root:root .pagination__link {
+  font-size: 1rem;
+  color: var(--m-plum);
+}
+
+html:root:root .pagination__link--current {
+  color: var(--m-pearl);
+}
+
+html:root:root .pagination__link--disabled {
+  opacity: 0.4;
+}
