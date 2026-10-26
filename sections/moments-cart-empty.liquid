@@ -1,0 +1,64 @@
+{%- comment -%}
+  Empty cart: "Nothing here yet. Start with a moment." and the six moment tiles (the same tile as the homepage, so the colours and marks match).
+  Shown only while the cart is empty; the best-sellers row below it is the page's product list section. Re-rendered by the theme when the last line is removed.
+{%- endcomment -%}
+
+{%- if cart.empty? -%}
+  {%- liquid
+    assign moment_handles = 'night-moment,gift-moment,all-day-moment,daily-moment,fresh-moment,love-moment' | split: ','
+    assign moment_marks = 'night,gift,allday,daily,fresh,love' | split: ','
+  -%}
+  <section class="m-cempty" aria-labelledby="m-cempty-title-{{ section.id }}">
+    <div class="m-wrap">
+      <h2 class="m-cempty__title" id="m-cempty-title-{{ section.id }}">{{ 'cart_page.empty_title' | t }}</h2>
+      <ul class="m-cempty__grid" role="list">
+        {%- for handle in moment_handles -%}
+          {%- assign c = collections[handle] -%}
+          {%- if c != blank -%}
+            <li class="m-tile-item">{% render 'moment-tile', collection: c, mark: moment_marks[forloop.index0] %}</li>
+          {%- endif -%}
+        {%- endfor -%}
+      </ul>
+    </div>
+  </section>
+{%- endif -%}
+
+{% stylesheet %}
+  .m-cempty {
+    padding-block: clamp(24px, 4vw, 56px) clamp(8px, 2vw, 24px);
+  }
+
+  .m-cempty__title {
+    margin: 0 0 clamp(16px, 2.5vw, 28px);
+    font-size: clamp(1.75rem, 3.6vw, 2.75rem);
+    line-height: 1.1;
+    text-align: center;
+    text-wrap: balance;
+  }
+
+  .m-cempty__grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  @media screen and (min-width: 750px) {
+    .m-cempty__grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+  }
+
+  @media screen and (min-width: 1100px) {
+    .m-cempty__grid { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "MOMENTS empty cart",
+  "limit": 1,
+  "settings": [],
+  "presets": [{ "name": "MOMENTS empty cart" }]
+}
+{% endschema %}

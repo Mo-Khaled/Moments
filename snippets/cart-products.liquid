@@ -156,11 +156,7 @@
                       {{- item.product.title -}}
                     </a>
                   </p>
-                  {% if item.product.vendor and block_settings.vendor %}
-                    <p>
-                      {% render 'vendor-name', vendor: item.product.vendor %}
-                    </p>
-                  {% endif %}
+                  {%- render 'product-card-meta', product: item.product -%}
 
                   {%- if item.item_components.size != 0 -%}
                     <ul class="cart-items__bundle list-unstyled">

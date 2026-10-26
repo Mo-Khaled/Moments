@@ -505,6 +505,14 @@
     "faq": "FAQ",
     "explore": "More to explore"
   },
+  "cart_page": {
+    "ship_more": "Add {{ amount }} more for free shipping",
+    "ship_done": "You have free shipping",
+    "empty_title": "Start with a moment.",
+    "claims_label": "Why order from MOMENTS",
+    "toast_added": "Added to cart",
+    "toast_view": "View cart"
+  },
   "brands_index": {
     "title": "Brands",
     "text": "100% original, sealed. Find the scent that fits your moment.",

@@ -1,0 +1,83 @@
+{%- doc -%}
+  Free-shipping progress for the cart. The threshold is the ONE theme setting "Free shipping above" (settings.moments_free_shipping, in whole pounds); the cart
+  total is in cents. Below the threshold: how much more to add, with a progress track. At or above it: a plain confirmation. Shows nothing for an empty cart
+  or when the setting is 0. It lives inside the cart summary, so it is re-rendered with the totals whenever a quantity changes.
+
+  @example
+  {% render 'moments-free-shipping-bar' %}
+{%- enddoc -%}
+
+{%- liquid
+  assign threshold_cents = settings.moments_free_shipping | times: 100
+  assign total = cart.total_price
+-%}
+
+{%- if threshold_cents > 0 and cart.empty? == false -%}
+  {%- liquid
+    assign remaining = threshold_cents | minus: total
+    assign percent = total | times: 100 | divided_by: threshold_cents
+    if percent > 100
+      assign percent = 100
+    endif
+    assign remaining_money = remaining | money_without_trailing_zeros
+  -%}
+  <div class="m-ship{% if remaining <= 0 %} m-ship--done{% endif %}" role="status">
+    <p class="m-ship__text">
+      {%- if remaining > 0 -%}
+        {{ 'cart_page.ship_more' | t: amount: remaining_money }}
+      {%- else -%}
+        {{ 'cart_page.ship_done' | t }}
+      {%- endif -%}
+    </p>
+    <span class="m-ship__track" aria-hidden="true"><span class="m-ship__fill" style="--m-ship: {{ percent }}%"></span></span>
+  </div>
+{%- endif -%}
+
+{% stylesheet %}
+  .m-ship {
+    display: grid;
+    gap: 8px;
+    padding: 12px 14px;
+    border: 1px solid var(--m-card-border);
+    border-radius: 12px;
+    background: var(--m-card-frame);
+  }
+
+  .m-ship__text {
+    margin: 0;
+    font-size: 0.875rem;
+    line-height: 1.35;
+    color: var(--m-plum);
+  }
+
+  .m-ship__track {
+    display: block;
+    block-size: 6px;
+    border-radius: 9999px;
+    background: color-mix(in srgb, var(--m-plum) 12%, transparent);
+    overflow: hidden;
+  }
+
+  .m-ship__fill {
+    display: block;
+    inline-size: var(--m-ship);
+    block-size: 100%;
+    border-radius: inherit;
+    background: var(--m-berry);
+    transform-origin: left;
+  }
+
+  html[dir='rtl'] .m-ship__fill {
+    margin-inline-start: auto;
+  }
+
+  .m-ship--done .m-ship__fill {
+    background: var(--moment-fresh-field);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .m-ship__fill {
+      transition: inline-size var(--m-dur-3) var(--m-ease);
+    }
+  }
+{% endstylesheet %}

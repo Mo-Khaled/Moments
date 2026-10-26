@@ -21,3 +21,5 @@ All checks run against the live storefront (https://momentseg.com); add `--theme
 | `normalize-images.py`, `prepare-brand-logos.py`, `prepare-video.mjs`, `gen-store-proposals.py`, `visual-diff.py`, `visual-snapshot.mjs` | Asset preparation and older audit tools |
 
 Two machine-specific notes: antivirus software that scans HTTPS (for example Kaspersky) re-serves pages uncompressed and injects its own scripts, which inflates every size measured on that machine (the scripts block those requests); and Git Bash rewrites a leading `/` in arguments, so run path arguments with `MSYS_NO_PATHCONV=1`.
+
+Traffic note: the checks together make hundreds of page loads. After days of this the store's edge (Cloudflare) started answering headless browsers with a 429 challenge. Run the full suite sparingly (one engine, `--quick`), reuse one browser session, and leave an hour between big runs.

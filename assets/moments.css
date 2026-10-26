@@ -1019,3 +1019,194 @@ html:root:root .pagination__link--current {
 html:root:root .pagination__link--disabled {
   opacity: 0.4;
 }
+
+/* ---------- Cart page ----------
+   Line items are cards (same edge, radius and surface as the product cards), the packshot sits contained on the frame token, the moment label and brand
+   show once, and the summary is a sticky card beside them (stacked on phones, with a pinned checkout bar). Scoped to .cart-page so the cart drawer is unchanged. */
+html:root:root .cart-page .cart-items__table-row {
+  padding: 14px;
+  margin-block-end: 12px;
+  border: 1px solid var(--m-card-border);
+  border-radius: var(--m-radius-card);
+  background: var(--m-card-surface);
+}
+
+html:root:root .cart-page .cart-items--dividers .cart-items__table-row,
+html:root:root .cart-page .cart-items--dividers .cart-items__table-row:last-child,
+html:root:root .cart-page .cart-items__table-row:last-child {
+  padding: 14px;
+  border: 1px solid var(--m-card-border);
+  margin-block-end: 12px;
+}
+
+html:root:root .cart-page .cart-items__media-container {
+  border-radius: 12px;
+  background: var(--m-card-frame);
+  overflow: clip;
+}
+
+html:root:root .cart-page .cart-items__media-image {
+  border: 0;
+  border-radius: 0;
+  object-fit: contain;
+  mix-blend-mode: multiply;
+}
+
+html:root:root .cart-page .cart-items__details {
+  color: var(--m-text-muted);
+}
+
+html:root:root .cart-page .cart-items__title {
+  color: var(--m-plum);
+  font-family: var(--font-heading--family);
+  font-size: 1.125rem;
+  line-height: 1.2;
+}
+
+html:root:root .cart-page .cart-items__details .card-meta {
+  margin-block-end: 8px;
+}
+
+html:root:root .cart-page .cart-items__price {
+  color: var(--m-plum);
+  font-weight: 600;
+}
+
+/* summary: a sticky card on desktop */
+html:root:root .cart-page__summary {
+  padding: clamp(16px, 2.4vw, 24px);
+  border: 1px solid var(--m-card-border);
+  border-radius: var(--m-radius-card);
+  background: var(--m-card-surface);
+}
+
+html:root:root .cart-page__summary .cart__summary-totals {
+  display: grid;
+  gap: 14px;
+}
+
+@media screen and (min-width: 750px) {
+  html:root:root .cart-page__summary {
+    display: block;
+    block-size: auto;
+    align-self: start;
+    position: sticky;
+    inset-block-start: 100px;
+  }
+}
+
+/* the claims we may make, and nothing else */
+.m-cart-claims {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 16px;
+  margin: 16px 0 0;
+  padding: 0;
+  list-style: none;
+  font-size: 0.8125rem;
+  color: var(--m-text-muted);
+}
+
+.m-cart-claims li + li::before {
+  content: '';
+  display: inline-block;
+  inline-size: 4px;
+  block-size: 4px;
+  margin-inline-end: 16px;
+  border-radius: 9999px;
+  background: var(--m-gold-ink);
+  vertical-align: middle;
+}
+
+.m-cart-claims a {
+  color: inherit;
+  text-underline-offset: 3px;
+}
+
+/* the pinned checkout bar, phones only */
+.m-cart-bar {
+  display: none;
+}
+
+@media screen and (max-width: 749px) {
+  .cart-page .m-cart-bar {
+    position: fixed;
+    inset-inline: 0;
+    inset-block-end: 0;
+    z-index: 20;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 12px 16px calc(12px + env(safe-area-inset-bottom));
+    border-block-start: 1px solid var(--m-card-border);
+    background: var(--m-pearl);
+  }
+
+  .m-cart-bar__total {
+    display: grid;
+    gap: 2px;
+    font-size: 0.8125rem;
+    color: var(--m-text-muted);
+  }
+
+  .m-cart-bar__total strong {
+    font-size: 1.125rem;
+    color: var(--m-plum);
+  }
+
+  .m-cart-bar__button {
+    flex: 1 1 auto;
+    max-inline-size: 220px;
+    min-block-size: 48px;
+  }
+
+  /* the in-flow checkout button would repeat the bar; the accelerated buttons stay */
+  html:root:root .cart-page__summary .cart__checkout-button {
+    display: none;
+  }
+
+  html:root:root .cart-page:not(.cart-page--empty) {
+    padding-block-end: 96px;
+  }
+}
+
+/* the theme's "extend summary to the page edge" padding is not needed inside the summary card */
+html:root:root .cart-page__summary .cart__summary-container,
+html:root:root .cart-page__summary .cart__summary-inner {
+  block-size: auto;
+  padding: 0;
+  border: 0;
+  background: transparent;
+}
+
+@media screen and (max-width: 749px) {
+  html:root:root .cart-page .cart-items__table-row {
+    padding: 12px;
+  }
+
+  html:root:root .cart-page .cart-items__title {
+    font-size: 1rem;
+  }
+
+  html:root:root .cart-page .cart-items__price {
+    font-size: 1rem;
+  }
+}
+
+/* phones: the summary and its children may shrink below their content width (the discount row pushed the page 34px wide at 320px) */
+@media screen and (max-width: 749px) {
+  html:root:root .cart-page {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  html:root:root .cart-page__summary,
+  html:root:root .cart-page__summary * {
+    min-inline-size: 0;
+  }
+
+  html:root:root .cart-page__summary {
+    max-inline-size: 100%;
+    overflow-x: clip;
+  }
+}

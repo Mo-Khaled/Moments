@@ -5,6 +5,7 @@
 {%- enddoc -%}
 
 <div class="cart__summary-totals">
+  {% render 'moments-free-shipping-bar' %}
   {% # We need to keep this node in place to allow morphing to work properly # %}
   <div class="cart__original-total-container cart-primary-typography">
     {%- if cart.cart_level_discount_applications.size > 0 -%}
@@ -120,6 +121,25 @@
     </div>
   {% endif %}
 </div>
+
+{%- unless cart.empty? -%}
+  {%- assign returns_page = pages['returns-exchange-policy'] -%}
+  <ul class="m-cart-claims" role="list" aria-label="{{ 'cart_page.claims_label' | t }}">
+    <li>{{ 'homepage.pillars.original_title' | t }}</li>
+    <li>{{ 'homepage.pillars.cod_title' | t }}</li>
+    {%- if returns_page != blank -%}
+      <li><a href="{{ returns_page.url }}">{{ 'homepage.pillars.returns_title' | t }}</a></li>
+    {%- endif -%}
+  </ul>
+
+  <div class="m-cart-bar">
+    <div class="m-cart-bar__total">
+      <span>{{ 'content.cart_estimated_total' | t }}</span>
+      <strong>{{ cart.total_price | money }}</strong>
+    </div>
+    <button type="submit" name="checkout" form="cart-form" class="button m-cart-bar__button">{{ 'content.checkout' | t }}</button>
+  </div>
+{%- endunless -%}
 
 {% stylesheet %}
   .cart-actions {

@@ -1,0 +1,142 @@
+{%- doc -%}
+  The "Added to cart" toast, for the cart type "page" (with the drawer, the drawer is the confirmation). See assets/moment-toast.js.
+  Top end of the screen on desktop, top centre on phones, below the sticky header; slides 8px and fades (transform and opacity only), off under reduced motion.
+
+  @example
+  {% render 'moment-toast' %}
+{%- enddoc -%}
+
+{%- if settings.cart_type == 'page' -%}
+  <script src="{{ 'moment-toast.js' | asset_url }}" type="module" fetchpriority="low"></script>
+  <moment-toast hidden role="status" aria-live="polite">
+    <span class="moment-toast__icon" aria-hidden="true">
+      <svg viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m4.5 10.5 3.5 3.5 7.5-8"/></svg>
+    </span>
+    <span class="moment-toast__text">{{ 'cart_page.toast_added' | t }}</span>
+    <a class="moment-toast__link" href="{{ routes.cart_url }}">{{ 'cart_page.toast_view' | t }}</a>
+    <a class="moment-toast__link moment-toast__link--primary" href="{{ routes.root_url }}checkout">{{ 'content.checkout' | t }}</a>
+    <button class="moment-toast__close" type="button" data-toast-close aria-label="{{ 'actions.close' | t }}">
+      <svg viewBox="0 0 20 20" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="m5 5 10 10M15 5 5 15"/></svg>
+    </button>
+  </moment-toast>
+{%- endif -%}
+
+{% stylesheet %}
+  moment-toast {
+    position: fixed;
+    inset-block-start: 84px;
+    inset-inline-end: 16px;
+    z-index: 2147482000;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    max-inline-size: calc(100vw - 32px);
+    padding: 8px 8px 8px 14px;
+    border: 1px solid var(--m-card-border);
+    border-radius: 9999px;
+    background: var(--m-card-surface);
+    color: var(--m-plum);
+    box-shadow: 0 14px 30px -14px rgb(59 30 58 / 0.45);
+    font-size: 0.9375rem;
+    opacity: 0;
+    transform: translateY(-8px);
+    pointer-events: none;
+    transition: opacity 220ms var(--m-ease), transform 220ms var(--m-ease);
+  }
+
+  html[dir='rtl'] moment-toast {
+    padding: 8px 14px 8px 8px;
+  }
+
+  moment-toast[hidden] {
+    display: none;
+  }
+
+  moment-toast[data-open] {
+    opacity: 1;
+    transform: none;
+    pointer-events: auto;
+  }
+
+  .moment-toast__icon {
+    display: grid;
+    place-items: center;
+    inline-size: 26px;
+    block-size: 26px;
+    border-radius: 9999px;
+    background: var(--moment-fresh-field);
+    color: var(--m-pearl);
+    flex: none;
+  }
+
+  .moment-toast__text {
+    font-weight: 500;
+    white-space: nowrap;
+  }
+
+  .moment-toast__link {
+    display: inline-flex;
+    align-items: center;
+    min-block-size: 44px;
+    padding-inline: 10px;
+    color: var(--m-plum);
+    font-weight: 500;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    white-space: nowrap;
+  }
+
+  .moment-toast__link--primary {
+    padding-inline: 16px;
+    border-radius: 9999px;
+    background: var(--m-berry);
+    color: var(--m-white);
+    text-decoration: none;
+  }
+
+  .moment-toast__close {
+    display: grid;
+    place-items: center;
+    inline-size: 44px;
+    block-size: 44px;
+    padding: 0;
+    border: 0;
+    border-radius: 9999px;
+    background: transparent;
+    color: var(--m-plum);
+    cursor: pointer;
+    flex: none;
+  }
+
+  .moment-toast__link:focus-visible,
+  .moment-toast__close:focus-visible {
+    outline: 2px solid var(--m-berry);
+    outline-offset: 2px;
+  }
+
+  @media screen and (max-width: 749px) {
+    moment-toast {
+      inset-inline: 12px;
+      inset-block-start: 72px;
+      max-inline-size: none;
+      border-radius: 16px;
+      flex-wrap: wrap;
+      row-gap: 0;
+    }
+
+    .moment-toast__text {
+      flex: 1 1 auto;
+    }
+
+    .moment-toast__close {
+      order: 2;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    moment-toast {
+      transition: none;
+      transform: none;
+    }
+  }
+{% endstylesheet %}
