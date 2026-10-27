@@ -1,7 +1,6 @@
 {%- doc -%}
   Renders the product badge for a card: the saving when there is a compare-at price, "Sold out" when there is no stock.
-  One badge style for the whole theme: square corners, a gold outline on the page surface (the single gold badge outline
-  of the brand), no filled pill. A product that is on sale and in stock shows the saving; a sold-out product shows
+  One badge style for the whole theme: the saving is a solid berry tag with a small tag icon (no gold); sold out is a muted outline. A product that is on sale and in stock shows the saving; a sold-out product shows
   "Sold out" in muted ink. A product with no compare-at price and in stock shows nothing.
 
   @param {object} product - The product object.
@@ -26,7 +25,8 @@
       {{- 'content.product_badge_sold_out' | t -}}
     </div>
   {%- elsif on_sale -%}
-    <div class="product-badges__badge">
+    <div class="product-badges__badge product-badges__badge--save">
+      <span class="product-badges__icon" aria-hidden="true">{{ 'icon-tag.svg' | inline_asset_content }}</span>
       {{- 'content.product_badge_save' | t: amount: saving_text -}}
     </div>
   {%- endif -%}
@@ -70,6 +70,31 @@
     font-weight: 500;
     line-height: 1.4;
     text-align: center;
+  }
+
+  .product-badges__badge--save {
+    gap: 5px;
+    border-radius: 9999px;
+    padding-block: 4px;
+    padding-inline: 9px 11px;
+    background: var(--m-berry-600, #9E385D);
+    box-shadow: none;
+    color: var(--m-pearl, #FAF6F2);
+    font-weight: 600;
+    letter-spacing: 0.01em;
+  }
+
+  .product-badges__icon {
+    display: inline-flex;
+    inline-size: 14px;
+    block-size: 14px;
+    flex: none;
+    --icon-stroke-width: 1.6px;
+  }
+
+  .product-badges__icon svg {
+    inline-size: 100%;
+    block-size: 100%;
   }
 
   .product-badges__badge--muted {

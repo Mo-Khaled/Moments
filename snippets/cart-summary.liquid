@@ -125,10 +125,10 @@
 {%- unless cart.empty? -%}
   {%- assign returns_page = pages['returns-exchange-policy'] -%}
   <ul class="m-cart-claims" role="list" aria-label="{{ 'cart_page.claims_label' | t }}">
-    <li>{{ 'homepage.pillars.original_title' | t }}</li>
-    <li>{{ 'homepage.pillars.cod_title' | t }}</li>
+    <li><span class="m-cart-claims__icon" aria-hidden="true">{{ 'icon-shield.svg' | inline_asset_content }}</span>{{ 'homepage.pillars.original_title' | t }}</li>
+    <li><span class="m-cart-claims__icon" aria-hidden="true">{{ 'icon-truck.svg' | inline_asset_content }}</span>{{ 'homepage.pillars.cod_title' | t }}</li>
     {%- if returns_page != blank -%}
-      <li><a href="{{ returns_page.url }}">{{ 'homepage.pillars.returns_title' | t }}</a></li>
+      <li><span class="m-cart-claims__icon" aria-hidden="true">{{ 'icon-return.svg' | inline_asset_content }}</span><a href="{{ returns_page.url }}">{{ 'homepage.pillars.returns_title' | t }}</a></li>
     {%- endif -%}
   </ul>
 

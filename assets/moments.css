@@ -1107,15 +1107,23 @@ html:root:root .cart-page__summary .cart__summary-totals {
   color: var(--m-text-muted);
 }
 
-.m-cart-claims li + li::before {
-  content: '';
-  display: inline-block;
-  inline-size: 4px;
-  block-size: 4px;
-  margin-inline-end: 16px;
-  border-radius: 9999px;
-  background: var(--m-gold-ink);
-  vertical-align: middle;
+.m-cart-claims li {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.m-cart-claims__icon {
+  display: inline-flex;
+  inline-size: 16px;
+  block-size: 16px;
+  color: var(--m-berry-ink);
+  --icon-stroke-width: 1.5px;
+}
+
+.m-cart-claims__icon svg {
+  inline-size: 100%;
+  block-size: 100%;
 }
 
 .m-cart-claims a {
@@ -1209,4 +1217,10 @@ html:root:root .cart-page__summary .cart__summary-inner {
     max-inline-size: 100%;
     overflow-x: clip;
   }
+}
+
+/* the saving badge keeps its pill shape inside cards (the card override above rounds other badges to 6px) */
+html:root:root product-card .product-badges__badge--save {
+  border-radius: 9999px;
+  white-space: nowrap;
 }
