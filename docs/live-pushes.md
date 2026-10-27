@@ -42,3 +42,6 @@ Cause found: when the pointer leaves the window (or the window blurs), Chrome ke
 
 ### 2026-10-27 Save badge, brand icons, jsconfig (live)
 Pushed: snippets/product-card-badges.liquid (Save label: solid berry pill, pearl text, tag icon, no gold; 5.9:1), assets/moments.css, snippets/cart-summary.liquid (claim icons), assets/icon-{cart,add-to-cart,account,search,arrow}.svg redrawn (rounded, small spark accent) and new icon-{tag,truck,shield,return,gift,spark,bottle}.svg, assets/jsconfig.json (removed deprecated baseUrl; "paths" still resolves @theme/*).
+
+### 2026-10-27 cursor follower removed (live, smoke passed)
+layout/theme.liquid no longer renders the moment-cursor companion (the circle that followed the pointer). The pointer images (moment-pointer) stay. snippets/moment-cursor.liquid deleted from the repo; the unused copy remains on the live theme (no deletions pushed).
