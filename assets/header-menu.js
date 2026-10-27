@@ -39,6 +39,13 @@ class HeaderMenu extends Component {
     // Safety net: a panel that is open while the pointer is nowhere near the menu (and focus is not inside it) is closed.
     document.addEventListener('pointermove', this.#onDocumentPointermove, { signal: this.#abortController.signal, passive: true });
     this.addEventListener('click', this.#onClick, { signal: this.#abortController.signal });
+    // MOMENTS fix: when the pointer leaves the page (up into the tab bar, off the window) or the window loses focus, Chrome can keep :hover on the last
+    // element and fires no pointerleave, so the panel stayed open. Close it on those signals.
+    const leave = () => { this.#debouncedActivateHandler.cancel(); this.#debouncedDeactivate.cancel(); this.#deactivate(this.#state.activeItem, true); };
+    document.documentElement.addEventListener('mouseleave', leave, { signal: this.#abortController.signal });
+    document.addEventListener('mouseout', (e) => { if (!e.relatedTarget) leave(); }, { signal: this.#abortController.signal });
+    window.addEventListener('blur', leave, { signal: this.#abortController.signal });
+    document.addEventListener('visibilitychange', () => { if (document.hidden) leave(); }, { signal: this.#abortController.signal });
   }
 
   #watchdog = 0;

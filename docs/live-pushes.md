@@ -36,3 +36,6 @@ Pushed: snippets/moments-free-shipping-bar, cart-summary, cart-products, section
 
 ### 2026-10-27 header-menu.js (mega panel half-open fix, live, smoke passed)
 Pushed assets/header-menu.js: panel height follows its content (ResizeObserver), a 250 ms guard closes an open panel when the pointer/focus is away, and a lost-state reset. 40 hover trials clean on live.
+
+### 2026-10-27 header-menu.js again (live, smoke passed)
+Cause found: when the pointer leaves the window (or the window blurs), Chrome keeps :hover on the menu and fires no pointerleave, so the panel stayed open (reproduced: 499px open on the old code). The menu now also closes on document mouseleave, mouseout with no target, window blur and tab hidden. scripts/check-menu-leave.mjs covers it.
