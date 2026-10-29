@@ -47,3 +47,13 @@ Nothing below is guessed or invented; each item is a slot that is hidden on the 
 
 - **PayPal on the product page (performance):** the product page loads PayPal's smart button (about 840 KB in total). If most orders are cash on delivery, turning off "Show dynamic checkout buttons" on the product page (Theme editor, Product page, Buy buttons) makes product pages about 0.8 MB lighter. It removes a payment shortcut, so it is your call.
 - **Brands page template:** the new Brands page is `templates/page.page.json` and applies to the pages whose template is "page" (Brands and the placeholder "Home Page"). The old `templates/page.brands.json` is unused; it can be deleted or assigned in the admin if you prefer.
+
+## Gift finder
+- **Approve the metafield definitions** (namespace `moments`: gift_feel, gift_strength, gift_who, gift_occasion, gift_safe, gift_why, gift_ready; see `docs/gift-finder-dry-run-output.txt`). Not created until you say yes.
+- **Tag the products**: fill `scripts/gift-metafields-template.csv` (50 rows, values empty on purpose). I validate it with the dry run and write only after your approval.
+- **Approve the wording of every "why" line** (max 90 characters, no scent notes, no "smells like").
+- **Create the `gift-finder` collection** holding the tagged products (or name another in the section settings), and the page "Gift finder" (handle `gift-finder`, template `page.gift-finder`).
+- **Budget bands**: Theme settings > MOMENTS > Gift finder > budget limits, e.g. `1000,2000,3500` (empty = no budget row).
+- **Gift-ready**: say what "gift-ready" means for your products (nothing about wrapping, boxes or cards is claimed). The row stays off until you confirm and tag `gift_ready`.
+- **Navigation**: say if the page should go into the main menu (not done).
+- **Un-hide the homepage strip** once products are tagged (it ships hidden).

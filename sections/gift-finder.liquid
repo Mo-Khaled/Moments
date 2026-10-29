@@ -1,0 +1,276 @@
+{%- comment -%}
+  Gift finder. One section, two layouts:
+    strip - a slim card for the homepage: three rows of pills and "Show picks", which opens the results page with the choices in the URL.
+    page  - the full page: the same card, then up to N picks, a compare mode and a table.
+
+  Where the picks come from (docs/decisions-log.md, "Gift finder data"): a single collection (setting, default handle "gift-finder") that holds
+  the products the owner has tagged with the moments.gift_* metafields. Liquid cannot filter ~1,000 products by metafield on its own, and the
+  Storefront metafield filters need a Search & Discovery setup, so the page renders ONLY the tagged products of that collection (50 per page,
+  the next pages fetched with the Section Rendering API when someone taps "Show picks") and the filtering runs in the browser. The strip embeds
+  no products at all. A product is shown only when it is available and has a feel, a strength and a reason; nothing is guessed.
+
+  Add a new "who" or "occasion": see docs/gift-finder.md (one line here, one in the locale file, one choice on the metafield).
+{%- endcomment -%}
+
+{%- liquid
+  assign layout = section.settings.layout
+  assign heading_tag = 'h2'
+  if layout == 'page'
+    assign heading_tag = 'h1'
+  endif
+
+  assign title = section.settings.heading
+  if title == blank
+    if layout == 'page'
+      assign title = 'gift_finder.page_heading' | t
+    else
+      assign title = 'gift_finder.strip_title' | t
+    endif
+  endif
+  assign intro = section.settings.intro
+  if intro == blank and layout == 'page'
+    assign intro = 'gift_finder.page_intro' | t
+  endif
+
+  assign target_url = section.settings.results_page.url
+  if target_url == blank
+    assign target_url = routes.root_url | append: 'pages/gift-finder'
+  endif
+
+  assign who_options = 'wife|her partner,husband|him partner,mother|mother,father|father,friend|friend,colleague|colleague' | split: ','
+  assign occasion_options = 'birthday,anniversary,eid,thank_you,wedding,new_baby' | split: ','
+
+  assign edges = settings.gift_budget_bands | split: ','
+  assign max_picks = section.settings.max_picks | default: 3
+-%}
+
+{{ 'gift-finder.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'gift-finder.js' | asset_url }}" type="module" fetchpriority="low"></script>
+<noscript><style>.gf__ui { display: none; } .gf__nojs { display: block; }</style></noscript>
+
+<svg class="visually-hidden" width="0" height="0" aria-hidden="true" focusable="false">
+  <symbol id="gf-feel-fresh" viewBox="0 0 16 16"><path d="M8 1.5c2.6 3.1 4.2 5.2 4.2 7.4a4.2 4.2 0 0 1-8.4 0c0-2.2 1.6-4.3 4.2-7.4Z" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></symbol>
+  <symbol id="gf-feel-warm" viewBox="0 0 16 16"><circle cx="8" cy="8" r="3" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M8 1.5v2M8 12.5v2M1.5 8h2M12.5 8h2M3.4 3.4l1.4 1.4M11.2 11.2l1.4 1.4M12.6 3.4l-1.4 1.4M4.8 11.2l-1.4 1.4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></symbol>
+  <symbol id="gf-feel-sweet" viewBox="0 0 16 16"><path d="M8 13.5S2 10 2 5.9A3.1 3.1 0 0 1 8 4.7a3.1 3.1 0 0 1 6 1.2C14 10 8 13.5 8 13.5Z" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></symbol>
+  <symbol id="gf-feel-woody" viewBox="0 0 16 16"><path d="M8 14V6M8 9 5 6.5M8 11l3-2.5M8 6c-2.600-.4-3.400-2.400-3-4 2.200.2 3.400 1.600 3 4Zm0 0c2.600-.4 3.400-2.400 3-4-2.200.2-3.400 1.600-3 4Z" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="gf-feel-clean" viewBox="0 0 16 16"><path d="M8 1.5 9.4 6.6 14.5 8 9.4 9.400 8 14.500 6.600 9.400 1.500 8 6.600 6.600Z" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></symbol>
+</svg>
+
+<section class="gf gf--{{ layout }}" aria-labelledby="gf-title-{{ section.id }}" {{ section.shopify_attributes }}>
+  <div class="m-wrap">
+    <gift-finder
+      class="gf__root"
+      data-layout="{{ layout }}"
+      data-target="{{ target_url }}"
+      data-max="{{ max_picks }}"
+      data-section-id="{{ section.id }}"
+    >
+      <div class="gf__card">
+        <header class="gf__head">
+          <{{ heading_tag }} class="gf__title" id="gf-title-{{ section.id }}">{{ title }}</{{ heading_tag }}>
+          {%- if intro != blank -%}
+            <p class="gf__intro">{{ intro }}</p>
+          {%- endif -%}
+        </header>
+
+        <div class="gf__ui">
+          <div class="gf__group" role="group" aria-labelledby="gf-who-{{ section.id }}" data-group="who">
+            <p class="gf__label" id="gf-who-{{ section.id }}">{{ 'gift_finder.who_label' | t }}</p>
+            <div class="gf__pills">
+              {%- for option in who_options -%}
+                {%- assign parts = option | split: '|' -%}
+                {%- assign key = parts[0] -%}
+                {%- assign label_key = 'gift_finder.who.' | append: key -%}
+                <button type="button" class="gf__pill" aria-pressed="false" data-value="{{ key }}" data-match="{{ parts[1] }}">{{ label_key | t }}</button>
+              {%- endfor -%}
+            </div>
+          </div>
+
+          <div class="gf__group" role="group" aria-labelledby="gf-occasion-{{ section.id }}" data-group="occasion">
+            <p class="gf__label" id="gf-occasion-{{ section.id }}">{{ 'gift_finder.occasion_label' | t }}</p>
+            <div class="gf__pills">
+              {%- for key in occasion_options -%}
+                {%- assign label_key = 'gift_finder.occasion.' | append: key -%}
+                <button type="button" class="gf__pill" aria-pressed="false" data-value="{{ key }}" data-match="{{ key }}">{{ label_key | t }}</button>
+              {%- endfor -%}
+            </div>
+          </div>
+
+          {%- if edges.size > 0 -%}
+            <div class="gf__group" role="group" aria-labelledby="gf-budget-{{ section.id }}" data-group="budget">
+              <p class="gf__label" id="gf-budget-{{ section.id }}">{{ 'gift_finder.budget_label' | t }}</p>
+              <div class="gf__pills">
+                {%- assign prev = 0 -%}
+                {%- for edge in edges limit: 3 -%}
+                  {%- assign hi = edge | strip | plus: 0 -%}
+                  {%- if forloop.first -%}
+                    {%- assign band_label = 'gift_finder.budget_under' | t: max: hi -%}
+                  {%- else -%}
+                    {%- assign band_label = 'gift_finder.budget_between' | t: min: prev, max: hi -%}
+                  {%- endif -%}
+                  <button type="button" class="gf__pill" aria-pressed="false" data-value="b{{ forloop.index }}" data-match="{{ prev }}-{{ hi }}">{{ band_label }}</button>
+                  {%- assign prev = hi -%}
+                {%- endfor -%}
+                <button type="button" class="gf__pill" aria-pressed="false" data-value="b{{ edges.size | at_most: 3 | plus: 1 }}" data-match="{{ prev }}-">{{ 'gift_finder.budget_over' | t: min: prev }}</button>
+              </div>
+            </div>
+          {%- endif -%}
+
+          <div class="gf__actions">
+            <button type="button" class="button gf__go" data-action="show">{{ 'gift_finder.show_picks' | t }}</button>
+            <button type="button" class="gf__link" data-action="safest">{{ 'gift_finder.safest' | t }}</button>
+            <button type="button" class="gf__link gf__link--quiet" data-action="reset" hidden>{{ 'gift_finder.reset' | t }}</button>
+          </div>
+        </div>
+
+        <div class="gf__nojs">
+          <p>{{ 'gift_finder.no_js_note' | t }}</p>
+          <a class="button" href="{{ routes.all_products_collection_url }}">{{ 'gift_finder.browse_all' | t }}</a>
+        </div>
+      </div>
+
+      {%- if layout == 'page' -%}
+        {%- liquid
+          assign collection = section.settings.collection
+          if collection == blank
+            assign collection = collections['gift-finder']
+          endif
+          assign tagged_here = 0
+          assign total_here = 0
+        -%}
+
+        <p class="visually-hidden" role="status" aria-live="polite" data-live></p>
+
+        <div class="gf__results" data-results hidden>
+          <div class="gf__results-head">
+            <h2 class="gf__results-title">{{ 'gift_finder.results_heading' | t }}</h2>
+            <p class="gf__count" data-count></p>
+          </div>
+
+          <div class="gf__empty" data-empty hidden>
+            <p class="gf__empty-text">{{ 'gift_finder.empty' | t }}</p>
+            <h3 class="gf__empty-title">{{ 'gift_finder.empty_safest_heading' | t }}</h3>
+          </div>
+
+          <p class="gf__hint" data-compare-hint hidden>{{ 'gift_finder.compare_hint' | t }}</p>
+
+          <ol class="gp-list" data-list data-next="">
+            {%- if collection != blank -%}
+              {%- paginate collection.products by 50 -%}
+                {%- for product in collection.products -%}
+                  {%- assign total_here = total_here | plus: 1 -%}
+                  {%- assign mf = product.metafields.moments -%}
+                  {%- if product.available and mf.gift_feel.value != blank and mf.gift_strength.value != blank and mf.gift_why.value != blank -%}
+                    {%- assign tagged_here = tagged_here | plus: 1 -%}
+                    {% render 'gift-pick-card', product: product, show_ready: settings.gift_show_ready %}
+                  {%- endif -%}
+                {%- endfor -%}
+                {%- if paginate.next -%}
+                  <li class="gp-next" data-next-url="{{ paginate.next.url }}" hidden></li>
+                {%- endif -%}
+              {%- endpaginate -%}
+            {%- endif -%}
+          </ol>
+
+          <div class="gf__compare-bar" data-compare-bar hidden>
+            <button type="button" class="button gf__compare-go" data-action="compare" disabled></button>
+          </div>
+
+          <section class="gf__compare" data-compare-panel hidden aria-labelledby="gf-compare-title-{{ section.id }}" tabindex="-1">
+            <h2 class="gf__results-title" id="gf-compare-title-{{ section.id }}">{{ 'gift_finder.compare_heading' | t }}</h2>
+            <div class="gf__table-wrap" data-compare-table></div>
+            <p class="gf__verdict" data-verdict></p>
+            <button type="button" class="gf__link" data-action="close-compare">{{ 'gift_finder.compare_close' | t }}</button>
+          </section>
+        </div>
+
+        {%- if request.design_mode -%}
+          <p class="gf__editor-note">
+            {%- if collection == blank -%}
+              Choose a collection (or create one with the handle "gift-finder") that holds the products you tag.
+            {%- else -%}
+              {{ 'gift_finder.editor_count' | t: tagged: tagged_here, total: total_here }}
+            {%- endif -%}
+          </p>
+        {%- endif -%}
+      {%- endif -%}
+
+      <script type="application/json" data-i18n>
+        {
+          "found_one": {{ 'gift_finder.found_one' | t | json }},
+          "found_other": {{ 'gift_finder.found_other' | t | json }},
+          "found_safest": {{ 'gift_finder.found_safest' | t | json }},
+          "nothing_tagged": {{ 'gift_finder.nothing_tagged' | t | json }},
+          "compare_button": {{ 'gift_finder.compare_button' | t | json }},
+          "compare_max": {{ 'gift_finder.compare_max' | t | json }},
+          "compare_caption": {{ 'gift_finder.compare_caption' | t | json }},
+          "compare_fragrance": {{ 'gift_finder.compare_fragrance' | t | json }},
+          "row_order": ["price", "feel", "strength", "moment", "why", "ready"],
+          "rows": {
+            "price": {{ 'gift_finder.rows.price' | t | json }},
+            "feel": {{ 'gift_finder.rows.feel' | t | json }},
+            "strength": {{ 'gift_finder.rows.strength' | t | json }},
+            "moment": {{ 'gift_finder.rows.moment' | t | json }},
+            "why": {{ 'gift_finder.rows.why' | t | json }},
+            "ready": {{ 'gift_finder.rows.ready' | t | json }}
+          },
+          "verdict_similar": {{ 'gift_finder.verdict_similar' | t | json }},
+          "verdict_same_strength": {{ 'gift_finder.verdict_same_strength' | t | json }},
+          "verdict_part": {{ 'gift_finder.verdict_part' | t | json }},
+          "verdict_item": {{ 'gift_finder.verdict_item' | t | json }},
+          "verdict_lightest": {{ 'gift_finder.verdict_lightest' | t | json }},
+          "verdict_strongest": {{ 'gift_finder.verdict_strongest' | t | json }},
+          "verdict_middle": {{ 'gift_finder.verdict_middle' | t | json }}
+        }
+      </script>
+    </gift-finder>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "MOMENTS gift finder",
+  "tag": "div",
+  "settings": [
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "Layout",
+      "options": [
+        { "value": "strip", "label": "Strip (homepage)" },
+        { "value": "page", "label": "Full page with results" }
+      ],
+      "default": "strip"
+    },
+    { "type": "text", "id": "heading", "label": "Heading", "info": "Leave empty for the default wording." },
+    { "type": "textarea", "id": "intro", "label": "Intro text", "info": "Leave empty for the default wording (page layout only when empty)." },
+    {
+      "type": "page",
+      "id": "results_page",
+      "label": "Results page (strip)",
+      "info": "The page that holds the full gift finder. Leave empty to use /pages/gift-finder."
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Tagged products (page)",
+      "info": "A collection holding the products you tagged with the gift metafields. Leave empty to use the collection with the handle \"gift-finder\"."
+    },
+    {
+      "type": "range",
+      "id": "max_picks",
+      "label": "Most picks to show",
+      "min": 1,
+      "max": 3,
+      "step": 1,
+      "default": 3
+    }
+  ],
+  "presets": [
+    {
+      "name": "MOMENTS gift finder",
+      "settings": { "layout": "strip" }
+    }
+  ]
+}
+{% endschema %}

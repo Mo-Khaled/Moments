@@ -1,0 +1,14 @@
+{
+  "sections": {
+    "gift_finder": {
+      "type": "gift-finder",
+      "settings": {
+        "layout": "page",
+        "max_picks": 3
+      }
+    }
+  },
+  "order": [
+    "gift_finder"
+  ]
+}

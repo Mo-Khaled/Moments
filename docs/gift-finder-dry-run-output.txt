@@ -1,0 +1,13 @@
+== Metafield definitions that would be created (namespace "moments", products) ==
+  moments.gift_feel  single_line_text_field  choices=["fresh","warm","sweet","woody","clean"]
+  moments.gift_strength  number_integer  min=1 max=5
+  moments.gift_who  list.single_line_text_field  choices=["her","him","mother","father","friend","colleague","partner"]
+  moments.gift_occasion  list.single_line_text_field  choices=["birthday","anniversary","eid","thank_you","wedding","new_baby"]
+  moments.gift_safe  boolean  (no validation)
+  moments.gift_why  single_line_text_field  max=90
+  moments.gift_ready  boolean  (no validation)
+
+== Product values that would be written (metafieldsSet) ==
+
+Summary: 50 rows, 0 ready to write, 50 left empty (excluded from the gift finder), 0 with problems.
+DRY RUN: nothing was sent to the store.

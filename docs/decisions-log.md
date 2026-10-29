@@ -101,3 +101,13 @@ Each entry: decision, alternatives, why, how to revert.
 - Cart type: switched from "drawer" to "page" in settings_data.json on staging; with the page type a shopper stays where they are and nothing confirmed the add, so a toast was added (assets/moment-toast.js, snippets/moment-toast.liquid): "Added to cart", View cart and Check out, 5 seconds, paused on hover or focus, Escape closes, never takes focus, shown only for adds (CartAddEvent), only when the cart type is page.
 - Not built: the 5-second undo after removing a line (the theme removes and re-renders; an undo needs its own cart mutation flow) and grouping of bundle lines (the bundle builder adds plain lines with no bundle property to group by). Both are listed as follow-ups.
 - Fixed on the way: the summary card carried the theme's "extend to the page edge" padding; at 320px the discount row made the page 34px wider than the screen (grid column and min-width fixed).
+
+## 2026-10-29: Gift finder data (how the picks are loaded)
+- Options weighed: (a) Section Rendering API over a Liquid loop, (b) a prebuilt JSON of tagged products, (c) Storefront metafield filters.
+- Liquid cannot filter ~1,000 products by metafield in one render, and (c) needs the metafields enabled as filters in Search & Discovery (a store change) plus one request per combination. Embedding the whole catalogue as JSON is ruled out.
+- Chosen: the page renders only the TAGGED products of one curated collection (default handle `gift-finder`), as real cards (50 per page; later pages fetched once with the Section Rendering API when someone taps "Show picks"); the browser filters them on data attributes. Lighter than JSON + client templates because the cards are the theme's own markup (same add-to-cart form, prices formatted by Liquid) and nothing has to be rebuilt in JS; with 50 tagged products the extra HTML is about 15 KB compressed and the images are lazy inside hidden items (not fetched).
+- The homepage strip embeds no product data at all: it sends the choices to the page in the URL.
+- Untagged products (no feel, strength or reason) are never rendered; sold-out products are left out of gift picks.
+- Multi-variant products show "Choose size" (link to the product) instead of adding a size the buyer did not pick.
+- Verdict wording: the example "lasts longer" was not used, because the data holds strength, not longevity; the sentence speaks only of strength and feel.
+- Homepage strip ships hidden (`disabled` in index.json): with no product tagged yet it would lead to an empty page.

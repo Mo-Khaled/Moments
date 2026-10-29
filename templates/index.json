@@ -516,6 +516,13 @@
         "link_url": "/pages/moments"
       }
     },
+    "gift_strip": {
+      "type": "gift-finder",
+      "disabled": true,
+      "settings": {
+        "layout": "strip"
+      }
+    },
     "moments_brands": {
       "type": "moments-brand-marquee",
       "blocks": {
@@ -641,6 +648,7 @@
     "moments_hero",
     "moments_brands",
     "moments_shop",
+    "gift_strip",
     "product_list_CYd9gQ",
     "moments_gift",
     "moments_story",

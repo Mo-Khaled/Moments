@@ -1,0 +1,187 @@
+{%- doc -%}
+  One gift pick: a bordered card (same border, radius and surface as the product cards) with the bottle image, the name, the brand,
+  the price, an "Easy to like" badge only when moments.gift_safe is true, and the plain rows Feels, Strength, Best moment, Why this one
+  (and Gift-ready only when the theme setting is on and the product is tagged true).
+
+  The data attributes feed assets/gift-finder.js (filtering and the comparison table). The product must already have passed the
+  "tagged" test in sections/gift-finder.liquid (feel, strength and a reason present); this snippet never guesses a missing value.
+  Add to cart is the theme's own product-form-component, so the cart drawer or page, the toast and the cart count behave as everywhere else.
+
+  @param {object} product - The product.
+  @param {boolean} [show_ready] - Show the Gift-ready row (only when the product is tagged true).
+
+  @example
+  {% render 'gift-pick-card', product: product, show_ready: settings.gift_show_ready %}
+{%- enddoc -%}
+
+{%- liquid
+  assign mf = product.metafields.moments
+  assign feel = mf.gift_feel.value
+  assign strength = mf.gift_strength.value | plus: 0
+  assign why = mf.gift_why.value
+  assign who_list = mf.gift_who.value | join: ' '
+  assign occasion_list = mf.gift_occasion.value | join: ' '
+  assign is_safe = mf.gift_safe.value
+  assign is_ready = mf.gift_ready.value
+  assign variant = product.selected_or_first_available_variant
+  assign price_le = variant.price | divided_by: 100.0 | round
+  assign feel_label_key = 'gift_finder.feel.' | append: feel
+  assign strength_key = 'gift_finder.strength.' | append: strength
+  assign strength_word = strength_key | t
+  assign feel_label = feel_label_key | t
+
+  comment
+    Best moment: same rule as snippets/product-card-meta.liquid (the first handle of the "Moment collections" setting the product is in).
+  endcomment
+  assign moment_key = ''
+  assign moment_label = ''
+  if settings.moments_handles != blank
+    assign handles = settings.moments_handles | split: ','
+    for handle in handles
+      assign handle = handle | strip
+      assign hit = product.collections | where: 'handle', handle | first
+      if hit != blank
+        assign moment_key = handle | remove: '-moment' | replace: '-', '_'
+        assign label_key = 'moments.' | append: moment_key
+        assign moment_label = label_key | t
+        if moment_label contains 'translation missing'
+          assign moment_label = hit.title
+          assign moment_key = ''
+        endif
+        break
+      endif
+    endfor
+  endif
+  assign mark_name = moment_key | remove: '_'
+
+  assign can_add = false
+  if variant.available and product.variants.size == 1
+    assign can_add = true
+  endif
+  assign shown_ready = false
+  if show_ready and is_ready
+    assign shown_ready = true
+  endif
+-%}
+
+<li
+  class="gp-item"
+  data-gift-pick
+  data-handle="{{ product.handle }}"
+  data-title="{{ product.title | escape }}"
+  data-who="{{ who_list }}"
+  data-occasion="{{ occasion_list }}"
+  data-price="{{ price_le }}"
+  data-safe="{{ is_safe | default: false }}"
+  data-feel="{{ feel }}"
+  data-strength="{{ strength }}"
+  data-feel-label="{{ feel_label | escape }}"
+  data-strength-word="{{ strength_word | escape }}"
+  hidden
+>
+  <article
+    class="gp-card{% if moment_key != blank %} gp-card--tone{% endif %}"
+    {% if moment_key != blank %}style="--gp-soft: var(--moment-{{ mark_name }}-soft); --gp-soft-ink: var(--moment-{{ mark_name }}-soft-ink);"{% endif %}
+  >
+    <div class="gp-card__frame">
+      {%- if product.featured_media -%}
+        <a class="gp-card__image-link" href="{{ product.url }}" tabindex="-1" aria-hidden="true">
+          {{- product.featured_media.preview_image | image_url: width: 640 | image_tag: loading: 'lazy', alt: product.featured_media.alt | default: product.title, widths: '240, 360, 480, 640', sizes: '(min-width: 990px) 28vw, 80vw', class: 'gp-card__image' -}}
+        </a>
+      {%- endif -%}
+      {%- if is_safe -%}
+        <span class="gp-card__badge">{{ 'gift_finder.easy_to_like' | t }}</span>
+      {%- endif -%}
+    </div>
+
+    <div class="gp-card__body">
+      <p class="gp-card__brand">{{ product.vendor }}</p>
+      <h3 class="gp-card__title"><a href="{{ product.url }}">{{ product.title }}</a></h3>
+      <p class="gp-card__price" data-row="price">
+        {%- if variant.compare_at_price > variant.price -%}
+          <s class="gp-card__was">{{ variant.compare_at_price | money }}</s>
+          <span class="gp-card__now gp-card__now--sale">{{ variant.price | money }}</span>
+        {%- else -%}
+          <span class="gp-card__now">{{ variant.price | money }}</span>
+        {%- endif -%}
+      </p>
+
+      <dl class="gp-rows">
+        <div class="gp-row" data-row="feel">
+          <dt>{{ 'gift_finder.rows.feel' | t }}</dt>
+          <dd>
+            <svg class="gp-glyph" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true" focusable="false"><use href="#gf-feel-{{ feel }}"></use></svg>
+            <span>{{ feel_label }}</span>
+          </dd>
+        </div>
+        <div class="gp-row" data-row="strength">
+          <dt>{{ 'gift_finder.rows.strength' | t }}</dt>
+          <dd>
+            <span class="gp-bar" role="img" aria-label="{{ 'gift_finder.strength_aria' | t: word: strength_word, level: strength }}">
+              {%- for step in (1..5) -%}
+                <span class="gp-bar__step{% if step <= strength %} is-on{% endif %}"></span>
+              {%- endfor -%}
+            </span>
+            <span>{{ strength_word }}</span>
+          </dd>
+        </div>
+        {%- if moment_label != blank -%}
+          <div class="gp-row" data-row="moment">
+            <dt>{{ 'gift_finder.rows.moment' | t }}</dt>
+            <dd>
+              {%- if moment_key != blank -%}
+                <span class="gp-moment">{% render 'moment-mark', mark: mark_name %}<span>{{ moment_label }}</span></span>
+              {%- else -%}
+                <span>{{ moment_label }}</span>
+              {%- endif -%}
+            </dd>
+          </div>
+        {%- endif -%}
+        <div class="gp-row" data-row="why">
+          <dt>{{ 'gift_finder.rows.why' | t }}</dt>
+          <dd>{{ why | escape }}</dd>
+        </div>
+        {%- if shown_ready -%}
+          <div class="gp-row" data-row="ready">
+            <dt>{{ 'gift_finder.rows.ready' | t }}</dt>
+            <dd>{{ 'gift_finder.ready_yes' | t }}</dd>
+          </div>
+        {%- endif -%}
+      </dl>
+
+      <label class="gp-card__compare" data-compare-label hidden>
+        <input type="checkbox" data-compare value="{{ product.handle }}" aria-label="{{ 'gift_finder.compare_tick_for' | t: title: product.title }}">
+        <span>{{ 'gift_finder.compare_tick' | t }}</span>
+      </label>
+
+      <div class="gp-card__actions">
+        {%- if can_add -%}
+          <product-form-component
+            data-section-id="{{ section.id }}"
+            data-product-id="{{ product.id }}"
+            on:submit="/handleSubmit"
+            class="gp-card__form"
+          >
+            <div class="visually-hidden" aria-live="assertive" role="status" aria-atomic="true" ref="liveRegion"></div>
+            {%- form 'product', product, novalidate: 'novalidate', data-type: 'add-to-cart-form' -%}
+              <input type="hidden" name="id" ref="variantId" value="{{ variant.id }}">
+              <input type="hidden" name="quantity" value="1">
+              {%- assign add_text = 'gift_finder.add_to_cart' | t -%}
+              {% render 'add-to-cart-button',
+                add_to_cart_text: add_text,
+                class: 'gp-card__add',
+                can_add_to_cart: true,
+                product: product
+              %}
+            {%- endform -%}
+          </product-form-component>
+          <a class="gp-card__details" href="{{ product.url }}">{{ 'gift_finder.view_details' | t }}</a>
+        {%- else -%}
+          <a class="button gp-card__add" href="{{ product.url }}">
+            {%- if variant.available -%}{{ 'gift_finder.choose_size' | t }}{%- else -%}{{ 'gift_finder.view_details' | t }}{%- endif -%}
+          </a>
+        {%- endif -%}
+      </div>
+    </div>
+  </article>
+</li>

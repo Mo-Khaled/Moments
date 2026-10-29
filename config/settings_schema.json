@@ -2322,6 +2322,23 @@
       },
       {
         "type": "header",
+        "content": "Gift finder"
+      },
+      {
+        "type": "text",
+        "id": "gift_budget_bands",
+        "label": "Gift finder budget limits (LE)",
+        "info": "Up to three numbers in LE, comma-separated and rising, for example 1000,2000,3500. They make four bands: under 1000, 1000 to 2000, 2000 to 3500, over 3500. Leave empty to hide the budget row."
+      },
+      {
+        "type": "checkbox",
+        "id": "gift_show_ready",
+        "label": "Show the \"Gift-ready\" row on gift finder cards",
+        "info": "Only turn this on once you have confirmed what \"gift-ready\" means for your products and tagged them (moments.gift_ready). Nothing is claimed about gift wrapping or boxes.",
+        "default": false
+      },
+      {
+        "type": "header",
         "content": "About menu (header) and footer"
       },
       {

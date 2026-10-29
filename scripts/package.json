@@ -1,1 +1,1 @@
-{"name":"moments-theme-checks","private":true,"description":"Dev-only checks, not part of the theme","scripts":{"tiles":"node check-tiles.mjs"},"devDependencies":{"@axe-core/playwright":"^4.14.0","lighthouse":"^13.5.0","playwright-core":"^1.49.1"}}
+{"name":"moments-theme-checks","private":true,"description":"Dev-only checks, not part of the theme","scripts":{"tiles":"node check-tiles.mjs"},"devDependencies":{"@axe-core/playwright":"^4.14.0","lighthouse":"^13.5.0","liquidjs":"^10.30.1","playwright-core":"^1.49.1"}}
