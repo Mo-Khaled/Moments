@@ -45,3 +45,9 @@ Pushed: snippets/product-card-badges.liquid (Save label: solid berry pill, pearl
 
 ### 2026-10-27 cursor follower removed (live, smoke passed)
 layout/theme.liquid no longer renders the moment-cursor companion (the circle that followed the pointer). The pointer images (moment-pointer) stay. snippets/moment-cursor.liquid deleted from the repo; the unused copy remains on the live theme (no deletions pushed).
+
+### 2026-10-29 gift finder (live, smoke passed twice)
+Pulled live first: templates/index.json, locales/en.default.json, config/settings_schema.json equal to the last commit (no editor drift). Commit 52e6833 (branch gift-finder).
+1. sections/gift-finder.liquid, snippets/gift-pick-card.liquid, assets/gift-finder.js, assets/gift-finder.css, locales/en.default.json, config/settings_schema.json (new settings: gift budget limits, Gift-ready toggle default off). Checks: theme check 0 errors and no offence in these files; scripts/check-gift-finder.mjs (local render with sample values, 390/768/1440, RTL, keyboard, axe, no-JS) PASSED. Smoke PASSED.
+2. templates/page.gift-finder.json (new), templates/index.json (adds `gift_strip` after the moment tiles with `"disabled": true`, nothing else changed). Smoke PASSED. Checked: /pages/about-us?view=gift-finder renders the finder and says "No fragrances are ready for the gift finder yet." (no product is tagged); the homepage renders no strip, so its HTML and Lighthouse numbers are unchanged.
+Rollback: the strip is already hidden; push the previous templates/index.json (`git show 52e6833^:templates/index.json`) if the section entry itself must go. The other files are inert while no page uses page.gift-finder.
