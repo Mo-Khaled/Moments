@@ -13,9 +13,10 @@ const chrome = await launch({ chromePath: process.env.CHROME_PATH || undefined, 
 const rows = [];
 const md = [`# Performance ${TAG}${DESKTOP ? ' (desktop)' : ' (mobile, slow 4G, 4x CPU)'}`, '', `Lighthouse on https://momentseg.com, ${new Date().toISOString().slice(0, 10)}. Scores vary a few points run to run.`, '', '| page | perf | LCP | TBT | CLS | FCP | transferred | requests | JS | images |', '|---|---|---|---|---|---|---|---|---|---|'];
 for (const path of PAGES) {
-  const r = await lighthouse(`https://momentseg.com${path}?pb=0${process.env.PREVIEW ? '&preview_theme_id=' + process.env.PREVIEW : ''}`, { port: chrome.port, output: 'json', logLevel: 'error', onlyCategories: ['performance'], formFactor: DESKTOP ? 'desktop' : 'mobile', screenEmulation: DESKTOP ? { mobile: false, width: 1350, height: 940, deviceScaleFactor: 1, disabled: false } : undefined, throttlingMethod: 'simulate', blockedUrlPatterns: ['*kaspersky*', '*kis.v2.scr*'] });
+  const r = await lighthouse(`https://momentseg.com${path}${path.includes('?') ? '&' : '?'}pb=0${process.env.PREVIEW ? '&preview_theme_id=' + process.env.PREVIEW : ''}`, { port: chrome.port, output: 'json', logLevel: 'error', onlyCategories: ['performance'], formFactor: DESKTOP ? 'desktop' : 'mobile', screenEmulation: DESKTOP ? { mobile: false, width: 1350, height: 940, deviceScaleFactor: 1, disabled: false } : undefined, throttlingMethod: 'simulate', blockedUrlPatterns: ['*kaspersky*', '*kis.v2.scr*'] });
   const lhr = r.lhr; const a = lhr.audits;
-  const net = a['network-requests'].details.items;
+  // a run that times out has no request list; report the timing metrics anyway
+  const net = a['network-requests']?.details?.items || [];
   const byType = (t) => net.filter((x) => x.resourceType === t).reduce((s, x) => s + (x.transferSize || 0), 0);
   const total = net.reduce((s, x) => s + (x.transferSize || 0), 0);
   const kb = (n) => (n / 1024).toFixed(0) + ' KB';

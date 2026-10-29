@@ -1,5 +1,6 @@
 // Quick hover-and-leave on "Shop by Moment" (the owner's report 2026-10-29: a cropped strip of moment tiles stays under the header).
-// For each dwell time, hover the link, then move the pointer DOWN through the panel area into the page, wait, and record what is still painted.
+// For each dwell time, hover the link, leave fast (down through the panel to the page, or up out of the header), wait, and record what is
+// still painted. The cause was the tiles staying opaque while the panel's clip ran back to zero (fixed in snippets/moments-mega.liquid).
 //   node scripts/check-menu-quick-leave.mjs [--base https://momentseg.com] [--trials 3]
 import { chromium } from 'playwright-core';
 const arg = (n, d) => { const i = process.argv.indexOf('--' + n); return i > -1 ? process.argv[i + 1] : d; };
@@ -28,7 +29,8 @@ for (const dwell of [0, 30, 60, 100, 150, 220, 300, 400]) {
     await page.mouse.move(box.x + box.width / 2, box.y + box.height / 2, { steps: 2 });
     await page.waitForTimeout(dwell);
     // leave fast: down through the panel area to below it (900px, the panel ends near 620px), or up out of the window edge of the header
-    const exits = [[box.x + box.width / 2 + 40, 900], [box.x + 600, 2], [box.x + box.width / 2, box.y + box.height + 12], [box.x + box.width / 2 + 200, box.y + box.height + 30], [box.x + box.width / 2, box.y + box.height + 60]];
+    // (resting ON the open panel keeps it open on purpose, so every exit ends outside the panel)
+    const exits = [[box.x + box.width / 2 + 40, 900], [box.x + 600, 2]];
     const exit = exits[t % exits.length];
     await page.mouse.move(exit[0], exit[1], { steps: 4 });
     await page.waitForTimeout(1500);
