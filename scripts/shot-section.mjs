@@ -9,6 +9,6 @@ await ctx.route(/kaspersky-labs|shopifysvc|monorail/, (r) => r.abort());
 const p = await ctx.newPage();
 await p.goto(`https://momentseg.com/?pb=0${THEME ? '&preview_theme_id=' + THEME : ''}`, { waitUntil: 'domcontentloaded' }); await p.waitForTimeout(3500);
 const el = p.locator(sel).first(); await el.scrollIntoViewIfNeeded(); await p.waitForTimeout(900);
-await p.addStyleTag({ content: 'moment-cursor{display:none!important} #header-group,header-component{position:static!important}' });
+await p.addStyleTag({ content: '#header-group,header-component{position:static!important}' });
 await el.screenshot({ path: out });
 await b.close();

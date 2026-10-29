@@ -13,7 +13,7 @@ All checks run against the live storefront (https://momentseg.com); add `--theme
 | `check-card-layout.mjs`, `check-card-matrix.mjs` | Product cards on every placement; text area across browsers and conditions |
 | `check-mobile-menu.mjs` | The phone menu sheet at 320 to 700px, LTR and RTL, Chromium and WebKit |
 | `check-menu-hover.mjs` | The desktop mega menu never stays open after the pointer leaves |
-| `check-pointer.mjs`, `build-cursors.mjs` | The custom pointer; builds the cursor PNGs from `assets/cursor-*.svg` |
+| `check-pointer.mjs`, `build-cursors.mjs` | The custom pointer (arrow and hand) and no cursor follower; builds the cursor PNGs from `assets/cursor-*.svg` |
 | `check-gift.mjs`, `check-tiles.mjs`, `check-home.mjs`, `check-links.mjs`, `check-terms.mjs`, `check-carousel.mjs`, `check-bundle.mjs` | Gift card, moment tiles, home, links, banned terms, carousel, bundle builder |
 | `check-perf.mjs`, `analyse-weight.mjs`, `analyse-html.mjs`, `probe-idle-cpu.mjs` | Lighthouse (mobile), real bytes by owner, what makes the HTML heavy, idle CPU while a page does nothing |
 | `moment-palette.mjs` | The six moment colours from one OKLCH recipe, with contrast and distance checks (`--css` prints the tokens) |

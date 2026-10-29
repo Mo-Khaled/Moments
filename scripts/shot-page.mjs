@@ -8,6 +8,5 @@ const ctx = await b.newContext(mobile ? { ...devices['iPhone 13'] } : { viewport
 await ctx.route(/kaspersky-labs|shopifysvc|monorail/, (r) => r.abort());
 const p = await ctx.newPage();
 await p.goto(`https://momentseg.com${path}${path.includes('?') ? '&' : '?'}pb=0${THEME ? '&preview_theme_id=' + THEME : ''}`, { waitUntil: 'domcontentloaded' }); await p.waitForTimeout(4000);
-await p.addStyleTag({ content: 'moment-cursor{display:none!important}' });
 await p.screenshot({ path: out, fullPage: process.argv.includes('--full') && !mobile });
 await b.close();

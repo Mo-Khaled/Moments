@@ -48,7 +48,7 @@ for (const [ws, dir] of MODES) {
   const total0 = await page.evaluate(() => document.documentElement.scrollHeight);
   for (let y = 0; y < Math.min(total0, 12000); y += h * 0.8) { await page.evaluate((yy) => window.scrollTo({ top: yy, behavior: 'instant' }), y); await page.waitForTimeout(110); }
   await page.evaluate(() => window.scrollTo({ top: 0, behavior: 'instant' })); await page.waitForTimeout(500);
-  await page.addStyleTag({ content: '#header-group, #header-group *, .header, header-component, moment-cursor, [class*="sticky"] { position: static !important; } moment-cursor { display: none !important; } .m-announce { position: static !important; }' });
+  await page.addStyleTag({ content: '#header-group, #header-group *, .header, header-component, [class*="sticky"] { position: static !important; } .m-announce { position: static !important; }' });
   await page.waitForTimeout(300);
   const meta = await page.evaluate(() => {
     const secs = [...document.querySelectorAll('body > .shopify-section, #MainContent > .shopify-section, #header-group > .shopify-section, body > header.shopify-section')].map((e) => { const r = e.getBoundingClientRect(); return { id: e.id.replace('shopify-section-', '').slice(-26), top: Math.round(r.top + scrollY), bottom: Math.round(r.bottom + scrollY), hero: !!e.querySelector('.m-hero, .hgb, .m-brands'), chrome: e.classList.contains('shopify-section-group-header-group') }; }).filter((s) => s.bottom - s.top > 4).sort((a, b) => a.top - b.top);

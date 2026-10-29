@@ -1,5 +1,5 @@
 // Pointer checks on the live storefront: computed cursor per element type, every cursor image loads at <= 32/64px with its hotspot
-// inside, the follower token is never over the pointer tip, no layout shift. usage: node scripts/check-pointer.mjs [--site] 
+// inside, no cursor follower on the page, no layout shift. usage: node scripts/check-pointer.mjs [--site] 
 //   default: the diagnostic page /pages/about-us?view=cursor-test; --site: the real pages (needs the theme.liquid render pushed)
 import { chromium } from 'playwright-core';
 const SITE = process.argv.includes('--site');
@@ -43,17 +43,12 @@ if (SITE) {
     if (res.input && isCustom(res.input)) fail(`${path} input must stay native: ${res.input}`);
     console.log(`ok ${path}`, JSON.stringify(Object.fromEntries(Object.entries(res).map(([k, v]) => [k, v && (v.includes('url(') ? (v.includes('cursor-link') ? 'link-img' : 'default-img') : v)]))));
   }
-  // follower: the token must stay clear of the pointer tip while the mouse moves; no layout shift
+  // only the pointer images: nothing may follow the mouse (the owner removed the cursor follower for good on 2026-10-27)
   await page.goto(`${BASE}/?pb=0`, { waitUntil: 'domcontentloaded' });
   await page.waitForTimeout(2000);
-  for (const [x, y] of [[300, 300], [700, 500], [1000, 250], [500, 700]]) {
-    await page.mouse.move(x, y, { steps: 8 }); await page.waitForTimeout(900);
-    const t = await page.evaluate(() => { const el = document.querySelector('.moment-cursor__token'); if (!el) return null; const r = el.getBoundingClientRect(); return { l: r.left, t: r.top, w: r.width }; });
-    if (!t) { console.log('follower not present (setting off or hidden)'); break; }
-    const dx = t.l - x, dy = t.t - y;
-    if (dx < 10 && dy < 10 && dx + t.w > -4) fail(`follower overlaps the tip at ${x},${y}: token left ${dx.toFixed(0)}, top ${dy.toFixed(0)}`);
-    else console.log(`ok follower clear of the tip at ${x},${y} (token starts ${dx.toFixed(0)}px right, ${dy.toFixed(0)}px below)`);
-  }
+  for (const [x, y] of [[300, 300], [700, 500], [1000, 250]]) { await page.mouse.move(x, y, { steps: 8 }); await page.waitForTimeout(400); }
+  const follower = await page.evaluate(() => [...document.querySelectorAll('body *')].filter((e) => /cursor/i.test(e.tagName) || /cursor-?(token|follow|companion)/i.test(String(e.className?.baseVal ?? e.className ?? ''))).map((e) => e.tagName.toLowerCase()));
+  if (follower.length) fail(`a cursor follower is on the page: ${follower.join(', ')}`); else console.log('ok no cursor follower, pointer images only');
   const cls = await page.evaluate(() => window.__cls);
   if (cls > 0.05) fail(`layout shift ${cls.toFixed(3)}`); else console.log(`ok CLS ${cls.toFixed(3)}`);
 }

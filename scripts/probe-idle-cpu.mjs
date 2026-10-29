@@ -9,7 +9,6 @@ const VARIANTS = {
   'no CSS transitions': { css: '*,*::before,*::after{transition:none!important}' },
   'no marquee/ticker': { css: '.m-ticker__track,.m-ticker__group,.m-ticker__list,.m-ticker *{animation:none!important}' },
   'no announcement rotation': { css: '.m-announce__msg{animation:none!important}' },
-  'no cursor companion': { css: 'moment-cursor{display:none!important}', js: "document.querySelector('moment-cursor')?.remove()" },
   'no hero slides animation': { css: '.m-hero *{animation:none!important;transition:none!important}' },
   'no video': { js: "document.querySelectorAll('video').forEach(v=>{v.pause();v.removeAttribute('src');v.load()})" },
   'no moment marks gestures': { css: 'moment-mark,moment-mark *{animation:none!important}' },

@@ -70,7 +70,7 @@ Six object marks, no characters: Night (lantern with crescent), Gift (ribbon-tie
 Allowed and built: two continuous tickers (announcement bar and brand marquee; CSS transform only, pause on hover and focus,
 reversed in RTL, static under reduced motion), the hero (looping video on desktop after the poster, very slow transform-only drift
 on slides without footage, crossfade between moments), the accent takeover (colour transitions on `--m-live`), the Moment mark
-gestures, press feedback on tiles and buttons. After approval: the Moment cursor companion and the search-overlay shortcuts.
+gestures, press feedback on tiles and buttons. After approval: the search-overlay shortcuts. (No cursor follower: the owner decided against it.)
 Rules unchanged: transform, opacity and colour only; nothing moves under `prefers-reduced-motion`; no layout shift; no
 scroll-jacking; no parallax; nothing auto-advances faster than 6 s (the hero does not auto-advance at all).
 Tokens: `--m-ease: cubic-bezier(0.23, 1, 0.32, 1)`, durations 160 / 240 / 360 ms.
