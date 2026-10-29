@@ -111,3 +111,16 @@ Each entry: decision, alternatives, why, how to revert.
 - Multi-variant products show "Choose size" (link to the product) instead of adding a size the buyer did not pick.
 - Verdict wording: the example "lasts longer" was not used, because the data holds strength, not longevity; the sentence speaks only of strength and feel.
 - Homepage strip ships hidden (`disabled` in index.json): with no product tagged yet it would lead to an empty page.
+
+## 2026-10-29: Gift-box hero
+- Brand guide read (MOMENTS-Brand-Identity.pdf): patterns are tone-on-tone with their background; warm light or plum backgrounds; no glossy black or gold looks, no supplier packshot alone on white, one hero product, no heavy filters. So the box is plum with the plum-tone pattern (motif #4E2E4D, the exact colour of signature-plum.svg) rather than a nude pattern on plum, which would break the tone-on-tone rule. The bottle stands on the brand's deep plum and Night glow, never on white. The photos are unfiltered (cut out only).
+- No gold edge: the identity palette (03-Colors/moments-colors.css) has no gold, so the edge is a nude hairline.
+- The kit's pattern SVGs are 253 KB each; the hero uses a 4 KB tile built from the icon path (scripts/prepare-hero-box.py). The logo is inline (no request before first paint), the Arabic wordmark is used on Arabic pages, and the logo sits on the lid only, never on the bottle.
+- Stage colours: deep plum at the start and end (equal to the brand strip, so no seam), the Night colour as a radial glow masked off before the last rows. Pearl text on every state means no colour flip mid-scroll and no contrast dip.
+- Scroll: CSS scroll-driven animation on one registered property (--p) where supported, otherwise a 0.7 KB script writing --p (passive, rAF, only while visible). Only transform and opacity animate. will-change is on only while visible, and never opacity on the lid: Chrome then flattens the lid's 3D faces into one plane (found while building).
+- Two photos are a crossfade plus a few degrees of rotateY, not a turntable.
+- The bottle photos are 720 px squares (the bottle about 530 px tall); the cut-outs are native size and not upscaled.
+- Not swapped in: the section and a preview template are live, the homepage is unchanged.
+
+## 2026-10-29: Mega panel strip after a quick hover
+- See docs/live-pushes.md. The MOMENTS panel content now follows the theme's --submenu-content-opacity (hidden at once on close, a 160 ms fade on open).

@@ -57,3 +57,11 @@ Nothing below is guessed or invented; each item is a slot that is hidden on the 
 - **Gift-ready**: say what "gift-ready" means for your products (nothing about wrapping, boxes or cards is claimed). The row stays off until you confirm and tag `gift_ready`.
 - **Navigation**: say if the page should go into the main menu (not done).
 - **Un-hide the homepage strip** once products are tagged (it ships hidden).
+
+## Gift-box hero
+- **Approve the swap**: the hero is live only on `/?view=hero-box`. Say yes and it replaces the current hero (the old one is disabled, not deleted).
+- **Higher-resolution bottle photos**: the two 9 PM photos are 720 px; the bottle is about 530 px tall, enough for phones but soft on large screens. Ideal: 2000 px or more on the long side, on a plain light background, front and three-quarter, same distance and light.
+- **A turntable shoot** (12 to 36 angles) if you want a real rotation; today it is a two-photo crossfade.
+- **Final copy**: "Every moment has a scent." / "Gifts and fragrances, sorted by the moment you are dressing for." / "Open a moment." / "Start with 9 PM, or find your own." are drafts (locales/en.default.json, hero_box.*). Arabic lines are still to be written.
+- **A real iPhone check** of the 3D box before the swap (the Windows test browser cannot draw 3D transforms).
+- **The identity zip and the two photos** are in the repo folder but git-ignored; keep them or move them, your choice.
