@@ -4,79 +4,18 @@
 // Scenarios: strip, Wife + Anniversary, Friend + Birthday, Not sure (safest), no match, compare table, RTL, reduced motion,
 // keyboard-only flow, axe (wcag2aa incl. colour contrast). Screenshots: docs/design/gift-finder/.
 //   node scripts/check-gift-finder.mjs [--no-shots]
-import { Liquid, Tag } from 'liquidjs';
+import { ROOT, engine, css, serve } from './lib/theme-fixture.mjs';
 import { chromium } from 'playwright-core';
 import AxeBuilder from '@axe-core/playwright';
-import { createServer } from 'node:http';
-import { readFileSync, mkdirSync, existsSync } from 'node:fs';
+import { readFileSync, mkdirSync } from 'node:fs';
 import { gzipSync } from 'node:zlib';
-import { join, extname } from 'node:path';
+import { join } from 'node:path';
 
-const ROOT = new URL('..', import.meta.url).pathname.replace(/^\/(\w:)/, '$1');
 const OUT = join(ROOT, 'docs/design/gift-finder');
 const shots = !process.argv.includes('--no-shots');
 mkdirSync(OUT, { recursive: true });
 
-const stripComment = (s) => s.replace(/^﻿?\s*\/\*[\s\S]*?\*\//, '');
-const en = JSON.parse(stripComment(readFileSync(join(ROOT, 'locales/en.default.json'), 'utf8')));
-const lookup = (key) => key.split('.').reduce((o, k) => (o == null ? o : o[k]), en);
 
-const engine = new Liquid({ root: [join(ROOT, 'sections'), join(ROOT, 'snippets')], extname: '.liquid', dynamicPartials: true, jsTruthy: false });
-const css = [];
-// liquidjs passes keyword args as [key, value] pairs after the input
-engine.registerFilter('t', function (key, ...pairs) {
-  const args = Object.fromEntries(pairs.filter(Array.isArray));
-  const s = lookup(key);
-  if (typeof s !== 'string') return `translation missing: ${key}`;
-  return s.replace(/\{\{\s*(\w+)\s*\}\}/g, (m, k) => (k in args ? args[k] : m));
-});
-engine.registerFilter('image_url', (img, ...pairs) => (img && img.src) || '');
-engine.registerFilter('image_tag', (src, ...pairs) => {
-  const a = Object.fromEntries(pairs.filter(Array.isArray));
-  return `<img src="${src}" alt="${a.alt ?? ''}" class="${a.class ?? ''}" loading="${a.loading ?? 'lazy'}" width="640" height="640">`;
-});
-engine.registerFilter('money', (cents) => `LE ${(Number(cents) / 100).toLocaleString('en-US', { minimumFractionDigits: 2 })}`);
-engine.registerFilter('json', (v) => JSON.stringify(v));
-engine.registerFilter('asset_url', (f) => `/assets/${f}`);
-engine.registerFilter('stylesheet_tag', (u) => `<link rel="stylesheet" href="${u}">`);
-engine.registerFilter('inline_asset_content', (f) => readFileSync(join(ROOT, 'assets', f), 'utf8'));
-const block = (render) =>
-  class extends Tag {
-    constructor(token, remain, liquid, parser) {
-      super(token, remain, liquid);
-      this.tpl = [];
-      const name = token.name;
-      const stream = parser.parseStream(remain).on(`tag:end${name}`, () => stream.stop()).on('template', (t) => this.tpl.push(t)).on('end', () => { throw new Error(`${name} not closed`); });
-      stream.start();
-    }
-    *render(ctx, emitter) {
-      const html = yield this.liquid.renderer.renderTemplates(this.tpl, ctx);
-      emitter.write(render(html, ctx));
-    }
-  };
-// schema, doc, stylesheet and javascript bodies are raw text (doc examples contain {% render %} tags that must not run)
-const raw = (render) =>
-  class extends Tag {
-    constructor(token, remain, liquid) {
-      super(token, remain, liquid);
-      this.text = '';
-      while (remain.length) {
-        const t = remain.shift();
-        if (t.name === `end${token.name}`) return;
-        this.text += t.getText();
-      }
-      throw new Error(`${token.name} not closed`);
-    }
-    render(ctx, emitter) {
-      emitter.write(render(this.text));
-    }
-  };
-engine.registerTag('schema', raw(() => ''));
-engine.registerTag('doc', raw(() => ''));
-engine.registerTag('stylesheet', raw((h) => (css.push(h), '')));
-engine.registerTag('javascript', raw(() => ''));
-engine.registerTag('form', block((h) => `<form method="post" action="/cart/add">${h}</form>`));
-engine.registerTag('paginate', block((h) => h));
 
 // ---------- sample data (local only) ----------
 const swatch = (hue) => `data:image/svg+xml,${encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640"><rect width="640" height="640" fill="#fffdfb"/><rect x="250" y="120" width="140" height="60" rx="10" fill="hsl(${hue} 30% 40%)"/><rect x="200" y="180" width="240" height="340" rx="40" fill="hsl(${hue} 40% 70%)"/></svg>`)}`;
@@ -118,15 +57,8 @@ const pages = {
   '/rtl/strip': await page('strip', { dir: 'rtl' }),
   '/ready/pages/gift-finder': await page('page', { ready: true }),
 };
-const types = { '.css': 'text/css', '.js': 'text/javascript', '.svg': 'image/svg+xml', '.woff2': 'font/woff2' };
-const server = createServer((req, res) => {
-  const url = new URL(req.url, 'http://x');
-  if (pages[url.pathname]) return res.writeHead(200, { 'content-type': 'text/html' }).end(pages[url.pathname]);
-  const file = join(ROOT, url.pathname);
-  if (url.pathname.startsWith('/assets/') && existsSync(file)) return res.writeHead(200, { 'content-type': types[extname(file)] || 'application/octet-stream' }).end(readFileSync(file));
-  res.writeHead(404).end('not found');
-}).listen(0);
-const BASE = `http://127.0.0.1:${server.address().port}`;
+const server = serve(pages);
+const BASE = server.base;
 
 let bad = 0;
 const ok = (cond, msg) => { console.log(cond ? 'ok  ' : 'FAIL', msg); if (!cond) bad++; };

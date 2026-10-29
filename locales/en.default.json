@@ -362,6 +362,16 @@
     "fresh": "Fresh",
     "love": "Love"
   },
+  "hero_box": {
+    "label": "Welcome",
+    "headline_1": "Every moment has a scent.",
+    "line_1": "Gifts and fragrances, sorted by the moment you are dressing for.",
+    "headline_2": "Open a moment.",
+    "headline_3": "Start with 9 PM, or find your own.",
+    "shop_gifts": "Shop gifts",
+    "find_moment": "Find your moment",
+    "bottle_alt": "{{ title }} by {{ brand }}, rising out of a MOMENTS gift box"
+  },
   "gift_finder": {
     "strip_title": "Find a gift in 3 taps",
     "page_heading": "Find the right gift",

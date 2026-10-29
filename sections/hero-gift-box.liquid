@@ -1,0 +1,260 @@
+{%- comment -%}
+  Homepage hero: a MOMENTS gift box that opens on scroll while one bottle rises out of it (docs/hero-gift-box.md).
+
+  First paint is the static poster: the closed box (CSS faces, the pattern, the logo inline), the first headline and the two buttons,
+  all in the HTML and CSS, so nothing waits for a script or an image and nothing shifts. The bottle photos load after, at low priority.
+  Scroll linking: a tall track with a sticky stage and one progress value --p (0 to 1). CSS scroll-driven animations where supported;
+  otherwise assets/hero-gift-box.js writes --p from the scroll position (passive listener, one rAF per frame, only while visible).
+  Every moving part reads --p: transform and opacity only. Reduced motion or the setting off: --p is 1 (open box, last headline), no track.
+  Phones: no tilt, the lid lifts and the bottle rises with simple translate and scale.
+  Two photos exist (front and three-quarter), so the bottle crossfades between them with a few degrees of rotateY. It is not a turntable.
+{%- endcomment -%}
+
+{%- liquid
+  assign product = section.settings.product
+  if product == blank
+    assign product = all_products['9-pm-night-out']
+  endif
+
+  assign headline_1 = 'hero_box.headline_1' | t
+  assign line_1 = 'hero_box.line_1' | t
+  assign headline_2 = 'hero_box.headline_2' | t
+  assign headline_3 = 'hero_box.headline_3' | t
+  assign button_count = 0
+  for block in section.blocks
+    case block.type
+      when 'headline'
+        case block.settings.stage
+          when '1'
+            if block.settings.text != blank
+              assign headline_1 = block.settings.text
+            endif
+            if block.settings.line != blank
+              assign line_1 = block.settings.line
+            endif
+          when '2'
+            if block.settings.text != blank
+              assign headline_2 = block.settings.text
+            endif
+          when '3'
+            if block.settings.text != blank
+              assign headline_3 = block.settings.text
+            endif
+        endcase
+      when 'button'
+        assign button_count = button_count | plus: 1
+    endcase
+  endfor
+
+  assign gifts_url = collections['gifts'].url | default: routes.all_products_collection_url
+  assign moments_url = routes.root_url | append: 'pages/moments'
+
+  assign bottle_alt = product.title | default: '9 PM Night Out'
+  assign bottle_brand = product.vendor | default: 'AFNAN'
+  assign bottle_alt = 'hero_box.bottle_alt' | t: title: bottle_alt, brand: bottle_brand
+
+  assign animate = section.settings.animate
+  assign box_tone = section.settings.box_tone | default: 'plum'
+-%}
+
+{{ 'hero-gift-box.css' | asset_url | stylesheet_tag }}
+{%- if animate -%}
+  <script src="{{ 'hero-gift-box.js' | asset_url }}" type="module" fetchpriority="low"></script>
+{%- endif -%}
+
+<section
+  class="hgb hgb--{{ box_tone }}"
+  data-hgb
+  {% unless animate %}data-static{% endunless %}
+  aria-labelledby="hgb-title-{{ section.id }}"
+  style="--hgb-pattern: url('{{ 'hero-box-pattern.svg' | asset_url }}'); --hgb-logo: var(--m-{{ section.settings.logo_tone | default: 'white' }});"
+>
+  <div class="hgb__track">
+    <div class="hgb__stage">
+      <div class="hgb__glow" aria-hidden="true"></div>
+      <div class="hgb__inner m-wrap">
+        <div class="hgb__copy">
+          <div class="hgb__lines">
+            <div class="hgb__line hgb__line--1">
+              <h1 class="hgb__title" dir="auto" id="hgb-title-{{ section.id }}">{{ headline_1 }}</h1>
+              <p class="hgb__text" dir="auto">{{ line_1 }}</p>
+            </div>
+            <p class="hgb__line hgb__line--2 hgb__title" dir="auto" aria-hidden="true">{{ headline_2 }}</p>
+            <p class="hgb__line hgb__line--3 hgb__title" dir="auto" aria-hidden="true">{{ headline_3 }}</p>
+          </div>
+          <div class="hgb__actions">
+            {%- if button_count > 0 -%}
+              {%- for block in section.blocks -%}
+                {%- if block.type == 'button' and block.settings.label != blank -%}
+                  <a class="hgb-btn hgb-btn--{{ block.settings.style }}" href="{{ block.settings.link | default: '#' }}" {{ block.shopify_attributes }}>{{ block.settings.label }}</a>
+                {%- endif -%}
+              {%- endfor -%}
+            {%- else -%}
+              <a class="hgb-btn hgb-btn--primary" href="{{ gifts_url }}">{{ 'hero_box.shop_gifts' | t }}</a>
+              <a class="hgb-btn hgb-btn--secondary" href="{{ moments_url }}">{{ 'hero_box.find_moment' | t }}</a>
+            {%- endif -%}
+          </div>
+        </div>
+
+        <div class="hgb__scene">
+          <div class="hgb__ground" aria-hidden="true"></div>
+          <div class="hgb-box">
+            <div class="hgb-face hgb-face--inner-back" aria-hidden="true"></div>
+            <div class="hgb-face hgb-face--inner-floor" aria-hidden="true"></div>
+            <div class="hgb-face hgb-face--back" aria-hidden="true"></div>
+            <div class="hgb-face hgb-face--left" aria-hidden="true"></div>
+            <div class="hgb-face hgb-face--right" aria-hidden="true"></div>
+
+            <div class="hgb-bottle">
+              {%- liquid
+                assign front_image = section.settings.front_image
+                assign angle_image = section.settings.angle_image
+              -%}
+              {%- if front_image != blank -%}
+                {{ front_image | image_url: width: 600 | image_tag: class: 'hgb-bottle__img hgb-bottle__img--front', alt: bottle_alt, widths: '300, 450, 600', sizes: '(min-width: 750px) 200px, 120px', loading: 'eager', fetchpriority: 'low', decoding: 'async' }}
+              {%- else -%}
+                <img
+                  class="hgb-bottle__img hgb-bottle__img--front"
+                  src="{{ 'hero-9pm-front.webp' | asset_url }}"
+                  srcset="{{ 'hero-9pm-front-sm.webp' | asset_url }} 115w, {{ 'hero-9pm-front.webp' | asset_url }} 231w"
+                  sizes="(min-width: 750px) 200px, 120px"
+                  width="231"
+                  height="531"
+                  alt="{{ bottle_alt | escape }}"
+                  fetchpriority="low"
+                  decoding="async"
+                >
+              {%- endif -%}
+              {%- if angle_image != blank -%}
+                {{ angle_image | image_url: width: 600 | image_tag: class: 'hgb-bottle__img hgb-bottle__img--angle', alt: '', widths: '300, 450, 600', sizes: '(min-width: 750px) 200px, 120px', loading: 'eager', fetchpriority: 'low', decoding: 'async' }}
+              {%- else -%}
+                <img
+                  class="hgb-bottle__img hgb-bottle__img--angle"
+                  src="{{ 'hero-9pm-angle.webp' | asset_url }}"
+                  srcset="{{ 'hero-9pm-angle-sm.webp' | asset_url }} 113w, {{ 'hero-9pm-angle.webp' | asset_url }} 226w"
+                  sizes="(min-width: 750px) 200px, 120px"
+                  width="226"
+                  height="529"
+                  alt=""
+                  fetchpriority="low"
+                  decoding="async"
+                >
+              {%- endif -%}
+            </div>
+
+            <div class="hgb-face hgb-face--front" aria-hidden="true"></div>
+
+            <div class="hgb-lid" aria-hidden="true">
+              <div class="hgb-lid__face hgb-lid__top">{% render 'hero-box-logo' %}</div>
+              <div class="hgb-lid__face hgb-lid__under"></div>
+              <div class="hgb-lid__face hgb-lid__front">{% render 'hero-box-logo' %}</div>
+              <div class="hgb-lid__face hgb-lid__side hgb-lid__side--left"></div>
+              <div class="hgb-lid__face hgb-lid__side hgb-lid__side--right"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "MOMENTS gift-box hero",
+  "tag": "div",
+  "class": "hgb-section",
+  "limit": 1,
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "animate",
+      "label": "Open the box on scroll",
+      "info": "Off: the open box with the bottle and the last headline, no scroll animation. Visitors who ask for reduced motion always get that version.",
+      "default": true
+    },
+    {
+      "type": "product",
+      "id": "product",
+      "label": "Rising bottle (product)",
+      "info": "Used for the image description. Leave empty for 9 PM Night Out."
+    },
+    {
+      "type": "image_picker",
+      "id": "front_image",
+      "label": "Bottle, front view (transparent cut-out)",
+      "info": "A cut-out with a transparent background (no white box), the bottle filling the image. Leave empty for the 9 PM cut-out."
+    },
+    {
+      "type": "image_picker",
+      "id": "angle_image",
+      "label": "Bottle, three-quarter view (transparent cut-out)",
+      "info": "The same bottle turned about 30 degrees, same size and framing as the front view."
+    },
+    {
+      "type": "select",
+      "id": "box_tone",
+      "label": "Box colour",
+      "options": [
+        { "value": "plum", "label": "Plum" },
+        { "value": "deep", "label": "Deep plum" }
+      ],
+      "default": "plum"
+    },
+    {
+      "type": "select",
+      "id": "logo_tone",
+      "label": "Logo colour on the lid",
+      "options": [
+        { "value": "white", "label": "White" },
+        { "value": "nude", "label": "Nude" }
+      ],
+      "default": "white"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "headline",
+      "name": "Headline",
+      "settings": [
+        {
+          "type": "select",
+          "id": "stage",
+          "label": "When it shows",
+          "options": [
+            { "value": "1", "label": "1: box closed" },
+            { "value": "2", "label": "2: box opening" },
+            { "value": "3", "label": "3: box open" }
+          ],
+          "default": "1"
+        },
+        { "type": "text", "id": "text", "label": "Headline", "info": "Leave empty for the default wording." },
+        { "type": "text", "id": "line", "label": "Line below (stage 1 only)" }
+      ]
+    },
+    {
+      "type": "button",
+      "name": "Button",
+      "limit": 2,
+      "settings": [
+        { "type": "text", "id": "label", "label": "Label" },
+        { "type": "url", "id": "link", "label": "Link" },
+        {
+          "type": "select",
+          "id": "style",
+          "label": "Style",
+          "options": [
+            { "value": "primary", "label": "Primary (berry)" },
+            { "value": "secondary", "label": "Secondary (outline)" }
+          ],
+          "default": "primary"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "MOMENTS gift-box hero"
+    }
+  ]
+}
+{% endschema %}

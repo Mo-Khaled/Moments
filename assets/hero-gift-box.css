@@ -1,0 +1,613 @@
+/* Gift-box hero (sections/hero-gift-box.liquid). One progress value --p (0 closed, 1 open) drives everything; transform and opacity only.
+   Colours are theme tokens; the stage starts and ends on deep plum (--s-deep) so it meets the brand strip with no seam. */
+
+@property --p {
+  syntax: '<number>';
+  inherits: true;
+  initial-value: 0;
+}
+
+@keyframes hgb-progress {
+  from { --p: 0; }
+  to { --p: 1; }
+}
+
+.hgb {
+  --hgb-box: var(--m-plum);
+  --hgb-inside: var(--m-plum-900);
+  --hgb-edge: rgb(233 207 200 / 0.38); /* nude hairline: the box edge, no gold (the identity palette has none) */
+  position: relative;
+  isolation: isolate;
+  color: var(--m-pearl);
+  background: var(--s-deep, #251224);
+}
+
+.hgb--deep {
+  --hgb-box: var(--m-plum-900);
+  --hgb-inside: #1a0c19;
+}
+
+/* header into the hero: the same pearl fade the previous hero used; on the section, so it scrolls away with the page */
+.hgb::before {
+  content: '';
+  position: absolute;
+  inset-inline: 0;
+  inset-block-start: 0;
+  z-index: 3;
+  block-size: min(var(--blend, 200px), 22svh);
+  pointer-events: none;
+  background: linear-gradient(var(--s-pearl, #faf6f2), rgb(250 246 242 / 0));
+  background: linear-gradient(in oklab, var(--s-pearl, #faf6f2), rgb(250 246 242 / 0));
+}
+
+.hgb__track {
+  position: relative;
+  block-size: 300vh;
+  view-timeline-name: --hgb;
+  view-timeline-axis: block;
+}
+
+.hgb__stage {
+  position: sticky;
+  inset-block-start: 0;
+  block-size: 100vh;
+  block-size: 100svh;
+  overflow: clip;
+}
+
+@supports (animation-timeline: view()) {
+  .hgb:not([data-static]) .hgb__stage {
+    animation: hgb-progress linear both;
+    animation-timeline: --hgb;
+    animation-range: contain 0% contain 100%;
+  }
+}
+
+/* the Night tint: a radial glow behind the box that grows as it opens; the stage edges stay deep, so the join below never moves */
+.hgb__glow {
+  --tint: clamp(0, (var(--p) - 0.12) / 0.45, 1);
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(60% 55% at 70% 58%, var(--moment-night-field, #5f4589), transparent 72%),
+    radial-gradient(42% 40% at 70% 62%, rgb(156 107 138 / 0.55), transparent 70%);
+  opacity: calc(0.28 + 0.62 * var(--tint));
+}
+
+[dir='rtl'] .hgb__glow {
+  transform: scaleX(-1);
+}
+
+.hgb__inner {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  align-items: center;
+  gap: clamp(24px, 4vw, 64px);
+  block-size: 100%;
+  padding-block: calc(env(safe-area-inset-top, 0px) + clamp(88px, 12svh, 140px)) calc(env(safe-area-inset-bottom, 0px) + 32px);
+  box-sizing: border-box;
+}
+
+/* ---------- copy ---------- */
+.hgb__copy {
+  --s1: calc(1 - clamp(0, (var(--p) - 0.24) / 0.1, 1));
+  --s2: calc(clamp(0, (var(--p) - 0.32) / 0.1, 1) - clamp(0, (var(--p) - 0.62) / 0.1, 1));
+  --s3: clamp(0, (var(--p) - 0.7) / 0.1, 1);
+  position: relative;
+  z-index: 2;
+  display: grid;
+  gap: 28px;
+  max-inline-size: 34rem;
+}
+
+.hgb__lines {
+  display: grid;
+}
+
+.hgb__line {
+  grid-area: 1 / 1;
+  margin: 0;
+}
+
+.hgb__line--1 {
+  display: grid;
+  gap: 14px;
+  opacity: var(--s1);
+  transform: translateY(calc((1 - var(--s1)) * -12px));
+}
+
+.hgb__line--2 {
+  opacity: var(--s2);
+  transform: translateY(calc((1 - var(--s2)) * 12px));
+}
+
+.hgb__line--3 {
+  opacity: var(--s3);
+  transform: translateY(calc((1 - var(--s3)) * 12px));
+}
+
+.hgb__title {
+  margin: 0;
+  color: var(--m-pearl);
+  font-family: var(--font-heading--family, 'Marcellus', Georgia, serif);
+  font-weight: 400;
+  font-size: clamp(2rem, 4.2vw, 3.5rem);
+  line-height: 1.12;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  text-wrap: balance;
+}
+
+html[lang='ar'] .hgb__title,
+[dir='rtl'] .hgb__title:lang(ar) {
+  font-family: 'Alexandria', 'Readex Pro', sans-serif;
+  font-weight: 500;
+  letter-spacing: 0;
+  text-transform: none;
+  line-height: 1.35;
+}
+
+.hgb__text {
+  margin: 0;
+  max-inline-size: 30rem;
+  color: var(--m-nude);
+  font-size: 1.0625rem;
+  line-height: 1.6;
+}
+
+html[lang='ar'] .hgb__text {
+  line-height: 1.7;
+}
+
+.hgb__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.hgb-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-block-size: 48px;
+  padding-inline: 26px;
+  border-radius: 999px;
+  font-family: var(--font-body--family, 'Readex Pro', sans-serif);
+  font-size: 1rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background-color var(--m-dur-1, 160ms) var(--m-ease, ease), transform var(--m-dur-1, 160ms) var(--m-ease, ease);
+}
+
+.hgb-btn--primary {
+  background: var(--m-berry);
+  color: var(--m-white, #fff);
+}
+
+.hgb-btn--secondary {
+  border: 1px solid var(--m-nude);
+  color: var(--m-pearl);
+}
+
+@media (hover: hover) {
+  .hgb-btn--primary:hover {
+    background: var(--m-berry-600);
+  }
+
+  .hgb-btn--secondary:hover {
+    background: rgb(250 246 242 / 0.1);
+  }
+}
+
+.hgb-btn:active {
+  transform: scale(0.98);
+}
+
+.hgb-btn:focus-visible {
+  outline: 2px solid var(--m-pearl);
+  outline-offset: 3px;
+}
+
+/* ---------- scene and box ---------- */
+.hgb__scene {
+  --w: clamp(220px, 24vw, 340px);
+  --h: calc(var(--w) * 0.56);
+  --d: calc(var(--w) * 0.66);
+  --lip: calc(var(--h) * 0.24);
+  --lid: clamp(0, (var(--p) - 0.06) / 0.3, 1);
+  --rise: clamp(0, (var(--p) - 0.22) / 0.42, 1);
+  --turn: clamp(0, (var(--p) - 0.4) / 0.3, 1);
+  --settle: clamp(0, (var(--p) - 0.7) / 0.3, 1);
+  position: relative;
+  display: grid;
+  place-items: center;
+  block-size: 100%;
+  min-block-size: 0;
+  /* the box sits low in the scene so the rising bottle has room above it */
+  padding-block-start: calc(var(--h) * 1.5);
+  perspective: 1200px;
+  perspective-origin: 50% 20%;
+}
+
+.hgb__ground {
+  position: absolute;
+  inset-inline-start: 50%;
+  inset-block-start: calc(50% + var(--h) * 1.05);
+  inline-size: calc(var(--w) * 1.5);
+  block-size: calc(var(--h) * 0.5);
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgb(16 6 15 / 0.55), transparent);
+  transform: translateX(-50%);
+}
+
+[dir='rtl'] .hgb__ground {
+  transform: translateX(50%);
+}
+
+.hgb-box {
+  position: relative;
+  inline-size: var(--w);
+  block-size: var(--h);
+  transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d;
+  transform: translateY(calc(var(--settle) * 8px)) rotateX(-14deg) rotateY(calc(-26deg + var(--settle) * 6deg));
+}
+
+.hgb-face,
+.hgb-lid__face {
+  position: absolute;
+  box-sizing: border-box;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  background-color: var(--hgb-box);
+  background-image: var(--hgb-pattern);
+  background-size: 64px 64px;
+  box-shadow: inset 0 0 0 1px var(--hgb-edge);
+}
+
+.hgb-face {
+  inset-block-start: 50%;
+  inset-inline-start: 50%;
+}
+
+.hgb-face--front,
+.hgb-face--back,
+.hgb-face--inner-back {
+  inline-size: var(--w);
+  block-size: var(--h);
+  margin-block-start: calc(var(--h) / -2);
+  margin-inline-start: calc(var(--w) / -2);
+}
+
+.hgb-face--left,
+.hgb-face--right {
+  inline-size: var(--d);
+  block-size: var(--h);
+  margin-block-start: calc(var(--h) / -2);
+  margin-inline-start: calc(var(--d) / -2);
+  /* the side in shadow */
+  background-color: color-mix(in oklab, var(--hgb-box) 82%, #000);
+}
+
+.hgb-face--front { transform: translateZ(calc(var(--d) / 2)); }
+.hgb-face--back { transform: rotateY(180deg) translateZ(calc(var(--d) / 2)); }
+.hgb-face--right { transform: rotateY(90deg) translateZ(calc(var(--w) / 2)); }
+.hgb-face--left { transform: rotateY(-90deg) translateZ(calc(var(--w) / 2)); }
+
+.hgb-face--inner-back {
+  background: var(--hgb-inside);
+  box-shadow: none;
+  transform: translateZ(calc(var(--d) / -2 + 1px));
+}
+
+.hgb-face--inner-floor {
+  inline-size: var(--w);
+  block-size: var(--d);
+  margin-block-start: calc(var(--d) / -2);
+  margin-inline-start: calc(var(--w) / -2);
+  background: var(--hgb-inside);
+  box-shadow: none;
+  transform: rotateX(90deg) translateZ(calc(var(--h) / -2 + 1px));
+}
+
+/* the lid: a group hinged on the back top edge */
+.hgb-lid {
+  --ow: calc(var(--w) + 8px);
+  --od: calc(var(--d) + 8px);
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-start: 50%;
+  inline-size: 0;
+  block-size: 0;
+  transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d;
+  transform: translateZ(calc(var(--od) / -2)) translateY(calc(var(--lid) * -4px)) rotateX(calc(var(--lid) * 112deg));
+}
+
+.hgb-lid__top,
+.hgb-lid__under {
+  inset-block-start: 0;
+  inset-inline-start: calc(var(--ow) / -2);
+  inline-size: var(--ow);
+  block-size: var(--od);
+  transform-origin: 50% 0;
+}
+
+.hgb-lid__top {
+  display: grid;
+  place-items: center;
+  color: var(--hgb-logo, #fff);
+  transform: translateY(calc(var(--lip) * -1)) rotateX(90deg);
+}
+
+.hgb-lid__under {
+  background: var(--hgb-inside);
+  box-shadow: none;
+  transform: translateY(calc(var(--lip) * -1 + 1px)) rotateX(90deg) rotateY(180deg);
+}
+
+.hgb-lid__front {
+  inset-block-start: calc(var(--lip) * -1);
+  inset-inline-start: calc(var(--ow) / -2);
+  inline-size: var(--ow);
+  block-size: var(--lip);
+  transform: translateZ(var(--od));
+}
+
+.hgb-lid__side {
+  inset-block-start: calc(var(--lip) * -1);
+  inset-inline-start: calc(var(--od) / -2);
+  inline-size: var(--od);
+  block-size: var(--lip);
+  background-color: color-mix(in oklab, var(--hgb-box) 82%, #000);
+}
+
+.hgb-lid__side--right { transform: translateX(calc(var(--ow) / 2)) translateZ(calc(var(--od) / 2)) rotateY(90deg); }
+.hgb-lid__side--left { transform: translateX(calc(var(--ow) / -2)) translateZ(calc(var(--od) / 2)) rotateY(-90deg); }
+
+/* logical inset-inline-start flips in RTL, but 3D x is physical: pin the box internals to physical left so the box stays the same shape */
+[dir='rtl'] .hgb-face,
+[dir='rtl'] .hgb-lid {
+  inset-inline-start: auto;
+  inset-inline-end: 50%;
+}
+
+[dir='rtl'] .hgb-face--front,
+[dir='rtl'] .hgb-face--back,
+[dir='rtl'] .hgb-face--inner-back,
+[dir='rtl'] .hgb-face--inner-floor {
+  margin-inline-start: 0;
+  margin-inline-end: calc(var(--w) / -2);
+}
+
+[dir='rtl'] .hgb-face--left,
+[dir='rtl'] .hgb-face--right {
+  margin-inline-start: 0;
+  margin-inline-end: calc(var(--d) / -2);
+}
+
+[dir='rtl'] .hgb-lid__top,
+[dir='rtl'] .hgb-lid__under,
+[dir='rtl'] .hgb-lid__front {
+  inset-inline-start: auto;
+  inset-inline-end: calc(var(--ow) / -2);
+}
+
+[dir='rtl'] .hgb-lid__side {
+  inset-inline-start: auto;
+  inset-inline-end: calc(var(--od) / -2);
+}
+
+.hgb-lid__front .hgb-logo {
+  display: none;
+}
+
+.hgb-logo {
+  display: grid;
+  justify-items: center;
+  gap: 8%;
+  inline-size: 62%;
+}
+
+.hgb-logo__icon {
+  inline-size: 22%;
+  block-size: auto;
+}
+
+.hgb-logo__word {
+  inline-size: 100%;
+  block-size: auto;
+}
+
+/* the bottle: stands on the floor, rises out, turns to face the visitor and gently past it; the photo swaps front to three-quarter */
+.hgb-bottle {
+  --bh: calc(var(--h) * 1.62);
+  position: absolute;
+  inset-block-end: 0;
+  inset-inline-start: 50%;
+  inline-size: calc(var(--bh) * 0.435);
+  block-size: var(--bh);
+  margin-inline-start: calc(var(--bh) * -0.2175);
+  opacity: clamp(0, (var(--p) - 0.16) / 0.08, 1);
+  transform-origin: 50% 100%;
+  transform:
+    translateY(calc(var(--rise) * var(--h) * -1.12))
+    rotateY(calc(26deg - var(--settle) * 6deg + (var(--turn) - 0.5) * 10deg))
+    scale(calc(0.94 + var(--rise) * 0.06));
+}
+
+[dir='rtl'] .hgb-bottle {
+  inset-inline-start: auto;
+  inset-inline-end: 50%;
+  margin-inline-start: 0;
+  margin-inline-end: calc(var(--bh) * -0.2175);
+}
+
+.hgb-bottle__img {
+  position: absolute;
+  inset: 0;
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: contain;
+  object-position: 50% 100%;
+  filter: drop-shadow(0 18px 22px rgb(16 6 15 / 0.45));
+}
+
+.hgb-bottle__img--angle {
+  opacity: var(--turn);
+}
+
+.hgb-bottle__img--front {
+  opacity: calc(1 - var(--turn) * 0.999);
+}
+
+/* will-change only while the hero is on screen. Never opacity on the lid: it would flatten the lid's 3D faces into one plane. */
+.hgb.is-live .hgb-lid {
+  will-change: transform;
+}
+
+.hgb.is-live .hgb-bottle,
+.hgb.is-live .hgb__line {
+  will-change: transform, opacity;
+}
+
+/* ---------- tablet and phones ---------- */
+@media screen and (max-width: 989px) {
+  .hgb__inner {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto minmax(0, 1fr);
+    align-items: start;
+    gap: 8px;
+  }
+
+  .hgb__glow {
+    background:
+      radial-gradient(80% 50% at 50% 70%, var(--moment-night-field, #5f4589), transparent 72%),
+      radial-gradient(60% 36% at 50% 74%, rgb(156 107 138 / 0.55), transparent 70%);
+  }
+
+  .hgb__scene {
+    --w: clamp(170px, 46vw, 300px);
+  }
+}
+
+@media screen and (max-width: 749px) {
+  .hgb__track {
+    block-size: 260vh;
+  }
+
+  .hgb__inner {
+    padding-block-start: calc(env(safe-area-inset-top, 0px) + 84px);
+  }
+
+  .hgb__title {
+    font-size: clamp(1.75rem, 8vw, 2.25rem);
+  }
+
+  .hgb__text {
+    font-size: 1rem;
+  }
+
+  .hgb__copy {
+    gap: 20px;
+  }
+
+  .hgb__scene {
+    --w: clamp(160px, 52vw, 230px);
+    perspective: none;
+  }
+
+  /* no tilt on phones: the box faces the visitor, the lid lifts and leans a little, the bottle rises */
+  .hgb-box {
+    transform: translateY(calc(var(--settle) * 6px));
+  }
+
+  .hgb-lid {
+    transform: translateZ(calc(var(--od) / -2)) translateY(calc(var(--lid) * var(--h) * -1.35)) rotateX(calc(var(--lid) * 14deg));
+  }
+
+  .hgb-face--left,
+  .hgb-face--right,
+  .hgb-face--back,
+  .hgb-face--inner-floor,
+  .hgb-lid__side,
+  .hgb-lid__under {
+    display: none;
+  }
+
+  .hgb-lid__top {
+    display: none;
+  }
+
+  /* the lid seen from the front: its front band carries the logo */
+  .hgb-lid__front {
+    display: grid;
+    place-items: center;
+    block-size: calc(var(--lip) * 1.6);
+    inset-block-start: calc(var(--lip) * -1.6);
+    color: var(--hgb-logo, #fff);
+  }
+
+  .hgb-lid__front .hgb-logo {
+    display: grid;
+    grid-auto-flow: column;
+    align-items: center;
+    gap: 6%;
+    inline-size: 70%;
+  }
+
+  .hgb-lid__front .hgb-logo__icon {
+    inline-size: 14%;
+  }
+
+  .hgb-face--inner-back {
+    opacity: var(--lid);
+  }
+
+  .hgb-bottle {
+    transform: translateY(calc(var(--rise) * var(--h) * -1.05)) scale(calc(0.92 + var(--rise) * 0.08));
+  }
+
+  .hgb-bottle__img {
+    filter: drop-shadow(0 12px 14px rgb(16 6 15 / 0.45));
+  }
+}
+
+/* ---------- reduced motion and the setting off: the open box, the bottle standing out, the last headline; no track ---------- */
+.hgb[data-static] .hgb__track {
+  block-size: auto;
+}
+
+.hgb[data-static] .hgb__stage {
+  position: relative;
+  --p: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hgb__track {
+    block-size: auto;
+  }
+
+  .hgb__stage {
+    position: relative;
+    --p: 1;
+    animation: none !important;
+  }
+
+  .hgb-btn {
+    transition: none;
+  }
+}
+
+@media (forced-colors: active) {
+  .hgb::before,
+  .hgb__glow {
+    display: none;
+  }
+
+  .hgb-btn {
+    border: 1px solid ButtonText;
+  }
+}

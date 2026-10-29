@@ -56,3 +56,8 @@ docs/design/card-layout-*.md
 docs/performance/perf-*-run*.md
 scripts/.*
 lighthouse-*.json
+
+# owner inputs kept out of the repo
+MOMENTS-Identity-Full.zip
+/72.webp
+/73.webp
