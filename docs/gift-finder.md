@@ -51,7 +51,7 @@ In the theme editor the page shows "N of M products on this page are tagged" so 
 3. The metafield definition: add the new token to the `gift_who` / `gift_occasion` choices (a store change: owner approval), and to the lists at the top of `scripts/gift-metafields-dry-run.mjs`.
 
 ## Turning it on
-1. Owner approves the definitions; they are created; products are tagged and added to the `gift-finder` collection.
+1. The definitions exist (created 2026-10-29). Next: the owner fills the CSV and approves each "why" line; then the values are written, and the products are added to the `gift-finder` collection.
 2. Create a page "Gift finder" with handle `gift-finder` and template `page.gift-finder` (store change).
 3. Theme editor > Home > "MOMENTS gift finder": un-hide the section.
 4. Optional, with approval: add the page to the main navigation.

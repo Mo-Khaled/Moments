@@ -49,17 +49,17 @@ Nothing below is guessed or invented; each item is a slot that is hidden on the 
 - **Brands page template:** the new Brands page is `templates/page.page.json` and applies to the pages whose template is "page" (Brands and the placeholder "Home Page"). The old `templates/page.brands.json` is unused; it can be deleted or assigned in the admin if you prefer.
 
 ## Gift finder
-- **Approve the metafield definitions** (namespace `moments`: gift_feel, gift_strength, gift_who, gift_occasion, gift_safe, gift_why, gift_ready; see `docs/gift-finder-dry-run-output.txt`). Not created until you say yes.
+- Metafield definitions: **created 2026-10-29** with your approval (namespace `moments`, 7 definitions, pinned on the product page). No product values are written until you send the filled CSV and approve each "why" line.
 - **Tag the products**: fill `scripts/gift-metafields-template.csv` (50 rows, values empty on purpose). I validate it with the dry run and write only after your approval.
 - **Approve the wording of every "why" line** (max 90 characters, no scent notes, no "smells like").
 - **Create the `gift-finder` collection** holding the tagged products (or name another in the section settings), and the page "Gift finder" (handle `gift-finder`, template `page.gift-finder`).
 - **Budget bands**: Theme settings > MOMENTS > Gift finder > budget limits, e.g. `1000,2000,3500` (empty = no budget row).
 - **Gift-ready**: say what "gift-ready" means for your products (nothing about wrapping, boxes or cards is claimed). The row stays off until you confirm and tag `gift_ready`.
-- **Navigation**: say if the page should go into the main menu (not done).
+- **Navigation**: not in the main menu (your answer 2026-10-29: not yet).
 - **Un-hide the homepage strip** once products are tagged (it ships hidden).
 
 ## Gift-box hero
-- **Approve the swap**: the hero is live only on `/?view=hero-box`. Say yes and it replaces the current hero (the old one is disabled, not deleted).
+- **The swap**: on hold until you have tested `/?view=hero-box` on a real iPhone and an Android phone (your answer 2026-10-29). Say yes and it replaces the current hero (the old one is disabled, not deleted).
 - **Higher-resolution bottle photos**: the two 9 PM photos are 720 px; the bottle is about 530 px tall, enough for phones but soft on large screens. Ideal: 2000 px or more on the long side, on a plain light background, front and three-quarter, same distance and light.
 - **A turntable shoot** (12 to 36 angles) if you want a real rotation; today it is a two-photo crossfade.
 - **Final copy**: "Every moment has a scent." / "Gifts and fragrances, sorted by the moment you are dressing for." / "Open a moment." / "Start with 9 PM, or find your own." are drafts (locales/en.default.json, hero_box.*). Arabic lines are still to be written.

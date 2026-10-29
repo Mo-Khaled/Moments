@@ -63,3 +63,14 @@ Rollback: nothing to roll back on the homepage; to remove the preview, delete te
 Owner report: hovering "Shop by Moment" and leaving at once left a cropped strip of moment tiles under the header. Cause: the panel opens and closes by animating a clip, and the theme hides the panel content with --submenu-content-opacity, but the MOMENTS panel (snippets/moments-mega.liquid) never used it, so the tiles stayed fully painted inside the shrinking clip. Fix: .m-mega follows --submenu-content-opacity, fading in over 160 ms and disappearing at once on close. Commit (branch hero-gift-box) "fix(menu): mega panel tiles follow the theme's content opacity".
 Pushed: snippets/moments-mega.liquid. Checks on live: frame sampling every 40 ms after hovers of 20 to 140 ms: tiles at opacity 0 in all 22 closing frames; check-menu-leave (window leave, blur) ok; check-menu-hover 40 trials, nothing stuck; scripts/check-menu-quick-leave.mjs (new) ok. Smoke PASSED.
 Rollback: push the previous file (`git show HEAD~1:snippets/moments-mega.liquid`); the old behaviour returns.
+
+### 2026-10-29 store change: gift finder metafield definitions (owner approved in chat)
+Created 7 product metafield DEFINITIONS in namespace `moments` (Admin API metafieldDefinitionCreate, pinned): gift_feel (single line, choices fresh/warm/sweet/woody/clean), gift_strength (integer 1-5), gift_who (list, her/him/mother/father/friend/colleague/partner), gift_occasion (list, birthday/anniversary/eid/thank_you/wedding/new_baby), gift_safe (boolean), gift_why (single line, max 90), gift_ready (boolean). No definitions existed before. No product values written.
+Rollback: delete the definitions in Settings > Custom data > Products (no values exist yet, so nothing else is lost).
+
+### 2026-10-29 cursor follower: last traces removed (live, smoke passed)
+config/settings_schema.json: the "Moment cursor companion" setting removed (settings_data.json held no value for it). snippets/moment-cursor.liquid, unused since 2026-10-27, deleted from the live theme. Scripts and docs no longer reference it; scripts/check-pointer.mjs now fails if anything follows the mouse. check-pointer --site: arrow and hand on every page tested, inputs native, no follower, CLS 0.000. Smoke PASSED.
+Rollback: not expected; the snippet is in git history (`git show 6005df2^:snippets/moment-cursor.liquid`).
+
+### 2026-10-29 hero LCP pass (preview only, smoke passed)
+Pushed: sections/hero-gift-box.liquid, snippets/hero-box-logo.liquid (logo paths once, as symbols), snippets/hero-gift-box-styles.liquid (new: the hero's styles inline), and assets/hero-gift-box.css removed from the live theme (replaced by the inline styles). check-hero-box (Chromium) PASSED; lid logo checked on desktop, phone and RTL. Live homepage unchanged.
