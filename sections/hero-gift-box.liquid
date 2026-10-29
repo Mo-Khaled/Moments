@@ -2,7 +2,8 @@
   Homepage hero: a MOMENTS gift box that opens on scroll while one bottle rises out of it (docs/hero-gift-box.md).
 
   First paint is the static poster: the closed box (CSS faces, the pattern, the logo inline), the first headline and the two buttons,
-  all in the HTML and CSS, so nothing waits for a script or an image and nothing shifts. The bottle photos load after, at low priority.
+  all in the HTML and inline CSS, so nothing waits for a script, a stylesheet or an image and nothing shifts. The bottle photos are lazy
+  and low priority (hidden until the lid opens), so they never compete with the first paint.
   Scroll linking: a tall track with a sticky stage and one progress value --p (0 to 1). CSS scroll-driven animations where supported;
   otherwise assets/hero-gift-box.js writes --p from the scroll position (passive listener, one rAF per frame, only while visible).
   Every moving part reads --p: transform and opacity only. Reduced motion or the setting off: --p is 1 (open box, last headline), no track.
@@ -57,7 +58,8 @@
   assign box_tone = section.settings.box_tone | default: 'plum'
 -%}
 
-{{ 'hero-gift-box.css' | asset_url | stylesheet_tag }}
+{%- comment -%} The hero's CSS is inlined: a separate stylesheet was the last render-blocking request before the headline (the LCP) could paint. {%- endcomment -%}
+{% render 'hero-gift-box-styles' %}
 {%- if animate -%}
   <script src="{{ 'hero-gift-box.js' | asset_url }}" type="module" fetchpriority="low"></script>
 {%- endif -%}
@@ -69,6 +71,7 @@
   aria-labelledby="hgb-title-{{ section.id }}"
   style="--hgb-pattern: url('{{ 'hero-box-pattern.svg' | asset_url }}'); --hgb-logo: var(--m-{{ section.settings.logo_tone | default: 'white' }});"
 >
+  {%- render 'hero-box-logo', part: 'defs' -%}
   <div class="hgb__track">
     <div class="hgb__stage">
       <div class="hgb__glow" aria-hidden="true"></div>
@@ -111,7 +114,7 @@
                 assign angle_image = section.settings.angle_image
               -%}
               {%- if front_image != blank -%}
-                {{ front_image | image_url: width: 600 | image_tag: class: 'hgb-bottle__img hgb-bottle__img--front', alt: bottle_alt, widths: '300, 450, 600', sizes: '(min-width: 750px) 200px, 120px', loading: 'eager', fetchpriority: 'low', decoding: 'async' }}
+                {{ front_image | image_url: width: 600 | image_tag: class: 'hgb-bottle__img hgb-bottle__img--front', alt: bottle_alt, widths: '300, 450, 600', sizes: '(min-width: 750px) 200px, 120px', loading: 'lazy', fetchpriority: 'low', decoding: 'async' }}
               {%- else -%}
                 <img
                   class="hgb-bottle__img hgb-bottle__img--front"
@@ -121,12 +124,13 @@
                   width="231"
                   height="531"
                   alt="{{ bottle_alt | escape }}"
+                  loading="lazy"
                   fetchpriority="low"
                   decoding="async"
                 >
               {%- endif -%}
               {%- if angle_image != blank -%}
-                {{ angle_image | image_url: width: 600 | image_tag: class: 'hgb-bottle__img hgb-bottle__img--angle', alt: '', widths: '300, 450, 600', sizes: '(min-width: 750px) 200px, 120px', loading: 'eager', fetchpriority: 'low', decoding: 'async' }}
+                {{ angle_image | image_url: width: 600 | image_tag: class: 'hgb-bottle__img hgb-bottle__img--angle', alt: '', widths: '300, 450, 600', sizes: '(min-width: 750px) 200px, 120px', loading: 'lazy', fetchpriority: 'low', decoding: 'async' }}
               {%- else -%}
                 <img
                   class="hgb-bottle__img hgb-bottle__img--angle"
@@ -136,6 +140,7 @@
                   width="226"
                   height="529"
                   alt=""
+                  loading="lazy"
                   fetchpriority="low"
                   decoding="async"
                 >

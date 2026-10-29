@@ -8,7 +8,7 @@ Preview: `https://momentseg.com/?view=hero-box` (the live homepage is unchanged 
 |---|---|
 | `sections/hero-gift-box.liquid` | The section: copy, buttons, the CSS 3D box, the bottle. Settings and blocks below. |
 | `snippets/hero-box-logo.liquid` | The lid logo: the icon with the English wordmark, or the Arabic wordmark on Arabic pages. Generated. |
-| `assets/hero-gift-box.css` | Box geometry, the scroll-linked progress, phone, reduced-motion and RTL rules. |
+| `snippets/hero-gift-box-styles.liquid` | Inline styles (no blocking request): box geometry, the scroll-linked progress, phone, reduced-motion and RTL rules. |
 | `assets/hero-gift-box.js` | 0.7 KB gzipped. Toggles `will-change` while on screen; drives `--p` only where CSS scroll timelines are missing. |
 | `assets/hero-box-pattern.svg` | One 4 KB tile of the signature pattern, tone-on-tone on plum (from the identity kit). |
 | `assets/hero-9pm-{front,angle}[-sm].webp` | The transparent bottle cut-outs. |
