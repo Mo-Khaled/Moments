@@ -116,9 +116,24 @@
 {%- endif -%}
 
 {% stylesheet %}
+  /* The panel opens and closes by animating a clip (blocks/_header-menu.liquid). The content follows the theme's content opacity: it fades in
+     once the item is open and disappears at once when it closes, so a quick hover-and-leave never leaves a cropped strip of tiles under the
+     header while the clip runs back to zero. */
   .m-mega {
     display: grid;
     padding-block: 16px 24px;
+    opacity: var(--submenu-content-opacity, 1);
+    transition: opacity 160ms var(--m-ease, ease-out);
+  }
+
+  .menu-list__list-item:not(:has([aria-expanded='true'])) .m-mega {
+    transition-duration: 0s;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .m-mega {
+      transition: none;
+    }
   }
 
   .m-mega ul {
