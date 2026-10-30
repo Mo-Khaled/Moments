@@ -660,7 +660,8 @@
      Headline 1 stays centred and fades out during the move; headlines 2 and 3 are start-aligned. Transform only, from --p.
      RTL mirrors it. Reduced motion and the setting off show the open state: words at the start, box at the end. */
   @media screen and (min-width: 990px) {
-    .hgb__inner {
+    /* on the stage, so the glow (a sibling of the content) follows the box too */
+    .hgb__stage {
       --shift: clamp(0, (var(--p) - 0.04) / 0.3, 1);
       --dir: 1;
       /* the copy block is 36rem wide and centred; it travels to the content edge (the gutter, or the 90rem column on wide screens) */
@@ -669,7 +670,7 @@
       --box-dx: min(20vw, 22rem);
     }
 
-    [dir='rtl'] .hgb__inner {
+    [dir='rtl'] .hgb__stage {
       --dir: -1;
     }
 
