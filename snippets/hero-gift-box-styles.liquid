@@ -32,18 +32,7 @@
     --hgb-inside: #1a0c19;
   }
 
-  /* header into the hero: the same pearl fade the previous hero used; on the section, so it scrolls away with the page */
-  .hgb::before {
-    content: '';
-    position: absolute;
-    inset-inline: 0;
-    inset-block-start: 0;
-    z-index: 3;
-    block-size: min(var(--blend, 72px), 22svh);
-    pointer-events: none;
-    background: linear-gradient(var(--s-pearl, #faf6f2), rgb(250 246 242 / 0));
-    background: linear-gradient(in oklab, var(--s-pearl, #faf6f2), rgb(250 246 242 / 0));
-  }
+  /* No fade from the header: on the homepage the header is transparent over this hero (theme setting), so the deep plum runs to the top. */
 
   .hgb__track {
     position: relative;

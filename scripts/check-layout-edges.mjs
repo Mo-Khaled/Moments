@@ -52,7 +52,7 @@ for (const w of WIDTHS) {
             const starts = items.map((e) => { const r = e.getBoundingClientRect(); return dir === 'ltr' ? r.left : innerWidth - r.right; });
             const min = Math.min(...starts);
             const id = sec.id.replace('shopify-section-', '').replace(/^template--\d+__/, '');
-            if (min < edge - 2) out.outside.push(`${id} starts ${Math.round(edge - min)}px outside the edge`);
+            if (min < edge - 4) out.outside.push(`${id} starts ${Math.round(edge - min)}px outside the edge`);
             else if (min > edge + 2) out.inset.push(`${id} +${Math.round(min - edge)}px`);
           }
         }

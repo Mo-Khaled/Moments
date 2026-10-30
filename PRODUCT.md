@@ -11,7 +11,7 @@ Night, Gift, All day, Daily, Fresh, Love.
 Shoppers in Egypt choosing a fragrance for themselves or as a gift, usually on a phone.
 
 ## Brand
-Plum #3B1E3A, berry #B7406A (the only action colour), nude #E9CFC8, pearl #FAF6F2, taupe #75665E, aged-gold hairlines only.
+Plum #3B1E3A, deep plum #251224, berry #B7406A (the only action colour), nude #E9CFC8, pearl #FAF6F2, taupe #75665E. No gold (removed 2026-10-30: accents are nude on dark, berry-ink on light).
 Marcellus headings, Readex Pro body, Alexandria for Arabic headings.
 Six object marks (no faces): night lantern, gift ribbon bottle, all-day sun over waves, daily lotus, fresh palm leaf, love rose.
 
