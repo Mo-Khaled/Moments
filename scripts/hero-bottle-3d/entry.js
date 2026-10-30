@@ -39,7 +39,8 @@ export async function setup(canvas, url, width, height, ratio = 2) {
     // fit the height (and the width when the canvas is narrow) with a small margin; look slightly down at the bottle
     const fov = (camera.fov * Math.PI) / 180;
     const byHeight = (size.y * 1.04) / 2 / Math.tan(fov / 2);
-    const byWidth = (Math.max(size.x, size.z) * 1.1) / 2 / Math.tan(fov / 2) / camera.aspect;
+    // the widest silhouette while turning is the diagonal of the footprint
+    const byWidth = (Math.hypot(size.x, size.z) * 1.08) / 2 / Math.tan(fov / 2) / camera.aspect;
     const distance = Math.max(byHeight, byWidth) + Math.max(size.x, size.z) / 2;
     camera.position.set(0, size.y * 0.5 + distance * 0.08, distance);
     camera.lookAt(0, size.y * 0.5, 0);
@@ -49,8 +50,9 @@ export async function setup(canvas, url, width, height, ratio = 2) {
 
   return {
     renderer,
-    render(p) {
-      pivot.rotation.y = angleAt(p);
+    render(p, tilt = { x: 0, y: 0 }) {
+      pivot.rotation.y = angleAt(p) + tilt.y;
+      pivot.rotation.x = tilt.x;
       renderer.render(scene, camera);
     },
     resize(w, h) {
@@ -81,17 +83,32 @@ export async function mount(hero) {
   let last = -1;
   let visible = true;
   let frame = 0;
+  // the bottle leans a little toward the mouse (up to about 7 degrees), eased, so it answers the visitor; it settles when the mouse rests
+  const tilt = { x: 0, y: 0 };
+  const aim = { x: 0, y: 0 };
+  stage.addEventListener('pointermove', (event) => {
+    if (event.pointerType !== 'mouse') return;
+    const r = stage.getBoundingClientRect();
+    aim.y = ((event.clientX - r.left) / r.width - 0.5) * 0.24;
+    aim.x = ((event.clientY - r.top) / r.height - 0.5) * 0.12;
+  }, { passive: true });
+  stage.addEventListener('pointerleave', () => { aim.x = 0; aim.y = 0; }, { passive: true });
   const progress = () => parseFloat(getComputedStyle(stage).getPropertyValue('--p')) || 0;
   const tick = () => {
     frame = 0;
     const p = progress();
-    if (Math.abs(p - last) > 0.0005) {
+    const moving = Math.abs(aim.x - tilt.x) > 0.0005 || Math.abs(aim.y - tilt.y) > 0.0005;
+    if (moving) {
+      tilt.x += (aim.x - tilt.x) * 0.12;
+      tilt.y += (aim.y - tilt.y) * 0.12;
+    }
+    if (moving || Math.abs(p - last) > 0.0005) {
       last = p;
-      view.render(p);
+      view.render(p, tilt);
     }
     if (visible) frame = requestAnimationFrame(tick);
   };
-  view.render(progress());
+  view.render(progress(), tilt);
   hero.classList.add('has-3d');
   new IntersectionObserver(([entry]) => {
     visible = entry.isIntersecting;

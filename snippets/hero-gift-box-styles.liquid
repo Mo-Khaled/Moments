@@ -75,27 +75,25 @@
     inset: 0;
     pointer-events: none;
     background:
-      radial-gradient(60% 55% at 70% 58%, var(--moment-night-field, #5f4589), transparent 72%),
-      radial-gradient(42% 40% at 70% 62%, rgb(156 107 138 / 0.55), transparent 70%);
+      radial-gradient(52% 50% at 50% 62%, var(--moment-night-field, #5f4589), transparent 72%),
+      radial-gradient(34% 34% at 50% 66%, rgb(156 107 138 / 0.55), transparent 70%);
     opacity: calc(0.28 + 0.62 * var(--tint));
     /* the glow never reaches the last rows, so the stage always ends on pure deep plum, the brand strip colour */
     -webkit-mask-image: linear-gradient(#000 70%, transparent 96%);
     mask-image: linear-gradient(#000 70%, transparent 96%);
   }
 
-  [dir='rtl'] .hgb__glow {
-    transform: scaleX(-1);
-  }
-
+  /* one centred column: the headline, the box (the one large thing), the two buttons under it */
   .hgb__inner {
     position: relative;
     display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-    align-items: center;
-    gap: clamp(24px, 4vw, 64px);
+    grid-template-rows: auto minmax(0, 1fr) auto;
+    justify-items: center;
+    gap: clamp(8px, 1.6svh, 20px);
     block-size: 100%;
-    padding-block: calc(env(safe-area-inset-top, 0px) + clamp(88px, 12svh, 140px)) calc(env(safe-area-inset-bottom, 0px) + 32px);
+    padding-block: calc(env(safe-area-inset-top, 0px) + clamp(92px, 12svh, 132px)) calc(env(safe-area-inset-bottom, 0px) + clamp(28px, 5svh, 56px));
     box-sizing: border-box;
+    text-align: center;
   }
 
   /* ---------- copy ---------- */
@@ -106,8 +104,8 @@
     position: relative;
     z-index: 2;
     display: grid;
-    gap: 28px;
-    max-inline-size: 34rem;
+    justify-items: center;
+    max-inline-size: 48rem;
   }
 
   .hgb__lines {
@@ -121,7 +119,8 @@
 
   .hgb__line--1 {
     display: grid;
-    gap: 14px;
+    justify-items: center;
+    gap: 12px;
     opacity: var(--s1);
     transform: translateY(calc((1 - var(--s1)) * -12px));
   }
@@ -141,7 +140,7 @@
     color: var(--m-pearl);
     font-family: var(--font-heading--family, 'Marcellus', Georgia, serif);
     font-weight: 400;
-    font-size: clamp(2rem, 4.2vw, 3.5rem);
+    font-size: clamp(1.9rem, 3.4vw, 3.25rem);
     line-height: 1.12;
     letter-spacing: 0.04em;
     text-transform: uppercase;
@@ -159,7 +158,8 @@
 
   .hgb__text {
     margin: 0;
-    max-inline-size: 30rem;
+    max-inline-size: 38rem;
+    text-wrap: balance;
     color: var(--m-nude);
     font-size: 1.0625rem;
     line-height: 1.6;
@@ -170,7 +170,10 @@
   }
 
   .hgb__actions {
+    position: relative;
+    z-index: 2;
     display: flex;
+    justify-content: center;
     flex-wrap: wrap;
     gap: 12px;
   }
@@ -220,8 +223,9 @@
 
   /* ---------- scene and box ---------- */
   .hgb__scene {
-    --w: clamp(220px, 24vw, 340px);
-    --h: calc(var(--w) * 0.56);
+    /* larger, and bounded by the height too so the risen bottle never reaches the headline */
+    --w: clamp(240px, min(30vw, 38svh), 460px);
+    --h: calc(var(--w) * 0.5);
     --d: calc(var(--w) * 0.66);
     --lip: calc(var(--h) * 0.24);
     --lid: clamp(0, (var(--p) - 0.06) / 0.3, 1);
@@ -230,19 +234,21 @@
     --settle: clamp(0, (var(--p) - 0.7) / 0.3, 1);
     position: relative;
     display: grid;
-    place-items: center;
+    place-items: end center;
+    inline-size: 100%;
     block-size: 100%;
     min-block-size: 0;
-    /* the box sits low in the scene so the rising bottle has room above it */
-    padding-block-start: calc(var(--h) * 1.5);
-    perspective: 1200px;
-    perspective-origin: 50% 20%;
+    /* the box stands at the bottom of the middle row; the rising bottle has the space above it */
+    padding-block-end: calc(var(--h) * 0.55); /* in perspective the front edge drops below the box's layout box; this keeps it clear of the buttons */
+    box-sizing: border-box;
+    perspective: 1400px;
+    perspective-origin: 50% 25%;
   }
 
   .hgb__ground {
     position: absolute;
     inset-inline-start: 50%;
-    inset-block-start: calc(50% + var(--h) * 1.05);
+    inset-block-end: calc(var(--h) * 0.22);
     inline-size: calc(var(--w) * 1.5);
     block-size: calc(var(--h) * 0.5);
     border-radius: 50%;
@@ -260,7 +266,8 @@
     block-size: var(--h);
     transform-style: preserve-3d;
     -webkit-transform-style: preserve-3d;
-    transform: translateY(calc(var(--settle) * 8px)) rotateX(-14deg) rotateY(calc(-26deg + var(--settle) * 6deg));
+    /* turned less than before, so the centred box reads square-on with its right side and the open top still visible */
+    transform: translateY(calc(var(--settle) * 6px)) rotateX(-16deg) rotateY(calc(-18deg + var(--settle) * 5deg));
   }
 
   .hgb-face,
@@ -389,6 +396,29 @@
   .hgb-lid__side--right { transform: translateX(calc(var(--ow) / 2)) translateZ(calc(var(--od) / 2)) rotateY(90deg); }
   .hgb-lid__side--left { transform: translateX(calc(var(--ow) / -2)) translateZ(calc(var(--od) / 2)) rotateY(-90deg); }
 
+  /* the back band and the inside of the rim (each face is one-sided, so the inside needs its own faces) */
+  .hgb-lid__band {
+    inset-block-start: calc(var(--lip) * -1);
+    inset-inline-start: calc(var(--ow) / -2);
+    inline-size: var(--ow);
+    block-size: var(--lip);
+  }
+
+  .hgb-lid__band--back { transform: rotateY(180deg); }
+  .hgb-lid__band--inner-front { transform: translateZ(calc(var(--od) - 1px)) rotateY(180deg); }
+  .hgb-lid__band--inner-back { transform: translateZ(1px); }
+
+  .hgb-lid__band--inner-front,
+  .hgb-lid__band--inner-back,
+  .hgb-lid__side--inner-left,
+  .hgb-lid__side--inner-right {
+    background: var(--hgb-inside);
+    box-shadow: none;
+  }
+
+  .hgb-lid__side--inner-right { transform: translateX(calc(var(--ow) / 2 - 1px)) translateZ(calc(var(--od) / 2)) rotateY(-90deg); }
+  .hgb-lid__side--inner-left { transform: translateX(calc(var(--ow) / -2 + 1px)) translateZ(calc(var(--od) / 2)) rotateY(90deg); }
+
   /* logical inset-inline-start flips in RTL, but 3D x is physical: pin the box internals to physical left so the box stays the same shape */
   [dir='rtl'] .hgb-face,
   [dir='rtl'] .hgb-lid {
@@ -414,7 +444,8 @@
 
   [dir='rtl'] .hgb-lid__top,
   [dir='rtl'] .hgb-lid__under,
-  [dir='rtl'] .hgb-lid__front {
+  [dir='rtl'] .hgb-lid__front,
+  [dir='rtl'] .hgb-lid__band {
     inset-inline-start: auto;
     inset-inline-end: calc(var(--ow) / -2);
   }
@@ -457,7 +488,7 @@
     opacity: clamp(0, (var(--p) - 0.16) / 0.08, 1);
     transform-origin: 50% 100%;
     transform:
-      translateY(calc(var(--rise) * var(--h) * -1.12))
+      translateY(calc(var(--rise) * var(--h) * var(--rise-by, -1.12)))
       rotateY(calc(26deg - var(--settle) * 6deg + (var(--turn) - 0.5) * 10deg))
       scale(calc(0.94 + var(--rise) * 0.06));
   }
@@ -481,14 +512,15 @@
 
   /* the generic MOMENTS bottle is wider than a photographed bottle */
   .hgb-bottle--model {
-    --bh: calc(var(--h) * 1.5);
-    inline-size: calc(var(--bh) * 0.62);
-    margin-inline-start: calc(var(--bh) * -0.31);
+    --bh: calc(var(--h) * 1.9);
+    --rise-by: -0.72;
+    inline-size: calc(var(--bh) * 0.5);
+    margin-inline-start: calc(var(--bh) * -0.25);
   }
 
   [dir='rtl'] .hgb-bottle--model {
     margin-inline-start: 0;
-    margin-inline-end: calc(var(--bh) * -0.31);
+    margin-inline-end: calc(var(--bh) * -0.25);
   }
 
   /* the live 3D bottle (assets/hero-bottle-3d.js) replaces the stills once it has drawn its first frame */
@@ -537,26 +569,7 @@
     will-change: transform, opacity;
   }
 
-  /* ---------- tablet and phones ---------- */
-  @media screen and (max-width: 989px) {
-    .hgb__inner {
-      grid-template-columns: minmax(0, 1fr);
-      grid-template-rows: auto minmax(0, 1fr);
-      align-items: start;
-      gap: 8px;
-    }
-
-    .hgb__glow {
-      background:
-        radial-gradient(80% 50% at 50% 70%, var(--moment-night-field, #5f4589), transparent 72%),
-        radial-gradient(60% 36% at 50% 74%, rgb(156 107 138 / 0.55), transparent 70%);
-    }
-
-    .hgb__scene {
-      --w: clamp(170px, 46vw, 300px);
-    }
-  }
-
+  /* ---------- phones (only when the section's "Show on phones" is on) ---------- */
   @media screen and (max-width: 749px) {
     .hgb__track {
       block-size: 260vh;
@@ -596,7 +609,10 @@
     .hgb-face--right,
     .hgb-face--back,
     .hgb-face--inner-floor,
+    .hgb-face--inner-left,
+    .hgb-face--inner-right,
     .hgb-lid__side,
+    .hgb-lid__band,
     .hgb-lid__under {
       display: none;
     }

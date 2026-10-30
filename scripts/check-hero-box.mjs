@@ -90,10 +90,10 @@ for (const [name, type] of engines) {
           const box = document.querySelector('.hgb-box').getBoundingClientRect();
           const scene = document.querySelector('.hgb__scene').getBoundingClientRect();
           const copy = document.querySelector('.hgb__copy').getBoundingClientRect();
-          return { off: Math.abs(box.left + box.width / 2 - (scene.left + scene.width / 2)), copyRight: copy.right, sceneRight: scene.right };
+          return { off: Math.abs(box.left + box.width / 2 - (scene.left + scene.width / 2)), copyOff: Math.abs(copy.left + copy.width / 2 - innerWidth / 2) };
         });
         ok(c.off < 0.2 * w, `${tag}: box centred in its column (offset ${c.off.toFixed(0)}px)`);
-        if (w >= 990) ok(c.copyRight > c.sceneRight, `${tag}: copy on the right in RTL`);
+        ok(c.copyOff < 24, `${tag}: headline centred (offset ${c.copyOff.toFixed(0)}px)`);
       }
       // the last stage row is the brand strip colour: the join below the hero is seamless
       await scrollTo(p, 1);

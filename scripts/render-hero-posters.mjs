@@ -9,7 +9,7 @@ import { join, extname } from 'node:path';
 import { tmpdir } from 'node:os';
 
 const root = new URL('..', import.meta.url).pathname.replace(/^\/(\w:)/, '$1');
-export const W = 372, H = 600; // CSS px of the bottle box (ratio 0.62); rendered at 2x
+export const W = 300, H = 600; // CSS px of the bottle box (ratio 0.5, the bottle is about 0.48 wide to 1 tall); rendered at 2x
 const page = `<!doctype html><body style="margin:0"><canvas id="c"></canvas><script type="module">
 import { setup } from '/assets/hero-bottle-3d.js';
 const canvas = document.getElementById('c');

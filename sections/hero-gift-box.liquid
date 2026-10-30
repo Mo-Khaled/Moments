@@ -55,7 +55,7 @@
   assign bottle_alt = 'hero_box.bottle_alt' | t: title: bottle_alt, brand: bottle_brand
 
   comment
-    The rising bottle. Default: the generic MOMENTS bottle, a 3D model ("perfume bottle" by milaha, CC BY 4.0, compressed by
+    The rising bottle. Default: the generic MOMENTS bottle, a 3D model ("Fancy Perfume Bottle" by Jamie McFarlane, CC BY 4.0, compressed by
     scripts/build-hero-3d.mjs), shown as two stills and, on desktop, as the live model. Uploaded cut-outs (front and three-quarter)
     replace it; then the product picker gives the image description.
   endcomment
@@ -113,18 +113,6 @@
             <p class="hgb__line hgb__line--2 hgb__title" dir="auto" aria-hidden="true">{{ headline_2 }}</p>
             <p class="hgb__line hgb__line--3 hgb__title" dir="auto" aria-hidden="true">{{ headline_3 }}</p>
           </div>
-          <div class="hgb__actions">
-            {%- if button_count > 0 -%}
-              {%- for block in section.blocks -%}
-                {%- if block.type == 'button' and block.settings.label != blank -%}
-                  <a class="hgb-btn hgb-btn--{{ block.settings.style }}" href="{{ block.settings.link | default: '#' }}" {{ block.shopify_attributes }}>{{ block.settings.label }}</a>
-                {%- endif -%}
-              {%- endfor -%}
-            {%- else -%}
-              <a class="hgb-btn hgb-btn--primary" href="{{ gifts_url }}">{{ 'hero_box.shop_gifts' | t }}</a>
-              <a class="hgb-btn hgb-btn--secondary" href="{{ moments_url }}">{{ 'hero_box.find_moment' | t }}</a>
-            {%- endif -%}
-          </div>
         </div>
 
         <div class="hgb__scene">
@@ -181,15 +169,34 @@
               <div class="hgb-lid__face hgb-lid__front">{% render 'hero-box-logo' %}</div>
               <div class="hgb-lid__face hgb-lid__side hgb-lid__side--left"></div>
               <div class="hgb-lid__face hgb-lid__side hgb-lid__side--right"></div>
+              {%- comment -%} the rim's back band and its four inside walls: an open lid shows them, so none may be missing {%- endcomment -%}
+              <div class="hgb-lid__face hgb-lid__band hgb-lid__band--back"></div>
+              <div class="hgb-lid__face hgb-lid__band hgb-lid__band--inner-front"></div>
+              <div class="hgb-lid__face hgb-lid__band hgb-lid__band--inner-back"></div>
+              <div class="hgb-lid__face hgb-lid__side hgb-lid__side--inner-left"></div>
+              <div class="hgb-lid__face hgb-lid__side hgb-lid__side--inner-right"></div>
             </div>
           </div>
+        </div>
+
+        <div class="hgb__actions">
+          {%- if button_count > 0 -%}
+            {%- for block in section.blocks -%}
+              {%- if block.type == 'button' and block.settings.label != blank -%}
+                <a class="hgb-btn hgb-btn--{{ block.settings.style }}" href="{{ block.settings.link | default: '#' }}" {{ block.shopify_attributes }}>{{ block.settings.label }}</a>
+              {%- endif -%}
+            {%- endfor -%}
+          {%- else -%}
+            <a class="hgb-btn hgb-btn--primary" href="{{ gifts_url }}">{{ 'hero_box.shop_gifts' | t }}</a>
+            <a class="hgb-btn hgb-btn--secondary" href="{{ moments_url }}">{{ 'hero_box.find_moment' | t }}</a>
+          {%- endif -%}
         </div>
       </div>
       {%- if generic -%}
         {%- comment -%} Licence condition of the 3D model (CC BY 4.0): credit, link, licence, and that it was changed. Shown wherever the bottle is. {%- endcomment -%}
-        {%- capture model_link -%}<a href="https://sketchfab.com/3d-models/perfume-bottle-2318f02b3bfb4587bc6e50ea768b4e77" rel="noopener" target="_blank">perfume bottle</a>{%- endcapture -%}
+        {%- capture model_link -%}<a href="https://sketchfab.com/3d-models/fancy-perfume-bottle-bde185bddefc4016b13021da5d1269ec" rel="noopener" target="_blank">Fancy Perfume Bottle</a>{%- endcapture -%}
         {%- capture licence_link -%}<a href="https://creativecommons.org/licenses/by/4.0/" rel="license noopener" target="_blank">CC BY 4.0</a>{%- endcapture -%}
-        <p class="hgb__credit">{{ 'hero_box.credit_html' | t: model: model_link, author: 'milaha', license: licence_link }}</p>
+        <p class="hgb__credit">{{ 'hero_box.credit_html' | t: model: model_link, author: 'Jamie McFarlane', license: licence_link }}</p>
       {%- endif -%}
     </div>
   </div>
