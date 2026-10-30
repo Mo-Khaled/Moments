@@ -66,3 +66,9 @@ Nothing below is guessed or invented; each item is a slot that is hidden on the 
 - **A real iPhone check** of the 3D box before the swap (the Windows test browser cannot draw 3D transforms).
 - **The identity zip and the two photos** are in the repo folder but git-ignored; keep them or move them, your choice.
 - **The 3D bottle**: in place on the preview (desktop only), credit line in the hero. Decide whether its teal glass suits the plum palette; it can be recoloured in the model (for example berry or rose glass) if you prefer.
+
+## Left as they are (your data or settings)
+- **PayPal button** on product pages and the cart: bright yellow next to the berry button. Turning it off is a payments choice (Theme editor > Product > Buy buttons > dynamic checkout buttons).
+- **Supplier packshots** on grey backgrounds: the image normalisation (pearl backdrop) is still waiting for your approval.
+- **Menu items and product titles in capitals** ("AFNAN PERFUMES", "ABOUT MOMENTS", "9 PM NIGHT OUT"): these are store data; rename them in Navigation and Products if you want sentence case.
+- **/pages/faq** shows a products template (marquee, collection list), not the MOMENTS FAQ section (`page.faq`). Assigning the FAQ template to that page is a store change.

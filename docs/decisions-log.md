@@ -125,3 +125,12 @@ Each entry: decision, alternatives, why, how to revert.
 
 ## 2026-10-29: Mega panel strip after a quick hover
 - See docs/live-pushes.md. The MOMENTS panel content now follows the theme's --submenu-content-opacity (hidden at once on close, a 160 ms fade on open).
+
+## 2026-10-30: site-wide colour and placement pass
+- Owner decisions: headings follow the brand guide (Marcellus, uppercase, 0.04em, H1 56/34, H2 36/26); gold removed (nude on dark, berry ink on light); short seamless joins instead of the 200px mauve fades.
+- Colour: the previous store's near-black palette is gone from the sticky add-to-cart, the drawer's free-shipping bar, the product Save pill (#8b0000 -> the card's berry pill), trust and returns badges, the location banner and the fragrance journey (note colours are now the six moment colours). Status colours are the identity's states. Schemes 5, 7 and 8 had plum, pearl or black primary buttons: all berry now; scheme 2's white page background is pearl. 32 references to six deleted colour schemes now point at scheme-1 (they already rendered as the default).
+- Placement: one content edge for every section (trust badges, scent notes, fragrance journey, breadcrumb, FAQ, page text, search grid on phones); three spacing steps; collection and returns titles start-aligned; product page "Pour Homme" start-aligned without its off-white box, tax note in sentence case, "Related products" an H2.
+- Joins: the fade is 96px (plum to pearl is about 96 dE in oklab x100, so about 1 per row, under the checker's 1.2; 72px measured 1.36). The header no longer fades into the hero: the theme's transparent-header option on the homepage puts the menu on the hero (owner screenshot of the grey smear, 2026-10-30).
+- Customer-visible TODO text: the empty hero slot's "TODO: add hero photography" label now shows only in the theme editor.
+- Not changed (store data or payments): the yellow PayPal button, grey supplier packshots, ALL-CAPS menu items and product titles.
+- Checker notes: check-contrast reports the collection page's current page number as 1:1; that is a false positive (the plum disc is the list's anchored ::before, verified by eye on live), present before this pass.

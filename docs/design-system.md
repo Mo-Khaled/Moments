@@ -10,7 +10,7 @@ Components use only the second and third layers. A section or snippet never cont
 
 | Layer | What it is | Examples |
 |---|---|---|
-| 1 Primitive | Raw brand values | `--m-plum #3B1E3A`, `--m-berry #B7406A`, `--m-nude #E9CFC8`, `--m-pearl #FAF6F2`, `--m-taupe #75665E`, `--m-gold-ink #8A6A22`, `--m-gold-light #CDA553`, `--m-berry-ink #8A2F52`, `--m-taupe-ink #5E5048`, `--m-ease`, `--m-dur-1/2/3` |
+| 1 Primitive | Raw brand values | `--m-plum #3B1E3A`, `--m-berry #B7406A`, `--m-nude #E9CFC8`, `--m-pearl #FAF6F2`, `--m-taupe #75665E`, `--m-plum-900 #251224`, `--m-mauve #9C6B8A`, `--m-nude-deep #DCB9B0`, states `--m-success #2E7558` `--m-warning #9A5B00` `--m-error #B3261E`, `--m-berry-ink #8A2F52`, `--m-taupe-ink #5E5048`, `--m-ease`, `--m-dur-1/2/3` |
 | 2 Semantic | What a value is for | `--m-surface`, `--m-surface-tint`, `--m-surface-dark`, `--m-text`, `--m-text-muted`, `--m-text-on-dark`, `--m-action`, `--m-action-text`, `--m-accent-rule`, `--m-accent-on-dark`, `--m-rule-quiet`, `--m-price-sale` |
 | 3 Component | One component's decision | `--m-badge-ink`, `--m-badge-bg`, `--m-badge-radius`, `--m-mark-ink/-body/-accent/-gold`, `--m-card-name-first/-rest`, `--m-card-meta` |
 
@@ -24,17 +24,18 @@ Page background and text colors still come from the theme color schemes (Customi
 | Taupe ink (#5E5048) on pearl | 7.2:1 | Muted text, card meta |
 | Berry ink (#8A2F52) on nude | 5.45:1 | Berry as text (sale price, link hover on nude) |
 | Berry (#B7406A) with white text | 5.31:1 | Buttons only |
-| Gold ink (#8A6A22) on pearl | 4.69:1 | The badge outline and text, hairlines. Never small text elsewhere |
-| Gold light (#CDA553) on plum | 6.35:1 | One highlight per plum band |
+| Nude (#E9CFC8) on plum | 9.9:1 | Accents, hairlines and highlights on dark bands and moment fields |
+| Berry ink (#8A2F52) on pearl | 7.49:1 | Accents, hairlines and the badge outline on light surfaces |
 
 - **Berry is the only action color.** It fills buttons; as text it becomes berry ink. Reason: one color means "you can act here".
-- **Gold is used only for hairlines, the single badge outline, and one highlight per plum band.** Never as a fill, never in body text. Reason: restraint is what makes it read as a mark of quality.
+- **No gold (2026-10-30).** The identity palette has none, so it is gone from the theme: accents are nude on dark bands and moment fields, berry ink on light surfaces. Focus rings: berry on light, pearl on dark (`--m-focus`).
 - Rejected (and why): taupe `#75665E` and berry `#B7406A` as text on nude (3.7:1 and 3.6:1, below AA).
 
 ## 3. Type
 
 - Headings: Marcellus (from Shopify's font system, `marcellus_n4`). Body and UI: Readex Pro 300 to 600 (self-hosted variable font, Latin 31 KB). Arabic headings: Alexandria 500 to 600 (Arabic file loads only on Arabic pages). Reason: the brand fonts, loaded without a render-blocking third-party request.
 - Scale and sizes come from the theme's type presets; the card adds: name first part 22 px (Marcellus), name second part 13 px (Readex 300, uppercase, 0.1em), meta 13 px.
+- **Headings (brand guide, 2026-10-30):** English H1/H2 are Marcellus, uppercase, letter-spacing 0.04em, line-height 1.15; sizes `--m-h1` (34 to 56px) and `--m-h2` (26 to 36px). One rule in assets/moments.css covers every section, Horizon text blocks and `role=heading` elements.
 - **Arabic:** letter-spacing 0 and no uppercase everywhere, body line-height 1.7, headings 1.35. Reason: letter-spacing and capitals break Arabic letter joining. Implemented through theme variables plus one specific selector, with no override flags.
 
 ## 4. Spacing, radius and shape
@@ -55,7 +56,7 @@ Rules: only `transform` and `opacity`; CSS transitions (interruptible), not keyf
 
 ## 6. Moment marks
 
-Six object marks, no characters: Night (lantern with crescent), Gift (ribbon-tied bottle), All day (sun over a wave line), Daily (lotus bud), Fresh (palm leaf with drops), Love (rose with a drifting petal). One 1.5 px plum line, a nude body, a berry accent, gold at most once (All day only, in the placeholders).
+Six object marks, no characters: Night (lantern with crescent), Gift (ribbon-tied bottle), All day (sun over a wave line), Daily (lotus bud), Fresh (palm leaf with drops), Love (rose with a drifting petal). One 1.5 px plum line, a nude body, a berry accent, the detail line in nude on dark tiles (berry ink on the light All day tile).
 
 **These are placeholders until an illustrator delivers the final set.** The contract for the final artwork:
 - One SVG symbol per mark, viewBox 48 x 48, with groups `mm-body` (main shape), `mm-accent` (the small part that moves) and `mm-detail` (extra line work shown only at the large size, nested inside the group it belongs to). Standalone files use `id="body"`, `id="accent"`, `id="detail"`. File names `moment-night.svg`, `moment-gift.svg`, `moment-allday.svg`, `moment-daily.svg`, `moment-fresh.svg`, `moment-love.svg`.
@@ -80,7 +81,7 @@ Six object marks, no characters: Night (lantern with crescent), Gift (ribbon-tie
 Order, top to bottom: photo with the badge, then the label row (moment mark and word, a thin rule, the brand), then the two-part name, then the price.
 
 - **Two-part name** (the signature device): first word in Marcellus, the rest in Readex 300, uppercase, letter-spaced. Rule: first word, or the first two when the name starts with a number and the next word is one or two letters (9 PM, 9 AM). Titles typed in capitals are normalised to capitalised words; a title that already has lowercase keeps its casing. Arabic splits the same way with no uppercase.
-- **Badge** (one style across the theme): square corners, gold outline on the page surface. "Save LE 250.00" appears only when there is a compare-at price and the product is in stock; "Sold out" appears in muted ink with no savings. Reason: a badge on every card carries no information.
+- **Badge** (one style across the theme): square corners, berry-ink outline on the page surface (the Save badge is the berry-600 pill). "Save LE 250.00" appears only when there is a compare-at price and the product is in stock; "Sold out" appears in muted ink with no savings. Reason: a badge on every card carries no information.
 - **Brand line** shows the vendor as stored. Vendor casing is cleaned in the later store-data step.
 - **Rating slot:** reserved in the plan, not built yet; it will render only when a real review rating exists. No ratings, counts or testimonials are invented.
 - **Prices:** one format, `LE 2,250.00`, everywhere (the currency-code switches are off).
@@ -111,6 +112,8 @@ WCAG AA contrast; visible focus; semantic headings; marks are decorative (`aria-
 - **Ticker:** `snippets/moments-ticker.liquid` (two identical groups, translate -50%, linear, transform only). Used by the announcement
   bar and the brand marquee. Reduced motion: static.
 - **Buttons:** `.m-btn` (berry pill), `.m-btn--outline` (on dark or photographic surfaces), `.m-link` (underlined text link).
-- **Type scale:** hero headline fluid 48 to 120px (`clamp(3rem, 9vw, 7.5rem)`), section headings up to 80px, Arabic line-height 1.3 to 1.35.
+- **Type scale:** H1 34 to 56px, H2 26 to 36px everywhere (the guide), Arabic line-height 1.35.
+- **Spacing:** three section steps `--m-space-s` (32 to 56px), `--m-space-m` (48 to 96px), `--m-space-l` (64 to 120px).
+- **Joins:** dark and light bands meet through a 96px oklab fade with no bridge tone (about 1 dE per row). The header never blends into the hero: on the homepage it is transparent over the hero (pearl bar once sticky), with a short deep-plum scrim over photographs.
   Fonts unchanged (Marcellus, Readex Pro, Alexandria): no change was needed for the performance budget.
 - **Uncropped imagery:** posters in "Fit" mode show the whole photograph over a blurred copy; packshots use `object-fit: contain`.
