@@ -54,6 +54,22 @@
   assign bottle_brand = product.vendor | default: 'AFNAN'
   assign bottle_alt = 'hero_box.bottle_alt' | t: title: bottle_alt, brand: bottle_brand
 
+  comment
+    The rising bottle. Default: the generic MOMENTS bottle, a 3D model ("perfume bottle" by milaha, CC BY 4.0, compressed by
+    scripts/build-hero-3d.mjs), shown as two stills and, on desktop, as the live model. Uploaded cut-outs (front and three-quarter)
+    replace it; then the product picker gives the image description.
+  endcomment
+  assign front_image = section.settings.front_image
+  assign angle_image = section.settings.angle_image
+  assign generic = true
+  if front_image != blank
+    assign generic = false
+  endif
+  assign live_model = false
+  if generic and section.settings.model_3d
+    assign live_model = true
+  endif
+
   assign animate = section.settings.animate
   assign phones = section.settings.show_on_phones
   assign box_tone = section.settings.box_tone | default: 'plum'
@@ -79,6 +95,7 @@
   class="hgb hgb--{{ box_tone }}"
   data-hgb
   {% unless animate %}data-static{% endunless %}
+  {% if live_model and animate %}data-model="{{ 'hero-bottle.glb' | asset_url }}" data-module="{{ 'hero-bottle-3d.js' | asset_url }}"{% endif %}
   aria-labelledby="hgb-title-{{ section.id }}"
   style="--hgb-pattern: url('{{ 'hero-box-pattern.svg' | asset_url }}'); --hgb-logo: var(--m-{{ section.settings.logo_tone | default: 'white' }});"
 >
@@ -121,42 +138,38 @@
             <div class="hgb-face hgb-face--left" aria-hidden="true"></div>
             <div class="hgb-face hgb-face--right" aria-hidden="true"></div>
 
-            <div class="hgb-bottle">
-              {%- liquid
-                assign front_image = section.settings.front_image
-                assign angle_image = section.settings.angle_image
-              -%}
-              {%- if front_image != blank -%}
-                {{ front_image | image_url: width: 600 | image_tag: class: 'hgb-bottle__img hgb-bottle__img--front', alt: bottle_alt, widths: '300, 450, 600', sizes: '(min-width: 750px) 200px, 120px', loading: 'lazy', fetchpriority: 'low', decoding: 'async' }}
-              {%- else -%}
+            <div class="hgb-bottle{% if generic %} hgb-bottle--model{% endif %}">
+              {%- if generic -%}
+                {%- comment -%} Stills of the 3D bottle at the start and end of its turn (scripts/render-hero-posters.mjs); the live model replaces them on desktop. {%- endcomment -%}
                 <img
                   class="hgb-bottle__img hgb-bottle__img--front"
-                  src="{{ 'hero-9pm-front.webp' | asset_url }}"
-                  srcset="{{ 'hero-9pm-front-sm.webp' | asset_url }} 115w, {{ 'hero-9pm-front.webp' | asset_url }} 231w"
-                  sizes="(min-width: 750px) 200px, 120px"
-                  width="231"
-                  height="531"
-                  alt="{{ bottle_alt | escape }}"
+                  src="{{ 'hero-bottle-start.webp' | asset_url }}"
+                  srcset="{{ 'hero-bottle-start-sm.webp' | asset_url }} 372w, {{ 'hero-bottle-start.webp' | asset_url }} 744w"
+                  sizes="(min-width: 750px) 240px, 150px"
+                  width="372"
+                  height="600"
+                  alt="{{ 'hero_box.bottle_alt_generic' | t | escape }}"
                   loading="lazy"
                   fetchpriority="low"
                   decoding="async"
                 >
-              {%- endif -%}
-              {%- if angle_image != blank -%}
-                {{ angle_image | image_url: width: 600 | image_tag: class: 'hgb-bottle__img hgb-bottle__img--angle', alt: '', widths: '300, 450, 600', sizes: '(min-width: 750px) 200px, 120px', loading: 'lazy', fetchpriority: 'low', decoding: 'async' }}
-              {%- else -%}
                 <img
                   class="hgb-bottle__img hgb-bottle__img--angle"
-                  src="{{ 'hero-9pm-angle.webp' | asset_url }}"
-                  srcset="{{ 'hero-9pm-angle-sm.webp' | asset_url }} 113w, {{ 'hero-9pm-angle.webp' | asset_url }} 226w"
-                  sizes="(min-width: 750px) 200px, 120px"
-                  width="226"
-                  height="529"
+                  src="{{ 'hero-bottle-end.webp' | asset_url }}"
+                  srcset="{{ 'hero-bottle-end-sm.webp' | asset_url }} 372w, {{ 'hero-bottle-end.webp' | asset_url }} 744w"
+                  sizes="(min-width: 750px) 240px, 150px"
+                  width="372"
+                  height="600"
                   alt=""
                   loading="lazy"
                   fetchpriority="low"
                   decoding="async"
                 >
+              {%- else -%}
+                {{ front_image | image_url: width: 600 | image_tag: class: 'hgb-bottle__img hgb-bottle__img--front', alt: bottle_alt, widths: '300, 450, 600', sizes: '(min-width: 750px) 200px, 120px', loading: 'lazy', fetchpriority: 'low', decoding: 'async' }}
+                {%- if angle_image != blank -%}
+                  {{ angle_image | image_url: width: 600 | image_tag: class: 'hgb-bottle__img hgb-bottle__img--angle', alt: '', widths: '300, 450, 600', sizes: '(min-width: 750px) 200px, 120px', loading: 'lazy', fetchpriority: 'low', decoding: 'async' }}
+                {%- endif -%}
               {%- endif -%}
             </div>
 
@@ -172,6 +185,12 @@
           </div>
         </div>
       </div>
+      {%- if generic -%}
+        {%- comment -%} Licence condition of the 3D model (CC BY 4.0): credit, link, licence, and that it was changed. Shown wherever the bottle is. {%- endcomment -%}
+        {%- capture model_link -%}<a href="https://sketchfab.com/3d-models/perfume-bottle-2318f02b3bfb4587bc6e50ea768b4e77" rel="noopener" target="_blank">perfume bottle</a>{%- endcapture -%}
+        {%- capture licence_link -%}<a href="https://creativecommons.org/licenses/by/4.0/" rel="license noopener" target="_blank">CC BY 4.0</a>{%- endcapture -%}
+        <p class="hgb__credit">{{ 'hero_box.credit_html' | t: model: model_link, author: 'milaha', license: licence_link }}</p>
+      {%- endif -%}
     </div>
   </div>
 </section>
@@ -198,16 +217,23 @@
       "default": false
     },
     {
+      "type": "checkbox",
+      "id": "model_3d",
+      "label": "3D bottle on desktop",
+      "info": "The generic MOMENTS bottle turns in 3D as the box opens (loaded after the page, desktop only). Off: two still images. Not used when you upload your own bottle images below.",
+      "default": true
+    },
+    {
       "type": "product",
       "id": "product",
       "label": "Rising bottle (product)",
-      "info": "Used for the image description. Leave empty for 9 PM Night Out."
+      "info": "Only with your own bottle images below: gives their description."
     },
     {
       "type": "image_picker",
       "id": "front_image",
       "label": "Bottle, front view (transparent cut-out)",
-      "info": "A cut-out with a transparent background (no white box), the bottle filling the image. Leave empty for the 9 PM cut-out."
+      "info": "Optional: a cut-out with a transparent background (no white box), the bottle filling the image. Leave empty for the generic 3D MOMENTS bottle."
     },
     {
       "type": "image_picker",

@@ -370,7 +370,9 @@
     "headline_3": "Now choose your moment.",
     "shop_gifts": "Shop gifts",
     "find_moment": "Find your moment",
-    "bottle_alt": "{{ title }} by {{ brand }}, rising out of a MOMENTS gift box"
+    "bottle_alt": "{{ title }} by {{ brand }}, rising out of a MOMENTS gift box",
+    "bottle_alt_generic": "A faceted perfume bottle rising out of a MOMENTS gift box",
+    "credit_html": "3D bottle adapted from {{ model }} by {{ author }}, {{ license }}"
   },
   "gift_finder": {
     "strip_title": "Find a gift in 3 taps",

@@ -3,7 +3,8 @@
 // Checks: the stage pins (sticky) and --p follows the scroll, no horizontal scroll, the box stays centred in its column in RTL,
 // the headline in the DOM changes with the state, buttons reachable by keyboard with a visible focus ring, axe wcag2aa (contrast
 // included) on every state, CLS 0 from the hero while loading, the hero's last row is the brand strip colour (no seam).
-// Screenshots: docs/design/hero-gift-box/.   node scripts/check-hero-box.mjs [--no-shots] [--engine chromium|webkit|all]
+// The box and text states run with the still bottle; the live 3D bottle has its own page and checks (software WebGL here is far slower
+// than any real graphics chip, so it would distort the scroll timing). Screenshots: docs/design/hero-gift-box/.   node scripts/check-hero-box.mjs [--no-shots] [--engine chromium|webkit|all]
 import { ROOT, engine, css, serve } from './lib/theme-fixture.mjs';
 import { chromium, webkit } from 'playwright-core';
 import AxeBuilder from '@axe-core/playwright';
@@ -15,10 +16,10 @@ mkdirSync(OUT, { recursive: true });
 const shots = !process.argv.includes('--no-shots');
 const which = process.argv.includes('--engine') ? process.argv[process.argv.indexOf('--engine') + 1] : 'all';
 
-async function page({ dir = 'ltr', animate = true, phones = true } = {}) {
+async function page({ dir = 'ltr', animate = true, phones = true, model = false } = {}) {
   css.length = 0;
   const globals = { settings: {}, routes: { root_url: '/', all_products_collection_url: '/collections/all' }, request: { design_mode: false, locale: { iso_code: dir === 'rtl' ? 'ar' : 'en' } }, collections: { gifts: { url: '/collections/gifts' } }, all_products: { '9-pm-night-out': { title: '9 PM Night Out', vendor: 'AFNAN' } } };
-  const section = { id: 'hero', settings: { animate, show_on_phones: phones, box_tone: 'plum', logo_tone: 'white' }, blocks: [] };
+  const section = { id: 'hero', settings: { animate, show_on_phones: phones, model_3d: model, box_tone: 'plum', logo_tone: 'white' }, blocks: [] };
   const body = await engine.renderFile('hero-gift-box', { section }, { globals });
   return `<!doctype html><html lang="${dir === 'rtl' ? 'ar' : 'en'}" dir="${dir}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Hero fixture</title><link rel="stylesheet" href="/assets/base.css"><link rel="stylesheet" href="/assets/moments.css"><style>${css.join('\n')}</style>
@@ -27,7 +28,7 @@ async function page({ dir = 'ltr', animate = true, phones = true } = {}) {
 <body><header class="fx-header"></header><main><div class="shopify-section">${body}</div><div class="shopify-section"><div class="m-brands fx-brands"></div></div><div class="shopify-section"><div class="fx-tiles"></div></div></main></body></html>`;
 }
 
-const pages = { '/': await page(), '/rtl': await page({ dir: 'rtl' }), '/static': await page({ animate: false }), '/desktop-only': await page({ phones: false }) };
+const pages = { '/': await page(), '/rtl': await page({ dir: 'rtl' }), '/static': await page({ animate: false }), '/desktop-only': await page({ phones: false }), '/3d': await page({ model: true }) };
 const server = serve(pages);
 let bad = 0;
 const ok = (cond, msg) => { console.log(cond ? 'ok  ' : 'FAIL', msg); if (!cond) bad++; };
@@ -43,12 +44,20 @@ const scrollTo = async (p, f) => {
     const top = t.getBoundingClientRect().top + scrollY;
     scrollTo(0, top + (t.offsetHeight - innerHeight) * f);
   }, f);
-  await p.waitForTimeout(350);
+  // wait until the progress settles (the live 3D bottle renders in software here, which slows the frames)
+  let last = -1;
+  for (let i = 0; i < 40; i++) {
+    await p.waitForTimeout(120);
+    const now = await p.evaluate(() => getComputedStyle(document.querySelector('.hgb__stage')).getPropertyValue('--p'));
+    if (now === last) break;
+    last = now;
+  }
 };
 
 const engines = which === 'all' ? [['chromium', chromium], ['webkit', webkit]] : [[which, which === 'webkit' ? webkit : chromium]];
 for (const [name, type] of engines) {
-  const browser = await type.launch(name === 'chromium' ? { channel: 'chrome' } : {});
+  // software WebGL (SwiftShader) so the live 3D bottle can render in headless Chrome
+  const browser = await type.launch(name === 'chromium' ? { channel: 'chrome', args: ['--use-angle=swiftshader', '--enable-unsafe-swiftshader'] } : {});
   const widths = name === 'chromium' ? [1440, 1280, 768, 390, 360] : [1440, 390];
   for (const dir of ['ltr', 'rtl']) {
     for (const w of widths) {
@@ -106,6 +115,34 @@ for (const [name, type] of engines) {
     const shown = await p.evaluate(() => getComputedStyle(document.querySelector('.hgb').closest('.shopify-section')).display !== 'none');
     ok(shown === want, `${name} ${w}px with "Show on phones" off: hero ${shown ? 'shown' : 'hidden'}`);
     await ctx.close();
+  }
+
+  // the live 3D bottle: mounts on desktop after load, draws, and turns with the scroll (Chromium only: WebKit here has no 3D)
+  if (name === 'chromium') {
+    const ctx = await browser.newContext({ viewport: { width: 1440, height: 900 } });
+    const p = await ctx.newPage();
+    const errors = [];
+    p.on('pageerror', (e) => errors.push(String(e)));
+    await p.goto(server.base + '/3d', { waitUntil: 'load' });
+    const mounted = await p.waitForSelector('.hgb.has-3d .hgb-bottle__3d', { timeout: 20000 }).then(() => true).catch(() => false);
+    ok(mounted, `${name} 1440: live 3D bottle mounted after load`);
+    if (mounted) {
+      const pixels = async () => p.$eval('.hgb-bottle__3d', (c) => c.toDataURL().length);
+      await scrollTo(p, 0.42); await p.waitForTimeout(500);
+      const half = await p.screenshot({ clip: await p.$eval('.hgb-bottle', (e) => { const r = e.getBoundingClientRect(); return { x: r.x, y: r.y, width: r.width, height: r.height }; }) });
+      await scrollTo(p, 1); await p.waitForTimeout(500);
+      const open = await p.screenshot({ clip: await p.$eval('.hgb-bottle', (e) => { const r = e.getBoundingClientRect(); return { x: r.x, y: r.y, width: r.width, height: r.height }; }) });
+      ok(!half.equals(open), `${name} 1440: the 3D bottle turns between half open and open`);
+      ok((await p.$eval('.hgb-bottle__img--front', (e) => getComputedStyle(e).visibility)) === 'hidden', `${name} 1440: stills hidden once the model draws`);
+      if (shots) { await scrollTo(p, 0.42); await p.waitForTimeout(400); await p.screenshot({ path: join(OUT, '3d-1440-half.png') }); await scrollTo(p, 1); await p.waitForTimeout(400); await p.screenshot({ path: join(OUT, '3d-1440-open.png') }); }
+    }
+    ok(!errors.length, `${name} 1440 3D: no page errors ${errors.join(' | ')}`);
+    await ctx.close();
+    const ctx2 = await browser.newContext({ viewport: { width: 1440, height: 900 }, reducedMotion: 'reduce' });
+    const p2 = await ctx2.newPage();
+    await p2.goto(server.base + '/3d', { waitUntil: 'load' }); await p2.waitForTimeout(2500);
+    ok(!(await p2.$('.hgb-bottle__3d')), `${name} reduced motion: no 3D module loaded, stills only`);
+    await ctx2.close();
   }
 
   // keyboard: the two buttons in order, visible focus

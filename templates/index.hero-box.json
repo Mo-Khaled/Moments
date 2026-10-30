@@ -4,9 +4,10 @@
       "type": "hero-gift-box",
       "settings": {
         "animate": true,
-        "product": "9-pm-night-out",
         "box_tone": "plum",
-        "logo_tone": "white"
+        "logo_tone": "white",
+        "model_3d": true,
+        "show_on_phones": false
       }
     },
     "moments_hero": {

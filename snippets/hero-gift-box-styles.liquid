@@ -479,6 +479,46 @@
     filter: drop-shadow(0 18px 22px rgb(16 6 15 / 0.45));
   }
 
+  /* the generic MOMENTS bottle is wider than a photographed bottle */
+  .hgb-bottle--model {
+    --bh: calc(var(--h) * 1.5);
+    inline-size: calc(var(--bh) * 0.62);
+    margin-inline-start: calc(var(--bh) * -0.31);
+  }
+
+  [dir='rtl'] .hgb-bottle--model {
+    margin-inline-start: 0;
+    margin-inline-end: calc(var(--bh) * -0.31);
+  }
+
+  /* the live 3D bottle (assets/hero-bottle-3d.js) replaces the stills once it has drawn its first frame */
+  .hgb-bottle__3d {
+    position: absolute;
+    inset: 0;
+    inline-size: 100%;
+    block-size: 100%;
+    filter: drop-shadow(0 18px 22px rgb(16 6 15 / 0.45));
+  }
+
+  .hgb.has-3d .hgb-bottle__img {
+    visibility: hidden;
+  }
+
+  .hgb__credit {
+    position: absolute;
+    inset-block-end: calc(env(safe-area-inset-bottom, 0px) + 10px);
+    inset-inline-end: 16px;
+    z-index: 2;
+    margin: 0;
+    color: var(--m-nude);
+    font-size: 0.75rem;
+  }
+
+  .hgb__credit a {
+    color: inherit;
+    text-underline-offset: 2px;
+  }
+
   .hgb-bottle__img--angle {
     opacity: var(--turn);
   }

@@ -32,4 +32,12 @@ if (hero && !reduced.matches) {
     addEventListener('scroll', request, { passive: true });
     addEventListener('resize', request, { passive: true });
   }
+
+  // The live 3D bottle: desktop only, after the page has loaded and the browser is idle, so it never delays the first paint.
+  // The stills stay if the module or WebGL fails.
+  if (hero.dataset.module && matchMedia('(min-width: 750px)').matches) {
+    const load = () => (window.requestIdleCallback || setTimeout)(() => import(hero.dataset.module).then((m) => m.mount(hero)).catch(() => {}), { timeout: 3000 });
+    if (document.readyState === 'complete') load();
+    else addEventListener('load', load, { once: true });
+  }
 }
