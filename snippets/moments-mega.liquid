@@ -130,6 +130,12 @@
     transition-duration: 0s;
   }
 
+  /* A closed panel is not rendered at all, so Chrome can never show a stale piece of it (owner screenshots 2026-10-30: a strip of
+     tiles under the header after leaving the menu, and a pale band across the tiles). Open or hovered, it renders as usual. */
+  .menu-list__list-item:not(:has(> .menu-list__link[aria-expanded='true'])):not(:has(> .menu-list__submenu:hover)) .m-mega {
+    content-visibility: hidden;
+  }
+
   @media (prefers-reduced-motion: reduce) {
     .m-mega {
       transition: none;

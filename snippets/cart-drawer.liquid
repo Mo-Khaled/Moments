@@ -85,6 +85,9 @@
               {% render 'cart-bubble' %}
             </h2>
 
+            {%- comment -%} MOMENTS: a direct way to the full cart page from the drawer (owner request 2026-10-30) {%- endcomment -%}
+            <a class="cart-drawer__view-cart" href="{{ routes.cart_url }}">{{ 'cart_page.toast_view' | t }}</a>
+
             <button
               ref="closeButton"
               on:click="cart-drawer-component/close"

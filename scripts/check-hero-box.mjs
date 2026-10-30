@@ -44,13 +44,11 @@ const scrollTo = async (p, f) => {
     const top = t.getBoundingClientRect().top + scrollY;
     scrollTo(0, top + (t.offsetHeight - innerHeight) * f);
   }, f);
-  // wait until the progress settles (the live 3D bottle renders in software here, which slows the frames)
-  let last = -1;
-  for (let i = 0; i < 40; i++) {
+  // wait until the progress reaches the scroll position (software rendering here can lag several frames behind), up to 6 s
+  for (let i = 0; i < 50; i++) {
     await p.waitForTimeout(120);
-    const now = await p.evaluate(() => getComputedStyle(document.querySelector('.hgb__stage')).getPropertyValue('--p'));
-    if (now === last) break;
-    last = now;
+    const now = Number(await p.evaluate(() => getComputedStyle(document.querySelector('.hgb__stage')).getPropertyValue('--p')));
+    if (Math.abs(now - f) < 0.03) break;
   }
 };
 

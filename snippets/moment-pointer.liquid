@@ -54,6 +54,12 @@
       ):not([data-zoom], [aria-disabled='true']) {
         cursor: var(--m-pointer-link);
       }
+
+      /* the theme sets cursor: pointer on parts INSIDE clickable elements (a filter heading's text, a card's inner span), which showed
+         the system hand there; everything inside a link, button, summary or label takes the berry hand too, except text fields */
+      html:root:root :where(a[href], button:not(:disabled), [role='button'], summary, label) :where(*):not(input:not([type='checkbox'], [type='radio'], [type='submit'], [type='button']), textarea, select, [data-zoom]) {
+        cursor: var(--m-pointer-link);
+      }
     }
   </style>
 {%- endif -%}

@@ -731,6 +731,42 @@ html:root:root [class*="color-scheme-"] {
   max-inline-size: 48rem;
 }
 
+/* Cart drawer: "View cart" beside the title, a quiet text link (the drawer already has Check out and the accelerated button) */
+.cart-drawer__view-cart {
+  display: inline-flex;
+  align-items: center;
+  min-block-size: 44px;
+  margin-inline-start: auto;
+  margin-inline-end: 8px;
+  color: var(--m-berry-ink);
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.cart-drawer__view-cart:hover {
+  color: var(--m-plum);
+}
+
+.cart-drawer__view-cart:focus-visible {
+  outline: 2px solid var(--m-focus);
+  outline-offset: 2px;
+}
+
+/* Header menus over the page (owner screenshots 2026-10-30):
+   - the header and the page's sticky parts (the collection filter bar) were both at z-index 8, so the later one in the page painted
+     over the open mega panel (a pale band across the moment tiles); the header group is one level above;
+   - the menu's background layer drew its drop shadow up to 100px outside its clip, and Chrome did not repaint that area when the
+     panel closed (a strip of tiles left under the header); the panel keeps its own shadow, the background layer has none. */
+html:root:root #header-group > .header-section {
+  z-index: calc(var(--layer-sticky) + 1);
+}
+
+html:root:root .overflow-menu::after {
+  box-shadow: none;
+}
+
 /* ---------- Colour flow: no seam where one full-bleed colour meets another ----------
    Three surface tones only: deep and plum (one family: hero, brand strip, Shop by Moment, story, marquee, footer) and the pearl base.
    Where two different tones meet, the LOWER band opens with a short strip (::before on its wrapper, --blend tall) that fades from the colour
