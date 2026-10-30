@@ -33,11 +33,18 @@ if (hero && !reduced.matches) {
     addEventListener('resize', request, { passive: true });
   }
 
-  // The live 3D bottle: desktop only, after the page has loaded and the browser is idle, so it never delays the first paint.
+  // The live 3D bottle: desktop only, loaded on the visitor's first scroll, pointer move or key press after the page has loaded. Starting
+  // three.js and the model blocks the main thread for a moment, so it never runs before someone interacts (and never during first paint).
+  // The bottle is first needed when the lid opens on scroll; until it is ready the stills, rendered from the same model, show.
   // The stills stay if the module or WebGL fails.
   if (hero.dataset.module && matchMedia('(min-width: 750px)').matches) {
-    const load = () => (window.requestIdleCallback || setTimeout)(() => import(hero.dataset.module).then((m) => m.mount(hero)).catch(() => {}), { timeout: 3000 });
-    if (document.readyState === 'complete') load();
-    else addEventListener('load', load, { once: true });
+    const events = ['scroll', 'wheel', 'pointermove', 'keydown', 'touchstart'];
+    const load = () => {
+      for (const type of events) removeEventListener(type, load);
+      import(hero.dataset.module).then((m) => m.mount(hero)).catch(() => {});
+    };
+    const arm = () => { for (const type of events) addEventListener(type, load, { once: true, passive: true }); };
+    if (document.readyState === 'complete') arm();
+    else addEventListener('load', arm, { once: true });
   }
 }

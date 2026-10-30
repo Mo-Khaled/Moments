@@ -124,8 +124,11 @@ for (const [name, type] of engines) {
     const errors = [];
     p.on('pageerror', (e) => errors.push(String(e)));
     await p.goto(server.base + '/3d', { waitUntil: 'load' });
+    await p.waitForTimeout(2500);
+    ok(!(await p.$('.hgb-bottle__3d')), `${name} 1440: no 3D module before the visitor interacts (keeps it out of first load)`);
+    await p.mouse.move(400, 400);
     const mounted = await p.waitForSelector('.hgb.has-3d .hgb-bottle__3d', { timeout: 20000 }).then(() => true).catch(() => false);
-    ok(mounted, `${name} 1440: live 3D bottle mounted after load`);
+    ok(mounted, `${name} 1440: live 3D bottle mounted after the first interaction`);
     if (mounted) {
       const pixels = async () => p.$eval('.hgb-bottle__3d', (c) => c.toDataURL().length);
       await scrollTo(p, 0.42); await p.waitForTimeout(500);
