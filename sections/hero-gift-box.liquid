@@ -102,6 +102,7 @@
   {%- render 'hero-box-logo', part: 'defs' -%}
   <div class="hgb__track">
     <div class="hgb__stage">
+      <div class="hgb__pattern" aria-hidden="true"></div>
       <div class="hgb__glow" aria-hidden="true"></div>
       <div class="hgb__inner m-wrap">
         <div class="hgb__copy">
@@ -117,6 +118,12 @@
 
         <div class="hgb__scene">
           <div class="hgb__ground" aria-hidden="true"></div>
+          {%- if animate -%}
+            <p class="hgb__cue" aria-hidden="true">
+              <span>{{ 'hero_box.scroll_cue' | t }}</span>
+              <svg viewBox="0 0 16 16" width="14" height="14" focusable="false"><path d="M3.5 6l4.5 4.5L12.5 6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </p>
+          {%- endif -%}
           <div class="hgb-box">
             <div class="hgb-face hgb-face--inner-back" aria-hidden="true"></div>
             <div class="hgb-face hgb-face--inner-floor" aria-hidden="true"></div>
@@ -163,8 +170,21 @@
 
             <div class="hgb-face hgb-face--front" aria-hidden="true"></div>
 
+            {%- comment -%} the wrapper only carries the closed lid's small "peek" (an invitation to scroll); the lid itself stays a 3D group {%- endcomment -%}
+            <div class="hgb-lid-peek">
             <div class="hgb-lid" aria-hidden="true">
               <div class="hgb-lid__face hgb-lid__top">{% render 'hero-box-logo' %}</div>
+              {%- comment -%} the bow stands upright on the ribbon, facing the visitor, and swings back with the lid {%- endcomment -%}
+              <div class="hgb-lid__bow">
+                <svg class="hgb-bow" viewBox="0 0 120 84" focusable="false" aria-hidden="true">
+                  <path class="hgb-bow__tail" d="M57 44 L40 82 L49 77 L55 84 Z"/>
+                  <path class="hgb-bow__tail" d="M63 44 L80 82 L71 77 L65 84 Z"/>
+                  <path class="hgb-bow__loop" d="M60 42 C42 12 9 8 11 30 C13 48 40 49 60 42 Z"/>
+                  <path class="hgb-bow__loop" d="M60 42 C78 12 111 8 109 30 C107 48 80 49 60 42 Z"/>
+                  <path class="hgb-bow__fold" d="M58 40 C46 26 26 22 22 30 M62 40 C74 26 94 22 98 30"/>
+                  <ellipse class="hgb-bow__knot" cx="60" cy="42" rx="9" ry="8"/>
+                </svg>
+              </div>
               <div class="hgb-lid__face hgb-lid__under"></div>
               <div class="hgb-lid__face hgb-lid__front">{% render 'hero-box-logo' %}</div>
               <div class="hgb-lid__face hgb-lid__side hgb-lid__side--left"></div>
@@ -175,6 +195,7 @@
               <div class="hgb-lid__face hgb-lid__band hgb-lid__band--inner-back"></div>
               <div class="hgb-lid__face hgb-lid__side hgb-lid__side--inner-left"></div>
               <div class="hgb-lid__face hgb-lid__side hgb-lid__side--inner-right"></div>
+            </div>
             </div>
           </div>
         </div>

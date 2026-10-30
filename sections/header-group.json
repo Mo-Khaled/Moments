@@ -116,7 +116,7 @@
         "msg_shipping"
       ],
       "settings": {
-        "style": "rotate",
+        "style": "marquee",
         "interval": 4,
         "speed": 40
       }

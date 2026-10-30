@@ -371,6 +371,7 @@
     "shop_gifts": "Shop gifts",
     "find_moment": "Find your moment",
     "bottle_alt": "{{ title }} by {{ brand }}, rising out of a MOMENTS gift box",
+    "scroll_cue": "Scroll to open",
     "bottle_alt_generic": "A faceted perfume bottle rising out of a MOMENTS gift box",
     "credit_html": "3D bottle adapted from {{ model }} by {{ author }}, {{ license }}"
   },
