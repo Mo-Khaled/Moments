@@ -74,3 +74,7 @@ Rollback: not expected; the snippet is in git history (`git show 6005df2^:snippe
 
 ### 2026-10-29 hero LCP pass (preview only, smoke passed)
 Pushed: sections/hero-gift-box.liquid, snippets/hero-box-logo.liquid (logo paths once, as symbols), snippets/hero-gift-box-styles.liquid (new: the hero's styles inline), and assets/hero-gift-box.css removed from the live theme (replaced by the inline styles). check-hero-box (Chromium) PASSED; lid logo checked on desktop, phone and RTL. Live homepage unchanged.
+
+### 2026-10-30 hero: desktop only, inside walls (preview only, smoke passed)
+Owner: the box on phones is not wanted; a side looked missing on desktop. Pulled templates/index.hero-box.json first (equal to the last push).
+Pushed: sections/hero-gift-box.liquid (new setting "Show on phones", default off: under 750px the section is hidden and the previous moments-hero shows; from 750px the previous hero is hidden), snippets/hero-gift-box-styles.liquid (inside faces of the left and right walls, seen through the open top), templates/index.hero-box.json (moments_hero added back after hero_box, so phones on the preview get today's hero). check-hero-box PASSED (incl. hidden at 390/749, shown at 750/1440). On live: /?view=hero-box shows the new hero at 1440 and the current hero at 390; the live homepage is unchanged. Smoke PASSED.

@@ -25,7 +25,7 @@ Preview: `https://momentseg.com/?view=hero-box` (the live homepage is unchanged 
   - Night glow: grows behind the box from 0.12;
   - headlines: 1 → 2 around 0.3, 2 → 3 around 0.66;
   - box: settles slightly from 0.7.
-- **Phones (under 750px)**: no tilt. The box faces the visitor, the lid lifts and leans a little (with the logo on its front band), and the bottle rises.
+- **Phones (under 750px)**: by default the section is not shown on phones (setting "Show on phones", off; the owner's choice 2026-10-30) and the previous hero shows instead. With the setting on: no tilt. The box faces the visitor, the lid lifts and leans a little (with the logo on its front band), and the bottle rises.
 - **Reduced motion, or the setting off**: `--p` is fixed at 1, so the open box, the standing bottle and the last headline show, with no tall track.
 - **Colours**: the stage starts and ends on deep plum `#251224` (the brand strip's colour), so the join below is seamless at every scroll position. The Night glow is radial and fades out before the stage's last rows. Text is pearl on every state, and contrast was checked on all of them. There's no gold: the identity palette has none. The box edge is a nude hairline.
 - **Screen readers**: the h1 is headline 1. Headlines 2 and 3 are real text in the DOM but `aria-hidden`, so nothing is announced on scroll. Box faces are `aria-hidden`. The bottle has alt text ("9 PM Night Out by AFNAN, rising out of a MOMENTS gift box").
