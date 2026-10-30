@@ -78,3 +78,6 @@ Pushed: sections/hero-gift-box.liquid, snippets/hero-box-logo.liquid (logo paths
 ### 2026-10-30 hero: desktop only, inside walls (preview only, smoke passed)
 Owner: the box on phones is not wanted; a side looked missing on desktop. Pulled templates/index.hero-box.json first (equal to the last push).
 Pushed: sections/hero-gift-box.liquid (new setting "Show on phones", default off: under 750px the section is hidden and the previous moments-hero shows; from 750px the previous hero is hidden), snippets/hero-gift-box-styles.liquid (inside faces of the left and right walls, seen through the open top), templates/index.hero-box.json (moments_hero added back after hero_box, so phones on the preview get today's hero). check-hero-box PASSED (incl. hidden at 390/749, shown at 750/1440). On live: /?view=hero-box shows the new hero at 1440 and the current hero at 390; the live homepage is unchanged. Smoke PASSED.
+
+### 2026-10-30 hero headline 3 (preview only, smoke passed)
+Pulled locales/en.default.json first (no drift). hero_box.headline_3 is now "Now choose your moment." (no product named; the owner chose a generic MOMENTS bottle for the 3D model). Only the preview uses this string.
