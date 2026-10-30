@@ -56,7 +56,7 @@
 
 {% stylesheet %}
   .m-refer {
-    padding-block: clamp(40px, 6vw, 96px);
+    padding-block: var(--m-space-m);
     background: var(--m-surface);
     color: var(--m-text);
   }
@@ -71,7 +71,7 @@
   .m-refer__title {
     margin: 0 0 12px;
     max-inline-size: 14ch;
-    font-size: clamp(2.5rem, 6vw, 4.75rem);
+    font-size: var(--m-h1);
     line-height: 1;
     text-wrap: balance;
   }
@@ -98,7 +98,7 @@
   .m-refer__todo {
     margin: 24px 0 0;
     padding: 8px 12px;
-    border: 1px dashed var(--m-gold-ink);
+    border: 1px dashed var(--m-berry-ink);
     font-size: 0.8125rem;
   }
 

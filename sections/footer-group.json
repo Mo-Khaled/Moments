@@ -173,7 +173,7 @@
             "icon_size": 20,
             "text_color": "#faf6f2",
             "icon_color": "#e9cfc8",
-            "link_hover_color": "#b7406a"
+            "link_hover_color": "#e9cfc8"
           },
           "blocks": {}
         }

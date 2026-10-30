@@ -59,9 +59,11 @@
 
 <style>
 .sn {
-  padding: 28px 20px;
-  max-width: var(--page-width, 1200px);
-  margin: 0 auto;
+  box-sizing: border-box;
+  inline-size: 100%;
+  max-inline-size: calc(var(--m-content) + 2 * var(--m-gutter));
+  margin-inline: auto;
+  padding: 28px var(--m-gutter);
 }
 .sn__title-bar {
   display: flex;

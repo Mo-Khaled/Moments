@@ -217,9 +217,9 @@
       gap: 12px;
       padding: 10px 16px;
       padding-bottom: calc(10px + env(safe-area-inset-bottom, 0px));
-      background: #FAF9F1;
-      border-top: 1px solid rgba(34, 7, 10, 0.1);
-      box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.08);
+      background: var(--m-pearl);
+      border-top: 1px solid rgb(59 30 58 / 0.08);
+      box-shadow: 0 -6px 16px -12px rgb(59 30 58 / 0.18);
       animation: sticky-atc-slide-up 0.25s ease;
     }
 
@@ -267,7 +267,7 @@
     .sticky-atc__title {
       font-size: 0.85rem;
       font-weight: 600;
-      color: #22070A;
+      color: var(--m-text);
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -275,7 +275,7 @@
 
     .sticky-atc__price {
       font-size: 0.8rem;
-      color: #22070A;
+      color: var(--m-text);
       opacity: 0.75;
     }
 
@@ -284,7 +284,7 @@
       margin-inline-start: 6px;
       font-size: 0.75rem;
       font-weight: 600;
-      color: #B3261E;
+      color: var(--m-error, #B3261E);
     }
 
     .sticky-atc__stock[hidden] {
@@ -295,18 +295,17 @@
       flex: 0 0 auto;
       padding: 10px 20px;
       border-radius: 999px;
-      background: #22070A;
-      color: #ffffff;
+      min-block-size: 44px;
+      background: var(--m-action);
+      color: var(--m-action-text);
       border: none;
-      font-size: 0.85rem;
+      font-size: 0.9375rem;
       font-weight: 600;
-      letter-spacing: 0.02em;
-      text-transform: uppercase;
       white-space: nowrap;
     }
 
     .sticky-atc__button:hover {
-      background: #000000;
+      background: var(--m-berry-600);
     }
 
     .sticky-atc__button:disabled {

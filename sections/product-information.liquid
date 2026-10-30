@@ -305,8 +305,13 @@
   }
 
  /* Breadcrumb styles */
+  /* on the same content edge as the header and every MOMENTS section (.m-wrap) */
   .breadcrumb-section {
-    padding: 0.2rem 12px;
+    box-sizing: border-box;
+    inline-size: 100%;
+    max-inline-size: calc(var(--m-content) + 2 * var(--m-gutter));
+    margin-inline: auto;
+    padding: 0.2rem var(--m-gutter);
   }
 
 
@@ -316,7 +321,7 @@
     align-items: center;
     list-style: none;
     margin: 0;
-    padding: 0.75rem;
+    padding: 0.75rem 0;
     font-size: 0.875rem;
     color: rgb(var(--color-foreground-rgb) / var(--opacity-subdued-text));
   }
@@ -349,7 +354,7 @@
 
   @media screen and (max-width: 749px) {
     .breadcrumb-section {
-      padding: 0rem 0;
+      padding-block: 0;
     }
 
     .breadcrumb {

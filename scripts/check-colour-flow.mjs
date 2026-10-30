@@ -48,13 +48,15 @@ for (const [ws, dir] of MODES) {
   const total0 = await page.evaluate(() => document.documentElement.scrollHeight);
   for (let y = 0; y < Math.min(total0, 12000); y += h * 0.8) { await page.evaluate((yy) => window.scrollTo({ top: yy, behavior: 'instant' }), y); await page.waitForTimeout(110); }
   await page.evaluate(() => window.scrollTo({ top: 0, behavior: 'instant' })); await page.waitForTimeout(500);
-  await page.addStyleTag({ content: '#header-group, #header-group *, .header, header-component, [class*="sticky"] { position: static !important; } .m-announce { position: static !important; }' });
+  await page.addStyleTag({ content: '#header-group, #header-group *, .header, header-component, [class*="sticky"] { position: static !important; } .m-announce { position: static !important; } .sticky-atc, sticky-add-to-cart { display: none !important; }' });
   await page.waitForTimeout(300);
   const meta = await page.evaluate(() => {
     const secs = [...document.querySelectorAll('body > .shopify-section, #MainContent > .shopify-section, #header-group > .shopify-section, body > header.shopify-section')].map((e) => { const r = e.getBoundingClientRect(); return { id: e.id.replace('shopify-section-', '').slice(-26), top: Math.round(r.top + scrollY), bottom: Math.round(r.bottom + scrollY), hero: !!e.querySelector('.m-hero, .hgb, .m-brands'), chrome: e.classList.contains('shopify-section-group-header-group') }; }).filter((s) => s.bottom - s.top > 4).sort((a, b) => a.top - b.top);
     const f = document.querySelector('.shopify-section-group-footer-group');
     const blend = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--blend')) || 200;
-    return { height: document.documentElement.scrollHeight, secs, footerTop: f ? Math.round(f.getBoundingClientRect().top + scrollY) : null, blend };
+    // product photos are media like the hero: on phones the gallery runs edge to edge and its photo backdrop is not a section seam
+    const media = [...document.querySelectorAll('media-gallery, .product-information__media')].map((e) => { const r = e.getBoundingClientRect(); return [Math.round(r.top + scrollY), Math.round(r.bottom + scrollY)]; }).filter(([a, b]) => b - a > 4);
+    return { height: document.documentElement.scrollHeight, secs, media, footerTop: f ? Math.round(f.getBoundingClientRect().top + scrollY) : null, blend };
   });
   const H = meta.height;
   // read both columns row by row in viewport-high strips
@@ -72,8 +74,8 @@ for (const [ws, dir] of MODES) {
       for (let i = 0; i < rows; i++) data[c][sy + i] = px[i];
     }
   }
-  // exempt: hero media, header chrome
-  const ex = meta.secs.filter((s) => s.hero || s.chrome).map((s) => [s.top, s.bottom]);
+  // exempt: hero media, header chrome, the product gallery
+  const ex = [...meta.secs.filter((s) => s.hero || s.chrome).map((s) => [s.top, s.bottom]), ...meta.media];
   const exempt = (y) => ex.some(([a, b]) => y >= a - 2 && y <= b + 2);
   const problems = [];
   let maxStep = 0, maxAt = 0;

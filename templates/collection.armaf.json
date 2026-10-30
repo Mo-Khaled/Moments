@@ -134,7 +134,7 @@
                 "text": "{{ closest.collection.description }}",
                 "width": "100%",
                 "max_width": "normal",
-                "alignment": "center",
+                "alignment": "left",
                 "type_preset": "paragraph",
                 "font": "var(--font-primary--family)",
                 "font_size": "",
@@ -226,7 +226,7 @@
           "settings": {
             "product_card_gap": 0,
             "inherit_color_scheme": false,
-            "color_scheme": "scheme-e1e09ff5-6396-47cd-ad7a-c05470cf2a2e",
+            "color_scheme": "scheme-1",
             "border": "none",
             "border_width": 1,
             "border_opacity": 100,

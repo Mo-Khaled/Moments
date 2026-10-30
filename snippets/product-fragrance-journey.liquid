@@ -179,7 +179,7 @@
   border-radius: 50%;
   flex-shrink: 0;
   margin-right: 4px;
-  background: #b0a090;
+  background: var(--m-taupe);
 }
 .fj__chip--attr {
   display: inline-flex;
@@ -187,23 +187,23 @@
   gap: 0.45rem;
   padding: 0.35rem 0.85rem;
   background: transparent;
-  border: 1px solid rgba(122, 90, 96, 0.2);
+  border: 1px solid var(--m-nude-deep);
   border-radius: 999px;
   font-size: 0.8125rem;
   letter-spacing: 0.01em;
-  color: #3c1217;
+  color: var(--m-text);
   line-height: 1.4;
   font-family: var(--font-body--family, inherit);
   transition: border-color 0.2s ease;
 }
 .fj__chip--attr:hover {
-  border-color: rgba(122, 90, 96, 0.45);
+  border-color: var(--m-mauve);
 }
 .fj__attr-icon {
   display: flex;
   align-items: center;
   flex-shrink: 0;
-  color: #7a5a60;
+  color: var(--m-text-muted);
   opacity: 0.85;
 }
 .fj__attr-icon svg { display: block; }
@@ -212,11 +212,12 @@
 <script>
 (function(){
   var colors = {
-    citrus:'#E8920A',floral:'#E8789A',rose:'#C94070',herbal:'#7A9E60',
-    spice:'#C04830',woody:'#8B5E3C',oud:'#5C3820',amber:'#C8920A',
-    musk:'#B0A8C0',moss:'#5A7A4A',incense:'#7A6850',tobacco:'#6A5040',
-    leather:'#7A5030',aquatic:'#3A90C0',gourmand:'#D4784A',fruity:'#E05870',
-    coffee:'#5A3820'
+    // note families drawn in the six moment colours (assets/moments.css), so the journey speaks the site's colour language
+    citrus:'var(--moment-allday-field)',floral:'var(--moment-gift-field)',rose:'var(--moment-love-field)',herbal:'var(--moment-fresh-field)',
+    spice:'var(--moment-daily-field)',woody:'var(--moment-daily-deep)',oud:'var(--moment-night-deep)',amber:'var(--moment-daily-field)',
+    musk:'var(--m-nude-deep)',moss:'var(--moment-fresh-deep)',incense:'var(--moment-night-field)',tobacco:'var(--moment-daily-deep)',
+    leather:'var(--moment-daily-deep)',aquatic:'var(--moment-fresh-field)',gourmand:'var(--moment-gift-field)',fruity:'var(--moment-love-field)',
+    coffee:'var(--moment-night-deep)'
   };
   var map = {
     'bergamot':'citrus','lemon':'citrus','lime':'citrus','grapefruit':'citrus',
@@ -266,7 +267,7 @@
   }
   document.querySelectorAll('#fj-{{ section.id }} .fj__dot').forEach(function(d){
     var cat = getCategory(d.getAttribute('data-note'));
-    d.style.background = colors[cat] || '#B0A090';
+    d.style.background = colors[cat] || 'var(--m-taupe)';
   });
 })();
 </script>

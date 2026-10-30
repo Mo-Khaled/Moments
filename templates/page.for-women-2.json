@@ -1169,7 +1169,7 @@
         "section_width": "page-width",
         "horizontal_alignment": "center",
         "gap": 28,
-        "color_scheme": "scheme-569ff6eb-fdb9-4ddc-b654-696925b06146",
+        "color_scheme": "scheme-1",
         "padding-block-start": 32,
         "padding-block-end": 32
       }
@@ -1178,7 +1178,7 @@
       "type": "divider",
       "name": "t:names.divider_section",
       "settings": {
-        "color_scheme": "scheme-569ff6eb-fdb9-4ddc-b654-696925b06146",
+        "color_scheme": "scheme-1",
         "section_width": "full-width",
         "thickness": 1,
         "corner_radius": "square",
@@ -1448,7 +1448,7 @@
         "section_width": "page-width",
         "horizontal_alignment": "flex-start",
         "gap": 28,
-        "color_scheme": "scheme-569ff6eb-fdb9-4ddc-b654-696925b06146",
+        "color_scheme": "scheme-1",
         "padding-block-start": 0,
         "padding-block-end": 36
       }
@@ -1528,7 +1528,7 @@
         "section_width": "page-width",
         "section_height": "",
         "section_height_custom": 50,
-        "color_scheme": "scheme-569ff6eb-fdb9-4ddc-b654-696925b06146",
+        "color_scheme": "scheme-1",
         "background_media": "none",
         "video_position": "cover",
         "background_image": "shopify://shop_images/sa2_0c43c02f-dd0b-44ef-9e43-e95d293b73c8.png",

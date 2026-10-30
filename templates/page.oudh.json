@@ -1000,7 +1000,7 @@
       "type": "divider",
       "name": "t:names.divider_section",
       "settings": {
-        "color_scheme": "scheme-bf67b61c-a522-4711-afd6-ec65ee079393",
+        "color_scheme": "scheme-1",
         "section_width": "full-width",
         "thickness": 1,
         "corner_radius": "square",
@@ -1283,7 +1283,7 @@
         "section_width": "page-width",
         "horizontal_alignment": "center",
         "gap": 28,
-        "color_scheme": "scheme-bf67b61c-a522-4711-afd6-ec65ee079393",
+        "color_scheme": "scheme-1",
         "padding-block-start": 16,
         "padding-block-end": 32
       }

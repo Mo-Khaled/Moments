@@ -1,8 +1,8 @@
 {%- doc -%}
   Placeholder shown in a hero when no image or video is set. It stands in for the
   Shopify demo illustration until real fragrance photography is uploaded in the
-  theme editor. The label is visible on purpose, so an unfinished slot can't be
-  published unnoticed.
+  theme editor. In the theme editor a label marks the empty slot, so it can't be
+  forgotten; on the storefront it is a plain plum field (no TODO text for shoppers).
 
   @param {string} [class] - CSS classes added to the slot (pass the hero image classes for sizing).
 
@@ -10,12 +10,14 @@
   {% render 'hero-image-slot', class: 'hero__image' %}
 {%- enddoc -%}
 
+{%- comment -%} The label is for the theme editor only; shoppers see a plain plum field. {%- endcomment -%}
 <div
   class="hero-image-slot {{ class }}"
-  role="img"
-  aria-label="{{ 'placeholders.hero_image_todo' | t }}"
+  {% if request.design_mode %}role="img" aria-label="{{ 'placeholders.hero_image_todo' | t }}"{% else %}aria-hidden="true"{% endif %}
 >
-  <span class="hero-image-slot__label">{{ 'placeholders.hero_image_todo' | t }}</span>
+  {%- if request.design_mode -%}
+    <span class="hero-image-slot__label">{{ 'placeholders.hero_image_todo' | t }}</span>
+  {%- endif -%}
 </div>
 
 {% stylesheet %}

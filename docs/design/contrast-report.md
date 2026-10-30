@@ -1,15 +1,5 @@
 # Contrast report
 
-Live storefront, 2026-10-29. axe color-contrast rule plus our own computed check (4.5:1 normal text, 3:1 large text). Text over photographs is listed as "image" (not computed).
+Live storefront, 2026-10-30. axe color-contrast rule plus our own computed check (4.5:1 normal text, 3:1 large text). Text over photographs is listed as "image" (not computed).
 
-## /?view=hero-box 1440px LTR: ok
-Own check: 0 below threshold. axe: 0. Text over photographs (not computed): 0.
-
-## /?view=hero-box 1440px RTL: ok
-Own check: 0 below threshold. axe: 0. Text over photographs (not computed): 0.
-
-## /?view=hero-box 375px LTR: ok
-Own check: 0 below threshold. axe: 0. Text over photographs (not computed): 0.
-
-## /?view=hero-box 375px RTL: ok
-Own check: 0 below threshold. axe: 0. Text over photographs (not computed): 0.
+## C:/Program Files/Git/collections/all 1440 ltr: ERROR Error: page.goto: net::ERR_NAME_NOT_RESOLVED at https://momentseg.comc/Program%20Files/Git/collectio

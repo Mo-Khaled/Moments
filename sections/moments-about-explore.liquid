@@ -84,7 +84,7 @@
 
 {% stylesheet %}
   .m-aex {
-    padding-block: clamp(32px, 5vw, 72px);
+    padding-block: var(--m-space-m);
     background: var(--m-surface);
     color: var(--m-text);
   }
@@ -96,7 +96,7 @@
 
   .m-aex__h2 {
     margin: clamp(16px, 3vw, 40px) 0 0;
-    font-size: clamp(2.25rem, 5.5vw, 4.25rem);
+    font-size: var(--m-h2);
     line-height: 1.02;
   }
 
@@ -205,7 +205,7 @@
     --m-mark-ink: var(--m-plum);
     --m-mark-body: var(--m-nude);
     --m-mark-accent: var(--m-berry);
-    --m-mark-gold: var(--m-gold-ink);
+    --m-mark-gold: var(--m-berry-ink);
 
     display: grid;
     gap: 8px;
@@ -221,7 +221,7 @@
   }
 
   .m-aex__card.m-tone--allday {
-    border-color: var(--m-gold-ink);
+    border-color: var(--m-berry-ink);
   }
 
   .m-aex__card.m-tone--gift {
@@ -282,7 +282,7 @@
   }
 
   .m-aex__statement .m-accent {
-    color: var(--m-gold-light);
+    color: var(--m-nude);
   }
 
   .m-aex__pick {
@@ -305,7 +305,7 @@
     --m-mark-ink: var(--m-plum);
     --m-mark-body: var(--m-pearl);
     --m-mark-accent: var(--m-berry);
-    --m-mark-gold: var(--m-gold-ink);
+    --m-mark-gold: var(--m-berry-ink);
 
     display: inline-flex;
     align-items: center;

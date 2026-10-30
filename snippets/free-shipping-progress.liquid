@@ -83,15 +83,14 @@
     font-size: 0.7rem;
     font-weight: 600;
     letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: #22070A99;
+    color: var(--m-text-muted);
   }
 
   .free-shipping-bar__message {
     margin: 0;
     font-size: 1.02rem;
     line-height: 1.5;
-    color: #22070A;
+    color: var(--m-text);
     letter-spacing: 0.005em;
   }
 
@@ -112,14 +111,14 @@
   .free-shipping-bar__message--complete .svg-wrapper svg {
     width: 14px;
     height: 14px;
-    fill: #22070A;
+    fill: var(--m-text);
   }
 
   .free-shipping-bar__track {
     width: 100%;
     height: 3px;
     border-radius: 999px;
-    background: #e6e6e6;
+    background: var(--m-taupe-light);
     overflow: hidden;
     margin-block-start: 2px;
   }
@@ -127,7 +126,7 @@
   .free-shipping-bar__fill {
     height: 100%;
     width: var(--progress, 0%);
-    background: #22070A;
+    background: var(--m-action);
     border-radius: 999px;
     transition: width 0.4s ease;
   }
@@ -140,20 +139,19 @@
     gap: 8px;
     padding: 12px 18px;
     border-radius: 999px;
-    border: 1px solid #22070A;
-    background: #22070A;
-    color: #ffffff;
+    border: 1px solid var(--m-action);
+    background: var(--m-action);
+    color: var(--m-action-text);
     text-decoration: none;
     font-size: 0.95rem;
     font-weight: 600;
     letter-spacing: 0.08em;
-    text-transform: uppercase;
     transition: background 0.15s ease, border-color 0.15s ease;
   }
 
   .free-shipping-bar__collection-link:hover {
-    background: #000000;
-    border-color: #000000;
+    background: var(--m-berry-600);
+    border-color: var(--m-berry-600);
   }
 
   .free-shipping-bar__collection-link-icon {
@@ -165,7 +163,7 @@
     height: 11px;
     display: block;
     flex-shrink: 0;
-    fill: #ffffff;
+    fill: var(--m-action-text);
   }
 
   [dir='rtl'] .free-shipping-bar__collection-link-icon svg {

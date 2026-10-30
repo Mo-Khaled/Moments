@@ -1664,7 +1664,7 @@ zoom-dialog dialog {
   padding: 0;
   max-width: 100%;
   max-height: 100%;
-  background: #fff;
+  background: var(--m-pearl, #fff);
   opacity: 0;
   transition: opacity var(--animation-speed) var(--animation-easing);
   scrollbar-width: none;
@@ -3046,7 +3046,7 @@ fly-to-cart {
   }
 
   50% {
-    box-shadow: 0 0 0 2px #000;
+    box-shadow: 0 0 0 2px var(--m-plum, #000);
     scale: 1;
   }
 }

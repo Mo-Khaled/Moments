@@ -145,20 +145,24 @@
 
 {% stylesheet %}
   .m-faq {
-    padding-block: clamp(40px, 6vw, 96px);
+    padding-block: var(--m-space-m);
     background: var(--m-surface);
     color: var(--m-text);
   }
 
+  /* full content width, so the FAQ starts on the header's edge; the text keeps a readable measure */
   .m-faq__inner {
     display: grid;
     gap: 32px;
-    max-inline-size: calc(52rem + 2 * var(--m-gutter));
+  }
+
+  .m-faq__inner > * {
+    max-inline-size: 52rem;
   }
 
   .m-faq__title {
     margin: 0;
-    font-size: clamp(2.25rem, 5vw, 4rem);
+    font-size: var(--m-h1);
     line-height: 1.02;
   }
 

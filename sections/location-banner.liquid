@@ -12,14 +12,14 @@
     font-size: 11px;
     letter-spacing: 0.2em;
     text-transform: uppercase;
-    color: #9e7b5a;
+    color: var(--m-berry-ink);
     margin-bottom: 10px;
   }
   .hm-loc-title {
     text-align: center;
-    font-size: clamp(26px, 5vw, 40px);
+    font-size: var(--m-h2);
     font-weight: 500;
-    color: #22070A;
+    color: var(--m-text);
     margin: 0 0 6px;
     font-family: var(--font-heading--family, var(--font-body--family, serif));
     line-height: 1.2;
@@ -27,15 +27,15 @@
   .hm-loc-subtitle {
     text-align: center;
     font-size: 14px;
-    color: #8a7060;
+    color: var(--m-text-muted);
     margin: 0 0 40px;
     letter-spacing: 0.05em;
   }
   .hm-loc-card {
-    border: 1px solid #e8ddd5;
+    border: 1px solid var(--m-nude-deep);
     border-radius: 16px;
     overflow: hidden;
-    background: #fff;
+    background: var(--m-white);
   }
   .hm-loc-map {
     width: 100%;
@@ -50,8 +50,8 @@
     gap: 16px;
     padding: 20px 24px;
     flex-wrap: wrap;
-    border-top: 1px solid #f0e8e0;
-    background: #fffdf9;
+    border-top: 1px solid var(--m-rule-quiet);
+    background: var(--m-pearl);
   }
   .hm-loc-details {
     display: flex;
@@ -62,7 +62,7 @@
     width: 40px;
     height: 40px;
     min-width: 40px;
-    background: #f5ece4;
+    background: var(--m-nude);
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -72,7 +72,7 @@
     width: 18px;
     height: 18px;
     fill: none;
-    stroke: #22070A;
+    stroke: var(--m-text);
     stroke-width: 1.8;
     stroke-linecap: round;
     stroke-linejoin: round;
@@ -80,13 +80,13 @@
   .hm-loc-name {
     font-size: 15px;
     font-weight: 600;
-    color: #22070A;
+    color: var(--m-text);
     margin: 0 0 4px;
     line-height: 1.3;
   }
   .hm-loc-addr {
     font-size: 12.5px;
-    color: #9e8878;
+    color: var(--m-text-muted);
     line-height: 1.7;
     margin: 0;
   }
@@ -102,13 +102,16 @@
     gap: 6px;
     font-size: 12.5px;
     padding: 9px 16px;
-    border-radius: 8px;
+    border-radius: 999px;
+    min-block-size: 44px;
     text-decoration: none;
     font-family: inherit;
-    transition: opacity 0.15s;
+    transition: background-color var(--m-dur-1) var(--m-ease), color var(--m-dur-1) var(--m-ease);
     white-space: nowrap;
   }
-  .hm-loc-btn:hover { opacity: 0.82; }
+  .hm-loc-btn-map:hover { background: var(--m-berry-600); border-color: var(--m-berry-600); }
+  .hm-loc-btn-wa:hover { background: var(--m-plum); color: var(--m-pearl); }
+  .hm-loc-btn-wa:hover svg { stroke: var(--m-pearl); }
   .hm-loc-btn svg {
     width: 15px;
     height: 15px;
@@ -119,22 +122,22 @@
     flex-shrink: 0;
   }
   .hm-loc-btn-wa {
-    border: 1px solid #d5c8be;
-    background: #fff;
-    color: #22070A;
+    border: 1px solid var(--m-plum);
+    background: var(--m-white);
+    color: var(--m-text);
   }
-  .hm-loc-btn-wa svg { stroke: #22070A; }
+  .hm-loc-btn-wa svg { stroke: var(--m-text); }
   .hm-loc-btn-map {
-    background: #22070A;
-    color: #FAF9F1;
-    border: 1px solid #22070A;
+    background: var(--m-action);
+    color: var(--m-action-text);
+    border: 1px solid var(--m-action);
   }
-  .hm-loc-btn-map svg { stroke: #FAF9F1; }
+  .hm-loc-btn-map svg { stroke: var(--m-white); }
   .hm-loc-since {
     text-align: center;
     margin-top: 24px;
     font-size: 12px;
-    color: #b8a898;
+    color: var(--m-text-muted);
     letter-spacing: 0.08em;
   }
   @media (max-width: 500px) {

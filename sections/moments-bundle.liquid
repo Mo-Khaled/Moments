@@ -110,7 +110,7 @@
 
 {% stylesheet %}
   .m-bundle {
-    padding-block: clamp(24px, 4vw, 64px) clamp(96px, 10vw, 128px);
+    padding-block: var(--m-space-s) var(--m-space-l);
     background: var(--m-surface);
     color: var(--m-text);
   }
@@ -128,7 +128,7 @@
 
   .m-bundle__title {
     margin: 0;
-    font-size: clamp(3rem, 8vw, 6rem);
+    font-size: var(--m-h1);
     line-height: 0.98;
   }
 
@@ -151,8 +151,8 @@
 
   .m-bundle__tiers span {
     padding: 6px 12px;
-    border: 1px solid var(--m-gold-ink);
-    color: var(--m-gold-ink);
+    border: 1px solid var(--m-berry-ink);
+    color: var(--m-berry-ink);
     font-size: 0.8125rem;
   }
 

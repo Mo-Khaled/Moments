@@ -418,7 +418,7 @@
   .m-slide__title {
     max-inline-size: min(100%, 7em);
     font-family: var(--font-heading--family);
-    font-size: clamp(3rem, 9vw, 7.5rem);
+    font-size: var(--m-h1);
     line-height: 0.98;
     text-wrap: balance;
   }
@@ -472,8 +472,8 @@
   .m-switch__btn {
     --m-mark-ink: var(--m-pearl);
     --m-mark-body: transparent;
-    --m-mark-accent: var(--m-gold-light);
-    --m-mark-gold: var(--m-gold-light);
+    --m-mark-accent: var(--m-nude);
+    --m-mark-gold: var(--m-nude);
     --mm-size: 22px;
 
     display: inline-flex;
@@ -510,7 +510,7 @@
     --m-mark-ink: var(--m-plum);
     --m-mark-body: var(--m-nude);
     --m-mark-accent: var(--m-berry);
-    --m-mark-gold: var(--m-gold-ink);
+    --m-mark-gold: var(--m-berry-ink);
   }
 
   .m-switch__btn[aria-pressed='true'] .m-switch__label {
@@ -523,7 +523,7 @@
 
   .m-switch__btn:focus-visible,
   .m-playback__btn:focus-visible {
-    outline: 2px solid var(--m-gold-light);
+    outline: 2px solid var(--m-focus);
     outline-offset: 2px;
   }
 

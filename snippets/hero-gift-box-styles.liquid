@@ -39,7 +39,7 @@
     inset-inline: 0;
     inset-block-start: 0;
     z-index: 3;
-    block-size: min(var(--blend, 200px), 22svh);
+    block-size: min(var(--blend, 72px), 22svh);
     pointer-events: none;
     background: linear-gradient(var(--s-pearl, #faf6f2), rgb(250 246 242 / 0));
     background: linear-gradient(in oklab, var(--s-pearl, #faf6f2), rgb(250 246 242 / 0));
@@ -140,7 +140,7 @@
     color: var(--m-pearl);
     font-family: var(--font-heading--family, 'Marcellus', Georgia, serif);
     font-weight: 400;
-    font-size: clamp(1.9rem, 3.4vw, 3.25rem);
+    font-size: var(--m-h1);
     line-height: 1.12;
     letter-spacing: 0.04em;
     text-transform: uppercase;
@@ -580,7 +580,7 @@
     }
 
     .hgb__title {
-      font-size: clamp(1.75rem, 8vw, 2.25rem);
+      font-size: var(--m-h1);
     }
 
     .hgb__text {
