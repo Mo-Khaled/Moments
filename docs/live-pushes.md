@@ -94,3 +94,20 @@ Owner swapped the 3D model for "Fancy Perfume Bottle" by Jamie McFarlane (Sketch
 Pushed: sections/hero-gift-box.liquid (one centred column: headline, box, buttons under the box; lid back band and four inner rim walls; credit names the new author and model), snippets/hero-gift-box-styles.liquid (box sized by width and height, up to 460 px, turned less; the bottle larger and rising less), assets/hero-bottle-3d.js (wider framing; the bottle leans up to ~7 degrees toward the mouse, eased), assets/hero-bottle.glb, assets/hero-bottle-{start,end}[-sm].webp (stills re-rendered from the new model).
 Checks: check-hero-box Chromium and WebKit PASSED. On live: no 3D before interaction, mounts after it, credit "3D bottle adapted from Fancy Perfume Bottle by Jamie McFarlane, CC BY 4.0"; at 390 the current hero shows. Lighthouse desktop, two runs: / LCP 10.7-11.2 s, TBT 410-1,050 ms; /?view=hero-box LCP 4.9-5.0 s, TBT 250 ms, CLS 0-0.001.
 Rollback: push the previous versions of these files from git (commit before "feat(hero): new 3D bottle").
+
+### 2026-10-30 site-wide colour and placement pass (live, four batches, smoke passed after each)
+Staging #161340850367 first (full push, review screenshots in docs/design/site-polish/, colour flow and contrast on staging). Pulled and diffed every editor-managed file before pushing; live had no drift.
+1. CSS, sections, snippets (33 files): no gold; berry actions; identity state colours; guide headings (Marcellus, uppercase, 0.04em, 56/36 and 34/26); three spacing steps; one content edge (breadcrumb, trust/returns badges, scent notes, fragrance journey, FAQ, page text); 96px seamless joins; sticky add-to-cart, drawer free-shipping bar, Save pill, location banner, fragrance journey on tokens; empty hero slot label only in the editor.
+2. Templates and the footer group (27 files): product page price case, "Pour Homme" alignment, "Related products" H2; collection and returns titles start-aligned; 32 dead colour-scheme references to scheme-1; search grid gutter on phones; footer link hover nude.
+3. config/settings_data.json (pushed from the pulled live copy, so cart_type stayed "drawer"): scheme-2 pearl background, berry primary buttons in schemes 5, 7, 8, nude-deep input borders.
+4. Header into the hero: transparent header on the homepage (inverse, pearl text), deep-plum scrim on the photo hero, nude accent link and plum-filled search pill over the hero; the dead "top" scheme reference fixed.
+Checks on live: colour flow 9 pages x 4 modes PASS; contrast OK; check-layout-edges (edges, headings, gold, overflow) at 1440/768/390 PASS; tiles, hero, gift finder checks PASS.
+Rollback: per batch from git (`git show <commit>^:<file>`), templates and settings_data from the pulled copies.
+
+### 2026-10-30 announcement marquee, hero polish, menu artifacts, cursor, drawer link (live, smoke passed after each)
+- sections/header-group.json (announcement style "marquee"), sections/moments-announcement.liquid (nude sparkle separators): the bar scrolls left to right like the brand strip.
+- Gift-box hero: berry ribbon (the bow was added, then removed at the owner's request), tone-on-tone pattern stage, light pool, "Scroll to open" cue and a lid peek; lighter text and buttons (300 / 500); on desktop the stage splits as it opens (box to the end side, words and buttons to the start side). Preview only (/?view=hero-box).
+- Mega menu: the header section is one z-index level above sticky page parts (the collection filter bar painted a pale band over the open panel); the menu background layer has no drop shadow (its shadow outside the clip left a strip of tiles under the header after closing); closed panels are not rendered (content-visibility). scripts/check-menu-artifacts.mjs reproduces both.
+- Pointer: the berry hand applies inside clickable elements (the filter headings showed the system hand); text fields use a new MOMENTS I-beam (assets/cursor-text.*); check-pointer --site OK.
+- Cart drawer: "View cart" link beside the title (routes.cart_url).
+Checks: menu leave/hover/quick-leave OK; colour flow home, collection, hero preview PASS; contrast OK; hero check Chromium and WebKit PASS.
