@@ -80,11 +80,11 @@
     background-image: var(--hgb-pattern);
     background-size: 112px 112px;
     background-position: 50% 0;
-    opacity: 0.55;
-    -webkit-mask-image: radial-gradient(ellipse 46% 52% at 50% 56%, transparent 40%, #000 100%), linear-gradient(#000 70%, transparent 96%);
-    -webkit-mask-composite: source-in;
-    mask-image: radial-gradient(ellipse 46% 52% at 50% 56%, transparent 40%, #000 100%), linear-gradient(#000 70%, transparent 96%);
-    mask-composite: intersect;
+    opacity: 0.45;
+    /* even across the stage (an oval cleared around the box was left behind as an empty block once the box slides aside; owner
+       2026-10-30); it only fades out at the bottom so the stage still ends on pure deep plum */
+    -webkit-mask-image: linear-gradient(#000 70%, transparent 96%);
+    mask-image: linear-gradient(#000 70%, transparent 96%);
   }
 
   .hgb__inner {
