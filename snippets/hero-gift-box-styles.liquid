@@ -355,7 +355,7 @@
   }
 
   /* The ribbon: one berry band tied off-centre (so the logo stays clear), across the box front, the lid's front and its top, with a
-     satin highlight down its middle; the bow sits on the lid near the front edge. Berry is the brand's accent, used here as the one bold note. */
+     satin highlight down its middle (no bow: the owner removed it, 2026-10-30). Berry is the brand's accent, used here as the one bold note. */
   .hgb-box {
     --rb: 12%;
     --rbw: 7%;
@@ -374,65 +374,6 @@
   .hgb-lid__front {
     background-image: var(--hgb-ribbon), var(--hgb-pattern);
     background-size: 100% 100%, 64px 64px;
-  }
-
-  /* an upright plane on the lid's top surface (y = -lip in the lid group), two thirds of the way to the front, on the ribbon */
-  .hgb-lid__bow {
-    position: absolute;
-    inset-block-start: calc(var(--lip) * -1);
-    inset-inline-start: calc(var(--ow) / -2);
-    inline-size: var(--ow);
-    block-size: 0;
-    transform-style: preserve-3d;
-    -webkit-transform-style: preserve-3d;
-    transform: translateZ(calc(var(--od) * 0.66));
-  }
-
-  [dir='rtl'] .hgb-lid__bow {
-    inset-inline-start: auto;
-    inset-inline-end: calc(var(--ow) / -2);
-  }
-
-  .hgb-bow {
-    position: absolute;
-    inset-block-end: -2px;
-    inset-inline-start: var(--rb);
-    inline-size: 24%;
-    block-size: auto;
-    transform: translateX(-50%);
-    overflow: visible;
-    filter: drop-shadow(0 3px 4px rgb(16 6 15 / 0.35));
-  }
-
-  [dir='rtl'] .hgb-bow {
-    inset-inline-start: auto;
-    inset-inline-end: calc(100% - var(--rb));
-    transform: translateX(50%);
-  }
-
-  .hgb-bow__loop,
-  .hgb-bow__tail {
-    fill: var(--m-berry);
-    stroke: var(--m-berry-600);
-    stroke-width: 2;
-    stroke-linejoin: round;
-  }
-
-  .hgb-bow__tail {
-    fill: var(--m-berry-600);
-  }
-
-  .hgb-bow__fold {
-    fill: none;
-    stroke: var(--m-berry-ink);
-    stroke-width: 2;
-    stroke-linecap: round;
-  }
-
-  .hgb-bow__knot {
-    fill: var(--m-berry-600);
-    stroke: var(--m-berry-ink);
-    stroke-width: 1.5;
   }
 
   /* the closed lid lifts a few pixels every few seconds: an invitation to scroll; it fades out as the lid opens. Transform only. */
