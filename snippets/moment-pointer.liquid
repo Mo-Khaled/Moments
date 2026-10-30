@@ -16,18 +16,22 @@
     assign d2 = 'cursor-default-2x.png' | asset_url
     assign l1 = 'cursor-link.png' | asset_url
     assign l2 = 'cursor-link-2x.png' | asset_url
+    assign t1 = 'cursor-text.png' | asset_url
+    assign t2 = 'cursor-text-2x.png' | asset_url
   -%}
   <style id="moment-pointer-css">
     @media (pointer: fine) and (not (forced-colors: active)) {
       html:root {
         --m-pointer-default: url('{{ d1 }}') 8 3, auto;
         --m-pointer-link: url('{{ l1 }}') 18 3, pointer;
+        --m-pointer-text: url('{{ t1 }}') 16 16, text;
       }
 
       @supports (cursor: image-set(url('{{ d1 }}') 1x) 8 3) {
         html:root {
           --m-pointer-default: image-set(url('{{ d1 }}') 1x, url('{{ d2 }}') 2x) 8 3, auto;
           --m-pointer-link: image-set(url('{{ l1 }}') 1x, url('{{ l2 }}') 2x) 18 3, pointer;
+          --m-pointer-text: image-set(url('{{ t1 }}') 1x, url('{{ t2 }}') 2x) 16 16, text;
         }
       }
 
@@ -35,6 +39,7 @@
         html:root {
           --m-pointer-default: -webkit-image-set(url('{{ d1 }}') 1x, url('{{ d2 }}') 2x) 8 3, auto;
           --m-pointer-link: -webkit-image-set(url('{{ l1 }}') 1x, url('{{ l2 }}') 2x) 18 3, pointer;
+          --m-pointer-text: -webkit-image-set(url('{{ t1 }}') 1x, url('{{ t2 }}') 2x) 16 16, text;
         }
       }
 
@@ -53,6 +58,11 @@
         select:not(:disabled)
       ):not([data-zoom], [aria-disabled='true']) {
         cursor: var(--m-pointer-link);
+      }
+
+      /* text fields: the MOMENTS I-beam (the thin system I-beam was easy to lose on the white fields; owner report 2026-10-30) */
+      html:root:root :is(input:not([type='checkbox'], [type='radio'], [type='submit'], [type='button'], [type='range'], [type='color'], [type='file']), textarea, [contenteditable='true']):not(:disabled) {
+        cursor: var(--m-pointer-text);
       }
 
       /* the theme sets cursor: pointer on parts INSIDE clickable elements (a filter heading's text, a card's inner span), which showed

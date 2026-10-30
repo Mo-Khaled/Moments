@@ -655,6 +655,59 @@
   }
 
   /* ---------- phones (only when the section's "Show on phones" is on) ---------- */
+  /* Desktop: as the lid opens the stage splits. The box (with its light pool and the Night glow) slides from the centre to the end
+     side, the words and the buttons slide to the start edge and the headline drops to sit beside the box (owner request 2026-10-30).
+     Headline 1 stays centred and fades out during the move; headlines 2 and 3 are start-aligned. Transform only, from --p.
+     RTL mirrors it. Reduced motion and the setting off show the open state: words at the start, box at the end. */
+  @media screen and (min-width: 990px) {
+    .hgb__inner {
+      --shift: clamp(0, (var(--p) - 0.04) / 0.3, 1);
+      --dir: 1;
+      /* the copy block is 36rem wide and centred; it travels to the content edge (the gutter, or the 90rem column on wide screens) */
+      --copy-dx: min(50vw - 18rem - var(--m-gutter), 27rem - var(--m-gutter));
+      --edge-dx: min(50vw - var(--m-gutter), 45rem - var(--m-gutter));
+      --box-dx: min(20vw, 22rem);
+    }
+
+    [dir='rtl'] .hgb__inner {
+      --dir: -1;
+    }
+
+    .hgb__copy {
+      inline-size: 36rem;
+      max-inline-size: 36rem;
+      transform: translate(calc(var(--shift) * var(--copy-dx) * var(--dir) * -1), calc(var(--shift) * 18svh));
+    }
+
+    .hgb__lines {
+      justify-self: stretch;
+    }
+
+    .hgb__line--2,
+    .hgb__line--3 {
+      justify-self: start;
+      text-align: start;
+    }
+
+    /* the buttons keep their own width and stay centred while closed; translate(-50vw + edge) plus +50% of their own width puts their
+       start edge exactly on the content edge when open */
+    .hgb__actions {
+      transform: translateX(calc(var(--shift) * var(--edge-dx) * var(--dir) * -1)) translateX(calc(var(--shift) * 50% * var(--dir)));
+    }
+
+    .hgb__scene,
+    .hgb__glow {
+      transform: translateX(calc(var(--shift) * var(--box-dx) * var(--dir)));
+    }
+
+    .hgb.is-live .hgb__copy,
+    .hgb.is-live .hgb__actions,
+    .hgb.is-live .hgb__scene {
+      will-change: transform;
+    }
+  }
+
+
   @media screen and (max-width: 749px) {
     .hgb__track {
       block-size: 260vh;

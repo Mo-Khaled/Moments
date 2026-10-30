@@ -1,9 +1,9 @@
 // Builds the pointer PNGs from the committed SVG sources (assets/cursor-*.svg): 32x32 (1x) and 64x64 (2x), transparent background.
-// Hotspots (1x pixels): arrow tip (8, 3), hand fingertip (18, 3) (see snippets/moment-pointer.liquid). usage: node scripts/build-cursors.mjs
+// Hotspots (1x pixels): arrow tip (8, 3), hand fingertip (18, 3), I-beam centre (16, 16) (see snippets/moment-pointer.liquid). usage: node scripts/build-cursors.mjs
 import { chromium } from 'playwright-core';
 import { readFileSync } from 'node:fs';
 
-const NAMES = ['cursor-default', 'cursor-link'];
+const NAMES = ['cursor-default', 'cursor-link', 'cursor-text'];
 const browser = await chromium.launch({ channel: 'chrome', headless: true });
 for (const [size, suffix] of [[32, ''], [64, '-2x']]) {
   for (const n of NAMES) {

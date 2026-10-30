@@ -83,15 +83,23 @@ for (const [name, type] of engines) {
         }
         if (shots && (name === 'chromium' || label !== 'half')) await p.screenshot({ path: join(OUT, `${name}-${w}-${dir}-${label}.png`) });
       }
-      if (dir === 'rtl') {
-        const c = await p.evaluate(() => {
-          const box = document.querySelector('.hgb-box').getBoundingClientRect();
-          const scene = document.querySelector('.hgb__scene').getBoundingClientRect();
-          const copy = document.querySelector('.hgb__copy').getBoundingClientRect();
-          return { off: Math.abs(box.left + box.width / 2 - (scene.left + scene.width / 2)), copyOff: Math.abs(copy.left + copy.width / 2 - innerWidth / 2) };
-        });
-        ok(c.off < 0.2 * w, `${tag}: box centred in its column (offset ${c.off.toFixed(0)}px)`);
-        ok(c.copyOff < 24, `${tag}: headline centred (offset ${c.copyOff.toFixed(0)}px)`);
+      // closed: the box and the headline are centred; open (desktop, 990px and up): the box on the end side, the words on the start side
+      const geo = () => p.evaluate(() => {
+        const box = document.querySelector('.hgb-box').getBoundingClientRect();
+        const scene = document.querySelector('.hgb__scene').getBoundingClientRect();
+        const copy = document.querySelector('.hgb__copy').getBoundingClientRect();
+        return { boxX: box.left + box.width / 2, inScene: Math.abs(box.left + box.width / 2 - (scene.left + scene.width / 2)), copyX: copy.left + copy.width / 2, mid: innerWidth / 2 };
+      });
+      await scrollTo(p, 0);
+      const closed = await geo();
+      ok(closed.inScene < 0.2 * w, `${tag}: box centred in its column (offset ${closed.inScene.toFixed(0)}px)`);
+      ok(Math.abs(closed.copyX - closed.mid) < 24, `${tag} closed: headline centred (offset ${Math.abs(closed.copyX - closed.mid).toFixed(0)}px)`);
+      if (w >= 990) {
+        await scrollTo(p, 1);
+        const open = await geo();
+        const endSide = dir === 'ltr' ? open.boxX > open.mid + 0.1 * w : open.boxX < open.mid - 0.1 * w;
+        const startSide = dir === 'ltr' ? open.copyX < open.mid - 0.1 * w : open.copyX > open.mid + 0.1 * w;
+        ok(endSide && startSide, `${tag} open: box on the end side (${Math.round(open.boxX)}), words on the start side (${Math.round(open.copyX)})`);
       }
       // the last stage row is the brand strip colour: the join below the hero is seamless
       await scrollTo(p, 1);

@@ -18,7 +18,8 @@ if (!SITE) {
     const custom = r.urls.length > 0;
     console.log(`${r.name.padEnd(18)} ${custom ? 'CUSTOM' : 'native'} ${r.size || ''} hot ${r.hot ? r.hot.join(',') : '-'}  ${r.cur.slice(0, 60)}`);
   }
-  const want = { custom: ['html', 'body', 'link', 'button', 'role=button', 'label', 'select', 'summary', 'm-btn link', 'checkbox', 'paragraph text', 'card (div)'], native: ['text input', 'textarea', 'disabled button'] };
+  // text fields carry the MOMENTS I-beam since 2026-10-30 (the thin system I-beam was easy to lose on white fields)
+  const want = { custom: ['html', 'body', 'link', 'button', 'role=button', 'label', 'select', 'summary', 'm-btn link', 'checkbox', 'paragraph text', 'card (div)', 'text input', 'textarea'], native: ['disabled button'] };
   for (const n of want.custom) { const r = rows.find((x) => x.name === n); if (!r || !r.urls.length) fail(`${n} should be the custom pointer`); else if (!r.ok) fail(`${n} cursor image invalid (${r.size})`); }
   for (const n of want.native) { const r = rows.find((x) => x.name === n); if (r && r.urls.length) fail(`${n} must keep the native cursor`); }
   const link = rows.find((x) => x.name === 'link'), def = rows.find((x) => x.name === 'body');
@@ -40,7 +41,7 @@ if (SITE) {
     });
     const isCustom = (c) => c && /url\(/.test(c);
     for (const k of ['body', 'link', 'button', 'cta', 'card']) if (res[k] !== null && !isCustom(res[k])) fail(`${path} ${k}: ${res[k]}`);
-    if (res.input && isCustom(res.input)) fail(`${path} input must stay native: ${res.input}`);
+    if (res.input && !/cursor-text/.test(res.input)) fail(`${path} text input should use the MOMENTS I-beam: ${res.input}`);
     console.log(`ok ${path}`, JSON.stringify(Object.fromEntries(Object.entries(res).map(([k, v]) => [k, v && (v.includes('url(') ? (v.includes('cursor-link') ? 'link-img' : 'default-img') : v)]))));
   }
   // only the pointer images: nothing may follow the mouse (the owner removed the cursor follower for good on 2026-10-27)
