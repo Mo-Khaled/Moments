@@ -310,6 +310,20 @@
     transform: translateZ(calc(var(--d) / -2 + 1px));
   }
 
+  /* the inside of the left and right walls, seen through the open top (the outer side faces are one-sided) */
+  .hgb-face--inner-left,
+  .hgb-face--inner-right {
+    inline-size: var(--d);
+    block-size: var(--h);
+    margin-block-start: calc(var(--h) / -2);
+    margin-inline-start: calc(var(--d) / -2);
+    background: color-mix(in oklab, var(--hgb-inside) 85%, var(--hgb-box));
+    box-shadow: none;
+  }
+
+  .hgb-face--inner-left { transform: rotateY(90deg) translateZ(calc(var(--w) / -2 + 1px)); }
+  .hgb-face--inner-right { transform: rotateY(-90deg) translateZ(calc(var(--w) / -2 + 1px)); }
+
   .hgb-face--inner-floor {
     inline-size: var(--w);
     block-size: var(--d);
@@ -390,6 +404,8 @@
     margin-inline-end: calc(var(--w) / -2);
   }
 
+  [dir='rtl'] .hgb-face--inner-left,
+  [dir='rtl'] .hgb-face--inner-right,
   [dir='rtl'] .hgb-face--left,
   [dir='rtl'] .hgb-face--right {
     margin-inline-start: 0;

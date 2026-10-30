@@ -9,6 +9,89 @@
         "logo_tone": "white"
       }
     },
+    "moments_hero": {
+      "type": "moments-hero",
+      "blocks": {
+        "slide_night": {
+          "type": "slide",
+          "settings": {
+            "moment": "night",
+            "from_hour": 18,
+            "to_hour": 5,
+            "poster_fit": "fit",
+            "primary_url": "/collections/night-moment",
+            "secondary_url": "/pages/moments"
+          }
+        },
+        "slide_fresh": {
+          "type": "slide",
+          "settings": {
+            "moment": "fresh",
+            "from_hour": 5,
+            "to_hour": 10,
+            "poster_fit": "fit",
+            "primary_url": "/collections/fresh-moment",
+            "secondary_url": "/pages/moments"
+          }
+        },
+        "slide_allday": {
+          "type": "slide",
+          "settings": {
+            "moment": "allday",
+            "from_hour": 10,
+            "to_hour": 18,
+            "poster_fit": "fit",
+            "primary_url": "/collections/all-day-moment",
+            "secondary_url": "/pages/moments"
+          }
+        },
+        "slide_gift": {
+          "type": "slide",
+          "settings": {
+            "moment": "gift",
+            "from_hour": 0,
+            "to_hour": 0,
+            "poster_fit": "fit",
+            "primary_url": "/collections/gift-moment",
+            "secondary_url": "/pages/moments"
+          }
+        },
+        "slide_daily": {
+          "type": "slide",
+          "settings": {
+            "moment": "daily",
+            "from_hour": 0,
+            "to_hour": 0,
+            "poster_fit": "fit",
+            "primary_url": "/collections/daily-moment",
+            "secondary_url": "/pages/moments"
+          }
+        },
+        "slide_love": {
+          "type": "slide",
+          "settings": {
+            "moment": "love",
+            "from_hour": 0,
+            "to_hour": 0,
+            "poster_fit": "fit",
+            "primary_url": "/collections/love-moment",
+            "secondary_url": "/pages/moments"
+          }
+        }
+      },
+      "block_order": [
+        "slide_night",
+        "slide_fresh",
+        "slide_allday",
+        "slide_gift",
+        "slide_daily",
+        "slide_love"
+      ],
+      "settings": {
+        "override": "auto",
+        "scrim_strength": 74
+      }
+    },
     "moments_brands": {
       "type": "moments-brand-marquee",
       "blocks": {
@@ -582,6 +665,7 @@
   },
   "order": [
     "hero_box",
+    "moments_hero",
     "moments_brands",
     "moments_shop",
     "gift_strip",

@@ -15,10 +15,10 @@ mkdirSync(OUT, { recursive: true });
 const shots = !process.argv.includes('--no-shots');
 const which = process.argv.includes('--engine') ? process.argv[process.argv.indexOf('--engine') + 1] : 'all';
 
-async function page({ dir = 'ltr', animate = true } = {}) {
+async function page({ dir = 'ltr', animate = true, phones = true } = {}) {
   css.length = 0;
   const globals = { settings: {}, routes: { root_url: '/', all_products_collection_url: '/collections/all' }, request: { design_mode: false, locale: { iso_code: dir === 'rtl' ? 'ar' : 'en' } }, collections: { gifts: { url: '/collections/gifts' } }, all_products: { '9-pm-night-out': { title: '9 PM Night Out', vendor: 'AFNAN' } } };
-  const section = { id: 'hero', settings: { animate, box_tone: 'plum', logo_tone: 'white' }, blocks: [] };
+  const section = { id: 'hero', settings: { animate, show_on_phones: phones, box_tone: 'plum', logo_tone: 'white' }, blocks: [] };
   const body = await engine.renderFile('hero-gift-box', { section }, { globals });
   return `<!doctype html><html lang="${dir === 'rtl' ? 'ar' : 'en'}" dir="${dir}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Hero fixture</title><link rel="stylesheet" href="/assets/base.css"><link rel="stylesheet" href="/assets/moments.css"><style>${css.join('\n')}</style>
@@ -27,7 +27,7 @@ async function page({ dir = 'ltr', animate = true } = {}) {
 <body><header class="fx-header"></header><main><div class="shopify-section">${body}</div><div class="shopify-section"><div class="m-brands fx-brands"></div></div><div class="shopify-section"><div class="fx-tiles"></div></div></main></body></html>`;
 }
 
-const pages = { '/': await page(), '/rtl': await page({ dir: 'rtl' }), '/static': await page({ animate: false }) };
+const pages = { '/': await page(), '/rtl': await page({ dir: 'rtl' }), '/static': await page({ animate: false }), '/desktop-only': await page({ phones: false }) };
 const server = serve(pages);
 let bad = 0;
 const ok = (cond, msg) => { console.log(cond ? 'ok  ' : 'FAIL', msg); if (!cond) bad++; };
@@ -96,6 +96,16 @@ for (const [name, type] of engines) {
       ok(!errors.length, `${tag}: no page errors ${errors.join(' | ')}`);
       await ctx.close();
     }
+  }
+
+  // the default ("Show on phones" off): hidden under 750px, shown from 750px
+  for (const [w, want] of [[390, false], [749, false], [750, true], [1440, true]]) {
+    const ctx = await browser.newContext({ viewport: { width: w, height: 800 } });
+    const p = await ctx.newPage();
+    await p.goto(server.base + '/desktop-only');
+    const shown = await p.evaluate(() => getComputedStyle(document.querySelector('.hgb').closest('.shopify-section')).display !== 'none');
+    ok(shown === want, `${name} ${w}px with "Show on phones" off: hero ${shown ? 'shown' : 'hidden'}`);
+    await ctx.close();
   }
 
   // keyboard: the two buttons in order, visible focus

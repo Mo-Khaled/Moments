@@ -55,11 +55,22 @@
   assign bottle_alt = 'hero_box.bottle_alt' | t: title: bottle_alt, brand: bottle_brand
 
   assign animate = section.settings.animate
+  assign phones = section.settings.show_on_phones
   assign box_tone = section.settings.box_tone | default: 'plum'
 -%}
 
 {%- comment -%} The hero's CSS is inlined: a separate stylesheet was the last render-blocking request before the headline (the LCP) could paint. {%- endcomment -%}
 {% render 'hero-gift-box-styles' %}
+{%- unless phones -%}
+  {%- comment -%}
+    Desktop only (the owner's choice, 2026-10-30): under 750px this hero is not shown, and the page's previous hero (moments-hero), if it is
+    on the page, takes its place; on wider screens the previous hero is hidden. Both stay in the template, so either can be switched back.
+  {%- endcomment -%}
+  <style>
+    @media screen and (max-width: 749px) { .shopify-section:has(> .hgb) { display: none; } }
+    @media screen and (min-width: 750px) { .shopify-section:has(> .m-hero) { display: none; } }
+  </style>
+{%- endunless -%}
 {%- if animate -%}
   <script src="{{ 'hero-gift-box.js' | asset_url }}" type="module" fetchpriority="low"></script>
 {%- endif -%}
@@ -104,6 +115,8 @@
           <div class="hgb-box">
             <div class="hgb-face hgb-face--inner-back" aria-hidden="true"></div>
             <div class="hgb-face hgb-face--inner-floor" aria-hidden="true"></div>
+            <div class="hgb-face hgb-face--inner-left" aria-hidden="true"></div>
+            <div class="hgb-face hgb-face--inner-right" aria-hidden="true"></div>
             <div class="hgb-face hgb-face--back" aria-hidden="true"></div>
             <div class="hgb-face hgb-face--left" aria-hidden="true"></div>
             <div class="hgb-face hgb-face--right" aria-hidden="true"></div>
@@ -176,6 +189,13 @@
       "label": "Open the box on scroll",
       "info": "Off: the open box with the bottle and the last headline, no scroll animation. Visitors who ask for reduced motion always get that version.",
       "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_on_phones",
+      "label": "Show on phones",
+      "info": "Off: phones (under 750px) see the previous hero section instead, when it is on the page. Wider screens always see this one.",
+      "default": false
     },
     {
       "type": "product",
