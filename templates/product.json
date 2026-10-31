@@ -722,10 +722,15 @@
         "padding-block-start": 10,
         "padding-block-end": 40
       }
+    },
+    "scent_guide": {
+      "type": "moments-scent-guide",
+      "settings": {}
     }
   },
   "order": [
     "main",
+    "scent_guide",
     "1787267660a921450f",
     "trust_badges_product",
     "product_recommendations_iJXNp9"

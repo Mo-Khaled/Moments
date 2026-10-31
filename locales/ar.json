@@ -600,7 +600,7 @@
         "gift_card_confirmation_by_email": "إذا لم تستلمها، أعد إرسال البريد الإلكتروني أو اتصل بنا.",
         "thank_you_confirmed_with_email_description": {
           "multi_store": "سوف تتلقى رسائل تأكيد منفصلة من كل متجر قريبًا",
-          "single_store": "سوف تتلقى رسالة تأكيد بالبريد الإلكتروني قريبًا"
+          "single_store": "ستصلك رسالة تأكيد على واتساب قريبًا"
         },
         "thank_you_confirmed_with_phone_description": {
           "multi_store": "سوف تتلقى رسائل تأكيد منفصلة من كل متجر قريبًا",
@@ -608,7 +608,7 @@
         },
         "thank_you_confirmed_with_email_and_phone_description": {
           "multi_store": "سوف تتلقى رسائل تأكيد منفصلة من كل متجر قريبًا",
-          "single_store": "سوف تتلقى رسالة تأكيد بالبريد الإلكتروني قريبًا"
+          "single_store": "ستصلك رسالة تأكيد على واتساب قريبًا"
         },
         "thank_you_confirmed_order_with_email": "سوف تتلقى رسالة تأكيد بالبريد الإلكتروني تحتوي على رقم طلبك قريبًا.",
         "thank_you_confirmed_order_with_phone": "سوف تتلقى رسالة نصية تأكيدية برقم طلبك قريبًا.",
@@ -4190,7 +4190,7 @@
       "refunded_amount": "تم استرداد المبلغ",
       "shipping": {
         "summary": "شحن",
-        "free": "حر"
+        "free": "حسب مكانك"
       },
       "subtotal": "المجموع الفرعي",
       "taxes": "الضرائب",
@@ -4278,12 +4278,12 @@
     "add": "أضف",
     "add_to_cart": "أضف إلى السلة",
     "added": "تمت الإضافة",
-    "apply": "نفذ",
-    "back": "للخلف",
-    "choose": "اختار",
-    "clear": "واضح",
+    "apply": "تطبيق",
+    "back": "رجوع",
+    "choose": "اختر",
+    "clear": "مسح",
     "clear_all": "مسح الكل",
-    "close": "اغلق",
+    "close": "إغلاق",
     "open": "افتح",
     "continue_shopping": "متابعة التسوق",
     "enter_password": "أدخل كلمة المرور",
@@ -4295,14 +4295,14 @@
     "remove_discount": "إزالة الخصم {{ code }}",
     "show_less": "إظهار أقل",
     "show_more": "إظهار المزيد",
-    "close_dialog": "إغلاق الحوار",
-    "show_filters": "فلتر",
-    "more": "أكثر",
+    "close_dialog": "إغلاق النافذة",
+    "show_filters": "تصفية",
+    "more": "المزيد",
     "zoom": "تكبير",
     "reset": "إعادة ضبط",
-    "sign_up": "اشتراك",
-    "submit": "يُقدِّم",
-    "sort": "نوع",
+    "sign_up": "إنشاء حساب",
+    "submit": "إرسال",
+    "sort": "ترتيب",
     "enter_using_password": "الدخول باستخدام كلمة المرور",
     "see_items": {
       "one": "عرض {{ count }} منتج",
@@ -4314,52 +4314,52 @@
     "view_store_information": "عرض معلومات المتجر"
   },
   "content": {
-    "account_orders": "طلبات",
-    "cart_title": "عربة التسوق",
-    "price": "سعر",
-    "search_input_label": "يبحث",
-    "search_input_placeholder": "يبحث",
-    "search": "يبحث",
+    "account_orders": "الطلبات",
+    "cart_title": "السلة",
+    "price": "السعر",
+    "search_input_label": "بحث",
+    "search_input_placeholder": "ابحث",
+    "search": "بحث",
     "search_results_view_all": "عرض الكل",
     "search_results_view_all_button": "عرض الكل",
-    "product_badge_sold_out": "نفذ",
+    "product_badge_sold_out": "نفدت الكمية",
     "product_badge_sale": "تخفيض",
     "product_card_placeholder": "عنوان المنتج",
     "placeholder_image": "صورة نائبة",
-    "quantity": "كمية",
+    "quantity": "الكمية",
     "recently_viewed_products": "تمت مشاهدته مؤخرًا",
-    "reviews": "المراجعات",
+    "reviews": "التقييمات",
     "read_more": "اقرأ المزيد...",
     "search_results": "نتائج البحث",
     "search_results_label": "نتائج البحث",
-    "search_results_no_results": "لم يتم العثور على نتائج لـ \" {{ terms }} \". حاول البحث مرة أخرى.",
-    "search_results_no_results_check_spelling": "لم يتم العثور على نتائج لـ \" {{ terms }} \". تحقق من التهجئة أو استخدم كلمة أو عبارة أخرى.",
+    "search_results_no_results": "لا توجد نتائج لـ «{{ terms }}». جرّب بحثًا آخر.",
+    "search_results_no_results_check_spelling": "لا توجد نتائج لـ «{{ terms }}». تأكد من الكتابة أو جرّب كلمة أخرى.",
     "search_results_resource_articles": "منشورات المدونة",
     "search_results_resource_collections": "المجموعات",
     "search_results_resource_pages": "الصفحات",
-    "search_results_resource_products": "منتجات",
+    "search_results_resource_products": "المنتجات",
     "search_results_resource_products_count": {
       "one": "{{ count }} منتج",
       "other": "{{ count }} منتج"
     },
     "search_results_resource_queries": "اقتراحات البحث",
     "seller_note": "تعليمات خاصة",
-    "shipping_policy": "يتم احتساب الشحن عند الخروج.",
-    "shipping_policy_html": "يتم احتساب <a href=\"{{ link }}\">الشحن</a> عند الخروج.",
+    "shipping_policy": "يُحسب الشحن عند إتمام الطلب.",
+    "shipping_policy_html": "يُحسب <a href=\"{{ link }}\">الشحن</a> عند إتمام الطلب.",
     "store_owner_link_html": "هل أنت صاحب المتجر؟ <a href=\"{{ link }}\">سجّل دخولك هنا</a>",
-    "taxes_at_checkout_shipping_at_checkout_with_policy_html": "يتم احتساب الضرائب والخصومات <a href=\"{{ link }}\">والشحن</a> عند الخروج.",
-    "taxes_at_checkout_shipping_at_checkout_with_policy_without_discounts_html": "يتم احتساب الضرائب <a href=\"{{ link }}\">والشحن</a> عند الخروج.",
-    "taxes_at_checkout_shipping_at_checkout_without_policy": "يتم احتساب الضرائب والخصومات والشحن عند الخروج.",
-    "taxes_at_checkout_shipping_at_checkout_without_policy_without_discounts": "يتم احتساب الضرائب والشحن عند الخروج.",
+    "taxes_at_checkout_shipping_at_checkout_with_policy_html": "تُحسب الضرائب والخصومات <a href=\"{{ link }}\">والشحن</a> عند إتمام الطلب.",
+    "taxes_at_checkout_shipping_at_checkout_with_policy_without_discounts_html": "تُحسب الضرائب <a href=\"{{ link }}\">والشحن</a> عند إتمام الطلب.",
+    "taxes_at_checkout_shipping_at_checkout_without_policy": "تُحسب الضرائب والخصومات والشحن عند إتمام الطلب.",
+    "taxes_at_checkout_shipping_at_checkout_without_policy_without_discounts": "تُحسب الضرائب والشحن عند إتمام الطلب.",
     "taxes_included": "الضرائب متضمنة.",
     "taxes_included_shipping_at_checkout_with_policy_html": "شامل الضرائب. يتم احتساب الخصومات <a href=\"{{ link }}\">والشحن</a> عند الدفع.",
     "taxes_included_shipping_at_checkout_with_policy_without_discounts_html": "الضرائب مشمولة. يتم احتساب رسوم الشحن عند الدفع.",
     "taxes_included_shipping_at_checkout_without_policy": "شامل الضرائب. يتم احتساب الخصومات والشحن عند الدفع.",
     "taxes_included_shipping_at_checkout_without_policy_without_discounts": "الضرائب مشمولة. يتم احتساب رسوم الشحن عند الدفع.",
     "unavailable": "غير متاح",
-    "use_fewer_filters_html": "حاول استخدام عدد أقل من المرشحات، أو <a class=\"{{ class }}\" href=\"{{ link }}\">قم بمسح كافة المرشحات</a> .",
+    "use_fewer_filters_html": "جرّب عددًا أقل من عوامل التصفية، أو <a class=\"{{ class }}\" href=\"{{ link }}\">امسح كل عوامل التصفية</a>",
     "view_more_details": "عرض المزيد من التفاصيل",
-    "your_cart_is_empty": "سلة التسوق الخاصة بك فارغة",
+    "your_cart_is_empty": "سلتك فارغة",
     "product_count": "عدد المنتجات",
     "errors": "الأخطاء",
     "wrong_password": "كلمة المرور خاطئة",
@@ -4371,20 +4371,20 @@
     "recipient_form_message": "الرسالة (اختياري)",
     "recipient_form_characters_used": "{{ used_chars }} / {{ max_chars }} حرف مستخدم",
     "recipient_form_send_on": "سنة-شهر-يوم",
-    "recipient_form_send_on_label": "إرسال (اختياري)",
+    "recipient_form_send_on_label": "تاريخ الإرسال (اختياري)",
     "recipient_form_fields_visible": "أصبحت حقول نموذج المستلم مرئية الآن",
     "recipient_form_fields_hidden": "أصبحت حقول نموذج المستلم مخفية الآن",
     "recipient_form_error": "حدث خطأ في إرسال النموذج",
     "product_custom_property_character_count": "{{ used_chars }} / {{ max_chars }} حرف مستخدم",
     "cart_subtotal": "المجموع الفرعي",
-    "cart_total": "إجمالي سلة التسوق",
-    "checkout": "الدفع",
-    "discounts": "خصومات",
+    "cart_total": "إجمالي السلة",
+    "checkout": "إتمام الطلب",
+    "discounts": "الخصومات",
     "grid_view": {
       "grid_fieldset": "شبكة الأعمدة",
-      "zoom_out": "التصغير",
-      "default_view": "تقصير",
-      "single_item": "أعزب"
+      "zoom_out": "تصغير",
+      "default_view": "افتراضي",
+      "single_item": "منتج واحد"
     },
     "inventory_low_stock": "المخزون قليل",
     "inventory_in_stock": "متاح",
@@ -4392,51 +4392,51 @@
     "language": "اللغة",
     "page_placeholder_title": "عنوان الصفحة",
     "pagination": {
-      "previous": "سابق",
+      "previous": "السابق",
       "next": "التالي",
       "nav_label": "التنقل بين الصفحات",
       "page": "الصفحة {{ page }}"
     },
-    "price_sale": "سعر البيع",
+    "price_sale": "سعر التخفيض",
     "duties_and_taxes_included": "الرسوم والضرائب متضمنة.",
     "pickup_not_available": "الاستلام غير متاح حاليًا",
     "powered_by": "سيتم تشغيل هذا المتجر بواسطة",
     "price_filter_html": "أعلى سعر هو {{ price }}",
-    "shipping_discount_error": "تظهر خصومات الشحن عند الخروج بعد إضافة عنوان",
+    "shipping_discount_error": "تظهر خصومات الشحن عند إتمام الطلب بعد إضافة العنوان",
     "duties_and_taxes_included_shipping_at_checkout_with_policy_without_discounts_html": "الرسوم والضرائب مشمولة. يتم احتساب تكلفة الشحن عند الدفع.",
     "duties_and_taxes_included_shipping_at_checkout_without_policy": "شامل الرسوم والضرائب. تُحسب الخصومات والشحن عند الدفع.",
     "duties_and_taxes_included_shipping_at_checkout_without_policy_without_discounts": "الرسوم والضرائب مشمولة. يتم احتساب تكلفة الشحن عند الدفع.",
     "duties_included_taxes_at_checkout_shipping_at_checkout_without_policy": "الرسوم مشمولة. الضرائب والخصومات وتكاليف الشحن تُحسب عند الدفع.",
-    "discount_code_error": "لا يمكن تطبيق رمز الخصم على سلة التسوق الخاصة بك",
+    "discount_code_error": "لا يمكن تطبيق كود الخصم على سلتك",
     "duties_included_taxes_at_checkout_shipping_at_checkout_with_policy_without_discounts_html": "الرسوم مشمولة. يتم احتساب رسوم الشحن عند الدفع.",
     "duties_included_taxes_at_checkout_shipping_at_checkout_without_policy_without_discounts": "الرسوم مشمولة. يتم احتساب رسوم الشحن عند الدفع.",
     "page_placeholder_content": "حدد الصفحة لعرض محتواها.",
     "pickup_available_at_html": "الاستلام متاح في <b>{{ location }}</b>",
     "pickup_available_in": "الاستلام متاح، {{ pickup_time }}",
-    "discount": "خصم",
+    "discount": "الخصم",
     "account_title": "حسابي",
-    "account_profile": "حساب تعريفي",
-    "filters": "الفلترة",
+    "account_profile": "الملف الشخصي",
+    "filters": "التصفية",
     "duties_and_taxes_included_shipping_at_checkout_with_policy_html": "شامل الرسوم والضرائب. تُحسب الخصومات <a href=\"{{ link }}\">والشحن</a> عند الدفع.",
     "duties_included_taxes_at_checkout_shipping_at_checkout_with_policy_html": "الرسوم مشمولة. الضرائب والخصومات وتكاليف <a href=\"{{ link }}\">الشحن</a> تُحسب عند الدفع.",
-    "cart_estimated_total": "إجمالي التقديرات",
+    "cart_estimated_total": "الإجمالي التقديري",
     "collection_placeholder": "عنوان المجموعة",
     "discount_code": "رمز الخصم",
-    "duties_included": "الواجبات مشم",
+    "duties_included": "الرسوم مشمولة.",
     "featured_products": "المنتجات المميزة",
     "inventory_low_stock_show_count": {
-      "one": "{{ count }} left",
-      "other": "{{ count }} left"
+      "one": "باقي {{ count }} فقط",
+      "other": "باقي {{ count }} فقط"
     },
     "item_count": {
-      "one": "{{ count }} item",
-      "other": "{{ count }} items"
+      "one": "منتج واحد",
+      "other": "{{ count }} منتجات"
     },
     "localization_region_and_language": "المنطقة واللغة",
     "no_products_found": "لم يتم العثور على أي منتجات.",
     "no_results_found": "لم يتم العثور على نتائج",
     "pickup_ready_in": "{{ pickup_time }}",
-    "price_compare_at": "قارن بسعر",
+    "price_compare_at": "السعر قبل الخصم",
     "price_from": "من {{ price }}",
     "price_regular": "السعر العادي",
     "product_image": "صورة المنتج",
@@ -4449,32 +4449,32 @@
     "product_badge_save": "وفّر {{ amount }}"
   },
   "placeholders": {
-    "search": "يبحث",
+    "search": "ابحث",
     "password": "كلمة المرور",
     "product_title": "عنوان المنتج",
     "collection_title": "عنوان المجموعة",
     "blog_posts": "منشورات المدونة",
-    "blog_post_title": "عنوان",
-    "blog_post_author": "مؤلف",
-    "blog_post_date": "تاريخ",
+    "blog_post_title": "العنوان",
+    "blog_post_author": "الكاتب",
+    "blog_post_date": "التاريخ",
     "blog_post_description": "مقتطف من محتوى مدونتك",
     "hero_image_todo": "مطلوب: أضف صورة البانر الرئيسية (2400 × 1350 بكسل)"
   },
   "accessibility": {
     "account": "حسابي",
-    "cart": "عربة التسوق",
-    "cart_count": "إجمالي العناصر في سلة التسوق",
-    "close_dialog": "إغلاق الحوار",
+    "cart": "السلة",
+    "cart_count": "إجمالي المنتجات في السلة",
+    "close_dialog": "إغلاق النافذة",
     "country_region": "البلد/المنطقة",
     "country_results_count": "{{ count }} نتائج",
     "decrease_quantity": "تقليل الكمية",
     "discount": "تطبيق رمز الخصم",
     "discount_menu": "أكواد الخصم",
     "discount_applied": "تم تطبيق رمز الخصم: {{ code }}",
-    "filters": "الفلترة",
+    "filters": "التصفية",
     "filter_count": {
-      "one": "تم تطبيق الفلترة {{ count }}",
-      "other": "تم تطبيق {{ count }} الفلترة"
+      "one": "تم تطبيق عامل تصفية واحد",
+      "other": "تم تطبيق {{ count }} عوامل تصفية"
     },
     "increase_quantity": "زيادة الكمية",
     "inventory_status": "حالة المخزون",
@@ -4485,17 +4485,17 @@
     "pause_video": "إيقاف الفيديو مؤقتًا",
     "play_model": "تشغيل نموذج ثلاثي الأبعاد",
     "play_video": "تشغيل الفيديو",
-    "loading_product_recommendations": "تحميل توصيات المنتج",
+    "loading_product_recommendations": "جارٍ تحميل المنتجات المقترحة",
     "rating": "تقييم هذا المنتج هو {{ rating }} من 5",
     "remove_item": "إزالة {{ title}}",
     "reset_search": "إعادة تعيين البحث",
     "scroll_to": "انتقل إلى {{ title }}",
-    "search_results_count": "تم العثور على {{ count }} نتيجة بحث عن \" {{ query }} \"",
-    "search_results_no_results": "لم يتم العثور على نتائج لـ \" {{ query }} \"",
+    "search_results_count": "تم العثور على {{ count }} نتيجة لـ «{{ query }}»",
+    "search_results_no_results": "لا توجد نتائج لـ «{{ query }}»",
     "skip_to_product_info": "انتقل إلى معلومات المنتج",
     "skip_to_results_list": "انتقل إلى قائمة النتائج",
     "skip_to_text": "انتقل إلى المحتوى",
-    "slide_status": "الشريحة {{ index }} بطول {{ length }}",
+    "slide_status": "الشريحة {{ index }} من {{ length }}",
     "slideshow_next": "الشريحة التالية",
     "slideshow_pause": "إيقاف عرض الشرائح مؤقتًا",
     "slideshow_play": "تشغيل عرض الشرائح",
@@ -4507,12 +4507,12 @@
     "switch_to_arabic": "التبديل إلى العربية"
   },
   "fields": {
-    "separator": "ل"
+    "separator": "إلى"
   },
   "gift_cards": {
     "issued": {
       "how_to_use_gift_card": "استخدم رمز بطاقة الهدية عبر الإنترنت أو رمز الاستجابة السريعة في المتجر",
-      "title": "إليك رصيد بطاقة الهدايا {{ value }} لـ {{ shop }} !",
+      "title": "إليك رصيد بطاقة الهدية {{ value }} من {{ shop }}!",
       "subtext": "بطاقة الهدية الخاصة بك",
       "shop_link": "قم بزيارة المتجر عبر الإنترنت",
       "add_to_apple_wallet": "أضف إلى محفظة Apple",
@@ -4526,17 +4526,17 @@
   "products": {
     "product": {
       "add_to_cart": "أضف إلى السلة",
-      "adding_to_cart": "إضافة...",
-      "added_to_cart": "تمت الإضافة إلى سلة التسوق",
-      "add_to_cart_error": "خطأ في الإضافة إلى سلة التسوق",
-      "quantity_error_max": "هذا العنصر له حد أقصى قدره {{ maximum }}",
-      "sold_out": "نفذ",
+      "adding_to_cart": "جارٍ الإضافة...",
+      "added_to_cart": "تمت الإضافة إلى السلة",
+      "add_to_cart_error": "تعذّرت الإضافة إلى السلة",
+      "quantity_error_max": "الحد الأقصى لهذا المنتج {{ maximum }}",
+      "sold_out": "نفدت الكمية",
       "unavailable": "غير متاح",
-      "quantity": "كمية",
-      "quantity_increments": "زيادات قدرها {{ increment }}",
-      "quantity_minimum": "الحد الأدنى من {{ minimum }}",
+      "quantity": "الكمية",
+      "quantity_increments": "بمضاعفات {{ increment }}",
+      "quantity_minimum": "الحد الأدنى {{ minimum }}",
       "quantity_maximum": "الحد الأقصى {{ maximum }}",
-      "in_cart": "في عربة التسوق"
+      "in_cart": "في السلة"
     }
   },
   "blogs": {
@@ -4545,9 +4545,9 @@
       "error": "لقد فشل نشر تعليقك، يرجى معالجة ما يلي:",
       "moderated": "يرجى ملاحظة أنه يتعين الموافقة على التعليقات قبل نشرها.",
       "success_moderated": "تم نشر التعليق، في انتظار الموافقة",
-      "email": "بريد إلكتروني",
-      "message": "رسالة",
-      "name": "اسم",
+      "email": "البريد الإلكتروني",
+      "message": "الرسالة",
+      "name": "الاسم",
       "heading": "اترك تعليقًا",
       "success": "تم نشر التعليق"
     },
@@ -4563,19 +4563,19 @@
     "contact_form": {
       "error_heading": "يرجى تعديل ما يلي:",
       "post_success": "شكرًا لتواصلك معنا. سنتواصل معك في أقرب وقت ممكن.",
-      "name": "اسم",
-      "email": "بريد إلكتروني",
+      "name": "الاسم",
+      "email": "البريد الإلكتروني",
       "phone": "رقم الهاتف",
-      "comment": "تعليق"
+      "comment": "الرسالة"
     },
     "email_signup": {
       "success": "شكرا على الاشتراك!",
-      "label": "بريد إلكتروني",
+      "label": "البريد الإلكتروني",
       "placeholder": "البريد الإلكتروني"
     },
     "load_video": "تحميل الفيديو: {{ description }}",
-    "filter": "فلتر",
-    "sold_out": "نفذ",
+    "filter": "تصفية",
+    "sold_out": "نفدت الكمية",
     "payment_methods": "طرق الدفع"
   },
   "sections": {
@@ -4585,12 +4585,14 @@
     }
   },
   "moments": {
-    "night": "الليل",
+    "night": "سهرة",
     "gift": "هدية",
     "all_day": "طوال اليوم",
-    "daily": "يومي",
-    "fresh": "منعش",
-    "love": "حب"
+    "daily": "العمل",
+    "fresh": "حر الصيف",
+    "love": "ليلة رومانسية",
+    "occasions": "الأفراح والأعياد",
+    "winter": "ليالي الشتاء"
   },
   "homepage": {
     "hero": {
@@ -4605,8 +4607,8 @@
       "shop_moment": "تسوّق {{ moment }}",
       "slides": {
         "night": {
-          "headline": "صُنع لليل",
-          "text": "عميق ودافئ ولا يُنسى. عطر لما بعد الغروب."
+          "headline": "صُنع للسهرة",
+          "text": "عميق ودافئ ولا يُنسى. للعشاء والخروج والسهر."
         },
         "gift": {
           "headline": "أهدِ لحظة",
@@ -4617,16 +4619,24 @@
           "text": "عطر خفيف يرافقك طوال يومك."
         },
         "daily": {
-          "headline": "طقسك اليومي",
-          "text": "العطر الذي تمدّ يدك إليه دون تفكير."
+          "headline": "جاهز للعمل",
+          "text": "نظيف وأنيق وقريب من البشرة. مناسب للعمل والجامعة."
         },
         "fresh": {
-          "headline": "انتعاش من البداية",
-          "text": "نظيف وبارد ومنتبه."
+          "headline": "انتعاش في حر الصيف",
+          "text": "منعش وخفيف ومشرق. للأيام الحارة."
         },
         "love": {
-          "headline": "قلها بعطر",
-          "text": "ناعم ودافئ وجريء قليلًا."
+          "headline": "لليلة رومانسية",
+          "text": "ناعم ودافئ وجريء قليلًا. لكما معًا."
+        },
+        "occasions": {
+          "headline": "للأفراح والأعياد",
+          "text": "غني وثابت واحتفالي. للأيام التي لا تُنسى."
+        },
+        "winter": {
+          "headline": "دفء ليالي الشتاء",
+          "text": "عود وعنبر وتوابل تبقى معك في الأمسيات الباردة."
         }
       }
     },
@@ -4685,7 +4695,7 @@
     },
     "sell": {
       "heading": "ماذا نبيع",
-      "text": "عطور أصلية من العلامات التي تعرفها، مرتبة في ست لحظات: الليل والهدايا وطوال اليوم واليومي والمنعش والحب. اختر اللحظة التي تستعد لها ونعرض لك ما يناسبها.",
+      "text": "عطور أصلية من العلامات التي تعرفها، مرتبة في ست لحظات: العمل والسهرة والليلة الرومانسية وحر الصيف والأفراح والأعياد وليالي الشتاء. اختر لحظتك ونعرض لك ما يناسبها.",
       "badge_1": "أصلي 100% ومغلق",
       "badge_2": "ست لحظات",
       "badge_3": "الأسعار بالجنيه المصري",
@@ -4701,12 +4711,12 @@
       "p3_title": "أسعار واضحة بالجنيه",
       "p3_text": "السعر الذي تراه هو السعر بالجنيه المصري.",
       "p4_title": "اختيار الهدية سهل",
-      "p4_text": "لحظة كاملة من أطقم الهدايا الجاهزة للإهداء."
+      "p4_text": "أطقم هدايا جاهزة للإهداء، في قسم الهدايا."
     },
     "steps": {
-      "heading": "كيف يعمل",
+      "heading": "كيف نعمل",
       "s1_title": "اختر لحظة",
-      "s1_text": "الليل أو الهدايا أو طوال اليوم أو اليومي أو المنعش أو الحب.",
+      "s1_text": "العمل أو السهرة أو ليلة رومانسية أو حر الصيف أو الأفراح والأعياد أو ليالي الشتاء.",
       "s2_title": "اطلب وادفع عند الاستلام",
       "s2_text": "الدفع عند الاستلام متاح.",
       "s3_title": "استلم زجاجتك المغلقة",
@@ -4789,7 +4799,7 @@
     "topic_returns_a": "التفاصيل الكاملة في صفحة سياسة الاسترجاع.",
     "topic_returns_link": "اقرأ سياسة الاسترجاع",
     "topic_gift_q": "كيف أختار هدية؟",
-    "topic_gift_a": "ابدأ بلحظة الهدايا التي تجمع أطقم الهدايا، أو اختر اللحظة التي يستعد لها الشخص."
+    "topic_gift_a": "ابدأ بقسم الهدايا الذي يجمع أطقم الهدايا، أو اختر اللحظة التي يستعد لها الشخص، مثل الأفراح والأعياد."
   },
   "contact": {
     "heading": "اتصل بنا",
@@ -4816,7 +4826,7 @@
     "copied": "تم نسخ الرابط",
     "share": "مشاركة",
     "message": "عطور أصلية مرتبة حسب اللحظة. ألقِ نظرة:",
-    "steps": "كيف يعمل",
+    "steps": "كيف نعمل",
     "s1": "شارك",
     "s1_text": "أرسل الرابط إلى صديق.",
     "s2": "صديقك يطلب",
@@ -4896,14 +4906,777 @@
     "c2_a_html": "الأسعار بالجنيه المصري.",
     "c2_b_html": "<strong>ما تراه هو ما تدفعه.</strong>",
     "c3_title": "صُنعت للحظات",
-    "c3_a_html": "الليل والهدايا وطوال اليوم واليومي والمنعش والحب.",
+    "c3_a_html": "العمل والسهرة والليلة الرومانسية وحر الصيف والأفراح والأعياد وليالي الشتاء.",
     "c3_b_html": "كل زجاجة في <strong>اللحظة التي تناسبها</strong>.",
     "c4_title": "هدايا سهلة",
     "c4_a_html": "لا تعرف ماذا تختار؟ <strong>ابدأ من المناسبة.</strong>",
-    "c4_b_html": "لحظة الهدايا تجمع أطقم جاهزة للإهداء.",
+    "c4_b_html": "قسم الهدايا يجمع أطقمًا جاهزة للإهداء.",
     "pair_left_a": "لأن اختيار العطر يجب أن يبدأ من",
     "pair_left_accent": "اللحظة،",
     "pair_left_b": "لا من اسم العلامة.",
     "pair_right": "اختر لحظتك"
+  },
+  "hero_box": {
+    "label": "أهلًا بك",
+    "headline_1": "لكل لحظة عطر.",
+    "line_1": "هدايا وعطور مرتبة حسب اللحظة التي تستعد لها.",
+    "headline_2": "افتح لحظة.",
+    "headline_3": "والآن اختر لحظتك.",
+    "shop_gifts": "تسوّق الهدايا",
+    "find_moment": "اعثر على لحظتك",
+    "bottle_alt": "{{ title }} من {{ brand }}، يخرج من علبة هدايا لحظات",
+    "scroll_cue": "مرّر للفتح",
+    "moments_label": "تسوّق حسب اللحظة",
+    "bottle_alt_generic": "زجاجة عطر تخرج من علبة هدايا لحظات",
+    "credit_html": "الزجاجة ثلاثية الأبعاد مقتبسة من {{ model }} لـ {{ author }}، {{ license }}"
+  },
+  "gift_finder": {
+    "strip_title": "اعثر على هدية في 3 خطوات",
+    "page_heading": "اعثر على الهدية المناسبة",
+    "page_intro": "أخبرنا لمن الهدية. نعرض لك اختيارات قليلة وسهلة ونشرح كل واحد بكلمات بسيطة.",
+    "who_label": "لمن الهدية؟",
+    "occasion_label": "ما المناسبة؟",
+    "budget_label": "الميزانية",
+    "who": {
+      "wife": "الزوجة",
+      "husband": "الزوج",
+      "mother": "الأم",
+      "father": "الأب",
+      "friend": "صديق",
+      "colleague": "زميل عمل"
+    },
+    "occasion": {
+      "birthday": "عيد ميلاد",
+      "anniversary": "ذكرى زواج",
+      "eid": "العيد",
+      "thank_you": "شكر وتقدير",
+      "wedding": "فرح",
+      "new_baby": "مولود جديد"
+    },
+    "budget_under": "أقل من {{ max }} ج.م",
+    "budget_between": "من {{ min }} إلى {{ max }} ج.م",
+    "budget_over": "أكثر من {{ min }} ج.م",
+    "skip_hint": "يمكنك تخطي أي سؤال.",
+    "show_picks": "اعرض الاختيارات",
+    "safest": "لست متأكدًا؟ اعرض الاختيارات الأضمن",
+    "reset": "ابدأ من جديد",
+    "no_js_note": "أداة اختيار الهدايا تحتاج إلى JavaScript. ما زال بإمكانك تصفح كل العطور.",
+    "browse_all": "تصفّح كل العطور",
+    "results_heading": "اختياراتك",
+    "found_one": "وجدنا اختيارًا واحدًا",
+    "found_other": "وجدنا {{ count }} اختيارات",
+    "found_safest": "نعرض الاختيارات الأضمن",
+    "empty": "لا يوجد ما يطابق هذا الاختيار بعد. جرّب عددًا أقل من الشروط.",
+    "empty_safest_heading": "الاختيارات الأضمن بدلًا من ذلك",
+    "nothing_tagged": "لا توجد عطور جاهزة لأداة اختيار الهدايا بعد.",
+    "editor_count": "معاينة المحرر: {{ tagged }} من {{ total }} منتج في هذه الصفحة مصنفة لأداة الهدايا. المنتجات غير المصنفة مستبعدة.",
+    "easy_to_like": "يعجب الجميع",
+    "rows": {
+      "price": "السعر",
+      "feel": "الطابع",
+      "strength": "القوة",
+      "moment": "أنسب لحظة",
+      "why": "لماذا هذا العطر",
+      "ready": "جاهز للإهداء"
+    },
+    "ready_yes": "نعم",
+    "feel": {
+      "fresh": "منعش وخفيف",
+      "warm": "دافئ وغني",
+      "sweet": "حلو وناعم",
+      "woody": "عميق وخشبي",
+      "clean": "نظيف ومنعش"
+    },
+    "strength": {
+      "1": "هادئ",
+      "2": "خفيف",
+      "3": "متوسط",
+      "4": "قوي",
+      "5": "قوي جدًا"
+    },
+    "strength_aria": "القوة: {{ word }}، {{ level }} من 5",
+    "add_to_cart": "أضف إلى السلة",
+    "choose_size": "اختر الحجم",
+    "view_details": "عرض التفاصيل",
+    "compare_tick": "قارن",
+    "compare_tick_for": "قارن {{ title }}",
+    "compare_hint": "اختر 2 أو 3 عطور لمقارنتها جنبًا إلى جنب.",
+    "compare_button": "قارن {{ count }} اختيارات",
+    "compare_heading": "جنبًا إلى جنب",
+    "compare_caption": "مقارنة العطور التي اخترتها",
+    "compare_fragrance": "العطر",
+    "compare_close": "إغلاق المقارنة",
+    "compare_max": "يمكنك مقارنة 3 عطور كحد أقصى.",
+    "verdict_similar": "هذه العطور متشابهة: نفس القوة ونفس الطابع.",
+    "verdict_same_strength": "لها نفس القوة؛ {{ parts }}.",
+    "verdict_part": "{{ title }} طابعه {{ feel }}",
+    "verdict_item": "{{ title }} {{ strength }} وطابعه {{ feel }}",
+    "verdict_lightest": "الأخف",
+    "verdict_strongest": "الأقوى",
+    "verdict_middle": "متوسط القوة"
+  },
+  "scent": {
+    "filters_title": "تصفية حسب الرائحة",
+    "clear": "مسح فلاتر الرائحة",
+    "group_family": "عائلة الرائحة",
+    "group_note": "المكونات",
+    "group_gender": "لمن",
+    "group_season": "الموسم",
+    "group_time": "الوقت",
+    "group_type": "التركيز",
+    "group_size": "حجم العبوة",
+    "show_all_notes": "كل المكونات",
+    "explain_title": "تعرّف على هذا العطر",
+    "explain_intro": "جديد على العطور؟ هذه رائحة العطر بكلمات بسيطة.",
+    "pyramid_title": "كيف يتطور العطر على بشرتك",
+    "pyramid_top": "الدقائق الأولى: النفحات الخفيفة التي تشمّها أولًا، وتتلاشى خلال ١٥ إلى ٣٠ دقيقة تقريبًا.",
+    "pyramid_heart": "الساعات التالية: قلب العطر وشخصيته الحقيقية، لمدة ساعتين إلى ٤ ساعات تقريبًا.",
+    "pyramid_base": "ما يبقى: النفحات العميقة التي تبقى على بشرتك لساعات طويلة.",
+    "family_title": "عائلة الرائحة",
+    "notes_title": "ما ستشمّه",
+    "wear_title": "متى تضعه",
+    "skin_note": "كل بشرة مختلفة: قد تختلف رائحة العطر نفسه عليك قليلًا.",
+    "family": {
+      "woody": {
+        "name": "خشبي",
+        "about": "دافئ وهادئ وجاف، مثل الخشب المصقول أو صندوق من خشب الأرز. ناعم وراقٍ."
+      },
+      "floral": {
+        "name": "زهري",
+        "about": "رائحة الزهور الطازجة: ناعمة ورومانسية ومحبوبة بسهولة."
+      },
+      "gourmand": {
+        "name": "حلو (جورماند)",
+        "about": "حلو وشهي مثل الحلويات: فانيليا وكراميل وسكر. دافئ ومريح."
+      },
+      "amber-oriental": {
+        "name": "عنبري وشرقي",
+        "about": "دافئ وغني وحلو قليلًا، بالراتنجات والتوابل. يدوم طويلًا ويشعرك بالفخامة."
+      },
+      "musky": {
+        "name": "مسكي",
+        "about": "نظيف وناعم وقريب من رائحة البشرة، مثل الغسيل النظيف. هادئ ومريح."
+      },
+      "citrus": {
+        "name": "حمضي",
+        "about": "منعش ومشرق: ليمون وبرتقال وبرغموت. يمنح نشاطًا، ومثالي في الحر."
+      },
+      "spicy": {
+        "name": "حار",
+        "about": "توابل دافئة مثل القرفة والهيل والفلفل. حيوي وجريء."
+      },
+      "fruity": {
+        "name": "فاكهي",
+        "about": "فاكهة حلوة وعصيرية مثل التوت والتفاح والخوخ. مرح ومبهج."
+      },
+      "patchouli": {
+        "name": "باتشولي",
+        "about": "ترابي وعميق، مثل التربة الرطبة والأوراق الداكنة. يضيف عمقًا ويدوم طويلًا."
+      },
+      "oud": {
+        "name": "عود",
+        "about": "الخشب الثمين في الشرق: مدخن وغني وقوي. القليل منه يكفي."
+      },
+      "leather-tobacco": {
+        "name": "جلد وتبغ",
+        "about": "جلد ناعم وأوراق تبغ مجففة. دافئ وواثق ومناسب للمساء."
+      },
+      "fresh-aquatic": {
+        "name": "منعش ومائي",
+        "about": "بارد ومنعش، مثل نسيم البحر أو الماء العذب. نظيف وخفيف للأيام الحارة."
+      }
+    },
+    "note": {
+      "musk": {
+        "name": "مسك",
+        "about": "ناعم ونظيف مثل دفء البشرة، ويساعد العطر على الثبات."
+      },
+      "white-musk": {
+        "name": "مسك أبيض",
+        "about": "أنظف أنواع المسك: رائحة الغسيل النظيف والبودرة."
+      },
+      "warm-musk": {
+        "name": "مسك دافئ",
+        "about": "مسك بدفء مريح وحلاوة خفيفة."
+      },
+      "vanilla": {
+        "name": "فانيليا",
+        "about": "حلوة وكريمية مثل حلوى الفانيليا. دافئة ومريحة."
+      },
+      "amber": {
+        "name": "عنبر",
+        "about": "دافئ وذهبي وحلو قليلًا، يمنح إحساسًا بالدفء."
+      },
+      "dry-amber": {
+        "name": "عنبر جاف",
+        "about": "عنبر بلا سكر: دافئ وخشبي وجاف."
+      },
+      "ambergris": {
+        "name": "عنبر رمادي",
+        "about": "مالح ودافئ وقريب من البشرة، يمنح العطر إشراقًا وثباتًا."
+      },
+      "ambroxan": {
+        "name": "أمبروكسان",
+        "about": "عصري ونظيف بلمسة خشبية عنبرية. منعش لكنه يدوم."
+      },
+      "amberwood": {
+        "name": "خشب العنبر",
+        "about": "خشب دافئ وجاف بلمسة عنبر. قوي وعصري."
+      },
+      "patchouli": {
+        "name": "باتشولي",
+        "about": "ترابي وداكن مثل التربة الرطبة، يضيف عمقًا."
+      },
+      "bergamot": {
+        "name": "برغموت",
+        "about": "حمضيات مشرقة بين الليمون والبرتقال، افتتاحية منعشة."
+      },
+      "jasmine": {
+        "name": "ياسمين",
+        "about": "زهرة بيضاء غنية: حلوة وفواحة وأنيقة."
+      },
+      "sandalwood": {
+        "name": "خشب الصندل",
+        "about": "خشب كريمي وناعم، دافئ ومهدئ."
+      },
+      "rose": {
+        "name": "ورد",
+        "about": "الزهرة الكلاسيكية: رومانسية ومنعشة وحلوة قليلًا."
+      },
+      "cedarwood": {
+        "name": "خشب الأرز",
+        "about": "خشب جاف ونظيف مثل برادة الأقلام. هادئ ومتزن."
+      },
+      "oud": {
+        "name": "عود",
+        "about": "خشب ثمين ومدخن وقوي، محبوب في الخليج."
+      },
+      "oud-wood": {
+        "name": "خشب العود",
+        "about": "عود بلمسة أنعم وأخف."
+      },
+      "tonka-bean": {
+        "name": "حبوب التونكا",
+        "about": "حلوة مثل الفانيليا مع لمسة لوز وقش."
+      },
+      "coumarin": {
+        "name": "كومارين",
+        "about": "الرائحة الحلوة الشبيهة بالقش في حبوب التونكا."
+      },
+      "saffron": {
+        "name": "زعفران",
+        "about": "تابل دافئ بلمسة جلدية، فاخر وغني."
+      },
+      "lavender": {
+        "name": "خزامى",
+        "about": "عشبي منعش ومهدئ، مثل الملاءات النظيفة."
+      },
+      "vetiver": {
+        "name": "نجيل الهند",
+        "about": "جذور عشب خضراء وترابية، جافة وأنيقة."
+      },
+      "leather": {
+        "name": "جلد",
+        "about": "جلد جديد وناعم، جريء وواثق."
+      },
+      "suede": {
+        "name": "شمواه",
+        "about": "جلد مخملي ناعم، لطيف ودافئ."
+      },
+      "cinnamon": {
+        "name": "قرفة",
+        "about": "تابل دافئ وحلو مثل المخبوزات الطازجة."
+      },
+      "orange-blossom": {
+        "name": "زهر البرتقال",
+        "about": "زهرة بيضاء مشمسة بحلاوة تشبه العسل."
+      },
+      "orange-flower": {
+        "name": "زهرة البرتقال",
+        "about": "زهرة بيضاء مشمسة بحلاوة تشبه العسل."
+      },
+      "neroli": {
+        "name": "نيرولي",
+        "about": "الجانب الأخضر المنعش من زهرة البرتقال."
+      },
+      "pink-pepper": {
+        "name": "فلفل وردي",
+        "about": "تابل خفيف ولامع، منعش وليس حارًا."
+      },
+      "black-pepper": {
+        "name": "فلفل أسود",
+        "about": "تابل جاف وحاد يضيف حيوية."
+      },
+      "incense": {
+        "name": "بخور",
+        "about": "راتنج مدخن، مثل غرفة هادئة يملؤها البخور."
+      },
+      "cardamom": {
+        "name": "هيل",
+        "about": "تابل منعش ودافئ مثل القهوة العربية."
+      },
+      "apple": {
+        "name": "تفاح",
+        "about": "مقرمش وعصيري، منعش ومبهج."
+      },
+      "lemon": {
+        "name": "ليمون",
+        "about": "حاد ومشمس ونظيف، بداية منعشة."
+      },
+      "lime": {
+        "name": "ليمون أخضر",
+        "about": "حامض وأخضر ومنعش."
+      },
+      "mandarin": {
+        "name": "يوسفي",
+        "about": "حمضيات حلوة وعصيرية، مشرقة ومبهجة."
+      },
+      "tangerine": {
+        "name": "يوسفي",
+        "about": "حمضيات حلوة وعصيرية، مشرقة ومبهجة."
+      },
+      "orange": {
+        "name": "برتقال",
+        "about": "قشر برتقال حلو وعصيري، مشمس ومنعش."
+      },
+      "grapefruit": {
+        "name": "جريب فروت",
+        "about": "حمضيات منعشة بمرارة خفيفة، فوارة ومنشطة."
+      },
+      "geranium": {
+        "name": "إبرة الراعي",
+        "about": "ورق أخضر بلمسة ورد، منعش وبه نعناع خفيف."
+      },
+      "caramel": {
+        "name": "كراميل",
+        "about": "حلو وزبدي وذهبي مثل التوفي."
+      },
+      "pineapple": {
+        "name": "أناناس",
+        "about": "استوائي وحلو وعصيري."
+      },
+      "lily-of-the-valley": {
+        "name": "زنبق الوادي",
+        "about": "زهرة ربيعية رقيقة: منعشة وخضراء ونظيفة."
+      },
+      "muguet": {
+        "name": "زنبق الوادي",
+        "about": "زهرة ربيعية رقيقة: منعشة وخضراء ونظيفة."
+      },
+      "oakmoss": {
+        "name": "طحلب البلوط",
+        "about": "طحلب الغابة الرطب، ترابي وأخضر وكلاسيكي."
+      },
+      "oak-moss": {
+        "name": "طحلب البلوط",
+        "about": "طحلب الغابة الرطب، ترابي وأخضر وكلاسيكي."
+      },
+      "moss": {
+        "name": "طحلب",
+        "about": "أخضر ورطب وترابي مثل أرض الغابة."
+      },
+      "raspberry": {
+        "name": "توت العليق",
+        "about": "توت أحمر حلو بحموضة خفيفة، عصيري ومرح."
+      },
+      "red-berries": {
+        "name": "التوت الأحمر",
+        "about": "مزيج من التوت الأحمر الحلو، عصيري ومشرق."
+      },
+      "strawberry": {
+        "name": "فراولة",
+        "about": "فراولة حلوة تشبه الحلوى."
+      },
+      "cherry": {
+        "name": "كرز",
+        "about": "كرز داكن وحلو، عصيري بلمسة لوز."
+      },
+      "blackcurrant": {
+        "name": "كشمش أسود",
+        "about": "توت داكن بحموضة ولمسة خضراء."
+      },
+      "black-currant": {
+        "name": "كشمش أسود",
+        "about": "توت داكن بحموضة ولمسة خضراء."
+      },
+      "cassis": {
+        "name": "كاسيس",
+        "about": "توت داكن بحموضة ولمسة خضراء."
+      },
+      "iris": {
+        "name": "سوسن",
+        "about": "بودري وأنيق، مثل بودرة المكياج الناعمة."
+      },
+      "orris": {
+        "name": "سوسن",
+        "about": "بودري وأنيق، مثل بودرة المكياج الناعمة."
+      },
+      "nutmeg": {
+        "name": "جوز الطيب",
+        "about": "تابل دافئ بنكهة المكسرات."
+      },
+      "labdanum": {
+        "name": "لبدانوم",
+        "about": "راتنج دافئ ولزج، عميق ويشبه العنبر."
+      },
+      "cistus": {
+        "name": "قسطوس",
+        "about": "شجيرة راتنجية دافئة، عميقة وتشبه العنبر."
+      },
+      "ginger": {
+        "name": "زنجبيل",
+        "about": "تابل منعش وحيوي بلمسة دافئة."
+      },
+      "coconut": {
+        "name": "جوز الهند",
+        "about": "كريمي ومشمس واستوائي."
+      },
+      "woody-notes": {
+        "name": "نفحات خشبية",
+        "about": "مزيج من الأخشاب: جاف ودافئ وناعم."
+      },
+      "precious-woods": {
+        "name": "الأخشاب الثمينة",
+        "about": "مزيج من الأخشاب الفاخرة: دافئ وغني."
+      },
+      "benzoin": {
+        "name": "بنزوين",
+        "about": "راتنج حلو يشبه الفانيليا، ناعم ودافئ."
+      },
+      "violet": {
+        "name": "بنفسج",
+        "about": "زهرة ناعمة بودرية بلمسة حلوة."
+      },
+      "violet-leaf": {
+        "name": "ورقة البنفسج",
+        "about": "أخضر ومنعش مثل الأوراق المقطوفة."
+      },
+      "praline": {
+        "name": "برالين",
+        "about": "مكسرات مكرملة حلوة، غنية وشهية."
+      },
+      "peach": {
+        "name": "خوخ",
+        "about": "فاكهة ناعمة مخملية وعصيرية."
+      },
+      "apricot": {
+        "name": "مشمش",
+        "about": "فاكهة ناعمة مشمسة تشبه الخوخ."
+      },
+      "plum": {
+        "name": "برقوق",
+        "about": "فاكهة داكنة حلوة تشبه المربى."
+      },
+      "honey": {
+        "name": "عسل",
+        "about": "ذهبي وحلو ودافئ."
+      },
+      "tuberose": {
+        "name": "مسك الروم",
+        "about": "زهرة بيضاء كريمية قوية، جريئة وساحرة."
+      },
+      "pear": {
+        "name": "كمثرى",
+        "about": "منعشة وعصيرية وحلوة قليلًا."
+      },
+      "guaiac-wood": {
+        "name": "خشب الغاياك",
+        "about": "خشب مدخن بحلاوة خفيفة."
+      },
+      "guaiacwood": {
+        "name": "خشب الغاياك",
+        "about": "خشب مدخن بحلاوة خفيفة."
+      },
+      "sage": {
+        "name": "مريمية",
+        "about": "عشبية ومنعشة وعطرية."
+      },
+      "clary-sage": {
+        "name": "ميرمية كلاري",
+        "about": "عشبية وحلوة قليلًا بلمسة مسكية ناعمة."
+      },
+      "peony": {
+        "name": "فاوانيا",
+        "about": "زهرة وردية خفيفة ومنعشة."
+      },
+      "cashmeran": {
+        "name": "كاشميران",
+        "about": "ناعم ودافئ مثل كنزة الكشمير."
+      },
+      "cashmere": {
+        "name": "الكشمير",
+        "about": "ناعم ودافئ مثل كنزة الكشمير."
+      },
+      "mint": {
+        "name": "نعناع",
+        "about": "بارد ومنعش."
+      },
+      "tobacco": {
+        "name": "تبغ",
+        "about": "أوراق تبغ مجففة: دافئة وحلوة ومدخنة (ليست رائحة السجائر)."
+      },
+      "ylang-ylang": {
+        "name": "إيلنغ إيلنغ",
+        "about": "زهرة استوائية كريمية ومشمسة."
+      },
+      "cananga": {
+        "name": "كانانجا",
+        "about": "قريبة من الإيلنغ إيلنغ: كريمية وزهرية."
+      },
+      "white-flowers": {
+        "name": "زهور بيضاء",
+        "about": "باقة زهور بيضاء: كريمية وأنيقة."
+      },
+      "white-florals": {
+        "name": "زهور بيضاء",
+        "about": "باقة زهور بيضاء: كريمية وأنيقة."
+      },
+      "florals": {
+        "name": "زهور",
+        "about": "باقة زهور متنوعة."
+      },
+      "floral-notes": {
+        "name": "نفحات زهرية",
+        "about": "باقة زهور متنوعة."
+      },
+      "aquatic-notes": {
+        "name": "نفحات مائية",
+        "about": "باردة ومائية مثل نسيم البحر."
+      },
+      "marine": {
+        "name": "نفحات بحرية",
+        "about": "هواء البحر المالح، منعش ومنفتح."
+      },
+      "sea-salt": {
+        "name": "ملح بحري",
+        "about": "بشرة مالحة مشمسة بعد السباحة."
+      },
+      "almond": {
+        "name": "لوز",
+        "about": "حلو بنكهة المكسرات مثل المرزبان."
+      },
+      "sugar": {
+        "name": "سكر",
+        "about": "حلاوة خالصة مثل الحلوى."
+      },
+      "marshmallow": {
+        "name": "مارشميلو",
+        "about": "ناعم وهش وسكري."
+      },
+      "coffee": {
+        "name": "قهوة",
+        "about": "حبوب قهوة محمصة، غنية ومنشطة."
+      },
+      "litchi": {
+        "name": "ليتشي",
+        "about": "فاكهة استوائية عصيرية بلمسة ورد."
+      },
+      "lychee": {
+        "name": "ليتشي",
+        "about": "فاكهة استوائية عصيرية بلمسة ورد."
+      },
+      "clove": {
+        "name": "قرنفل",
+        "about": "تابل قوي ودافئ، جريء واحتفالي."
+      },
+      "magnolia": {
+        "name": "ماغنوليا",
+        "about": "زهرة كريمية بلمسة ليمون منعشة."
+      },
+      "spice": {
+        "name": "توابل",
+        "about": "مزيج من التوابل الدافئة."
+      },
+      "spicy-notes": {
+        "name": "نفحات حارة",
+        "about": "مزيج من التوابل الدافئة."
+      },
+      "smoke": {
+        "name": "دخان",
+        "about": "مدخن مثل نار الحطب."
+      },
+      "basil": {
+        "name": "ريحان",
+        "about": "عشبة خضراء منعشة."
+      },
+      "orchid": {
+        "name": "أوركيد",
+        "about": "زهرة غريبة ناعمة وحلوة قليلًا."
+      },
+      "osmanthus": {
+        "name": "أوسمانثوس",
+        "about": "زهرة برائحة المشمش والجلد."
+      },
+      "fig": {
+        "name": "تين",
+        "about": "أخضر وحليبي وفاكهي مثل شجرة التين."
+      },
+      "elemi": {
+        "name": "إليمي",
+        "about": "راتنج منعش بلمسة ليمون."
+      },
+      "nagarmotha": {
+        "name": "ناجارموثا",
+        "about": "جذر ترابي مدخن قريب من العود."
+      },
+      "cypriol": {
+        "name": "السعدية",
+        "about": "جذر ترابي مدخن قريب من العود."
+      },
+      "milk": {
+        "name": "حليب",
+        "about": "ناعم وكريمي ومريح."
+      },
+      "mango": {
+        "name": "مانجو",
+        "about": "عصيرية واستوائية وحلوة."
+      },
+      "herbal": {
+        "name": "أعشاب",
+        "about": "أعشاب خضراء منعشة."
+      },
+      "green-notes": {
+        "name": "نفحات خضراء",
+        "about": "عشب وأوراق مقطوفة حديثًا."
+      },
+      "freesia": {
+        "name": "فريزيا",
+        "about": "زهرة خفيفة ومنعشة بلمسة فاكهة."
+      },
+      "dates": {
+        "name": "تمر",
+        "about": "حلو وغني مثل الشراب."
+      },
+      "birch": {
+        "name": "بتولا",
+        "about": "خشب مدخن بلمسة جلدية."
+      },
+      "aldehydes": {
+        "name": "ألدهيدات",
+        "about": "فوار ونظيف برائحة الصابون، مثل الكتان النظيف."
+      },
+      "akigalawood": {
+        "name": "أكيجالاوود",
+        "about": "خشبي بلمسة فلفل حارة."
+      },
+      "rosemary": {
+        "name": "إكليل الجبل",
+        "about": "عشبي منعش وعطري."
+      },
+      "myrrh": {
+        "name": "مُرّ",
+        "about": "راتنج قديم بحلاوة مدخنة."
+      },
+      "heliotrope": {
+        "name": "هليوتروب",
+        "about": "زهرة بودرية تشبه اللوز."
+      },
+      "gardenia": {
+        "name": "جاردينيا",
+        "about": "زهرة بيضاء كريمية فواحة."
+      },
+      "cypress": {
+        "name": "سرو",
+        "about": "خشب أخضر منعش يشبه الصنوبر."
+      },
+      "cacao": {
+        "name": "كاكاو",
+        "about": "شوكولاتة داكنة بحلاوة ومرارة."
+      },
+      "cocoa": {
+        "name": "كاكاو",
+        "about": "شوكولاتة داكنة بحلاوة ومرارة."
+      },
+      "artemisia": {
+        "name": "أرطماسيا",
+        "about": "عشبي أخضر بمرارة خفيفة."
+      },
+      "lily": {
+        "name": "زنبق",
+        "about": "زهرة بيضاء منعشة وأنيقة."
+      },
+      "thyme": {
+        "name": "الزعتر",
+        "about": "عشبة عطرية دافئة."
+      },
+      "rhubarb": {
+        "name": "راوند",
+        "about": "حامض وأخضر وعصيري."
+      },
+      "pistachio": {
+        "name": "فستق",
+        "about": "كريمي وحلو بنكهة المكسرات."
+      },
+      "juniper": {
+        "name": "عرعر",
+        "about": "توت منعش يشبه الصنوبر."
+      },
+      "black-tea": {
+        "name": "شاي أسود",
+        "about": "أوراق شاي جافة بلمسة مدخنة."
+      },
+      "tagete": {
+        "name": "القطيفة",
+        "about": "زهرة القطيفة الخضراء الفاكهية."
+      },
+      "oriental-notes": {
+        "name": "نفحات شرقية",
+        "about": "راتنجات وتوابل دافئة."
+      },
+      "fruity-notes": {
+        "name": "نفحات فاكهية",
+        "about": "مزيج من الفاكهة الحلوة."
+      },
+      "davana": {
+        "name": "دافانا",
+        "about": "عشبة فاكهية تشبه المشمش المجفف."
+      },
+      "cognac": {
+        "name": "كونياك",
+        "about": "دافئ وفاكهي بلمسة مشروب معتق."
+      },
+      "citrus": {
+        "name": "حمضيات",
+        "about": "مزيج من الليمون والبرتقال والحمضيات، مشرق ومنعش."
+      },
+      "cherry-blossom": {
+        "name": "زهر الكرز",
+        "about": "زهرة وردية رقيقة، خفيفة ورومانسية."
+      },
+      "white-wood": {
+        "name": "خشب أبيض",
+        "about": "خشب خفيف ونظيف وكريمي."
+      },
+      "toffee": {
+        "name": "توفي",
+        "about": "حلوى كراميل ذهبية بطعم الزبدة."
+      },
+      "ambrofix": {
+        "name": "أمبروفكس",
+        "about": "عنبر خشبي نظيف وعصري يساعد العطر على الثبات."
+      }
+    },
+    "value": {
+      "men": "رجالي",
+      "women": "نسائي",
+      "unisex": "للجنسين",
+      "summer": "صيفي",
+      "winter": "شتوي",
+      "all-year": "طوال العام",
+      "day": "نهارًا",
+      "night": "مساءً",
+      "day-night": "نهارًا ومساءً",
+      "eau-de-parfum": "أو دو بارفان",
+      "extrait-de-parfum": "إكستريه دو بارفان",
+      "body-mist": "رذاذ جسم"
+    },
+    "value_about": {
+      "summer": "خفيف ومناسب للأيام الحارة.",
+      "winter": "دافئ وغني، مناسب للطقس البارد.",
+      "all-year": "مناسب لكل المواسم.",
+      "day": "منعش ومناسب للنهار والعمل والجامعة.",
+      "night": "أعمق وأجرأ: للمساء والسهرات.",
+      "day-night": "يناسب من الصباح حتى المساء."
+    }
   }
 }

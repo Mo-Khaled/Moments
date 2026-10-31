@@ -98,7 +98,7 @@
               class="field__label price-facet__label"
               for="{{ filter.label | escape }}-GTE"
             >
-              {{ cart.currency.symbol }}
+              {% if request.locale.iso_code == 'ar' %}ج.م{% else %}LE{% endif %}
             </label>
           </div>
 
@@ -127,13 +127,16 @@
               class="field__label price-facet__label"
               for="{{ filter.label | escape }}-LTE"
             >
-              {{ cart.currency.symbol }}
+              {% if request.locale.iso_code == 'ar' %}ج.م{% else %}LE{% endif %}
             </label>
           </div>
         </div>
 
         <div class="price-facet__highest-price">
           {%- assign formatted_highest_price = filter.range_max | money -%}
+          {%- if request.locale.iso_code == 'ar' -%}
+            {%- assign formatted_highest_price = filter.range_max | money_without_currency | remove: '.00' | append: ' ج.م' -%}
+          {%- endif -%}
           {{ 'content.price_filter_html' | t: price: formatted_highest_price }}
         </div>
 
@@ -235,5 +238,17 @@
     color: var(--facets-input-label-color);
     padding: var(--input-padding-y) var(--input-padding-x);
     transform: none;
+  }
+
+  /* right to left: the currency sign sits at the start (right) and the number keeps clear of it (they overlapped on /ar) */
+  html[dir='rtl'] .field__input.price-facet__input {
+    text-align: left;
+    padding-left: var(--input-padding-x);
+    padding-right: calc(2.5 * var(--input-padding-x));
+  }
+
+  [dir='rtl'] .field__label.price-facet__label {
+    left: auto;
+    right: 0;
   }
 {% endstylesheet %}

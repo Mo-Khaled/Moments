@@ -57,16 +57,18 @@
     }
   }
 
-  /* the Night tint: a radial glow behind the box that grows as it opens; the stage edges stay deep, so the join below never moves */
+  /* a warm stage light behind the box that grows as it opens: nude from above with a sand core, so the plum is broken by warm light,
+     not more violet (owner 2026-10-30: "no colour to break this purple"); the stage edges stay deep, so the join below never moves */
   .hgb__glow {
     --tint: clamp(0, (var(--p) - 0.12) / 0.45, 1);
     position: absolute;
     inset: 0;
     pointer-events: none;
     background:
-      radial-gradient(52% 50% at 50% 62%, var(--moment-night-field, #5f4589), transparent 72%),
-      radial-gradient(34% 34% at 50% 66%, rgb(156 107 138 / 0.55), transparent 70%);
-    opacity: calc(0.28 + 0.62 * var(--tint));
+      radial-gradient(26% 30% at 50% 64%, rgb(230 199 124 / 0.30), transparent 70%),
+      radial-gradient(44% 46% at 50% 60%, rgb(233 207 200 / 0.26), transparent 72%),
+      conic-gradient(from 168deg at 50% -8%, transparent, rgb(250 246 242 / 0.07) 6deg, rgb(250 246 242 / 0.07) 18deg, transparent 24deg);
+    opacity: calc(0.55 + 0.45 * var(--tint));
     /* the glow never reaches the last rows, so the stage always ends on pure deep plum, the brand strip colour */
     -webkit-mask-image: linear-gradient(#000 70%, transparent 96%);
     mask-image: linear-gradient(#000 70%, transparent 96%);
@@ -152,8 +154,8 @@
 
   html[lang='ar'] .hgb__title,
   [dir='rtl'] .hgb__title:lang(ar) {
-    font-family: 'Alexandria', 'Readex Pro', sans-serif;
-    font-weight: 500;
+    font-family: var(--font-heading--family);
+    font-weight: 600;
     letter-spacing: 0;
     text-transform: none;
     line-height: 1.35;
@@ -172,6 +174,68 @@
 
   html[lang='ar'] .hgb__text {
     line-height: 1.7;
+  }
+
+  /* the six moments as chips: a colour dot from each moment's field on a quiet glass pill */
+  .hgb__moments {
+    margin-block-start: 10px;
+  }
+
+  .hgb__chips {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .hgb-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-block-size: 36px;
+    padding-inline: 12px 16px;
+    border: 1px solid rgb(233 207 200 / 0.28);
+    border-radius: 999px;
+    background: rgb(250 246 242 / 0.06);
+    color: var(--m-pearl);
+    font-size: 0.875rem;
+    letter-spacing: 0.02em;
+    text-decoration: none;
+    transition: background-color var(--m-dur-1, 160ms) var(--m-ease, ease), border-color var(--m-dur-1, 160ms) var(--m-ease, ease), transform var(--m-dur-1, 160ms) var(--m-ease, ease);
+  }
+
+  .hgb-chip__dot {
+    flex: none;
+    inline-size: 10px;
+    block-size: 10px;
+    border-radius: 50%;
+    background: var(--chip);
+    box-shadow: 0 0 0 1px rgb(250 246 242 / 0.35), 0 0 10px var(--chip);
+  }
+
+  @media (hover: hover) {
+    .hgb-chip:hover {
+      border-color: var(--chip);
+      background: color-mix(in oklab, var(--chip) 22%, transparent);
+    }
+  }
+
+  .hgb-chip:active {
+    transform: scale(0.97);
+  }
+
+  .hgb-chip:focus-visible {
+    outline: 2px solid var(--m-pearl);
+    outline-offset: 2px;
+  }
+
+  /* headlines 2 and 3 share the chips' grid cell and sit above them: they are text only, so clicks pass through to the chips */
+  .hgb__line--2,
+  .hgb__line--3 {
+    pointer-events: none;
   }
 
   .hgb__actions {
@@ -395,35 +459,56 @@
     90% { transform: translate3d(0, -2px, 0); }
   }
 
+  /* bottom-start corner, one line: a mouse outline with a dot rolling down inside it, then the words, 10px apart */
   .hgb__cue {
     position: absolute;
-    inset-block-start: 6%;
-    inset-inline: 0;
+    inset-block-end: calc(env(safe-area-inset-bottom, 0px) + clamp(28px, 5svh, 56px) + 12px);
+    inset-inline-start: max(var(--m-gutter, 24px), 50vw - 45rem + var(--m-gutter, 24px));
     z-index: 2;
     display: flex;
-    flex-direction: column;
     align-items: center;
-    gap: 6px;
+    gap: 10px;
     margin: 0;
     color: var(--m-nude);
-    font-size: 0.8125rem;
-    font-weight: 300;
-    letter-spacing: 0.06em;
+    font-size: 0.75rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
     opacity: calc(1 - clamp(0, var(--p) / 0.06, 1));
     pointer-events: none;
   }
 
-  .hgb__cue svg {
-    animation: hgb-cue 2.4s cubic-bezier(0.23, 1, 0.32, 1) infinite;
+  .hgb__mouse {
+    position: relative;
+    flex: none;
+    inline-size: 16px;
+    block-size: 24px;
+    border: 1px solid currentColor;
+    border-radius: 999px;
+  }
+
+  .hgb__mouse::before {
+    content: '';
+    position: absolute;
+    inset-block-start: 5px;
+    inset-inline-start: 50%;
+    inline-size: 2px;
+    block-size: 5px;
+    margin-inline-start: -1px;
+    border-radius: 1px;
+    background: currentColor;
+    animation: hgb-cue 2.2s cubic-bezier(0.23, 1, 0.32, 1) infinite;
   }
 
   @keyframes hgb-cue {
-    0%, 100% { transform: translateY(0); opacity: 0.55; }
-    50% { transform: translateY(5px); opacity: 1; }
+    0% { transform: translateY(0); opacity: 0; }
+    20% { opacity: 1; }
+    70% { transform: translateY(8px); opacity: 0; }
+    100% { transform: translateY(8px); opacity: 0; }
   }
 
   html[lang='ar'] .hgb__cue {
     letter-spacing: 0;
+    text-transform: none;
   }
 
   /* the lid: a group hinged on the back top edge */
@@ -805,7 +890,7 @@
   }
 
   .hgb[data-static] .hgb-lid-peek,
-  .hgb[data-static] .hgb__cue svg {
+  .hgb[data-static] .hgb__mouse::before {
     animation: none;
   }
 
@@ -815,7 +900,7 @@
 
   @media (prefers-reduced-motion: reduce) {
     .hgb-lid-peek,
-    .hgb__cue svg {
+    .hgb__mouse::before {
       animation: none;
     }
 

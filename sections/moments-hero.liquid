@@ -74,6 +74,10 @@
             assign label = 'moments.daily' | t
           when 'fresh'
             assign label = 'moments.fresh' | t
+          when 'occasions'
+            assign label = 'moments.occasions' | t
+          when 'winter'
+            assign label = 'moments.winter' | t
           else
             assign label = 'moments.love' | t
         endcase
@@ -117,6 +121,20 @@
             endif
             if subline == blank
               assign subline = 'homepage.hero.slides.fresh.text' | t
+            endif
+          when 'occasions'
+            if headline == blank
+              assign headline = 'homepage.hero.slides.occasions.headline' | t
+            endif
+            if subline == blank
+              assign subline = 'homepage.hero.slides.occasions.text' | t
+            endif
+          when 'winter'
+            if headline == blank
+              assign headline = 'homepage.hero.slides.winter.headline' | t
+            endif
+            if subline == blank
+              assign subline = 'homepage.hero.slides.winter.text' | t
             endif
           else
             if headline == blank
@@ -236,6 +254,10 @@
               assign label = 'moments.daily' | t
             when 'fresh'
               assign label = 'moments.fresh' | t
+            when 'occasions'
+              assign label = 'moments.occasions' | t
+            when 'winter'
+              assign label = 'moments.winter' | t
             else
               assign label = 'moments.love' | t
           endcase
@@ -748,12 +770,14 @@
       "info": "Auto picks the moment from the visitor's local hour (each slide's hours). Choose one to run a campaign.",
       "options": [
         { "value": "auto", "label": "Auto (by local hour)" },
-        { "value": "night", "label": "Night" },
+        { "value": "night", "label": "Evening out" },
         { "value": "gift", "label": "Gift" },
         { "value": "allday", "label": "All day" },
-        { "value": "daily", "label": "Daily" },
-        { "value": "fresh", "label": "Fresh" },
-        { "value": "love", "label": "Love" }
+        { "value": "daily", "label": "Office" },
+        { "value": "fresh", "label": "Summer heat" },
+        { "value": "love", "label": "Date night" },
+        { "value": "occasions", "label": "Weddings & Eid" },
+        { "value": "winter", "label": "Winter nights" }
       ],
       "default": "auto"
     },
@@ -780,12 +804,14 @@
           "id": "moment",
           "label": "Moment",
           "options": [
-            { "value": "night", "label": "Night" },
+            { "value": "night", "label": "Evening out" },
             { "value": "gift", "label": "Gift" },
             { "value": "allday", "label": "All day" },
-            { "value": "daily", "label": "Daily" },
-            { "value": "fresh", "label": "Fresh" },
-            { "value": "love", "label": "Love" }
+            { "value": "daily", "label": "Office" },
+            { "value": "fresh", "label": "Summer heat" },
+            { "value": "love", "label": "Date night" },
+            { "value": "occasions", "label": "Weddings & Eid" },
+            { "value": "winter", "label": "Winter nights" }
           ],
           "default": "night"
         },
@@ -820,12 +846,14 @@
           "info": "The gradient behind the slide when there is no poster.",
           "options": [
             { "value": "moment", "label": "Same as the moment" },
-            { "value": "night", "label": "Night" },
+            { "value": "night", "label": "Evening out" },
             { "value": "gift", "label": "Gift" },
             { "value": "allday", "label": "All day" },
-            { "value": "daily", "label": "Daily" },
-            { "value": "fresh", "label": "Fresh" },
-            { "value": "love", "label": "Love" }
+            { "value": "daily", "label": "Office" },
+            { "value": "fresh", "label": "Summer heat" },
+            { "value": "love", "label": "Date night" },
+            { "value": "occasions", "label": "Weddings & Eid" },
+            { "value": "winter", "label": "Winter nights" }
           ],
           "default": "moment"
         },

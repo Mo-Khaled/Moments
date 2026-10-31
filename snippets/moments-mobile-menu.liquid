@@ -18,9 +18,18 @@
 {%- enddoc -%}
 
 {%- liquid
-  assign moment_handles = 'night-moment,gift-moment,all-day-moment,daily-moment,fresh-moment,love-moment' | split: ','
-  assign moment_marks = 'night,gift,allday,daily,fresh,love' | split: ','
-  assign moment_keys = 'moments.night,moments.gift,moments.all_day,moments.daily,moments.fresh,moments.love' | split: ','
+  capture moment_handles
+    render 'moments-config', part: 'handles'
+  endcapture
+  assign moment_handles = moment_handles | strip | split: ','
+  capture moment_marks
+    render 'moments-config', part: 'keys'
+  endcapture
+  assign moment_marks = moment_marks | strip | split: ','
+  capture moment_keys
+    render 'moments-config', part: 'labels'
+  endcapture
+  assign moment_keys = moment_keys | strip | split: ','
   assign link_order = 'brands,for her,for him' | split: ','
   assign threshold = settings.moments_free_shipping | times: 100 | money_without_trailing_zeros
   assign step = 0
@@ -136,13 +145,13 @@
         <span class="mm__count" data-mm-count{% if cart.item_count == 0 %} hidden{% endif %}>{{ cart.item_count }}</span>
       </a>
       {%- if localization.available_languages.size > 1 -%}
-        {%- form 'localization', id: 'MobileMenuLangForm', class: 'mm__lang' -%}
+        {%- form 'localization', id: 'MobileMenuLangForm', class: 'mm__lang', return_to: request.path -%}
           {%- if request.locale.iso_code == 'ar' -%}
             <span class="mm__lang-current" lang="ar">ع</span><span class="mm__lang-sep" aria-hidden="true">|</span>
-            <button class="mm__lang-switch" type="submit" name="locale_code" value="en" lang="en" aria-label="{{ 'accessibility.switch_to_english' | t }}">EN</button>
+            <button class="mm__lang-switch" type="submit" name="language_code" value="en" lang="en" aria-label="{{ 'accessibility.switch_to_english' | t }}">EN</button>
           {%- else -%}
             <span class="mm__lang-current" lang="en">EN</span><span class="mm__lang-sep" aria-hidden="true">|</span>
-            <button class="mm__lang-switch" type="submit" name="locale_code" value="ar" lang="ar" aria-label="{{ 'accessibility.switch_to_arabic' | t }}">ع</button>
+            <button class="mm__lang-switch" type="submit" name="language_code" value="ar" lang="ar" aria-label="{{ 'accessibility.switch_to_arabic' | t }}">ع</button>
           {%- endif -%}
         {%- endform -%}
       {%- endif -%}

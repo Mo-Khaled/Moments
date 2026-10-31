@@ -17,6 +17,10 @@
   endif
   assign saving = product.compare_at_price | minus: product.price
   assign saving_text = saving | money
+  # Arabic: "وفر 301 ج.م", the same price style as snippets/price.liquid
+  if request.locale.iso_code == 'ar'
+    assign saving_text = saving | money_without_currency | remove: '.00' | append: ' ج.م'
+  endif
 -%}
 
 <div class="product-badges product-badges--{{ settings.badge_position }}">

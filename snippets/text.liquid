@@ -83,6 +83,15 @@
   # A product vendor that still carries another shop's name (store data, rename pending approval) is shown as the shop's own name.
   assign other_shop = 'Harama' | append: 'in Perfumes'
   assign shown_text = block.settings.text | replace: other_shop, shop.name
+
+  # The product title shown through a text block ("{{ closest.product.title }}" on the product page) uses the same clean
+  # name as the cards: no bottle size in the name, the size has its own line (owner request 2026-10-31)
+  if closest.product != blank and shown_text contains closest.product.title
+    capture clean_name
+      render 'product-name', product: closest.product, plain: true
+    endcapture
+    assign shown_text = shown_text | replace: closest.product.title, clean_name
+  endif
 %}
 
 {% if fallback_text != blank and plain_text == blank %}

@@ -1,0 +1,867 @@
+Type,Identification,Field,Locale,Market,Status,Default content,Translated content
+COLLECTION,'488505344191,title,ar,,,AFNAN,أفنان
+COLLECTION,'488505442495,title,ar,,,Al Ezz for Oud,العز للعود
+COLLECTION,'488505475263,title,ar,,,ALMAS PERFUMES,عطور ألماس
+COLLECTION,'488505802943,title,ar,,,FAAN,فان
+COLLECTION,'488505835711,title,ar,,,French Avenue,فرنش أفينيو
+COLLECTION,'488505868479,title,ar,,,GULF ORCHID,جلف أوركيد
+COLLECTION,'488505999551,title,ar,,,KHADLAJ,خدلج
+COLLECTION,'488506097855,title,ar,,,LAVERNE,لافيرن
+COLLECTION,'488506130623,title,ar,,,LE BONHEUR,لو بونور
+COLLECTION,'488506163391,title,ar,,,LE FALCONE,لو فالكون
+COLLECTION,'488506294463,title,ar,,,RASASI PERFUMES,عطور الرصاصي
+COLLECTION,'488606433471,title,ar,,,come wth deodorant,مع مزيل عرق
+COLLECTION,'488606531775,title,ar,,,THE SUPREMACY LINE,مجموعة سوبريماسي
+COLLECTION,'488606564543,title,ar,,,Diamond Collection,مجموعة دايموند
+COLLECTION,'488606597311,title,ar,,,ISLAND LINE,مجموعة آيلاند
+COLLECTION,'488606630079,title,ar,,,VELVET COLLECTION,مجموعة فيلفيت
+COLLECTION,'488606662847,title,ar,,,SHIYAAKA COLLECTION,مجموعة شياكة
+COLLECTION,'488606826687,title,ar,,,Assaf Discovery Sets,أطقم اكتشاف عساف
+COLLECTION,'488606859455,title,ar,,,QASIDA LINE,مجموعة قصيدة
+COLLECTION,'488606892223,title,ar,,,AMJAD LINE,مجموعة أمجاد
+COLLECTION,'488606924991,title,ar,,,ARROGATE COLLECTION,مجموعة أروجيت
+COLLECTION,'488607088831,title,ar,,,Oudh Incense,بخور عود
+COLLECTION,'488607121599,title,ar,,,Under 300 EGP,أقل من 300 جنيه
+COLLECTION,'488607219903,title,ar,,,FAAN 200ML,فان 200 مل
+COLLECTION,'489238134975,title,ar,,,Fresh Moment,حر الصيف
+COLLECTION,'489238167743,title,ar,,,Night Moment,سهرة
+COLLECTION,'489238200511,title,ar,,,Love Moment,ليلة رومانسية
+COLLECTION,'489238233279,title,ar,,,Daily Moment,العمل
+COLLECTION,'489238266047,title,ar,,,Gift Moment,هدايا
+COLLECTION,'489238298815,title,ar,,,All Day Moment,طوال اليوم
+COLLECTION,'489911124159,title,ar,,,Morning Moments,لحظات الصباح
+COLLECTION,'489911189695,title,ar,,,Work Moments,لحظات العمل
+LINK,'645254447295,title,ar,,,ALMAS,ألماس
+LINK,'645254676671,title,ar,,,DKHOON EMIRATES,دخون الإمارات
+LINK,'645254709439,title,ar,,,FAAN,فان
+LINK,'645254742207,title,ar,,,French Avenue,فرنش أفينيو
+LINK,'645254906047,title,ar,,,LAVERNE,لافيرن
+LINK,'645254938815,title,ar,,,LE BONHEUR,لو بونور
+LINK,'645254971583,title,ar,,,LE FALCONE,لو فالكون
+LINK,'645255069887,title,ar,,,RASASI PERFUMES,عطور الرصاصي
+LINK,'645255299263,title,ar,,,New Moments,لحظات جديدة
+LINK,'645255758015,title,ar,,,Home and ambiance,المنزل والأجواء
+LINK,'645255790783,title,ar,,,ABOUT MOMENTS,عن MOMENTS
+LINK,'646649184447,title,ar,,,Shop by Moment,تسوّق حسب اللحظة
+MENU,'256434667711,title,ar,,,Customer account main menu,قائمة حساب العميل
+MENU,'256686915775,title,ar,,,Top Brands,أشهر العلامات
+PAGE,'143304097983,title,ar,,,MOMENTS,MOMENTS
+PAGE,'143604711615,title,ar,,,Make a bundle,كوّن باقتك
+PRODUCT,'15386433093823,title,ar,,,MISS SAKURA - 100 ML,ميس ساكورا - 100 مل
+PRODUCT,'15386433126591,title,ar,,,BREEZE 100ML,بريز 100 مل
+PRODUCT,'15386433192127,title,ar,,,ODYSSEY HOMME BODY MIST,رذاذ جسم أوديسي هوم
+PRODUCT,'15386433224895,title,ar,,,HOOK BLUE 200ML,هوك بلو 200 مل
+PRODUCT,'15386433257663,title,ar,,,STRIKE BLACK 125ML,سترايك بلاك 125 مل
+PRODUCT,'15386433355967,title,ar,,,MAAHIR HONOR 100ML,ماهر أونر 100 مل
+PRODUCT,'15386433388735,title,ar,,,FRANKEL CHILL 200ML,فرانكل تشيل 200 مل
+PRODUCT,'15386433421503,title,ar,,,QASIDA QUEEN 100ML,قصيدة كوين 100 مل
+PRODUCT,'15386433454271,title,ar,,,QASIDA PURITY 100ML,قصيدة بيوريتي 100 مل
+PRODUCT,'15386433487039,title,ar,,,QASIDA SENSES 100ML,قصيدة سينسز 100 مل
+PRODUCT,'15386433519807,title,ar,,,QASIDA BAKHOUR 100ML,قصيدة بخور 100 مل
+PRODUCT,'15386433552575,title,ar,,,QASIDA AL BADR 100ML,قصيدة البدر 100 مل
+PRODUCT,'15386433585343,title,ar,,,BLACK CAVALIER SURGE 100ML,بلاك كافالييه سيرج 100 مل
+PRODUCT,'15386433650879,title,ar,,,PROVENCE D'OR 200ML,بروفانس دور 200 مل
+PRODUCT,'15386433683647,title,ar,,,COUTURE 100ML,كوتور 100 مل
+PRODUCT,'15386433781951,title,ar,,,DKHOON OUD 100ML,دخون عود 100 مل
+PRODUCT,'15386433814719,title,ar,,,KAHILAN 100ML,كحيلان 100 مل
+PRODUCT,'15386433847487,title,ar,,,PRIVATE DECEMBER 2ND 100ML,برايفت ديسمبر 2 100 مل
+PRODUCT,'15386433880255,title,ar,,,AL HILAL 37 100ML,الهلال 37 100 مل
+PRODUCT,'15386433913023,title,ar,,,ON FIRE 9 100ML,أون فاير 9 100 مل
+PRODUCT,'15386433978559,title,ar,,,HANEEN MARSHMALLOW 100ML,حنين مارشميلو 100 مل
+PRODUCT,'15386434011327,title,ar,,,NURAN MANGO 100ML,نوران مانجو 100 مل
+PRODUCT,'15386434044095,title,ar,,,CHECKMATE WHITE KNIGHT,تشيك ميت وايت نايت
+PRODUCT,'15386434109631,title,ar,,,CHECKMATE BLACK KNIGHT,تشيك ميت بلاك نايت
+PRODUCT,'15386434175167,title,ar,,,QASIDA DUNES 100ML,قصيدة ديونز 100 مل
+PRODUCT,'15386434207935,title,ar,,,ARROGATE PINK DIVA 200ML,أروجيت بينك ديفا 200 مل
+PRODUCT,'15386434240703,title,ar,,,QASIDA SAHM 100ML,قصيدة سهم 100 مل
+PRODUCT,'15386434339007,title,ar,,,QASIDA SIGNATURE 100ML,قصيدة سيجنتشر 100 مل
+PRODUCT,'15386434371775,title,ar,,,AMJAD KINGDOM 200ML,أمجاد كينجدم 200 مل
+PRODUCT,'15386434404543,title,ar,,,AMJAD MYSTERY 200ML,أمجاد ميستري 200 مل
+PRODUCT,'15386434437311,title,ar,,,AMJAD CORAL 200ML,أمجاد كورال 200 مل
+PRODUCT,'15386434470079,title,ar,,,AMJAD HONOUR 200ML,أمجاد أونر 200 مل
+PRODUCT,'15386434502847,title,ar,,,FIRE ON ICE 100ML,فاير أون آيس 100 مل
+PRODUCT,'15386434568383,title,ar,,,DAAREJ AURELIA 100ML,دارج أوريليا 100 مل
+PRODUCT,'15386434601151,title,ar,,,DAAREJ VERVE 100ML,دارج فيرف 100 مل
+PRODUCT,'15386434633919,title,ar,,,SHUHRAH AVENOIR 100ML,شهرة أفينوار 100 مل
+PRODUCT,'15386434666687,title,ar,,,SHUHRAH OPULENCE 100ML,شهرة أوبيولنس 100 مل
+PRODUCT,'15386434699455,title,ar,,,HAWAS VIPER FOR HIM 100ML,هوس فايبر للرجال 100 مل
+PRODUCT,'15386434732223,title,ar,,,HAWAS ATLANTIS FOR HIM 100ML,هوس أتلانتس للرجال 100 مل
+PRODUCT,'15386434797759,title,ar,,,QASIDA DUNES 200ML,قصيدة ديونز 200 مل
+PRODUCT,'15386434830527,title,ar,,,QASIDA PURITY 200ML,قصيدة بيوريتي 200 مل
+PRODUCT,'15386434863295,title,ar,,,QASIDA SENSES 200ML,قصيدة سينسز 200 مل
+PRODUCT,'15386434896063,title,ar,,,QASIDA SAHM 200ML,قصيدة سهم 200 مل
+PRODUCT,'15386434928831,title,ar,,,IMPERIAL OCEAN 100ML,إمبريال أوشن 100 مل
+PRODUCT,'15386434961599,title,ar,,,KARUS GOLD ABSOLU 100ML,كاروس جولد أبسولو 100 مل
+PRODUCT,'15386434994367,title,ar,,,SHIYAAKA SKY SPECIAL EDITION 100ML,شياكة سكاي إصدار خاص 100 مل
+PRODUCT,'15386435027135,title,ar,,,ISLAND SUN 100ML,آيلاند صن 100 مل
+PRODUCT,'15386435059903,title,ar,,,MEGARA 100ML,ميجارا 100 مل
+PRODUCT,'15386435190975,title,ar,,,MAN BLACK EDITION 100ML,مان بلاك إيديشن 100 مل
+PRODUCT,'15386435223743,title,ar,,,FLORENZA 100ML,فلورنزا 100 مل
+PRODUCT,'15386435256511,title,ar,,,LEONIE 100ML,ليوني 100 مل
+PRODUCT,'15386435289279,title,ar,,,SALVO ELIXIR 60ML,سالفو إليكسير 60 مل
+PRODUCT,'15386435322047,title,ar,,,YOUR TOUCH FOR MEN 100ML,يور تاتش للرجال 100 مل
+PRODUCT,'15386435354815,title,ar,,,FRANKEL STORM 100ML,فرانكل ستورم 100 مل
+PRODUCT,'15386435387583,title,ar,,,HIRSH LAHAB MAHWER 100ML,هيرش لهب محور 100 مل
+PRODUCT,'15386435420351,title,ar,,,HIRSH LAHAB 100ML,هيرش لهب 100 مل
+PRODUCT,'15386435485887,title,ar,,,AURA 100ML,أورا 100 مل
+PRODUCT,'15386435518655,title,ar,,,MUSAMAM BLACK INTENSE 100ML,مسمم بلاك إنتنس 100 مل
+PRODUCT,'15386435551423,title,ar,,,QUEEN OF ARABIA 100ML,كوين أوف أرابيا 100 مل
+PRODUCT,'15386435584191,title,ar,,,PURE CRYSTAL 100ML,بيور كريستال 100 مل
+PRODUCT,'15386435616959,title,ar,,,ETERNAL VANILLE 100ML,إيترنال فانيل 100 مل
+PRODUCT,'15386435649727,title,ar,,,DALAL 100ML,دلال 100 مل
+PRODUCT,'15386435682495,title,ar,,,MAYAR CHERRY INTENSE 100ML,ميار تشيري إنتنس 100 مل
+PRODUCT,'15386435715263,title,ar,,,TERIAQ INTENSE GIFT SET,طقم هدايا ترياق إنتنس
+PRODUCT,'15386435780799,title,ar,,,FAKHAR MAN GIFT SET,طقم هدايا فخر مان
+PRODUCT,'15386435813567,title,ar,,,YARA CANDY GIFT SET,طقم هدايا يارا كاندي
+PRODUCT,'15386435846335,title,ar,,,TERIAQ GIFT SET,طقم هدايا ترياق
+PRODUCT,'15386435911871,title,ar,,,KHAMRAH GIFT SET,طقم هدايا خمرة
+PRODUCT,'15386435944639,title,ar,,,ANA ABIYEDH PASSION 60ML,أنا أبيض باشن 60 مل
+PRODUCT,'15386435977407,title,ar,,,Day & Night Bundle,باقة داي آند نايت
+PRODUCT,'15386436010175,title,ar,,,ARROGATE BLUE 200ML,أروجيت بلو 200 مل
+PRODUCT,'15386436042943,title,ar,,,WILD COLT TOBACCO 100ML,وايلد كولت توباكو 100 مل
+PRODUCT,'15386436108479,title,ar,,,ARROGATE COLLECTION SET 3×25ML,طقم أروجيت كوليكشن 3×25 مل
+PRODUCT,'15386436141247,title,ar,,,GLITCH 150ML,جليتش 150 مل
+PRODUCT,'15386436174015,title,ar,,,WILD COLT BAKHOUR 150ML,وايلد كولت بخور 150 مل
+PRODUCT,'15386436239551,title,ar,,,ARROGATE ADDICT 200ML,أروجيت أديكت 200 مل
+PRODUCT,'15386436272319,title,ar,,,FRANKEL IMAGINATION 200ML,فرانكل إيماجينيشن 200 مل
+PRODUCT,'15386436305087,title,ar,,,WILD COLT ELIXIR 200ML,وايلد كولت إليكسير 200 مل
+PRODUCT,'15386436370623,title,ar,,,LIP STICK 150ML,ليب ستيك 150 مل
+PRODUCT,'15386436403391,title,ar,,,FRANKEL SET 3×25ML,طقم فرانكل 3×25 مل
+PRODUCT,'15386436468927,title,ar,,,FRANKEL IMAGINATION 100ML,فرانكل إيماجينيشن 100 مل
+PRODUCT,'15386436501695,title,ar,,,ELIZABETH 100ML,إليزابيث 100 مل
+PRODUCT,'15386436567231,title,ar,,,Triple Island Set,طقم تريبل آيلاند
+PRODUCT,'15386436599999,title,ar,,,Island + Vanilla Dunes Set,طقم آيلاند + فانيلا ديونز
+PRODUCT,'15386436665535,title,ar,,,Island Dreams + Island Vanilla Dunes Set,طقم آيلاند دريمز + آيلاند فانيلا ديونز
+PRODUCT,'15386436698303,title,ar,,,Dolby,دولبي
+PRODUCT,'15386436731071,title,ar,,,AFNAN ORANGE GIFT BAG,حقيبة هدايا أفنان أورانج
+PRODUCT,'15386436763839,title,ar,,,ASSAF GIFT BAG,حقيبة هدايا عساف
+PRODUCT,'15386436796607,title,ar,,,AFNAN GIFT BAG,حقيبة هدايا أفنان
+PRODUCT,'15386436829375,title,ar,,,IBRAQ Premium Gift Bag – Large,حقيبة هدايا إبراق بريميوم – كبيرة
+PRODUCT,'15386436862143,title,ar,,,KLIKAT,كليكات
+PRODUCT,'15386436927679,title,ar,,,KILKAT BLUE,كليكات بلو
+PRODUCT,'15386436960447,title,ar,,,CONNOISSEUR WOMAN,كونوسير وومان
+PRODUCT,'15386436993215,title,ar,,,CLUB DE NUIT MAN,كلوب دي نوي مان
+PRODUCT,'15386437025983,title,ar,,,CLUB DE NUIT ICONIC,كلوب دي نوي أيكونيك
+PRODUCT,'15386437058751,title,ar,,,CLUB DE NUIT SILLAGE,كلوب دي نوي سيلاج
+PRODUCT,'15386437124287,title,ar,,,NO COMMENT,نو كومنت
+PRODUCT,'15386437157055,title,ar,,,FRANKEL BLACK ELIXIR,فرانكل بلاك إليكسير
+PRODUCT,'15386437222591,title,ar,,,CLUB DE NUIT WOMAN,كلوب دي نوي وومان
+PRODUCT,'15386437255359,title,ar,,,DUNESCAPE,ديونسكيب
+PRODUCT,'15386437288127,title,ar,,,THE PRIDE OF ARMAF POUR HOMME,ذا برايد أوف أرماف بور هوم
+PRODUCT,'15386437320895,title,ar,,,DUBAI NIGHTS UMBRA,دبي نايتس أومبرا
+PRODUCT,'15386437353663,title,ar,,,DUBAI NIGHTS MIDNIGHT,دبي نايتس ميدنايت
+PRODUCT,'15386437419199,title,ar,,,INFINITY GOLD,إنفينيتي جولد
+PRODUCT,'15386437484735,title,ar,,,INFINITY SILVER,إنفينيتي سيلفر
+PRODUCT,'15386437517503,title,ar,,,LUNA,لونا
+PRODUCT,'15386437550271,title,ar,,,CLUB DE NUIT URBAN MAN ELIXIR,كلوب دي نوي أربان مان إليكسير
+PRODUCT,'15386437583039,title,ar,,,CLUB DE NUIT BLING,كلوب دي نوي بلينج
+PRODUCT,'15386437615807,title,ar,,,CLUB DE NUIT LIONHEART MAN,كلوب دي نوي لايون هارت مان
+PRODUCT,'15386437648575,title,ar,,,ODYSSEY MANDARIN SKY VINTAGE EDITION,أوديسي ماندارين سكاي فينتدج إيديشن
+PRODUCT,'15386437681343,title,ar,,,ODYSSEY PINK POP,أوديسي بينك بوب
+PRODUCT,'15386437746879,title,ar,,,ODYSSEY LI'CHI LUSH,أوديسي ليتشي لاش
+PRODUCT,'15386437779647,title,ar,,,ODYSSEY HOMME WHITE EDITION,أوديسي هوم وايت إيديشن
+PRODUCT,'15386437812415,title,ar,,,ODYSSEY REVOLUTION ULTRA EDITION,أوديسي ريفوليوشن ألترا إيديشن
+PRODUCT,'15386437845183,title,ar,,,ASAD ELIXIR,أسد إليكسير
+PRODUCT,'15386437910719,title,ar,,,YARA ELIXIR,يارا إليكسير
+PRODUCT,'15386437943487,title,ar,,,MAMOUL ASHIQ AL OUD,معمول عاشق العود
+PRODUCT,'15386437976255,title,ar,,,MAMOUL OUD AZRAQ,معمول عود أزرق
+PRODUCT,'15386438041791,title,ar,,,MAMOUL KUWAITI,معمول كويتي
+PRODUCT,'15386438074559,title,ar,,,BAKHOOR KUWAITI,بخور كويتي
+PRODUCT,'15386438140095,title,ar,,,BAKHOOR AMIR AL OUD SPECIAL EDITION,بخور أمير العود إصدار خاص
+PRODUCT,'15386438172863,title,ar,,,BAKHOOR ASHIQ AL OUD ASWAD,بخور عاشق العود أسود
+PRODUCT,'15386438205631,title,ar,,,BAKHOOR OUD AZRAQ,بخور عود أزرق
+PRODUCT,'15386438238399,title,ar,,,BAHAR AL ARAB,بحر العرب
+PRODUCT,'15386438271167,title,ar,,,SACRIFICE FOR HER,ساكريفايس للنساء
+PRODUCT,'15386438336703,title,ar,,,BLU,بلو
+PRODUCT,'15386438369471,title,ar,,,WISAL DHAHAB,وصال ذهب
+PRODUCT,'15386438402239,title,ar,,,WISAL,وصال
+PRODUCT,'15386438435007,title,ar,,,NEUTRON,نيوترون
+PRODUCT,'15386438467775,title,ar,,,CARBON,كاربون
+PRODUCT,'15386438500543,title,ar,,,ASSAF LUXURY GIFT SET,طقم هدايا عساف لاكشري
+PRODUCT,'15386438533311,title,ar,,,SUGAR ME MARSHMALLOW DREAM,شوجر مي مارشميلو دريم
+PRODUCT,'15386438566079,title,ar,,,SHEIKH AL SHUYUKH SUPREME,شيخ الشيوخ سوبريم
+PRODUCT,'15386438598847,title,ar,,,AJWAD,أجود
+PRODUCT,'15386438631615,title,ar,,,AL NOBLE AMEER,النوبل أمير
+PRODUCT,'15386438697151,title,ar,,,ATLAS,أطلس
+PRODUCT,'15386438729919,title,ar,,,CONNOISSEUR MAN,كونوسير مان
+PRODUCT,'15386438762687,title,ar,,,HUNTER,هانتر
+PRODUCT,'15386438795455,title,ar,,,LEO,ليو
+PRODUCT,'15386438828223,title,ar,,,MUSK RED BERRIES,مسك ريد بيريز
+PRODUCT,'15386438860991,title,ar,,,NOBLE,نوبل
+PRODUCT,'15386438893759,title,ar,,,NOMADE,نوماد
+PRODUCT,'15386438926527,title,ar,,,FRANKEL BLUE ELIXIR,فرانكل بلو إليكسير
+PRODUCT,'15386438959295,title,ar,,,GRIS ERIK - 100 ML,جري إريك - 100 مل
+PRODUCT,'15386438992063,title,ar,,,DANGEROUS ARROGATE - 200 ML,دينجرس أروجيت - 200 مل
+PRODUCT,'15386439024831,title,ar,,,ARROGATE PINK - 200 ML,أروجيت بينك - 200 مل
+PRODUCT,'15386439057599,title,ar,,,ATTACKS - 150 ML,أتاكس - 150 مل
+PRODUCT,'15386439090367,title,ar,,,HIRSH BAKHOURI,هيرش بخوري
+PRODUCT,'15386439123135,title,ar,,,EMERALD SOUL DIAMOND,إميرالد سول دايموند
+PRODUCT,'15386439155903,title,ar,,,NUDE CORAL DIAMOND,نود كورال دايموند
+PRODUCT,'15386439221439,title,ar,,,TUWAIQ,طويق
+PRODUCT,'15386439286975,title,ar,,,LIQUID BRUN,ليكويد برون
+PRODUCT,'15386439319743,title,ar,,,LA DI DA FOR HIM,لا دي دا للرجال
+PRODUCT,'15386439352511,title,ar,,,QASIDA QUEEN 200ML,قصيدة كوين 200 مل
+PRODUCT,'15386439385279,title,ar,,,QASIDA SIGNATURE 200ML,قصيدة سيجنتشر 200 مل
+PRODUCT,'15386439418047,title,ar,,,QASIDA BAKHOUR 200ML,قصيدة بخور 200 مل
+PRODUCT,'15386439450815,title,ar,,,QASIDA AL BADR 200ML,قصيدة البدر 200 مل
+PRODUCT,'15386439483583,title,ar,,,HAWAS KOBRA,هوس كوبرا
+PRODUCT,'15386439516351,title,ar,,,SAPPHIRE LEATHER,سافاير ليذر
+PRODUCT,'15386439549119,title,ar,,,LADOR INCENSE CLASSIC,بخور لادور كلاسيك
+PRODUCT,'15386439581887,title,ar,,,CLUB DE NUIT WOMAN 250 ML,كلوب دي نوي وومان 250 مل
+PRODUCT,'15386439614655,title,ar,,,OUD MUATTAR MUNAWWARA,عود معطر منورة
+PRODUCT,'15386439647423,title,ar,,,EMPIRE REGENT,إمباير ريجنت
+PRODUCT,'15386439680191,title,ar,,,OUD MUATTAR GHALIYA,عود معطر غالية
+PRODUCT,'15386439712959,title,ar,,,GHADEER SILVER,غدير سيلفر
+PRODUCT,'15386439745727,title,ar,,,OUD AL SABAH,عود الصباح
+PRODUCT,'15386439778495,title,ar,,,AL-LAIL MUSK,الليل مسك
+PRODUCT,'15386439811263,title,ar,,,AL-SHAMS MUSK,الشمس مسك
+PRODUCT,'15386439876799,title,ar,,,AL-FAJR MUSK,الفجر مسك
+PRODUCT,'15386439909567,title,ar,,,AL-QAMAR MUSK,القمر مسك
+PRODUCT,'15386439942335,title,ar,,,WHITE REGENT DIAMOND,وايت ريجنت دايموند
+PRODUCT,'15386439975103,title,ar,,,BLUE LAVERNE BAKHUR,بلو لافيرن بخور
+PRODUCT,'15386440040639,title,ar,,,FRENCH TOBACCO,فرنش توباكو
+PRODUCT,'15386440073407,title,ar,,,ANGEL MUSK,إنجل مسك
+PRODUCT,'15386440106175,title,ar,,,OUDH AL KHANJAR INCENSE,بخور عود الخنجر
+PRODUCT,'15386440138943,title,ar,,,AL KHANJAR INCENSE,بخور الخنجر
+PRODUCT,'15386440171711,title,ar,,,AL NAFIS INCENSE,بخور النفيس
+PRODUCT,'15386440204479,title,ar,,,OUDH AL NAFIS INCENSE,بخور عود النفيس
+PRODUCT,'15386440270015,title,ar,,,WILD COLT TOBACCO - 200 ML,وايلد كولت توباكو - 200 مل
+PRODUCT,'15386440302783,title,ar,,,DKHOON VELVET,دخون فيلفيت
+PRODUCT,'15386440335551,title,ar,,,SIGNATURE BLACK,سيجنتشر بلاك
+PRODUCT,'15386440401087,title,ar,,,SIGNATURE GOLD,سيجنتشر جولد
+PRODUCT,'15386440433855,title,ar,,,YARA TOUS PERFUME MIST,رذاذ عطري يارا توس
+PRODUCT,'15386440499391,title,ar,,,MAYAR NATURAL INTENSE PERFUME MIST,رذاذ عطري ميار ناتشورال إنتنس
+PRODUCT,'15386440532159,title,ar,,,BADEE AL OUD NOBLE BLUSH PERFUME MIST,رذاذ عطري بديع العود نوبل بلاش
+PRODUCT,'15386440564927,title,ar,,,SEHR LATTAFA PERFUME MIST,رذاذ عطري سحر لطافة
+PRODUCT,'15386440630463,title,ar,,,OUD MUATTAR BAHRAINI,عود معطر بحريني
+PRODUCT,'15386440695999,title,ar,,,OUD MUATTAR KUWAITI,عود معطر كويتي
+PRODUCT,'15386440728767,title,ar,,,MISS SAKURA - 100 ML,ميس ساكورا - 100 مل
+PRODUCT,'15386440761535,title,ar,,,MISS FLORA - 100 ML,ميس فلورا - 100 مل
+PRODUCT,'15386440794303,title,ar,,,MISS GRIS - 100 ML,ميس جري - 100 مل
+PRODUCT,'15386440827071,title,ar,,,LADY SUPREME - 100 ML,ليدي سوبريم - 100 مل
+PRODUCT,'15386440859839,title,ar,,,PINK LADY - 100 ML,بينك ليدي - 100 مل
+PRODUCT,'15386440925375,title,ar,,,SPECIAL MUSK,سبيشال مسك
+PRODUCT,'15386440958143,title,ar,,,ABAQ POMEGRANATE MUSK,عبق بومجرانيت مسك
+PRODUCT,'15386440990911,title,ar,,,POWDER MUSK,باودر مسك
+PRODUCT,'15386441023679,title,ar,,,ARABIAN TOBACCO,أرابيان توباكو
+PRODUCT,'15386441056447,title,ar,,,BLACK CARBON DIAMOND,بلاك كاربون دايموند
+PRODUCT,'15386441089215,title,ar,,,BLUE DIAMOND AQUA,بلو دايموند أكوا
+PRODUCT,'15386441121983,title,ar,,,GREY PEARL DIAMOND,جراي بيرل دايموند
+PRODUCT,'15386441187519,title,ar,,,PURPLE HEART DIAMOND,بيربل هارت دايموند
+PRODUCT,'15386441220287,title,ar,,,AMEER AL ARAB IMPERIUM,أمير العرب إمبيريوم
+PRODUCT,'15386441253055,title,ar,,,PINK DIAMOND - SAKURA,بينك دايموند - ساكورا
+PRODUCT,'15386441285823,title,ar,,,QUEEN ROSE,كوين روز
+PRODUCT,'15386441318591,title,ar,,,CROWN SPIRIT - 200 ML,كراون سبيريت - 200 مل
+PRODUCT,'15386441351359,title,ar,,,JUMAN PRECIOUS,جمان بريشس
+PRODUCT,'15386441384127,title,ar,,,JUMAN EXCLUSIVE,جمان إكسكلوسيف
+PRODUCT,'15386441416895,title,ar,,,SHAHEEN,شاهين
+PRODUCT,'15386441482431,title,ar,,,FALCONE DANA,فالكون دانة
+PRODUCT,'15386441515199,title,ar,,,HAYBA MAJESTY,هيبة ماجستي
+PRODUCT,'15386441547967,title,ar,,,HAYBA ROYALTY,هيبة رويالتي
+PRODUCT,'15386441580735,title,ar,,,MIRSAAL LOVE LETTER,مرسال لاف ليتر
+PRODUCT,'15386441613503,title,ar,,,BONITA HOT PINK,بونيتا هوت بينك
+PRODUCT,'15386441646271,title,ar,,,BONITA RIVERA,بونيتا ريفيرا
+PRODUCT,'15386441679039,title,ar,,,QANNAS,قناص
+PRODUCT,'15386441744575,title,ar,,,NIGHTLY DONNA,نايتلي دونا
+PRODUCT,'15386441777343,title,ar,,,VINTAGE TOBACCO COLLECTION,فينتدج توباكو كوليكشن
+PRODUCT,'15386441810111,title,ar,,,BRAZILIAN TOBACCO 200ml,برازيليان توباكو 200 مل
+PRODUCT,'15386441875647,title,ar,,,ASSAF ARROGATE PINK SET,طقم عساف أروجيت بينك
+PRODUCT,'15386441908415,title,ar,,,Assaf Eid Bakhur Collection – 340 ml,عساف عيد بخور كوليكشن – 340 مل
+PRODUCT,'15386441941183,title,ar,,,MORNING GIRL - 100 ML,مورنينج جيرل - 100 مل
+PRODUCT,'15386442006719,title,ar,,,GRIS ERIK - 200 ML,جري إريك - 200 مل
+PRODUCT,'15386442072255,title,ar,,,AURA 35 - 150 ML,أورا 35 - 150 مل
+PRODUCT,'15386442105023,title,ar,,,PINK LADY - 200 ML,بينك ليدي - 200 مل
+PRODUCT,'15386442170559,title,ar,,,RISK COMETE - 150 ML,ريسك كوميت - 150 مل
+PRODUCT,'15386442203327,title,ar,,,MISS FLORA - 200 ML,ميس فلورا - 200 مل
+PRODUCT,'15386442236095,title,ar,,,ARROGATE COMETE - 200 ML,أروجيت كوميت - 200 مل
+PRODUCT,'15386442268863,title,ar,,,MISS GRISS INTENSE - 100 ML,ميس جري إنتنس - 100 مل
+PRODUCT,'15386442301631,title,ar,,,ROYALE WOMEN 50ML,رويال للنساء 50 مل
+PRODUCT,'15386442334399,title,ar,,,HAWAS MALIBU,هوس ماليبو
+PRODUCT,'15386442367167,title,ar,,,The Kingdom Perfumed Spray 200ml,رذاذ عطري ذا كينجدم 200 مل
+PRODUCT,'15386442432703,title,ar,,,OUD MUATTAR OUD AL SAADA,عود معطر عود السعادة
+PRODUCT,'15386442465471,title,ar,,,OUD MUATTAR OUD AL MAQAAM,عود معطر عود المقام
+PRODUCT,'15386442498239,title,ar,,,OUD MUATTAR OUD AL RAWDA,عود معطر عود الروضة
+PRODUCT,'15386442531007,title,ar,,,Angham Perfumed Spray 200ml,رذاذ عطري أنغام 200 مل
+PRODUCT,'15386442563775,title,ar,,,Ajwad Pink To Pink Perfumed Spray 200ml,رذاذ عطري أجود بينك تو بينك 200 مل
+PRODUCT,'15386442596543,title,ar,,,Fakhar Lattafa White Perfumed Spray 200ml,رذاذ عطري فخر لطافة وايت 200 مل
+PRODUCT,'15386442629311,title,ar,,,Raed Luxe Perfumed Spray 200ml,رذاذ عطري رائد لوكس 200 مل
+PRODUCT,'15386442662079,title,ar,,,Asad Perfumed Spray - 200ml,رذاذ عطري أسد - 200 مل
+PRODUCT,'15386442694847,title,ar,,,Ramz Lattafa Gold Perfumed Spray - 200ml,رذاذ عطري رمز لطافة جولد - 200 مل
+PRODUCT,'15386442760383,title,ar,,,Qaed Al Fursan Perfumed Spray - 200ml,رذاذ عطري قائد الفرسان - 200 مل
+PRODUCT,'15386442793151,title,ar,,,ENIGMATIC,إنيجماتيك
+PRODUCT,'15386442825919,title,ar,,,Raghba Perfumed Spray - 200ml,رذاذ عطري رغبة - 200 مل
+PRODUCT,'15386442858687,title,ar,,,Bade'e Al Oud Sublime Perfumed Spray - 200ml,رذاذ عطري بديع العود سبلايم - 200 مل
+PRODUCT,'15386442891455,title,ar,,,Fakhar Lattafa Perfumed Spray For Men - 200ml,رذاذ عطري فخر لطافة للرجال - 200 مل
+PRODUCT,'15386442924223,title,ar,,,Victoria Perfumed Spray - 200ml,رذاذ عطري فيكتوريا - 200 مل
+PRODUCT,'15386442956991,title,ar,,,LAYAAN,ليان
+PRODUCT,'15386442989759,title,ar,,,THE STORY SPORT,ذا ستوري سبورت
+PRODUCT,'15386443022527,title,ar,,,THE STORY,ذا ستوري
+PRODUCT,'15386443088063,title,ar,,,MIRA COCO,ميرا كوكو
+PRODUCT,'15386443120831,title,ar,,,MIRA AMOUR,ميرا أمور
+PRODUCT,'15386443153599,title,ar,,,SO WILD BOULDER,سو وايلد بولدر
+PRODUCT,'15386443186367,title,ar,,,SO WILD QUARTEZ,سو وايلد كوارتز
+PRODUCT,'15386443219135,title,ar,,,SCOPPIO,سكوبيو
+PRODUCT,'15386443251903,title,ar,,,EAGER,إيجر
+PRODUCT,'15386443284671,title,ar,,,SPECIAL MUSK,سبيشال مسك
+PRODUCT,'15386443317439,title,ar,,,MUTHEERAH,مثيرة
+PRODUCT,'15386443382975,title,ar,,,AURA BLOOM,أورا بلوم
+PRODUCT,'15386443415743,title,ar,,,AMEER AL OUD BLACK INTENSE,أمير العود بلاك إنتنس
+PRODUCT,'15386443448511,title,ar,,,AMEER AL OUD GOLD,أمير العود جولد
+PRODUCT,'15386443514047,title,ar,,,REHAL FOREST,رحال فورست
+PRODUCT,'15386443546815,title,ar,,,MARSHMALLOW MUSK,مارشميلو مسك
+PRODUCT,'15386443579583,title,ar,,,AMEER AL OUD SPECIAL EDITION,أمير العود إصدار خاص
+PRODUCT,'15386443645119,title,ar,,,POMEGRANATE MUSK,بومجرانيت مسك
+PRODUCT,'15386443677887,title,ar,,,AL OUD AL AZRAQ,العود الأزرق
+PRODUCT,'15386443710655,title,ar,,,SAMA AL OUD,سما العود
+PRODUCT,'15386443776191,title,ar,,,FARSAH,فرصة
+PRODUCT,'15386443808959,title,ar,,,WHITE HEART,وايت هارت
+PRODUCT,'15386443841727,title,ar,,,KUWAITI PERFUME,عطر كويتي
+PRODUCT,'15386443874495,title,ar,,,SEHR AL OUD,سحر العود
+PRODUCT,'15386443907263,title,ar,,,SWEET OUD,سويت عود
+PRODUCT,'15386443940031,title,ar,,,YUM YUM,يم يم
+PRODUCT,'15386443972799,title,ar,,,CLUB DE NUIT PRECIEUX 1 EXTRAIT DE PARFUM,كلوب دي نوي بريسيو 1 إكستريه دو بارفان
+PRODUCT,'15386444005567,title,ar,,,CLUB DE NUIT PRECIEUX IV,كلوب دي نوي بريسيو IV
+PRODUCT,'15386444071103,title,ar,,,OMBRE D'OR,أومبر دور
+PRODUCT,'15386444103871,title,ar,,,ISLAND BREEZE,آيلاند بريز
+PRODUCT,'15386444169407,title,ar,,,DELIGHTS ISLAND BLISS,ديلايتس آيلاند بليس
+PRODUCT,'15386444202175,title,ar,,,ODYSSEY MANDARIN SKY MAN,أوديسي ماندارين سكاي مان
+PRODUCT,'15386444267711,title,ar,,,ODYSSEY CANDEE SPECIAL EDITION,أوديسي كاندي إصدار خاص
+PRODUCT,'15386444300479,title,ar,,,ODYSSEY EAU DE MONTAGNE MOUNTAIN EDITION,أوديسي أو دو مونتاني ماونتن إيديشن
+PRODUCT,'15386444333247,title,ar,,,ODYSSEY MARSHMALLOW,أوديسي مارشميلو
+PRODUCT,'15386444366015,title,ar,,,ODYSSEY MEGA LIMITED EDITION,أوديسي ميجا إصدار محدود
+PRODUCT,'15386444431551,title,ar,,,ODYSSEY AOUD,أوديسي عود
+PRODUCT,'15386444464319,title,ar,,,FATIMA,فاطمة
+PRODUCT,'15386444497087,title,ar,,,Sharaf Divine,شرف ديفاين
+PRODUCT,'15386444529855,title,ar,,,ANGHAM SECOND SONG,أنغام سكند سونج
+PRODUCT,'15386444562623,title,ar,,,NIGHTLY MOON,نايتلي مون
+PRODUCT,'15386444595391,title,ar,,,PRIME 25 N,برايم 25 N
+PRODUCT,'15386444628159,title,ar,,,PRIME 26 N,برايم 26 N
+PRODUCT,'15386444660927,title,ar,,,QUMRA,قمرة
+PRODUCT,'15386444726463,title,ar,,,CARAMEL LATTE,كراميل لاتيه
+PRODUCT,'15386444759231,title,ar,,,MARIGOLD,ماريجولد
+PRODUCT,'15386444791999,title,ar,,,BLACK CAVALIER VI Perfume,عطر بلاك كافالييه VI
+PRODUCT,'15386444824767,title,ar,,,BLACK CAVALIER XI Perfume,عطر بلاك كافالييه XI
+PRODUCT,'15386444857535,title,ar,,,NUHA BON BON,نهى بون بون
+PRODUCT,'15386444890303,title,ar,,,NUHA,نهى
+PRODUCT,'15386444923071,title,ar,,,PRIVATE BLEND MUSK,برايفت بليند مسك
+PRODUCT,'15386444955839,title,ar,,,PRIVATE BLEND TOBACO,برايفت بليند توباكو
+PRODUCT,'15386445021375,title,ar,,,25 EXPERIENCE,25 إكسبيرينس
+PRODUCT,'15386445054143,title,ar,,,MANSION,مانشن
+PRODUCT,'15386445086911,title,ar,,,SHIYAAKA SNOW,شياكة سنو
+PRODUCT,'15386445119679,title,ar,,,25 HERITAGE,25 هيريتدج
+PRODUCT,'15386445152447,title,ar,,,NAFAIS SHARQ,نفائس شرق
+PRODUCT,'15386445185215,title,ar,,,MUSK POUR AMBER,مسك بور أمبر
+PRODUCT,'15386445217983,title,ar,,,SHIYAAKA BLUE,شياكة بلو
+PRODUCT,'15386445250751,title,ar,,,SHIYAAKA FOR MEN,شياكة للرجال
+PRODUCT,'15386445316287,title,ar,,,ONYX GOLD,أونيكس جولد
+PRODUCT,'15386445349055,title,ar,,,ONYX SILVER,أونيكس سيلفر
+PRODUCT,'15386445381823,title,ar,,,OMBRE NOTES,أومبر نوتس
+PRODUCT,'15386445414591,title,ar,,,ISLAND DREAMS,آيلاند دريمز
+PRODUCT,'15386445447359,title,ar,,,9 PM NIGHT OUT,9 بي ام نايت آوت
+PRODUCT,'15386445480127,title,ar,,,VANILLA CREAM MACARON,فانيلا كريم ماكرون
+PRODUCT,'15386445512895,title,ar,,,TOFFEE GANACHE,توفي جاناش
+PRODUCT,'15386445545663,title,ar,,,STRAWBERRY TRES LECHES,ستروبيري تريس ليتشيز
+PRODUCT,'15386445578431,title,ar,,,PECAN BUTTER COOKIE,بيكان باتر كوكي
+PRODUCT,'15386445643967,title,ar,,,MATCHA LATTE,ماتشا لاتيه
+PRODUCT,'15386445676735,title,ar,,,MANGO AFFOGATO,مانجو أفوجاتو
+PRODUCT,'15386445709503,title,ar,,,LEMON SORBET,ليمون سوربيه
+PRODUCT,'15386445742271,title,ar,,,FRENCH VANILLA LATTE,فرنش فانيلا لاتيه
+PRODUCT,'15386445775039,title,ar,,,DULCE DE LECHE,دولسي دي ليتشي
+PRODUCT,'15386445807807,title,ar,,,COTTON BLUSH,كوتون بلاش
+PRODUCT,'15386445840575,title,ar,,,COOKIE DOUGH,كوكي دو
+PRODUCT,'15386445873343,title,ar,,,COCONUT CHIFFON,كوكونت شيفون
+PRODUCT,'15386445938879,title,ar,,,CHOCOLATE GANACHE,تشوكليت جاناش
+PRODUCT,'15386445971647,title,ar,,,CARAMEL CHOCOLATE MACARON,كراميل تشوكليت ماكرون
+PRODUCT,'15386446037183,title,ar,,,BERRIES CREAM MACARON,بيريز كريم ماكرون
+PRODUCT,'15386446069951,title,ar,,,MISS ARROGATE - 200 ML,ميس أروجيت - 200 مل
+PRODUCT,'15386446102719,title,ar,,,ARROGATE COLT ASSAF,أروجيت كولت عساف
+PRODUCT,'15386446135487,title,ar,,,ARROGATE GIRL - 200 ML,أروجيت جيرل - 200 مل
+PRODUCT,'15386446168255,title,ar,,,WILD COLT - 200 ML,وايلد كولت - 200 مل
+PRODUCT,'15386446201023,title,ar,,,CULLINAN DIAMOND IRIS,كولينان دايموند آيريس
+PRODUCT,'15386446233791,title,ar,,,TOBACCO BOX,توباكو بوكس
+PRODUCT,'15386446266559,title,ar,,,SPANISH TOBACCO,سبانيش توباكو
+PRODUCT,'15386446332095,title,ar,,,BLACK DIAMOND INCENSE,بخور بلاك دايموند
+PRODUCT,'15386446364863,title,ar,,,NAFAIS MAGRIB,نفائس مغرب
+PRODUCT,'15386446397631,title,ar,,,PEACH VELVET,بيتش فيلفيت
+PRODUCT,'15386446430399,title,ar,,,SHIYAAKA SHADOW SPECIAL EDITION,شياكة شادو إصدار خاص
+PRODUCT,'15386446463167,title,ar,,,TITAN,تايتن
+PRODUCT,'15386446495935,title,ar,,,RIA,ريا
+PRODUCT,'15386446528703,title,ar,,,SAWAAR VANILLE BLANC,سوار فانيل بلان
+PRODUCT,'15386446561471,title,ar,,,HAWAS FIRE,هوس فاير
+PRODUCT,'15386446627007,title,ar,,,HAWAS PINK,هوس بينك
+PRODUCT,'15386446692543,title,ar,,,SHURAH SENSUELLE,شهرة سنسويل
+PRODUCT,'15386446725311,title,ar,,,SHUHRAH ELIXIR,شهرة إليكسير
+PRODUCT,'15386446758079,title,ar,,,HABIK WOMEN,حابك للنساء
+PRODUCT,'15386446790847,title,ar,,,Royale,رويال
+PRODUCT,'15386446856383,title,ar,,,HAWAS ÉCLAT,هوس إكلا
+PRODUCT,'15386446889151,title,ar,,,Hawas Tropical,هوس تروبيكال
+PRODUCT,'15386446921919,title,ar,,,HAWAS ELIXIR,هوس إليكسير
+PRODUCT,'15386446954687,title,ar,,,HAWAS BLACK,هوس بلاك
+PRODUCT,'15386447020223,title,ar,,,HAWAS ICE,هوس آيس
+PRODUCT,'15386447052991,title,ar,,,L'Incontournable Blue Lady 2,لانكونتورنابل بلو ليدي 2
+PRODUCT,'15386447085759,title,ar,,,Elite Man,إيليت مان
+PRODUCT,'15386447118527,title,ar,,,Pure Musk,بيور مسك
+PRODUCT,'15386447151295,title,ar,,,It's Essential Rasasi,إتس إسنشال رصاصي
+PRODUCT,'15386447184063,title,ar,,,Style Ikon,ستايل أيكون
+PRODUCT,'15386447249599,title,ar,,,Deep Blue Men,ديب بلو للرجال
+PRODUCT,'15386447282367,title,ar,,,Royal Musk,رويال مسك
+PRODUCT,'15386447315135,title,ar,,,Brilliant Bronze,بريليانت برونز
+PRODUCT,'15386447347903,title,ar,,,Youth Ikon,يوث أيكون
+PRODUCT,'15386447380671,title,ar,,,Elite Lady,إيليت ليدي
+PRODUCT,'15386447413439,title,ar,,,Wood Excess Pour Femme,وود إكسيس بور فام
+PRODUCT,'15386447446207,title,ar,,,Victory Women,فيكتوري للنساء
+PRODUCT,'15386447511743,title,ar,,,Passion,باشن
+PRODUCT,'15386447544511,title,ar,,,Sotoor Raa',سطور راء
+PRODUCT,'15386447577279,title,ar,,,QASAMAT - BAREEQ,قسمات - بريق
+PRODUCT,'15386447610047,title,ar,,,Rumz Al Rasasi 9325,رمز الرصاصي 9325
+PRODUCT,'15386447642815,title,ar,,,Sotoor Waaw,سطور واو
+PRODUCT,'15386447675583,title,ar,,,Sotoor Seen,سطور سين
+PRODUCT,'15386447708351,title,ar,,,OUD AL MUBAKHR,عود المبخر
+PRODUCT,'15386447741119,title,ar,,,Hatem,حاتم
+PRODUCT,'15386447773887,title,ar,,,ENTEBAA FOR MEN,انتباه للرجال
+PRODUCT,'15386447839423,title,ar,,,SHURAH,شهرة
+PRODUCT,'15386447872191,title,ar,,,L'Incontournable Blue 2 for Men,لانكونتورنابل بلو 2 للرجال
+PRODUCT,'15386447904959,title,ar,,,Blue for Men,بلو للرجال
+PRODUCT,'15386447937727,title,ar,,,Blue Lady,بلو ليدي
+PRODUCT,'15386447970495,title,ar,,,Emotion Women,إيموشن للنساء
+PRODUCT,'15386448003263,title,ar,,,Emotion Men,إيموشن للرجال
+PRODUCT,'15386448036031,title,ar,,,Romance,رومانس
+PRODUCT,'15386448068799,title,ar,,,MUKHALLAT OUDH AL MUBAKHR,مخلط عود المبخر
+PRODUCT,'15386448101567,title,ar,,,AL WISAM DAY,الوسام داي
+PRODUCT,'15386448134335,title,ar,,,Ighraa Black Men,إغراء بلاك للرجال
+PRODUCT,'15386448199871,title,ar,,,Ighraa Red Women,إغراء ريد للنساء
+PRODUCT,'15386448232639,title,ar,,,La Yuqawam,لا يقاوم
+PRODUCT,'15386448265407,title,ar,,,Hawas for Her,هوس للنساء
+PRODUCT,'15386448298175,title,ar,,,HAWAS FOR MEN,هوس للرجال
+PRODUCT,'15386448330943,title,ar,,,NAFAEIS AL SHAGHAF,نفائس الشغف
+PRODUCT,'15386448363711,title,ar,,,Rumz Al Rasasi 9325 Zebra Pour Homme,رمز الرصاصي 9325 زيبرا بور هوم
+PRODUCT,'15386448396479,title,ar,,,Rumz Al Rasasi 9325 Zebra Pour Femme,رمز الرصاصي 9325 زيبرا بور فام
+PRODUCT,'15386448429247,title,ar,,,OUDH AL ABIYAD,عود الأبيض
+PRODUCT,'15386448462015,title,ar,,,Yazan,يزن
+PRODUCT,'15386448494783,title,ar,,,DAAREJ POUR FEMME,دارج بور فام
+PRODUCT,'15386448527551,title,ar,,,DAAREJ POUR HOMME,دارج بور هوم
+PRODUCT,'15386448560319,title,ar,,,Abyan,أبيان
+PRODUCT,'15386448593087,title,ar,,,Royal 2,رويال 2
+PRODUCT,'15386448625855,title,ar,,,ENTEBAA FOR WOMEN,انتباه للنساء
+PRODUCT,'15386448658623,title,ar,,,NAFAEIS AL SHAGHAF FOR WOMEN,نفائس الشغف للنساء
+PRODUCT,'15386448691391,title,ar,,,4 Flowers,4 فلاورز
+PRODUCT,'15386448756927,title,ar,,,FAQAT LIL RIJAL,فقط للرجال
+PRODUCT,'15386448789695,title,ar,,,Royal Blue,رويال بلو
+PRODUCT,'15386448822463,title,ar,,,SHUHRAH FOR MEN,شهرة للرجال
+PRODUCT,'15386448855231,title,ar,,,MINI INCENSE WADEEMA,بخور ميني وديمة
+PRODUCT,'15386448887999,title,ar,,,MINI INCENSE NASAEM,بخور ميني نسائم
+PRODUCT,'15386448920767,title,ar,,,MINI INCENSE NABEEL BLACK,بخور ميني نبيل بلاك
+PRODUCT,'15386448953535,title,ar,,,Andaleeb Flora,عندليب فلورا
+PRODUCT,'15386448986303,title,ar,,,Oud Thameen,عود ثمين
+PRODUCT,'15386449051839,title,ar,,,Majd Al Sultan,مجد السلطان
+PRODUCT,'15386449117375,title,ar,,,Ameerat Al Arab Prive Rose,أميرة العرب بريفيه روز
+PRODUCT,'15386449150143,title,ar,,,Pure White,بيور وايت
+PRODUCT,'15386449182911,title,ar,,,Andaleeb,عندليب
+PRODUCT,'15386449215679,title,ar,,,Ameer Al Arab,أمير العرب
+PRODUCT,'15386449248447,title,ar,,,Ameerat Al Arab,أميرة العرب
+PRODUCT,'15386449281215,title,ar,,,THE LION'S CLUB - MONARQUE,ذا لايونز كلوب - مونارك
+PRODUCT,'15386449313983,title,ar,,,CLUB DE NUIT INTENSE MAN 2PC GIFT SET,طقم هدايا كلوب دي نوي إنتنس مان - قطعتان
+PRODUCT,'15386449346751,title,ar,,,THE LION'S CLUB - FEROCE,ذا لايونز كلوب - فيروسيه
+PRODUCT,'15386449379519,title,ar,,,CLUB DE NUIT MALEKA,كلوب دي نوي ملكة
+PRODUCT,'15386449412287,title,ar,,,CLUB DE NUIT MILESTONE,كلوب دي نوي مايلستون
+PRODUCT,'15386449445055,title,ar,,,CLUB DE NUIT LIONHEART WOMAN,كلوب دي نوي لايون هارت وومان
+PRODUCT,'15386449510591,title,ar,,,CLUB DE NUIT INTENSE MAN LIMITED EDITION,كلوب دي نوي إنتنس مان إصدار محدود
+PRODUCT,'15386449543359,title,ar,,,CLUB DE NUIT INTENSE MAN,كلوب دي نوي إنتنس مان
+PRODUCT,'15386449576127,title,ar,,,CHECKMATE KING,تشيك ميت كينج
+PRODUCT,'15386449608895,title,ar,,,CHECKMATE QUEEN,تشيك ميت كوين
+PRODUCT,'15386449641663,title,ar,,,CLUB DE NUIT SILLAGE,كلوب دي نوي سيلاج
+PRODUCT,'15386449674431,title,ar,,,CLUB DE NUIT IMPERIALE,كلوب دي نوي إمبريال
+PRODUCT,'15386449707199,title,ar,,,CLUB DE NUIT INTENSE WOMAN,كلوب دي نوي إنتنس وومان
+PRODUCT,'15386449739967,title,ar,,,MINI INCENSE TAJEBNI,بخور ميني تعجبني
+PRODUCT,'15386449772735,title,ar,,,MINI INCENSE NABEEL,بخور ميني نبيل
+PRODUCT,'15386449838271,title,ar,,,MINI INCENSE KHAWATIR,بخور ميني خواطر
+PRODUCT,'15386449871039,title,ar,,,TAJEBNI DEODORANT SPRAY,بخاخ مزيل عرق تعجبني
+PRODUCT,'15386449903807,title,ar,,,SAADA DEODORANT SPRAY,بخاخ مزيل عرق سعادة
+PRODUCT,'15386449936575,title,ar,,,RAUNAQ DEODORANT SPRAY,بخاخ مزيل عرق رونق
+PRODUCT,'15386449969343,title,ar,,,QISATY DEODORANT SPRAY,بخاخ مزيل عرق قصتي
+PRODUCT,'15386450002111,title,ar,,,OODY WOODY DEODORANT SPRAY,بخاخ مزيل عرق أودي وودي
+PRODUCT,'15386450034879,title,ar,,,NABEEL BLACK DEODORANT SPRAY,بخاخ مزيل عرق نبيل بلاك
+PRODUCT,'15386450067647,title,ar,,,NABEEL DEODORANT SPRAY,بخاخ مزيل عرق نبيل
+PRODUCT,'15386450100415,title,ar,,,MAGHATEER DEODORANT SPRAY,بخاخ مزيل عرق مغاتير
+PRODUCT,'15386450165951,title,ar,,,KHAYALI DEODORANT SPRAY,بخاخ مزيل عرق خيالي
+PRODUCT,'15386450231487,title,ar,,,KANZ DEODORANT SPRAY,بخاخ مزيل عرق كنز
+PRODUCT,'15386450264255,title,ar,,,HABIBI LIL ABAD DEODORANT SPRAY,بخاخ مزيل عرق حبيبي للأبد
+PRODUCT,'15386450297023,title,ar,,,GOLD 24K DEODORANT SPRAY,بخاخ مزيل عرق جولد 24 قيراط
+PRODUCT,'15386450362559,title,ar,,,FATTAN DEODORANT SPRAY,بخاخ مزيل عرق فتان
+PRODUCT,'15386450395327,title,ar,,,FAKHAR AL NABEEL DEODORANT SPRAY,بخاخ مزيل عرق فخر النبيل
+PRODUCT,'15386450460863,title,ar,,,DAHN AL OUD AMIRI DEODORANT SPRAY,بخاخ مزيل عرق دهن العود أميري
+PRODUCT,'15386450493631,title,ar,,,DAHN AL OUD DEODORANT SPRAY,بخاخ مزيل عرق دهن العود
+PRODUCT,'15386450526399,title,ar,,,OCEAN DEODORANT SPRAY,بخاخ مزيل عرق أوشن
+PRODUCT,'15386450559167,title,ar,,,NADER DEODORANT SPRAY,بخاخ مزيل عرق نادر
+PRODUCT,'15386450624703,title,ar,,,IRTH DEODORANT SPRAY,بخاخ مزيل عرق إرث
+PRODUCT,'15386450657471,title,ar,,,FULAD DEODORANT SPRAY,بخاخ مزيل عرق فولاذ
+PRODUCT,'15386450690239,title,ar,,,CROWN OF EMIRATES DEODORANT SPRAY,بخاخ مزيل عرق كراون أوف إميريتس
+PRODUCT,'15386450723007,title,ar,,,AL BASHIQ DEODORANT SPRAY,بخاخ مزيل عرق الباشق
+PRODUCT,'15386450755775,title,ar,,,ASATEER DEODORANT SPRAY,بخاخ مزيل عرق أساطير
+PRODUCT,'15386450821311,title,ar,,,SANDAL ROLL ON OIL PERFUME,عطر زيتي رول أون صندل
+PRODUCT,'15386450854079,title,ar,,,OCEAN DRY AIR FRESHENER,معطر جو جاف أوشن
+PRODUCT,'15386450886847,title,ar,,,CROWN OF EMIRATES DRY AIR FRESHENER,معطر جو جاف كراون أوف إميريتس
+PRODUCT,'15386450952383,title,ar,,,AL BASHIQ DRY AIR FRESHENER,معطر جو جاف الباشق
+PRODUCT,'15386450985151,title,ar,,,IRTH DRY AIR FRESHENER,معطر جو جاف إرث
+PRODUCT,'15386451017919,title,ar,,,RAUNAQ AIR FRESHENER,معطر جو رونق
+PRODUCT,'15386451050687,title,ar,,,GOLD 24K DRY AIR FRESHENER,معطر جو جاف جولد 24 قيراط
+PRODUCT,'15386451083455,title,ar,,,DAHN AL OUD AIR FRESHENER,معطر جو دهن العود
+PRODUCT,'15386451116223,title,ar,,,FAKHAR AL NABEEL AIR FRESHENER,معطر جو فخر النبيل
+PRODUCT,'15386451148991,title,ar,,,HABIBI LIL ABAD AIR FRESHENER,معطر جو حبيبي للأبد
+PRODUCT,'15386451214527,title,ar,,,BAHIR AIR FRESHENER,معطر جو باهر
+PRODUCT,'15386451247295,title,ar,,,KHAYALI AIR FRESHENER,معطر جو خيالي
+PRODUCT,'15386451280063,title,ar,,,QISATY AIR FRESHENER,معطر جو قصتي
+PRODUCT,'15386451345599,title,ar,,,FATTAN AIR FRESHENER,معطر جو فتان
+PRODUCT,'15386451378367,title,ar,,,DAHN AL OUD AMIRI AIR FRESHENER,معطر جو دهن العود أميري
+PRODUCT,'15386451411135,title,ar,,,OODY WOODY AIR FRESHENER,معطر جو أودي وودي
+PRODUCT,'15386451443903,title,ar,,,SA'ADA AIR FRESHENER,معطر جو سعادة
+PRODUCT,'15386451476671,title,ar,,,KANZ DRY AIR FRESHENER,معطر جو جاف كنز
+PRODUCT,'15386451509439,title,ar,,,NABEEL BLACK DRY AIR FRESHENER,معطر جو جاف نبيل بلاك
+PRODUCT,'15386451542207,title,ar,,,NASAEM DRY AIR FRESHENER,معطر جو جاف نسائم
+PRODUCT,'15386451574975,title,ar,,,NABEEL DRY AIR FRESHENER,معطر جو جاف نبيل
+PRODUCT,'15386451607743,title,ar,,,OUDH MAMUL BAHER,عود معمول باهر
+PRODUCT,'15386451640511,title,ar,,,OUDH MAMUL FATTAN,عود معمول فتان
+PRODUCT,'15386451673279,title,ar,,,OUDH MAMUL QISATY,عود معمول قصتي
+PRODUCT,'15386451738815,title,ar,,,OUDH MAMUL NABEEL,عود معمول نبيل
+PRODUCT,'15386451804351,title,ar,,,NABEEL BLACK INCENSE,بخور نبيل بلاك
+PRODUCT,'15386451837119,title,ar,,,MAKH MIKH INCENSE,بخور ماخ ميخ
+PRODUCT,'15386451869887,title,ar,,,NABEEL INCENSE,بخور نبيل
+PRODUCT,'15386451902655,title,ar,,,NASAEM INCENSE,بخور نسائم
+PRODUCT,'15386451935423,title,ar,,,OUDH KHAWATIR INCENSE,بخور عود خواطر
+PRODUCT,'15386451968191,title,ar,,,OUDH TAJEBNI INCENSE,بخور عود تعجبني
+PRODUCT,'15386452000959,title,ar,,,OUDH MAKH MIKH INCENSE,بخور عود ماخ ميخ
+PRODUCT,'15386452033727,title,ar,,,OUDH NASAEM INCENSE,بخور عود نسائم
+PRODUCT,'15386452066495,title,ar,,,OUDH NABEEL BLACK INCENSE,بخور عود نبيل بلاك
+PRODUCT,'15386452099263,title,ar,,,OUDH NABEEL INCENSE,بخور عود نبيل
+PRODUCT,'15386452164799,title,ar,,,THOUQ,ذوق
+PRODUCT,'15386452197567,title,ar,,,KHAMRAH QAHWA,خمرة قهوة
+PRODUCT,'15386452230335,title,ar,,,BADEE AL OUD AMETHYEST,بديع العود أميثيست
+PRODUCT,'15386452263103,title,ar,,,JASOOR,جسور
+PRODUCT,'15386452295871,title,ar,,,SHEIKH AL SHUYUKH BLACK,شيخ الشيوخ بلاك
+PRODUCT,'15386452328639,title,ar,,,MUSAMAM WHITE INTENSE,مسمم وايت إنتنس
+PRODUCT,'15386452361407,title,ar,,,YARA,يارا
+PRODUCT,'15386452394175,title,ar,,,BADEE AL OUD - OUD OF GLORY,بديع العود - عود أوف جلوري
+PRODUCT,'15386452459711,title,ar,,,Ameer Al Oudh,أمير العود
+PRODUCT,'15386452492479,title,ar,,,AMEER AL OUD INTENSE,أمير العود إنتنس
+PRODUCT,'15386452525247,title,ar,,,KHALIS MUSK (PURE MUSK),خالص مسك (بيور مسك)
+PRODUCT,'15386452558015,title,ar,,,RAMZ LATTAFA GOLD,رمز لطافة جولد
+PRODUCT,'15386452590783,title,ar,,,RAMZ LATTAFA SILVER,رمز لطافة سيلفر
+PRODUCT,'15386452623551,title,ar,,,ANA ABIYEDH,أنا أبيض
+PRODUCT,'15386452656319,title,ar,,,BLUE OUD,بلو عود
+PRODUCT,'15386452721855,title,ar,,,OPULENT MUSK,أوبيولنت مسك
+PRODUCT,'15386452787391,title,ar,,,OUD MOOD ELIXIR,عود مود إليكسير
+PRODUCT,'15386452820159,title,ar,,,OUD MOOD REMINISENCE,عود مود ريمينيسنس
+PRODUCT,'15386452852927,title,ar,,,ROUAT AL MUSK,روعة المسك
+PRODUCT,'15386452885695,title,ar,,,ROUAT AL OUD,روعة العود
+PRODUCT,'15386452918463,title,ar,,,EJAAZI,إعجازي
+PRODUCT,'15386453049535,title,ar,,,Ekhtiari,اختياري
+PRODUCT,'15386453082303,title,ar,,,QIMMAH FOR WOMEN,قمة للنساء
+PRODUCT,'15386453147839,title,ar,,,QIMMAH FOR MEN,قمة للرجال
+PRODUCT,'15386453180607,title,ar,,,LAIL MALEKI,ليل ملكي
+PRODUCT,'15386453213375,title,ar,,,FAKHAR LATTAFA MEN,فخر لطافة للرجال
+PRODUCT,'15386453278911,title,ar,,,MAAHIR GOLD,ماهر جولد
+PRODUCT,'15386453344447,title,ar,,,KHAMRAH,خمرة
+PRODUCT,'15386453377215,title,ar,,,YARA MOII,يارا موي
+PRODUCT,'15386453409983,title,ar,,,ASAD,أسد
+PRODUCT,'15386453442751,title,ar,,,MAAHIR BLACK EDITION,ماهر بلاك إيديشن
+PRODUCT,'15386453475519,title,ar,,,OUD MOOD,عود مود
+PRODUCT,'15386453508287,title,ar,,,QAAED,قائد
+PRODUCT,'15386453541055,title,ar,,,VELVET ROSE,فيلفيت روز
+PRODUCT,'15386453573823,title,ar,,,RAAED INTENSE,رائد إنتنس
+PRODUCT,'15386453606591,title,ar,,,AWRAQ AL OUD,أوراق العود
+PRODUCT,'15386453639359,title,ar,,,SHEIKH AL SHUYUKH LUXE EDITION,شيخ الشيوخ لوكس إيديشن
+PRODUCT,'15386453672127,title,ar,,,RAGHBA,رغبة
+PRODUCT,'15386453704895,title,ar,,,VELVET OUD,فيلفيت عود
+PRODUCT,'15386453737663,title,ar,,,RAED ABSOLU,رائد أبسولو
+PRODUCT,'15386453770431,title,ar,,,RAAED OUD,رائد عود
+PRODUCT,'15386453803199,title,ar,,,Ramaad Al Oud,رماد العود
+PRODUCT,'15386453835967,title,ar,,,SONDOS,سندس
+PRODUCT,'15386453868735,title,ar,,,KHALIS OUDI (PURE OUDI),خالص عودي (بيور عودي)
+PRODUCT,'15386453901503,title,ar,,,NAJDIA,نجدية
+PRODUCT,'15386453934271,title,ar,,,WASHWASHA,وشوشة
+PRODUCT,'15386453967039,title,ar,,,AL NASHAMA CAPRICE,النشامى كابريس
+PRODUCT,'15386453999807,title,ar,,,FAKHAR LATTAFA WHITE,فخر لطافة وايت
+PRODUCT,'15386454032575,title,ar,,,ANA ABIYEDH SCARLET,أنا أبيض سكارليت
+PRODUCT,'15386454065343,title,ar,,,HABIK MEN,حابك للرجال
+PRODUCT,'15386454130879,title,ar,,,DYNASTY,دايناستي
+PRODUCT,'15386454163647,title,ar,,,YARA TOUS,يارا توس
+PRODUCT,'15386454196415,title,ar,,,ECLAIRE PISTACHE,إكلير بيستاش
+PRODUCT,'15386454229183,title,ar,,,OPULENT DUBAI,أوبيولنت دبي
+PRODUCT,'15386454261951,title,ar,,,HAYAATI BLACK,حياتي بلاك
+PRODUCT,'15386454294719,title,ar,,,MASHRABYA,مشربية
+PRODUCT,'15386454360255,title,ar,,,SHEIKH AL SHUYUKH FINAL EDITION,شيخ الشيوخ فاينال إيديشن
+PRODUCT,'15386454393023,title,ar,,,FAKHAR PLATIN,فخر بلاتين
+PRODUCT,'15386454425791,title,ar,,,BADEE AL OUD SUBLIME,بديع العود سبلايم
+PRODUCT,'15386454458559,title,ar,,,QAED AL FURSAN,قائد الفرسان
+PRODUCT,'15386454491327,title,ar,,,AJWAD PINK TO PINK,أجود بينك تو بينك
+PRODUCT,'15386454524095,title,ar,,,Petra 100ml,بترا 100 مل
+PRODUCT,'15386454556863,title,ar,,,BADEE AL OUD NOBLE BLUSH,بديع العود نوبل بلاش
+PRODUCT,'15386454589631,title,ar,,,ANGHAM,أنغام
+PRODUCT,'15386454622399,title,ar,,,ASAD BOURBON,أسد بوربون
+PRODUCT,'15386454655167,title,ar,,,ATHEERI,أثيري
+PRODUCT,'15386454687935,title,ar,,,VICTORIA,فيكتوريا
+PRODUCT,'15386454720703,title,ar,,,MOHRA,مهرة
+PRODUCT,'15386454753471,title,ar,,,KHAMRAH DOKHAN,خمرة دخان
+PRODUCT,'15386454786239,title,ar,,,RAVE NOW - WOMEN,ريف ناو للنساء
+PRODUCT,'15386454819007,title,ar,,,TERIAQ INTENSE,ترياق إنتنس
+PRODUCT,'15386454851775,title,ar,,,AL NASHAMA,النشامى
+PRODUCT,'15386454884543,title,ar,,,AFEEF,عفيف
+PRODUCT,'15386454950079,title,ar,,,ANA ABIYEADH CORAL,أنا أبيض كورال
+PRODUCT,'15386454982847,title,ar,,,HER CONFESSION,هير كونفيشن
+PRODUCT,'15386455015615,title,ar,,,HIS CONFESSION,هيز كونفيشن
+PRODUCT,'15386455048383,title,ar,,,RAVE NOW,ريف ناو
+PRODUCT,'15386455081151,title,ar,,,HAYAATI FLORENCE,حياتي فلورنس
+PRODUCT,'15386455113919,title,ar,,,SEHR LATTAFA,سحر لطافة
+PRODUCT,'15386455146687,title,ar,,,YARA CANDY,يارا كاندي
+PRODUCT,'15386455179455,title,ar,,,TERIAQ,ترياق
+PRODUCT,'15386455212223,title,ar,,,LIAM GREY,ليام جراي
+PRODUCT,'15386455244991,title,ar,,,LIAM BLUE SHINE,ليام بلو شاين
+PRODUCT,'15386455277759,title,ar,,,MOHRA SILKY ROSE,مهرة سيلكي روز
+PRODUCT,'15386455310527,title,ar,,,MAYAR,ميار
+PRODUCT,'15386455343295,title,ar,,,MAYAR NATURAL INTENSE,ميار ناتشورال إنتنس
+PRODUCT,'15386455376063,title,ar,,,MUSAMAM,مسمم
+PRODUCT,'15386455408831,title,ar,,,MAHASIN CRYSTAL,محاسن كريستال
+PRODUCT,'15386455441599,title,ar,,,ECLAIRE,إكلير
+PRODUCT,'15386455474367,title,ar,,,BADEE AL OUD HONOR AND GLORY,بديع العود أونر آند جلوري
+PRODUCT,'15386455507135,title,ar,,,MAAHIR LEGACY,ماهر ليجاسي
+PRODUCT,'15386455539903,title,ar,,,QAED AL FURSAN UNLIMITED,قائد الفرسان أنليميتد
+PRODUCT,'15386455572671,title,ar,,,BAYAAN,بيان
+PRODUCT,'15386455605439,title,ar,,,KINGDOM MEN,كينجدم للرجال
+PRODUCT,'15386455670975,title,ar,,,ASAD ZENZIBAR,أسد زنجبار
+PRODUCT,'15386455703743,title,ar,,,ANA ABIYEDH ROUGE,أنا أبيض روج
+PRODUCT,'15386455736511,title,ar,,,ANSAAM GOLD,أنسام جولد
+PRODUCT,'15386455769279,title,ar,,,SAKEENA,سكينة
+PRODUCT,'15386455802047,title,ar,,,FAKHAR LATTAFA EXTRAIT,فخر لطافة إكستريه
+PRODUCT,'15386455834815,title,ar,,,AFFECTION,أفكشن
+PRODUCT,'15386455867583,title,ar,,,NEBRAS,نبراس
+PRODUCT,'15386455900351,title,ar,,,AL AMEED,العميد
+PRODUCT,'15386455933119,title,ar,,,Raw Human,رو هيومان
+PRODUCT,'15386456162495,title,ar,,,Prize (Pride),برايز (برايد)
+PRODUCT,'15386456195263,title,ar,,,AL KHAS WINNERS TROPHY GOLD,الخاص وينرز تروفي جولد
+PRODUCT,'15386456228031,title,ar,,,ISHQ AL SHUYUKH GOLD,عشق الشيوخ جولد
+PRODUCT,'15386456260799,title,ar,,,ISHQ AL SHUYUKH SILVER,عشق الشيوخ سيلفر
+PRODUCT,'15386456293567,title,ar,,,AWAAN,أوان
+PRODUCT,'15386456326335,title,ar,,,VINTAGE RADIO,فينتدج راديو
+PRODUCT,'15386456359103,title,ar,,,ANSAAM SILVER,أنسام سيلفر
+PRODUCT,'15386456391871,title,ar,,,AFAQ,آفاق
+PRODUCT,'15386456424639,title,ar,,,GHARAM,غرام
+PRODUCT,'15386456457407,title,ar,,,AJWAA,أجواء
+PRODUCT,'15386456490175,title,ar,,,WAJOOD,وجود
+PRODUCT,'15386456522943,title,ar,,,AL AREEQ GOLD,العريق جولد
+PRODUCT,'15386456555711,title,ar,,,AL AREEQ SILVER,العريق سيلفر
+PRODUCT,'15386456588479,title,ar,,,HALA,هلا
+PRODUCT,'15386456621247,title,ar,,,AL KHAS WINNERS TROPHY SILVER,الخاص وينرز تروفي سيلفر
+PRODUCT,'15386456654015,title,ar,,,SHAHEEN SILVER,شاهين سيلفر
+PRODUCT,'15386456686783,title,ar,,,SHAHEEN GOLD,شاهين جولد
+PRODUCT,'15386456719551,title,ar,,,La Collection d’antiquity 1886,لا كوليكشن دانتيكيتي 1886
+PRODUCT,'15386456752319,title,ar,,,Art of Arabia III (Pride),آرت أوف أرابيا III (برايد)
+PRODUCT,'15386456785087,title,ar,,,La Collection D’ Antiquities 1910,لا كوليكشن دانتيكيتي 1910
+PRODUCT,'15386456850623,title,ar,,,EMBRACE,إمبريس
+PRODUCT,'15386456883391,title,ar,,,Art of Arabia II (Pride),آرت أوف أرابيا II (برايد)
+PRODUCT,'15386456916159,title,ar,,,La African Drummer,لا أفريكان درامر
+PRODUCT,'15386456981695,title,ar,,,THARWAH GOLD,ثروة جولد
+PRODUCT,'15386457047231,title,ar,,,THARWAH SILVER,ثروة سيلفر
+PRODUCT,'15386457079999,title,ar,,,BLUE SAPPHIRE,بلو سافاير
+PRODUCT,'15386457145535,title,ar,,,AL QIAM SILVER,القيم سيلفر
+PRODUCT,'15386457211071,title,ar,,,ROYAL SAPPHIRE,رويال سافاير
+PRODUCT,'15386457276607,title,ar,,,AL QIAM GOLD,القيم جولد
+PRODUCT,'15386457309375,title,ar,,,La Collection d'AntiquitŽs,لا كوليكشن دانتيكيتي
+PRODUCT,'15386457407679,title,ar,,,LEEN,لين
+PRODUCT,'15386457440447,title,ar,,,ETERNAL OUD,إيترنال عود
+PRODUCT,'15386457473215,title,ar,,,Maharjan Gold,مهرجان جولد
+PRODUCT,'15386457538751,title,ar,,,Maharjan Silver,مهرجان سيلفر
+PRODUCT,'15386457571519,title,ar,,,MASA,ماسة
+PRODUCT,'15386457604287,title,ar,,,OSCAR,أوسكار
+PRODUCT,'15386457669823,title,ar,,,AWATIF POUR FEMME,عواطف بور فام
+PRODUCT,'15386457702591,title,ar,,,ABADI OPULENT,عبادي أوبيولنت
+PRODUCT,'15386457735359,title,ar,,,TARAF BLACK,ترف بلاك
+PRODUCT,'15386457768127,title,ar,,,GHAYATH,غياث
+PRODUCT,'15386457800895,title,ar,,,AL KASER,القصر
+PRODUCT,'15386457866431,title,ar,,,RAMSH POUR HOMME,رمش بور هوم
+PRODUCT,'15386457899199,title,ar,,,MODHESH AURA,مدهش أورا
+PRODUCT,'15386457931967,title,ar,,,TIRAMISU CARAMEL,تيراميسو كراميل
+PRODUCT,'15386457997503,title,ar,,,HAWWA PINK,حواء بينك
+PRODUCT,'15386458030271,title,ar,,,GHYOOM,غيوم
+PRODUCT,'15386458063039,title,ar,,,TIRAMISU COCO,تيراميسو كوكو
+PRODUCT,'15386458095807,title,ar,,,AMBER IS GREAT,أمبر إز جريت
+PRODUCT,'15386458128575,title,ar,,,STALLION,ستاليون
+PRODUCT,'15386458161343,title,ar,,,TARF WHITE,طرف وايت
+PRODUCT,'15386458194111,title,ar,,,Reserved Oud,ريزيرفد عود
+PRODUCT,'15386458226879,title,ar,,,Reserved Black Cedar,ريزيرفد بلاك سيدار
+PRODUCT,'15386458259647,title,ar,,,TREASURE,تريجر
+PRODUCT,'15386458292415,title,ar,,,Hawwa Red,حواء ريد
+PRODUCT,'15386458325183,title,ar,,,Nawa'em,نواعم
+PRODUCT,'15386458357951,title,ar,,,Abdi Black,عبدي بلاك
+PRODUCT,'15386458390719,title,ar,,,Vigour,فيجور
+PRODUCT,'15386458423487,title,ar,,,Awatif Pour Homme,عواطف بور هوم
+PRODUCT,'15386458456255,title,ar,,,Mazaaj Infused,مزاج إنفيوزد
+PRODUCT,'15386458489023,title,ar,,,Mazaaj Brown,مزاج براون
+PRODUCT,'15386458521791,title,ar,,,Infrad Noir,انفراد نوار
+PRODUCT,'15386458554559,title,ar,,,Infrad Luxe,انفراد لوكس
+PRODUCT,'15386458587327,title,ar,,,Khafaya Homme,خفايا هوم
+PRODUCT,'15386458620095,title,ar,,,Impulse Oud,إمبلس عود
+PRODUCT,'15386458652863,title,ar,,,BOUQET RED,بوكيه ريد
+PRODUCT,'15386458685631,title,ar,,,Sharaf The Club,شرف ذا كلوب
+PRODUCT,'15386458718399,title,ar,,,Sharaf Blend,شرف بليند
+PRODUCT,'15386458751167,title,ar,,,Yaa Umree,يا عمري
+PRODUCT,'15386458816703,title,ar,,,Reveerie Petals,ريفيري بيتالز
+PRODUCT,'15386458849471,title,ar,,,Reveerie Aqua,ريفيري أكوا
+PRODUCT,'15386458882239,title,ar,,,ZUKHRUF POUR HOMME,زخرف بور هوم
+PRODUCT,'15386458915007,title,ar,,,ITQAN GOLD,إتقان جولد
+PRODUCT,'15386458947775,title,ar,,,ITQAN NOIR,إتقان نوار
+PRODUCT,'15386458980543,title,ar,,,CULT,كالت
+PRODUCT,'15386459013311,title,ar,,,9 PM ELIXIR,9 بي ام إليكسير
+PRODUCT,'15386459046079,title,ar,,,HISTORIC DORIA,هيستوريك دوريا
+PRODUCT,'15386459078847,title,ar,,,HISTORIC OLMEDA,هيستوريك أولميدا
+PRODUCT,'15386459111615,title,ar,,,SOUVENIR FLORAL BOUQUET,سوفنير فلورال بوكيه
+PRODUCT,'15386459144383,title,ar,,,SOUVENIR DESERT ROSE,سوفنير ديزرت روز
+PRODUCT,'15386459177151,title,ar,,,RARE REEF,رير ريف
+PRODUCT,'15386459209919,title,ar,,,DELICIOUS BOUQUET,ديليشس بوكيه
+PRODUCT,'15386459242687,title,ar,,,TURATHI BLUE,تراثي بلو
+PRODUCT,'15386459275455,title,ar,,,HISTORIC SAHARA,هيستوريك سهارا
+PRODUCT,'15386459308223,title,ar,,,VIOLET BOUQUET,فايوليت بوكيه
+PRODUCT,'15386459340991,title,ar,,,TURATHI BROWN,تراثي براون
+PRODUCT,'15386459373759,title,ar,,,TURATHI ELECTRIC,تراثي إلكتريك
+PRODUCT,'15386459406527,title,ar,,,TURATHI RED,تراثي ريد
+PRODUCT,'15386459439295,title,ar,,,TURATHI PURPLE,تراثي بيربل
+PRODUCT,'15386459472063,title,ar,,,SUPREMACY TAPIS ROUGE - LUXURY COLLECTION,سوبريماسي تابي روج - لاكشري كوليكشن
+PRODUCT,'15386459504831,title,ar,,,SUPREMACY SILVER,سوبريماسي سيلفر
+PRODUCT,'15386459537599,title,ar,,,SUPREMACY NOIR,سوبريماسي نوار
+PRODUCT,'15386459570367,title,ar,,,SUPREMACY INCENSE,بخور سوبريماسي
+PRODUCT,'15386459603135,title,ar,,,SUPREMACY IN OUD 100 ML,سوبريماسي إن عود 100 مل
+PRODUCT,'15386459635903,title,ar,,,SUPREMACY IN HEAVEN,سوبريماسي إن هيفن
+PRODUCT,'15386459668671,title,ar,,,SUPREMACY GOLD 100 ML,سوبريماسي جولد 100 مل
+PRODUCT,'15386459701439,title,ar,,,SUPREMACY GALA - LUXURY COLLECTION,سوبريماسي جالا - لاكشري كوليكشن
+PRODUCT,'15386459734207,title,ar,,,SUPREMACY COLLECTOR'S EDITION,سوبريماسي كوليكتورز إيديشن
+PRODUCT,'15386459766975,title,ar,,,PORTRAIT REVIVAL,بورتريه ريفايفال
+PRODUCT,'15386459799743,title,ar,,,PORTRAIT ABSTRACT,بورتريه أبستراكت
+PRODUCT,'15386459865279,title,ar,,,MYSTIQUE BOUQUET,ميستيك بوكيه
+PRODUCT,'15386459898047,title,ar,,,MODEST UNE,موديست أون
+PRODUCT,'15386459930815,title,ar,,,MODEST DEUX,موديست دو
+PRODUCT,'15386459963583,title,ar,,,LA FLEUR BOUQUET,لا فلور بوكيه
+PRODUCT,'15386459996351,title,ar,,,KIAANA CRUSH,كيانا كراش
+PRODUCT,'15386460029119,title,ar,,,KIAANA ANGEL,كيانا إنجل
+PRODUCT,'15386460061887,title,ar,,,9 AM DIVE,9 إيه ام دايف
+PRODUCT,'15386460094655,title,ar,,,9 PM,9 بي ام
+PRODUCT,'15386460160191,title,ar,,,INARA WHITE,إنارة وايت
+PRODUCT,'15386460192959,title,ar,,,INARA BLACK,إنارة بلاك
+PRODUCT,'15386460225727,title,ar,,,CHERRY BOUQUET,تشيري بوكيه
+PRODUCT,'15386460258495,title,ar,,,9 PM - Pour Femme,9 بي ام - بور فام
+PRODUCT,'15386460291263,title,ar,,,9 AM - Pour Femme,9 إيه ام - بور فام
+PRODUCT,'15386460324031,title,ar,,,9 PM REBEL,9 بي ام ريبل
+PRODUCT,'15386460356799,title,ar,,,9 AM,9 إيه ام
+PRODUCT,'15386460389567,title,ar,,,SUPREMACY IN OUD - LUXURY COLLECTION - 150ML,سوبريماسي إن عود - لاكشري كوليكشن - 150 مل
+PRODUCT,'15386460455103,title,ar,,,MIRSAAL OF TRUST,مرسال أوف ترست
+PRODUCT,'15386460520639,title,ar,,,MIRSAAL WITH LOVE,مرسال ويذ لاف
+PRODUCT,'15386460553407,title,ar,,,RARE PASSION,رير باشن
+PRODUCT,'15386460618943,title,ar,,,RARE,رير
+PRODUCT,'15386460651711,title,ar,,,SUPREMACY NOT ONLY INTENSE 150 ML,سوبريماسي نوت أونلي إنتنس 150 مل
+PRODUCT,'15386460684479,title,ar,,,SUPREMACY SILVER - 150 ML,سوبريماسي سيلفر - 150 مل
+PRODUCT,'15386460750015,title,ar,,,SUPREMACY PURPLE,سوبريماسي بيربل
+PRODUCT,'15386460782783,title,ar,,,SUPREMACY PINK,سوبريماسي بينك
+PRODUCT,'15386460848319,title,ar,,,BONITA LA ROSE,بونيتا لا روز
+PRODUCT,'15386460881087,title,ar,,,BONITA FEMME,بونيتا فام
+PRODUCT,'15386460913855,title,ar,,,ALFURSAN,الفرسان
+PRODUCT,'15386460946623,title,ar,,,ASEEL,أصيل
+PRODUCT,'15386460979391,title,ar,,,SHOUQ,شوق
+PRODUCT,'15386461044927,title,ar,,,ALJAWAD,الجواد
+PRODUCT,'15386461077695,title,ar,,,KHULOOD,خلود
+PRODUCT,'15386461110463,title,ar,,,ALMAJD,المجد
+PRODUCT,'15386461143231,title,ar,,,MUHARIB ALPHA,محارب ألفا
+PRODUCT,'15386461175999,title,ar,,,MUHARIB,محارب
+PRODUCT,'15386461208767,title,ar,,,RISALA FOREVER,رسالة فور إيفر
+PRODUCT,'15386461241535,title,ar,,,RISALA FOR YOU,رسالة فور يو
+PRODUCT,'15386461274303,title,ar,,,RISALA AUTOGRAPH,رسالة أوتوجراف
+PRODUCT,'15386461307071,title,ar,,,MIRSAAL VALENTINE,مرسال فالنتاين
+PRODUCT,'15386461372607,title,ar,,,MIRSAAL PASSION,مرسال باشن
+PRODUCT,'15386461438143,title,ar,,,ROMANCIA,رومانسيا
+PRODUCT,'15386461503679,title,ar,,,BEDOON ISM,بدون اسم
+PRODUCT,'15386461536447,title,ar,,,MAKHMALI,مخملي
+PRODUCT,'15386461601983,title,ar,,,MAHASIN KHALTA SILVER,محاسن خلطة سيلفر
+PRODUCT,'15386461634751,title,ar,,,MAHASIN KHALTA LA YUQAWAM,محاسن خلطة لا يقاوم
+PRODUCT,'15386461700287,title,ar,,,MAHASIN KHALTA ABAYA,محاسن خلطة عباية
+PRODUCT,'15386461733055,title,ar,,,MAHASIN KHALTA ORIGINAL,محاسن خلطة أوريجينال
+PRODUCT,'15386461831359,title,ar,,,HAREEM SULTAN GOLD 35ML,حريم سلطان جولد 35 مل
+PRODUCT,'15386461929663,title,ar,,,FRASH MAKHMALI AIR FRESHENER,معطر جو فريش مخملي
+PRODUCT,'15386461962431,title,ar,,,FRASH AL MAJALIS AIR FRESHENER,معطر جو فريش المجالس
+PRODUCT,'15386462027967,title,ar,,,FRASH MAHASIN ABAYA,فريش محاسن عباية
+PRODUCT,'15386462093503,title,ar,,,FRASH MUSKY AIR FRESHENER,معطر جو فريش مسكي
+PRODUCT,'15386462159039,title,ar,,,FRASH DALOUAA AIR FRESHENER,معطر جو فريش دلوعة
+PRODUCT,'15386462224575,title,ar,,,FRASH QISSA AIR FRESHENER,معطر جو فريش قصة
+PRODUCT,'15386462257343,title,ar,,,FRASH HAREEM AL SULTAN AIR FRESHENER,معطر جو فريش حريم السلطان
+PRODUCT,'15386462322879,title,ar,,,FRASH FARFASHA AIR FRESHENER,معطر جو فريش فرفشة
+PRODUCT,'15386462421183,title,ar,,,FRASH LA YUQAWAM AIR FRESHENER,معطر جو فريش لا يقاوم
+PRODUCT,'15386462486719,title,ar,,,OUD MUATTAR RIMAAL,عود معطر رمال
+PRODUCT,'15386462552255,title,ar,,,OUD MUATTAR MAAMUL WARDI,عود معطر معمول وردي
+PRODUCT,'15386462617791,title,ar,,,OUD MUATTAR AL AZRAQ,عود معطر الأزرق
+PRODUCT,'15386462683327,title,ar,,,MABROOK,مبروك
+PRODUCT,'15386462748863,title,ar,,,ALF MABROOK,ألف مبروك
+PRODUCT,'15386462814399,title,ar,,,AL BAHAAR GOLD,البهار جولد
+PRODUCT,'15386462879935,title,ar,,,BAKHOOR AL BAHAAR,بخور البهار
+PRODUCT,'15386462945471,title,ar,,,SOUGAH,صوغة
+PRODUCT,'15386463011007,title,ar,,,TAIBA,طيبة
+PRODUCT,'15386463076543,title,ar,,,BAKHOOR RUKAIYA,بخور رقية
+PRODUCT,'15386463142079,title,ar,,,OUD MUATTAR KHAWAATER,عود معطر خواطر
+PRODUCT,'15386463207615,title,ar,,,OUD MUATTAR SAMOU AL OUD,عود معطر سمو العود
+PRODUCT,'15386463273151,title,ar,,,MAAMUL CAMBODI,معمول كمبودي
+PRODUCT,'15386463338687,title,ar,,,MAAMUL KHAYAALI,معمول خيالي
+PRODUCT,'15386463404223,title,ar,,,RUKAIYA,رقية
+PRODUCT,'15386463502527,title,ar,,,OUD MUATTAR MAAMUL AL BAHAR,عود معطر معمول البحر
+PRODUCT,'15386463568063,title,ar,,,CELESTE TOFFEE,سيليست توفي
+PRODUCT,'15386463633599,title,ar,,,CELESTE JOICE,سيليست جويس
+PRODUCT,'15386463731903,title,ar,,,CELESTE FLEUR,سيليست فلور
+PRODUCT,'15386463797439,title,ar,,,CELESTE AQUA,سيليست أكوا
+PRODUCT,'15386463862975,title,ar,,,CLOUD CANDY,كلاود كاندي
+PRODUCT,'15386463928511,title,ar,,,ISLAND VANILLA DUNES,آيلاند فانيلا ديونز
+PRODUCT,'15386463994047,title,ar,,,ISLAND EXTRAIT DE PARFUM,آيلاند إكستريه دو بارفان
+PRODUCT,'15386464059583,title,ar,,,COVETED DIAMOND,كوفيتد دايموند
+PRODUCT,'15386464125119,title,ar,,,COVETED SHADES,كوفيتد شيدز
+PRODUCT,'15386464190655,title,ar,,,WHITE FOREST STRAWBERRY,وايت فورست ستروبيري
+PRODUCT,'15386464288959,title,ar,,,SAQR AL BADIA,صقر البادية
+PRODUCT,'15386464354495,title,ar,,,SARA,سارة
+PRODUCT,'15386464420031,title,ar,,,RASAYEL SHAGAF,رسائل شغف
+PRODUCT,'15386464485567,title,ar,,,RASAYEL VID,رسائل ود
+PRODUCT,'15386464551103,title,ar,,,MOCHA LATTE,موكا لاتيه
+PRODUCT,'15386464616639,title,ar,,,CAFFE LATTE,كافيه لاتيه
+PRODUCT,'15386464714943,title,ar,,,AZURE VELVET,أزور فيلفيت
+PRODUCT,'15386464780479,title,ar,,,BLEU GLACE,بلو جلاس
+PRODUCT,'15386464813247,title,ar,,,DESERT ROSE,ديزرت روز
+PRODUCT,'15386464846015,title,ar,,,ZAYAAN GOLD,زيان جولد
+PRODUCT,'15386464878783,title,ar,,,SYMBOL OF POWER,سيمبول أوف باور
+PRODUCT,'15386464977087,title,ar,,,SYMBOL OF LOVE,سيمبول أوف لاف
+PRODUCT,'15386465009855,title,ar,,,CREAM VELVET,كريم فيلفيت
+PRODUCT,'15386465042623,title,ar,,,FURSAN BROWN,فرسان براون
+PRODUCT,'15386465075391,title,ar,,,FURSAN WHITE,فرسان وايت
+PRODUCT,'15386465108159,title,ar,,,WOW OUD,واو عود
+PRODUCT,'15386465140927,title,ar,,,ROSE COUTURE,روز كوتور
+PRODUCT,'15386465173695,title,ar,,,OUD NOIR,عود نوار
+PRODUCT,'15386465206463,title,ar,,,SENSOUS NIGHT,سنشوس نايت
+PRODUCT,'15386465239231,title,ar,,,MAISON L'IMAGINAIRE,ميزون ليماجينير
+PRODUCT,'15386465271999,title,ar,,,MAISON EPOQUE ARTISTIQUE,ميزون إيبوك أرتيستيك
+PRODUCT,'15386465304767,title,ar,,,MUSK AL SABAH,مسك الصباح
+PRODUCT,'15386465337535,title,ar,,,GAITH,غيث
+PRODUCT,'15386465370303,title,ar,,,GHADEER GOLD,غدير جولد
+PRODUCT,'15386465403071,title,ar,,,25 INTEGRITY,25 إنتيجريتي
+PRODUCT,'15386465435839,title,ar,,,25 TRUST,25 ترست
+PRODUCT,'15386465468607,title,ar,,,25 LOYALTY,25 لويالتي
+PRODUCT,'15386465534143,title,ar,,,AURA PISTA DESSERT,أورا بيستا ديزرت
+PRODUCT,'15386465566911,title,ar,,,LA FEDE AURA KISS OF ROSE,لا فيدي أورا كيس أوف روز
+PRODUCT,'15386465599679,title,ar,,,LA FEDE AURA CRISP FLOWER,لا فيدي أورا كريسب فلاور
+PRODUCT,'15386465632447,title,ar,,,NUHA VANILLA PEARL,نهى فانيلا بيرل
+PRODUCT,'15386465665215,title,ar,,,NUHA CHERRY BLUSH,نهى تشيري بلاش
+PRODUCT,'15386465697983,title,ar,,,KARUS AMBER GOLD,كاروس أمبر جولد
+PRODUCT,'15386465730751,title,ar,,,KARUS OUD FIRE,كاروس عود فاير
+PRODUCT,'15386465763519,title,ar,,,KARUS SECRET MUSK,كاروس سيكريت مسك
+PRODUCT,'15386465796287,title,ar,,,KARUS BLUE SPICE,كاروس بلو سبايس
+PRODUCT,'15386465861823,title,ar,,,HAREEM SULTAN 75 ML,حريم سلطان 75 مل
+PRODUCT,'15386465894591,title,ar,,,EMPIRE CROWN,إمباير كراون
+PRODUCT,'15386465927359,title,ar,,,EMPIRE VICTOR,إمباير فيكتور
+PRODUCT,'15386465960127,title,ar,,,EMPIRE EMPRESS,إمباير إمبريس
+PRODUCT,'15386465992895,title,ar,,,INTOXICATE BLUE ELIXIR,إنتوكسيكيت بلو إليكسير
+PRODUCT,'15386466025663,title,ar,,,INTOXICATE,إنتوكسيكيت
+PRODUCT,'15397407588543,title,ar,,,SUEÑO 100ML,سوينيو 100 مل
+PRODUCT,'15397407654079,title,ar,,,ONYX GALAXY 100ML,أونيكس جالاكسي 100 مل
+PRODUCT,'15397407850687,title,ar,,,MUSE 100ML,ميوز 100 مل
+PRODUCT,'15397407916223,title,ar,,,INTOXICATE MYSTIQUE 100ML,إنتوكسيكيت ميستيك 100 مل
+PRODUCT,'15405899940031,title,ar,,,PURE LAMYA OIL PERFUME 20ML,عطر زيتي بيور لمياء 20 مل
+PRODUCT,'15405899972799,title,ar,,,MUSK POWDER BODY SPRAY 200ML,رذاذ جسم مسك باودر 200 مل

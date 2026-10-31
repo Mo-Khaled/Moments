@@ -5,8 +5,14 @@
 
 {%- if cart.empty? -%}
   {%- liquid
-    assign moment_handles = 'night-moment,gift-moment,all-day-moment,daily-moment,fresh-moment,love-moment' | split: ','
-    assign moment_marks = 'night,gift,allday,daily,fresh,love' | split: ','
+    capture moment_handles
+      render 'moments-config', part: 'handles'
+    endcapture
+    assign moment_handles = moment_handles | strip | split: ','
+    capture moment_marks
+      render 'moments-config', part: 'keys'
+    endcapture
+    assign moment_marks = moment_marks | strip | split: ','
   -%}
   <section class="m-cempty" aria-labelledby="m-cempty-title-{{ section.id }}">
     <div class="m-wrap">

@@ -7,13 +7,22 @@
 {%- enddoc -%}
 
 {%- liquid
-  assign chip_handles = 'night-moment,gift-moment,all-day-moment,daily-moment,fresh-moment,love-moment' | split: ','
-  assign chip_marks = 'night,gift,allday,daily,fresh,love' | split: ','
-  assign chip_keys = 'moments.night,moments.gift,moments.all_day,moments.daily,moments.fresh,moments.love' | split: ','
+  capture chip_handles
+    render 'moments-config', part: 'handles'
+  endcapture
+  assign chip_handles = chip_handles | strip | split: ','
+  capture chip_marks
+    render 'moments-config', part: 'keys'
+  endcapture
+  assign chip_marks = chip_marks | strip | split: ','
+  capture chip_keys
+    render 'moments-config', part: 'labels'
+  endcapture
+  assign chip_keys = chip_keys | strip | split: ','
 -%}
 
 <div class="m-chips">
-  <p class="m-chips__title">{{ 'homepage.moments.heading' | t }}</p>
+  <h4 class="predictive-search-results__title m-chips__title">{{ 'homepage.moments.heading' | t }}</h4>
   <ul class="m-chips__list">
     {%- for handle in chip_handles -%}
       {%- assign chip_collection = collections[handle] -%}
@@ -31,20 +40,11 @@
 </div>
 
 {% stylesheet %}
+  /* on the same inset and with the same heading as the theme's own search groups (Recently viewed, Products) below it;
+     it sat flush on the dialog edge with a small uppercase label of its own (owner 2026-10-30) */
   .m-chips {
-    padding-block-end: 16px;
-  }
-
-  .m-chips__title {
-    margin: 0 0 10px;
-    font-size: 0.75rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-  }
-
-  html[lang='ar'] .m-chips__title {
-    letter-spacing: 0;
-    text-transform: none;
+    padding-inline: var(--padding-xl);
+    padding-block-end: var(--padding-sm);
   }
 
   .m-chips__list {

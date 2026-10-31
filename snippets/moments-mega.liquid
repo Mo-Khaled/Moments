@@ -51,12 +51,13 @@
   {%- liquid
     assign shop_by = ''
     for item in all_links
-      assign item_key = item.title | downcase | strip
-      if item_key == 'for her' or item_key == 'for him' or item_key == 'unisex'
+      # matched on the link's handle, not its title: titles are translated on /ar
+      assign item_key = item.url | split: '?' | first | split: '/' | last | downcase
+      if item_key == 'for-her' or item_key == 'for-him' or item_key == 'unisex'
         assign shop_by = shop_by | append: item.url | append: '|' | append: item.title | append: ';'
       endif
     endfor
-    unless shop_by contains '|Unisex'
+    unless shop_by contains '/unisex|'
       if collections['unisex'] != blank
         assign shop_by = shop_by | append: collections['unisex'].url | append: '|Unisex;'
       endif
@@ -65,9 +66,12 @@
   -%}
   <div class="m-mega m-mega--moments m-wrap">
     <ul class="m-mega__moments">
-      {%- assign moment_handles = 'night-moment,gift-moment,all-day-moment,daily-moment,fresh-moment,love-moment' | split: ',' -%}
-      {%- assign moment_marks = 'night,gift,allday,daily,fresh,love' | split: ',' -%}
-      {%- assign moment_keys = 'moments.night,moments.gift,moments.all_day,moments.daily,moments.fresh,moments.love' | split: ',' -%}
+      {%- capture moment_handles -%}{% render 'moments-config', part: 'handles' %}{%- endcapture -%}
+      {%- assign moment_handles = moment_handles | strip | split: ',' -%}
+      {%- capture moment_marks -%}{% render 'moments-config', part: 'keys' %}{%- endcapture -%}
+      {%- assign moment_marks = moment_marks | strip | split: ',' -%}
+      {%- capture moment_keys -%}{% render 'moments-config', part: 'labels' %}{%- endcapture -%}
+      {%- assign moment_keys = moment_keys | strip | split: ',' -%}
       {%- for handle in moment_handles -%}
         {%- assign moment_collection = collections[handle] -%}
         {%- if moment_collection != blank -%}

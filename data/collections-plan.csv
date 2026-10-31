@@ -1,0 +1,201 @@
+﻿handle,title,title_ar,rule (all tags must match),products
+scent-woody,Woody fragrances,عطور خشبية,family:Woody,326
+scent-floral,Floral fragrances,عطور زهرية,family:Floral,310
+scent-gourmand,Gourmand fragrances,عطور حلوة (جورماند),family:Gourmand,294
+scent-amber-oriental,Amber & Oriental fragrances,عطور عنبرية وشرقية,family:Amber & Oriental,266
+scent-musky,Musky fragrances,عطور مسكية,family:Musky,195
+scent-citrus,Citrus fragrances,عطور حمضية,family:Citrus,158
+scent-spicy,Spicy fragrances,عطور حارة,family:Spicy,153
+scent-fruity,Fruity fragrances,عطور فاكهية,family:Fruity,124
+scent-patchouli,Patchouli fragrances,عطور باتشولي,family:Patchouli,116
+scent-oud,Oud fragrances,عطور عود,family:Oud,64
+scent-leather-tobacco,Leather & Tobacco fragrances,عطور جلد وتبغ,family:Leather & Tobacco,45
+scent-fresh-aquatic,Fresh & Aquatic fragrances,عطور منعشة ومائية,family:Fresh & Aquatic,31
+scent-men,Men's fragrances,عطور رجالية,gender:Men,153
+scent-unisex,Unisex fragrances,عطور للجنسين,gender:Unisex,274
+scent-women,Women's fragrances,عطور نسائية,gender:Women,174
+scent-all-year,All year fragrances,عطور لكل المواسم,season:All year,209
+scent-summer,Summer fragrances,عطور صيفية,season:Summer,234
+scent-winter,Winter fragrances,عطور شتوية,season:Winter,304
+scent-day,Day fragrances,عطور نهارية,time:Day,234
+scent-day-night,Day & night fragrances,عطور لليل والنهار,time:Day & night,209
+scent-night,Night fragrances,عطور مسائية,time:Night,304
+scent-body-mist,Body Mist,رذاذ جسم,type:Body Mist,3
+scent-eau-de-parfum,Eau de Parfum,أو دو بارفان,type:Eau de Parfum,122
+scent-extrait-de-parfum,Extrait de Parfum,إكستريه دو بارفان,type:Extrait de Parfum,3
+note-musk,Fragrances with Musk,عطور بنفحة مسك,note:Musk,326
+note-vanilla,Fragrances with Vanilla,عطور بنفحة فانيليا,note:Vanilla,308
+note-amber,Fragrances with Amber,عطور بنفحة عنبر,note:Amber,261
+note-patchouli,Fragrances with Patchouli,عطور بنفحة باتشولي,note:Patchouli,237
+note-bergamot,Fragrances with Bergamot,عطور بنفحة برغموت,note:Bergamot,232
+note-jasmine,Fragrances with Jasmine,عطور بنفحة ياسمين,note:Jasmine,195
+note-sandalwood,Fragrances with Sandalwood,عطور بنفحة خشب الصندل,note:Sandalwood,190
+note-rose,Fragrances with Rose,عطور بنفحة ورد,note:Rose,179
+note-cedarwood,Fragrances with Cedarwood,عطور بنفحة خشب الأرز,note:Cedarwood,164
+note-oud,Fragrances with Oud,عطور بنفحة عود,note:Oud,121
+note-tonka-bean,Fragrances with Tonka Bean,عطور بنفحة حبوب التونكا,note:Tonka Bean,119
+note-saffron,Fragrances with Saffron,عطور بنفحة زعفران,note:Saffron,112
+note-lavender,Fragrances with Lavender,عطور بنفحة خزامى,note:Lavender,100
+note-vetiver,Fragrances with Vetiver,عطور بنفحة نجيل الهند,note:Vetiver,95
+note-leather,Fragrances with Leather,عطور بنفحة جلد,note:Leather,83
+note-cinnamon,Fragrances with Cinnamon,عطور بنفحة قرفة,note:Cinnamon,77
+note-orange-blossom,Fragrances with Orange Blossom,عطور بنفحة زهر البرتقال,note:Orange Blossom,76
+note-cardamom,Fragrances with Cardamom,عطور بنفحة هيل,note:Cardamom,71
+note-pink-pepper,Fragrances with Pink Pepper,عطور بنفحة فلفل وردي,note:Pink Pepper,70
+note-incense,Fragrances with Incense,عطور بنفحة بخور,note:Incense,66
+note-apple,Fragrances with Apple,عطور بنفحة تفاح,note:Apple,66
+note-lemon,Fragrances with Lemon,عطور بنفحة ليمون,note:Lemon,58
+note-geranium,Fragrances with Geranium,عطور بنفحة إبرة الراعي,note:Geranium,57
+note-mandarin,Fragrances with Mandarin,عطور بنفحة يوسفي,note:Mandarin,56
+note-caramel,Fragrances with Caramel,عطور بنفحة كراميل,note:Caramel,51
+note-white-musk,Fragrances with White Musk,عطور بنفحة مسك أبيض,note:White Musk,48
+note-pineapple,Fragrances with Pineapple,عطور بنفحة أناناس,note:Pineapple,47
+note-orange,Fragrances with Orange,عطور بنفحة برتقال,note:Orange,47
+note-lily-of-the-valley,Fragrances with Lily Of The Valley,عطور بنفحة زنبق الوادي,note:Lily Of The Valley,47
+note-ambergris,Fragrances with Ambergris,عطور بنفحة عنبر رمادي,note:Ambergris,47
+note-raspberry,Fragrances with Raspberry,عطور بنفحة توت العليق,note:Raspberry,46
+note-oakmoss,Fragrances with Oakmoss,عطور بنفحة طحلب البلوط,note:Oakmoss,46
+note-labdanum,Fragrances with Labdanum,عطور بنفحة لبدانوم,note:Labdanum,44
+note-nutmeg,Fragrances with Nutmeg,عطور بنفحة جوز الطيب,note:Nutmeg,43
+note-iris,Fragrances with Iris,عطور بنفحة سوسن,note:Iris,43
+note-grapefruit,Fragrances with Grapefruit,عطور بنفحة جريب فروت,note:Grapefruit,41
+note-woody-notes,Fragrances with Woody Notes,عطور بنفحة نفحات خشبية,note:Woody Notes,40
+note-ginger,Fragrances with Ginger,عطور بنفحة زنجبيل,note:Ginger,40
+note-coconut,Fragrances with Coconut,عطور بنفحة جوز الهند,note:Coconut,39
+note-black-pepper,Fragrances with Black Pepper,عطور بنفحة فلفل أسود,note:Black Pepper,38
+note-benzoin,Fragrances with Benzoin,عطور بنفحة بنزوين,note:Benzoin,36
+note-violet,Fragrances with Violet,عطور بنفحة بنفسج,note:Violet,34
+note-ambroxan,Fragrances with Ambroxan,عطور بنفحة أمبروكسان,note:Ambroxan,33
+note-praline,Fragrances with Praline,عطور بنفحة برالين,note:Praline,32
+note-peach,Fragrances with Peach,عطور بنفحة خوخ,note:Peach,31
+note-guaiac-wood,Fragrances with Guaiac Wood,عطور بنفحة خشب الغاياك,note:Guaiac Wood,30
+note-plum,Fragrances with Plum,عطور بنفحة برقوق,note:Plum,28
+note-pear,Fragrances with Pear,عطور بنفحة كمثرى,note:Pear,28
+note-honey,Fragrances with Honey,عطور بنفحة عسل,note:Honey,27
+note-tuberose,Fragrances with Tuberose,عطور بنفحة مسك الروم,note:Tuberose,26
+note-sage,Fragrances with Sage,عطور بنفحة مريمية,note:Sage,25
+note-peony,Fragrances with Peony,عطور بنفحة فاوانيا,note:Peony,25
+note-mint,Fragrances with Mint,عطور بنفحة نعناع,note:Mint,25
+note-cashmeran,Fragrances with Cashmeran,عطور بنفحة كاشميران,note:Cashmeran,24
+note-amberwood,Fragrances with Amberwood,عطور بنفحة خشب العنبر,note:Amberwood,22
+note-tobacco,Fragrances with Tobacco,عطور بنفحة تبغ,note:Tobacco,21
+note-neroli,Fragrances with Neroli,عطور بنفحة نيرولي,note:Neroli,21
+note-dry-amber,Fragrances with Dry Amber,عطور بنفحة عنبر جاف,note:Dry Amber,21
+note-blackcurrant,Fragrances with Blackcurrant,عطور بنفحة كشمش أسود,note:Blackcurrant,21
+note-black-currant,Fragrances with Black Currant,عطور بنفحة كشمش أسود,note:Black Currant,21
+note-ylang-ylang,Fragrances with Ylang-ylang,عطور بنفحة إيلنغ إيلنغ,note:Ylang-ylang,20
+note-white-flowers,Fragrances with White Flowers,عطور بنفحة زهور بيضاء,note:White Flowers,20
+note-aquatic-notes,Fragrances with Aquatic Notes,عطور بنفحة نفحات مائية,note:Aquatic Notes,20
+note-almond,Fragrances with Almond,عطور بنفحة لوز,note:Almond,20
+note-sugar,Fragrances with Sugar,عطور بنفحة سكر,note:Sugar,19
+note-strawberry,Fragrances with Strawberry,عطور بنفحة فراولة,note:Strawberry,18
+note-red-berries,Fragrances with Red Berries,عطور بنفحة التوت الأحمر,note:Red Berries,18
+note-orange-flower,Fragrances with Orange Flower,عطور بنفحة زهرة البرتقال,note:Orange Flower,17
+note-moss,Fragrances with Moss,عطور بنفحة طحلب,note:Moss,16
+note-litchi,Fragrances with Litchi,عطور بنفحة ليتشي,note:Litchi,16
+note-coffee,Fragrances with Coffee,عطور بنفحة قهوة,note:Coffee,16
+note-clove,Fragrances with Clove,عطور بنفحة قرنفل,note:Clove,15
+note-orris,Fragrances with Orris,عطور بنفحة سوسن,note:Orris,14
+note-magnolia,Fragrances with Magnolia,عطور بنفحة ماغنوليا,note:Magnolia,14
+note-clary-sage,Fragrances with Clary Sage,عطور بنفحة ميرمية كلاري,note:Clary Sage,14
+note-ylang-ylang,Fragrances with Ylang Ylang,عطور بنفحة إيلنغ إيلنغ,note:Ylang Ylang,13
+note-spice,Fragrances with Spice,عطور بنفحة توابل,note:Spice,13
+note-oud-wood,Fragrances with Oud Wood,عطور بنفحة خشب العود,note:Oud Wood,13
+note-lime,Fragrances with Lime,عطور بنفحة ليمون أخضر,note:Lime,13
+note-smoke,Fragrances with Smoke,عطور بنفحة دخان,note:Smoke,12
+note-basil,Fragrances with Basil,عطور بنفحة ريحان,note:Basil,12
+note-orchid,Fragrances with Orchid,عطور بنفحة أوركيد,note:Orchid,11
+note-herbal,Fragrances with Herbal,عطور بنفحة أعشاب,note:Herbal,11
+note-apricot,Fragrances with Apricot,عطور بنفحة مشمش,note:Apricot,11
+note-osmanthus,Fragrances with Osmanthus,عطور بنفحة أوسمانثوس,note:Osmanthus,10
+note-milk,Fragrances with Milk,عطور بنفحة حليب,note:Milk,10
+note-marine,Fragrances with Marine,عطور بنفحة نفحات بحرية,note:Marine,10
+note-lychee,Fragrances with Lychee,عطور بنفحة ليتشي,note:Lychee,10
+note-fig,Fragrances with Fig,عطور بنفحة تين,note:Fig,10
+note-elemi,Fragrances with Elemi,عطور بنفحة إليمي,note:Elemi,10
+note-cherry,Fragrances with Cherry,عطور بنفحة كرز,note:Cherry,10
+note-akigalawood,Fragrances with Akigalawood,عطور بنفحة أكيجالاوود,note:Akigalawood,10
+note-spicy-notes,Fragrances with Spicy Notes,عطور بنفحة نفحات حارة,note:Spicy Notes,9
+note-precious-woods,Fragrances with Precious Woods,عطور بنفحة الأخشاب الثمينة,note:Precious Woods,9
+note-nagarmotha,Fragrances with Nagarmotha,عطور بنفحة ناجارموثا,note:Nagarmotha,9
+note-mango,Fragrances with Mango,عطور بنفحة مانجو,note:Mango,9
+note-green-notes,Fragrances with Green Notes,عطور بنفحة نفحات خضراء,note:Green Notes,9
+note-freesia,Fragrances with Freesia,عطور بنفحة فريزيا,note:Freesia,9
+note-dates,Fragrances with Dates,عطور بنفحة تمر,note:Dates,9
+note-birch,Fragrances with Birch,عطور بنفحة بتولا,note:Birch,9
+note-artemisia,Fragrances with Artemisia,عطور بنفحة أرطماسيا,note:Artemisia,9
+note-aldehydes,Fragrances with Aldehydes,عطور بنفحة ألدهيدات,note:Aldehydes,9
+note-white-florals,Fragrances with White Florals,عطور بنفحة زهور بيضاء,note:White Florals,8
+note-violet-leaf,Fragrances with Violet Leaf,عطور بنفحة ورقة البنفسج,note:Violet Leaf,8
+note-suede,Fragrances with Suede,عطور بنفحة شمواه,note:Suede,8
+note-rosemary,Fragrances with Rosemary,عطور بنفحة إكليل الجبل,note:Rosemary,8
+note-oak-moss,Fragrances with Oak Moss,عطور بنفحة طحلب البلوط,note:Oak Moss,8
+note-myrrh,Fragrances with Myrrh,عطور بنفحة مُرّ,note:Myrrh,8
+note-muguet,Fragrances with Muguet,عطور بنفحة زنبق الوادي,note:Muguet,8
+note-heliotrope,Fragrances with Heliotrope,عطور بنفحة هليوتروب,note:Heliotrope,8
+note-gardenia,Fragrances with Gardenia,عطور بنفحة جاردينيا,note:Gardenia,8
+note-florals,Fragrances with Florals,عطور بنفحة زهور,note:Florals,8
+note-cypress,Fragrances with Cypress,عطور بنفحة سرو,note:Cypress,8
+note-cacao,Fragrances with Cacao,عطور بنفحة كاكاو,note:Cacao,8
+note-tangerine,Fragrances with Tangerine,عطور بنفحة يوسفي,note:Tangerine,7
+note-lily,Fragrances with Lily,عطور بنفحة زنبق,note:Lily,7
+note-guaiacwood,Fragrances with Guaiacwood,عطور بنفحة خشب الغاياك,note:Guaiacwood,7
+note-davana,Fragrances with Davana,عطور بنفحة دافانا,note:Davana,7
+note-cassis,Fragrances with Cassis,عطور بنفحة كاسيس,note:Cassis,7
+note-cashmere,Fragrances with Cashmere,عطور بنفحة الكشمير,note:Cashmere,7
+note-warm-musk,Fragrances with Warm Musk,عطور بنفحة مسك دافئ,note:Warm Musk,6
+note-thyme,Fragrances with Thyme,عطور بنفحة الزعتر,note:Thyme,6
+note-sea-salt,Fragrances with Sea Salt,عطور بنفحة ملح بحري,note:Sea Salt,6
+note-rhubarb,Fragrances with Rhubarb,عطور بنفحة راوند,note:Rhubarb,6
+note-pistachio,Fragrances with Pistachio,عطور بنفحة فستق,note:Pistachio,6
+note-juniper,Fragrances with Juniper,عطور بنفحة عرعر,note:Juniper,6
+note-fruity-notes,Fragrances with Fruity Notes,عطور بنفحة نفحات فاكهية,note:Fruity Notes,6
+note-floral-notes,Fragrances with Floral Notes,عطور بنفحة نفحات زهرية,note:Floral Notes,6
+note-coumarin,Fragrances with Coumarin,عطور بنفحة كومارين,note:Coumarin,6
+note-cognac,Fragrances with Cognac,عطور بنفحة كونياك,note:Cognac,6
+note-citrus,Fragrances with Citrus,عطور بنفحة حمضيات,note:Citrus,6
+note-cherry-blossom,Fragrances with Cherry Blossom,عطور بنفحة أزهار الكرز,note:Cherry Blossom,6
+note-black-tea,Fragrances with Black Tea,عطور بنفحة شاي أسود,note:Black Tea,6
+note-white-wood,Fragrances with White Wood,عطور بنفحة خشب أبيض,note:White Wood,5
+note-toffee,Fragrances with Toffee,عطور بنفحة توفي,note:Toffee,5
+note-tagete,Fragrances with Tagete,عطور بنفحة القطيفة,note:Tagete,5
+note-oriental-notes,Fragrances with Oriental Notes,عطور بنفحة نفحات شرقية,note:Oriental Notes,5
+note-marshmallow,Fragrances with Marshmallow,عطور بنفحة مارشميلو,note:Marshmallow,5
+note-cypriol,Fragrances with Cypriol,عطور بنفحة السعدية,note:Cypriol,5
+note-cocoa,Fragrances with Cocoa,عطور بنفحة كاكاو,note:Cocoa,5
+note-cistus,Fragrances with Cistus,عطور بنفحة قسطوس,note:Cistus,5
+note-cananga,Fragrances with Cananga,عطور بنفحة كانانجا,note:Cananga,5
+note-ambrofix,Fragrances with Ambrofix,عطور بنفحة أمبروفيكس,note:Ambrofix,5
+scent-amber-oriental-men,Amber & Oriental fragrances for men,عطور عنبرية وشرقية رجالية,family:Amber & Oriental + gender:Men,70
+scent-amber-oriental-unisex,Amber & Oriental fragrances unisex,عطور عنبرية وشرقية للجنسين,family:Amber & Oriental + gender:Unisex,111
+scent-amber-oriental-women,Amber & Oriental fragrances for women,عطور عنبرية وشرقية نسائية,family:Amber & Oriental + gender:Women,39
+scent-citrus-men,Citrus fragrances for men,عطور حمضية رجالية,family:Citrus + gender:Men,52
+scent-citrus-unisex,Citrus fragrances unisex,عطور حمضية للجنسين,family:Citrus + gender:Unisex,52
+scent-citrus-women,Citrus fragrances for women,عطور حمضية نسائية,family:Citrus + gender:Women,27
+scent-floral-men,Floral fragrances for men,عطور زهرية رجالية,family:Floral + gender:Men,50
+scent-floral-unisex,Floral fragrances unisex,عطور زهرية للجنسين,family:Floral + gender:Unisex,80
+scent-floral-women,Floral fragrances for women,عطور زهرية نسائية,family:Floral + gender:Women,108
+scent-fresh-aquatic-men,Fresh & Aquatic fragrances for men,عطور منعشة ومائية رجالية,family:Fresh & Aquatic + gender:Men,9
+scent-fresh-aquatic-unisex,Fresh & Aquatic fragrances unisex,عطور منعشة ومائية للجنسين,family:Fresh & Aquatic + gender:Unisex,12
+scent-fruity-men,Fruity fragrances for men,عطور فاكهية رجالية,family:Fruity + gender:Men,21
+scent-fruity-unisex,Fruity fragrances unisex,عطور فاكهية للجنسين,family:Fruity + gender:Unisex,34
+scent-fruity-women,Fruity fragrances for women,عطور فاكهية نسائية,family:Fruity + gender:Women,44
+scent-gourmand-men,Gourmand fragrances for men,عطور حلوة (جورماند) رجالية,family:Gourmand + gender:Men,40
+scent-gourmand-unisex,Gourmand fragrances unisex,عطور حلوة (جورماند) للجنسين,family:Gourmand + gender:Unisex,123
+scent-gourmand-women,Gourmand fragrances for women,عطور حلوة (جورماند) نسائية,family:Gourmand + gender:Women,88
+scent-leather-tobacco-men,Leather & Tobacco fragrances for men,عطور جلد وتبغ رجالية,family:Leather & Tobacco + gender:Men,14
+scent-leather-tobacco-unisex,Leather & Tobacco fragrances unisex,عطور جلد وتبغ للجنسين,family:Leather & Tobacco + gender:Unisex,23
+scent-musky-men,Musky fragrances for men,عطور مسكية رجالية,family:Musky + gender:Men,33
+scent-musky-unisex,Musky fragrances unisex,عطور مسكية للجنسين,family:Musky + gender:Unisex,66
+scent-musky-women,Musky fragrances for women,عطور مسكية نسائية,family:Musky + gender:Women,63
+scent-oud-men,Oud fragrances for men,عطور عود رجالية,family:Oud + gender:Men,5
+scent-oud-unisex,Oud fragrances unisex,عطور عود للجنسين,family:Oud + gender:Unisex,21
+scent-patchouli-men,Patchouli fragrances for men,عطور باتشولي رجالية,family:Patchouli + gender:Men,34
+scent-patchouli-unisex,Patchouli fragrances unisex,عطور باتشولي للجنسين,family:Patchouli + gender:Unisex,42
+scent-patchouli-women,Patchouli fragrances for women,عطور باتشولي نسائية,family:Patchouli + gender:Women,17
+scent-spicy-men,Spicy fragrances for men,عطور حارة رجالية,family:Spicy + gender:Men,43
+scent-spicy-unisex,Spicy fragrances unisex,عطور حارة للجنسين,family:Spicy + gender:Unisex,74
+scent-spicy-women,Spicy fragrances for women,عطور حارة نسائية,family:Spicy + gender:Women,16
+scent-woody-men,Woody fragrances for men,عطور خشبية رجالية,family:Woody + gender:Men,79
+scent-woody-unisex,Woody fragrances unisex,عطور خشبية للجنسين,family:Woody + gender:Unisex,116
+scent-woody-women,Woody fragrances for women,عطور خشبية نسائية,family:Woody + gender:Women,73

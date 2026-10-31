@@ -4,12 +4,3 @@ Live storefront, 2026-10-30. axe color-contrast rule plus our own computed check
 
 ## /?view=hero-box 1440px LTR: ok
 Own check: 0 below threshold. axe: 0. Text over photographs (not computed): 0.
-
-## /?view=hero-box 1440px RTL: ok
-Own check: 0 below threshold. axe: 0. Text over photographs (not computed): 0.
-
-## /?view=hero-box 375px LTR: ok
-Own check: 0 below threshold. axe: 0. Text over photographs (not computed): 0.
-
-## /?view=hero-box 375px RTL: ok
-Own check: 0 below threshold. axe: 0. Text over photographs (not computed): 0.

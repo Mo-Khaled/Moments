@@ -11,8 +11,14 @@
 {%- enddoc -%}
 
 {%- liquid
-  assign moment_handles = 'night-moment,gift-moment,all-day-moment,daily-moment,fresh-moment,love-moment' | split: ','
-  assign moment_keys = 'moments.night,moments.gift,moments.all_day,moments.daily,moments.fresh,moments.love' | split: ','
+  capture moment_handles
+    render 'moments-config', part: 'handles'
+  endcapture
+  assign moment_handles = moment_handles | strip | split: ','
+  capture moment_keys
+    render 'moments-config', part: 'labels'
+  endcapture
+  assign moment_keys = moment_keys | strip | split: ','
   assign order = 'brands,gifts,for her,for him' | split: ','
   assign index = 0
 -%}

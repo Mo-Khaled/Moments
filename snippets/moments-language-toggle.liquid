@@ -1,0 +1,108 @@
+{%- doc -%}
+  The language switch in the header: one short code per published language (EN, AR), the current one marked.
+  Each code is a submit button of Shopify's localization form, so it works without JavaScript and keeps the page.
+  return_to is set to request.path on purpose: the header is also rendered through the Section Rendering API, and the default
+  return_to then points at "?section_id=...header_section", so switching language landed on a bare header (owner report 2026-10-30).
+  request.path alone was not enough (a header re-rendered after add to cart still carries the section URL), so the script below
+  rewrites return_to of every localization form (this one, the phone top bar, the phone menu) to the page in the address bar.
+  Shown only when the store has more than one published language (Settings > Languages).
+
+  @example
+  {% render 'moments-language-toggle' %}
+{%- enddoc -%}
+
+{%- if localization.available_languages.size > 1 -%}
+  {%- form 'localization', class: 'm-lang', return_to: request.path -%}
+    {%- for language in localization.available_languages -%}
+      {%- assign is_current = false -%}
+      {%- if language.iso_code == localization.language.iso_code -%}
+        {%- assign is_current = true -%}
+      {%- endif -%}
+      <button
+        class="m-lang__option"
+        type="submit"
+        name="language_code"
+        value="{{ language.iso_code }}"
+        lang="{{ language.iso_code }}"
+        aria-label="{{ language.endonym_name | escape }}"
+        {% if is_current %}
+          aria-current="true"
+        {% endif %}
+      >
+        {{- language.iso_code | split: '-' | first | upcase -}}
+      </button>
+    {%- endfor -%}
+  {%- endform -%}
+{%- endif -%}
+
+{% javascript %}
+  // Every language switch returns to the page the visitor is on, never to a Section Rendering URL (?section_id= / ?sections=)
+  document.addEventListener(
+    'submit',
+    (event) => {
+      const form = event.target;
+      if (!(form instanceof HTMLFormElement) || new URL(form.action, location.href).pathname !== '/localization') return;
+      const returnTo = form.querySelector('input[name="return_to"]');
+      if (!returnTo) return;
+      const page = new URL(location.href);
+      page.searchParams.delete('section_id');
+      page.searchParams.delete('sections');
+      returnTo.value = page.pathname + page.search;
+    },
+    true
+  );
+{% endjavascript %}
+
+{% stylesheet %}
+  /* a slim pill in the header's own colour (pearl over the hero, plum on light pages); the current language is filled */
+  .m-lang {
+    display: inline-flex;
+    align-items: center;
+    gap: 2px;
+    margin-inline: 4px 8px; /* with the search pill's 12px end margin: 16px from search, 8px to the account icon, in either direction */
+    padding: 2px;
+    border: 1px solid color-mix(in srgb, currentColor 35%, transparent);
+    border-radius: 999px;
+  }
+
+  /* phones: the logo needs the room, and the menu (the two lines) carries its own EN / AR switch */
+  @media screen and (max-width: 749px) {
+    .m-lang {
+      display: none;
+    }
+  }
+
+  .m-lang__option {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-inline-size: 36px;
+    min-block-size: 32px;
+    padding-inline: 8px;
+    border: 0;
+    border-radius: 999px;
+    background: transparent;
+    color: inherit;
+    font: inherit;
+    font-size: 0.8125rem;
+    letter-spacing: 0.08em;
+    cursor: pointer;
+    opacity: 0.72;
+    transition: background-color 160ms cubic-bezier(0.23, 1, 0.32, 1), opacity 160ms cubic-bezier(0.23, 1, 0.32, 1);
+  }
+
+  .m-lang__option:hover {
+    opacity: 1;
+  }
+
+  .m-lang__option[aria-current='true'] {
+    background: color-mix(in srgb, currentColor 16%, transparent);
+    opacity: 1;
+    cursor: default;
+  }
+
+  .m-lang__option:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 2px;
+  }
+{% endstylesheet %}

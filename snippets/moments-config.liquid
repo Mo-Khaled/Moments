@@ -1,0 +1,28 @@
+{%- doc -%}
+  The six moments, in grid order, in one place. Every list of moments in the theme (mega menu, phone menu, search chips,
+  hero chips, empty cart, bundle, About) reads this snippet, so the set is changed here only.
+
+  Occasion-based set (owner decision 2026-10-30): Office, Evening out, Date night, Summer heat, Weddings & Eid, Winter nights.
+  Each moment is a manual collection whose handle is "<key>-moment"; the key picks the mark, the colour tokens
+  (--moment-<key>-*) and the label (locale key moments.<key>). Product cards derive the key from the handle the same way.
+
+  Outputs a comma-separated list, to be captured and split:
+    {% capture handles %}{% render 'moments-config', part: 'handles' %}{% endcapture %}
+    {% assign handles = handles | strip | split: ',' %}
+
+  @param {string} part - handles, keys (mark and tone names) or labels (locale keys).
+
+  @example
+  {% render 'moments-config', part: 'keys' %}
+{%- enddoc -%}
+
+{%- liquid
+  case part
+    when 'handles'
+      echo 'daily-moment,night-moment,love-moment,fresh-moment,occasions-moment,winter-moment'
+    when 'keys'
+      echo 'daily,night,love,fresh,occasions,winter'
+    when 'labels'
+      echo 'moments.daily,moments.night,moments.love,moments.fresh,moments.occasions,moments.winter'
+  endcase
+-%}

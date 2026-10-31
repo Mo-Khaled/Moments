@@ -1,5 +1,6 @@
 {%- doc -%}
-  One Moment mark: a small object illustration for a moment (Night, Gift, All day, Daily, Fresh, Love).
+  One Moment mark: a small object illustration for a moment (Office, Evening out, Date night, Summer heat, Weddings & Eid,
+  Winter nights; plus Gift and All day for older content). Keys: daily, night, love, fresh, occasions, winter, gift, allday.
   Decorative by default (aria-hidden); pass `label` when the mark is the only content of a link or button.
   Small (menu rows, card labels) or large (the art on Shop by Moment tiles, 160 px, double the gesture amplitude).
   A merchant-uploaded image or SVG replaces the built-in drawing, and the gesture is set per use.
@@ -7,7 +8,7 @@
   Hover: one small gesture. Touch: runs once when the mark scrolls into view. Reduced motion: static.
   The mark reacts when it is hovered, or when any ancestor with the attribute data-moment-host is hovered or focused.
 
-  @param {string} [mark] - night, gift, allday, daily, fresh or love. Blank with an image set means a custom mark.
+  @param {string} [mark] - daily, night, love, fresh, occasions, winter, gift or allday. Blank with an image set means a custom mark.
   @param {image} [image] - Custom image or SVG from the theme editor, shown instead of the built-in drawing.
   @param {string} [gesture] - swing, tie, rise, open, sway, drift or none. Default depends on the mark.
   @param {string} [size] - sm (24 px) or lg (160 px). Default sm.
@@ -36,11 +37,15 @@
         assign mark_gesture = 'sway'
       when 'love'
         assign mark_gesture = 'drift'
+      when 'occasions'
+        assign mark_gesture = 'tie'
+      when 'winter'
+        assign mark_gesture = 'rise'
       else
         assign mark_gesture = 'swing'
     endcase
   endif
-  assign known = 'night gift allday daily fresh love' | split: ' '
+  assign known = 'night gift allday daily fresh love occasions winter' | split: ' '
 -%}
 
 <moment-mark
@@ -91,7 +96,8 @@
   /* Where each gesture pivots. */
   moment-mark[data-mark='night'] { --mm-box: 50%; --mm-boy: 0%; }
   moment-mark[data-mark='fresh'] { --mm-box: 0%; --mm-boy: 100%; --mm-aox: 50%; --mm-aoy: 0%; }
-  moment-mark[data-mark='daily'] { --mm-aox: 50%; --mm-aoy: 100%; }
+  moment-mark[data-mark='daily'] { --mm-aox: 50%; --mm-aoy: 50%; }
+  moment-mark[data-mark='occasions'] { --mm-aox: 50%; --mm-aoy: 50%; }
   moment-mark[data-mark='gift'] { --mm-aox: 50%; --mm-aoy: 50%; }
   moment-mark[data-mark='love'] { --mm-aox: 0%; --mm-aoy: 100%; }
 

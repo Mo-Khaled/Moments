@@ -48,6 +48,10 @@
                     {{ 'moments.daily' | t }}
                   {%- when 'fresh' -%}
                     {{ 'moments.fresh' | t }}
+                  {%- when 'occasions' -%}
+                    {{ 'moments.occasions' | t }}
+                  {%- when 'winter' -%}
+                    {{ 'moments.winter' | t }}
                   {%- else -%}
                     {{ 'moments.love' | t }}
                 {%- endcase -%}
@@ -268,12 +272,14 @@
           "id": "mark",
           "label": "Moment mark",
           "options": [
-            { "value": "night", "label": "Night" },
+            { "value": "night", "label": "Evening out" },
             { "value": "gift", "label": "Gift" },
             { "value": "allday", "label": "All day" },
-            { "value": "daily", "label": "Daily" },
-            { "value": "fresh", "label": "Fresh" },
-            { "value": "love", "label": "Love" }
+            { "value": "daily", "label": "Office" },
+            { "value": "fresh", "label": "Summer heat" },
+            { "value": "love", "label": "Date night" },
+            { "value": "occasions", "label": "Weddings & Eid" },
+            { "value": "winter", "label": "Winter nights" }
           ],
           "default": "night"
         }

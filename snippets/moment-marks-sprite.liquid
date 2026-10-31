@@ -1,5 +1,7 @@
 {%- doc -%}
-  SVG sprite for the six Moment marks (placeholders until an illustrator delivers the final set).
+  SVG sprite for the Moment marks (placeholders until an illustrator delivers the final set). The grid set (2026-10-30):
+  daily = Office (briefcase), night = Evening out (lantern), love = Date night (rose), fresh = Summer heat (palm leaf),
+  occasions = Weddings & Eid (crescent and star), winter = Winter nights (steaming cup); gift and allday stay for the Gift block and older content.
   Render it once per page in the layout; snippets/moment-mark.liquid points at the symbols with <use>.
 
   Layer structure, the contract for the final artwork: every symbol has
@@ -40,10 +42,10 @@
     </symbol>
     <symbol id="moment-mark-daily" viewBox="-8 -8 64 64">
       <g class="mm-body">
-        <path class="mm-line mm-fill" d="M24 11c-6 6-6 16 0 23 6-7 6-17 0-23z"/><path class="mm-line" d="M24 34v8M16 42h16"/>
-        <g class="mm-detail"><path class="mm-line" d="M24 15v15M20 22q4 4 8 0"/></g>
+        <rect class="mm-line mm-fill" x="8" y="17" width="32" height="21" rx="3"/><path class="mm-line" d="M19 17v-3.5a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2V17"/>
+        <g class="mm-detail"><path class="mm-line" d="M8 26h12M28 26h12M14 38v3M34 38v3"/></g>
       </g>
-      <g class="mm-accent"><path class="mm-line mm-accent-fill mm-soft" d="M24 34c-8-1-13-7-14-14 6 0 11 3 14 8M24 34c8-1 13-7 14-14-6 0-11 3-14 8"/></g>
+      <g class="mm-accent"><rect class="mm-line mm-accent-fill" x="20" y="23.5" width="8" height="5.5" rx="1.5"/></g>
     </symbol>
     <symbol id="moment-mark-fresh" viewBox="-8 -8 64 64">
       <g class="mm-body">
@@ -58,6 +60,20 @@
         <g class="mm-detail"><path class="mm-line" d="M14 20c1-4 5-7 8-7M30 22c-1 4-4 7-8 8"/></g>
       </g>
       <g class="mm-accent"><path class="mm-line mm-accent-fill" d="M36 13c3 2 4 6 1 9-3-1-5-5-1-9z"/></g>
+    </symbol>
+    <symbol id="moment-mark-occasions" viewBox="-8 -8 64 64">
+      <g class="mm-body">
+        <path class="mm-line mm-fill" d="M27 9A15 15 0 1 0 39 33 11.5 11.5 0 1 1 27 9z"/>
+        <g class="mm-detail"><path class="mm-line mm-gold" d="M40 26.5h4M42 24.5v4M30 37.5h3M31.5 36v3"/></g>
+      </g>
+      <g class="mm-accent"><path class="mm-line mm-accent-fill" d="M35 11.5l1.6 4 4 1.6-4 1.6-1.6 4-1.6-4-4-1.6 4-1.6z"/></g>
+    </symbol>
+    <symbol id="moment-mark-winter" viewBox="-8 -8 64 64">
+      <g class="mm-body">
+        <path class="mm-line mm-fill" d="M11 22h23v8a9 9 0 0 1-9 9h-5a9 9 0 0 1-9-9z"/><path class="mm-line" d="M34 24.5h2a4 4 0 0 1 0 8h-2.6M8 42.5h30"/>
+        <g class="mm-detail"><path class="mm-line" d="M11 27h23"/></g>
+      </g>
+      <g class="mm-accent"><path class="mm-line mm-gold" d="M18 17.5c-2-2 2-3.5 0-6M23 17.5c-2-2 2-3.5 0-6M28 17.5c-2-2 2-3.5 0-6"/></g>
     </symbol>
   </defs>
 </svg>

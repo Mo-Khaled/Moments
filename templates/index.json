@@ -335,8 +335,8 @@
           "type": "slide",
           "settings": {
             "moment": "fresh",
-            "from_hour": 5,
-            "to_hour": 10,
+            "from_hour": 0,
+            "to_hour": 0,
             "poster_fit": "fit",
             "primary_url": "/collections/fresh-moment",
             "secondary_url": "/pages/moments"
@@ -345,33 +345,33 @@
         "slide_allday": {
           "type": "slide",
           "settings": {
-            "moment": "allday",
-            "from_hour": 10,
+            "moment": "daily",
+            "from_hour": 5,
             "to_hour": 18,
             "poster_fit": "fit",
-            "primary_url": "/collections/all-day-moment",
+            "primary_url": "/collections/daily-moment",
             "secondary_url": "/pages/moments"
           }
         },
         "slide_gift": {
           "type": "slide",
           "settings": {
-            "moment": "gift",
+            "moment": "occasions",
             "from_hour": 0,
             "to_hour": 0,
             "poster_fit": "fit",
-            "primary_url": "/collections/gift-moment",
+            "primary_url": "/collections/occasions-moment",
             "secondary_url": "/pages/moments"
           }
         },
         "slide_daily": {
           "type": "slide",
           "settings": {
-            "moment": "daily",
+            "moment": "winter",
             "from_hour": 0,
             "to_hour": 0,
             "poster_fit": "fit",
-            "primary_url": "/collections/daily-moment",
+            "primary_url": "/collections/winter-moment",
             "secondary_url": "/pages/moments"
           }
         },
@@ -406,43 +406,43 @@
         "tile_night": {
           "type": "moment",
           "settings": {
-            "collection": "night-moment",
-            "mark": "night"
+            "collection": "daily-moment",
+            "mark": "daily"
           }
         },
         "tile_gift": {
           "type": "moment",
           "settings": {
-            "collection": "gift-moment",
-            "mark": "gift"
+            "collection": "night-moment",
+            "mark": "night"
           }
         },
         "tile_allday": {
           "type": "moment",
           "settings": {
-            "collection": "all-day-moment",
-            "mark": "allday"
+            "collection": "love-moment",
+            "mark": "love"
           }
         },
         "tile_daily": {
-          "type": "moment",
-          "settings": {
-            "collection": "daily-moment",
-            "mark": "daily"
-          }
-        },
-        "tile_fresh": {
           "type": "moment",
           "settings": {
             "collection": "fresh-moment",
             "mark": "fresh"
           }
         },
+        "tile_fresh": {
+          "type": "moment",
+          "settings": {
+            "collection": "occasions-moment",
+            "mark": "occasions"
+          }
+        },
         "tile_love": {
           "type": "moment",
           "settings": {
-            "collection": "love-moment",
-            "mark": "love"
+            "collection": "winter-moment",
+            "mark": "winter"
           }
         }
       },
@@ -464,43 +464,43 @@
         "row_night": {
           "type": "moment",
           "settings": {
-            "collection": "night-moment",
-            "mark": "night"
+            "collection": "daily-moment",
+            "mark": "daily"
           }
         },
         "row_gift": {
           "type": "moment",
           "settings": {
-            "collection": "gift-moment",
-            "mark": "gift"
+            "collection": "night-moment",
+            "mark": "night"
           }
         },
         "row_allday": {
           "type": "moment",
           "settings": {
-            "collection": "all-day-moment",
-            "mark": "allday"
+            "collection": "love-moment",
+            "mark": "love"
           }
         },
         "row_daily": {
-          "type": "moment",
-          "settings": {
-            "collection": "daily-moment",
-            "mark": "daily"
-          }
-        },
-        "row_fresh": {
           "type": "moment",
           "settings": {
             "collection": "fresh-moment",
             "mark": "fresh"
           }
         },
+        "row_fresh": {
+          "type": "moment",
+          "settings": {
+            "collection": "occasions-moment",
+            "mark": "occasions"
+          }
+        },
         "row_love": {
           "type": "moment",
           "settings": {
-            "collection": "love-moment",
-            "mark": "love"
+            "collection": "winter-moment",
+            "mark": "winter"
           }
         }
       },
@@ -634,11 +634,30 @@
     "moments_gift": {
       "type": "moments-gift-block",
       "blocks": {
-        "set_1": { "type": "gift_set", "settings": { "product": "khamrah-gift-set" } },
-        "set_2": { "type": "gift_set", "settings": { "product": "fakhar-man-gift-set" } },
-        "set_3": { "type": "gift_set", "settings": { "product": "yara-candy-gift-set" } }
+        "set_1": {
+          "type": "gift_set",
+          "settings": {
+            "product": "khamrah-gift-set"
+          }
+        },
+        "set_2": {
+          "type": "gift_set",
+          "settings": {
+            "product": "fakhar-man-gift-set"
+          }
+        },
+        "set_3": {
+          "type": "gift_set",
+          "settings": {
+            "product": "yara-candy-gift-set"
+          }
+        }
       },
-      "block_order": ["set_1", "set_2", "set_3"],
+      "block_order": [
+        "set_1",
+        "set_2",
+        "set_3"
+      ],
       "settings": {
         "collection": "gift-moment"
       }

@@ -79,6 +79,12 @@
     min-inline-size: 100vw;
   }
 
+  /* a text ticker: the group is exactly as wide as its repeats (enough copies to cover any screen), so the gap after the
+     last message equals every other gap; stretching it to 100vw left a wider hole at the seam when Arabic was shorter */
+  .m-ticker--single .m-ticker__group {
+    min-inline-size: 0;
+  }
+
   .m-ticker__list {
     display: flex;
     flex: none;

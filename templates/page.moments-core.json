@@ -15,43 +15,43 @@
         "tile_night": {
           "type": "moment",
           "settings": {
-            "collection": "night-moment",
-            "mark": "night"
+            "collection": "daily-moment",
+            "mark": "daily"
           }
         },
         "tile_gift": {
           "type": "moment",
           "settings": {
-            "collection": "gift-moment",
-            "mark": "gift"
+            "collection": "night-moment",
+            "mark": "night"
           }
         },
         "tile_allday": {
           "type": "moment",
           "settings": {
-            "collection": "all-day-moment",
-            "mark": "allday"
+            "collection": "love-moment",
+            "mark": "love"
           }
         },
         "tile_daily": {
-          "type": "moment",
-          "settings": {
-            "collection": "daily-moment",
-            "mark": "daily"
-          }
-        },
-        "tile_fresh": {
           "type": "moment",
           "settings": {
             "collection": "fresh-moment",
             "mark": "fresh"
           }
         },
+        "tile_fresh": {
+          "type": "moment",
+          "settings": {
+            "collection": "occasions-moment",
+            "mark": "occasions"
+          }
+        },
         "tile_love": {
           "type": "moment",
           "settings": {
-            "collection": "love-moment",
-            "mark": "love"
+            "collection": "winter-moment",
+            "mark": "winter"
           }
         }
       },

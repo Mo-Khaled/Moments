@@ -1,0 +1,70 @@
+{%- doc -%}
+  Arabic pages show every number in Arabic digits (owner request 2026-10-31: "if I am on Arabic, everything must be
+  in Arabic"): prices, sizes, counts, page numbers, the ticker. Text is converted in the browser, also for content
+  that arrives later (cart drawer, variant prices, filters, pagination), so no template has to know about it.
+  "LE 2,150.00" written by scripts becomes "٢٬١٥٠ ج.م". Form fields, scripts and styles are left alone.
+  Rendered only on /ar, at the end of <body> so the first paint already has Arabic digits.
+
+  @example
+  {% render 'moments-arabic-digits' %}
+{%- enddoc -%}
+
+{%- if request.locale.iso_code == 'ar' -%}
+  <script>
+    (() => {
+      const DIGITS = '٠١٢٣٤٥٦٧٨٩';
+      const SKIP = new Set(['SCRIPT', 'STYLE', 'NOSCRIPT', 'TEXTAREA', 'INPUT', 'SELECT', 'OPTION', 'CODE', 'PRE', 'svg']);
+      // brand names shown on their own (card meta, product page brand line, filters) read in Arabic (owner request 2026-10-31)
+      const BRANDS = {
+        'AFNAN': 'أفنان', 'AJMAL': 'أجمل', 'ALMAS PERFUMES': 'عطور ألماس', 'AMARAH PERFUMES': 'عطور أمارة',
+        'ARABIYAT SUGAR': 'عربيات شوجر', 'ARABIYAT PRESTIGE': 'عربيات بريستيج', 'ARMAF': 'أرماف', 'ASDAF': 'أصداف',
+        'ASSAF': 'عساف', 'AL EZZ FOR OUD': 'العز للعود', 'BANAFA FOR OUD': 'بنافع للعود', 'DKHOON EMIRATES': 'دخون الإمارات',
+        'FAAN': 'فان', 'FRENCH AVENUE': 'فرنش أفينيو', 'GULF ORCHID': 'جلف أوركيد', 'IBRAQ': 'إبراق',
+        'JEAN ANTOINE': 'جان أنطوان', 'KHADLAJ': 'خدلج', 'LATTAFA': 'لطافة', 'LATTAFA PRIDE': 'لطافة برايد',
+        'LAVERNE': 'لافيرن', 'LE BONHEUR': 'لو بونور', 'LE FALCONE': 'لو فالكون', 'MAISON ALHAMBRA': 'ميزون الحمراء',
+        'MAISON ASRAR': 'ميزون أسرار', 'NABEEL PERFUMES': 'عطور نبيل', 'NABEEL': 'نبيل', 'NASEEM': 'نسيم',
+        'RASASI PERFUMES': 'عطور الرصاصي', 'RASASI': 'الرصاصي', 'SAINTE VALERE': 'سانت فاليري', 'ZIMAYA': 'زيمايا',
+      };
+      const brandOf = (text) => BRANDS[text.trim().toUpperCase()];
+      const toArabic = (text) =>
+        brandOf(text) ? text.replace(text.trim(), brandOf(text)) : text
+          // a Latin-written price ("LE 2,150.00") becomes the Arabic form: the number, then the pound sign
+          .replace(/LE\s?(\d[\d,]*)(?:\.(\d\d))?/g, (m, whole, cents) =>
+            whole + (cents && cents !== '00' ? '.' + cents : '') + ' ج.م'
+          )
+          // thousands and decimal separators between digits, then the digits themselves
+          .replace(/(\d),(?=\d)/g, '$1٬')
+          .replace(/(\d)\.(?=\d)/g, '$1٫')
+          .replace(/\d/g, (d) => DIGITS[d]);
+
+      const convert = (root) => {
+        const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
+          acceptNode(node) {
+            if (!/\d/.test(node.nodeValue) && !brandOf(node.nodeValue)) return NodeFilter.FILTER_REJECT;
+            for (let el = node.parentElement; el; el = el.parentElement) {
+              if (SKIP.has(el.tagName) || el.isContentEditable) return NodeFilter.FILTER_REJECT;
+            }
+            return NodeFilter.FILTER_ACCEPT;
+          },
+        });
+        const nodes = [];
+        while (walker.nextNode()) nodes.push(walker.currentNode);
+        for (const node of nodes) node.nodeValue = toArabic(node.nodeValue);
+      };
+
+      convert(document.body);
+      new MutationObserver((records) => {
+        for (const record of records) {
+          if (record.type === 'characterData') {
+            if (/\d/.test(record.target.nodeValue) || brandOf(record.target.nodeValue)) convert(record.target.parentNode || document.body);
+          } else {
+            for (const node of record.addedNodes) {
+              if (node.nodeType === Node.TEXT_NODE) convert(node.parentNode || document.body);
+              else if (node.nodeType === Node.ELEMENT_NODE) convert(node);
+            }
+          }
+        }
+      }).observe(document.body, { childList: true, characterData: true, subtree: true });
+    })();
+  </script>
+{%- endif -%}

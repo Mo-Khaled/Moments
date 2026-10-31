@@ -1,0 +1,294 @@
+{%- doc -%}
+  Scent filters for collection pages: scent family, notes, gender, season, time of day and strength, built from the
+  product tags written by scripts/fragrance-db.py (family:Woody, note:Vanilla, gender:Women, season:Winter, time:Night,
+  type:Eau de Parfum). Each option is a link to Shopify's tag-filtered collection URL (/collections/x/note-vanilla+gender-women),
+  so choices combine (a product must match all of them), work without JavaScript, and work on /ar.
+  Options come from collection.tags, the tags of the products currently shown, so every option still has matches.
+  Names and Arabic come from locales "scent" (data/scent-glossary.py). Owner request 2026-10-31.
+
+  @example
+  {% render 'moments-scent-filters' %}
+{%- enddoc -%}
+
+{%- if collection != blank and collection.tags.size > 0 -%}
+  {%- liquid
+    assign groups = 'family,note,gender,size,season,time,type' | split: ','
+    assign popular_notes = 'musk,vanilla,amber,patchouli,bergamot,jasmine,sandalwood,rose,cedarwood,oud,tonka-bean,saffron,lavender,vetiver,leather,cinnamon' | split: ','
+
+    assign active = '|'
+    for current in current_tags
+      assign current_handle = current | handleize
+      assign active = active | append: current_handle | append: '|'
+    endfor
+
+    assign sort_query = ''
+    if collection.sort_by != blank
+      assign sort_query = '?sort_by=' | append: collection.sort_by
+    endif
+  -%}
+
+  <div class="m-scent-filters">
+    <div class="m-scent-filters__head">
+      <h4 class="m-scent-filters__title">{{ 'scent.filters_title' | t }}</h4>
+      {%- if current_tags.size > 0 -%}
+        <a class="m-scent-filters__clear" href="{{ collection.url }}{{ sort_query }}">{{ 'scent.clear' | t }}</a>
+      {%- endif -%}
+    </div>
+
+    {%- for group in groups -%}
+      {%- liquid
+        assign prefix = group | append: ':'
+        assign options = ''
+        assign extra = ''
+        assign option_count = 0
+        assign has_active = false
+      -%}
+      {%- for tag in collection.tags -%}
+        {%- unless tag contains prefix -%}{%- continue -%}{%- endunless -%}
+        {%- liquid
+          assign value = tag | remove_first: prefix | strip
+          assign slug = value | handleize
+          assign tag_handle = tag | handleize
+          assign marker = '|' | append: tag_handle | append: '|'
+
+          if group == 'family' or group == 'note'
+            assign key = 'scent.' | append: group | append: '.' | append: slug | append: '.name'
+          else
+            assign key = 'scent.value.' | append: slug
+          endif
+          assign label = key | t
+          if label contains 'ranslation missing' or label == blank
+            assign label = value
+          endif
+          if group == 'size' and request.locale.iso_code == 'ar'
+            assign label = value | replace: ' ml', ' مل' | replace: ' g', ' جم'
+          endif
+
+          # the link toggles this option and keeps the others
+          assign next = ''
+          assign is_active = false
+          if active contains marker
+            assign is_active = true
+            assign has_active = true
+          endif
+          for current in current_tags
+            assign current_handle = current | handleize
+            if current_handle != tag_handle
+              assign next = next | append: '+' | append: current_handle
+            endif
+          endfor
+          unless is_active
+            assign next = next | append: '+' | append: tag_handle
+          endunless
+          assign next = next | remove_first: '+'
+          assign href = collection.url
+          if next != blank
+            assign href = href | append: '/' | append: next
+          endif
+          assign href = href | append: sort_query
+        -%}
+        {%- capture option -%}
+          <li>
+            <a
+              class="m-scent-filters__option{% if is_active %} is-active{% endif %}"
+              href="{{ href }}"
+              rel="nofollow"
+              {% if is_active %}
+                aria-current="true"
+              {% endif %}
+            >
+              <span class="m-scent-filters__box" aria-hidden="true"></span>
+              <span>{{ label }}</span>
+            </a>
+          </li>
+        {%- endcapture -%}
+        {%- liquid
+          if group == 'size'
+            # sizes sort by volume, not alphabetically ("20 ml" before "100 ml"); sets go last
+            assign size_number = value | split: ' ' | first | plus: 0
+            if value contains '×'
+              assign size_number = 9999
+            endif
+            assign size_key = size_number | plus: 10000 | append: ''
+            assign options = options | append: size_key | append: '§' | append: option | append: '¦'
+            assign option_count = option_count | plus: 1
+            continue
+          endif
+          assign option_count = option_count | plus: 1
+          if group == 'note' and option_count > 12 and is_active == false
+            unless popular_notes contains slug
+              assign extra = extra | append: option
+              continue
+            endunless
+          endif
+          assign options = options | append: option
+        -%}
+      {%- endfor -%}
+
+      {%- if group == 'size' and options != blank -%}
+        {%- liquid
+          assign sorted = options | split: '¦' | sort
+          assign options = ''
+          for entry in sorted
+            assign part = entry | split: '§' | last
+            assign options = options | append: part
+          endfor
+        -%}
+      {%- endif -%}
+      {%- if option_count > 0 -%}
+        {%- assign group_key = 'scent.group_' | append: group -%}
+        <details class="m-scent-filters__group" {% unless group == 'type' or group == 'time' %}open{% endunless %}{% if has_active %} open{% endif %}>
+          <summary class="m-scent-filters__summary">{{ group_key | t }}</summary>
+          <ul class="m-scent-filters__list{% if group == 'note' %} m-scent-filters__list--notes{% endif %}" role="list">
+            {{ options }}
+          </ul>
+          {%- if extra != blank -%}
+            <details class="m-scent-filters__more">
+              <summary>{{ 'scent.show_all_notes' | t }}</summary>
+              <ul class="m-scent-filters__list m-scent-filters__list--notes" role="list">{{ extra }}</ul>
+            </details>
+          {%- endif -%}
+        </details>
+      {%- endif -%}
+    {%- endfor -%}
+  </div>
+{%- endif -%}
+
+{% stylesheet %}
+  /* one rhythm for the whole panel: 20px between groups, 12px from a group title to its options, 8px between options */
+  .m-scent-filters {
+    display: grid;
+    margin-block-end: 20px;
+  }
+
+  .m-scent-filters__head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 12px;
+    padding-block-end: 16px;
+    border-block-end: 1px solid var(--m-rule-quiet);
+  }
+
+  .m-scent-filters__title {
+    margin: 0;
+    font-family: var(--font-heading--family);
+    font-size: 1.25rem;
+    font-weight: var(--font-heading--weight);
+  }
+
+  .m-scent-filters__clear {
+    color: var(--m-text-muted);
+    font-size: 0.8125rem;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .m-scent-filters__group {
+    padding-block: 18px;
+    border-block-end: 1px solid var(--m-rule-quiet);
+  }
+
+  .m-scent-filters__summary,
+  .m-scent-filters__more > summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    min-block-size: 28px;
+    cursor: pointer;
+    list-style: none;
+  }
+
+  .m-scent-filters__summary::-webkit-details-marker,
+  .m-scent-filters__more > summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .m-scent-filters__summary {
+    font-size: 1rem;
+    font-weight: 500;
+  }
+
+  /* physical sides on purpose: the chevron points down when closed and up when open, in either direction */
+  .m-scent-filters__summary::after {
+    content: '';
+    flex: none;
+    inline-size: 7px;
+    block-size: 7px;
+    margin-block-start: -4px;
+    border-right: 1.5px solid currentColor;
+    border-bottom: 1.5px solid currentColor;
+    transform: rotate(45deg);
+    transition: transform var(--m-dur-2, 200ms) var(--m-ease, ease);
+  }
+
+  .m-scent-filters__group[open] > .m-scent-filters__summary::after {
+    margin-block-start: 4px;
+    transform: rotate(-135deg);
+  }
+
+  .m-scent-filters__list {
+    display: grid;
+    gap: 8px;
+    margin: 12px 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .m-scent-filters__list--notes {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 16px;
+  }
+
+  .m-scent-filters__option {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-block-size: 28px;
+    color: var(--m-text);
+    font-size: 0.9375rem;
+    line-height: 1.3;
+    text-decoration: none;
+  }
+
+  .m-scent-filters__box {
+    flex: none;
+    inline-size: 16px;
+    block-size: 16px;
+    border: 1px solid var(--m-rule, currentColor);
+    border-radius: 4px;
+    transition: background-color var(--m-dur-1, 160ms) var(--m-ease, ease), border-color var(--m-dur-1, 160ms) var(--m-ease, ease);
+  }
+
+  .m-scent-filters__option:hover .m-scent-filters__box {
+    border-color: var(--m-text);
+  }
+
+  .m-scent-filters__option.is-active .m-scent-filters__box {
+    border-color: var(--m-berry-600, currentColor);
+    background: var(--m-berry-600, currentColor)
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4 8.5l2.5 2.5L12 5.5' fill='none' stroke='white' stroke-width='2'/%3E%3C/svg%3E")
+      center / 12px no-repeat;
+  }
+
+  .m-scent-filters__option.is-active {
+    font-weight: 500;
+  }
+
+  .m-scent-filters__more {
+    margin-block-start: 12px;
+  }
+
+  .m-scent-filters__more > summary {
+    justify-content: flex-start;
+    color: var(--m-text-muted);
+    font-size: 0.875rem;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .m-scent-filters__more[open] > summary {
+    display: none;
+  }
+{% endstylesheet %}

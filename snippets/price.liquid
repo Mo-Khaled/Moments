@@ -55,6 +55,13 @@ endif
     assign price = price | money
     assign compare_at_price = compare_at_price | money
   endif
+
+  # Arabic: the number then the pound sign, written the Egyptian way ("2,150 ج.م"), no ".00": the shop's "LE 2,150.00"
+  # put a Latin code before the number in a right-to-left line (owner report 2026-10-31)
+  if request.locale.iso_code == 'ar' and product_resource != blank
+    assign price = price_raw | money_without_currency | remove: '.00' | append: ' ج.م'
+    assign compare_at_price = compare_at_price_raw | money_without_currency | remove: '.00' | append: ' ج.م'
+  endif
 -%}
 
 <div ref="priceContainer" class="price-container">
@@ -66,9 +73,13 @@ endif
         <span class="price price--sale">{{ price | default: '&nbsp;' }}</span>
       </span>
       {% if show_discount_badge %}
-<span class="price-badge">
-  Save {{ discount_amount | money_without_trailing_zeros }}
-</span>
+{%- liquid
+  assign saving_text = discount_amount | money_without_trailing_zeros
+  if request.locale.iso_code == 'ar'
+    assign saving_text = discount_amount | money_without_currency | remove: '.00' | append: ' ج.م'
+  endif
+-%}
+<span class="price-badge">{{ 'content.product_badge_save' | t: amount: saving_text }}</span>
       {% endif %}
     </div>
     

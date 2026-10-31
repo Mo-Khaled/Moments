@@ -30,16 +30,21 @@
 {% capture children %}
   {% for key in primary_keys limit: 3 %}
     {% for link in all_links %}
-      {% assign link_key = link.title | downcase | strip %}
-      {% if link_key == key %}
+      {% liquid
+        # a key matches the link's title or its handle (the last part of its URL); the handle is the same on /ar,
+        # where the titles are translated, so the keys are handles ("moments,brands") and work in every language
+        assign link_key = link.title | downcase | strip
+        assign url_key = link.url | split: '?' | first | split: '/' | last | downcase
+      %}
+      {% if link_key == key or url_key == key %}
         {% liquid
           assign panel_mode = 'none'
-          if link_key contains 'moment' and link_key contains 'shop'
+          if key contains 'moment'
             assign panel_mode = 'moments'
-          elsif link_key == 'brands'
+          elsif key == 'brands'
             assign panel_mode = 'brands'
           endif
-          assign link_id = link_key | handleize
+          assign link_id = key | handleize
         %}
         <li
           role="presentation"
@@ -52,7 +57,7 @@
           <a
             href="{{ link.url }}"
             data-skip-node-update="true"
-            class="menu-list__link{% if link.active %} menu-list__link--active{% endif %}{% if link_key == 'gifts' %} menu-list__link--accent{% endif %}"
+            class="menu-list__link{% if link.active %} menu-list__link--active{% endif %}{% if key == 'gifts' or key == 'wishlist' %} menu-list__link--accent{% endif %}"
             {%- if panel_mode != 'none' -%}
               aria-controls="submenu-{{ link_id }}"
               aria-haspopup="true"

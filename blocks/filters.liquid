@@ -208,6 +208,8 @@
                     minimum-items: 2
                   %}
                 {% else %}
+                  {%- comment -%} MOMENTS: scent filters (family, notes, gender, season, time, strength) above the store's filters {%- endcomment -%}
+                  {% render 'moments-scent-filters' %}
                   {{ rendered_filters }}
                 {% endif %}
               </div>
@@ -393,6 +395,7 @@
               {% assign total_active_values = 0 %}
               {% assign is_active = false %}
 
+              {% render 'moments-scent-filters' %}
               {%- for filter in filters -%}
                 {%- liquid
                   assign should_autofocus = false

@@ -17,9 +17,18 @@
 {%- liquid
   assign min_items = section.settings.min_items
   assign max_items = section.settings.max_items
-  assign chips = 'night-moment,gift-moment,all-day-moment,daily-moment,fresh-moment,love-moment' | split: ','
-  assign chip_marks = 'night,gift,allday,daily,fresh,love' | split: ','
-  assign chip_keys = 'moments.night,moments.gift,moments.all_day,moments.daily,moments.fresh,moments.love' | split: ','
+  capture chips
+    render 'moments-config', part: 'handles'
+  endcapture
+  assign chips = chips | strip | split: ','
+  capture chip_marks
+    render 'moments-config', part: 'keys'
+  endcapture
+  assign chip_marks = chip_marks | strip | split: ','
+  capture chip_keys
+    render 'moments-config', part: 'labels'
+  endcapture
+  assign chip_keys = chip_keys | strip | split: ','
 -%}
 
 <section

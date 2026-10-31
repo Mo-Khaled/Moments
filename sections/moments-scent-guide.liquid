@@ -1,0 +1,268 @@
+{%- comment -%}
+  "Understanding this scent": a plain-language guide on the product page for someone who knows nothing about perfume
+  (owner request 2026-10-31). Follows the pattern of the big perfume sites (how the note pyramid unfolds, the scent
+  family, the notes, when to wear it), in our own words. Built from the product tags written by scripts/fragrance-db.py
+  (family:, note:, season:, time:) and the glossary in locales "scent" (data/scent-glossary.py), so it works for every
+  product without per-product setup. The top/heart/base notes from the product's own metafields are shown when present.
+{%- endcomment -%}
+
+{%- liquid
+  assign families = ''
+  assign notes = ''
+  assign note_count = 0
+  assign wear = ''
+  for tag in product.tags
+    if tag contains 'family:'
+      assign value = tag | remove_first: 'family:' | strip
+      assign slug = value | handleize
+      assign name_key = 'scent.family.' | append: slug | append: '.name'
+      assign about_key = 'scent.family.' | append: slug | append: '.about'
+      assign name = name_key | t
+      if name contains 'ranslation missing'
+        assign name = value
+      endif
+      assign about = about_key | t
+      capture item
+        echo '<li class="m-guide__family"><strong>' | append: name | append: '</strong>'
+        unless about contains 'ranslation missing'
+          echo '<span>' | append: about | append: '</span>'
+        endunless
+        echo '</li>'
+      endcapture
+      assign families = families | append: item
+    elsif tag contains 'note:' and note_count < 12
+      assign value = tag | remove_first: 'note:' | strip
+      assign slug = value | handleize
+      assign about_key = 'scent.note.' | append: slug | append: '.about'
+      assign about = about_key | t
+      unless about contains 'ranslation missing'
+        assign name_key = 'scent.note.' | append: slug | append: '.name'
+        assign name = name_key | t
+        capture item
+          echo '<li class="m-guide__note"><strong>' | append: name | append: '</strong><span>' | append: about | append: '</span></li>'
+        endcapture
+        assign notes = notes | append: item
+        assign note_count = note_count | plus: 1
+      endunless
+    elsif tag contains 'season:' or tag contains 'time:'
+      assign value = tag | split: ':' | last | strip
+      assign slug = value | handleize
+      assign value_key = 'scent.value.' | append: slug
+      assign about_key = 'scent.value_about.' | append: slug
+      assign label = value_key | t
+      assign about = about_key | t
+      unless about contains 'ranslation missing'
+        capture item
+          echo '<li><strong>' | append: label | append: '</strong><span>' | append: about | append: '</span></li>'
+        endcapture
+        assign wear = wear | append: item
+      endunless
+    endif
+  endfor
+
+  assign layers = 'top,heart,base' | split: ','
+-%}
+
+{%- if families != blank or notes != blank -%}
+  <section class="m-guide m-wrap" aria-labelledby="ScentGuide-{{ section.id }}">
+    <div class="m-guide__head">
+      <h2 class="m-guide__title" id="ScentGuide-{{ section.id }}">{{ 'scent.explain_title' | t }}</h2>
+      <p class="m-guide__intro">{{ 'scent.explain_intro' | t }}</p>
+    </div>
+
+    <div class="m-guide__grid">
+      <div class="m-guide__card m-guide__card--pyramid">
+        <h3>{{ 'scent.pyramid_title' | t }}</h3>
+        <ol class="m-guide__pyramid">
+          {%- for layer in layers -%}
+            {%- liquid
+              assign text_key = 'scent.pyramid_' | append: layer
+              assign layer_notes = ''
+              for i in (1..6)
+                assign field = layer | append: '_notes_' | append: i
+                assign v = product.metafields.custom[field].value
+                if v != blank
+                  assign layer_notes = layer_notes | append: v | append: '، '
+                endif
+              endfor
+              if request.locale.iso_code != 'ar'
+                assign layer_notes = layer_notes | replace: '، ', ', '
+              endif
+            -%}
+            <li class="m-guide__step m-guide__step--{{ layer }}">
+              <span class="m-guide__step-mark" aria-hidden="true"></span>
+              <p>{{ text_key | t }}</p>
+              {%- if layer_notes != blank -%}
+                <p class="m-guide__step-notes">{{ layer_notes | strip | remove_last: '،' | remove_last: ',' }}</p>
+              {%- endif -%}
+            </li>
+          {%- endfor -%}
+        </ol>
+      </div>
+
+      {%- if families != blank -%}
+        <div class="m-guide__card">
+          <h3>{{ 'scent.family_title' | t }}</h3>
+          <ul class="m-guide__list" role="list">{{ families }}</ul>
+        </div>
+      {%- endif -%}
+
+      {%- if notes != blank -%}
+        <div class="m-guide__card m-guide__card--notes">
+          <h3>{{ 'scent.notes_title' | t }}</h3>
+          <ul class="m-guide__list m-guide__list--notes" role="list">{{ notes }}</ul>
+        </div>
+      {%- endif -%}
+
+      {%- if wear != blank -%}
+        <div class="m-guide__card">
+          <h3>{{ 'scent.wear_title' | t }}</h3>
+          <ul class="m-guide__list" role="list">{{ wear }}</ul>
+          <p class="m-guide__skin">{{ 'scent.skin_note' | t }}</p>
+        </div>
+      {%- endif -%}
+    </div>
+  </section>
+{%- endif -%}
+
+{% stylesheet %}
+  .m-guide {
+    padding-block: 48px;
+    color: var(--m-text);
+  }
+
+  .m-guide__head {
+    max-inline-size: 640px;
+    margin-block-end: 24px;
+  }
+
+  .m-guide__title {
+    margin: 0 0 8px;
+    font-family: var(--font-heading--family);
+    font-weight: var(--font-heading--weight);
+    font-size: clamp(1.5rem, 2.4vw, 2rem);
+  }
+
+  .m-guide__intro {
+    margin: 0;
+    color: var(--m-text-muted);
+  }
+
+  .m-guide__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 16px;
+  }
+
+  .m-guide__card {
+    padding: 22px;
+    border: 1px solid var(--m-rule-quiet);
+    border-radius: 16px;
+    background: var(--m-surface, transparent);
+  }
+
+  .m-guide__card--notes {
+    grid-column: span 2;
+  }
+
+  @media screen and (max-width: 749px) {
+    .m-guide {
+      padding-block: 32px;
+    }
+
+    .m-guide__card--notes {
+      grid-column: auto;
+    }
+  }
+
+  .m-guide__card h3 {
+    margin: 0 0 14px;
+    font-family: var(--font-heading--family);
+    font-weight: var(--font-heading--weight);
+    font-size: 1.125rem;
+  }
+
+  .m-guide__list {
+    display: grid;
+    gap: 12px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .m-guide__list--notes {
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  }
+
+  .m-guide__list li {
+    display: grid;
+    gap: 2px;
+  }
+
+  .m-guide__list strong {
+    font-weight: 600;
+  }
+
+  .m-guide__list span,
+  .m-guide__pyramid p,
+  .m-guide__skin {
+    color: var(--m-text-muted);
+    font-size: 0.9375rem;
+    line-height: 1.5;
+  }
+
+  .m-guide__pyramid {
+    display: grid;
+    gap: 14px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .m-guide__step {
+    display: grid;
+    grid-template-columns: 22px 1fr;
+    column-gap: 10px;
+  }
+
+  .m-guide__step p {
+    grid-column: 2;
+    margin: 0;
+  }
+
+  .m-guide__step-mark {
+    grid-row: span 2;
+    inline-size: 14px;
+    block-size: 14px;
+    margin-block-start: 4px;
+    border-radius: 50%;
+    background: var(--m-berry-600, currentColor);
+  }
+
+  .m-guide__step--top .m-guide__step-mark {
+    opacity: 0.35;
+  }
+
+  .m-guide__step--heart .m-guide__step-mark {
+    opacity: 0.65;
+  }
+
+  .m-guide__step-notes {
+    color: var(--m-text) !important;
+    font-weight: 500;
+  }
+
+  .m-guide__skin {
+    margin: 14px 0 0;
+    font-size: 0.8125rem;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "MOMENTS scent guide",
+  "enabled_on": { "templates": ["product"] },
+  "settings": [],
+  "presets": [{ "name": "MOMENTS scent guide" }]
+}
+{% endschema %}

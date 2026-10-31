@@ -1,15 +1,17 @@
 {%- doc -%}
-  The two-part product name, the signature device of the MOMENTS card.
-  The first word names the line (Rare, Supremacy, 9 PM) in the heading font; the rest names the variant
-  (Reef, Collector's Edition, Night Out) in a lighter, wider style. One-word names show only the first part.
+  The product name on cards and the product page: one name, one size, one line style (owner request 2026-10-31: the old
+  two-part name, first word large and the rest small, read as two names, e.g. "9 بي" over "ام نايت آوت").
+  The bottle size at the end of a title (100ML, 100 ml, 200 مل, 50 جم) is left out: the size belongs to the size
+  picker and the details, not to the name.
+  Titles typed in capitals are normalised to capitalised words; short words of one or two letters (AM, PM, XO) stay
+  in capitals. A title with lowercase letters keeps its own casing. Arabic takes no uppercase or letter-spacing.
 
-  Split rule: the first word, or the first two words when the name starts with a number and the next word is
-  one or two letters (9 PM, 9 AM). Titles typed in capitals are normalised to capitalised words, short
-  words of one or two letters (AM, PM, XO) stay in capitals. A title with lowercase letters keeps its own casing.
-  Arabic titles split the same way and take no uppercase or letter-spacing.
+  The size is shown on its own line under the name ("100 ml"), from the title or, failing that, the product's
+  custom.volume field; plain: true returns the bare name only (used for the product page title).
 
   @param {object} product - The product.
   @param {string} [class] - Extra classes.
+  @param {boolean} [plain] - Output only the name text, no markup and no size line.
 
   @example
   {% render 'product-name', product: product %}
@@ -24,38 +26,69 @@
     assign has_lowercase = true
   endif
 
-  assign first_count = 1
-  if words.size > 2
-    assign second = words[1]
-    assign starts_numeric = words[0] | plus: 0
-    if starts_numeric > 0 and second.size < 3
-      assign first_count = 2
-    endif
-  elsif words.size == 2
-    assign second = words[1]
-    assign starts_numeric = words[0] | plus: 0
-    if starts_numeric > 0 and second.size < 3
-      assign first_count = 2
+  # drop a trailing size: "100ML" / "100ml" / "100مل" as one word, or "100 ML" / "200 مل" / "50 جم" as two
+  assign keep = words.size
+  assign size_number = 0
+  assign size_unit = ''
+  if keep > 1
+    assign last_word = words.last | downcase
+    assign last_digits = last_word | remove: 'ml' | remove: 'مل' | remove: 'جم' | remove: 'gm' | remove: 'g'
+    assign last_number = last_digits | plus: 0
+    if last_number > 0 and last_word != last_digits
+      assign keep = keep | minus: 1
+      assign size_number = last_number
+      assign size_unit = last_word | remove: last_digits
+    elsif keep > 2
+      if last_word == 'ml' or last_word == 'مل' or last_word == 'جم' or last_word == 'g' or last_word == 'gm'
+        assign before_index = keep | minus: 2
+        assign before_number = words[before_index] | plus: 0
+        if before_number > 0
+          assign keep = keep | minus: 2
+          assign size_number = before_number
+          assign size_unit = last_word
+        endif
+      endif
     endif
   endif
 
-  capture first_part
-    for word in words limit: first_count
-      unless forloop.first
-        echo ' '
-      endunless
-      if has_lowercase
-        echo word
-      elsif word.size < 3
-        echo word | upcase
-      else
-        echo word | downcase
-      endif
-    endfor
-  endcapture
+  # the size line: from the title, or the product's own volume field
+  assign size_text = ''
+  if size_number > 0
+    if size_unit == 'جم' or size_unit == 'g' or size_unit == 'gm'
+      assign size_text = size_number | append: ' g'
+    else
+      assign size_text = size_number | append: ' ml'
+    endif
+  else
+    assign volume = product.metafields.custom.volume.value
+    if volume != blank
+      assign size_text = volume | append: '' | downcase | replace: 'ml', ' ml' | replace: '  ', ' ' | strip
+    endif
+  endif
+  # the product's size tag (size:100 ml, the same value the Bottle size filter uses) wins over both
+  for tag in product.tags
+    if tag contains 'size:'
+      assign size_text = tag | remove_first: 'size:' | strip
+      break
+    endif
+  endfor
+  if request.locale.iso_code == 'ar'
+    assign size_text = size_text | replace: ' ml', ' مل' | replace: ' g', ' جم'
+  endif
 
-  capture rest_part
-    for word in words offset: first_count
+  # a separator left in front of the removed size ("MISS SAKURA - 100 ML") goes too, and a title ending in one anyway
+  for i in (1..2)
+    if keep > 1
+      assign last_index = keep | minus: 1
+      assign last_word = words[last_index]
+      if last_word == '-' or last_word == '–' or last_word == '—' or last_word == '|' or last_word == '/'
+        assign keep = keep | minus: 1
+      endif
+    endif
+  endfor
+
+  capture name
+    for word in words limit: keep
       unless forloop.first
         echo ' '
       endunless
@@ -64,58 +97,45 @@
       elsif word.size < 3
         echo word | upcase
       else
-        echo word | downcase
+        echo word | downcase | capitalize
       endif
     endfor
   endcapture
-  assign rest_part = rest_part | strip
 -%}
 
-<span class="product-name {{ class }}">
-  <span class="product-name__first">{{ first_part | strip }}</span>
-  {%- if rest_part != blank %} <span class="product-name__rest">{{ rest_part }}</span>{% endif -%}
-</span>
+{%- if plain -%}
+  {{- name | strip -}}
+{%- else -%}
+  <span class="product-name {{ class }}">{{ name | strip }}</span>
+  {%- if size_text != blank -%}
+    <span class="product-name__size">{{ size_text }}</span>
+  {%- endif -%}
+{%- endif -%}
 
 {% stylesheet %}
   .product-name {
     display: block;
-    line-height: 1.15;
-    text-wrap: balance;
-  }
-
-  .product-name__first {
-    display: block;
     color: var(--m-card-name-first);
     font-family: var(--font-heading--family);
     font-weight: var(--font-heading--weight);
-    font-size: 1.375rem;
-    text-transform: capitalize;
+    font-size: 1.25rem;
+    line-height: 1.25;
+    text-wrap: balance;
   }
 
-  .product-name__rest {
+  .product-name__size {
     display: block;
-    margin-block-start: 2px;
-    color: var(--m-card-name-rest);
+    margin-block-start: 4px;
+    color: var(--m-text-muted);
     font-family: var(--font-body--family);
-    font-weight: 300;
     font-size: 0.8125rem;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
+    line-height: 1.2;
   }
 
   /* Arabic joins its letters: no capitals, no letter-spacing. */
-  html[lang='ar'] .product-name__first,
-  html[lang='ar'] .product-name__rest {
+  html[lang='ar'] .product-name {
     text-transform: none;
     letter-spacing: 0;
-  }
-
-  html[lang='ar'] .product-name__first {
-    font-size: 1.25rem;
-    line-height: 1.35;
-  }
-
-  html[lang='ar'] .product-name__rest {
-    font-size: 0.875rem;
+    line-height: 1.4;
   }
 {% endstylesheet %}

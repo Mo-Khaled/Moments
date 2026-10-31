@@ -355,12 +355,14 @@
     }
   },
   "moments": {
-    "night": "Night",
+    "night": "Evening out",
     "gift": "Gift",
     "all_day": "All day",
-    "daily": "Daily",
-    "fresh": "Fresh",
-    "love": "Love"
+    "daily": "Office",
+    "fresh": "Summer heat",
+    "love": "Date night",
+    "occasions": "Weddings & Eid",
+    "winter": "Winter nights"
   },
   "hero_box": {
     "label": "Welcome",
@@ -372,6 +374,7 @@
     "find_moment": "Find your moment",
     "bottle_alt": "{{ title }} by {{ brand }}, rising out of a MOMENTS gift box",
     "scroll_cue": "Scroll to open",
+    "moments_label": "Shop by moment",
     "bottle_alt_generic": "A faceted perfume bottle rising out of a MOMENTS gift box",
     "credit_html": "3D bottle adapted from {{ model }} by {{ author }}, {{ license }}"
   },
@@ -473,8 +476,8 @@
       "shop_moment": "Shop {{ moment }}",
       "slides": {
         "night": {
-          "headline": "Made for the night",
-          "text": "Deep, warm and unmistakable. Fragrance for after dark."
+          "headline": "Made for the evening out",
+          "text": "Deep, warm and unmistakable. For dinners, outings and late nights."
         },
         "gift": {
           "headline": "Give a moment",
@@ -485,16 +488,24 @@
           "text": "Easy fragrance that keeps up with your whole day."
         },
         "daily": {
-          "headline": "Your everyday ritual",
-          "text": "The one you reach for without thinking."
+          "headline": "Ready for the office",
+          "text": "Clean and polished, close to the skin. Right for work and university."
         },
         "fresh": {
-          "headline": "Fresh from the start",
-          "text": "Clean, cool and wide awake."
+          "headline": "Cool in the summer heat",
+          "text": "Fresh, light and bright. Made for hot days that stay fresh."
         },
         "love": {
-          "headline": "Say it with a scent",
-          "text": "Soft, warm and a little bold."
+          "headline": "Set for date night",
+          "text": "Soft, warm and a little bold. For the two of you."
+        },
+        "occasions": {
+          "headline": "For weddings and Eid",
+          "text": "Rich, long-lasting and festive. For the days everyone remembers."
+        },
+        "winter": {
+          "headline": "Warm for winter nights",
+          "text": "Oud, amber and spice that stay with you on cool evenings."
         }
       }
     },
@@ -553,7 +564,7 @@
     },
     "sell": {
       "heading": "What we sell",
-      "text": "Original fragrances from the brands you know, sorted into six moments: Night, Gift, All day, Daily, Fresh and Love. Pick the moment you are dressing for and we show you what fits.",
+      "text": "Original fragrances from the brands you know, sorted into six moments: Office, Evening out, Date night, Summer heat, Weddings & Eid and Winter nights. Pick the moment you are dressing for and we show you what fits.",
       "badge_1": "100% original, sealed",
       "badge_2": "Six moments",
       "badge_3": "Prices in EGP",
@@ -569,12 +580,12 @@
       "p3_title": "Clear prices in EGP",
       "p3_text": "The price you see is the price in Egyptian pounds.",
       "p4_title": "Easy to choose a gift",
-      "p4_text": "A whole moment of gift sets, ready to hand over."
+      "p4_text": "Gift sets ready to hand over, in the Gifts collection."
     },
     "steps": {
       "heading": "How it works",
       "s1_title": "Choose a moment",
-      "s1_text": "Night, Gift, All day, Daily, Fresh or Love.",
+      "s1_text": "Office, Evening out, Date night, Summer heat, Weddings & Eid or Winter nights.",
       "s2_title": "Order and pay on delivery",
       "s2_text": "Cash on delivery is available.",
       "s3_title": "Receive your sealed bottle",
@@ -653,7 +664,7 @@
     "topic_returns_a": "The full details are on our returns policy page.",
     "topic_returns_link": "Read the returns policy",
     "topic_gift_q": "How do I choose a gift?",
-    "topic_gift_a": "Start with the Gift moment, which collects gift sets, or choose the moment the person is dressing for."
+    "topic_gift_a": "Start with Gifts, which collects gift sets, or choose the moment the person is dressing for, such as Weddings & Eid."
   },
   "contact": {
     "heading": "Contact us",
@@ -760,14 +771,678 @@
     "c2_a_html": "Prices are in EGP.",
     "c2_b_html": "<strong>What you see is what you pay.</strong>",
     "c3_title": "Made for moments",
-    "c3_a_html": "Night, Gift, All Day, Daily, Fresh and Love.",
+    "c3_a_html": "Office, Evening out, Date night, Summer heat, Weddings & Eid and Winter nights.",
     "c3_b_html": "Every bottle sits in the <strong>moment it suits best</strong>.",
     "c4_title": "Easy gifting",
     "c4_a_html": "Not sure what to pick? <strong>Start from the occasion.</strong>",
-    "c4_b_html": "The Gift moment collects gift sets, ready to hand over.",
+    "c4_b_html": "The Gifts collection holds gift sets, ready to hand over.",
     "pair_left_a": "Because choosing a fragrance should start with the",
     "pair_left_accent": "moment,",
     "pair_left_b": "not a brand name.",
     "pair_right": "Pick your moment"
+  },
+  "scent": {
+    "filters_title": "Scent filters",
+    "clear": "Clear scent filters",
+    "group_family": "Scent family",
+    "group_note": "Notes",
+    "group_gender": "For",
+    "group_season": "Season",
+    "group_time": "Time of day",
+    "group_type": "Strength",
+    "group_size": "Bottle size",
+    "show_all_notes": "Show all notes",
+    "explain_title": "Understanding this scent",
+    "explain_intro": "New to perfume? Here is what this one smells like, in plain words.",
+    "pyramid_title": "How a perfume unfolds",
+    "pyramid_top": "First minutes: the light notes you smell first. They fade within about 15 to 30 minutes.",
+    "pyramid_heart": "The next hours: the heart, the true character of the perfume, for about 2 to 4 hours.",
+    "pyramid_base": "What stays: the deep notes that remain on your skin for many hours.",
+    "family_title": "Its scent family",
+    "notes_title": "What you will smell",
+    "wear_title": "When to wear it",
+    "skin_note": "Every skin is different: the same perfume can smell slightly different on you.",
+    "family": {
+      "woody": {
+        "name": "Woody",
+        "about": "Dry, warm and calm, like polished wood or a cedar chest. Smooth and grown-up."
+      },
+      "floral": {
+        "name": "Floral",
+        "about": "Smells like fresh flowers: soft, romantic and easy to like."
+      },
+      "gourmand": {
+        "name": "Gourmand",
+        "about": "Sweet and edible: vanilla, caramel, sugar. Cosy, like a dessert."
+      },
+      "amber-oriental": {
+        "name": "Amber & Oriental",
+        "about": "Warm, rich and slightly sweet, with resins and spices. Lasts long and feels luxurious."
+      },
+      "musky": {
+        "name": "Musky",
+        "about": "Clean, soft and skin-like, like fresh laundry. Close to the skin and comforting."
+      },
+      "citrus": {
+        "name": "Citrus",
+        "about": "Bright and juicy: lemon, orange, bergamot. Fresh and energising, best in the heat."
+      },
+      "spicy": {
+        "name": "Spicy",
+        "about": "Warm kitchen spices like cinnamon, cardamom and pepper. Lively and bold."
+      },
+      "fruity": {
+        "name": "Fruity",
+        "about": "Sweet, juicy fruit like berries, apple or peach. Playful and cheerful."
+      },
+      "patchouli": {
+        "name": "Patchouli",
+        "about": "Earthy and deep, like damp soil and dark leaves. Adds depth and lasts long."
+      },
+      "oud": {
+        "name": "Oud",
+        "about": "The precious Middle Eastern wood: smoky, rich and intense. A little goes a long way."
+      },
+      "leather-tobacco": {
+        "name": "Leather & Tobacco",
+        "about": "Smooth leather and dried tobacco leaves. Warm, confident and evening-ready."
+      },
+      "fresh-aquatic": {
+        "name": "Fresh & Aquatic",
+        "about": "Cool and airy, like sea breeze or fresh water. Clean and light for hot days."
+      }
+    },
+    "note": {
+      "musk": {
+        "name": "Musk",
+        "about": "Soft and clean, like warm skin. It makes a perfume last."
+      },
+      "white-musk": {
+        "name": "White Musk",
+        "about": "The cleanest musk: fresh laundry and powder."
+      },
+      "warm-musk": {
+        "name": "Warm Musk",
+        "about": "Musk with a cosy, slightly sweet warmth."
+      },
+      "vanilla": {
+        "name": "Vanilla",
+        "about": "Sweet and creamy, like a vanilla dessert. Warm and comforting."
+      },
+      "amber": {
+        "name": "Amber",
+        "about": "Warm, golden and slightly sweet. Gives a cosy glow."
+      },
+      "dry-amber": {
+        "name": "Dry Amber",
+        "about": "Amber without the sugar: warm, woody and dry."
+      },
+      "ambergris": {
+        "name": "Ambergris",
+        "about": "Salty, warm and skin-like. Makes a scent glow and last."
+      },
+      "ambroxan": {
+        "name": "Ambroxan",
+        "about": "Modern, clean and woody-amber. Feels fresh but lasts."
+      },
+      "amberwood": {
+        "name": "Amberwood",
+        "about": "Dry, warm wood with an amber glow. Strong and modern."
+      },
+      "patchouli": {
+        "name": "Patchouli",
+        "about": "Earthy and dark, like damp soil. Adds depth."
+      },
+      "bergamot": {
+        "name": "Bergamot",
+        "about": "A bright citrus between lemon and orange. Fresh opening."
+      },
+      "jasmine": {
+        "name": "Jasmine",
+        "about": "A rich white flower: sweet, heady and elegant."
+      },
+      "sandalwood": {
+        "name": "Sandalwood",
+        "about": "Creamy, smooth wood. Soft, warm and calming."
+      },
+      "rose": {
+        "name": "Rose",
+        "about": "The classic flower: romantic, fresh and a little sweet."
+      },
+      "cedarwood": {
+        "name": "Cedarwood",
+        "about": "Dry, clean wood, like pencil shavings. Calm and steady."
+      },
+      "oud": {
+        "name": "Oud",
+        "about": "Precious, smoky and intense wood, loved across the Gulf."
+      },
+      "oud-wood": {
+        "name": "Oud Wood",
+        "about": "A smoother, softer take on oud."
+      },
+      "tonka-bean": {
+        "name": "Tonka Bean",
+        "about": "Sweet like vanilla with a hint of almond and hay."
+      },
+      "coumarin": {
+        "name": "Coumarin",
+        "about": "The sweet, hay-like smell found in tonka beans."
+      },
+      "saffron": {
+        "name": "Saffron",
+        "about": "Warm, slightly leathery spice. Luxurious and rich."
+      },
+      "lavender": {
+        "name": "Lavender",
+        "about": "Fresh, herbal and calming, like clean sheets."
+      },
+      "vetiver": {
+        "name": "Vetiver",
+        "about": "Green, earthy grass roots. Dry and elegant."
+      },
+      "leather": {
+        "name": "Leather",
+        "about": "Smooth new leather. Bold and confident."
+      },
+      "suede": {
+        "name": "Suede",
+        "about": "Soft, velvety leather. Gentle and warm."
+      },
+      "cinnamon": {
+        "name": "Cinnamon",
+        "about": "Warm, sweet spice, like fresh baking."
+      },
+      "orange-blossom": {
+        "name": "Orange Blossom",
+        "about": "Sunny white flower with a honeyed sweetness."
+      },
+      "orange-flower": {
+        "name": "Orange Flower",
+        "about": "Sunny white flower with a honeyed sweetness."
+      },
+      "neroli": {
+        "name": "Neroli",
+        "about": "Fresh, green-citrus side of the orange flower."
+      },
+      "pink-pepper": {
+        "name": "Pink Pepper",
+        "about": "A light, sparkling spice. Fresh, not hot."
+      },
+      "black-pepper": {
+        "name": "Black Pepper",
+        "about": "Dry, sharp spice that adds a kick."
+      },
+      "incense": {
+        "name": "Incense",
+        "about": "Smoky resin, like a calm, peaceful room."
+      },
+      "cardamom": {
+        "name": "Cardamom",
+        "about": "Fresh, warm spice, like Arabic coffee."
+      },
+      "apple": {
+        "name": "Apple",
+        "about": "Crisp and juicy. Fresh and cheerful."
+      },
+      "lemon": {
+        "name": "Lemon",
+        "about": "Sharp, sunny and clean. A fresh start."
+      },
+      "lime": {
+        "name": "Lime",
+        "about": "Zesty, green and tangy."
+      },
+      "mandarin": {
+        "name": "Mandarin",
+        "about": "Sweet, juicy citrus. Bright and happy."
+      },
+      "tangerine": {
+        "name": "Tangerine",
+        "about": "Sweet, juicy citrus. Bright and happy."
+      },
+      "orange": {
+        "name": "Orange",
+        "about": "Sweet, juicy orange peel. Sunny and fresh."
+      },
+      "grapefruit": {
+        "name": "Grapefruit",
+        "about": "Bitter-fresh citrus. Sparkling and energising."
+      },
+      "geranium": {
+        "name": "Geranium",
+        "about": "Green, rosy leaf. Fresh and a little minty."
+      },
+      "caramel": {
+        "name": "Caramel",
+        "about": "Sweet, buttery and golden, like toffee."
+      },
+      "pineapple": {
+        "name": "Pineapple",
+        "about": "Tropical, sweet and juicy."
+      },
+      "lily-of-the-valley": {
+        "name": "Lily Of The Valley",
+        "about": "Delicate spring flower: fresh, green and clean."
+      },
+      "muguet": {
+        "name": "Muguet",
+        "about": "Delicate spring flower: fresh, green and clean."
+      },
+      "oakmoss": {
+        "name": "Oakmoss",
+        "about": "Damp forest moss. Earthy, green and classic."
+      },
+      "oak-moss": {
+        "name": "Oak Moss",
+        "about": "Damp forest moss. Earthy, green and classic."
+      },
+      "moss": {
+        "name": "Moss",
+        "about": "Green, damp and earthy, like a forest floor."
+      },
+      "raspberry": {
+        "name": "Raspberry",
+        "about": "Sweet-tart red berry. Juicy and fun."
+      },
+      "red-berries": {
+        "name": "Red Berries",
+        "about": "A mix of sweet red berries. Juicy and bright."
+      },
+      "strawberry": {
+        "name": "Strawberry",
+        "about": "Sweet, candy-like strawberry."
+      },
+      "cherry": {
+        "name": "Cherry",
+        "about": "Dark, sweet cherry. Juicy and a little almond-like."
+      },
+      "blackcurrant": {
+        "name": "Blackcurrant",
+        "about": "Tart, dark berry with a green edge."
+      },
+      "black-currant": {
+        "name": "Black Currant",
+        "about": "Tart, dark berry with a green edge."
+      },
+      "cassis": {
+        "name": "Cassis",
+        "about": "Tart, dark berry with a green edge."
+      },
+      "iris": {
+        "name": "Iris",
+        "about": "Powdery and elegant, like soft make-up powder."
+      },
+      "orris": {
+        "name": "Orris",
+        "about": "Powdery and elegant, like soft make-up powder."
+      },
+      "nutmeg": {
+        "name": "Nutmeg",
+        "about": "Warm, nutty spice."
+      },
+      "labdanum": {
+        "name": "Labdanum",
+        "about": "Sticky, warm resin. Deep and amber-like."
+      },
+      "cistus": {
+        "name": "Cistus",
+        "about": "Warm, resinous shrub. Deep and amber-like."
+      },
+      "ginger": {
+        "name": "Ginger",
+        "about": "Fresh, zesty spice with a warm bite."
+      },
+      "coconut": {
+        "name": "Coconut",
+        "about": "Creamy, sunny and tropical."
+      },
+      "woody-notes": {
+        "name": "Woody Notes",
+        "about": "A blend of woods: dry, warm and smooth."
+      },
+      "precious-woods": {
+        "name": "Precious Woods",
+        "about": "A blend of fine woods: warm and rich."
+      },
+      "benzoin": {
+        "name": "Benzoin",
+        "about": "Sweet, vanilla-like resin. Soft and warm."
+      },
+      "violet": {
+        "name": "Violet",
+        "about": "Soft, powdery flower with a sweet touch."
+      },
+      "violet-leaf": {
+        "name": "Violet Leaf",
+        "about": "Green and fresh, like cut leaves."
+      },
+      "praline": {
+        "name": "Praline",
+        "about": "Sweet caramelised nuts. Rich and gourmand."
+      },
+      "peach": {
+        "name": "Peach",
+        "about": "Soft, velvety and juicy fruit."
+      },
+      "apricot": {
+        "name": "Apricot",
+        "about": "Soft, sunny fruit, a little like peach."
+      },
+      "plum": {
+        "name": "Plum",
+        "about": "Dark, sweet and jammy fruit."
+      },
+      "honey": {
+        "name": "Honey",
+        "about": "Golden, sweet and warm."
+      },
+      "tuberose": {
+        "name": "Tuberose",
+        "about": "Creamy, intense white flower. Bold and glamorous."
+      },
+      "pear": {
+        "name": "Pear",
+        "about": "Fresh, juicy and lightly sweet."
+      },
+      "guaiac-wood": {
+        "name": "Guaiac Wood",
+        "about": "Smoky, slightly sweet wood."
+      },
+      "guaiacwood": {
+        "name": "Guaiacwood",
+        "about": "Smoky, slightly sweet wood."
+      },
+      "sage": {
+        "name": "Sage",
+        "about": "Fresh, herbal and aromatic."
+      },
+      "clary-sage": {
+        "name": "Clary Sage",
+        "about": "Herbal and slightly sweet, with a soft musky side."
+      },
+      "peony": {
+        "name": "Peony",
+        "about": "Light, fresh pink flower."
+      },
+      "cashmeran": {
+        "name": "Cashmeran",
+        "about": "Soft, warm and fuzzy, like a cashmere sweater."
+      },
+      "cashmere": {
+        "name": "Cashmere",
+        "about": "Soft, warm and fuzzy, like a cashmere sweater."
+      },
+      "mint": {
+        "name": "Mint",
+        "about": "Cool and refreshing."
+      },
+      "tobacco": {
+        "name": "Tobacco",
+        "about": "Dried tobacco leaves: warm, sweet and smoky (not cigarette smoke)."
+      },
+      "ylang-ylang": {
+        "name": "Ylang Ylang",
+        "about": "Creamy, sunny tropical flower."
+      },
+      "cananga": {
+        "name": "Cananga",
+        "about": "A cousin of ylang-ylang: creamy and floral."
+      },
+      "white-flowers": {
+        "name": "White Flowers",
+        "about": "A bouquet of white flowers: creamy and elegant."
+      },
+      "white-florals": {
+        "name": "White Florals",
+        "about": "A bouquet of white flowers: creamy and elegant."
+      },
+      "florals": {
+        "name": "Florals",
+        "about": "A mixed bouquet of flowers."
+      },
+      "floral-notes": {
+        "name": "Floral Notes",
+        "about": "A mixed bouquet of flowers."
+      },
+      "aquatic-notes": {
+        "name": "Aquatic Notes",
+        "about": "Cool and watery, like a sea breeze."
+      },
+      "marine": {
+        "name": "Marine",
+        "about": "Salty sea air. Fresh and open."
+      },
+      "sea-salt": {
+        "name": "Sea Salt",
+        "about": "Salty, sunny skin after a swim."
+      },
+      "almond": {
+        "name": "Almond",
+        "about": "Sweet, nutty, like marzipan."
+      },
+      "sugar": {
+        "name": "Sugar",
+        "about": "Pure sweetness, like candy."
+      },
+      "marshmallow": {
+        "name": "Marshmallow",
+        "about": "Soft, fluffy and sugary."
+      },
+      "coffee": {
+        "name": "Coffee",
+        "about": "Roasted coffee beans. Rich and energising."
+      },
+      "litchi": {
+        "name": "Litchi",
+        "about": "Juicy, rosy exotic fruit."
+      },
+      "lychee": {
+        "name": "Lychee",
+        "about": "Juicy, rosy exotic fruit."
+      },
+      "clove": {
+        "name": "Clove",
+        "about": "Strong, warm spice. Bold and festive."
+      },
+      "magnolia": {
+        "name": "Magnolia",
+        "about": "Creamy flower with a fresh, lemony touch."
+      },
+      "spice": {
+        "name": "Spice",
+        "about": "A mix of warm spices."
+      },
+      "spicy-notes": {
+        "name": "Spicy Notes",
+        "about": "A mix of warm spices."
+      },
+      "smoke": {
+        "name": "Smoke",
+        "about": "Smoky, like a wood fire."
+      },
+      "basil": {
+        "name": "Basil",
+        "about": "Fresh, green herb."
+      },
+      "orchid": {
+        "name": "Orchid",
+        "about": "Exotic, soft and slightly sweet flower."
+      },
+      "osmanthus": {
+        "name": "Osmanthus",
+        "about": "Flower that smells of apricot and leather."
+      },
+      "fig": {
+        "name": "Fig",
+        "about": "Green, milky and fruity, like a fig tree."
+      },
+      "elemi": {
+        "name": "Elemi",
+        "about": "Fresh, lemony resin."
+      },
+      "nagarmotha": {
+        "name": "Nagarmotha",
+        "about": "Earthy, smoky root, close to oud."
+      },
+      "cypriol": {
+        "name": "Cypriol",
+        "about": "Earthy, smoky root, close to oud."
+      },
+      "milk": {
+        "name": "Milk",
+        "about": "Soft, creamy and comforting."
+      },
+      "mango": {
+        "name": "Mango",
+        "about": "Juicy, tropical and sweet."
+      },
+      "herbal": {
+        "name": "Herbal",
+        "about": "Fresh green herbs."
+      },
+      "green-notes": {
+        "name": "Green Notes",
+        "about": "Freshly cut grass and leaves."
+      },
+      "freesia": {
+        "name": "Freesia",
+        "about": "Light, fresh and fruity flower."
+      },
+      "dates": {
+        "name": "Dates",
+        "about": "Sweet, rich and syrupy."
+      },
+      "birch": {
+        "name": "Birch",
+        "about": "Smoky, leathery wood."
+      },
+      "aldehydes": {
+        "name": "Aldehydes",
+        "about": "Sparkling, soapy and clean, like fresh linen."
+      },
+      "akigalawood": {
+        "name": "Akigalawood",
+        "about": "Woody and peppery, with a spicy edge."
+      },
+      "rosemary": {
+        "name": "Rosemary",
+        "about": "Fresh, herbal and aromatic."
+      },
+      "myrrh": {
+        "name": "Myrrh",
+        "about": "Ancient, smoky-sweet resin."
+      },
+      "heliotrope": {
+        "name": "Heliotrope",
+        "about": "Powdery, almond-like flower."
+      },
+      "gardenia": {
+        "name": "Gardenia",
+        "about": "Creamy, lush white flower."
+      },
+      "cypress": {
+        "name": "Cypress",
+        "about": "Fresh, green, piney wood."
+      },
+      "cacao": {
+        "name": "Cacao",
+        "about": "Dark, bitter-sweet chocolate."
+      },
+      "cocoa": {
+        "name": "Cocoa",
+        "about": "Dark, bitter-sweet chocolate."
+      },
+      "artemisia": {
+        "name": "Artemisia",
+        "about": "Bitter, green and herbal."
+      },
+      "lily": {
+        "name": "Lily",
+        "about": "Fresh, elegant white flower."
+      },
+      "thyme": {
+        "name": "Thyme",
+        "about": "Warm, aromatic herb."
+      },
+      "rhubarb": {
+        "name": "Rhubarb",
+        "about": "Tart, green and juicy."
+      },
+      "pistachio": {
+        "name": "Pistachio",
+        "about": "Creamy, nutty and sweet."
+      },
+      "juniper": {
+        "name": "Juniper",
+        "about": "Fresh, piney berry."
+      },
+      "black-tea": {
+        "name": "Black Tea",
+        "about": "Smoky, dry tea leaves."
+      },
+      "tagete": {
+        "name": "Tagete",
+        "about": "Green, fruity marigold flower."
+      },
+      "oriental-notes": {
+        "name": "Oriental Notes",
+        "about": "Warm resins and spices."
+      },
+      "fruity-notes": {
+        "name": "Fruity Notes",
+        "about": "A mix of sweet fruits."
+      },
+      "davana": {
+        "name": "Davana",
+        "about": "Fruity, boozy herb, a little like dried apricot."
+      },
+      "cognac": {
+        "name": "Cognac",
+        "about": "Warm, fruity and boozy."
+      },
+      "citrus": {
+        "name": "Citrus",
+        "about": "A mix of lemon, orange and other citrus fruits. Bright and fresh."
+      },
+      "cherry-blossom": {
+        "name": "Cherry Blossom",
+        "about": "Soft, delicate pink blossom. Light and romantic."
+      },
+      "white-wood": {
+        "name": "White Wood",
+        "about": "Light, clean and creamy wood."
+      },
+      "toffee": {
+        "name": "Toffee",
+        "about": "Buttery, golden caramel candy."
+      },
+      "ambrofix": {
+        "name": "Ambrofix",
+        "about": "Clean, modern amber-wood that makes a scent last."
+      }
+    },
+    "value": {
+      "men": "Men",
+      "women": "Women",
+      "unisex": "Unisex",
+      "summer": "Summer",
+      "winter": "Winter",
+      "all-year": "All year",
+      "day": "Day",
+      "night": "Night",
+      "day-night": "Day & night",
+      "eau-de-parfum": "Eau de Parfum",
+      "extrait-de-parfum": "Extrait de Parfum",
+      "body-mist": "Body Mist"
+    },
+    "value_about": {
+      "summer": "Light enough for hot days.",
+      "winter": "Warm and rich, made for cool weather.",
+      "all-year": "Easy to wear in any season.",
+      "day": "Fresh and easy for daytime, work or university.",
+      "night": "Deeper and bolder: evenings and going out.",
+      "day-night": "Works from morning to evening."
+    }
   }
 }

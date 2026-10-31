@@ -7,6 +7,9 @@
 <header-actions
   {{- block.shopify_attributes -}}
 >
+  {%- comment -%} MOMENTS: EN / AR switch beside the account and cart (owner request 2026-10-30) {%- endcomment -%}
+  {% render 'moments-language-toggle' %}
+
   {% if shop.customer_accounts_enabled %}
     {% render 'account-popover' %}
     {% render 'account-drawer' %}

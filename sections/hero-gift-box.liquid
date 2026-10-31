@@ -110,6 +110,28 @@
             <div class="hgb__line hgb__line--1">
               <h1 class="hgb__title" dir="auto" id="hgb-title-{{ section.id }}">{{ headline_1 }}</h1>
               <p class="hgb__text" dir="auto">{{ line_1 }}</p>
+              {%- comment -%} the six moments as colour chips: a way in before scrolling, and the moment colours against the plum (owner 2026-10-30) {%- endcomment -%}
+              <nav class="hgb__moments" aria-label="{{ 'hero_box.moments_label' | t | escape }}">
+                <ul class="hgb__chips" role="list">
+                  {%- capture chip_handles -%}{% render 'moments-config', part: 'handles' %}{%- endcapture -%}
+                  {%- assign chip_handles = chip_handles | strip | split: ',' -%}
+                  {%- capture chip_tones -%}{% render 'moments-config', part: 'keys' %}{%- endcapture -%}
+                  {%- assign chip_tones = chip_tones | strip | split: ',' -%}
+                  {%- capture chip_names -%}{% render 'moments-config', part: 'labels' %}{%- endcapture -%}
+                  {%- assign chip_names = chip_names | strip | split: ',' -%}
+                  {%- for handle in chip_handles -%}
+                    {%- assign chip_collection = collections[handle] -%}
+                    {%- if chip_collection != blank -%}
+                      <li>
+                        <a class="hgb-chip" href="{{ chip_collection.url }}" style="--chip: var(--moment-{{ chip_tones[forloop.index0] }}-field);">
+                          <span class="hgb-chip__dot" aria-hidden="true"></span>
+                          {{- chip_names[forloop.index0] | t -}}
+                        </a>
+                      </li>
+                    {%- endif -%}
+                  {%- endfor -%}
+                </ul>
+              </nav>
             </div>
             <p class="hgb__line hgb__line--2 hgb__title" dir="auto" aria-hidden="true">{{ headline_2 }}</p>
             <p class="hgb__line hgb__line--3 hgb__title" dir="auto" aria-hidden="true">{{ headline_3 }}</p>
@@ -118,12 +140,6 @@
 
         <div class="hgb__scene">
           <div class="hgb__ground" aria-hidden="true"></div>
-          {%- if animate -%}
-            <p class="hgb__cue" aria-hidden="true">
-              <span>{{ 'hero_box.scroll_cue' | t }}</span>
-              <svg viewBox="0 0 16 16" width="14" height="14" focusable="false"><path d="M3.5 6l4.5 4.5L12.5 6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </p>
-          {%- endif -%}
           <div class="hgb-box">
             <div class="hgb-face hgb-face--inner-back" aria-hidden="true"></div>
             <div class="hgb-face hgb-face--inner-floor" aria-hidden="true"></div>
@@ -202,6 +218,13 @@
           {%- endif -%}
         </div>
       </div>
+      {%- if animate -%}
+        {%- comment -%} the scroll cue: a mouse with a rolling dot beside the words, in the bottom-start corner (the credit holds the other) {%- endcomment -%}
+        <p class="hgb__cue" aria-hidden="true">
+          <span class="hgb__mouse"></span>
+          <span>{{ 'hero_box.scroll_cue' | t }}</span>
+        </p>
+      {%- endif -%}
       {%- if generic -%}
         {%- comment -%} Licence condition of the 3D model (CC BY 4.0): credit, link, licence, and that it was changed. Shown wherever the bottle is. {%- endcomment -%}
         {%- capture model_link -%}<a href="https://sketchfab.com/3d-models/fancy-perfume-bottle-bde185bddefc4016b13021da5d1269ec" rel="noopener" target="_blank">Fancy Perfume Bottle</a>{%- endcapture -%}

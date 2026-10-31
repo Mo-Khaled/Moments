@@ -18,6 +18,9 @@ All checks run against the live storefront (https://momentseg.com); add `--theme
 | `check-perf.mjs`, `analyse-weight.mjs`, `analyse-html.mjs`, `probe-idle-cpu.mjs` | Lighthouse (mobile), real bytes by owner, what makes the HTML heavy, idle CPU while a page does nothing |
 | `moment-palette.mjs` | The six moment colours from one OKLCH recipe, with contrast and distance checks (`--css` prints the tokens) |
 | `shot-page.mjs`, `shot-section.mjs`, `shot-marks.mjs`, `shot-card-iphone.mjs` | Screenshots on demand |
+| `fragrance-db.py` | Notes database from the public feed: top/heart/base notes (owner's `data/fragrantica-perfumes.csv` first, then the description's note lines, then its prose), families, gender, season. Writes `data/fragrance.db`, `data/fragrance-notes.csv`, `data/shopify-tags-import.csv` (filter tags, existing tags kept) and `data/collections-plan.csv`. Writes nothing to the store |
+| `create-collections.py` | Creates the planned rule-based collections (unpublished, Arabic titles) through the Admin API; dry run unless `--apply`; needs `SHOPIFY_STORE` and `SHOPIFY_ADMIN_TOKEN` |
+| `arabic_fields.py` | The Arabic for short product fields (notes, season, gender, inspired-by names), used by `fragrance-db.py` and the translations import |
 | `normalize-images.py`, `prepare-brand-logos.py`, `prepare-video.mjs`, `gen-store-proposals.py`, `visual-diff.py`, `visual-snapshot.mjs` | Asset preparation and older audit tools |
 
 Two machine-specific notes: antivirus software that scans HTTPS (for example Kaspersky) re-serves pages uncompressed and injects its own scripts, which inflates every size measured on that machine (the scripts block those requests); and Git Bash rewrites a leading `/` in arguments, so run path arguments with `MSYS_NO_PATHCONV=1`.

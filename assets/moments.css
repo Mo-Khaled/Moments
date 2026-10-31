@@ -59,11 +59,13 @@ html:root {
   --m-card-name-rest: var(--m-text-muted);
   --m-card-meta: var(--m-text-muted);
 
-  /* Type (the families come from Shopify's font system and snippets/brand-fonts.liquid) */
-  --font-body--family: 'Readex Pro', system-ui, sans-serif;
-  --font-subheading--family: 'Readex Pro', system-ui, sans-serif;
-  --font-accent--family: 'Readex Pro', system-ui, sans-serif;
-  --font-heading--family: 'Marcellus', Georgia, serif;
+  /* Type: one face per script for the whole site (owner decision 2026-10-30). Marcellus for Latin; it has no Arabic letters, so the
+     browser takes Arabic from El Messiri (snippets/brand-fonts.liquid), then Readex Pro's Arabic file. */
+  --m-font: 'Marcellus', 'El Messiri Arabic', 'Readex Pro', Georgia, serif;
+  --font-body--family: var(--m-font);
+  --font-subheading--family: var(--m-font);
+  --font-accent--family: var(--m-font);
+  --font-heading--family: var(--m-font);
   --font-heading--weight: 400;
 
   /* Section spacing: three steps instead of a dozen ranges (2026-10-30) */
@@ -76,12 +78,11 @@ html:root {
   --m-h2: clamp(1.625rem, 1.2rem + 1.1vw, 2.25rem);
 }
 
-/* Arabic: Alexandria headings, no letter-spacing and no uppercase anywhere (they break Arabic letter joining),
+/* Arabic: the same stack as English (El Messiri for the Arabic letters), no letter-spacing and no uppercase anywhere (they break Arabic letter joining),
    roomier line-height. Variables first, then a selector for blocks that set their own spacing.
    The selectors below are more specific than the theme's single-class rules, so no override flags are needed. */
 html:root[lang="ar"] {
-  --font-heading--family: 'Alexandria', 'Readex Pro', sans-serif;
-  --font-heading--weight: 500;
+  --font-heading--weight: 400;
   --font-body--case: none;
   --button-text-case: none;
   --button-text-case-primary: none;
@@ -90,6 +91,27 @@ html:root[lang="ar"] {
 
 html[lang="ar"] body {
   line-height: 1.7;
+}
+
+/* Marcellus has one weight; a faked bold smears it. Emphasis comes from size and case instead.
+   Arabic matches it: El Messiri has real bold weights, which made Arabic read heavier than English (owner request 2026-10-31),
+   so every Arabic text runs at the one regular weight, like English. */
+html {
+  font-synthesis-weight: none;
+}
+
+html[lang="ar"] body,
+html[lang="ar"] body * {
+  font-weight: 400 !important;
+}
+
+/* filter sidebar: the theme's margin is physical (right side), so in Arabic the products touched the filters; 32px on the
+   inner side in either direction */
+@media screen and (min-width: 750px) {
+  .collection-wrapper .facets-block-wrapper--vertical:not(#filters-drawer) {
+    margin: 0 !important;
+    margin-inline-end: 32px !important;
+  }
 }
 
 html[lang="ar"] body :is(h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6, .custom-typography, .rte) {
@@ -101,7 +123,7 @@ html[lang="ar"] body :is(h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6) {
   line-height: 1.35;
 }
 
-/* English headings follow the brand guide: Marcellus, uppercase, 0.04em letter-spacing (Arabic: Alexandria, no case, no spacing, above).
+/* English headings follow the brand guide: Marcellus, uppercase, 0.04em letter-spacing (Arabic: no case, no spacing, above).
    Specific enough to win over each section's own title rule; sizes come from --m-h1 and --m-h2 in each section. */
 html:not([lang="ar"]) :is(h1, h2, .h1, .h2, [role="heading"]:is([aria-level="1"], [aria-level="2"])) {
   font-family: var(--font-heading--family);
@@ -313,6 +335,28 @@ html:root {
   --moment-love-body: color-mix(in oklab, #921f3f 62%, var(--m-pearl));
   --moment-love-accent: var(--m-nude);
   --moment-love-gold: var(--m-nude);
+
+  /* Weddings & Eid (2026-10-30): the festive sand of the retired All day, plum ink */
+  --moment-occasions: var(--moment-allday);
+  --moment-occasions-field: var(--moment-allday-field);
+  --moment-occasions-deep: var(--moment-allday-deep);
+  --moment-occasions-soft: var(--moment-allday-soft);
+  --moment-occasions-soft-ink: var(--moment-allday-soft-ink);
+  --moment-occasions-ink: var(--m-plum);
+  --moment-occasions-body: var(--moment-allday-body);
+  --moment-occasions-accent: var(--m-berry-ink);
+  --moment-occasions-gold: var(--m-berry-ink);
+
+  /* Winter nights (2026-10-30): same recipe, hue 250, a deep blue (pearl on field 5.6:1, on deep 8.5:1) */
+  --moment-winter: linear-gradient(155deg, #2266a4, #124a7b);
+  --moment-winter-field: #2266a4;
+  --moment-winter-deep: #124a7b;
+  --moment-winter-soft: #d7eaff;
+  --moment-winter-soft-ink: #0d2f4f;
+  --moment-winter-ink: var(--m-pearl);
+  --moment-winter-body: color-mix(in oklab, #2266a4 62%, var(--m-pearl));
+  --moment-winter-accent: var(--m-nude);
+  --moment-winter-gold: var(--m-nude);
 }
 
 /* The active moment. The hero script sets data-moment on <html>; everything that should follow the moment reads
@@ -331,6 +375,8 @@ html[data-moment='allday'] { --m-live: var(--moment-allday-deep); --m-live-ink: 
 html[data-moment='daily'] { --m-live: var(--moment-daily-deep); --m-live-ink: var(--m-pearl); --m-live-line: var(--m-nude); }
 html[data-moment='fresh'] { --m-live: var(--moment-fresh-deep); --m-live-ink: var(--m-pearl); --m-live-line: var(--m-nude); }
 html[data-moment='love'] { --m-live: var(--moment-love-deep); --m-live-ink: var(--m-pearl); --m-live-line: var(--m-nude); }
+html[data-moment='occasions'] { --m-live: var(--moment-occasions-deep); --m-live-ink: var(--m-plum); --m-live-line: var(--m-plum); }
+html[data-moment='winter'] { --m-live: var(--moment-winter-deep); --m-live-ink: var(--m-pearl); --m-live-line: var(--m-nude); }
 
 /* Registered so the accent can transition (an unregistered custom property switches instantly). */
 @property --m-live {
@@ -400,6 +446,22 @@ html[data-moment='love'] { --m-live: var(--moment-love-deep); --m-live-ink: var(
   --tile-gold: var(--moment-love-gold);
 }
 
+.m-tone--occasions {
+  --tile-bg: var(--moment-occasions);
+  --tile-ink: var(--moment-occasions-ink);
+  --tile-body: var(--moment-occasions-body);
+  --tile-accent: var(--moment-occasions-accent);
+  --tile-gold: var(--moment-occasions-gold);
+}
+
+.m-tone--winter {
+  --tile-bg: var(--moment-winter);
+  --tile-ink: var(--moment-winter-ink);
+  --tile-body: var(--moment-winter-body);
+  --tile-accent: var(--moment-winter-accent);
+  --tile-gold: var(--moment-winter-gold);
+}
+
 /* Outlined action, for the second button next to .m-btn on a dark or photographic surface. */
 .m-btn--outline {
   background: transparent;
@@ -433,6 +495,18 @@ html[data-moment='love'] { --m-live: var(--moment-love-deep); --m-live-ink: var(
     display: inline;
     font-size: 0.875rem;
   }
+
+  /* the icon's 44px tap box (right for the icon-only button) left 21px of air before the word; in the pill the pill is the target */
+  .search-action .search-modal__button .svg-wrapper {
+    inline-size: auto;
+    block-size: auto;
+  }
+
+  /* the 44px icon box used to set the pill's height; without it the pill keeps that height and gets a little wider */
+  .search-action .search-modal__button {
+    min-block-size: 44px;
+    min-inline-size: 240px;
+  }
 }
 
 /* over the hero (transparent header): pearl text, a soft nude edge and a light deep-plum fill so the pill reads on plum or a photograph */
@@ -444,9 +518,10 @@ html[data-moment='love'] { --m-live: var(--moment-love-deep); --m-live-ink: var(
   }
 }
 
+/* search-button raises the specificity over the theme's own negative margins (they pulled the EN/AR pill onto the search pill) */
 @media screen and (min-width: 750px) {
-  .header__column--right .search-action {
-    margin-inline: 0;
+  .header__column--right search-button.search-action {
+    margin-inline: 0 12px;
   }
 }
 
@@ -731,27 +806,57 @@ html:root:root [class*="color-scheme-"] {
   max-inline-size: 48rem;
 }
 
-/* Cart drawer: "View cart" beside the title, a quiet text link (the drawer already has Check out and the accelerated button) */
+/* Cart drawer: "View cart" beside the title, an outlined berry pill (the secondary partner of the filled Check out pill).
+   The close button is position: fixed in the base theme, so it sat on top of the link; in this header it joins the row instead. */
+.cart-drawer__header .cart-drawer__close-button {
+  position: static;
+  flex: none;
+}
+
 .cart-drawer__view-cart {
   display: inline-flex;
   align-items: center;
-  min-block-size: 44px;
+  justify-content: center;
+  min-block-size: 40px;
+  padding-inline: 18px;
   margin-inline-start: auto;
-  margin-inline-end: 8px;
+  margin-inline-end: 12px;
+  border: 1px solid var(--m-berry-ink);
+  border-radius: 9999px;
   color: var(--m-berry-ink);
+  font-family: var(--font-body--family);
   font-size: 0.875rem;
   font-weight: 500;
-  text-decoration: underline;
-  text-underline-offset: 3px;
+  line-height: 1;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background-color var(--m-dur-1) var(--m-ease), color var(--m-dur-1) var(--m-ease), transform var(--m-dur-1) var(--m-ease);
 }
 
 .cart-drawer__view-cart:hover {
-  color: var(--m-plum);
+  background: var(--m-berry-ink);
+  color: var(--m-action-text);
+}
+
+.cart-drawer__view-cart:active {
+  transform: scale(0.97);
 }
 
 .cart-drawer__view-cart:focus-visible {
   outline: 2px solid var(--m-focus);
-  outline-offset: 2px;
+  outline-offset: 3px;
+}
+
+/* Product form error ("The maximum quantity of this item is already in your cart"): it is a flex item of the buy-buttons row,
+   so it sat beside the quantity box, top-aligned, half a line too high (owner screenshot 2026-10-30). It takes a row of its own,
+   between the quantity box and the buttons, with the icon centred on the text. */
+.product-form-buttons > .product-form-text__error {
+  flex: 1 0 100%;
+  min-width: 0;
+  align-items: center;
+  margin-block: 0;
+  color: var(--m-berry-ink);
+  font-size: 0.875rem;
 }
 
 /* Header menus over the page (owner screenshots 2026-10-30):

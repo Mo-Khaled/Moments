@@ -1,9 +1,8 @@
 /* =========================================================================
    RTL stylesheet
    Loaded only when request.locale.iso_code == 'ar'
-   NOTE: @import MUST be the first rule in the file or browsers ignore it.
+   Fonts come from --m-font (moments.css) and snippets/brand-fonts.liquid; no web font is imported here.
    ========================================================================= */
-@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@200..1000&display=swap');
 
 /* ------------------------------------------------------------------ */
 /* 0a. CRITICAL RTL overflow fix — skip-to-content link                */
@@ -32,10 +31,10 @@ html[dir='rtl'] body {
 }
 
 /* ------------------------------------------------------------------ */
-/* 1. Arabic font — Cairo                                              */
+/* 1. Arabic font: the site's one face (Marcellus, El Messiri Arabic) */
 /* ------------------------------------------------------------------ */
 :root {
-  --font-ar: 'Cairo', -apple-system, system-ui, 'Segoe UI', Tahoma, Arial, sans-serif;
+  --font-ar: var(--m-font, 'Marcellus', 'El Messiri Arabic', 'Readex Pro', Georgia, serif);
 }
 
 html[dir='rtl'],
@@ -202,10 +201,14 @@ html[dir='rtl'] .slideshow-control .icon-caret {
 /* ------------------------------------------------------------------ */
 /* 6. Numbers, prices — keep them LTR                                  */
 /* ------------------------------------------------------------------ */
+/* prices read right to left on /ar: they are written "2,150 ج.م" (snippets/price.liquid), so the sign follows the number */
 html[dir='rtl'] .price,
-html[dir='rtl'] .compare-at-price,
+html[dir='rtl'] .compare-at-price {
+  direction: rtl;
+  unicode-bidi: isolate;
+}
+
 html[dir='rtl'] .unit-price,
-html[dir='rtl'] product-price,
 html[dir='rtl'] .quantity-selector input[type='number'],
 html[dir='rtl'] .cart-bubble__text,
 html[dir='rtl'] .slideshow-controls__counter {
@@ -222,14 +225,16 @@ html[dir='rtl'] .unit-price {
 /* ------------------------------------------------------------------ */
 /* 6b. Price block alignment in RTL                                    */
 /* ------------------------------------------------------------------ */
+/* prices are right to left now ("٢٬٢٥٠ ج.م"), so the block follows the page direction: the sale price at the start (right),
+   the old price under it, the Save pill after it. flex-end / row-reverse were for the old left-to-right "LE" prices and put
+   the old price on the far left (owner report 2026-10-31) */
 html[dir='rtl'] .price-container {
-  align-items: flex-end;
+  align-items: flex-start;
 }
 
 html[dir='rtl'] .price-wrapper--sale,
 html[dir='rtl'] .price-wrapper--single,
 html[dir='rtl'] .price-wrapper--original {
-  flex-direction: row-reverse;
   justify-content: flex-start;
 }
 

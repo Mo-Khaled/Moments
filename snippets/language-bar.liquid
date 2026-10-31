@@ -15,11 +15,11 @@
         {%- if request.locale.iso_code == 'ar' -%}
           <span class="lang-bar__current" lang="ar">العربية</span>
           <span class="lang-bar__sep" aria-hidden="true"></span>
-          <button type="submit" name="locale_code" value="en" class="lang-bar__switch" lang="en" aria-label="{{ 'accessibility.switch_to_english' | t }}">English</button>
+          <button type="submit" name="language_code" value="en" class="lang-bar__switch" lang="en" aria-label="{{ 'accessibility.switch_to_english' | t }}">English</button>
         {%- else -%}
           <span class="lang-bar__current" lang="en">English</span>
           <span class="lang-bar__sep" aria-hidden="true"></span>
-          <button type="submit" name="locale_code" value="ar" class="lang-bar__switch" lang="ar" aria-label="{{ 'accessibility.switch_to_arabic' | t }}">العربية</button>
+          <button type="submit" name="language_code" value="ar" class="lang-bar__switch" lang="ar" aria-label="{{ 'accessibility.switch_to_arabic' | t }}">العربية</button>
         {%- endif -%}
       </div>
     {%- endform -%}

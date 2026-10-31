@@ -49,14 +49,14 @@
       for block in section.blocks limit: 3
         assign chars = chars | plus: 24
       endfor
-      assign group_width = chars | times: 9 | plus: 96 | times: 3
+      assign group_width = chars | times: 9 | plus: 96 | times: 6
       assign duration = group_width | divided_by: speed | at_least: 20
     -%}
     {%- capture ticker_items -%}
       {{ messages | replace: 'class="m-announce__msg"', 'class="m-ticker__item"' }}
     {%- endcapture -%}
     <div class="m-announce__ticker">
-      {% render 'moments-ticker', items: ticker_items, duration: duration, mode: 'single', label: 'MOMENTS' %}
+      {% render 'moments-ticker', items: ticker_items, duration: duration, mode: 'single', copies: 6, label: 'MOMENTS' %}
     </div>
   {%- else -%}
     <div class="m-announce__bar m-announce__bar--n{{ count }}" style="--m-rot-interval: {{ interval }}s; --n: {{ count }}">

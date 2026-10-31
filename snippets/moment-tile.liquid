@@ -11,7 +11,7 @@
   (--moment-night, --moment-night-ink, and so on); there is no photograph setting on purpose.
 
   @param {object} collection - The collection the tile links to.
-  @param {string} mark - night, gift, allday, daily, fresh or love. It also picks the colours.
+  @param {string} mark - daily, night, love, fresh, occasions or winter (also gift, allday). It also picks the colours.
   @param {string} [label] - Overrides the default label (the moment name from the locale files).
   @param {image} [packshot] - Optional normalised bottle image, shown uncropped (object-fit contain) at the bottom end.
   @param {string} [class] - Extra classes.
@@ -37,6 +37,10 @@
         assign tile_label = 'moments.fresh' | t
       when 'love'
         assign tile_label = 'moments.love' | t
+      when 'occasions'
+        assign tile_label = 'moments.occasions' | t
+      when 'winter'
+        assign tile_label = 'moments.winter' | t
       else
         assign tile_label = collection.title
     endcase

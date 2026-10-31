@@ -63,3 +63,7 @@ MOMENTS-Identity-Full.zip
 /73.webp
 /perfume_bottle.glb
 /fancy_perfume_bottle.glb
+
+# Store exports and generated data: re-export from Shopify admin / rebuild with scripts/fragrance-db.py
+MOMENTS_translations_*.csv
+data/fragrance.db
