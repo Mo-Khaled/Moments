@@ -10,6 +10,17 @@ import { debounce, formatMoney, startViewTransition } from '@theme/utilities';
 const SEARCH_QUERY = 'q';
 
 /**
+ * Price fields on /ar show and accept Arabic digits (١٬٥٠٠); the filter works on Western ones.
+ * @param {string} value
+ * @returns {string}
+ */
+const toLatinDigits = (value) =>
+  value
+    .replace(/[٠-٩]/g, (digit) => String('٠١٢٣٤٥٦٧٨٩'.indexOf(digit)))
+    .replace(/٫/g, '.')
+    .replace(/٬/g, ',');
+
+/**
  * Handles the main facets form functionality
  *
  * @typedef {Object} FacetsFormRefs
@@ -28,6 +39,11 @@ class FacetsFormComponent extends Component {
    */
   createURLParameters(formData = new FormData(this.refs.facetsForm)) {
     let newParameters = new URLSearchParams(/** @type any */ (formData));
+
+    for (const key of ['filter.v.price.gte', 'filter.v.price.lte']) {
+      const value = newParameters.get(key);
+      if (value) newParameters.set(key, toLatinDigits(value));
+    }
 
     if (newParameters.get('filter.v.price.gte') === '') newParameters.delete('filter.v.price.gte');
     if (newParameters.get('filter.v.price.lte') === '') newParameters.delete('filter.v.price.lte');
@@ -233,7 +249,7 @@ class PriceFacetComponent extends Component {
   #onKeyDown = (event) => {
     if (event.metaKey) return;
 
-    const pattern = /[0-9]|\.|,|'| |Tab|Backspace|Enter|ArrowUp|ArrowDown|ArrowLeft|ArrowRight|Delete|Escape/;
+    const pattern = /[0-9]|[٠-٩]|٫|٬|\.|,|'| |Tab|Backspace|Enter|ArrowUp|ArrowDown|ArrowLeft|ArrowRight|Delete|Escape/;
     if (!event.key.match(pattern)) event.preventDefault();
   };
 
@@ -243,6 +259,8 @@ class PriceFacetComponent extends Component {
   updatePriceFilterAndResults() {
     const { minInput, maxInput } = this.refs;
 
+    minInput.value = toLatinDigits(minInput.value);
+    maxInput.value = toLatinDigits(maxInput.value);
     this.#adjustToValidValues(minInput);
     this.#adjustToValidValues(maxInput);
 

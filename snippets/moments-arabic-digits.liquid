@@ -52,19 +52,53 @@
         for (const node of nodes) node.nodeValue = toArabic(node.nodeValue);
       };
 
+      // field hints ("0", "3,750.00") and the price filter fields read in Arabic too; assets/facets.js turns Arabic
+      // digits back into Western ones before it checks the range or builds the filter link
+      const PRICE_FIELD = 'input.price-facet__input';
+      const arabicPrice = (value) => toArabic(value.replace(/\.00$/, ''));
+      const convertHints = (root) => {
+        const fields = root.querySelectorAll ? root.querySelectorAll('input[placeholder]') : [];
+        for (const field of fields) {
+          if (/\d/.test(field.placeholder)) field.placeholder = arabicPrice(field.placeholder);
+          if (field.matches(PRICE_FIELD) && /\d/.test(field.value)) field.value = arabicPrice(field.value);
+        }
+      };
+      // after the filter has read the field (the theme listens in the bubble phase), show the value in Arabic again
+      document.addEventListener('change', (event) => {
+        const field = event.target;
+        if (field instanceof HTMLInputElement && field.matches(PRICE_FIELD)) {
+          setTimeout(() => {
+            if (/\d/.test(field.value)) field.value = arabicPrice(field.value);
+          });
+        }
+      });
+
       convert(document.body);
+      convertHints(document.body);
       new MutationObserver((records) => {
         for (const record of records) {
-          if (record.type === 'characterData') {
+          if (record.type === 'attributes') {
+            // the filter redraw writes the new value and hint back in Western digits
+            convertHints(record.target.parentNode || document.body);
+          } else if (record.type === 'characterData') {
             if (/\d/.test(record.target.nodeValue) || brandOf(record.target.nodeValue)) convert(record.target.parentNode || document.body);
           } else {
             for (const node of record.addedNodes) {
               if (node.nodeType === Node.TEXT_NODE) convert(node.parentNode || document.body);
-              else if (node.nodeType === Node.ELEMENT_NODE) convert(node);
+              else if (node.nodeType === Node.ELEMENT_NODE) {
+                convert(node);
+                convertHints(node);
+              }
             }
           }
         }
-      }).observe(document.body, { childList: true, characterData: true, subtree: true });
+      }).observe(document.body, {
+        childList: true,
+        characterData: true,
+        subtree: true,
+        attributes: true,
+        attributeFilter: ['value', 'placeholder'],
+      });
     })();
   </script>
 {%- endif -%}
