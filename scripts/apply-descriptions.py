@@ -59,8 +59,8 @@ def gql(query, variables=None, mutation=False):
         except ValueError:
             data = {}
         text = json.dumps(data) + res.stderr
-        if "THROTTLED" in text or " 429" in text:
-            time.sleep(20 * (attempt + 1))  # rate-limited: back off and resume, never hammer
+        if "THROTTLED" in text or " 429" in text or any(e in res.stdout + text for e in ("ETIMEDOUT", "ECONNRESET", "EAI_AGAIN")):
+            time.sleep(20 * (attempt + 1))  # rate-limited or the connection dropped: back off and resume, never hammer
             continue
         if res.returncode != 0 or not data or "error" in data or "errors" in data:
             raise RuntimeError(f"store execute failed: {res.stdout[-800:]} {res.stderr[-800:]}")

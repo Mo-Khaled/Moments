@@ -1,0 +1,171 @@
+{%- doc -%}
+  One perfume's "Understanding this scent" cards: how it unfolds (top / heart / base), its scent family, the notes you will
+  smell and when to wear it. Built from the perfume's own product: the family:, note:, season:, time: tags written by
+  scripts/fragrance-db.py, the glossary in locales "scent", and the custom.top_notes_N / heart_notes_N / base_notes_N fields.
+  A perfume inside a set that has no product of its own passes the same data as text (generated in moments-set-guide).
+
+  @param {object} [perfume] - The perfume's product.
+  @param {string} [name] - Shown above the cards when the perfume is one of several in a set.
+  @param {string} [name_ar] - The name on Arabic pages.
+  @param {string} [tags] - Comma list in the tag format ("family:Citrus,note:Orange,season:Summer,time:Day"), for a perfume without a product.
+  @param {string} [top] - Comma list of top notes, for a perfume without a product (English).
+  @param {string} [heart] - Heart notes, as top.
+  @param {string} [base] - Base notes, as top.
+  @param {string} [top_ar] - Arabic top notes (Arabic comma), for a perfume without a product.
+  @param {string} [heart_ar] - Arabic heart notes.
+  @param {string} [base_ar] - Arabic base notes.
+
+  @example
+  {% render 'scent-guide-panel', perfume: product %}
+{%- enddoc -%}
+
+{%- liquid
+  assign arabic = false
+  if request.locale.iso_code == 'ar'
+    assign arabic = true
+    if name_ar != blank
+      assign name = name_ar
+    endif
+  endif
+  if perfume != blank
+    assign tag_list = perfume.tags
+  else
+    assign tag_list = tags | split: ','
+  endif
+
+  assign families = ''
+  assign notes = ''
+  assign note_count = 0
+  assign wear = ''
+  for tag in tag_list
+    if tag contains 'family:'
+      assign value = tag | remove_first: 'family:' | strip
+      assign slug = value | handleize
+      assign name_key = 'scent.family.' | append: slug | append: '.name'
+      assign about_key = 'scent.family.' | append: slug | append: '.about'
+      assign label = name_key | t
+      if label contains 'ranslation missing'
+        assign label = value
+      endif
+      assign about = about_key | t
+      capture item
+        echo '<li class="m-guide__family"><strong>' | append: label | append: '</strong>'
+        unless about contains 'ranslation missing'
+          echo '<span>' | append: about | append: '</span>'
+        endunless
+        echo '</li>'
+      endcapture
+      assign families = families | append: item
+    elsif tag contains 'note:' and note_count < 12
+      assign value = tag | remove_first: 'note:' | strip
+      assign slug = value | handleize
+      assign about_key = 'scent.note.' | append: slug | append: '.about'
+      assign about = about_key | t
+      unless about contains 'ranslation missing'
+        assign name_key = 'scent.note.' | append: slug | append: '.name'
+        assign label = name_key | t
+        capture item
+          echo '<li class="m-guide__note"><strong>' | append: label | append: '</strong><span>' | append: about | append: '</span></li>'
+        endcapture
+        assign notes = notes | append: item
+        assign note_count = note_count | plus: 1
+      endunless
+    elsif tag contains 'season:' or tag contains 'time:'
+      assign value = tag | split: ':' | last | strip
+      assign slug = value | handleize
+      assign value_key = 'scent.value.' | append: slug
+      assign about_key = 'scent.value_about.' | append: slug
+      assign label = value_key | t
+      assign about = about_key | t
+      unless about contains 'ranslation missing'
+        capture item
+          echo '<li><strong>' | append: label | append: '</strong><span>' | append: about | append: '</span></li>'
+        endcapture
+        assign wear = wear | append: item
+      endunless
+    endif
+  endfor
+
+  assign layers = 'top,heart,base' | split: ','
+-%}
+
+{%- if families != blank or notes != blank -%}
+  <div class="m-guide__perfume"{% if name != blank %} data-perfume="{{ name | escape }}"{% endif %}>
+    {%- if name != blank -%}
+      <h3 class="m-guide__perfume-name">{{ name }}</h3>
+    {%- endif -%}
+    <div class="m-guide__grid">
+      <div class="m-guide__card m-guide__card--pyramid">
+        <h3>{{ 'scent.pyramid_title' | t }}</h3>
+        <ol class="m-guide__pyramid">
+          {%- for layer in layers -%}
+            {%- liquid
+              assign text_key = 'scent.pyramid_' | append: layer
+              assign layer_notes = ''
+              if perfume != blank
+                for i in (1..6)
+                  assign field = layer | append: '_notes_' | append: i
+                  assign v = perfume.metafields.custom[field].value
+                  if v != blank
+                    assign layer_notes = layer_notes | append: v | append: '، '
+                  endif
+                endfor
+                if arabic == false
+                  assign layer_notes = layer_notes | replace: '، ', ', '
+                endif
+                assign layer_notes = layer_notes | strip | remove_last: '،' | remove_last: ','
+              else
+                case layer
+                  when 'top'
+                    assign layer_notes = top
+                    if arabic
+                      assign layer_notes = top_ar
+                    endif
+                  when 'heart'
+                    assign layer_notes = heart
+                    if arabic
+                      assign layer_notes = heart_ar
+                    endif
+                  else
+                    assign layer_notes = base
+                    if arabic
+                      assign layer_notes = base_ar
+                    endif
+                endcase
+              endif
+            -%}
+            <li class="m-guide__step m-guide__step--{{ layer }}">
+              <span class="m-guide__step-mark" aria-hidden="true"></span>
+              {%- if layer_notes != blank -%}
+                <p class="m-guide__step-notes">{{ layer_notes }}</p>
+              {%- endif -%}
+              <p class="m-guide__step-text">{{ text_key | t }}</p>
+            </li>
+          {%- endfor -%}
+        </ol>
+      </div>
+
+      {%- if families != blank -%}
+        <div class="m-guide__card">
+          <h3>{{ 'scent.family_title' | t }}</h3>
+          <ul class="m-guide__list" role="list">{{ families }}</ul>
+        </div>
+      {%- endif -%}
+
+      {%- if notes != blank -%}
+        <div class="m-guide__card m-guide__card--notes">
+          <h3>{{ 'scent.notes_title' | t }}</h3>
+          <ul class="m-guide__list m-guide__list--notes" role="list">{{ notes }}</ul>
+        </div>
+      {%- endif -%}
+
+      {%- if wear != blank -%}
+        <div class="m-guide__card">
+          <h3>{{ 'scent.wear_title' | t }}</h3>
+          <ul class="m-guide__list" role="list">{{ wear }}</ul>
+          <p class="m-guide__skin">{{ 'scent.skin_note' | t }}</p>
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+{%- endif -%}

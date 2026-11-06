@@ -20,6 +20,11 @@
   assign filters = filters | default: results.filters
   assign total_active_values = 0
 
+  # MOMENTS (owner 2026-11-06): one filter panel, these filters only, in this order. Moment and Size appear once they are
+  # switched on in the Search & Discovery app; Season is read from either field the app may use.
+  assign moments_filters = 'filter.p.m.filter.moment,filter.p.m.filter.family,filter.p.m.filter.notes,filter.p.m.filter.gender,filter.p.m.custom.season,filter.p.m.filter.season,filter.p.vendor,filter.v.price,filter.p.m.filter.conc,filter.p.m.filter.size,filter.v.availability' | split: ','
+  assign moments_open = 'filter.p.m.filter.moment,filter.p.m.filter.family,filter.p.m.filter.notes' | split: ','
+
   # Calculate facets margin style
   capture facets_margin_style
     echo '--facets-margin: 0px '
@@ -157,7 +162,9 @@
               {% assign total_active_values = 0 %}
 
               {% capture rendered_filters %}
+                {%- for wanted in moments_filters -%}
                 {%- for filter in filters -%}
+                  {%- if filter.param_name != wanted -%}{%- continue -%}{%- endif -%}
                   {% case filter.type %}
                     {% when 'price_range' %}
                       {%- liquid
@@ -187,9 +194,14 @@
                         else
                           assign should_render_clear = false
                         endif
-                        render 'list-filter', filter: filter, filter_style: block_settings.filter_style, active_value_count: active_value_count, should_render_clear: should_render_clear, show_swatch_label: block_settings.show_swatch_label, sectionId: section.id
+                        assign start_open = false
+                        if moments_open contains filter.param_name
+                          assign start_open = true
+                        endif
+                        render 'list-filter', filter: filter, filter_style: block_settings.filter_style, active_value_count: active_value_count, should_render_clear: should_render_clear, show_swatch_label: block_settings.show_swatch_label, sectionId: section.id, start_open: start_open
                       %}
                   {% endcase %}
+                {%- endfor -%}
                 {%- endfor -%}
               {% endcapture %}
 
@@ -208,8 +220,6 @@
                     minimum-items: 2
                   %}
                 {% else %}
-                  {%- comment -%} MOMENTS: scent filters (family, notes, gender, season, time, strength) above the store's filters {%- endcomment -%}
-                  {% render 'moments-scent-filters' %}
                   {{ rendered_filters }}
                 {% endif %}
               </div>
@@ -395,8 +405,9 @@
               {% assign total_active_values = 0 %}
               {% assign is_active = false %}
 
-              {% render 'moments-scent-filters' %}
+              {%- for wanted in moments_filters -%}
               {%- for filter in filters -%}
+                {%- if filter.param_name != wanted -%}{%- continue -%}{%- endif -%}
                 {%- liquid
                   assign should_autofocus = false
                   if forloop.first and total_active_values == 0
@@ -421,9 +432,14 @@
 
                       assign active_value_count = filter.active_values | size
                       assign total_active_values = total_active_values | plus: active_value_count
-                      render 'list-filter', filter: filter, filter_style: 'vertical', active_value_count: active_value_count, should_render_clear: false, autofocus: should_autofocus, in_drawer: true, sectionId: section.id
+                      assign start_open = false
+                      if moments_open contains filter.param_name
+                        assign start_open = true
+                      endif
+                      render 'list-filter', filter: filter, filter_style: 'vertical', active_value_count: active_value_count, should_render_clear: false, autofocus: should_autofocus, in_drawer: true, sectionId: section.id, start_open: start_open
                     %}
                 {% endcase %}
+              {%- endfor -%}
               {%- endfor -%}
             </div>
           {% endif %}

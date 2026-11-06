@@ -6,126 +6,124 @@
   product without per-product setup. The top/heart/base notes from the product's own metafields are shown when present.
 {%- endcomment -%}
 
-{%- liquid
-  assign families = ''
-  assign notes = ''
-  assign note_count = 0
-  assign wear = ''
-  for tag in product.tags
-    if tag contains 'family:'
-      assign value = tag | remove_first: 'family:' | strip
-      assign slug = value | handleize
-      assign name_key = 'scent.family.' | append: slug | append: '.name'
-      assign about_key = 'scent.family.' | append: slug | append: '.about'
-      assign name = name_key | t
-      if name contains 'ranslation missing'
-        assign name = value
-      endif
-      assign about = about_key | t
-      capture item
-        echo '<li class="m-guide__family"><strong>' | append: name | append: '</strong>'
-        unless about contains 'ranslation missing'
-          echo '<span>' | append: about | append: '</span>'
-        endunless
-        echo '</li>'
-      endcapture
-      assign families = families | append: item
-    elsif tag contains 'note:' and note_count < 12
-      assign value = tag | remove_first: 'note:' | strip
-      assign slug = value | handleize
-      assign about_key = 'scent.note.' | append: slug | append: '.about'
-      assign about = about_key | t
-      unless about contains 'ranslation missing'
-        assign name_key = 'scent.note.' | append: slug | append: '.name'
-        assign name = name_key | t
-        capture item
-          echo '<li class="m-guide__note"><strong>' | append: name | append: '</strong><span>' | append: about | append: '</span></li>'
-        endcapture
-        assign notes = notes | append: item
-        assign note_count = note_count | plus: 1
-      endunless
-    elsif tag contains 'season:' or tag contains 'time:'
-      assign value = tag | split: ':' | last | strip
-      assign slug = value | handleize
-      assign value_key = 'scent.value.' | append: slug
-      assign about_key = 'scent.value_about.' | append: slug
-      assign label = value_key | t
-      assign about = about_key | t
-      unless about contains 'ranslation missing'
-        capture item
-          echo '<li><strong>' | append: label | append: '</strong><span>' | append: about | append: '</span></li>'
-        endcapture
-        assign wear = wear | append: item
-      endunless
-    endif
-  endfor
+{%- comment -%}
+  A set (several perfumes in one product, data/descriptions/sets.json) shows one panel per perfume, each from that
+  perfume's own product, with a switcher (owner request 2026-11-06). Without JavaScript every panel is shown, one under another.
+{%- endcomment -%}
+{%- capture set_panels -%}{%- render 'moments-set-guide', product: product -%}{%- endcapture -%}
+{%- if set_panels != blank -%}
+  {%- assign panels = set_panels -%}
+{%- else -%}
+  {%- capture panels -%}{%- render 'scent-guide-panel', perfume: product -%}{%- endcapture -%}
+{%- endif -%}
 
-  assign layers = 'top,heart,base' | split: ','
--%}
-
-{%- if families != blank or notes != blank -%}
+{%- if panels != blank -%}
   <section class="m-guide m-wrap" aria-labelledby="ScentGuide-{{ section.id }}">
     <div class="m-guide__head">
       <h2 class="m-guide__title" id="ScentGuide-{{ section.id }}">{{ 'scent.explain_title' | t }}</h2>
       <p class="m-guide__intro">{{ 'scent.explain_intro' | t }}</p>
     </div>
-
-    <div class="m-guide__grid">
-      <div class="m-guide__card m-guide__card--pyramid">
-        <h3>{{ 'scent.pyramid_title' | t }}</h3>
-        <ol class="m-guide__pyramid">
-          {%- for layer in layers -%}
-            {%- liquid
-              assign text_key = 'scent.pyramid_' | append: layer
-              assign layer_notes = ''
-              for i in (1..6)
-                assign field = layer | append: '_notes_' | append: i
-                assign v = product.metafields.custom[field].value
-                if v != blank
-                  assign layer_notes = layer_notes | append: v | append: '، '
-                endif
-              endfor
-              if request.locale.iso_code != 'ar'
-                assign layer_notes = layer_notes | replace: '، ', ', '
-              endif
-            -%}
-            <li class="m-guide__step m-guide__step--{{ layer }}">
-              <span class="m-guide__step-mark" aria-hidden="true"></span>
-              {%- if layer_notes != blank -%}
-                <p class="m-guide__step-notes">{{ layer_notes | strip | remove_last: '،' | remove_last: ',' }}</p>
-              {%- endif -%}
-              <p class="m-guide__step-text">{{ text_key | t }}</p>
-            </li>
-          {%- endfor -%}
-        </ol>
-      </div>
-
-      {%- if families != blank -%}
-        <div class="m-guide__card">
-          <h3>{{ 'scent.family_title' | t }}</h3>
-          <ul class="m-guide__list" role="list">{{ families }}</ul>
-        </div>
-      {%- endif -%}
-
-      {%- if notes != blank -%}
-        <div class="m-guide__card m-guide__card--notes">
-          <h3>{{ 'scent.notes_title' | t }}</h3>
-          <ul class="m-guide__list m-guide__list--notes" role="list">{{ notes }}</ul>
-        </div>
-      {%- endif -%}
-
-      {%- if wear != blank -%}
-        <div class="m-guide__card">
-          <h3>{{ 'scent.wear_title' | t }}</h3>
-          <ul class="m-guide__list" role="list">{{ wear }}</ul>
-          <p class="m-guide__skin">{{ 'scent.skin_note' | t }}</p>
-        </div>
-      {%- endif -%}
-    </div>
+    {%- if set_panels != blank -%}
+      <div class="m-guide__set" data-m-guide-set>{{ panels }}</div>
+      <script>
+        (() => {
+          const set = document.currentScript.previousElementSibling;
+          const panels = [...set.querySelectorAll('.m-guide__perfume[data-perfume]')];
+          if (panels.length < 2) return;
+          const list = document.createElement('div');
+          list.className = 'm-guide__tabs';
+          list.setAttribute('role', 'tablist');
+          const show = (i, focus) => panels.forEach((panel, j) => {
+            panel.hidden = i !== j;
+            const tab = list.children[j];
+            tab.setAttribute('aria-selected', String(i === j));
+            tab.tabIndex = i === j ? 0 : -1;
+            if (focus && i === j) tab.focus();
+          });
+          panels.forEach((panel, i) => {
+            const id = set.closest('section').id + '-perfume-' + i;
+            panel.id = id;
+            panel.setAttribute('role', 'tabpanel');
+            panel.classList.add('m-guide__perfume--tabbed');
+            const tab = document.createElement('button');
+            tab.type = 'button';
+            tab.className = 'm-guide__tab';
+            tab.setAttribute('role', 'tab');
+            tab.setAttribute('aria-controls', id);
+            tab.textContent = panel.dataset.perfume;
+            tab.addEventListener('click', () => show(i, false));
+            tab.addEventListener('keydown', (e) => {
+              const rtl = getComputedStyle(list).direction === 'rtl';
+              const step = { ArrowRight: rtl ? -1 : 1, ArrowLeft: rtl ? 1 : -1 }[e.key];
+              if (!step) return;
+              e.preventDefault();
+              show((i + step + panels.length) % panels.length, true);
+            });
+            list.appendChild(tab);
+          });
+          set.prepend(list);
+          show(0, false);
+        })();
+      </script>
+    {%- else -%}
+      {{ panels }}
+    {%- endif -%}
   </section>
 {%- endif -%}
 
 {% stylesheet %}
+  .m-guide__set {
+    display: grid;
+    gap: 32px;
+  }
+
+  .m-guide__perfume-name {
+    margin: 0 0 12px;
+    font-size: 1.25rem;
+  }
+
+  .m-guide__perfume--tabbed .m-guide__perfume-name {
+    position: absolute;
+    inline-size: 1px;
+    block-size: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
+  .m-guide__perfume[hidden] {
+    display: none;
+  }
+
+  .m-guide__tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-block-end: -8px;
+  }
+
+  .m-guide__tab {
+    min-block-size: 44px;
+    padding-inline: 18px;
+    border: 1px solid var(--m-rule-quiet, currentColor);
+    border-radius: 9999px;
+    background: transparent;
+    color: var(--m-text);
+    font: inherit;
+    cursor: pointer;
+  }
+
+  .m-guide__tab[aria-selected='true'] {
+    border-color: var(--m-plum, currentColor);
+    background: var(--m-plum, currentColor);
+    color: var(--m-pearl, #fff);
+  }
+
+  .m-guide__tab:focus-visible {
+    outline: 2px solid var(--m-focus, currentColor);
+    outline-offset: 2px;
+  }
+
   .m-guide {
     padding-block: 48px;
     color: var(--m-text);

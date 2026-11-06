@@ -17,10 +17,13 @@
     data-close-with-escape="true"
   {% endif %}
 
-  open-by-default-on-mobile
-  {% if filter_style == 'vertical' %}
-    open
-    open-by-default-on-desktop
+  {%- comment -%} MOMENTS (owner 2026-11-06): closed unless a price is set, like the other later filters {%- endcomment -%}
+  {% if filter.min_value.value != null or filter.max_value.value != null %}
+    open-by-default-on-mobile
+    {% if filter_style == 'vertical' %}
+      open
+      open-by-default-on-desktop
+    {% endif %}
   {% endif %}
 >
   <details

@@ -4,6 +4,7 @@
   @param {object} filter - The filter to render
   @param {string} filter_style - The filter style ('horizontal' | 'vertical')
   @param {number} active_value_count - The number of active values
+  @param {boolean} [start_open] - Open the filter on load (MOMENTS: the first three filters)
   @param {number} sectionId - The section ID
   @param {boolean} [autofocus] - Whether to autofocus the filter
   @param {boolean} [should_render_clear] - Whether to render the clear button
@@ -31,10 +32,16 @@
     data-disable-animation-on-desktop="true"
     data-close-with-escape="true"
   {% endif %}
-  open-by-default-on-mobile
-  {% if filter_style == 'vertical' %}
-    open
-    open-by-default-on-desktop
+  {%- comment -%}
+    MOMENTS (owner 2026-11-06): only the first filters start open (start_open) and any filter in use; the rest stay closed so
+    the panel reads as a short list, as on the big fragrance sites.
+  {%- endcomment -%}
+  {% if start_open or active_value_count > 0 %}
+    open-by-default-on-mobile
+    {% if filter_style == 'vertical' %}
+      open
+      open-by-default-on-desktop
+    {% endif %}
   {% endif %}
   data-filter-param-name="{{ filter.param_name | escape | replace: '.', '-' }}"
 >
@@ -368,10 +375,12 @@
                       </label>
                     </div>
                   {% else %}
+                    {%- comment -%} MOMENTS: how many products each choice leads to, e.g. "Floral (163)" {%- endcomment -%}
+                    {%- capture counted_label -%}{{ value.label }} ({{ value.count }}){%- endcapture -%}
                     {% render 'checkbox',
                       name: value.param_name,
                       value: value.value,
-                      label: value.label,
+                      label: counted_label,
                       checked: value.active,
                       id: input_id,
                       disabled: is_disabled,
