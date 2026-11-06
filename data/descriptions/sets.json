@@ -1,0 +1,116 @@
+{
+  "_about": "Products that hold more than one perfume (owner request 2026-11-06: every set lists each perfume's own notes like a single perfume). Each component's notes come from its own product ('handle', read the same way as its description) or, when the store has no product for it, from 'notes' with their source. Read by scripts/build-descriptions.py.",
+  "lady-collection": {
+    "intro_en": "Lady Collection by Assaf: three women's eaux de parfum in one gift box.",
+    "intro_ar": "ليدي كولكشن من أصاف: ثلاثة عطور نسائية أو دو بارفان في علبة هدية واحدة.",
+    "spec_en": "300 ml (3 x 100 ml) · Eau de Parfum · Pour Femme",
+    "spec_ar": "300 مل (3 × 100 مل) · أو دو بارفان · للنساء",
+    "components": [
+      {"name_en": "Miss Flora", "name_ar": "مس فلورا", "line_en": "a soft, elegant floral with a classic touch.", "line_ar": "عطر زهري ناعم وأنيق بلمسة كلاسيكية.", "handle": "miss-flora"},
+      {"name_en": "Pink Lady", "name_ar": "بينك ليدي", "line_en": "warmer and more seductive, for a confident personality.", "line_ar": "أكثر دفئاً وإغراءً، لشخصية واثقة.", "handle": "pink-lady"},
+      {"name_en": "Miss Sakura", "name_ar": "مس ساكورا", "line_en": "light and flowery, inspired by Japanese cherry blossom.", "line_ar": "خفيف ومزهر، مستوحى من زهر الكرز الياباني.", "handle": "miss-sakura"}
+    ]
+  },
+  "frankel-collection": {
+    "intro_en": "Frankel Collection by Assaf: three perfumes in one box, each with its own character.",
+    "intro_ar": "فرانكل كولكشن من أصاف: ثلاثة عطور في علبة واحدة، كل واحد بطابعه المختلف.",
+    "spec_en": "300 ml (3 x 100 ml) · Eau de Parfum · Unisex",
+    "spec_ar": "300 مل (3 × 100 مل) · أو دو بارفان · للجنسين",
+    "components": "frankel-trio"
+  },
+  "frankel-set": {
+    "intro_en": "A curated trio from the iconic Frankel collection: three concentrated 25ml versions of Assaf's most beloved Frankel fragrances, beautifully packaged for gifting or travel.",
+    "intro_ar": "ثلاثية مختارة من مجموعة فرانكل الأيقونية: ثلاث نسخ مركزة بحجم 25 مل من أكثر عطور فرانكل المحبوبة من عساف، معبأة بشكل أنيق للإهداء أو السفر.",
+    "spec_en": "75 ml (3 x 25 ml) · Eau de Parfum · Gift set",
+    "spec_ar": "75 مل (3 × 25 مل) · أو دو بارفان · مجموعة هدايا",
+    "components": "frankel-trio",
+    "contents_source": "bottle labels in the product photos: Frankel Imagination, Frankel Aventus, Frankel Silver"
+  },
+  "frankel-trio": [
+    {"name_en": "Frankel Silver", "name_ar": "فرانكل سيلفر",
+     "notes": {"top": ["Orange", "Sweet Lemon"], "heart": ["Green Tea", "Blackcurrant"], "base": ["Sandalwood", "Musk", "Petitgrain"]},
+     "source": "no Frankel Silver product in the store; retailers agree (aromahouseus.com, pariscom2030.com, rawzera.com, tajperf.com). The old Frankel Collection text said citrus, white florals, jasmine; cedarwood, amber, vanilla: replaced"},
+    {"name_en": "Frankel Aventus", "name_ar": "فرانكل أفينتوس",
+     "notes": {"top": ["Pineapple", "Bergamot", "Green Apple"], "heart": ["Damask Rose", "Jasmine"], "base": ["Oakmoss", "Musk", "Amber"]},
+     "source": "no Frankel Aventus product in the store and no web source for Assaf's Aventus; the store's own Frankel Collection text"},
+    {"name_en": "Frankel Imagination", "name_ar": "فرانكل إيماجينيشن", "handle": "frankel-imagination"}
+  ],
+  "arrogate-collection-set": {
+    "intro_en": "The perfect introduction to the Arrogate world: three iconic Assaf fragrances in 25ml concentrated sprays, beautifully packaged for gifting or travel.",
+    "intro_ar": "البداية المثالية لاستكشاف عالم أروجيت: ثلاثة عطور أيقونية من أصاف في بخاخات مركزة بحجم 25 مل، في تغليف أنيق للإهداء أو السفر.",
+    "spec_en": "75 ml (3 x 25 ml) · Eau de Parfum · Gift set",
+    "spec_ar": "75 مل (3 × 25 مل) · أو دو بارفان · مجموعة هدايا",
+    "contents_source": "bottle labels in the product photo: Miss Arrogate, Wild Colt, Arrogate Pink",
+    "components": [
+      {"name_en": "Miss Arrogate", "name_ar": "مس أروجيت", "handle": "miss-arrogate-assaf"},
+      {"name_en": "Wild Colt", "name_ar": "وايلد كولت", "handle": "wild-colt-assaf"},
+      {"name_en": "Arrogate Pink", "name_ar": "أروجيت بينك", "handle": "arrogate-pink"}
+    ]
+  },
+  "assaf-arrogate-pink-set": {
+    "intro_en": "A complete feminine collection featuring Arrogate Pink 200ml plus four complementary mini fragrances (20ml each).",
+    "intro_ar": "مجموعة نسائية متكاملة تضم أروجيت بينك 200 مل وأربعة عطور صغيرة مكملة (20 مل لكل منها).",
+    "spec_en": "200 ml + 4 x 20 ml · Eau de Parfum · For Women",
+    "spec_ar": "200 مل + 4 × 20 مل · أو دو بارفان · للنساء",
+    "components": [
+      {"name_en": "Arrogate Pink (200 ml and 20 ml)", "name_ar": "أروجيت بينك (200 مل و20 مل)", "handle": "arrogate-pink"},
+      {"name_en": "Arrogate Lipstick", "name_ar": "أروجيت ليبستيك",
+       "notes": {"top": ["Apple", "Pear", "Cinnamon", "Pink Pepper"], "heart": ["Orange Blossom", "Rose", "Jasmine", "White Flowers", "Peach", "Apricot"], "base": ["Vanilla", "Patchouli", "Guaiac Wood", "Vetiver"]},
+       "source": "no product in the store; retailers agree (pariscom2030.com, lamilas.com.au, emaratiscents.com)"},
+      {"name_en": "Miss Gris Dance", "name_ar": "مس جريس دانس",
+       "notes": {"top": ["Hazelnut", "Saffron", "Pear"], "heart": ["Rose", "Jasmine", "Osmanthus"], "base": ["Vanilla", "Sandalwood", "Incense"]},
+       "source": "no product in the store; parfumo.com, soghaat.co.uk, gulfamber.com agree"},
+      {"name_en": "Miss Arrogate", "name_ar": "مس أروجيت", "handle": "miss-arrogate-assaf"}
+    ]
+  },
+  "assaf-eid-bakhur-collection-340-ml": {
+    "intro_en": "A complete sensory collection for Ramadan and Eid: rich oriental notes meet refined modern touches, perfect for gatherings and gifting.",
+    "intro_ar": "مجموعة حسية متكاملة لرمضان والعيد: نفحات شرقية غنية بلمسات عصرية راقية، مثالية للتجمعات والإهداء.",
+    "spec_en": "340 ml (2 x 150 ml)",
+    "spec_ar": "340 مل (2 × 150 مل)",
+    "components": [
+      {"name_en": "Wild Colt Bukhoor (150 ml)", "name_ar": "بخور وايلد كولت (150 مل)", "handle": "wild-colt-bakhour"},
+      {"name_en": "Arrogate Comete (150 ml)", "name_ar": "أروجيت كوميت (150 مل)", "handle": "arrogate-comete",
+       "source": "notes of the Arrogate Comete perfume (the store has no separate 150 ml product)"}
+    ]
+  },
+  "vanilla-dreams": {
+    "intro_en": "Two of our most captivating vanilla fragrances, together in one set: the perfect combo if you like switching between a lighter day scent and a richer evening one.",
+    "intro_ar": "اثنان من أكثر عطور الفانيليا جاذبية في مجموعة واحدة: الثنائي المثالي لمن يحب التنقل بين عطر نهاري أخف وعطر مسائي أغنى.",
+    "spec_en": "",
+    "spec_ar": "",
+    "components": [
+      {"name_en": "Island Dreams", "name_ar": "آيلاند دريمز", "line_en": "warm and comforting.", "line_ar": "دافئ ومريح.", "handle": "island-dreams"},
+      {"name_en": "Island Vanilla Dunes", "name_ar": "آيلاند فانيلا ديونز", "line_en": "deeper and more oriental.", "line_ar": "أعمق وأكثر شرقية.", "handle": "island-vanilla-dunes-100ml"}
+    ]
+  },
+  "island-vanilla-dunes-set": {
+    "intro_en": "A classic pairing: two distinct personalities in one set, light and fresh for the day, rich and inviting for the night.",
+    "intro_ar": "ثنائي كلاسيكي: شخصيتان مختلفتان في مجموعة واحدة، خفيف ومنعش للنهار، وغني وجذاب للمساء.",
+    "spec_en": "",
+    "spec_ar": "",
+    "components": [
+      {"name_en": "Island", "name_ar": "آيلاند", "line_en": "the original signature scent.", "line_ar": "العطر الأصلي المميز.", "handle": "island-100ml"},
+      {"name_en": "Vanilla Dunes", "name_ar": "فانيلا ديونز", "line_en": "a warmer, deeper edge.", "line_ar": "لمسة أدفأ وأعمق.", "handle": "island-vanilla-dunes-100ml"}
+    ]
+  },
+  "triple-island-set": {
+    "intro_en": "Stock up on the one that started it all: three bottles of our signature Island fragrance, one at home, one on the go and one to gift.",
+    "intro_ar": "احتفظ بالعطر الذي بدأ كل شيء: ثلاث زجاجات من عطر آيلاند المميز، واحدة للمنزل وواحدة للتنقل وواحدة للإهداء.",
+    "spec_en": "",
+    "spec_ar": "",
+    "components": [
+      {"name_en": "Island (x3)", "name_ar": "آيلاند (×3)", "handle": "island-100ml"}
+    ]
+  },
+  "daily-use-bundle-1": {
+    "intro_en": "Your complete day-to-night set: two standout fragrances for summer days and nights.",
+    "intro_ar": "مجموعتك المتكاملة من النهار إلى الليل: عطران مميزان لأيام وليالي الصيف.",
+    "spec_en": "",
+    "spec_ar": "",
+    "components": [
+      {"name_en": "Hawas Ice", "name_ar": "هوس آيس", "line_en": "for the day.", "line_ar": "للنهار.", "handle": "hawas-ice"},
+      {"name_en": "9 PM Night Out", "name_ar": "9 بي إم نايت آوت", "line_en": "for the night.", "line_ar": "للمساء.", "handle": "9-pm-night-out"}
+    ]
+  }
+}

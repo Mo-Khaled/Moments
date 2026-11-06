@@ -1,0 +1,453 @@
+{
+ "arrogate-collection-set": {
+  "id": "gid://shopify/Product/15386436108479",
+  "handle": "arrogate-collection-set",
+  "title": "ARROGATE COLLECTION SET 3×25ML",
+  "status": "ACTIVE",
+  "vendor": "ASSAF",
+  "productType": "Gift Set",
+  "tags": [
+   "25ml",
+   "arrogate collection",
+   "assaf",
+   "gift set",
+   "size:3×25 ml",
+   "travel size",
+   "type:Eau de Parfum"
+  ],
+  "descriptionHtml": "<p><strong>ARROGATE COLLECTION SET</strong> by Assaf — 3 × 25 ML</p><p>The perfect introduction to the Arrogate world. Three iconic Arrogate fragrances in 25ml concentrated sprays — beautifully packaged for gifting or travel. Discover the collection that redefined modern Arabian perfumery.</p><p><strong>Contents:</strong> 3 × 25 ML Arrogate EDP sprays<br><strong>Type:</strong> Gift Set | <strong>Brand:</strong> ASSAF</p>",
+  "updatedAt": "2026-11-03T23:37:31Z",
+  "seo": {
+   "title": "ARROGATE COLLECTION SET — ASSAF 3×25ml",
+   "description": "Arrogate Collection Set من عساف — 3 عطور Arrogate 25ml في صندوق هدايا أنيق. مثالي للهدايا والسفر. أصلي 100%، توصيل لجميع محافظات مصر."
+  },
+  "totalInventory": 2,
+  "variants": {
+   "nodes": [
+    {
+     "id": "gid://shopify/ProductVariant/67601065640127",
+     "price": "2050.00",
+     "compareAtPrice": null,
+     "sku": "ASSAF-ASET-3X25ML",
+     "inventoryQuantity": 2
+    }
+   ]
+  },
+  "media": {
+   "nodes": [
+    {
+     "id": "gid://shopify/MediaImage/46287212478655"
+    }
+   ]
+  },
+  "_digest": "d0f8572d80d189e1bd8c2e9df20ef2ceec5c52b6f67d75374516db592d6da7b7",
+  "_ar": "<p><strong>مجموعة عطور أروجيت</strong> من عساف — 3 × 25 مل</p><p>البداية المثالية لاستكشاف عالم أروجيت. ثلاثة عطور أيقونية من أروجيت في بخاخات مركزة بحجم 25 مل — مقدمة في تغليف أنيق للإهداء أو السفر. اكتشف المجموعة التي أعادت تعريف صناعة العطور العربية العصرية.</p><p><strong>المحتويات:</strong> 3 بخاخات عطر أروجيت أو دو بارفان بحجم 25 مل<br><strong>النوع:</strong> مجموعة هدايا | <strong>العلامة التجارية:</strong> عساف</p>"
+ },
+ "assaf-arrogate-pink-set": {
+  "id": "gid://shopify/Product/15386441875647",
+  "handle": "assaf-arrogate-pink-set",
+  "title": "ASSAF ARROGATE PINK SET",
+  "status": "ACTIVE",
+  "vendor": "ASSAF",
+  "productType": "Perfume",
+  "tags": [
+   "family:Floral",
+   "family:Musky",
+   "family:Woody",
+   "gender:Women",
+   "note:Almond",
+   "note:Apricot",
+   "note:Jasmine",
+   "note:Musk",
+   "note:Neroli",
+   "note:Orange Blossom",
+   "note:Sandalwood",
+   "note:Violet",
+   "season:Summer",
+   "time:Day"
+  ],
+  "descriptionHtml": "<p>A complete feminine collection featuring Arrogate Pink 200ml plus four complementary mini fragrances (20ml each): Arrogate Pink, Arrogate Lipstick, Miss Gris Dance, and Miss Arrogate. The perfect luxury gift set.</p>",
+  "updatedAt": "2026-11-03T23:41:17Z",
+  "seo": {
+   "title": null,
+   "description": "Assaf Arrogate Pink Gift Set — 200ml + 4 مينيات 20ml. هدية نسائية فاخرة متكاملة. أصلي 100%، توصيل لجميع محافظات مصر."
+  },
+  "totalInventory": 0,
+  "variants": {
+   "nodes": [
+    {
+     "id": "gid://shopify/ProductVariant/67601074749631",
+     "price": "3650.00",
+     "compareAtPrice": "4000.00",
+     "sku": null,
+     "inventoryQuantity": 0
+    }
+   ]
+  },
+  "media": {
+   "nodes": [
+    {
+     "id": "gid://shopify/MediaImage/46287238955199"
+    }
+   ]
+  },
+  "_digest": "32687ca8d6964f5c5a7acb71bf22a8ed82f62b72478c92980150762564bd711f",
+  "_ar": "<p>مجموعة نسائية متكاملة تضم عطر Arrogate Pink بحجم 200 مل بالإضافة إلى أربعة عطور مصغّرة متناغمة (20 مل لكل منها): Arrogate Pink، وArrogate Lipstick، وMiss Gris Dance، وMiss Arrogate. طقم الهدايا الفاخر المثالي.</p>"
+ },
+ "assaf-eid-bakhur-collection-340-ml": {
+  "id": "gid://shopify/Product/15386441908415",
+  "handle": "assaf-eid-bakhur-collection-340-ml",
+  "title": "Assaf Eid Bakhur Collection – 340 ml",
+  "status": "ACTIVE",
+  "vendor": "ASSAF",
+  "productType": "Incense",
+  "tags": [
+   "note:Oriental Notes",
+   "size:340 ml"
+  ],
+  "descriptionHtml": "<p>A complete sensory collection for Ramadan and Eid — Wild Colt Bukhoor (150ml) and Arrogate Comete (150ml). Rich oriental notes meet refined modern touches, perfect for gatherings and gifting.</p>",
+  "updatedAt": "2026-11-03T23:41:17Z",
+  "seo": {
+   "title": null,
+   "description": "Assaf Eid Collection 340ml — Wild Colt Bakhoor + Arrogate Comete. مجموعة رمضان والعيد الأفضل للهدايا. أصلي 100%، توصيل لجميع محافظات مصر."
+  },
+  "totalInventory": 1,
+  "variants": {
+   "nodes": [
+    {
+     "id": "gid://shopify/ProductVariant/67601074880703",
+     "price": "4250.00",
+     "compareAtPrice": "5250.00",
+     "sku": null,
+     "inventoryQuantity": 1
+    }
+   ]
+  },
+  "media": {
+   "nodes": [
+    {
+     "id": "gid://shopify/MediaImage/46287239086271"
+    }
+   ]
+  },
+  "_digest": "96cedfa4c4fb2dcc690934ae20d4a04850816d9fda29c90fafd0aedefa524670",
+  "_ar": "<p>مجموعة حسية متكاملة لرمضان والعيد — بخور وايلد كولت (150 مل) وأروجيت كوميت (150 مل). تلتقي النفحات الشرقية الغنية بلمسات عصرية راقية، مثالية للتجمعات والإهداء.</p>"
+ },
+ "frankel-collection": {
+  "id": "gid://shopify/Product/15444670021823",
+  "handle": "frankel-collection",
+  "title": "FRANKEL COLLECTION",
+  "status": "ACTIVE",
+  "vendor": "ASSAF",
+  "productType": "Perfume Set",
+  "tags": [
+   "300ml",
+   "assaf",
+   "Eau de Parfum",
+   "frankel",
+   "gift set",
+   "Unisex"
+  ],
+  "descriptionHtml": "<p>Frankel Collection من أصاف — ثلاثة عطور في علبة واحدة، كل واحدة بطابعها المختلف.</p><p><strong>Frankel Silver</strong> — حمضيات وزهور بيضاء وياسمين تنتهي بخشب الأرز والعنبر والفانيليا.</p><p><strong>Frankel Aventus</strong> — أناناس وبرغموت وتفاح أخضر مع قلب من الورد الدمشقي والياسمين، وقاعدة من أوك موس ومسك وعنبر.</p><p><strong>Frankel Imagination</strong> — زهور الأيريس والليمون مع برعم البرتقال والورد الأبيض، وقاعدة من الصندل والمسك الأبيض والفانيليا.</p><p><strong>300 ML (3×100 ML) — Eau de Parfum — Unisex</strong></p>",
+  "updatedAt": "2026-11-03T23:55:06Z",
+  "seo": {
+   "title": null,
+   "description": null
+  },
+  "totalInventory": 2,
+  "variants": {
+   "nodes": [
+    {
+     "id": "gid://shopify/ProductVariant/67837880991935",
+     "price": "2750.00",
+     "compareAtPrice": null,
+     "sku": null,
+     "inventoryQuantity": 2
+    }
+   ]
+  },
+  "media": {
+   "nodes": [
+    {
+     "id": "gid://shopify/MediaImage/46606435451071"
+    }
+   ]
+  },
+  "_digest": "5540f090e1cedf1b35cd49a436660489cf9460554662796d4bfd63c22095512e",
+  "_ar": ""
+ },
+ "frankel-set": {
+  "id": "gid://shopify/Product/15386436403391",
+  "handle": "frankel-set",
+  "title": "FRANKEL SET 3×25ML",
+  "status": "ACTIVE",
+  "vendor": "ASSAF",
+  "productType": "Gift Set",
+  "tags": [
+   "25ml",
+   "assaf",
+   "frankel collection",
+   "gift set",
+   "size:3×25 ml",
+   "travel size",
+   "type:Eau de Parfum"
+  ],
+  "descriptionHtml": "<p><strong>FRANKEL SET</strong> by Assaf — 3 × 25 ML</p><p>A curated trio from the iconic Frankel collection — three concentrated 25ml versions of Assaf's most beloved Frankel fragrances, beautifully packaged for gifting or travel. The perfect introduction to the world of Frankel.</p><p><strong>Contents:</strong> 3 × 25 ML Frankel EDP sprays<br><strong>Type:</strong> Gift Set | <strong>Brand:</strong> ASSAF</p>",
+  "updatedAt": "2026-11-03T23:37:34Z",
+  "seo": {
+   "title": "FRANKEL SET — ASSAF 3×25ml Gift Set",
+   "description": "Frankel Set من عساف — 3 عطور Frankel 25ml في صندوق أنيق. هدية الرجل الذي يعشق فرانكل. أصلي 100%، توصيل لجميع محافظات مصر."
+  },
+  "totalInventory": 1,
+  "variants": {
+   "nodes": [
+    {
+     "id": "gid://shopify/ProductVariant/67601065967807",
+     "price": "1999.00",
+     "compareAtPrice": null,
+     "sku": "ASSAF-FSET-3X25ML",
+     "inventoryQuantity": 1
+    }
+   ]
+  },
+  "media": {
+   "nodes": [
+    {
+     "id": "gid://shopify/MediaImage/46287213953215"
+    }
+   ]
+  },
+  "_digest": "083ea3b710222cbaf7e9d6867c1f123f6652493b4e6865886ab382455d043eff",
+  "_ar": "<p><strong>مجموعة فرانكل</strong> من عساف — 3 × 25 مل</p><p>ثلاثية مختارة من مجموعة فرانكل الأيقونية — ثلاث نسخ مركزة بحجم 25 مل من أكثر عطور فرانكل المحبوبة من عساف، معبأة بشكل أنيق للإهداء أو السفر. المدخل المثالي إلى عالم فرانكل.</p><p><strong>المحتويات:</strong> 3 بخاخات أو دو بارفان فرانكل (EDP) بحجم 25 مل<br><strong>النوع:</strong> مجموعة هدايا | <strong>العلامة التجارية:</strong> عساف</p>"
+ },
+ "island-vanilla-dunes-set": {
+  "id": "gid://shopify/Product/15386436599999",
+  "handle": "island-vanilla-dunes-set",
+  "title": "Island + Vanilla Dunes Set",
+  "status": "ACTIVE",
+  "vendor": "KHADLAJ",
+  "productType": "Perfume",
+  "tags": [
+   "family:Amber & Oriental",
+   "family:Gourmand",
+   "family:Spicy",
+   "note:Amber",
+   "note:Aquatic Notes",
+   "note:Bergamot",
+   "note:Cardamom",
+   "note:Cinnamon",
+   "note:Guaiac Wood",
+   "note:Musk",
+   "note:Orange Blossom",
+   "note:Praline",
+   "note:Vanilla",
+   "note:White Wood",
+   "season:Winter",
+   "time:Night"
+  ],
+  "descriptionHtml": "<p class=\"font-claude-response-body break-words whitespace-normal\" dir=\"ltr\">A classic pairing: <strong>Island</strong>, our original signature scent, alongside <strong>Vanilla Dunes</strong> for a warmer, deeper edge. Two distinct personalities in one set — light and fresh for the day, rich and inviting for the night.</p>\n<p class=\"font-claude-response-body break-words whitespace-normal\" dir=\"ltr\">✅ 100% authentic fragrances<br>✅ Save vs. buying separately<br>✅ Great for everyday wear or gifting</p>",
+  "updatedAt": "2026-11-03T23:37:36Z",
+  "seo": {
+   "title": null,
+   "description": null
+  },
+  "totalInventory": 7,
+  "variants": {
+   "nodes": [
+    {
+     "id": "gid://shopify/ProductVariant/67601066131647",
+     "price": "2700.00",
+     "compareAtPrice": "3700.00",
+     "sku": null,
+     "inventoryQuantity": 7
+    }
+   ]
+  },
+  "media": {
+   "nodes": [
+    {
+     "id": "gid://shopify/MediaImage/46287214248127"
+    }
+   ]
+  },
+  "_digest": "89196b2e1a72af339afe0fa046adea31701f97a7e2ef3da675bd4764bd6d7024",
+  "_ar": "<p class=\"font-claude-response-body break-words whitespace-normal\" dir=\"rtl\">تناغم كلاسيكي: <strong>Island</strong>، عطرنا المميز الأصلي، إلى جانب <strong>Vanilla Dunes</strong> لمسة أكثر دفئًا وعمقًا. شخصيتان متمايزتان في مجموعة واحدة — خفيف ومنعش للنهار، وغني وجذاب لليل.</p>\n<p class=\"font-claude-response-body break-words whitespace-normal\" dir=\"rtl\">✅ عطور أصلية 100%<br>✅ وفّر مقارنة بشرائهما كلٌّ على حدة<br>✅ مثالي للاستخدام اليومي أو للإهداء</p>"
+ },
+ "lady-collection": {
+  "id": "gid://shopify/Product/15444670251199",
+  "handle": "lady-collection",
+  "title": "LADY COLLECTION",
+  "status": "ACTIVE",
+  "vendor": "ASSAF",
+  "productType": "Perfume Set",
+  "tags": [
+   "300ml",
+   "assaf",
+   "Eau de Parfum",
+   "gift set",
+   "lady collection",
+   "Pour Femme"
+  ],
+  "descriptionHtml": "<p>Lady Collection من أصاف — مجموعة نسائية فاخرة من ثلاثة عطور في علبة هدية واحدة.</p><p><strong>Miss Flora</strong> — زهري أنيق بطابع كلاسيكي.</p><p><strong>Pink Lady</strong> — أكثر دفئاً وإغراءً، لشخصية واثقة.</p><p><strong>Miss Sakura</strong> — خفيف ومزهر، مستوحى من زهر الكرز الياباني.</p><p><strong>300 ML (3×100 ML) — Eau de Parfum — Pour Femme</strong></p>",
+  "updatedAt": "2026-11-03T23:55:06Z",
+  "seo": {
+   "title": null,
+   "description": null
+  },
+  "totalInventory": 5,
+  "variants": {
+   "nodes": [
+    {
+     "id": "gid://shopify/ProductVariant/67837881221311",
+     "price": "2750.00",
+     "compareAtPrice": null,
+     "sku": null,
+     "inventoryQuantity": 5
+    }
+   ]
+  },
+  "media": {
+   "nodes": [
+    {
+     "id": "gid://shopify/MediaImage/46606435483839"
+    }
+   ]
+  },
+  "_digest": "68a37640a67fb61a02fb3ab19899149be1fb3625736905a07e7e5791d6bbab3e",
+  "_ar": ""
+ },
+ "triple-island-set": {
+  "id": "gid://shopify/Product/15386436567231",
+  "handle": "triple-island-set",
+  "title": "Triple Island Set",
+  "status": "ACTIVE",
+  "vendor": "KHADLAJ",
+  "productType": "Perfume",
+  "tags": [
+   "family:Floral",
+   "family:Fresh & Aquatic",
+   "note:Aquatic Notes",
+   "note:Neroli",
+   "note:White Wood",
+   "season:Summer",
+   "time:Day"
+  ],
+  "descriptionHtml": "<p class=\"font-claude-response-body break-words whitespace-normal\" dir=\"ltr\">Stock up on the one that started it all. Three bottles of our signature <strong>Island</strong> fragrance — perfect for keeping one at home, one on the go, and one to gift (or just never running out).</p>\n<p class=\"font-claude-response-body break-words whitespace-normal\" dir=\"ltr\">✅ 100% authentic, same fragrance x3<br>✅ Save vs. buying separately<br>✅ Ideal for loyal Island fans or bulk gifting</p>",
+  "updatedAt": "2026-11-03T23:37:35Z",
+  "seo": {
+   "title": null,
+   "description": null
+  },
+  "totalInventory": 7,
+  "variants": {
+   "nodes": [
+    {
+     "id": "gid://shopify/ProductVariant/67601066098879",
+     "price": "3900.00",
+     "compareAtPrice": "4500.00",
+     "sku": null,
+     "inventoryQuantity": 7
+    }
+   ]
+  },
+  "media": {
+   "nodes": [
+    {
+     "id": "gid://shopify/MediaImage/46287214117055"
+    }
+   ]
+  },
+  "_digest": "28c5b916268bcd1d0451a2de8d7af037a08cccdfca626ab35ba06aee572df92d",
+  "_ar": "<p class=\"font-claude-response-body break-words whitespace-normal\" dir=\"rtl\">تزودوا من العطر الذي بدأ كل شيء. ثلاث زجاجات من عطرنا المميز <strong>Island</strong> — مثالية لوضع واحدة في المنزل، وأخرى معكم أثناء التنقل، والثالثة للإهداء (أو لضمان عدم نفاده أبدًا).</p>\n<p class=\"font-claude-response-body break-words whitespace-normal\" dir=\"rtl\">✅ أصلي 100%، نفس العطر ×3<br>✅ وفّر مقارنة بشرائه بشكل منفصل<br>✅ مثالي لعشاق Island الأوفياء أو للإهداء بكميات كبيرة</p>"
+ },
+ "vanilla-dreams": {
+  "id": "gid://shopify/Product/15386436665535",
+  "handle": "vanilla-dreams",
+  "title": "Island Dreams + Island Vanilla Dunes Set",
+  "status": "ACTIVE",
+  "vendor": "KHADLAJ",
+  "productType": "Perfume",
+  "tags": [
+   "BUNDLES",
+   "family:Amber & Oriental",
+   "family:Gourmand",
+   "family:Spicy",
+   "note:Amber",
+   "note:Bergamot",
+   "note:Cardamom",
+   "note:Cinnamon",
+   "note:Coconut",
+   "note:Florals",
+   "note:Guaiac Wood",
+   "note:Musk",
+   "note:Orange Blossom",
+   "note:Praline",
+   "note:Vanilla",
+   "season:Winter",
+   "time:Night"
+  ],
+  "descriptionHtml": "<p class=\"font-claude-response-body break-words whitespace-normal\" dir=\"ltr\">Two of our most captivating vanilla fragrances, together in one set: <strong>Island Dreams</strong>, warm and comforting, paired with <strong>Island Vanilla Dunes</strong>, deeper and more oriental. The perfect combo if you like switching between a lighter day scent and a richer evening one — or if you're after a gift that balances warmth and elegance.</p>\n<p class=\"font-claude-response-body break-words whitespace-normal\" dir=\"ltr\">✅ 100% authentic fragrances<br>✅ Save vs. buying separately<br>✅ Great for everyday wear or gifting</p>",
+  "updatedAt": "2026-11-03T23:37:36Z",
+  "seo": {
+   "title": null,
+   "description": null
+  },
+  "totalInventory": 7,
+  "variants": {
+   "nodes": [
+    {
+     "id": "gid://shopify/ProductVariant/67601066197183",
+     "price": "2700.00",
+     "compareAtPrice": "3700.00",
+     "sku": null,
+     "inventoryQuantity": 7
+    }
+   ]
+  },
+  "media": {
+   "nodes": [
+    {
+     "id": "gid://shopify/MediaImage/46287214346431"
+    }
+   ]
+  },
+  "_digest": "b594b4a4e1d4dd31f7845e3924c72a2ba3efa9004f998d957f08e0bbea803740",
+  "_ar": "<p class=\"font-claude-response-body break-words whitespace-normal\" dir=\"rtl\">اثنان من أكثر عطور الفانيليا جاذبية لدينا، يجتمعان في مجموعة واحدة: <strong>Island Dreams</strong>، الدافئ والمريح، مع <strong>Island Vanilla Dunes</strong>، الأكثر عمقاً وشرقية. المزيج المثالي إذا كنت تحب التنقل بين رائحة نهارية أخف ورائحة مسائية أغنى — أو إذا كنت تبحث عن هدية تجمع بين الدفء والأناقة.</p>\n<p class=\"font-claude-response-body break-words whitespace-normal\" dir=\"rtl\">✅ عطور أصلية 100%<br>✅ وفّر مقارنة بشرائها بشكل منفصل<br>✅ رائعة للاستخدام اليومي أو للإهداء</p>"
+ },
+ "daily-use-bundle-1": {
+  "id": "gid://shopify/Product/15386435977407",
+  "handle": "daily-use-bundle-1",
+  "title": "Day & Night Bundle",
+  "status": "DRAFT",
+  "vendor": "AFNAN & RASASI",
+  "productType": "",
+  "tags": [],
+  "descriptionHtml": "<p><span>Hawas Ice</span><span> cuts through the heat — frozen apple, bergamot, and an icy marine accord to keep you fresh through the hottest part of the day. When the sun goes down, switch to </span><span>9 PM Night Out</span><span> — a smooth, modern warmth that settles into a rich trail, built for a night that’s cool but never cold.</span></p>\n<p><span>✅ Your complete day-to-night set</span></p>\n<p><span>✅ Save vs. buying separately</span></p>\n<p><span>✅ Two standout fragrances for summer days and nights</span></p>",
+  "updatedAt": "2026-10-08T10:06:45Z",
+  "seo": {
+   "title": null,
+   "description": null
+  },
+  "totalInventory": 2,
+  "variants": {
+   "nodes": [
+    {
+     "id": "gid://shopify/ProductVariant/67601065509055",
+     "price": "3600.00",
+     "compareAtPrice": "4600.00",
+     "sku": null,
+     "inventoryQuantity": 2
+    }
+   ]
+  },
+  "media": {
+   "nodes": [
+    {
+     "id": "gid://shopify/MediaImage/46287212282047"
+    }
+   ]
+  },
+  "_digest": "13f4923eb0031e55b82feacaa0b5e9d4677498a65e462db65755bc47eeec42b4",
+  "_ar": "<p><span>Hawas Ice</span><span> يكسر حدة الحرارة — تفاح مجمد، وبرغموت، ونفحات بحرية جليدية لتبقيك منتعشًا خلال أشد أوقات اليوم حرارة. وعندما تغيب الشمس، انتقل إلى </span><span>9 PM Night Out</span><span> — دفء ناعم وعصري يستقر في أثر غني، مصمم لليلة لطيفة لكنها ليست باردة أبدًا.</span></p>\n<p><span>✅ مجموعتك الكاملة من النهار إلى الليل</span></p>\n<p><span>✅ وفّر مقارنة بشرائهما كلٌّ على حدة</span></p>\n<p><span>✅ عطران متميزان لأيام وليالي الصيف</span></p>"
+ }
+}

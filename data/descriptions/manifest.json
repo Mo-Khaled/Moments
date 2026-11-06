@@ -1,9 +1,14 @@
 {
  "batches": [
   {
+   "batch": "batch-01",
+   "group": "set",
+   "count": 10
+  },
+  {
    "batch": "batch-02",
    "group": "hand",
-   "count": 4
+   "count": 1
   },
   {
    "batch": "batch-03",
@@ -13,17 +18,17 @@
   {
    "batch": "batch-04",
    "group": "partial",
-   "count": 11
+   "count": 100
   },
   {
    "batch": "batch-05",
-   "group": "no notes",
-   "count": 34
+   "group": "partial",
+   "count": 6
   },
   {
    "batch": "batch-06",
-   "group": "full",
-   "count": 100
+   "group": "no notes",
+   "count": 34
   },
   {
    "batch": "batch-07",
@@ -43,8 +48,13 @@
   {
    "batch": "batch-10",
    "group": "full",
-   "count": 84
+   "count": 100
+  },
+  {
+   "batch": "batch-11",
+   "group": "full",
+   "count": 88
   }
  ],
- "held_back": 187
+ "held_back": 82
 }

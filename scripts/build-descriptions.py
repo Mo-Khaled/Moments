@@ -31,7 +31,7 @@ OUT = os.path.join(DATA, "descriptions")
 EXPORT = os.path.join(DATA, "backups", "products_export-2026-11-06.csv")
 AR_EXPORT = os.path.join(DATA, "backups", "translations-ar-2026-11-06.csv")
 BATCH_SIZE = 100
-DONE = {"lady-collection"}  # batch 01
+DONE = set()  # every product goes through the batches; sets (batch 01) come from sets.json
 
 sys.path.insert(0, os.path.join(ROOT, "scripts"))
 spec = importlib.util.spec_from_file_location("fragrance_db", os.path.join(ROOT, "scripts", "fragrance-db.py"))
@@ -98,7 +98,8 @@ def structured(body):
     for layer, rx in fdb.LAYER.items():
         m = re.search(r"(?im)^\s*[-•*]?\s*(?:" + rx + r")\s*[:\-–|]\s*(.+)$", t)
         if m:
-            got[layer] = clean_list(m.group(1).split("|")[0])
+            # a note line can run on into a description after a dash: "Base: musk, and incense — dark, commanding"
+            got[layer] = clean_list(re.split(r"\s[—–]\s|\|", m.group(1))[0])
     return {k: v for k, v in got.items() if v}
 
 
@@ -124,7 +125,7 @@ FILLER = re.compile(r"^(?:(?:a|an|the|its|this|some|subtle|soft|smooth|warm|deep
                     r"generous|gentle|lasting|long-lasting|cozy|refined|mysterious|intense|bold|burst|touch|hint|hints|trail|blend|"
                     r"energy|freshness|accord|accords|heart|base|notes?|mix|splash|whisper|embrace|combination|layer|layers|foundation|"
                     r"of|with)\s+)+", re.I)
-CLAUSE_SPLIT = re.compile(r";|,\s*(?:and\s+)?(?=(?:then|softens?|before|and then|while|followed|transitions?|deepens?|blooms?|unfolds?|reveals?|develops?|"
+CLAUSE_SPLIT = re.compile(r";|,\s*(?:and\s+)?(?=(?:then|soften(?:s|ed|ing)?|before|and then|while|followed|transitions?|deepens?|blooms?|unfolds?|reveals?|develops?|"
                           r"settles?|rests?|moves?|gives?|dries?|leading|evolving|finishing|ending|with|the heart|the base)\b)"
                           r"|\.\s+(?=(?:the heart|the base|its heart|at its heart|then|it then|finally)\b)", re.I)
 
@@ -133,7 +134,7 @@ GENERIC = {"citrus", "aromatic", "floral", "woody", "fruity", "spicy", "oriental
            "powdery", "gourmand", "marine", "florals", "woods", "spices", "fruits", "flowers", "white flowers"}
 VOCAB_LOWER = set()  # filled by load(): every known note name, lower case
 LAYER_WORDS = re.compile(r"\b(opens?|opening|begins?|starts?|bursts?|kicks off|heart|middle|base|settles?|rests?|dries?|finish(?:es|ing)?|"
-                         r"anchored|softens?|transitions?|deepens?|blooms?|unfolds?|reveals?|develops?|gives?|moves?|followed)\b", re.I)
+                         r"anchored|soften(?:s|ed|ing)?|transitions?|deepens?|blooms?|unfolds?|reveals?|develops?|gives?|moves?|followed)\b", re.I)
 
 
 def cue_first(c):
@@ -162,7 +163,7 @@ def clause_layer(c):
         return "top"
     if re.search(r"\bsettles?\b", low):
         return "base?"
-    if re.search(r"\b(softens?|transitions?|deepens?|blooms?|unfolds?|reveals?|develops?|gives? way|moves? into|followed by)\b", low):
+    if re.search(r"\b(soften(?:s|ed|ing)?|transitions?|deepens?|blooms?|unfolds?|reveals?|develops?|gives? way|moves? into|followed by)\b", low):
         return "mid?"
     return None
 
@@ -272,7 +273,7 @@ def load():
     sheet = {}
     for r in csv.DictReader(open(os.path.join(DATA, "fragrantica-perfumes.csv"), encoding="utf-8-sig")):
         if r["Top notes"].strip() or r["Heart notes"].strip() or r["Base notes"].strip():
-            for h in r["Product handles"].split(","):
+            for h in re.split(r"[,\s]+", r["Product handles"]):  # the sheet separates handles with spaces
                 if h.strip():
                     sheet[h.strip()] = {"top": clean_list(r["Top notes"]), "heart": clean_list(r["Heart notes"]),
                                         "base": clean_list(r["Base notes"])}
@@ -286,7 +287,9 @@ def load():
                        and n.lower() not in GENERIC)
     extra = os.path.join(OUT, "notes-ar.csv")
     if os.path.exists(extra):
-        note_ar.update({r["note"]: r["ar"] for r in csv.DictReader(open(extra, encoding="utf-8-sig")) if r["ar"].strip()})
+        curated = {r["note"]: r["ar"] for r in csv.DictReader(open(extra, encoding="utf-8-sig")) if r["ar"].strip()}
+        note_ar.update(curated)
+        vocab |= set(curated)  # curated, translated note names are real notes
     no_notes = {}
     nn = os.path.join(OUT, "no-notes.csv")
     if os.path.exists(nn):
@@ -314,8 +317,80 @@ def spec_line(f):
     return " · ".join(en), " · ".join(ar)
 
 
+def read_notes(p, sheet, facts):
+    """a product's notes from its own text: owner sheet, then note lines, then prose, then the older extraction (layer unknown)"""
+    h, body = p["Handle"], p["Body (HTML)"]
+    f = facts.get(h, {})
+    if h in sheet:
+        notes, source = dict(sheet[h]), "owner's Fragrantica sheet"
+    else:
+        notes, source = structured(body), "description note lines"
+        if not notes:
+            notes, source = prose_notes(body), "description prose"
+        if not any(v for k, v in notes.items() if k != "uncertain") and f:
+            # earlier extraction (fragrance-db.py) found notes this reading could not place: all on one "Notes:" line,
+            # because its layer guesses are not reliable enough to print
+            merged = []
+            for col in ("top", "heart", "base", "notes (layer unknown)"):
+                merged += [n for n in clean_list(f.get(col, "")) if n not in merged]
+            notes, source = ({"note": merged}, "earlier extraction, layers not used") if merged else ({}, "")
+    uncertain = bool(notes.pop("uncertain", None))
+    return {k: v for k, v in notes.items() if v}, source, uncertain
+
+
+def note_lines(notes, note_ar, missing):
+    lines_en, lines_ar = [], []
+    for lay in ("top", "heart", "base", "note"):
+        if lay in notes:
+            lines_en.append(f"{LABEL_EN[lay]}: " + ", ".join(notes[lay]))
+            names = []
+            for n in notes[lay]:
+                if not note_ar.get(n):
+                    missing[n] = missing.get(n, 0) + 1
+                names.append(note_ar.get(n, ""))
+            lines_ar.append(f"{LABEL_AR[lay]}: " + "، ".join(names) if all(names) else "")
+    return lines_en, lines_ar
+
+
+def build_set(spec, sets, by_handle, sheet, facts, note_ar, vocab, missing):
+    """one paragraph per perfume in the set: its name (and the set's own line about it), then its own notes"""
+    comps = spec["components"]
+    if isinstance(comps, str):
+        comps = sets[comps]
+    esc = lambda t: html.escape(t, quote=False)
+    en, ar, problems, sources = [f"<p>{esc(spec['intro_en'])}</p>"], [f"<p>{esc(spec['intro_ar'])}</p>"], [], []
+    for c in comps:
+        if "notes" in c:
+            notes, uncertain = c["notes"], False
+            sources.append(f"{c['name_en']}: {c['source']}")
+        else:
+            notes, source, uncertain = read_notes(by_handle[c["handle"]], sheet, facts)
+            sources.append(f"{c['name_en']}: product {c['handle']} ({source})" + (f"; {c['source']}" if c.get("source") else ""))
+            if source == "description prose":
+                odd = [n for ns in notes.values() for n in ns if n not in vocab]
+                if odd:
+                    problems.append(f"{c['name_en']}: unrecognised note words: " + ", ".join(odd))
+        if uncertain:
+            problems.append(f"{c['name_en']}: layer reading uncertain")
+        if not notes:
+            problems.append(f"{c['name_en']}: no notes")
+        lines_en, lines_ar = note_lines(notes, note_ar, missing)
+        if lines_ar and not all(lines_ar):
+            problems.append(f"{c['name_en']}: Arabic note name missing")
+        head_en = f"<strong>{esc(c['name_en'])}</strong>" + (f": {esc(c['line_en'])}" if c.get("line_en") else "")
+        head_ar = f"<strong>{esc(c['name_ar'])}</strong>" + (f": {esc(c['line_ar'])}" if c.get("line_ar") else "")
+        en.append("<p>" + "<br>".join([head_en] + [esc(x) for x in lines_en]) + "</p>")
+        ar.append("<p>" + "<br>".join([head_ar] + [esc(x) for x in lines_ar]) + "</p>")
+    if spec["spec_en"]:
+        en.append(f"<p>{spec['spec_en']}</p>")
+        ar.append(f"<p>{spec['spec_ar']}</p>")
+    return "".join(en), "".join(ar), problems, sources
+
+
 def build():
     export, ar_by_title, sheet, facts, note_ar, no_notes, vocab, hand = load()
+    sets = {k: v for k, v in json.load(open(os.path.join(OUT, "sets.json"), encoding="utf-8")).items() if not k.startswith("_")}
+    by_handle = {p["Handle"]: p for p in export}
     rows, missing_ar_notes = [], {}
     for p in export:
         h, body = p["Handle"], p["Body (HTML)"]
@@ -329,6 +404,15 @@ def build():
                          "old_ar": "", "new_ar": "", "problems": "Arabic row cannot be matched safely (duplicate title or different body)"})
             continue
         ar_body = ar_row["Translated content"] if ar_row else ""
+        if h in sets and isinstance(sets[h], dict):
+            en, ar, problems, sources = build_set(sets[h], sets, by_handle, sheet, facts, note_ar, vocab, missing_ar_notes)
+            if not ar_row:
+                problems.append("no Arabic row in the export")
+            rows.append({"handle": h, "title": p["Title"], "type": p["Type"], "status": p["Status"], "group": "set",
+                         "notes source": " | ".join(sources), "layers": "per perfume", "old_body": body, "new_body": en,
+                         "ar_identification": ar_row["Identification"] if ar_row else "", "old_ar": ar_body, "new_ar": ar,
+                         "problems": "; ".join(problems)})
+            continue
         if h in hand:
             rows.append({"handle": h, "title": p["Title"], "type": p["Type"], "status": p["Status"], "group": "hand",
                          "notes source": "own text, converted by hand", "layers": "", "old_body": body, "new_body": hand[h]["en"],
@@ -336,21 +420,7 @@ def build():
                          "new_ar": hand[h]["ar"], "problems": "" if ar_row else "no Arabic row in the export"})
             continue
         f = facts.get(h, {})
-        if h in sheet:
-            notes, source = sheet[h], "owner's Fragrantica sheet"
-        else:
-            notes, source = structured(body), "description note lines"
-            if not notes:
-                notes, source = prose_notes(body), "description prose"
-            if not any(notes.values()) and f:
-                # earlier extraction (fragrance-db.py) found notes this reading could not place: all on one "Notes:" line,
-                # because its layer guesses are not reliable enough to print
-                merged = []
-                for col in ("top", "heart", "base", "notes (layer unknown)"):
-                    merged += [n for n in clean_list(f.get(col, "")) if n not in merged]
-                notes, source = ({"note": merged}, "earlier extraction, layers not used") if merged else ({}, "")
-        uncertain = bool(notes.pop("uncertain", None))
-        notes = {k: v for k, v in notes.items() if v}
+        notes, source, uncertain = read_notes(p, sheet, facts)
         known =[l for l in ("top", "heart", "base") if l in notes]
         if len(known) == 3:
             group = "full"
@@ -417,12 +487,12 @@ def build():
 
 
 def write_batches(rows):
-    order = {"hand": 0, "partial": 1, "no notes": 2, "full": 3, "held": 4}
+    order = {"set": -1, "hand": 0, "partial": 1, "no notes": 2, "full": 3, "held": 4}
     rows.sort(key=lambda r: (order[r["group"]], r["status"] != "active", r["handle"]))
     ar_fields = list(next(csv.reader(open(AR_EXPORT, encoding="utf-8-sig", newline=""))))
     batches = []
-    n = 2
-    for group in ("hand", "partial", "no notes", "full"):
+    n = 1
+    for group in ("set", "hand", "partial", "no notes", "full"):
         g = [r for r in rows if r["group"] == group and not r["problems"]]
         for i in range(0, len(g), BATCH_SIZE):
             batches.append((f"batch-{n:02d}", group, g[i:i + BATCH_SIZE]))

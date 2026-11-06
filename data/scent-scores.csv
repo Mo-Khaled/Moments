@@ -18,7 +18,7 @@ karus-blue-spice-100ml,KARUS BLUE SPICE,Perfume,active,Woody 100; Musky 82; Patc
 karus-secret-musk-100ml,KARUS SECRET MUSK,Perfume,active,Gourmand 100; Woody 98; Musky 73,Gourmand,"Woody, Musky",notes: earlier extraction (layers not used),"close call, decided by web search: parfumo.com (sweet-spicy); perfumeoriental.com (musky, sweet, gourmand); notes tonka, chocolate"
 karus-oud-fire-100ml,KARUS OUD FIRE,Perfume,active,Spicy 100; Gourmand 97; Patchouli 91; Oud 85; Leather & Tobacco 68; Floral 61,Spicy,"Gourmand, Patchouli, Oud",notes: owner's Fragrantica sheet,"close call, decided by web search: parfumo.com (oriental-spicy); retailer ""spicy amber vanilla""; secondary capped at 3 (had 5)"
 karus-amber-gold-100ml,KARUS AMBER GOLD,Perfume,active,,,,unscored: notes match no family,
-nuha-cherry-blush-85ml,NUHA CHERRY BLUSH,Perfume,active,Gourmand 100; Fruity 79; Floral 65,Gourmand,"Fruity, Floral",notes: description prose,
+nuha-cherry-blush-85ml,NUHA CHERRY BLUSH,Perfume,active,Floral 100; Gourmand 86; Fruity 68,Floral,"Gourmand, Fruity",notes: description prose,
 nuha-vanilla-pearl-85ml,NUHA VANILLA PEARL,Perfume,active,Gourmand 100; Musky 65,Gourmand,Musky,notes: earlier extraction (layers not used),
 la-fede-aura-crisp-flower-100ml,LA FEDE AURA CRISP FLOWER,Perfume,active,Floral 100; Fresh & Aquatic 57; Citrus 56,Floral,"Fresh & Aquatic, Citrus",notes: description prose,
 la-fede-aura-kiss-of-rose-100ml,LA FEDE AURA KISS OF ROSE,Perfume,active,Fruity 100; Floral 94; Gourmand 88; Amber & Oriental 86; Musky 59; Citrus 21,Fruity,"Floral, Gourmand, Amber & Oriental",notes: owner's Fragrantica sheet,secondary capped at 3 (had 4)
@@ -510,7 +510,7 @@ strawberry-tres-leches,STRAWBERRY TRES LECHES,Perfume,active,Gourmand 100; Fruit
 toffee-ganache,TOFFEE GANACHE,Perfume,active,Gourmand 100,Gourmand,,notes: earlier extraction (layers not used),
 vanilla-cream-macaron,VANILLA CREAM MACARON,Perfume,active,Gourmand 100,Gourmand,,notes: earlier extraction (layers not used),
 9-pm-night-out,9 PM NIGHT OUT,Perfume,active,Gourmand 100; Patchouli 48; Leather & Tobacco 46; Spicy 43; Woody 27; Floral 19; Citrus 17; Fruity 14,Gourmand,,notes: owner's Fragrantica sheet,
-island-dreams,ISLAND DREAMS,Perfume,active,Musky 100; Citrus 35; Floral 30; Fruity 30,Musky,,notes: description prose,
+island-dreams,ISLAND DREAMS,Perfume,active,Musky 100; Floral 68; Fruity 64; Citrus 35,Musky,"Floral, Fruity",notes: description prose,
 ombre-notes,OMBRE NOTES,Perfume,active,Amber & Oriental 100; Musky 69,Amber & Oriental,Musky,notes: description prose,
 onyx-silver,ONYX SILVER,Perfume,active,Woody 100; Musky 81; Spicy 64; Citrus 47,Woody,"Musky, Spicy",notes: description prose,
 onyx,ONYX GOLD,Perfume,active,Woody 100; Amber & Oriental 83; Oud 82,Woody,"Amber & Oriental, Oud",notes: earlier extraction (layers not used),
@@ -631,7 +631,7 @@ pink-lady-1,PINK LADY - 100 ML,Perfume,active,Patchouli 100; Gourmand 86; Floral
 lady-supreme,LADY SUPREME - 100 ML,Perfume,active,Floral 100; Citrus 29,Floral,,notes: earlier extraction (layers not used),
 miss-gris,MISS GRIS - 100 ML,Perfume,active,Floral 100; Gourmand 84; Amber & Oriental 73; Woody 69; Spicy 33; Fruity 24,Floral,"Gourmand, Amber & Oriental, Woody",notes: description prose,
 miss-flora-1,MISS FLORA - 100 ML,Perfume,active,Floral 100; Woody 57; Musky 47; Gourmand 28; Fruity 26,Floral,Woody,notes: description prose,
-miss-sakura,MISS SAKURA - 100 ML,Perfume,active,Floral 100; Citrus 70; Gourmand 38; Fruity 36; Woody 35; Musky 32,Floral,Citrus,notes: earlier extraction (layers not used),
+miss-sakura,MISS SAKURA - 100 ML,Perfume,active,Floral 100; Gourmand 53; Musky 49; Woody 43; Citrus 33; Fruity 17,Floral,Gourmand,notes: owner's Fragrantica sheet,
 oud-muattar-kuwaiti,OUD MUATTAR KUWAITI,Incense,active,Oud 100,Oud,,notes: earlier extraction (layers not used),
 oud-muattar-bahraini,OUD MUATTAR BAHRAINI,Incense,active,Oud 100,Oud,,notes: earlier extraction (layers not used),
 sehr-lattafa-perfume-mist,SEHR LATTAFA PERFUME MIST,Perfume Mist,active,Gourmand 100; Amber & Oriental 46,Gourmand,,notes: earlier extraction (layers not used),
@@ -745,7 +745,7 @@ lip-stick,LIP STICK 150ML,Perfume,active,Floral 100; Fruity 75; Woody 65; Gourma
 wild-colt-elixir,WILD COLT ELIXIR 200ML,Perfume,active,Amber & Oriental 100; Woody 76; Leather & Tobacco 48; Spicy 41; Patchouli 30; Citrus 13; Fresh & Aquatic 11,Amber & Oriental,Woody,notes: owner's Fragrantica sheet,
 frankel-imagination-1,FRANKEL IMAGINATION 200ML,Perfume,active,Spicy 100; Patchouli 90; Woody 71; Citrus 68; Floral 43,Spicy,"Patchouli, Woody, Citrus",notes: description note lines,
 arrogate-addict,ARROGATE ADDICT 200ML,Perfume,active,Amber & Oriental 100; Floral 58; Gourmand 39; Citrus 27,Amber & Oriental,Floral,notes: description note lines,
-wild-colt-bakhour,WILD COLT BAKHOUR 150ML,Perfume,active,Woody 100; Patchouli 47; Amber & Oriental 37; Leather & Tobacco 32; Gourmand 31; Musky 23; Spicy 18; Citrus 13; Fruity 13,Woody,,notes: description note lines,
+wild-colt-bakhour,WILD COLT BAKHOUR 150ML,Perfume,active,Woody 100; Amber & Oriental 66; Patchouli 47; Leather & Tobacco 32; Gourmand 31; Musky 23; Spicy 18; Citrus 13; Fruity 13,Woody,Amber & Oriental,notes: description note lines,
 glitch,GLITCH 150ML,Perfume,active,Amber & Oriental 100; Gourmand 83; Floral 58; Woody 57; Fruity 29; Citrus 27,Amber & Oriental,"Gourmand, Floral, Woody",notes: owner's Fragrantica sheet,
 arrogate-collection-set,ARROGATE COLLECTION SET 3×25ML,Gift Set,active,,,,unscored: no notes and no web-search family,
 wild-colt-tobacco-1,WILD COLT TOBACCO 100ML,Perfume,active,Leather & Tobacco 100; Floral 87; Amber & Oriental 81; Oud 77; Woody 51; Fruity 29,Leather & Tobacco,"Floral, Amber & Oriental, Oud",notes: description note lines,secondary capped at 3 (had 4)
@@ -819,4 +819,4 @@ strike-black-125ml,STRIKE BLACK 125ML,Perfume,active,Spicy 100; Patchouli 47; Fr
 hook-blue-200ml,HOOK BLUE 200ML,Perfume,active,Woody 100; Patchouli 36; Floral 25; Spicy 23,Woody,,notes: earlier extraction (layers not used),
 odyssey-homme-body-mist,ODYSSEY HOMME BODY MIST,,active,Floral 100; Leather & Tobacco 90; Spicy 75; Gourmand 60,Floral,"Leather & Tobacco, Spicy, Gourmand",notes: earlier extraction (layers not used),
 breeze-100ml,BREEZE 100ML,Perfume,active,Woody 100; Musky 53; Floral 40; Amber & Oriental 31; Spicy 22; Citrus 19,Woody,Musky,notes: description note lines,
-miss-sakura-100-ml-copy,MISS SAKURA - 100 ML,Perfume,active,Floral 100; Citrus 70; Gourmand 38; Fruity 36; Woody 35; Musky 32,Floral,Citrus,notes: earlier extraction (layers not used),
+miss-sakura-100-ml-copy,MISS SAKURA - 100 ML,Perfume,active,Floral 100; Gourmand 53; Musky 49; Woody 43; Citrus 33; Fruity 17,Floral,Gourmand,notes: owner's Fragrantica sheet,

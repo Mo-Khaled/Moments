@@ -21,7 +21,9 @@ import csv
 import html
 import json
 import os
+import shutil
 import subprocess
+import tempfile
 import sys
 import time
 
@@ -29,7 +31,7 @@ ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 OUT = os.path.join(ROOT, "data", "descriptions")
 EXPORT = os.path.join(ROOT, "data", "backups", "products_export-2026-11-06.csv")
 STORE = "dezrva-2z.myshopify.com"
-API = "2025-07"
+API = "2026-07"
 EXPECTED_COUNT = 821
 
 PRODUCT_FIELDS = """id handle title status vendor productType tags descriptionHtml updatedAt
@@ -39,21 +41,29 @@ PRODUCT_FIELDS = """id handle title status vendor productType tags descriptionHt
 
 
 def gql(query, variables=None, mutation=False):
-    cmd = ["shopify", "store", "execute", "-s", STORE, "--version", API, "--no-input", "-j", "-q", query]
+    # query and variables go through files: HTML and Arabic text must not pass through the Windows command line
+    tmp = tempfile.mkdtemp()
+    qf, vf = os.path.join(tmp, "q.graphql"), os.path.join(tmp, "v.json")
+    open(qf, "w", encoding="utf-8").write(query)
+    cmd = [shutil.which("shopify"), "store", "execute", "-s", STORE, "--version", API, "--no-input", "-j", "--query-file", qf]
     if variables:
-        cmd += ["-v", json.dumps(variables)]
+        json.dump(variables, open(vf, "w", encoding="utf-8"), ensure_ascii=False)
+        cmd += ["--variable-file", vf]
     if mutation:
         cmd.append("--allow-mutations")
     for attempt in range(6):
-        res = subprocess.run(cmd, capture_output=True, text=True, encoding="utf-8", shell=(os.name == "nt"))
-        lines = [l for l in res.stdout.splitlines() if l.strip().startswith("{")]
-        data = json.loads(lines[-1]) if lines else {}
-        text = json.dumps(data)
-        if "THROTTLED" in text or "429" in text:
+        res = subprocess.run(cmd, capture_output=True, text=True, encoding="utf-8")
+        out = res.stdout.strip()
+        try:
+            data = json.loads(out[out.index("{"):]) if "{" in out else {}
+        except ValueError:
+            data = {}
+        text = json.dumps(data) + res.stderr
+        if "THROTTLED" in text or " 429" in text:
             time.sleep(20 * (attempt + 1))  # rate-limited: back off and resume, never hammer
             continue
-        if res.returncode != 0 or "error" in data and "data" not in data:
-            raise RuntimeError(f"store execute failed: {res.stdout[-500:]} {res.stderr[-500:]}")
+        if res.returncode != 0 or not data or "error" in data or "errors" in data:
+            raise RuntimeError(f"store execute failed: {res.stdout[-800:]} {res.stderr[-800:]}")
         return data.get("data", data)
     raise RuntimeError("still rate-limited after 6 tries; resume this batch later")
 
