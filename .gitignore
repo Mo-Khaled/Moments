@@ -67,3 +67,7 @@ MOMENTS-Identity-Full.zip
 # Store exports and generated data: re-export from Shopify admin / rebuild with scripts/fragrance-db.py
 MOMENTS_translations_*.csv
 data/fragrance.db
+
+# store exports (product data and translations), kept locally as backups
+products_export*.csv
+data/backups/

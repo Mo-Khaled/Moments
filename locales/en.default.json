@@ -1444,5 +1444,9 @@
       "night": "Deeper and bolder: evenings and going out.",
       "day-night": "Works from morning to evening."
     }
+  },
+  "brand_rows": {
+    "new_in": "New in",
+    "top_sellers": "Top sellers"
   }
 }

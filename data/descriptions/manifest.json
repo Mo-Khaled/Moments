@@ -1,0 +1,50 @@
+{
+ "batches": [
+  {
+   "batch": "batch-02",
+   "group": "hand",
+   "count": 4
+  },
+  {
+   "batch": "batch-03",
+   "group": "partial",
+   "count": 100
+  },
+  {
+   "batch": "batch-04",
+   "group": "partial",
+   "count": 11
+  },
+  {
+   "batch": "batch-05",
+   "group": "no notes",
+   "count": 34
+  },
+  {
+   "batch": "batch-06",
+   "group": "full",
+   "count": 100
+  },
+  {
+   "batch": "batch-07",
+   "group": "full",
+   "count": 100
+  },
+  {
+   "batch": "batch-08",
+   "group": "full",
+   "count": 100
+  },
+  {
+   "batch": "batch-09",
+   "group": "full",
+   "count": 100
+  },
+  {
+   "batch": "batch-10",
+   "group": "full",
+   "count": 84
+  }
+ ],
+ "held_back": 187
+}

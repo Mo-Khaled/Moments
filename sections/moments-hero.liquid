@@ -21,7 +21,7 @@
   assign cfg_override = section.settings.override
 -%}
 
-<section class="m-hero" data-m-hero aria-label="{{ 'homepage.hero.label' | t }}" style="--m-hero-scrim: {{ section.settings.scrim_strength }}%">
+<section class="m-hero" data-m-hero data-autoplay="{{ section.settings.autoplay_seconds | default: 6 }}" aria-label="{{ 'homepage.hero.label' | t }}" style="--m-hero-scrim: {{ section.settings.scrim_strength }}%">
   <script type="application/json" data-m-hero-config>
     {
       "override": {{ cfg_override | json }},
@@ -619,6 +619,15 @@
   }
 
   @media screen and (max-width: 749px) {
+    /* Phones: the icon bar sits in the middle; the stage takes horizontal swipes, the page keeps vertical scroll. */
+    .m-hero__controls {
+      justify-content: center;
+    }
+
+    .m-hero {
+      touch-action: pan-y;
+    }
+
     .m-slide__copy {
       padding-block-end: 96px;
     }
@@ -718,7 +727,52 @@
       syncPlayback();
     };
 
-    switches.forEach((btn) => btn.addEventListener('click', () => activate(btn.dataset.momentSwitch, true)));
+    // Phones: the moments advance on their own and follow a horizontal swipe (owner request 2026-11-06).
+    // Never with reduced motion; held while a finger or focus is on the hero, off screen or in a hidden tab.
+    const autoplayMs = (parseFloat(hero.dataset.autoplay) || 0) * 1000;
+    const rtl = document.dir === 'rtl' || root.dir === 'rtl';
+    let timer = 0;
+    let held = false;
+
+    const step = (dir) => {
+      const i = slides.indexOf(activeSlide());
+      const next = slides[(i + dir + slides.length) % slides.length];
+      if (next) activate(next.dataset.moment, false);
+    };
+
+    const schedule = () => {
+      clearTimeout(timer);
+      if (!autoplayMs || reduced || desktop.matches || slides.length < 2) return;
+      if (held || !state.visible || !state.tabVisible) return;
+      timer = setTimeout(() => { step(1); schedule(); }, autoplayMs);
+    };
+
+    let startX = 0;
+    let startY = 0;
+    let tracking = false;
+    hero.addEventListener('touchstart', (e) => {
+      if (desktop.matches || e.touches.length !== 1) return;
+      tracking = true;
+      startX = e.touches[0].clientX;
+      startY = e.touches[0].clientY;
+      held = true;
+      clearTimeout(timer);
+    }, { passive: true });
+    hero.addEventListener('touchend', (e) => {
+      held = false;
+      if (tracking) {
+        tracking = false;
+        const dx = e.changedTouches[0].clientX - startX;
+        const dy = e.changedTouches[0].clientY - startY;
+        if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy) * 1.5) step((dx < 0) !== rtl ? 1 : -1);
+      }
+      schedule();
+    }, { passive: true });
+    hero.addEventListener('touchcancel', () => { tracking = false; held = false; schedule(); }, { passive: true });
+    hero.addEventListener('focusin', () => { held = true; clearTimeout(timer); });
+    hero.addEventListener('focusout', (e) => { if (!hero.contains(e.relatedTarget)) { held = false; schedule(); } });
+
+    switches.forEach((btn) => btn.addEventListener('click', () => { activate(btn.dataset.momentSwitch, true); schedule(); }));
 
     if (pauseBtn) {
       pauseBtn.addEventListener('click', () => {
@@ -746,13 +800,15 @@
       new IntersectionObserver((entries) => {
         state.visible = entries.some((entry) => entry.isIntersecting);
         syncPlayback();
+        schedule();
       }, { threshold: 0.15 }).observe(hero);
     }
 
-    document.addEventListener('visibilitychange', () => { state.tabVisible = !document.hidden; syncPlayback(); });
-    desktop.addEventListener('change', () => activate(root.dataset.moment, false));
+    document.addEventListener('visibilitychange', () => { state.tabVisible = !document.hidden; syncPlayback(); schedule(); });
+    desktop.addEventListener('change', () => { activate(root.dataset.moment, false); schedule(); });
 
     activate(root.dataset.moment || (slides[0] && slides[0].dataset.moment), false);
+    schedule();
   })();
 {% endjavascript %}
 
@@ -791,6 +847,17 @@
       "step": 2,
       "unit": "%",
       "default": 74
+    },
+    {
+      "type": "range",
+      "id": "autoplay_seconds",
+      "label": "Phones: next moment every",
+      "info": "Phones only. Swiping or tapping an icon restarts the count. 0 turns it off.",
+      "min": 0,
+      "max": 12,
+      "step": 1,
+      "unit": "s",
+      "default": 6
     }
   ],
   "blocks": [

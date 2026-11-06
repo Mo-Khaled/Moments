@@ -1,47 +1,88 @@
-# Final report (unattended run, 2026-10-25)
+# Final report: unattended run, 2026-11-06
 
-Everything below is on the **dev theme** `moments-redesign` (#161294745791). The live theme was never changed (only read, once, to compare). **Nothing was published.**
-No store data was changed. Index of all documents: [README.md](README.md).
+Owner away. Every decision taken on the owner's behalf is in [decisions-log.md](decisions-log.md) under "2026-11-06 (unattended run)".
+The live theme was not touched. No filter was changed. No metafield was created. Nothing was bought. Fragrantica was not contacted.
+The first unattended run's report is [final-report-2026-10-25.md](final-report-2026-10-25.md).
 
-## What was done
-| Part | Result |
+## The one thing left: store writes
+No product description has been written to the store. The Shopify CLI can write product data (`shopify store execute`), but only
+after a one-time login that needs a browser approval, which cannot be given from this terminal. Everything else is ready.
+
+1. Log in once (opens a browser; approve):
+   `shopify store auth --store dezrva-2z.myshopify.com --scopes read_products,write_products,read_translations,write_translations`
+2. Write Lady Collection and check it on the product page (English and /ar):
+   `python scripts/apply-descriptions.py batch-01`
+3. Then the batches in order, one at a time: `batch-02` ... `batch-10`.
+
+Each run checks the product count (821) before and after, saves every product as it is live to `data/descriptions/<batch>/live-before.json`
+before writing it, skips any product whose live description differs from the 2026-11-06 export (someone changed it since), writes only
+the description and its Arabic translation, reads the product back (text must match, every other field unchanged, otherwise it restores
+the product and stops), and logs each handle to `apply-log.jsonl`. A rate limit (429) makes it wait and retry, never hammer.
+`--dry-run` shows the changes without calling the store.
+
+No terminal: the same batches can go through the admin. Products > Import `products-import.csv` with "Overwrite products with matching
+handles" ticked (the file has only Handle, Title unchanged and Body, so no other column can change), then Settings > Languages > Import
+`translations-ar-import.csv`.
+
+## What was finished
+| Task | Result |
 | --- | --- |
-| 1 Announcement bar | Slim rounded bar, one message at a time (original and sealed, cash on delivery, free shipping over the theme amount), CSS rotation, paused on hover and focus, static under reduced motion. Marquee kept as a setting. |
-| 2 Header | Logo at the start, exactly three primary items (Shop by Moment, Brands, Gifts as the accent link) from a theme setting, search pill (icon only below 1100 px), account, cart. No nav bar row on phones. No menu edits. |
-| 3 Panels | Shop by Moment: six moment cards (3 x 2) and two short columns (Shop by, The edits). Brands: up to eight logos and "All brands". Inside the shared gutter, no empty headings, keyboard (arrows, Escape returns focus), tap to open, phone drawer lists the six moments first. Search overlay has six moment chips. |
-| 4 Hero | Six moment slides as editor blocks, opens on the visitor's local hour (night 18-04, fresh 05-09, all day 10-17, rest by setting), labelled switcher, accent follows the moment, poster-first desktop-only video with pause and mute, "Fit" posters never crop the bottle. **No video exists:** ffmpeg is not installed here, so the experimental loop was not made; `scripts/prepare-video.mjs` is ready. |
-| 5 Brand marquee | Continuous, seamless, constant speed, RTL reversed, pause on hover and focus, static wrapped row under reduced motion. Logos derived from the store's own files (transparent, trimmed, one colour; Laverne's leopard silhouette removed). Zero gap to the next band, gold hairline. |
-| 6 Sections | Colour blocks, Shop by Moment tiles (marks 50% of the tile), best sellers carousel, Gift colour block, story band that follows the active moment, email band. Pillar row removed. `/pages/moments` uses the same tile component. |
-| 8 About page | `templates/page.about.json` (nine editable sections). Empty slots are hidden for shoppers. List of slots: [about-todo.md](about-todo.md). **Not assigned to any page** (that is a store change). |
-| 9 Carry-over | Haramain traces: none in theme code or rendered text on 14 pages. The old trust badges and About text claims rewritten. Design plan sections 5, 7, 9 and the clutter budget updated. |
-| 9b Cleanup | Branch `cleanup/2026-10-25` merged. Three unused snippets, one superseded section and 11 orphan locale keys removed; [cleanup-log.md](cleanup-log.md). One removal (`filters-toggle`) changed the collection layout and was **reverted**; it is used indirectly. |
-| Images | All 767 active products audited (my earlier "517" was an addition mistake). Summary, worst 40, rights register, sourcing pack (EN and AR), gap list, photography spec, normalisation script and six samples. Nothing uploaded. |
-| 10 Release prep | [release-checklist.md](release-checklist.md), [rollback.md](rollback.md). Live equals the baseline in every editor-managed file: no conflicts. Backup theme **not** created (needs your yes). |
+| 1 Backups | `data/backups/products_export-2026-11-06.csv`: 821 products (770 active + 51 draft), verified byte for byte. `data/backups/translations-ar-2026-11-06.csv`: 25,812 rows, identical row by row, SHA-256 f5db92d8.... |
+| 2 Descriptions | 634 products converted and ready in 10 batches, Arabic included; 187 held back with a reason each (`data/descriptions/held-back.csv`). Not yet written (see above). |
+| 3 Primary ties | 325 ties became 92 close calls with the new weighting; 31 decided by the product's own description, 8 by web search, 53 marked "unsure". |
+| 4 Secondary | 50+ kept, capped at 3. Average 1.60 Secondary families per perfume, maximum 3 (114 products capped). |
+| 5 Moments | `data/moment-scores-PROPOSED.csv`, marked "PROPOSED, NOT APPROVED", not wired anywhere. Average 2.07 secondary moments, maximum 3. |
+| 6 Unscored | 74 became 35. 752 products are scored from notes, 34 from a web-search scent family. |
+| 7 Slider titles | "وصل حديثاً" and "الأكثر مبيعاً" display from `locales/ar.json` (checked on staging), so no extra translation row. Top sellers stays Shopify's best-selling order. |
 
-## What passed (automated, dev theme)
-- `check-home.mjs`: one announcement message visible and rotating, three nav items, panels at most 3 columns and 4 links, no empty heading, panel content inside the gutter, header edges equal the content edge, nothing wraps or scrolls sideways, brand strip gap 0, hero default at 21:00, 07:00, 13:00, switcher changes the accent, layout shift 0.001 to 0.002, bottle not cropped, headline never behind the header. At 1920, 1440, 1280, 1024, 768, 375, LTR and RTL.
-- `check-tiles.mjs`: 120 tile states, no clipped mark, no orphan cell, no cropped tile image.
-- `check-terms.mjs`: no other-shop name, TODO text, distributor claim or award claim on 14 pages. `check-links.mjs`: 75 internal links resolve.
-- `shopify theme check`: 0 errors. `check-traces.sh`: clean before every push.
+## Descriptions per batch
+| Batch | Group | Products | Drafts |
+| --- | --- | --- | --- |
+| batch-01 | Lady Collection (approved) | 1 | 0 |
+| batch-02 | Sets and Arabic-only bodies, converted by hand like Lady Collection | 4 | 0 |
+| batch-03, 04 | Partial notes (only the known layers) | 111 | 0 |
+| batch-05 | No notes: scent character and family from web search | 34 | 32 |
+| batch-06 to 10 | Full notes | 484 | 1 |
+| | **Ready** | **634** | 33 |
 
-## What is weak (impeccable critique, single-context; ⚠️ DEGRADED: no sub-agents, by your default)
-1. **Imagery.** One real photograph on the whole homepage (the Island Sun poster). Five hero slides, the tiles, the gift block and the About page are colour fields and placeholder line-art marks. It will not feel as rich as the reference until footage and photography exist. This is the biggest gap.
-2. **Best sellers card.** The brief asked for a hover image swap and add-to-cart on the image. **Not built.** The carousel uses the new card with large bottles and the compare-at fix only.
-3. **Cursor:** only the custom pointer (arrow and hand). There is no cursor follower; the owner decided against it.
-4. **Performance.** Mobile score 46, same as live today (45 to 46); LCP 5.4 to 5.8 s against live 7.0 to 7.6 s; blocking time about 200 ms above live. Targets (70+, LCP under 2.5 s) are not met; most of the cost is Shopify's own injected scripts.
-5. **RTL is emulated** (English text with `dir="rtl"`). Real Arabic needs the store language and a native review of the draft strings. `rtl.css` (loaded only for Arabic) was not exercised.
-6. **Panels.** The Shop by Moment panel's right side is short (Shop by: For Her, For Him; The edits: three links) and leaves empty space under it; "Unisex" is missing until a page exists.
-7. **About page** is thinner than it will be: the story and support sections are hidden until you supply facts, "What we sell" shows a colour field instead of a photo, and the promises are draft copy.
-8. **Skin & Body, New Moments, Offers** no longer appear in the header or panel and the footer menu does not list them, so they are reachable only by URL until you decide where they live (a store menu change).
-9. **Gold hairline contrast** on the Gift, Fresh and Love tiles is low (decorative only). The hero mark is placeholder art.
-10. **Not tested:** checkout (needs a real cart), the customer account login (Shopify blocks scripted requests), video pause off-screen (no video), real-device touch for the panel tap behaviour.
-11. **Cleanup verification** is "no difference attributable to the cleanup", not literally zero pixels: the third-party PayPal button, collection sort and gradient dithering (at most 6 levels) vary between identical runs.
+Each batch folder holds `products-import.csv`, `translations-ar-import.csv`, `review.csv` (old and new text side by side), `handles.txt`
+and the rollback files.
 
-## What I need from you
-See [needs-from-owner.md](needs-from-owner.md). The short version: facts (support phone and email, delivery areas, story), footage and photography, your decisions on the Haramain leftovers in store data, the Unisex page, assigning the About template, adding Arabic, the backup theme, and the word "publish" when you are ready.
+Held back (187), by first reason: the layer cannot be read safely because a layer word follows its notes (94), a "note" that is not a
+known note name (58), no story in the current text (20), Arabic row cannot be matched because of a duplicated title (6), Arabic note
+name missing (4), no notes and no reliable web result (4), single-source web result (1). By type: 147 perfumes, 20 deodorants,
+5 incense, 5 gift sets, 3 bags, 7 other.
 
-## Decisions I made for you
-[decisions-log.md](decisions-log.md), 15 entries, each with how to revert.
+## Scores
+`data/scent-scores.csv`: per product the family scores (strongest = 100), Primary, up to 3 Secondary, the source of the scores, and flags
+("close call, decided by the description", "decided by web search", "unsure", "secondary capped").
+Primary families: Gourmand 189, Floral 163, Amber & Oriental 125, Woody 113, Oud 53, Spicy 35, Patchouli 27, Musky 26,
+Leather & Tobacco 25, Fruity 19, Citrus 7, Fresh & Aquatic 4.
+Still unscored (35): 27 with no notes and no reliable web result (mostly the held-back drafts, bags, sets), 8 whose "notes" are only
+describing words. Every one is listed in the file with its reason.
 
-## Rollback
-Nothing live changed, so there is nothing to roll back today. After you publish: publish the backup theme (steps in [rollback.md](rollback.md)).
+## Uncertain or unfinished
+- **Store writes** (all batches), see the top of this report.
+- **53 "unsure" Primary families**: two families within 5 points and the description does not settle it. Web search was done for 8 of
+  64 close perfumes, then stopped to keep the run within capacity; the rest are flagged in `data/scent-scores.csv`.
+- **187 held-back descriptions**: listed with reasons; they need a person's reading (most are prose where notes come before the layer word).
+- **Arabic**: the stories are the store's existing Arabic translations; I wrote 110 note names (`data/descriptions/notes-ar.csv`), the
+  Arabic for 34 no-notes products and 4 hand conversions. A native read of those is advised.
+- **Moment rule**: a proposal only. Gift never leads (damped on purpose); review the fit table in `scripts/scent-scores.py`.
+- **Filters**: untouched. State found earlier: live shows both the theme's tag filters and the Search & Discovery filters (duplicates);
+  staging shows only Search & Discovery because its filters block is older. No record of a cleanup exists.
+
+## How to roll back a batch
+- Written with the script: `python scripts/apply-descriptions.py batch-NN --rollback` restores each product's description and Arabic
+  translation from `data/descriptions/batch-NN/live-before.json` (the live state saved just before the write; an Arabic translation that
+  did not exist is removed).
+- Through the admin: import `data/descriptions/batch-NN/rollback-products.csv` (overwrite ticked) and
+  `rollback-translations-ar.csv`. Both hold exactly the 2026-11-06 backup text for the products in `handles.txt`. An Arabic translation
+  that did not exist before cannot be deleted by import; remove it in Translate & Adapt.
+- Full restore of every description: the backup export `data/backups/products_export-2026-11-06.csv` (Handle, Title, Body columns).
+
+## Files
+- Scripts: `scripts/build-descriptions.py` (builds the batches from the backups), `scripts/apply-descriptions.py` (writes, verifies,
+  rolls back), `scripts/scent-scores.py` (scores and the moment proposal).
+- Data: `data/descriptions/` (batches, held-back list, no-notes web results, hand conversions, Arabic note names),
+  `data/scent-scores.csv`, `data/moment-scores-PROPOSED.csv`, `data/scores-tiebreak-web.csv`, `data/backups/`.

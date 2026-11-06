@@ -1,7 +1,17 @@
 
 
-{% assign button_collection = closest.collection %}
-{% assign button_url = button_collection.url %}
+{% liquid
+  assign button_collection = closest.collection
+  assign button_url = button_collection.url
+  # Brand rows: "View all" opens the brand page in the row's own order
+  if section.settings.source == 'page'
+    assign button_collection = collection
+    assign button_url = collection.url
+    if section.settings.sort != 'default'
+      assign button_url = button_url | append: '?sort_by=' | append: section.settings.sort
+    endif
+  endif
+%}
 
 {% if button_collection.products_count > section.settings.max_products %}
   {% render 'button', link: button_url %}

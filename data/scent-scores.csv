@@ -1,0 +1,822 @@
+﻿handle,title,type,status,family scores,primary family,secondary families,score source,flags
+lady-collection,LADY COLLECTION,Perfume Set,active,,,,unscored: no notes and no web-search family,
+frankel-collection,FRANKEL COLLECTION,Perfume Set,active,,,,unscored: no notes and no web-search family,
+stardust,STARDUST,Extrait de Parfum,active,,,,unscored: no notes and no web-search family,
+musk-powder-body-spray-200ml,MUSK POWDER BODY SPRAY 200ML,Body Spray,active,Musky 100,Musky,,notes: earlier extraction (layers not used),
+pure-lamya-oil-perfume-20ml,PURE LAMYA OIL PERFUME 20ML,Perfume Oil,active,Oud 100; Floral 83; Woody 64,Oud,"Floral, Woody",notes: description prose,
+intoxicate-mystique-100ml,INTOXICATE MYSTIQUE 100ML,Perfume,active,Amber & Oriental 100; Gourmand 83; Woody 57; Musky 35; Citrus 27,Amber & Oriental,"Gourmand, Woody",notes: description note lines,
+muse-100ml,MUSE 100ML,Perfume,active,Gourmand 100; Floral 41; Amber & Oriental 38; Musky 25; Citrus 13,Gourmand,,notes: description note lines,
+onyx-galaxy-100ml,ONYX GALAXY 100ML,Perfume,active,Woody 100,Woody,,notes: description prose,
+sueno-100ml,SUEÑO 100ML,Perfume,active,Gourmand 100; Floral 66; Musky 42; Fruity 20,Gourmand,Floral,notes: description note lines,
+intoxicate-100-ml,INTOXICATE,Perfume,active,Gourmand 100; Amber & Oriental 96,Gourmand,Amber & Oriental,notes: description prose,"close call, decided by web search: parfumo.com/Perfumes/la-fede/intoxicate (gourmand-sweet, Gourmand first accord)"
+intoxicate-blue-elixir-100-ml,INTOXICATE BLUE ELIXIR,Perfume,active,Spicy 100; Gourmand 98; Amber & Oriental 98; Floral 62; Citrus 29,Spicy,"Gourmand, Amber & Oriental, Floral",notes: description prose,"close call, decided by the description"
+empire-empress-100ml,EMPIRE EMPRESS,Perfume,active,Floral 100; Oud 99; Woody 65; Musky 53,Floral,"Oud, Woody, Musky",notes: description prose,"close call, decided by the description"
+empire-victor-100ml,EMPIRE VICTOR,Perfume,active,Gourmand 100,Gourmand,,notes: earlier extraction (layers not used),
+empire-crown-100ml,EMPIRE CROWN,Perfume,active,Leather & Tobacco 100; Musky 86; Woody 71; Spicy 45; Citrus 33,Leather & Tobacco,"Musky, Woody",notes: description prose,
+hareem-sultan-75-ml,HAREEM SULTAN 75 ML,Perfume,active,Floral 100; Musky 90,Floral,Musky,notes: description prose,
+karus-blue-spice-100ml,KARUS BLUE SPICE,Perfume,active,Woody 100; Musky 82; Patchouli 77; Floral 68; Spicy 43; Citrus 32,Woody,"Musky, Patchouli, Floral",notes: description prose,
+karus-secret-musk-100ml,KARUS SECRET MUSK,Perfume,active,Gourmand 100; Woody 98; Musky 73,Gourmand,"Woody, Musky",notes: earlier extraction (layers not used),"close call, decided by web search: parfumo.com (sweet-spicy); perfumeoriental.com (musky, sweet, gourmand); notes tonka, chocolate"
+karus-oud-fire-100ml,KARUS OUD FIRE,Perfume,active,Spicy 100; Gourmand 97; Patchouli 91; Oud 85; Leather & Tobacco 68; Floral 61,Spicy,"Gourmand, Patchouli, Oud",notes: owner's Fragrantica sheet,"close call, decided by web search: parfumo.com (oriental-spicy); retailer ""spicy amber vanilla""; secondary capped at 3 (had 5)"
+karus-amber-gold-100ml,KARUS AMBER GOLD,Perfume,active,,,,unscored: notes match no family,
+nuha-cherry-blush-85ml,NUHA CHERRY BLUSH,Perfume,active,Gourmand 100; Fruity 79; Floral 65,Gourmand,"Fruity, Floral",notes: description prose,
+nuha-vanilla-pearl-85ml,NUHA VANILLA PEARL,Perfume,active,Gourmand 100; Musky 65,Gourmand,Musky,notes: earlier extraction (layers not used),
+la-fede-aura-crisp-flower-100ml,LA FEDE AURA CRISP FLOWER,Perfume,active,Floral 100; Fresh & Aquatic 57; Citrus 56,Floral,"Fresh & Aquatic, Citrus",notes: description prose,
+la-fede-aura-kiss-of-rose-100ml,LA FEDE AURA KISS OF ROSE,Perfume,active,Fruity 100; Floral 94; Gourmand 88; Amber & Oriental 86; Musky 59; Citrus 21,Fruity,"Floral, Gourmand, Amber & Oriental",notes: owner's Fragrantica sheet,secondary capped at 3 (had 4)
+aura-pista-dessert-100ml,AURA PISTA DESSERT,Perfume,active,Gourmand 100; Musky 35,Gourmand,,notes: earlier extraction (layers not used),
+khadlaj-25-loyalty-100ml,25 LOYALTY,Perfume,active,Floral 100; Amber & Oriental 96; Woody 94; Fruity 87; Musky 68; Spicy 61; Citrus 30,Floral,"Amber & Oriental, Woody, Fruity",notes: description prose,"close call, decided by the description; secondary capped at 3 (had 5)"
+khadlaj-25-trust-100ml,25 TRUST,Perfume,active,Gourmand 100; Woody 29; Musky 24; Floral 22; Fruity 17; Citrus 9,Gourmand,,notes: owner's Fragrantica sheet,
+khadlaj-25-integrity-100ml,25 INTEGRITY,Perfume,active,Spicy 100; Gourmand 48,Spicy,,notes: description prose,
+ghadeer-gold-100ml,GHADEER GOLD,Perfume,active,Amber & Oriental 100; Oud 92; Musky 69,Amber & Oriental,"Oud, Musky",notes: earlier extraction (layers not used),
+gaith-100ml,GAITH,Perfume,active,Floral 100; Citrus 29,Floral,,notes: description prose,
+musk-al-sabah-100ml,MUSK AL SABAH,Perfume,active,Amber & Oriental 100; Musky 85; Gourmand 77; Fruity 62; Citrus 30,Amber & Oriental,"Musky, Gourmand, Fruity",notes: owner's Fragrantica sheet,
+maison-epoque-artistique-100ml,MAISON EPOQUE ARTISTIQUE,Perfume,active,Gourmand 100; Musky 67; Fresh & Aquatic 60,Gourmand,"Musky, Fresh & Aquatic",notes: earlier extraction (layers not used),
+maison-limaginaire-100ml,MAISON L'IMAGINAIRE,Perfume,active,Musky 100; Amber & Oriental 91; Citrus 35,Musky,Amber & Oriental,notes: description prose,
+sensous-night-100ml,SENSOUS NIGHT,Perfume,active,Gourmand 100; Musky 75; Patchouli 47; Fruity 35,Gourmand,Musky,notes: description prose,
+oud-noir-100ml,OUD NOIR,Perfume,active,Amber & Oriental 100; Oud 36; Woody 36; Musky 28,Amber & Oriental,,notes: earlier extraction (layers not used),
+rose-couture-100ml,ROSE COUTURE,Perfume,active,Floral 100; Musky 67,Floral,Musky,notes: earlier extraction (layers not used),
+wow-oud-100ml,WOW OUD,Perfume,active,Oud 100; Leather & Tobacco 75; Gourmand 72; Floral 45; Spicy 35,Oud,"Leather & Tobacco, Gourmand",notes: owner's Fragrantica sheet,
+fursan-white-100ml,FURSAN WHITE,Perfume,active,Gourmand 100; Musky 93; Floral 74,Gourmand,"Musky, Floral",notes: earlier extraction (layers not used),
+fursan-brown-100ml,FURSAN BROWN,Perfume,active,Woody 100; Amber & Oriental 64; Patchouli 54; Spicy 43; Citrus 19,Woody,"Amber & Oriental, Patchouli",notes: owner's Fragrantica sheet,
+cream-velvet-100ml,CREAM VELVET,Perfume,active,Gourmand 100; Woody 97; Musky 71,Gourmand,"Woody, Musky",notes: earlier extraction (layers not used),"close call, decided by web search: parfumo.com (sweet-gourmand); flora-parfums.com (Oriental - Gourmand - Floral)"
+symbol-of-love-100ml,SYMBOL OF LOVE,Perfume,active,Floral 100; Musky 41,Floral,,notes: earlier extraction (layers not used),
+symbol-of-power-100ml,SYMBOL OF POWER,Perfume,active,Woody 100,Woody,,notes: description prose,
+zayaan-gold-100ml,ZAYAAN GOLD,Perfume,active,Amber & Oriental 100; Gourmand 58; Patchouli 48; Spicy 43; Floral 36; Fruity 20; Citrus 12,Amber & Oriental,Gourmand,notes: owner's Fragrantica sheet,
+desert-rose-100ml,DESERT ROSE,Perfume,active,Floral 100; Fruity 94; Musky 89,Floral,"Fruity, Musky",notes: description prose,
+bleu-glace-100ml,BLEU GLACE,Perfume,active,Musky 100,Musky,,notes: description prose,
+azure-velvet-100ml,AZURE VELVET,Perfume,active,Woody 100; Gourmand 98,Woody,Gourmand,notes: description prose,"close call, decided by web search: parfumo.com (sweet-woody); retailer ""woody aromatic"""
+caffe-latte-100ml,CAFFE LATTE,Perfume,active,Gourmand 100; Musky 35,Gourmand,,notes: earlier extraction (layers not used),
+mocha-latte-100ml,MOCHA LATTE,Perfume,active,Gourmand 100,Gourmand,,notes: description prose,
+rasayel-vid-100ml,RASAYEL VID,Perfume,active,Floral 100; Musky 89; Citrus 31,Floral,Musky,notes: description prose,
+rasayel-shagaf-100ml,RASAYEL SHAGAF,Perfume,active,Amber & Oriental 100; Woody 94,Amber & Oriental,Woody,notes: description prose,
+sara-100ml,SARA,Perfume,active,Floral 100; Patchouli 57; Gourmand 44,Floral,Patchouli,notes: earlier extraction (layers not used),
+saqr-al-badia-100ml,SAQR AL BADIA,Perfume,active,Woody 100; Musky 64; Fresh & Aquatic 33; Citrus 32,Woody,Musky,notes: description prose,
+white-forest-strawberry-100ml,WHITE FOREST STRAWBERRY,Perfume,active,Fruity 100,Fruity,,notes: description prose,
+coveted-shades-100ml,COVETED SHADES,Perfume,active,Citrus 100; Musky 95; Spicy 83,Citrus,"Musky, Spicy",notes: owner's Fragrantica sheet,"close call, decided by web search: beautyhouse.com; amazon.com (citrus, fresh, spicy)"
+coveted-diamond-100ml,COVETED DIAMOND,Perfume,active,Woody 100; Musky 82,Woody,Musky,notes: description prose,
+island-100ml,ISLAND EXTRAIT DE PARFUM,Perfume,active,Fresh & Aquatic 100; Floral 97,Fresh & Aquatic,Floral,notes: earlier extraction (layers not used),"close call, decided by the description"
+island-vanilla-dunes-100ml,ISLAND VANILLA DUNES,Perfume,active,Gourmand 100; Amber & Oriental 67; Spicy 51; Musky 46; Floral 43; Woody 43; Citrus 16,Gourmand,"Amber & Oriental, Spicy",notes: owner's Fragrantica sheet,
+cloud-candy-100ml,CLOUD CANDY,Perfume,active,Gourmand 100; Musky 21,Gourmand,,notes: earlier extraction (layers not used),
+celeste-aqua-100ml,CELESTE AQUA,Perfume,active,Woody 100; Musky 82,Woody,Musky,notes: description prose,
+celeste-fleur-100ml,CELESTE FLEUR,Perfume,active,Gourmand 100,Gourmand,,notes: earlier extraction (layers not used),
+celeste-joice-100ml,CELESTE JOICE,Perfume,active,Musky 100; Woody 99; Fruity 42,Musky,Woody,notes: description prose,"close call, unsure: Musky, Woody"
+celeste-toffee-100ml,CELESTE TOFFEE,Perfume,active,Gourmand 100; Musky 22,Gourmand,,notes: earlier extraction (layers not used),
+bahaar-80gm,OUD MUATTAR MAAMUL AL BAHAR,Incense,active,Oud 100; Fresh & Aquatic 28,Oud,,notes: earlier extraction (layers not used),
+rukaiya-80gm,RUKAIYA,Perfume,active,Amber & Oriental 100; Oud 92; Floral 69,Amber & Oriental,"Oud, Floral",notes: earlier extraction (layers not used),
+maamul-khayaali-48gm,MAAMUL KHAYAALI,Incense,draft,,,,unscored: no notes and no web-search family,
+maamul-cambodi-48gm,MAAMUL CAMBODI,Incense,draft,Oud 100,Oud,,web search family (medium): jumia.com.eg (Khadlaj Cambodian Bakhoor Maamoul),
+samou-al-oud-40gm,OUD MUATTAR SAMOU AL OUD,Incense,active,Oud 100,Oud,,notes: earlier extraction (layers not used),
+om-khawateer-35gm,OUD MUATTAR KHAWAATER,Incense,active,Oud 100,Oud,,notes: earlier extraction (layers not used),
+rukaiya-55gm,BAKHOOR RUKAIYA,Incense,active,Oud 100; Floral 75,Oud,Floral,notes: earlier extraction (layers not used),
+taiba-58gm,TAIBA,Perfume,active,Amber & Oriental 100; Oud 92; Musky 69,Amber & Oriental,"Oud, Musky",notes: earlier extraction (layers not used),
+sougah-55gm,SOUGAH,Perfume,active,Amber & Oriental 100; Oud 92,Amber & Oriental,Oud,notes: earlier extraction (layers not used),
+bakhoor-al-bahaar-55gm,BAKHOOR AL BAHAAR,Incense,active,Oud 100,Oud,,notes: earlier extraction (layers not used),
+al-bahaar-gold-55gm,AL BAHAAR GOLD,Perfume,active,Oud 100; Amber & Oriental 96,Oud,Amber & Oriental,notes: earlier extraction (layers not used),"close call, decided by web search: khadlaj-perfumes.com (floral bakhoor, oud in the base; no amber listed)"
+alf-mabrook-42gm,ALF MABROOK,Perfume,draft,,,,unscored: no notes and no web-search family,
+mabrook-42gm,MABROOK,Perfume,draft,Oud 100,Oud,,web search family (medium): al-rashad.com; albazaarmarket.com,
+azraq-40gm,OUD MUATTAR AL AZRAQ,Incense,active,Amber & Oriental 100; Oud 81; Fresh & Aquatic 55,Amber & Oriental,"Oud, Fresh & Aquatic",notes: earlier extraction (layers not used),
+maamul-wardi-48gm,OUD MUATTAR MAAMUL WARDI,Incense,active,Oud 100; Floral 31,Oud,,notes: earlier extraction (layers not used),
+rimaal-40gm,OUD MUATTAR RIMAAL,Incense,active,Oud 100; Amber & Oriental 41,Oud,,notes: earlier extraction (layers not used),
+la-yuqawam-320ml,FRASH LA YUQAWAM AIR FRESHENER,Air Freshener,active,Amber & Oriental 100; Oud 92; Musky 69,Amber & Oriental,"Oud, Musky",notes: earlier extraction (layers not used),
+farfasha-320ml,FRASH FARFASHA AIR FRESHENER,Air Freshener,active,Floral 100,Floral,,notes: earlier extraction (layers not used),
+hareem-sultan-320ml,FRASH HAREEM AL SULTAN AIR FRESHENER,Air Freshener,active,Floral 100; Musky 90,Floral,Musky,notes: earlier extraction (layers not used),
+qissa-320ml,FRASH QISSA AIR FRESHENER,Air Freshener,active,Amber & Oriental 100,Amber & Oriental,,web search family (medium): own description; khadlaj-perfumes.com; beautyhouse.com,
+dalouaa-320ml,FRASH DALOUAA AIR FRESHENER,Air Freshener,active,Floral 100,Floral,,web search family (high): own description; khadlaj-perfumes.com; alrashad.com,
+musky-320ml,FRASH MUSKY AIR FRESHENER,Air Freshener,active,Musky 100,Musky,,notes: earlier extraction (layers not used),
+frash-mahasin-abaya-320ml,FRASH MAHASIN ABAYA,Air Freshener,active,Woody 100; Musky 73,Woody,Musky,notes: earlier extraction (layers not used),
+al-majalis-320ml,FRASH AL MAJALIS AIR FRESHENER,Air Freshener,active,Amber & Oriental 100; Oud 49,Amber & Oriental,,notes: earlier extraction (layers not used),
+makhmali-320ml,FRASH MAKHMALI AIR FRESHENER,Air Freshener,active,Musky 100; Floral 90,Musky,Floral,notes: earlier extraction (layers not used),
+hareem-sultan-gold-35ml,HAREEM SULTAN GOLD 35ML,Perfume,active,Woody 100; Floral 82; Musky 73,Woody,"Floral, Musky",notes: earlier extraction (layers not used),
+mahasin-khalta-original-100ml,MAHASIN KHALTA ORIGINAL,Perfume,draft,,,,unscored: no notes and no web-search family,
+mahasin-khalta-abaya-100ml,MAHASIN KHALTA ABAYA,Perfume,draft,,,,unscored: no notes and no web-search family,
+mahasin-khalta-la-yuqawam-100ml,MAHASIN KHALTA LA YUQAWAM,Perfume,draft,,,,unscored: no notes and no web-search family,
+mahasin-khalta-silver-100ml,MAHASIN KHALTA SILVER,Perfume,draft,,,,unscored: no notes and no web-search family,
+makhmali-100ml,MAKHMALI,Perfume,draft,Musky 100; Amber & Oriental 60,Musky,Amber & Oriental,web search family (medium): frencharabianperfume.com (Khalta Makhmali),
+bedoon-ism-100ml,BEDOON ISM,Perfume,draft,,,,unscored: no notes and no web-search family,
+romancia-100ml,ROMANCIA,Perfume,draft,Floral 100,Floral,,web search family (high): frencharabianperfume.com; anabis.com,
+mirsaal-passion-100-ml,MIRSAAL PASSION,Perfume,active,Gourmand 100; Fruity 34,Gourmand,,notes: description prose,
+mirsaal-valentine-100-ml,MIRSAAL VALENTINE,Perfume,active,Floral 100; Musky 67; Fresh & Aquatic 47; Fruity 47; Citrus 23,Floral,Musky,notes: description prose,
+risala-autograph-100-ml,RISALA AUTOGRAPH,Perfume,active,Amber & Oriental 100; Fruity 66; Floral 65; Leather & Tobacco 57; Woody 39; Gourmand 37; Citrus 31; Spicy 16,Amber & Oriental,"Fruity, Floral, Leather & Tobacco",notes: description prose,
+risala-for-you-100-ml,RISALA FOR YOU,Perfume,active,Gourmand 100; Floral 76; Amber & Oriental 20; Musky 18; Spicy 9,Gourmand,Floral,notes: description prose,
+risala-forever-100-ml,RISALA FOREVER,Perfume,active,Gourmand 100; Spicy 17; Musky 15; Fruity 15,Gourmand,,notes: description prose,
+muharib-100-ml,MUHARIB,Perfume,active,Amber & Oriental 100; Woody 78; Spicy 66; Floral 48; Patchouli 37; Citrus 12,Amber & Oriental,"Woody, Spicy",notes: description prose,
+muharib-alpha-100-ml,MUHARIB ALPHA,Perfume,active,Gourmand 100; Spicy 50; Leather & Tobacco 35; Amber & Oriental 28; Floral 16; Fresh & Aquatic 11,Gourmand,Spicy,notes: description prose,
+al-majd-100-ml,ALMAJD,Perfume,active,Fruity 100; Spicy 81; Amber & Oriental 68; Musky 58; Gourmand 56; Citrus 55,Fruity,"Spicy, Amber & Oriental, Musky",notes: description prose,secondary capped at 3 (had 5)
+khulood-100-ml,KHULOOD,Perfume,active,Woody 100; Fruity 60; Amber & Oriental 59; Musky 57; Patchouli 48; Floral 34; Citrus 30; Fresh & Aquatic 20; Spicy 18,Woody,"Fruity, Amber & Oriental, Musky",notes: description prose,
+al-jawad-100-ml,ALJAWAD,Perfume,active,Amber & Oriental 100; Gourmand 49; Musky 37; Fruity 32; Woody 32; Spicy 22; Floral 18,Amber & Oriental,,notes: description prose,
+shouq-100-ml,SHOUQ,Perfume,active,Gourmand 100; Floral 56; Citrus 29,Gourmand,Floral,notes: description prose,
+aseel-100-ml,ASEEL,Perfume,active,Gourmand 100; Amber & Oriental 80; Fruity 50; Patchouli 38; Spicy 35; Woody 29; Fresh & Aquatic 24; Floral 15; Citrus 9,Gourmand,"Amber & Oriental, Fruity",notes: description prose,
+al-fursan-100-ml,ALFURSAN,Perfume,active,Amber & Oriental 100; Gourmand 54; Woody 35; Patchouli 34; Fresh & Aquatic 31; Floral 31; Fruity 19; Citrus 11,Amber & Oriental,Gourmand,notes: description prose,
+bonita-femme-100-ml,BONITA FEMME,Perfume,active,Floral 100; Woody 59; Gourmand 58; Citrus 19,Floral,"Woody, Gourmand",notes: description prose,
+bonita-la-rose-100-ml,BONITA LA ROSE,Perfume,active,Woody 100; Floral 60; Amber & Oriental 50; Gourmand 34; Musky 32; Spicy 18; Citrus 10,Woody,"Floral, Amber & Oriental",notes: description prose,
+supremacy-pink,SUPREMACY PINK,Perfume,active,Floral 100; Amber & Oriental 62; Musky 53; Spicy 28,Floral,"Amber & Oriental, Musky",notes: description prose,
+supremacy-pearl-mauve,SUPREMACY PURPLE,Perfume,active,Musky 100; Fruity 76; Amber & Oriental 62; Gourmand 61; Citrus 42,Musky,"Fruity, Amber & Oriental, Gourmand",notes: description prose,
+supremacy-silver,SUPREMACY SILVER - 150 ML,Perfume,active,Amber & Oriental 100; Fruity 91; Musky 85; Woody 75; Patchouli 72; Floral 51; Citrus 27,Amber & Oriental,"Fruity, Musky, Woody",notes: description prose,secondary capped at 3 (had 5)
+supremacy-not-only-intense,SUPREMACY NOT ONLY INTENSE 150 ML,Perfume,active,Spicy 100; Amber & Oriental 99; Musky 86; Patchouli 80; Floral 71; Fruity 36; Citrus 33,Spicy,"Amber & Oriental, Musky, Patchouli",notes: description prose,"close call, unsure: Spicy, Amber & Oriental; secondary capped at 3 (had 4)"
+rare,RARE,Perfume,active,Gourmand 100; Spicy 89; Floral 67; Woody 41; Musky 30,Gourmand,"Spicy, Floral",notes: description prose,
+rare-passion,RARE PASSION,Perfume,active,Floral 100; Musky 61; Amber & Oriental 44; Woody 34; Gourmand 33; Citrus 16,Floral,Musky,notes: description prose,
+marsaal-red,MIRSAAL WITH LOVE,Perfume,active,Oud 100; Woody 98; Musky 79; Amber & Oriental 77; Spicy 52; Gourmand 47; Floral 44,Oud,"Woody, Musky, Amber & Oriental",notes: description prose,"close call, decided by web search: parfumo.com; reviewers: prominent oud and saffron; secondary capped at 3 (had 4)"
+marsaal-blue,MIRSAAL OF TRUST,Perfume,active,Amber & Oriental 100; Spicy 61; Fruity 44; Woody 42,Amber & Oriental,Spicy,notes: description prose,
+supremacy-oud,SUPREMACY IN OUD - LUXURY COLLECTION - 150ML,Perfume,active,Oud 100; Patchouli 100; Musky 89; Spicy 84; Floral 40,Oud,"Patchouli, Musky, Spicy",notes: description prose,"close call, decided by the description"
+am-9,9 AM,Perfume,active,Floral 100; Woody 54; Patchouli 49; Spicy 39; Musky 35; Fruity 22; Citrus 17,Floral,Woody,notes: description prose,
+bm-9-rebel-red,9 PM REBEL,Perfume,active,Woody 100; Gourmand 75; Amber & Oriental 41; Fruity 28; Musky 27; Citrus 14,Woody,Gourmand,notes: description prose,
+am-9-pink-womens,9 AM - Pour Femme,Perfume,active,Citrus 100; Amber & Oriental 66; Musky 63; Fruity 36,Citrus,"Amber & Oriental, Musky",notes: description prose,
+pm-9-womens-mauve,9 PM - Pour Femme,Perfume,active,Floral 100; Woody 71; Amber & Oriental 31; Fruity 27; Citrus 8,Floral,Woody,notes: description prose,
+cherry-bouquet,CHERRY BOUQUET,Perfume,active,Fruity 100; Woody 97; Floral 71; Gourmand 66; Patchouli 55,Fruity,"Woody, Floral, Gourmand",notes: description prose,"close call, unsure: Fruity, Woody; secondary capped at 3 (had 4)"
+ansaara-black,INARA BLACK,Perfume,active,Leather & Tobacco 100; Musky 64; Amber & Oriental 63; Woody 39,Leather & Tobacco,"Musky, Amber & Oriental",notes: owner's Fragrantica sheet,
+ansaara-white,INARA WHITE,Perfume,active,Amber & Oriental 100; Woody 71; Gourmand 69; Floral 38,Amber & Oriental,"Woody, Gourmand",notes: description prose,
+pm-9-black,9 PM,Perfume,active,Gourmand 100; Patchouli 69; Amber & Oriental 65; Floral 38; Spicy 23; Citrus 19; Fruity 17,Gourmand,"Patchouli, Amber & Oriental",notes: description prose,
+am-9-dive-light-blue-1,9 AM DIVE,Perfume,active,Woody 100; Spicy 92; Patchouli 87; Floral 63; Amber & Oriental 61; Fruity 45; Citrus 24; Fresh & Aquatic 22,Woody,"Spicy, Patchouli, Floral",notes: description prose,secondary capped at 3 (had 4)
+kayaan-angel,KIAANA ANGEL,Perfume,active,Woody 100; Fruity 73; Gourmand 46; Floral 36; Citrus 15,Woody,Fruity,notes: description prose,
+kayaan-crush,KIAANA CRUSH,Perfume,active,Amber & Oriental 100; Gourmand 62; Oud 46; Patchouli 43; Musky 41; Woody 39; Spicy 27,Amber & Oriental,Gourmand,notes: description prose,
+la-fleur-bouquet,LA FLEUR BOUQUET,Perfume,active,Floral 100; Musky 74; Fruity 42; Citrus 31,Floral,Musky,notes: description prose,
+modest-deux-womens,MODEST DEUX,Perfume,active,Floral 100; Patchouli 65; Musky 46; Spicy 46; Fruity 25,Floral,Patchouli,notes: description prose,
+modest-pour-homme,MODEST UNE,Perfume,active,Amber & Oriental 100; Spicy 97; Floral 83; Patchouli 77; Woody 76; Citrus 27,Amber & Oriental,"Spicy, Floral, Patchouli",notes: description prose,"close call, unsure: Amber & Oriental, Spicy; secondary capped at 3 (had 4)"
+mystic-bouquet,MYSTIQUE BOUQUET,Perfume,active,Floral 100; Amber & Oriental 96; Gourmand 71; Musky 67; Woody 55; Citrus 44; Fruity 31,Floral,"Amber & Oriental, Gourmand, Musky",notes: description prose,"close call, unsure: Floral, Amber & Oriental; secondary capped at 3 (had 4)"
+pour-homme-abstract,PORTRAIT ABSTRACT,Perfume,active,Woody 100; Amber & Oriental 57; Leather & Tobacco 50; Gourmand 32; Floral 30,Woody,"Amber & Oriental, Leather & Tobacco",notes: description prose,
+pour-homme-revival,PORTRAIT REVIVAL,Perfume,active,Gourmand 100; Woody 19; Spicy 18; Amber & Oriental 9,Gourmand,,notes: description prose,
+supremacy-collectors-edition,SUPREMACY COLLECTOR'S EDITION,Perfume,active,Amber & Oriental 100; Floral 60; Musky 49; Fruity 42; Woody 41; Citrus 17,Amber & Oriental,Floral,notes: description prose,
+supremacy-gala,SUPREMACY GALA - LUXURY COLLECTION,Perfume,active,Gourmand 100; Floral 18; Patchouli 18; Fruity 9; Citrus 7,Gourmand,,notes: description prose,
+supremacy-gold,SUPREMACY GOLD 100 ML,Perfume,active,Floral 100; Woody 87; Musky 81; Gourmand 37,Floral,"Woody, Musky",notes: description prose,
+supremacy-in-heaven,SUPREMACY IN HEAVEN,Perfume,active,Woody 100; Musky 99; Citrus 66,Woody,"Musky, Citrus",notes: description prose,"close call, decided by the description"
+supremacy-in-oud,SUPREMACY IN OUD 100 ML,Perfume,active,Oud 100; Patchouli 100; Musky 89; Spicy 84; Floral 40,Oud,"Patchouli, Musky, Spicy",notes: description prose,"close call, decided by the description"
+supremacy-in-sense,SUPREMACY INCENSE,Perfume,active,Amber & Oriental 100; Leather & Tobacco 76; Oud 57; Patchouli 54; Woody 53; Spicy 23; Citrus 19,Amber & Oriental,"Leather & Tobacco, Oud, Patchouli",notes: description prose,secondary capped at 3 (had 4)
+supremacy-noir,SUPREMACY NOIR,Perfume,active,Amber & Oriental 100; Leather & Tobacco 76; Oud 57; Patchouli 54; Woody 53; Spicy 23; Citrus 19,Amber & Oriental,"Leather & Tobacco, Oud, Patchouli",notes: description prose,secondary capped at 3 (had 4)
+supremacy-silver-1,SUPREMACY SILVER,Perfume,active,Amber & Oriental 100; Fruity 91; Musky 85; Woody 75; Patchouli 72; Floral 51; Citrus 27,Amber & Oriental,"Fruity, Musky, Woody",notes: description prose,secondary capped at 3 (had 5)
+tapis-rouge-womens,SUPREMACY TAPIS ROUGE - LUXURY COLLECTION,Perfume,active,Floral 100; Fruity 72; Woody 50,Floral,"Fruity, Woody",notes: description prose,
+turathi-purple,TURATHI PURPLE,Perfume,active,Gourmand 100; Patchouli 83; Spicy 83; Floral 56; Fruity 53,Gourmand,"Patchouli, Spicy, Floral",notes: description prose,secondary capped at 3 (had 4)
+turathi-red,TURATHI RED,Perfume,active,Floral 100; Musky 52; Fruity 33,Floral,Musky,notes: description prose,
+turathi-blue,TURATHI ELECTRIC,Perfume,active,Amber & Oriental 100; Gourmand 58; Fruity 47; Citrus 44; Musky 38; Woody 36; Floral 29,Amber & Oriental,Gourmand,notes: description prose,
+turathi-brown,TURATHI BROWN,Perfume,active,Fresh & Aquatic 100; Floral 94; Gourmand 84; Patchouli 65; Amber & Oriental 61,Fresh & Aquatic,"Floral, Gourmand, Patchouli",notes: description prose,secondary capped at 3 (had 4)
+violet-bouquet,VIOLET BOUQUET,Perfume,active,Amber & Oriental 100; Gourmand 41; Woody 40; Citrus 34; Spicy 24,Amber & Oriental,,notes: description prose,
+historic-sahara,HISTORIC SAHARA,Perfume,active,Gourmand 100; Musky 23; Spicy 21; Amber & Oriental 18; Citrus 8,Gourmand,,notes: description prose,
+turathi-sky-blue,TURATHI BLUE,Perfume,active,Patchouli 100; Musky 89; Amber & Oriental 87; Citrus 59,Patchouli,"Musky, Amber & Oriental, Citrus",notes: description prose,
+bouquet,DELICIOUS BOUQUET,Perfume,active,Gourmand 100; Floral 24; Musky 18; Citrus 12,Gourmand,,notes: description prose,
+rare-reef,RARE REEF,Perfume,active,Fruity 100; Gourmand 73; Fresh & Aquatic 55; Floral 40; Citrus 35,Fruity,"Gourmand, Fresh & Aquatic",notes: description prose,
+souvenir-desert-rose,SOUVENIR DESERT ROSE,Perfume,active,Floral 100; Woody 77; Amber & Oriental 73; Fruity 57; Citrus 44; Musky 42,Floral,"Woody, Amber & Oriental, Fruity",notes: description prose,
+souvenir-bouquet,SOUVENIR FLORAL BOUQUET,Perfume,active,Floral 100; Amber & Oriental 77; Musky 74; Gourmand 47; Citrus 21,Floral,"Amber & Oriental, Musky",notes: description prose,
+historic-olmeida,HISTORIC OLMEDA,Perfume,active,Spicy 100; Patchouli 77; Amber & Oriental 64; Citrus 47; Fruity 47; Woody 46; Musky 43; Floral 32,Spicy,"Patchouli, Amber & Oriental",notes: description prose,
+historic-doria,HISTORIC DORIA,Perfume,active,Floral 100; Musky 36; Citrus 29; Amber & Oriental 25; Fruity 12,Floral,,notes: description prose,
+9pm-elixir,9 PM ELIXIR,Perfume,active,Amber & Oriental 100; Patchouli 85; Spicy 81; Gourmand 72; Leather & Tobacco 72,Amber & Oriental,"Patchouli, Spicy, Gourmand",notes: description prose,secondary capped at 3 (had 4)
+kult,CULT,Perfume,active,Fruity 100; Gourmand 73; Woody 61; Floral 28,Fruity,"Gourmand, Woody",notes: description prose,
+itqan-noir,ITQAN NOIR,Perfume,active,Patchouli 100; Floral 89; Citrus 50,Patchouli,"Floral, Citrus",notes: earlier extraction (layers not used),
+itqan-gold,ITQAN GOLD,Perfume,active,,,,unscored: notes match no family,
+zukhruf-mens,ZUKHRUF POUR HOMME,Perfume,active,Floral 100; Woody 69; Gourmand 60,Floral,"Woody, Gourmand",notes: earlier extraction (layers not used),
+reveerie-aqua,Reveerie Aqua,Perfume,active,Amber & Oriental 100; Spicy 59; Floral 53; Woody 39; Fresh & Aquatic 19,Amber & Oriental,"Spicy, Floral",notes: description prose,
+reveerie-petals,Reveerie Petals,Perfume,active,Woody 100; Gourmand 87; Floral 82,Woody,"Gourmand, Floral",notes: earlier extraction (layers not used),
+ya-omri,Yaa Umree,Perfume,active,Floral 100; Woody 98; Musky 80; Gourmand 53,Floral,"Woody, Musky, Gourmand",notes: description prose,"close call, unsure: Floral, Woody"
+sharaf-blend,Sharaf Blend,Perfume,active,Gourmand 100; Spicy 33; Floral 25,Gourmand,,notes: description prose,
+sharaf-the-club,Sharaf The Club,Perfume,active,Amber & Oriental 100; Woody 69; Fruity 61; Citrus 27,Amber & Oriental,"Woody, Fruity",notes: earlier extraction (layers not used),
+bouquet-red,BOUQET RED,Perfume,active,Floral 100; Woody 68; Amber & Oriental 67; Spicy 36,Floral,"Woody, Amber & Oriental",notes: description prose,
+impulse-oud,Impulse Oud,Perfume,active,Floral 100; Amber & Oriental 68; Oud 48; Musky 24,Floral,Amber & Oriental,notes: earlier extraction (layers not used),
+khafaya,Khafaya Homme,Perfume,active,Amber & Oriental 100; Woody 95; Spicy 91; Floral 72; Citrus 30,Amber & Oriental,"Woody, Spicy, Floral",notes: description prose,"close call, unsure: Amber & Oriental, Woody"
+infrad-luxe,Infrad Luxe,Perfume,active,Musky 100,Musky,,notes: description prose,
+infrad-noir,Infrad Noir,Perfume,active,Oud 100; Leather & Tobacco 84; Musky 47,Oud,Leather & Tobacco,notes: earlier extraction (layers not used),
+mazaaj-brown,Mazaaj Brown,Perfume,active,Patchouli 100; Amber & Oriental 83; Spicy 76,Patchouli,"Amber & Oriental, Spicy",notes: earlier extraction (layers not used),
+mazaaj-blue,Mazaaj Infused,Perfume,active,Amber & Oriental 100; Floral 69; Spicy 65,Amber & Oriental,"Floral, Spicy",notes: earlier extraction (layers not used),
+awatif-blue,Awatif Pour Homme,Perfume,active,Fruity 100; Gourmand 75; Floral 55,Fruity,"Gourmand, Floral",notes: earlier extraction (layers not used),
+vigour,Vigour,Perfume,active,Spicy 100; Oud 84; Amber & Oriental 66; Fruity 32; Citrus 16,Spicy,"Oud, Amber & Oriental",notes: description prose,
+abdi-black,Abdi Black,Perfume,active,Gourmand 100; Floral 34; Woody 33; Musky 27,Gourmand,,notes: description prose,
+nawaem,Nawa'em,Perfume,active,Floral 100; Woody 94; Gourmand 92; Musky 38,Floral,"Woody, Gourmand",notes: description prose,
+hawa-red,Hawwa Red,Perfume,active,Fruity 100; Gourmand 45; Floral 28; Musky 28,Fruity,,notes: earlier extraction (layers not used),
+treasure,TREASURE,Perfume,active,Amber & Oriental 100; Spicy 99; Woody 94; Musky 67,Amber & Oriental,"Spicy, Woody, Musky",notes: earlier extraction (layers not used),"close call, decided by the description"
+reserved-black-cedar,Reserved Black Cedar,Perfume,active,Woody 100; Musky 47; Floral 35; Citrus 35,Woody,,notes: description prose,
+reserved-oud,Reserved Oud,Perfume,active,Oud 100; Floral 74; Gourmand 71; Amber & Oriental 67; Musky 44,Oud,"Floral, Gourmand, Amber & Oriental",notes: earlier extraction (layers not used),
+tarf-white,TARF WHITE,Perfume,active,Floral 100; Musky 53; Woody 52,Floral,"Musky, Woody",notes: earlier extraction (layers not used),
+stallion,STALLION,Perfume,active,Leather & Tobacco 100; Amber & Oriental 81,Leather & Tobacco,Amber & Oriental,notes: earlier extraction (layers not used),
+ambre-is-great-extrait,AMBER IS GREAT,Perfume,active,Gourmand 100; Musky 73,Gourmand,Musky,notes: description prose,
+tiramisu-coco,TIRAMISU COCO,Perfume,active,Gourmand 100,Gourmand,,notes: description prose,
+ghayoum,GHYOOM,Perfume,active,Woody 100; Floral 45; Spicy 37,Woody,,notes: earlier extraction (layers not used),
+hawa-pink,HAWWA PINK,Perfume,active,Floral 100; Musky 53; Woody 52,Floral,"Musky, Woody",notes: earlier extraction (layers not used),
+tiramisu-caramel,TIRAMISU CARAMEL,Perfume,active,,,,unscored: notes match no family,
+mudhish,MODHESH AURA,Perfume,active,Gourmand 100; Musky 75; Amber & Oriental 73; Spicy 66; Floral 38; Citrus 29; Fresh & Aquatic 27,Gourmand,"Musky, Amber & Oriental, Spicy",notes: description prose,
+rimsh-blue,RAMSH POUR HOMME,Perfume,active,Woody 100; Amber & Oriental 59,Woody,Amber & Oriental,notes: earlier extraction (layers not used),
+al-kaser,AL KASER,Perfume,active,Oud 100; Leather & Tobacco 75; Amber & Oriental 61; Floral 60; Musky 40,Oud,"Leather & Tobacco, Amber & Oriental, Floral",notes: earlier extraction (layers not used),
+ghayath,GHAYATH,Perfume,active,Oud 100; Spicy 98; Leather & Tobacco 84; Woody 51,Oud,"Spicy, Leather & Tobacco, Woody",notes: earlier extraction (layers not used),"close call, unsure: Oud, Spicy"
+tarf-black,TARAF BLACK,Perfume,active,Gourmand 100; Musky 93; Amber & Oriental 81; Floral 69; Oud 56; Spicy 49; Citrus 29,Gourmand,"Musky, Amber & Oriental, Floral",notes: description prose,secondary capped at 3 (had 4)
+abdi-blue,ABADI OPULENT,Perfume,active,Oud 100; Amber & Oriental 96; Floral 93; Citrus 23,Oud,"Amber & Oriental, Floral",notes: description prose,"close call, unsure: Oud, Amber & Oriental"
+awatif-black,AWATIF POUR FEMME,Perfume,active,Patchouli 100; Citrus 93; Gourmand 64; Floral 53,Patchouli,"Citrus, Gourmand, Floral",notes: earlier extraction (layers not used),
+oscar,OSCAR,Perfume,active,Spicy 100; Amber & Oriental 99; Woody 94; Musky 67,Spicy,"Amber & Oriental, Woody, Musky",notes: earlier extraction (layers not used),"close call, decided by the description"
+masa,MASA,Perfume,active,Spicy 100; Amber & Oriental 78; Musky 53; Citrus 21; Fruity 20,Spicy,"Amber & Oriental, Musky",notes: description prose,
+maharjan-silver,Maharjan Silver,Perfume,active,Woody 100; Floral 68; Musky 38; Citrus 32,Woody,Floral,notes: description prose,
+maharjan-gold-pride,Maharjan Gold,Perfume,active,Amber & Oriental 100; Floral 88; Woody 87; Gourmand 60; Spicy 23,Amber & Oriental,"Floral, Woody, Gourmand",notes: description prose,
+eternal-oud-pride,ETERNAL OUD,Perfume,active,Amber & Oriental 100; Gourmand 67; Floral 50; Oud 42; Fruity 13; Citrus 12,Amber & Oriental,"Gourmand, Floral",notes: description prose,
+leen-pride,LEEN,Perfume,active,Spicy 100; Floral 95; Woody 82; Amber & Oriental 78; Musky 67; Fruity 48; Citrus 24,Spicy,"Floral, Woody, Amber & Oriental",notes: description prose,"close call, unsure: Spicy, Floral; secondary capped at 3 (had 4)"
+la-collection-dantiquitzs-pride,La Collection d'AntiquitŽs,Perfume,draft,,,,unscored: no notes and no web-search family,
+al-qeem-gold-pride,AL QIAM GOLD,Perfume,active,Amber & Oriental 100; Woody 79; Oud 65; Leather & Tobacco 45; Patchouli 45; Spicy 25; Fruity 18,Amber & Oriental,"Woody, Oud",notes: description prose,
+royal-sapphire-pride,ROYAL SAPPHIRE,Perfume,active,Floral 100; Gourmand 76; Amber & Oriental 73; Musky 70; Citrus 47; Spicy 29,Floral,"Gourmand, Amber & Oriental, Musky",notes: description prose,
+al-qeem-silver-pride,AL QIAM SILVER,Perfume,active,Woody 100; Amber & Oriental 53; Musky 49; Spicy 26; Citrus 19,Woody,Amber & Oriental,notes: description prose,
+blue-sapphire-pride,BLUE SAPPHIRE,Perfume,active,Fresh & Aquatic 100; Patchouli 91; Woody 72; Floral 54; Fruity 31; Citrus 20,Fresh & Aquatic,"Patchouli, Woody, Floral",notes: description prose,
+tharwa-silver-pride,THARWAH SILVER,Perfume,active,Woody 100; Fresh & Aquatic 51; Musky 45; Floral 34; Citrus 16,Woody,Fresh & Aquatic,notes: description prose,
+tharwa-gold-pride,THARWAH GOLD,Perfume,active,Floral 100; Gourmand 62; Amber & Oriental 54; Woody 51; Citrus 16,Floral,"Gourmand, Amber & Oriental, Woody",notes: description prose,
+la-african-drummer-pride,La African Drummer,Perfume,active,Floral 100; Amber & Oriental 91; Gourmand 76; Musky 56; Fruity 27; Citrus 25,Floral,"Amber & Oriental, Gourmand, Musky",notes: description prose,
+art-of-arabia-ii-pride,Art of Arabia II (Pride),Perfume,draft,Woody 100; Spicy 60; Amber & Oriental 60,Woody,"Spicy, Amber & Oriental",web search family (medium): arabicgiftcenter.com; walkfragrances.us,
+embrace-pride,EMBRACE,Perfume,active,Amber & Oriental 100; Patchouli 29; Woody 27; Spicy 15; Citrus 11,Amber & Oriental,,notes: description prose,
+la-collection-bike-1910-pride,La Collection D’ Antiquities 1910,Perfume,active,Gourmand 100; Patchouli 44; Woody 33; Floral 22; Fruity 17,Gourmand,,notes: description prose,
+art-of-arabia-iii-pride,Art of Arabia III (Pride),Perfume,draft,Amber & Oriental 100; Spicy 60,Amber & Oriental,Spicy,web search family (medium): perfume.com; hiddensamples.com,
+la-collection-car-1886-pride,La Collection d’antiquity 1886,Perfume,active,Gourmand 100; Leather & Tobacco 35; Musky 32; Spicy 28; Floral 24; Citrus 13,Gourmand,,notes: description prose,
+shaheen-gold-pride,SHAHEEN GOLD,Perfume,active,Gourmand 100; Patchouli 44; Fruity 44; Floral 33; Citrus 14,Gourmand,,notes: description prose,
+shaheen-silver-pride,SHAHEEN SILVER,Perfume,active,Amber & Oriental 100; Musky 96; Woody 95; Patchouli 81; Floral 72; Citrus 30,Amber & Oriental,"Musky, Woody, Patchouli",notes: description prose,"close call, unsure: Amber & Oriental, Musky, Woody; secondary capped at 3 (had 4)"
+winners-cup-silver-pride,AL KHAS WINNERS TROPHY SILVER,Perfume,active,Woody 100; Gourmand 39; Floral 36; Amber & Oriental 28; Citrus 17,Woody,,notes: description prose,
+hala-pride,HALA,Perfume,active,Amber & Oriental 100; Spicy 30; Woody 25,Amber & Oriental,,notes: description prose,
+al-areeq-silver-pride,AL AREEQ SILVER,Perfume,active,Leather & Tobacco 100; Woody 71; Floral 43; Gourmand 34; Musky 33; Oud 32; Fruity 17; Spicy 17,Leather & Tobacco,Woody,notes: description prose,
+al-areeq-gold-pride,AL AREEQ GOLD,Perfume,active,Gourmand 100; Amber & Oriental 90; Leather & Tobacco 87; Musky 74; Spicy 49,Gourmand,"Amber & Oriental, Leather & Tobacco, Musky",notes: description prose,
+wujood-pride,WAJOOD,Perfume,active,Woody 100; Amber & Oriental 61; Patchouli 44; Spicy 25; Fresh & Aquatic 21,Woody,Amber & Oriental,notes: description prose,
+ajwaa-pride,AJWAA,Perfume,active,Amber & Oriental 100; Gourmand 28; Musky 16; Citrus 14,Amber & Oriental,,notes: description prose,
+gharam-pride,GHARAM,Perfume,active,Floral 100; Woody 92; Amber & Oriental 64; Fruity 38; Gourmand 36; Musky 35; Citrus 16,Floral,"Woody, Amber & Oriental",notes: description prose,
+afaq-pride,AFAQ,Perfume,active,Woody 100; Floral 68; Fruity 20,Woody,Floral,notes: description prose,
+ansaam-silver-pride,ANSAAM SILVER,Perfume,active,Gourmand 100; Patchouli 94; Amber & Oriental 87; Floral 62; Spicy 44; Citrus 26,Gourmand,"Patchouli, Amber & Oriental, Floral",notes: description prose,
+vintage-radio-pride,VINTAGE RADIO,Perfume,active,Woody 100; Fruity 58; Spicy 57; Floral 45; Fresh & Aquatic 33; Citrus 25,Woody,"Fruity, Spicy",notes: description prose,
+awaan-pride,AWAAN,Perfume,active,Floral 100; Patchouli 79; Woody 77; Musky 56; Citrus 47,Floral,"Patchouli, Woody, Musky",notes: description prose,
+ishq-al-shuyukh-silver-pride,ISHQ AL SHUYUKH SILVER,Perfume,active,Woody 100; Gourmand 97; Patchouli 88; Spicy 80; Citrus 67; Fruity 58,Woody,"Gourmand, Patchouli, Spicy",notes: description prose,"close call, unsure: Woody, Gourmand; secondary capped at 3 (had 5)"
+ishq-al-shuyukh-gold-pride,ISHQ AL SHUYUKH GOLD,Perfume,active,Gourmand 100; Amber & Oriental 50; Leather & Tobacco 37; Musky 31; Spicy 18,Gourmand,Amber & Oriental,notes: description prose,
+winners-cup-gold-pride,AL KHAS WINNERS TROPHY GOLD,Perfume,active,Floral 100; Patchouli 88; Gourmand 76; Musky 56; Spicy 37; Fruity 27,Floral,"Patchouli, Gourmand, Musky",notes: description prose,
+prize-pride,Prize (Pride),Perfume,draft,,,,unscored: no notes and no web-search family,
+roo-human-pride,Raw Human,Perfume,draft,Leather & Tobacco 100; Fruity 60,Leather & Tobacco,Fruity,web search family (high): wikiparfum.com/en/fragrances/pride-raw-human,
+al-ameed-pride,AL AMEED,Perfume,active,Leather & Tobacco 100; Woody 87; Amber & Oriental 70; Musky 63; Spicy 63; Fresh & Aquatic 32; Citrus 25,Leather & Tobacco,"Woody, Amber & Oriental, Musky",notes: description prose,secondary capped at 3 (had 4)
+nebras-pride,NEBRAS,Perfume,active,Gourmand 100; Amber & Oriental 31; Musky 21; Floral 16; Fruity 11; Citrus 8,Gourmand,,notes: description prose,
+affection-100ml-pride,AFFECTION,Perfume,active,Gourmand 100; Floral 79; Amber & Oriental 58; Musky 50; Fruity 28,Gourmand,"Floral, Amber & Oriental, Musky",notes: description prose,
+fakhar-lattafa-gold,FAKHAR LATTAFA EXTRAIT,Perfume,active,Patchouli 100; Woody 98; Amber & Oriental 78; Musky 71; Floral 67; Citrus 59,Patchouli,"Woody, Amber & Oriental, Musky",notes: description prose,"close call, unsure: Patchouli, Woody; secondary capped at 3 (had 5)"
+sakeena,SAKEENA,Perfume,active,Gourmand 100; Musky 35; Fresh & Aquatic 29; Floral 23; Fruity 15; Citrus 12,Gourmand,,notes: description prose,
+ansaam-gold-lattafa,ANSAAM GOLD,Perfume,active,Floral 100; Fruity 89; Gourmand 67; Musky 63; Citrus 22,Floral,"Fruity, Gourmand, Musky",notes: description prose,
+ana-abiyedh-red-60ml,ANA ABIYEDH ROUGE,Perfume,active,Floral 100; Amber & Oriental 91; Spicy 70; Musky 63; Woody 62,Floral,"Amber & Oriental, Spicy, Musky",notes: description prose,secondary capped at 3 (had 4)
+asad-blue,ASAD ZENZIBAR,Perfume,active,Woody 100; Amber & Oriental 93; Musky 64; Floral 53; Citrus 45; Spicy 34,Woody,"Amber & Oriental, Musky, Floral",notes: description prose,
+al-mamlaka,KINGDOM MEN,Perfume,active,Amber & Oriental 100; Musky 69; Gourmand 69; Woody 68; Fresh & Aquatic 55; Spicy 55; Floral 35,Amber & Oriental,"Musky, Gourmand, Woody",notes: description prose,secondary capped at 3 (had 5)
+bayan,BAYAAN,Perfume,active,Gourmand 100; Spicy 95; Oud 88; Floral 35; Fruity 20,Gourmand,"Spicy, Oud",notes: description prose,"close call, decided by the description"
+qaoed-al-forsan,QAED AL FURSAN UNLIMITED,Perfume,active,Gourmand 100; Musky 75; Woody 73; Fruity 64; Floral 62; Citrus 26,Gourmand,"Musky, Woody, Fruity",notes: description prose,secondary capped at 3 (had 4)
+maher-legas-silver,MAAHIR LEGACY,Perfume,active,Patchouli 100; Floral 82; Musky 72; Woody 70; Citrus 50; Fresh & Aquatic 29; Fruity 20,Patchouli,"Floral, Musky, Woody",notes: description prose,secondary capped at 3 (had 4)
+badee-al-oud-white,BADEE AL OUD HONOR AND GLORY,Perfume,active,Oud 100; Musky 89; Spicy 79; Amber & Oriental 78; Floral 44,Oud,"Musky, Spicy, Amber & Oriental",notes: description prose,
+eclair,ECLAIRE,Perfume,active,Gourmand 100; Musky 17,Gourmand,,notes: description prose,
+mahasin-red,MAHASIN CRYSTAL,Perfume,active,Woody 100; Amber & Oriental 80; Leather & Tobacco 78; Patchouli 58; Spicy 32; Citrus 19,Woody,"Amber & Oriental, Leather & Tobacco, Patchouli",notes: description prose,
+musamam-black,MUSAMAM,Perfume,active,Amber & Oriental 100; Floral 92; Woody 57; Spicy 32; Citrus 27,Amber & Oriental,"Floral, Woody",notes: description prose,
+mayar-intense,MAYAR NATURAL INTENSE,Perfume,active,Floral 100; Musky 78; Woody 78; Gourmand 75; Amber & Oriental 71; Fruity 57,Floral,"Musky, Woody, Gourmand",notes: description prose,secondary capped at 3 (had 5)
+mayar,MAYAR,Perfume,active,Amber & Oriental 100; Floral 69; Patchouli 54; Fruity 20,Amber & Oriental,"Floral, Patchouli",notes: description prose,
+mahra,MOHRA SILKY ROSE,Perfume,active,Floral 100; Musky 91; Gourmand 58; Patchouli 54; Spicy 23,Floral,"Musky, Gourmand, Patchouli",notes: owner's Fragrantica sheet,
+liam-gold,LIAM BLUE SHINE,Perfume,active,Patchouli 100; Amber & Oriental 94; Musky 64; Floral 54; Fresh & Aquatic 48; Spicy 38; Citrus 28,Patchouli,"Amber & Oriental, Musky, Floral",notes: description prose,
+liam-silver,LIAM GREY,Perfume,active,Gourmand 100; Woody 90; Patchouli 43; Amber & Oriental 38; Floral 37; Spicy 26; Fruity 17,Gourmand,Woody,notes: description prose,
+tariq-perfume,TERIAQ,Perfume,active,Gourmand 100; Amber & Oriental 32; Musky 32; Woody 31; Leather & Tobacco 29; Floral 24; Spicy 18; Fruity 10,Gourmand,,notes: description prose,
+yara-candy,YARA CANDY,Perfume,active,Woody 100; Amber & Oriental 83; Musky 73; Floral 61; Fruity 35; Citrus 32,Woody,"Amber & Oriental, Musky, Floral",notes: description prose,
+seher-lattafa,SEHR LATTAFA,Perfume,active,Gourmand 100; Amber & Oriental 78; Floral 50; Spicy 35,Gourmand,"Amber & Oriental, Floral",notes: description prose,
+hayati-pink,HAYAATI FLORENCE,Perfume,active,Gourmand 100; Amber & Oriental 46; Fruity 44; Floral 33; Woody 29; Citrus 14,Gourmand,,notes: description prose,
+now-black,RAVE NOW,Perfume,active,Woody 100; Floral 83; Gourmand 67; Musky 62; Amber & Oriental 56; Fruity 45; Patchouli 40; Citrus 17,Woody,"Floral, Gourmand, Musky",notes: description prose,secondary capped at 3 (had 4)
+his-confession-black,HIS CONFESSION,Perfume,active,Amber & Oriental 100; Gourmand 97; Woody 65; Floral 49; Patchouli 43; Spicy 20; Citrus 15,Amber & Oriental,"Gourmand, Woody",notes: description prose,"close call, unsure: Amber & Oriental, Gourmand"
+her-confession-white,HER CONFESSION,Perfume,active,Gourmand 100; Floral 66; Musky 42; Amber & Oriental 36; Spicy 24,Gourmand,Floral,notes: description prose,
+ana-abiyedh-coral,ANA ABIYEADH CORAL,Perfume,active,Gourmand 100; Amber & Oriental 98; Fruity 89; Musky 67; Floral 56; Citrus 23,Gourmand,"Amber & Oriental, Fruity, Musky",notes: description prose,"close call, unsure: Gourmand, Amber & Oriental; secondary capped at 3 (had 4)"
+afeef,AFEEF,Perfume,active,Floral 100; Amber & Oriental 87; Woody 81; Gourmand 71; Patchouli 65; Spicy 35; Citrus 26; Fruity 25,Floral,"Amber & Oriental, Woody, Gourmand",notes: description prose,secondary capped at 3 (had 4)
+al-nashama,AL NASHAMA,Perfume,active,Leather & Tobacco 100; Spicy 88; Amber & Oriental 84; Patchouli 71; Fruity 46; Floral 43; Fresh & Aquatic 23; Citrus 22,Leather & Tobacco,"Spicy, Amber & Oriental, Patchouli",notes: description prose,
+tariq-intense,TERIAQ INTENSE,Perfume,active,Amber & Oriental 100; Gourmand 54; Spicy 53; Citrus 16,Amber & Oriental,"Gourmand, Spicy",notes: description prose,
+now-red,RAVE NOW - WOMEN,Perfume,active,Gourmand 100; Floral 61; Musky 38; Citrus 15,Gourmand,Floral,notes: description prose,
+khamrah-dokhan,KHAMRAH DOKHAN,Perfume,active,Amber & Oriental 100; Gourmand 59; Leather & Tobacco 49; Patchouli 23; Spicy 15; Citrus 12,Amber & Oriental,Gourmand,notes: description prose,
+mahra-black,MOHRA,Perfume,active,Woody 100; Floral 42; Spicy 39; Patchouli 36; Amber & Oriental 33; Citrus 24; Musky 22,Woody,,notes: description prose,
+victoria-lattafa,VICTORIA,Perfume,active,Gourmand 100; Floral 62,Gourmand,Floral,notes: description prose,
+atheer-lattafa,ATHEERI,Perfume,active,Floral 100; Gourmand 84,Floral,Gourmand,notes: description prose,
+asad-brown,ASAD BOURBON,Perfume,active,Spicy 100; Woody 95; Amber & Oriental 90; Gourmand 78; Floral 39; Fruity 29,Spicy,"Woody, Amber & Oriental, Gourmand",notes: description prose,"close call, unsure: Spicy, Woody"
+angham-lattafa,ANGHAM,Perfume,active,Gourmand 100; Amber & Oriental 45; Musky 39; Spicy 35; Floral 26; Citrus 14,Gourmand,,notes: description prose,
+badee-al-oud-pink,BADEE AL OUD NOBLE BLUSH,Perfume,active,Gourmand 100; Woody 43; Musky 31,Gourmand,,notes: description prose,
+petra-100ml,Petra 100ml,Perfume,active,Floral 100; Leather & Tobacco 69; Amber & Oriental 51; Musky 44; Gourmand 41; Spicy 18; Fruity 17; Citrus 16,Floral,"Leather & Tobacco, Amber & Oriental",notes: description prose,
+ajwad-pink-to-pink,AJWAD PINK TO PINK,Perfume,active,Floral 100; Leather & Tobacco 69; Amber & Oriental 51; Musky 44; Gourmand 41; Spicy 18; Fruity 17; Citrus 16,Floral,"Leather & Tobacco, Amber & Oriental",notes: description prose,
+qaoed-al-forsan-gold,QAED AL FURSAN,Perfume,active,Oud 100; Amber & Oriental 69; Woody 66; Floral 50; Spicy 35; Fruity 26,Oud,"Amber & Oriental, Woody, Floral",notes: description prose,
+badee-al-oud-red,BADEE AL OUD SUBLIME,Perfume,active,Amber & Oriental 100; Floral 97; Oud 82; Musky 68; Fruity 55,Amber & Oriental,"Floral, Oud, Musky",notes: description prose,"close call, unsure: Amber & Oriental, Floral; secondary capped at 3 (had 4)"
+fakhar-lattafa-platinum,FAKHAR PLATIN,Perfume,active,Spicy 100; Amber & Oriental 77; Woody 59; Floral 40; Citrus 21,Spicy,"Amber & Oriental, Woody",notes: description prose,
+sheikh-al-shuyukh-final-edition,SHEIKH AL SHUYUKH FINAL EDITION,Perfume,active,Woody 100; Leather & Tobacco 60; Amber & Oriental 59; Floral 57; Musky 51; Gourmand 48; Spicy 40; Fresh & Aquatic 20; Citrus 14,Woody,"Leather & Tobacco, Amber & Oriental, Floral",notes: description prose,secondary capped at 3 (had 4)
+mashrabya-100ml,MASHRABYA,Perfume,active,Gourmand 100; Spicy 41; Patchouli 32; Leather & Tobacco 27,Gourmand,,notes: description prose,
+hayati-black,HAYAATI BLACK,Perfume,active,Gourmand 100; Musky 93; Spicy 73; Fruity 39; Citrus 29,Gourmand,"Musky, Spicy",notes: description prose,
+oublyt-dubai,OPULENT DUBAI,Perfume,active,Amber & Oriental 100; Woody 71; Floral 61; Citrus 27; Spicy 20; Fruity 13,Amber & Oriental,"Woody, Floral",notes: description prose,
+eclair-green,ECLAIRE PISTACHE,Perfume,active,Gourmand 100; Musky 16; Fruity 11,Gourmand,,notes: description prose,
+bara-yellow,YARA TOUS,Perfume,active,Floral 100; Woody 54; Gourmand 53; Fruity 40; Musky 40,Floral,"Woody, Gourmand",notes: description prose,
+dynasty-100ml,DYNASTY,Perfume,active,Woody 100; Leather & Tobacco 51; Spicy 45; Citrus 19; Fresh & Aquatic 17; Fruity 14,Woody,Leather & Tobacco,notes: description prose,
+habak,HABIK MEN,Perfume,active,Spicy 100; Patchouli 69; Woody 68; Gourmand 59; Floral 41; Fresh & Aquatic 37; Musky 37; Citrus 15,Spicy,"Patchouli, Woody, Gourmand",notes: description prose,
+ana-abiyedh-scarlet,ANA ABIYEDH SCARLET,Perfume,active,Gourmand 100; Floral 52; Patchouli 45; Spicy 37; Fruity 15,Gourmand,Floral,notes: description prose,
+fakhar-lattafa-white,FAKHAR LATTAFA WHITE,Perfume,active,Floral 100; Patchouli 58; Woody 57,Floral,"Patchouli, Woody",notes: description prose,
+al-nashama-capric,AL NASHAMA CAPRICE,Perfume,active,Woody 100; Floral 81; Amber & Oriental 74; Patchouli 57; Spicy 57; Citrus 30; Fresh & Aquatic 27,Woody,"Floral, Amber & Oriental, Patchouli",notes: description prose,secondary capped at 3 (had 4)
+washwasha,WASHWASHA,Perfume,active,Gourmand 100; Floral 79; Amber & Oriental 74; Musky 35; Spicy 21; Fruity 19; Citrus 12,Gourmand,"Floral, Amber & Oriental",notes: description prose,
+najdia,NAJDIA,Perfume,active,Amber & Oriental 100; Leather & Tobacco 97; Patchouli 77; Floral 58; Spicy 55; Citrus 51,Amber & Oriental,"Leather & Tobacco, Patchouli, Floral",notes: description prose,"close call, unsure: Amber & Oriental, Leather & Tobacco; secondary capped at 3 (had 5)"
+khalis-oudi-pure-oudi,KHALIS OUDI (PURE OUDI),Perfume,active,Woody 100; Gourmand 47; Musky 44; Amber & Oriental 40; Spicy 39; Oud 33; Floral 33,Woody,,notes: description prose,
+sondos,SONDOS,Perfume,active,Floral 100; Gourmand 89; Patchouli 83; Leather & Tobacco 83; Spicy 35; Citrus 26,Floral,"Gourmand, Patchouli, Leather & Tobacco",notes: description prose,
+ramaad-al-oud,Ramaad Al Oud,Perfume,active,Amber & Oriental 100; Oud 58; Musky 58,Amber & Oriental,"Oud, Musky",notes: description prose,
+raed-oud,RAAED OUD,Perfume,active,Spicy 100; Amber & Oriental 73; Floral 42; Leather & Tobacco 39; Citrus 39; Woody 28; Gourmand 24,Spicy,Amber & Oriental,notes: description prose,
+raed-luxe,RAED ABSOLU,Perfume,active,Patchouli 100; Floral 90; Woody 79; Gourmand 77; Spicy 63; Citrus 28,Patchouli,"Floral, Woody, Gourmand",notes: description prose,secondary capped at 3 (had 4)
+velvet-oud-black,VELVET OUD,Perfume,active,Leather & Tobacco 100; Oud 96; Amber & Oriental 74; Patchouli 60; Woody 55; Spicy 38; Citrus 22,Leather & Tobacco,"Oud, Amber & Oriental, Patchouli",notes: description prose,"close call, decided by the description; secondary capped at 3 (had 4)"
+raghba-women,RAGHBA,Perfume,active,Gourmand 100; Oud 75; Amber & Oriental 54; Musky 44; Woody 43,Gourmand,"Oud, Amber & Oriental",notes: description prose,
+sheikh-al-shuyukh-luxe-edition,SHEIKH AL SHUYUKH LUXE EDITION,Perfume,active,Gourmand 100; Woody 56; Spicy 48; Patchouli 43; Floral 23,Gourmand,Woody,notes: description prose,
+awraq-al-oud,AWRAQ AL OUD,Perfume,active,Oud 100; Woody 59; Gourmand 58; Spicy 50; Amber & Oriental 47; Floral 40,Oud,"Woody, Gourmand, Spicy",notes: description prose,
+raed-silver,RAAED INTENSE,Perfume,active,Woody 100; Amber & Oriental 80; Leather & Tobacco 78; Patchouli 58; Spicy 32; Citrus 19,Woody,"Amber & Oriental, Leather & Tobacco, Patchouli",notes: description prose,
+velvet-rose-oud,VELVET ROSE,Perfume,active,Leather & Tobacco 100; Amber & Oriental 84; Oud 75; Woody 63; Patchouli 60; Spicy 38; Citrus 22,Leather & Tobacco,"Amber & Oriental, Oud, Woody",notes: description prose,secondary capped at 3 (had 4)
+qaaed,QAAED,Perfume,active,Amber & Oriental 100; Gourmand 98; Leather & Tobacco 93; Oud 84; Spicy 83; Woody 69,Amber & Oriental,"Gourmand, Leather & Tobacco, Oud",notes: description prose,"close call, decided by the description; secondary capped at 3 (had 5)"
+oud-mood-yellow,OUD MOOD,Perfume,active,Spicy 100; Gourmand 85; Amber & Oriental 83; Oud 71; Leather & Tobacco 59; Woody 58,Spicy,"Gourmand, Amber & Oriental, Oud",notes: description prose,secondary capped at 3 (had 5)
+maher-black,MAAHIR BLACK EDITION,Perfume,active,Woody 100; Spicy 81; Leather & Tobacco 80; Patchouli 57; Amber & Oriental 50,Woody,"Spicy, Leather & Tobacco, Patchouli",notes: description prose,secondary capped at 3 (had 4)
+asad,ASAD,Perfume,active,Amber & Oriental 100; Gourmand 66; Woody 29; Patchouli 25; Floral 23; Leather & Tobacco 19; Spicy 18; Fruity 13,Amber & Oriental,Gourmand,notes: description prose,
+yara-moi,YARA MOII,Perfume,active,Gourmand 100; Floral 74; Patchouli 52; Woody 52; Spicy 25; Fruity 22,Gourmand,"Floral, Patchouli, Woody",notes: description prose,
+khamrah,KHAMRAH,Perfume,active,Gourmand 100; Amber & Oriental 90; Floral 49; Spicy 36; Citrus 14,Gourmand,Amber & Oriental,notes: description prose,
+maher-gold,MAAHIR GOLD,Perfume,active,Oud 100; Gourmand 72; Leather & Tobacco 63; Musky 53; Amber & Oriental 52; Spicy 35; Floral 30,Oud,"Gourmand, Leather & Tobacco, Musky",notes: description prose,secondary capped at 3 (had 4)
+fakhar-black-fakhar-lattafa-black,FAKHAR LATTAFA MEN,Perfume,active,Patchouli 100; Woody 98; Amber & Oriental 78; Floral 67; Citrus 31; Fresh & Aquatic 28,Patchouli,"Woody, Amber & Oriental, Floral",notes: description prose,"close call, unsure: Patchouli, Woody"
+lail-maleki,LAIL MALEKI,Perfume,active,Floral 100; Amber & Oriental 82; Woody 77; Fruity 30; Spicy 29,Floral,"Amber & Oriental, Woody",notes: description prose,
+qimmah-for-men-black,QIMMAH FOR MEN,Perfume,active,Gourmand 100; Floral 48; Woody 30,Gourmand,,notes: description prose,
+qimmah-for-women-green,QIMMAH FOR WOMEN,Perfume,active,Gourmand 100; Floral 48; Woody 30,Gourmand,,notes: description prose,
+ekhtiari,Ekhtiari,Perfume,active,Gourmand 100; Floral 66; Musky 42; Citrus 15,Gourmand,Floral,notes: description prose,
+ijazi-green,EJAAZI,Perfume,active,Woody 100; Amber & Oriental 39; Musky 34; Fresh & Aquatic 15; Citrus 12,Woody,,notes: description prose,
+rouat-al-oud,ROUAT AL OUD,Perfume,active,Oud 100; Floral 95; Amber & Oriental 78; Leather & Tobacco 75; Woody 51; Patchouli 50; Spicy 35; Fruity 26,Oud,"Floral, Amber & Oriental, Leather & Tobacco",notes: description prose,"close call, unsure: Oud, Floral; secondary capped at 3 (had 5)"
+rouat-al-musk,ROUAT AL MUSK,Perfume,active,Floral 100; Amber & Oriental 68; Patchouli 52; Musky 47; Spicy 25,Floral,"Amber & Oriental, Patchouli",notes: description prose,
+oud-mood-remember,OUD MOOD REMINISENCE,Perfume,active,Gourmand 100; Oud 87; Patchouli 78; Musky 75; Spicy 74; Woody 73; Amber & Oriental 73; Floral 42,Gourmand,"Oud, Patchouli, Musky",notes: description prose,secondary capped at 3 (had 6)
+oud-mood-elixir-gold,OUD MOOD ELIXIR,Perfume,active,Spicy 100; Gourmand 85; Amber & Oriental 83; Oud 71; Leather & Tobacco 59; Woody 58,Spicy,"Gourmand, Amber & Oriental, Oud",notes: description prose,secondary capped at 3 (had 5)
+opulent-musk,OPULENT MUSK,Perfume,active,Woody 100; Amber & Oriental 49; Musky 45; Spicy 27; Citrus 16,Woody,,notes: description prose,
+blue-oud,BLUE OUD,Perfume,active,Oud 100; Amber & Oriental 78; Gourmand 64; Floral 50; Woody 50; Spicy 28; Fresh & Aquatic 27; Citrus 21,Oud,"Amber & Oriental, Gourmand, Floral",notes: description prose,secondary capped at 3 (had 4)
+ana-abiyedh-black-60-ml,ANA ABIYEDH,Perfume,active,Amber & Oriental 100; Musky 85; Gourmand 69; Citrus 57; Fruity 54,Amber & Oriental,"Musky, Gourmand, Citrus",notes: description prose,secondary capped at 3 (had 4)
+ramz-lattafa-silver,RAMZ LATTAFA SILVER,Perfume,active,Gourmand 100; Amber & Oriental 98; Patchouli 83; Fresh & Aquatic 80; Spicy 59; Musky 58; Floral 42; Fruity 25; Citrus 23,Gourmand,"Amber & Oriental, Patchouli, Fresh & Aquatic",notes: description prose,"close call, unsure: Gourmand, Amber & Oriental; secondary capped at 3 (had 5)"
+ramz-lattafa-gold,RAMZ LATTAFA GOLD,Perfume,active,Floral 100; Fruity 94; Patchouli 93; Woody 73; Gourmand 71; Citrus 26,Floral,"Fruity, Patchouli, Woody",notes: description prose,secondary capped at 3 (had 4)
+khalis-musk-pure-musk,KHALIS MUSK (PURE MUSK),Perfume,active,Woody 100; Patchouli 71; Oud 47; Floral 47; Fresh & Aquatic 34,Woody,Patchouli,notes: description prose,
+ameer-al-oudh-intense-oud,AMEER AL OUD INTENSE,Perfume,active,Oud 100; Leather & Tobacco 75; Gourmand 72; Spicy 66; Amber & Oriental 58; Floral 50,Oud,"Leather & Tobacco, Gourmand, Spicy",notes: description prose,secondary capped at 3 (had 5)
+ameer-al-oudh,Ameer Al Oudh,Perfume,active,Oud 100; Gourmand 68; Amber & Oriental 43; Spicy 40; Woody 39,Oud,Gourmand,notes: owner's Fragrantica sheet,
+badee-al-oud-oud-for-glory,BADEE AL OUD - OUD OF GLORY,Perfume,active,Fruity 100; Patchouli 95; Amber & Oriental 87; Oud 76; Gourmand 68; Floral 63; Spicy 40; Citrus 29,Fruity,"Patchouli, Amber & Oriental, Oud",notes: description prose,"close call, unsure: Fruity, Patchouli; secondary capped at 3 (had 5)"
+yara-pink,YARA,Perfume,active,Gourmand 100; Woody 83; Floral 71; Musky 67,Gourmand,"Woody, Floral, Musky",notes: description prose,
+musamam-white-intense,MUSAMAM WHITE INTENSE,Perfume,active,Amber & Oriental 100; Woody 56; Citrus 34; Fruity 29; Spicy 22,Amber & Oriental,Woody,notes: description prose,
+sheikh-al-shuyukh-black,SHEIKH AL SHUYUKH BLACK,Perfume,active,Woody 100; Patchouli 84; Oud 51; Floral 45; Fresh & Aquatic 40,Woody,"Patchouli, Oud",notes: description prose,
+jasoor,JASOOR,Perfume,active,Leather & Tobacco 100; Floral 73; Spicy 64; Gourmand 61; Woody 51; Patchouli 45; Citrus 18,Leather & Tobacco,"Floral, Spicy, Gourmand",notes: description prose,secondary capped at 3 (had 4)
+badee-al-oud-amethyst,BADEE AL OUD AMETHYEST,Perfume,active,Floral 100; Oud 95; Amber & Oriental 78; Gourmand 64; Spicy 35; Citrus 21,Floral,"Oud, Amber & Oriental, Gourmand",notes: description prose,"close call, decided by the description"
+khamrah-qahwa,KHAMRAH QAHWA,Perfume,active,Gourmand 100; Spicy 52; Amber & Oriental 34; Musky 30,Gourmand,Spicy,notes: description prose,
+dhooq,THOUQ,Perfume,active,Amber & Oriental 100; Woody 45; Floral 34; Citrus 16,Amber & Oriental,,notes: description prose,
+oudh-nabeel-incense,OUDH NABEEL INCENSE,Incense,active,Woody 100; Floral 69; Patchouli 36; Spicy 27; Leather & Tobacco 24; Citrus 19; Fresh & Aquatic 16; Gourmand 16; Amber & Oriental 11,Woody,Floral,notes: description note lines,
+oudh-nabeel-black-incense,OUDH NABEEL BLACK INCENSE,Incense,active,Floral 100; Musky 49; Woody 49; Fresh & Aquatic 34; Citrus 33; Spicy 23,Floral,,notes: description note lines,
+oudh-nasaem-incense,OUDH NASAEM INCENSE,Incense,active,Floral 100; Woody 83; Oud 35; Amber & Oriental 23; Patchouli 22; Fruity 21; Gourmand 21; Musky 17; Citrus 12; Spicy 9,Floral,Woody,notes: description note lines,
+oudh-makh-mikh-incense,OUDH MAKH MIKH INCENSE,Incense,active,Floral 100; Woody 99; Amber & Oriental 90; Gourmand 66; Musky 62; Patchouli 52; Spicy 25; Citrus 24,Floral,"Woody, Amber & Oriental, Gourmand",notes: description note lines,"close call, decided by the description; secondary capped at 3 (had 5)"
+oudh-tajebni-incense,OUDH TAJEBNI INCENSE,Incense,active,Woody 100; Gourmand 87; Floral 68; Amber & Oriental 53; Spicy 48; Citrus 25,Woody,"Gourmand, Floral, Amber & Oriental",notes: description note lines,
+oudh-khawatir-incense,OUDH KHAWATIR INCENSE,Incense,active,Gourmand 100; Floral 96; Musky 75; Patchouli 70; Citrus 55; Woody 55,Gourmand,"Floral, Musky, Patchouli",notes: description note lines,"close call, unsure: Gourmand, Floral; secondary capped at 3 (had 5)"
+nasaem-incense,NASAEM INCENSE,Incense,active,Floral 100; Woody 83; Oud 35; Amber & Oriental 23; Patchouli 22; Fruity 21; Gourmand 21; Musky 17; Citrus 12; Spicy 9,Floral,Woody,notes: description note lines,
+nabeel-incense,NABEEL INCENSE,Incense,active,Woody 100; Floral 69; Patchouli 36; Spicy 27; Leather & Tobacco 24; Citrus 19; Fresh & Aquatic 16; Gourmand 16; Amber & Oriental 11,Woody,Floral,notes: description note lines,
+makh-mikh-incense,MAKH MIKH INCENSE,Incense,active,Floral 100; Woody 99; Amber & Oriental 90; Gourmand 66; Musky 62; Patchouli 52; Spicy 25; Citrus 24,Floral,"Woody, Amber & Oriental, Gourmand",notes: description note lines,"close call, decided by the description; secondary capped at 3 (had 5)"
+nabeel-black-incense,NABEEL BLACK INCENSE,Incense,active,Floral 100; Musky 49; Woody 49; Fresh & Aquatic 34; Citrus 33; Spicy 23,Floral,,notes: description note lines,
+oudh-mamul-nabeel,OUDH MAMUL NABEEL,Incense,active,Woody 100; Floral 69; Patchouli 36; Spicy 27; Leather & Tobacco 24; Citrus 19; Fresh & Aquatic 16; Gourmand 16; Amber & Oriental 11,Woody,Floral,notes: description note lines,
+oudh-mamul-qisaty,OUDH MAMUL QISATY,Incense,active,Gourmand 100; Leather & Tobacco 80; Floral 62; Fruity 60; Amber & Oriental 34; Woody 29; Citrus 14; Spicy 14,Gourmand,"Leather & Tobacco, Floral, Fruity",notes: description note lines,
+oudh-mamul-fattan,OUDH MAMUL FATTAN,Incense,active,Gourmand 100; Leather & Tobacco 80; Floral 62; Fruity 60; Amber & Oriental 34; Woody 29; Citrus 14; Spicy 14,Gourmand,"Leather & Tobacco, Floral, Fruity",notes: description note lines,
+oudh-mamul-baher,OUDH MAMUL BAHER,Incense,active,Floral 100; Musky 40; Woody 39; Gourmand 38; Amber & Oriental 36; Spicy 17; Fruity 15,Floral,,notes: description note lines,
+nabeel-dry-air-freshener,NABEEL DRY AIR FRESHENER,Air Freshener,active,Woody 100; Floral 69; Patchouli 36; Spicy 27; Leather & Tobacco 24; Citrus 19; Fresh & Aquatic 16; Gourmand 16; Amber & Oriental 11,Woody,Floral,notes: description note lines,
+nasaem-dry-air-freshener,NASAEM DRY AIR FRESHENER,Air Freshener,active,Floral 100; Woody 83; Oud 35; Amber & Oriental 23; Patchouli 22; Fruity 21; Gourmand 21; Musky 17; Citrus 12; Spicy 9,Floral,Woody,notes: description note lines,
+nabeel-black-dry-air-freshener,NABEEL BLACK DRY AIR FRESHENER,Air Freshener,active,Floral 100; Musky 49; Woody 49; Fresh & Aquatic 34; Citrus 33; Spicy 23,Floral,,notes: description note lines,
+lamya-dry-air-freshener,KANZ DRY AIR FRESHENER,Air Freshener,active,Gourmand 100; Woody 69; Floral 54; Spicy 26; Musky 22; Leather & Tobacco 18; Fresh & Aquatic 8,Gourmand,"Woody, Floral",notes: description note lines,
+saada-air-freshener,SA'ADA AIR FRESHENER,Air Freshener,active,Gourmand 100; Patchouli 61; Woody 38; Fruity 31; Fresh & Aquatic 26; Floral 25; Musky 22,Gourmand,Patchouli,notes: description note lines,
+oody-woody-air-freshener,OODY WOODY AIR FRESHENER,Air Freshener,active,Floral 100; Woody 82; Patchouli 34; Fruity 32; Amber & Oriental 31; Gourmand 28; Musky 24,Floral,Woody,notes: description note lines,
+dahn-al-oud-amiri-air-freshener,DAHN AL OUD AMIRI AIR FRESHENER,Air Freshener,active,Amber & Oriental 100; Gourmand 38; Leather & Tobacco 37; Patchouli 30; Citrus 12,Amber & Oriental,,notes: description note lines,
+fattan-air-freshener,FATTAN AIR FRESHENER,Air Freshener,active,Gourmand 100; Leather & Tobacco 80; Floral 62; Fruity 60; Amber & Oriental 34; Woody 29; Citrus 14; Spicy 14,Gourmand,"Leather & Tobacco, Floral, Fruity",notes: description note lines,
+qisaty-air-freshener,QISATY AIR FRESHENER,Air Freshener,active,Floral 100; Woody 91; Gourmand 56; Fruity 48; Patchouli 47; Oud 38; Musky 34; Citrus 9,Floral,"Woody, Gourmand",notes: description note lines,
+khayali-air-freshener,KHAYALI AIR FRESHENER,Air Freshener,active,Woody 100; Floral 68; Spicy 48; Musky 38; Patchouli 36,Woody,Floral,notes: description note lines,
+bahir-air-freshener,BAHIR AIR FRESHENER,Air Freshener,active,Floral 100; Musky 40; Woody 39; Gourmand 38; Amber & Oriental 36; Spicy 17; Fruity 15,Floral,,notes: description note lines,
+habibi-lil-abad-air-freshener,HABIBI LIL ABAD AIR FRESHENER,Air Freshener,active,Floral 100; Gourmand 96; Musky 75; Patchouli 70; Citrus 55; Woody 55,Floral,"Gourmand, Musky, Patchouli",notes: description note lines,"close call, decided by the description; secondary capped at 3 (had 5)"
+fakhar-al-nabeel-air-freshener,FAKHAR AL NABEEL AIR FRESHENER,Air Freshener,active,Floral 100; Woody 96; Amber & Oriental 64; Gourmand 49; Musky 40; Oud 39; Fruity 31; Spicy 27; Leather & Tobacco 21; Patchouli 19; Citrus 16; Fresh & Aquatic 6,Floral,"Woody, Amber & Oriental",notes: description note lines,"close call, unsure: Floral, Woody"
+dahn-al-oud-air-freshener,DAHN AL OUD AIR FRESHENER,Air Freshener,active,Floral 100; Woody 77; Patchouli 62; Oud 59; Amber & Oriental 45; Musky 30; Spicy 21; Citrus 17,Floral,"Woody, Patchouli, Oud",notes: description note lines,
+gold-24k-dry-air-freshener,GOLD 24K DRY AIR FRESHENER,Air Freshener,active,Gourmand 100; Leather & Tobacco 80; Floral 62; Fruity 60; Amber & Oriental 34; Woody 29; Citrus 14; Spicy 14,Gourmand,"Leather & Tobacco, Floral, Fruity",notes: description note lines,
+raunaq-air-freshener,RAUNAQ AIR FRESHENER,Air Freshener,active,Floral 100; Woody 54; Musky 44; Amber & Oriental 42; Patchouli 24; Gourmand 20; Fruity 17; Spicy 13; Citrus 10,Floral,Woody,notes: description note lines,
+irth-dry-air-freshener,IRTH DRY AIR FRESHENER,Air Freshener,active,Woody 100; Amber & Oriental 91; Floral 86; Spicy 60; Fruity 57; Patchouli 37; Gourmand 32; Leather & Tobacco 25; Oud 20; Musky 18; Citrus 12,Woody,"Amber & Oriental, Floral, Spicy",notes: description note lines,secondary capped at 3 (had 4)
+al-bashiq-dry-air-freshener,AL BASHIQ DRY AIR FRESHENER,Air Freshener,active,Amber & Oriental 100; Woody 74; Gourmand 44; Leather & Tobacco 36; Oud 34; Spicy 29; Floral 26; Patchouli 16; Musky 13; Citrus 9; Fruity 5,Amber & Oriental,Woody,notes: description note lines,
+crown-of-emirates-dry-air-freshener,CROWN OF EMIRATES DRY AIR FRESHENER,Air Freshener,active,Floral 100; Woody 47; Amber & Oriental 44; Oud 38; Musky 31; Spicy 28; Fruity 26; Citrus 19; Leather & Tobacco 19; Gourmand 12,Floral,,notes: description note lines,
+ocean-dry-air-freshener,OCEAN DRY AIR FRESHENER,Air Freshener,active,Woody 100; Floral 74; Gourmand 69; Amber & Oriental 60; Fruity 59; Spicy 44; Musky 43; Citrus 40; Oud 30; Patchouli 22; Fresh & Aquatic 21,Woody,"Floral, Gourmand, Amber & Oriental",notes: description note lines,secondary capped at 3 (had 4)
+sandal-roll-on-oil-perfume,SANDAL ROLL ON OIL PERFUME,Perfume,draft,Woody 100; Spicy 60; Musky 60,Woody,"Spicy, Musky",web search family (high): khanelkhaliliusa.com; alrashad.com,
+asateer-deodorant-spray,ASATEER DEODORANT SPRAY,Deodorant,active,Floral 100; Amber & Oriental 48; Oud 42; Musky 33; Woody 31; Leather & Tobacco 26; Citrus 19; Fruity 19; Spicy 18,Floral,,notes: description note lines,
+al-bashiq-deodorant-spray,AL BASHIQ DEODORANT SPRAY,Deodorant,active,Citrus 100,Citrus,,notes: description prose,
+crown-of-emirates-deodorant-spray,CROWN OF EMIRATES DEODORANT SPRAY,Deodorant,active,Amber & Oriental 100; Leather & Tobacco 79; Gourmand 29; Woody 27; Spicy 26,Amber & Oriental,Leather & Tobacco,notes: earlier extraction (layers not used),
+fulad-deodorant-spray,FULAD DEODORANT SPRAY,Deodorant,active,Amber & Oriental 100; Oud 81; Floral 69; Musky 62,Amber & Oriental,"Oud, Floral, Musky",notes: earlier extraction (layers not used),
+irth-deodorant-spray,IRTH DEODORANT SPRAY,Deodorant,active,Amber & Oriental 100; Musky 85; Woody 71; Floral 58,Amber & Oriental,"Musky, Woody, Floral",notes: description prose,
+nader-deodorant-spray,NADER DEODORANT SPRAY,Deodorant,active,Spicy 100,Spicy,,notes: earlier extraction (layers not used),
+ocean-deodorant-spray,OCEAN DEODORANT SPRAY,Deodorant,active,Fruity 100; Floral 78; Gourmand 75; Amber & Oriental 71; Musky 47,Fruity,"Floral, Gourmand, Amber & Oriental",notes: earlier extraction (layers not used),
+dahn-al-oud-deodorant-spray,DAHN AL OUD DEODORANT SPRAY,Deodorant,active,Oud 100; Floral 96; Patchouli 93; Spicy 47; Musky 44; Citrus 41,Oud,"Floral, Patchouli",notes: earlier extraction (layers not used),"close call, decided by the description"
+dahn-al-oud-amiri-deodorant-spray,DAHN AL OUD AMIRI DEODORANT SPRAY,Deodorant,active,Amber & Oriental 100; Patchouli 69; Leather & Tobacco 54; Gourmand 40; Citrus 35,Amber & Oriental,"Patchouli, Leather & Tobacco",notes: earlier extraction (layers not used),
+fakhar-al-nabeel-deodorant-spray,FAKHAR AL NABEEL DEODORANT SPRAY,Deodorant,active,Amber & Oriental 100; Woody 94; Musky 68,Amber & Oriental,"Woody, Musky",notes: earlier extraction (layers not used),
+fattan-deodorant-spray,FATTAN DEODORANT SPRAY,Deodorant,active,Floral 100; Leather & Tobacco 88; Gourmand 84; Amber & Oriental 73; Fruity 54; Citrus 22,Floral,"Leather & Tobacco, Gourmand, Amber & Oriental",notes: description prose,secondary capped at 3 (had 4)
+gold-24k-deodorant-spray,GOLD 24K DEODORANT SPRAY,Deodorant,active,Leather & Tobacco 100; Woody 87; Gourmand 67; Floral 63; Amber & Oriental 62; Spicy 50; Fruity 40; Citrus 33,Leather & Tobacco,"Woody, Gourmand, Floral",notes: earlier extraction (layers not used),secondary capped at 3 (had 5)
+habibi-lil-abad-deodorant-spray,HABIBI LIL ABAD DEODORANT SPRAY,Deodorant,active,Floral 100; Woody 85; Patchouli 77; Musky 69; Citrus 65; Gourmand 55,Floral,"Woody, Patchouli, Musky",notes: earlier extraction (layers not used),secondary capped at 3 (had 5)
+kanz-deodorant-spray,KANZ DEODORANT SPRAY,Deodorant,active,Gourmand 100; Floral 90; Woody 71,Gourmand,"Floral, Woody",notes: earlier extraction (layers not used),
+khayali-deodorant-spray,KHAYALI DEODORANT SPRAY,Deodorant,active,Woody 100; Floral 75; Spicy 67; Patchouli 60; Musky 32,Woody,"Floral, Spicy, Patchouli",notes: earlier extraction (layers not used),
+maghateer-deodorant-spray,MAGHATEER DEODORANT SPRAY,Deodorant,active,Spicy 100; Woody 77; Oud 45; Gourmand 42; Amber & Oriental 39; Floral 30,Spicy,Woody,notes: earlier extraction (layers not used),
+nabeel-deodorant-spray,NABEEL DEODORANT SPRAY,Deodorant,active,Spicy 100; Patchouli 93; Amber & Oriental 83,Spicy,"Patchouli, Amber & Oriental",notes: description prose,
+nabeel-black-deodorant-spray,NABEEL BLACK DEODORANT SPRAY,Deodorant,active,Floral 100; Musky 70; Woody 69; Citrus 47; Fresh & Aquatic 22,Floral,"Musky, Woody",notes: description prose,
+oody-woody-deodorant-spray,OODY WOODY DEODORANT SPRAY,Deodorant,active,Floral 100; Woody 86; Fruity 61; Musky 50; Gourmand 40,Floral,"Woody, Fruity, Musky",notes: earlier extraction (layers not used),
+qisaty-deodorant-spray,QISATY DEODORANT SPRAY,Deodorant,active,Floral 100; Woody 73; Oud 60; Gourmand 56; Musky 40; Citrus 37,Floral,"Woody, Oud, Gourmand",notes: earlier extraction (layers not used),
+raunaq-deodorant-spray,RAUNAQ DEODORANT SPRAY,Deodorant,active,Floral 100; Amber & Oriental 40,Floral,,notes: earlier extraction (layers not used),
+saoada-deodorant-spray,SAADA DEODORANT SPRAY,Deodorant,active,Gourmand 100; Patchouli 52; Fresh & Aquatic 38; Floral 31; Musky 31; Fruity 31,Gourmand,Patchouli,notes: earlier extraction (layers not used),
+tajebni-deodorant-spray,TAJEBNI DEODORANT SPRAY,Deodorant,active,Woody 100; Gourmand 76; Floral 73,Woody,"Gourmand, Floral",notes: earlier extraction (layers not used),
+mini-incense-khawatir,MINI INCENSE KHAWATIR,Incense,draft,Gourmand 100; Floral 96; Musky 75; Patchouli 70; Citrus 55; Woody 55,Gourmand,"Floral, Musky, Patchouli",notes: description note lines,"close call, unsure: Gourmand, Floral; secondary capped at 3 (had 5)"
+mini-incense-nabeel,MINI INCENSE NABEEL,Incense,active,Spicy 100; Amber & Oriental 41,Spicy,,notes: description prose,
+mini-incense-tajebni,MINI INCENSE TAJEBNI,Incense,active,Spicy 100; Floral 76; Woody 63,Spicy,"Floral, Woody",notes: description prose,
+club-de-nuit-intense-woman,CLUB DE NUIT INTENSE WOMAN,Perfume,active,Spicy 100; Floral 87; Oud 78; Amber & Oriental 75; Gourmand 55; Patchouli 51,Spicy,"Floral, Oud, Amber & Oriental",notes: description note lines,secondary capped at 3 (had 5)
+club-de-nuit-imperiale,CLUB DE NUIT IMPERIALE,Perfume,active,Woody 100; Floral 81; Amber & Oriental 59; Gourmand 36; Musky 34; Spicy 24; Citrus 18,Woody,"Floral, Amber & Oriental",notes: description note lines,
+club-de-nuit-sillage,CLUB DE NUIT SILLAGE,Perfume,active,Floral 100; Amber & Oriental 64; Citrus 47; Spicy 18; Fruity 13,Floral,Amber & Oriental,notes: description note lines,
+checkmate-queen,CHECKMATE QUEEN,Perfume,active,Woody 100; Spicy 64; Fruity 58; Floral 45; Fresh & Aquatic 33,Woody,"Spicy, Fruity",notes: description note lines,
+checkmate-king,CHECKMATE KING,Perfume,active,Amber & Oriental 100; Woody 95,Amber & Oriental,Woody,notes: description note lines,"close call, unsure: Amber & Oriental, Woody"
+club-de-nuit-intense-man,CLUB DE NUIT INTENSE MAN,Perfume,active,Floral 100; Amber & Oriental 87; Fruity 79; Musky 74; Patchouli 74; Gourmand 62; Woody 55; Citrus 39,Floral,"Amber & Oriental, Fruity, Musky",notes: description note lines,secondary capped at 3 (had 6)
+club-de-nuit-intense-man-limited-edition,CLUB DE NUIT INTENSE MAN LIMITED EDITION,Perfume,active,Floral 100; Amber & Oriental 66; Leather & Tobacco 55; Patchouli 39; Woody 39; Spicy 35; Citrus 26; Musky 24; Fruity 17,Floral,"Amber & Oriental, Leather & Tobacco",notes: description note lines,
+club-de-nuit-lionheart-woman,CLUB DE NUIT LIONHEART WOMAN,Perfume,active,Gourmand 100; Spicy 41; Floral 29,Gourmand,,notes: description prose,
+club-de-nuit-milestone,CLUB DE NUIT MILESTONE,Perfume,active,Woody 100; Amber & Oriental 56; Musky 49; Floral 41; Citrus 19,Woody,Amber & Oriental,notes: description note lines,
+club-de-nuit-maleka,CLUB DE NUIT MALEKA,Perfume,active,Woody 100; Gourmand 98; Amber & Oriental 95; Spicy 48; Fruity 31; Citrus 29,Woody,"Gourmand, Amber & Oriental",notes: description note lines,"close call, unsure: Woody, Gourmand, Amber & Oriental"
+the-lions-club-feroce,THE LION'S CLUB - FEROCE,Perfume,active,Woody 100; Oud 80; Gourmand 43; Spicy 42; Floral 21; Fresh & Aquatic 19; Citrus 19,Woody,Oud,notes: description note lines,
+club-de-nuit-intense-man-2pc-gift-set,CLUB DE NUIT INTENSE MAN 2PC GIFT SET,Perfume,active,Fruity 100; Floral 59; Amber & Oriental 57; Patchouli 43; Citrus 41; Gourmand 35; Woody 32; Musky 29,Fruity,"Floral, Amber & Oriental",notes: earlier extraction (layers not used),
+the-lions-club-monarque,THE LION'S CLUB - MONARQUE,Perfume,active,Gourmand 100; Amber & Oriental 29; Musky 25; Spicy 25; Woody 22; Citrus 10; Floral 10,Gourmand,,notes: description note lines,
+ameerat-al-arab,Ameerat Al Arab,Perfume,active,Floral 100; Woody 77; Musky 63,Floral,"Woody, Musky",notes: description note lines,
+ameer-al-arab,Ameer Al Arab,Perfume,active,Spicy 100; Floral 99; Patchouli 88; Woody 62; Fresh & Aquatic 28,Spicy,"Floral, Patchouli, Woody",notes: description note lines,"close call, decided by the description"
+andaleeb,Andaleeb,Perfume,active,Floral 100; Amber & Oriental 68; Musky 47,Floral,Amber & Oriental,notes: description note lines,
+pure-white,Pure White,Perfume,active,Musky 100; Citrus 35,Musky,,notes: description note lines,
+ameerat-al-arab-prive-rose,Ameerat Al Arab Prive Rose,Perfume,active,Musky 100; Woody 99; Floral 50,Musky,"Woody, Floral",notes: description note lines,"close call, unsure: Musky, Woody"
+majd-al-sultan,Majd Al Sultan,Perfume,active,Gourmand 100; Patchouli 71; Woody 68; Amber & Oriental 66; Floral 25; Spicy 21,Gourmand,"Patchouli, Woody, Amber & Oriental",notes: description note lines,
+oud-thameen,Oud Thameen,Perfume,active,Gourmand 100; Amber & Oriental 75; Spicy 58; Woody 22; Citrus 10,Gourmand,"Amber & Oriental, Spicy",notes: description note lines,
+andaleeb-flora,Andaleeb Flora,Perfume,active,Musky 100; Woody 99; Floral 50,Musky,"Woody, Floral",notes: description note lines,"close call, unsure: Musky, Woody"
+mini-incense-nabeel-black,MINI INCENSE NABEEL BLACK,Incense,active,Floral 100; Musky 49; Woody 49; Fresh & Aquatic 34; Citrus 33; Spicy 23,Floral,,notes: description note lines,
+mini-incense-nasaeem,MINI INCENSE NASAEM,Incense,active,Floral 100; Woody 83; Oud 35; Patchouli 22; Fruity 21; Gourmand 21; Musky 17; Citrus 12; Spicy 9,Floral,Woody,notes: description note lines,
+mini-incense-wadeema,MINI INCENSE WADEEMA,Incense,active,Woody 100; Oud 98; Musky 73; Patchouli 73; Spicy 31,Woody,"Oud, Musky, Patchouli",notes: description note lines,"close call, unsure: Woody, Oud"
+shuhrah-men,SHUHRAH FOR MEN,Perfume,active,Leather & Tobacco 100; Amber & Oriental 74; Woody 71; Oud 64; Musky 50,Leather & Tobacco,"Amber & Oriental, Woody, Oud",notes: earlier extraction (layers not used),secondary capped at 3 (had 4)
+royal-blue,Royal Blue,Perfume,draft,,,,unscored: no notes and no web-search family,
+for-men-only,FAQAT LIL RIJAL,Perfume,active,Woody 100; Patchouli 71; Leather & Tobacco 60; Musky 45; Spicy 27; Citrus 20,Woody,"Patchouli, Leather & Tobacco",notes: description prose,
+4-flowers,4 Flowers,Perfume,draft,,,,unscored: no notes and no web-search family,
+nafaeis-al-shaghaf-silver,NAFAEIS AL SHAGHAF FOR WOMEN,Perfume,active,Gourmand 100; Floral 61,Gourmand,Floral,notes: description prose,
+intibaa-women,ENTEBAA FOR WOMEN,Perfume,active,Floral 100; Woody 92; Musky 75; Gourmand 60; Citrus 29,Floral,"Woody, Musky, Gourmand",notes: description prose,
+royal-2,Royal 2,Perfume,draft,,,,unscored: no notes and no web-search family,
+abyan,Abyan,Perfume,draft,,,,unscored: no notes and no web-search family,
+darej-purple,DAAREJ POUR HOMME,Perfume,active,Floral 100; Patchouli 69; Amber & Oriental 58; Woody 55; Musky 39; Citrus 37; Fruity 19,Floral,"Patchouli, Amber & Oriental, Woody",notes: description prose,
+darej-men-black,DAAREJ POUR FEMME,Perfume,active,Gourmand 100; Amber & Oriental 87; Woody 83; Floral 62; Musky 58; Spicy 44,Gourmand,"Amber & Oriental, Woody, Floral",notes: description prose,secondary capped at 3 (had 4)
+yazan,Yazan,Perfume,draft,Amber & Oriental 100; Woody 60,Amber & Oriental,Woody,web search family (high): wikiparfum.com/en/fragrances/yazan; vperfumes.com,
+oud-al-abyad,OUDH AL ABIYAD,Perfume,active,Woody 100; Floral 35; Amber & Oriental 33; Musky 32; Citrus 10,Woody,,notes: owner's Fragrantica sheet,
+rasasi-9459-crocodile,Rumz Al Rasasi 9325 Zebra Pour Femme,Perfume,active,Woody 100; Patchouli 69; Amber & Oriental 57; Gourmand 40; Musky 39; Floral 37; Spicy 26,Woody,"Patchouli, Amber & Oriental",notes: description prose,
+rasasi-9325-zebra-women,Rumz Al Rasasi 9325 Zebra Pour Homme,Perfume,active,Floral 100; Leather & Tobacco 69; Patchouli 49; Woody 49; Amber & Oriental 39; Musky 35; Spicy 23; Citrus 17; Fruity 17,Floral,Leather & Tobacco,notes: description prose,
+nafaeis-al-shaghaf-gold,NAFAEIS AL SHAGHAF,Perfume,active,Gourmand 100; Floral 99; Patchouli 49; Musky 44; Spicy 18; Citrus 14,Gourmand,Floral,notes: description prose,"close call, unsure: Gourmand, Floral"
+hawas-men,HAWAS FOR MEN,Perfume,active,Patchouli 100; Amber & Oriental 94; Spicy 86; Fruity 75; Floral 60; Musky 56; Citrus 48,Patchouli,"Amber & Oriental, Spicy, Fruity",notes: description prose,secondary capped at 3 (had 5)
+hawas-women,Hawas for Her,Perfume,draft,Fruity 100; Floral 60,Fruity,Floral,web search family (high): parfumo.com/Perfumes/Rasasi/Hawas_for_Her; rasasistore.com,
+la-yuqawam,La Yuqawam,Perfume,draft,Leather & Tobacco 100; Amber & Oriental 60,Leather & Tobacco,Amber & Oriental,web search family (high): sabina.com; fragrancex.com,
+ighraa-red-women,Ighraa Red Women,Perfume,draft,,,,unscored: no notes and no web-search family,
+ighraa-black-men,Ighraa Black Men,Perfume,draft,,,,unscored: no notes and no web-search family,
+al-wisam-2,AL WISAM DAY,Perfume,active,Woody 100; Floral 76; Amber & Oriental 61; Oud 50; Musky 43; Fresh & Aquatic 26; Citrus 17,Woody,"Floral, Amber & Oriental, Oud",notes: description prose,
+oud-mubakhar,MUKHALLAT OUDH AL MUBAKHR,Perfume,active,Floral 100; Woody 54; Gourmand 53; Patchouli 49; Musky 35; Citrus 31; Spicy 23,Floral,"Woody, Gourmand",notes: owner's Fragrantica sheet,
+romance,Romance,Perfume,draft,Floral 100; Woody 60; Musky 60,Floral,"Woody, Musky",web search family (high): nahdionline.com; goldenscent.com,
+emotion-men,Emotion Men,Perfume,draft,Woody 100,Woody,,web search family (medium): tajperf.com; beautyhub.co.ke,
+emotion-women,Emotion Women,Perfume,draft,Fruity 100; Floral 60,Fruity,Floral,web search family (high): fragrancex.com; goldenscent.com,
+blue-lady,Blue Lady,Perfume,draft,Floral 100; Fruity 60,Floral,Fruity,web search family (high): rasasiexclusive.com/products/blue-lady; parfumo.com,
+blue-for-men,Blue for Men,Perfume,active,Floral 100; Amber & Oriental 75; Woody 57; Spicy 32; Fresh & Aquatic 21; Citrus 20,Floral,"Amber & Oriental, Woody",notes: owner's Fragrantica sheet,
+blue-for-men-2-black,L'Incontournable Blue 2 for Men,Perfume,active,Woody 100; Musky 38; Spicy 34; Citrus 32; Floral 29,Woody,,notes: owner's Fragrantica sheet,
+shuhrah-women,SHURAH,Perfume,active,Floral 100; Oud 74; Patchouli 56; Amber & Oriental 51; Musky 35; Fresh & Aquatic 18; Citrus 17,Floral,"Oud, Patchouli, Amber & Oriental",notes: description prose,
+qasamat,ENTEBAA FOR MEN,Perfume,active,Gourmand 100; Woody 43; Patchouli 29; Fruity 22; Spicy 15; Citrus 9,Gourmand,,notes: description prose,
+hatim,Hatem,Perfume,draft,,,,unscored: no notes and no web-search family,
+mixed-oud-mubakhar,OUD AL MUBAKHR,Incense,active,Oud 100; Woody 81; Citrus 41,Oud,Woody,notes: description prose,
+sotoor-s,Sotoor Seen,Perfume,draft,,,,unscored: no notes and no web-search family,
+sotoor-w,Sotoor Waaw,Perfume,draft,Spicy 100; Woody 60,Spicy,Woody,web search family (medium): perfume.com/rasasi/sotoor-waaw,
+rasasi-9325-men,Rumz Al Rasasi 9325,Perfume,draft,Fruity 100; Leather & Tobacco 60,Fruity,Leather & Tobacco,web search family (medium): wikiparfum.com; parfumo.com,
+qasamat-bariq,QASAMAT - BAREEQ,Perfume,active,Floral 100; Woody 100; Amber & Oriental 90; Patchouli 67; Spicy 63; Citrus 35; Musky 32; Fruity 14,Floral,"Woody, Amber & Oriental, Patchouli",notes: description prose,"close call, unsure: Floral, Woody; secondary capped at 3 (had 4)"
+sotoor-r,Sotoor Raa',Perfume,draft,Floral 100; Spicy 60; Citrus 60,Floral,"Spicy, Citrus",web search family (medium): perfume.com/rasasi/sotoor-raa; beautyencounter.com,
+passion,Passion,Perfume,draft,Woody 100,Woody,,web search family (medium): rasasionline.com/product/passion (brand),
+victory-women,Victory Women,Perfume,draft,Floral 100; Woody 60; Musky 60,Floral,"Woody, Musky",web search family (medium): parfumo.com; perfumesbyjs.com,
+wood-excess-women,Wood Excess Pour Femme,Perfume,draft,Woody 100; Floral 60,Woody,Floral,web search family (high): rasasionline.com (brand); carrefouruae.com,
+elite-lady,Elite Lady,Perfume,draft,Floral 100; Fruity 60,Floral,Fruity,web search family (high): rasasiexclusive.com (brand); parfumo.com,
+youth-icon-men,Youth Ikon,Perfume,draft,Citrus 100; Woody 60,Citrus,Woody,web search family (high): rasasiexclusive.com/products/youth-ikon (brand),
+brilliant-bronze,Brilliant Bronze,Perfume,draft,Woody 100; Spicy 60,Woody,Spicy,web search family (medium): parfumo.com; rasasiexclusive.com (brand),
+royal-musk,Royal Musk,Perfume,draft,Musky 100; Floral 60; Spicy 60,Musky,"Floral, Spicy",web search family (high): rasasiexclusive.com/products/royal-musk (brand),
+deep-blue-men,Deep Blue Men,Perfume,draft,Woody 100,Woody,,web search family (medium): rasasionline.com/product/deep-blue; walmart.com,
+style-icon-men,Style Ikon,Perfume,draft,Citrus 100; Woody 60,Citrus,Woody,web search family (high): rasasionline.com/product/style-ikon (brand); parfumo.com,
+its-essential-men,It's Essential Rasasi,Perfume,draft,Citrus 100; Spicy 60,Citrus,Spicy,web search family (high): rasasiexclusive.com (brand); parfumistas.us,
+pure-musk,Pure Musk,Perfume,draft,Musky 100; Floral 60; Amber & Oriental 60,Musky,"Floral, Amber & Oriental",web search family (high): rasasiexclusive.com/products/pure-musk (brand),
+elite-man,Elite Man,Perfume,draft,Fruity 100; Woody 60,Fruity,Woody,web search family (medium): rasasiexclusive.com (brand); sharaya.in,
+rasasi-blue-lady-2,L'Incontournable Blue Lady 2,Perfume,draft,Floral 100; Fruity 60,Floral,Fruity,web search family (high): goldenscent.com; amazon.es,
+hawas-ice,HAWAS ICE,Perfume,active,Amber & Oriental 100; Fruity 80; Musky 68; Floral 64; Citrus 51; Spicy 47; Fresh & Aquatic 46,Amber & Oriental,"Fruity, Musky, Floral",notes: description prose,secondary capped at 3 (had 4)
+hawas-black,HAWAS BLACK,Perfume,active,Woody 100; Amber & Oriental 64; Patchouli 51; Citrus 34; Floral 33; Fruity 21,Woody,"Amber & Oriental, Patchouli",notes: description prose,
+hawas-elixir,HAWAS ELIXIR,Perfume,active,Gourmand 100; Musky 25; Amber & Oriental 25; Floral 21; Fresh & Aquatic 13; Citrus 10,Gourmand,,notes: description prose,
+hawas-tropical,Hawas Tropical,Perfume,draft,Fresh & Aquatic 100; Fruity 60,Fresh & Aquatic,Fruity,web search family (high): sabina.com; flora-parfums.com,
+hawas-eclat,HAWAS ÉCLAT,Perfume,active,Amber & Oriental 100; Gourmand 84; Musky 47; Floral 39; Fruity 18; Citrus 16,Amber & Oriental,Gourmand,notes: description prose,
+royal-1,Royale,Perfume,active,Patchouli 100; Floral 76; Amber & Oriental 73; Woody 66; Musky 64; Spicy 57,Patchouli,"Floral, Amber & Oriental, Woody",notes: owner's Fragrantica sheet,secondary capped at 3 (had 5)
+habik-women,HABIK WOMEN,Perfume,active,Floral 100; Amber & Oriental 58; Musky 49; Woody 43; Fruity 19; Citrus 17,Floral,Amber & Oriental,notes: description prose,
+shuhrah-elixer,SHUHRAH ELIXIR,Perfume,active,Amber & Oriental 100; Floral 73; Patchouli 64; Oud 62; Woody 39; Citrus 34; Spicy 22,Amber & Oriental,"Floral, Patchouli, Oud",notes: description prose,
+shurah-sensuelle,SHURAH SENSUELLE,Perfume,active,Floral 100; Gourmand 96; Amber & Oriental 73; Musky 72; Woody 70; Fruity 27; Citrus 25,Floral,"Gourmand, Amber & Oriental, Musky",notes: description prose,"close call, unsure: Floral, Gourmand; secondary capped at 3 (had 4)"
+hawas-pink,HAWAS PINK,Perfume,active,Gourmand 100; Floral 39; Spicy 30,Gourmand,,notes: description prose,
+hawas-fire,HAWAS FIRE,Perfume,active,Amber & Oriental 100; Fresh & Aquatic 38; Floral 30,Amber & Oriental,,notes: description prose,
+sawaar-vanille-blanc,SAWAAR VANILLE BLANC,Perfume,active,Musky 100; Gourmand 54; Fruity 42,Musky,Gourmand,notes: description prose,
+ria,RIA,Perfume,active,Musky 100; Woody 99,Musky,Woody,notes: description prose,"close call, unsure: Musky, Woody"
+khadlaj-titan,TITAN,Perfume,active,Gourmand 100; Amber & Oriental 98; Musky 67,Gourmand,"Amber & Oriental, Musky",notes: earlier extraction (layers not used),"close call, decided by the description"
+shiyaaka-shadow-special-edition,SHIYAAKA SHADOW SPECIAL EDITION,Perfume,active,Patchouli 100; Floral 90; Citrus 70,Patchouli,"Floral, Citrus",notes: description prose,
+peach-velvet,PEACH VELVET,Perfume,active,Fruity 100; Woody 76; Amber & Oriental 63; Musky 42,Fruity,"Woody, Amber & Oriental",notes: earlier extraction (layers not used),
+nafais-magrib,NAFAIS MAGRIB,Perfume,active,Woody 100; Citrus 80,Woody,Citrus,notes: description prose,
+black-diamond-incense,BLACK DIAMOND INCENSE,Perfume,active,Amber & Oriental 100; Leather & Tobacco 70; Oud 68; Woody 42; Fresh & Aquatic 26; Gourmand 25,Amber & Oriental,"Leather & Tobacco, Oud",notes: description prose,
+spanish-tobacco,SPANISH TOBACCO,Perfume,active,Floral 100; Amber & Oriental 88; Leather & Tobacco 84; Gourmand 48; Spicy 47; Fresh & Aquatic 40,Floral,"Amber & Oriental, Leather & Tobacco",notes: description prose,
+tobacco-box,TOBACCO BOX,Perfume,active,Leather & Tobacco 100,Leather & Tobacco,,notes: earlier extraction (layers not used),
+cullinan-diamond-iris,CULLINAN DIAMOND IRIS,Perfume,active,Woody 100; Floral 66; Citrus 42; Patchouli 36; Fruity 18,Woody,Floral,notes: description prose,
+wild-colt-assaf,WILD COLT - 200 ML,Perfume,active,Amber & Oriental 100; Woody 78; Leather & Tobacco 53; Musky 45; Spicy 45; Patchouli 43; Citrus 26; Fresh & Aquatic 16,Amber & Oriental,"Woody, Leather & Tobacco",notes: description prose,
+arrogate-girl-assaf,ARROGATE GIRL - 200 ML,Perfume,active,Woody 100; Floral 71; Gourmand 69; Citrus 47; Musky 40; Fruity 10,Woody,"Floral, Gourmand",notes: description prose,
+arrogate-colt-assaf,ARROGATE COLT ASSAF,Perfume,active,Floral 100; Patchouli 88; Amber & Oriental 82; Woody 62; Fruity 51,Floral,"Patchouli, Amber & Oriental, Woody",notes: description prose,secondary capped at 3 (had 4)
+miss-arrogate-assaf,MISS ARROGATE - 200 ML,Perfume,active,Floral 100; Citrus 59,Floral,Citrus,notes: description prose,
+berries-cream-macaron,BERRIES CREAM MACARON,Perfume,active,Gourmand 100; Fruity 35,Gourmand,,notes: earlier extraction (layers not used),
+caramel-chocolate-macaron,CARAMEL CHOCOLATE MACARON,Perfume,active,Gourmand 100,Gourmand,,notes: earlier extraction (layers not used),
+chocolate-ganache,CHOCOLATE GANACHE,Perfume,active,Gourmand 100,Gourmand,,notes: earlier extraction (layers not used),
+coconut-chiffon,COCONUT CHIFFON,Perfume,active,Gourmand 100; Fruity 80,Gourmand,Fruity,notes: earlier extraction (layers not used),
+cookie-dough,COOKIE DOUGH,Perfume,active,Gourmand 100,Gourmand,,notes: earlier extraction (layers not used),
+cotton-blush,COTTON BLUSH,Perfume,active,Gourmand 100,Gourmand,,notes: earlier extraction (layers not used),
+dulce-de-leche,DULCE DE LECHE,Perfume,active,Gourmand 100,Gourmand,,notes: earlier extraction (layers not used),
+french-vanilla-latte,FRENCH VANILLA LATTE,Perfume,active,Gourmand 100,Gourmand,,notes: description prose,
+lemon-sorbet,LEMON SORBET,Perfume,active,Gourmand 100; Citrus 58,Gourmand,Citrus,notes: earlier extraction (layers not used),
+mango-affogato,MANGO AFFOGATO,Perfume,active,Gourmand 100; Fruity 63,Gourmand,Fruity,notes: earlier extraction (layers not used),
+matcha-latte,MATCHA LATTE,Perfume,active,Gourmand 100,Gourmand,,notes: earlier extraction (layers not used),
+pecan-butter-cookie,PECAN BUTTER COOKIE,Perfume,active,Gourmand 100,Gourmand,,notes: earlier extraction (layers not used),
+strawberry-tres-leches,STRAWBERRY TRES LECHES,Perfume,active,Gourmand 100; Fruity 42,Gourmand,,notes: earlier extraction (layers not used),
+toffee-ganache,TOFFEE GANACHE,Perfume,active,Gourmand 100,Gourmand,,notes: earlier extraction (layers not used),
+vanilla-cream-macaron,VANILLA CREAM MACARON,Perfume,active,Gourmand 100,Gourmand,,notes: earlier extraction (layers not used),
+9-pm-night-out,9 PM NIGHT OUT,Perfume,active,Gourmand 100; Patchouli 48; Leather & Tobacco 46; Spicy 43; Woody 27; Floral 19; Citrus 17; Fruity 14,Gourmand,,notes: owner's Fragrantica sheet,
+island-dreams,ISLAND DREAMS,Perfume,active,Musky 100; Citrus 35; Floral 30; Fruity 30,Musky,,notes: description prose,
+ombre-notes,OMBRE NOTES,Perfume,active,Amber & Oriental 100; Musky 69,Amber & Oriental,Musky,notes: description prose,
+onyx-silver,ONYX SILVER,Perfume,active,Woody 100; Musky 81; Spicy 64; Citrus 47,Woody,"Musky, Spicy",notes: description prose,
+onyx,ONYX GOLD,Perfume,active,Woody 100; Amber & Oriental 83; Oud 82,Woody,"Amber & Oriental, Oud",notes: earlier extraction (layers not used),
+shiyaaka-for-men,SHIYAAKA FOR MEN,Perfume,active,,,,unscored: notes match no family,
+shiyaaka-blue,SHIYAAKA BLUE,Perfume,active,Amber & Oriental 100; Musky 69; Woody 68; Patchouli 65; Floral 58; Citrus 51; Fresh & Aquatic 25,Amber & Oriental,"Musky, Woody, Patchouli",notes: description prose,secondary capped at 3 (had 5)
+musk-pour-amber,MUSK POUR AMBER,Perfume,active,Amber & Oriental 100; Floral 91; Woody 71; Gourmand 69; Musky 45; Fruity 27; Citrus 20,Amber & Oriental,"Floral, Woody, Gourmand",notes: owner's Fragrantica sheet,
+nafais-sharq,NAFAIS SHARQ,Perfume,active,Amber & Oriental 100; Oud 98; Spicy 88,Amber & Oriental,"Oud, Spicy",notes: earlier extraction (layers not used),"close call, decided by the description"
+25-heritage,25 HERITAGE,Perfume,active,Amber & Oriental 100; Woody 76,Amber & Oriental,Woody,notes: description prose,
+shiyaaka-snow,SHIYAAKA SNOW,Perfume,active,Spicy 100; Floral 56; Citrus 37,Spicy,Floral,notes: description prose,
+mansion,MANSION,Perfume,active,Gourmand 100; Woody 57; Fruity 35; Floral 31,Gourmand,Woody,notes: earlier extraction (layers not used),
+khadlaj-25-experience,25 EXPERIENCE,Perfume,active,Oud 100; Amber & Oriental 78; Woody 59,Oud,"Amber & Oriental, Woody",notes: description prose,
+private-blend-tobaco,PRIVATE BLEND TOBACO,Perfume,active,Leather & Tobacco 100; Amber & Oriental 84; Oud 75; Gourmand 69,Leather & Tobacco,"Amber & Oriental, Oud, Gourmand",notes: earlier extraction (layers not used),
+private-blend-musk,PRIVATE BLEND MUSK,Perfume,active,Citrus 100; Floral 84; Woody 65; Musky 50; Fruity 43,Citrus,"Floral, Woody, Musky",notes: earlier extraction (layers not used),
+nuha,NUHA,Perfume,active,Floral 100; Woody 77; Gourmand 76; Fruity 57,Floral,"Woody, Gourmand, Fruity",notes: description prose,
+nuha-bon-bon,NUHA BON BON,Perfume,active,Gourmand 100; Floral 29; Fruity 28,Gourmand,,notes: owner's Fragrantica sheet,
+black-cavalier-xi-perfume,BLACK CAVALIER XI Perfume,Perfume,active,Gourmand 100; Spicy 93; Woody 63; Amber & Oriental 46; Floral 33; Patchouli 33; Citrus 11; Fresh & Aquatic 11,Gourmand,"Spicy, Woody",notes: description prose,
+black-cavalier-vi-perfume,BLACK CAVALIER VI Perfume,Perfume,active,Woody 100; Patchouli 48; Floral 32; Fresh & Aquatic 29; Spicy 23; Citrus 17,Woody,,notes: description prose,
+marigold,MARIGOLD,Perfume,active,Amber & Oriental 100; Musky 85; Floral 58; Woody 56; Spicy 40; Fruity 36; Citrus 24,Amber & Oriental,"Musky, Floral, Woody",notes: description prose,
+caramel-latte,CARAMEL LATTE,Perfume,active,Gourmand 100; Floral 30,Gourmand,,notes: description prose,
+qumra,QUMRA,Perfume,active,Gourmand 100; Amber & Oriental 32; Spicy 13; Citrus 10,Gourmand,,notes: description prose,
+prime-26-n,PRIME 26 N,Perfume,active,Gourmand 100; Spicy 79; Amber & Oriental 72; Floral 42,Gourmand,"Spicy, Amber & Oriental",notes: description prose,
+prime-25-n,PRIME 25 N,Perfume,active,Leather & Tobacco 100; Amber & Oriental 96; Woody 94; Gourmand 69; Spicy 40; Citrus 30,Leather & Tobacco,"Amber & Oriental, Woody, Gourmand",notes: description prose,"close call, decided by the description"
+nightly-moon,NIGHTLY MOON,Perfume,active,Gourmand 100; Spicy 79; Amber & Oriental 72; Floral 42,Gourmand,"Spicy, Amber & Oriental",notes: description prose,
+angham-second-song,ANGHAM SECOND SONG,Perfume,active,Gourmand 100; Floral 48; Amber & Oriental 35; Musky 23; Fruity 13; Citrus 12,Gourmand,,notes: description prose,
+sharaf-divine,Sharaf Divine,Perfume,active,Gourmand 100; Amber & Oriental 50; Floral 32; Spicy 23; Citrus 17; Fruity 16,Gourmand,Amber & Oriental,notes: description prose,
+hawwa-pink-copy,FATIMA,Perfume,active,Floral 100; Amber & Oriental 81; Gourmand 60; Musky 38,Floral,"Amber & Oriental, Gourmand",notes: earlier extraction (layers not used),
+odyssey-aoud,ODYSSEY AOUD,Perfume,active,Patchouli 100; Oud 90; Amber & Oriental 83; Spicy 80; Musky 72; Woody 59; Floral 32,Patchouli,"Oud, Amber & Oriental, Spicy",notes: description note lines,secondary capped at 3 (had 5)
+odyssey-mega,ODYSSEY MEGA LIMITED EDITION,Perfume,active,Woody 100; Fruity 58; Musky 53; Citrus 45; Gourmand 45; Fresh & Aquatic 42; Spicy 28; Floral 24,Woody,"Fruity, Musky",notes: description note lines,
+odyssey-marshmallow,ODYSSEY MARSHMALLOW,Perfume,active,Woody 100; Fruity 58; Musky 53; Citrus 45; Gourmand 45; Fresh & Aquatic 42; Spicy 28; Floral 24,Woody,"Fruity, Musky",notes: description note lines,
+odyssey-eau-de-montagne-mountain-edition,ODYSSEY EAU DE MONTAGNE MOUNTAIN EDITION,Perfume,active,Gourmand 100; Musky 34; Woody 29; Floral 28; Spicy 18,Gourmand,,notes: description note lines,
+odyssey-candee-special-edition,ODYSSEY CANDEE SPECIAL EDITION,Perfume,active,Amber & Oriental 100; Fruity 88; Patchouli 87; Floral 75; Gourmand 69; Musky 62; Citrus 19,Amber & Oriental,"Fruity, Patchouli, Floral",notes: description note lines,secondary capped at 3 (had 5)
+odyssey-mandarin-sky-man,ODYSSEY MANDARIN SKY MAN,Perfume,active,Woody 100; Gourmand 82; Amber & Oriental 50; Citrus 28; Fresh & Aquatic 19; Spicy 18,Woody,"Gourmand, Amber & Oriental",notes: description note lines,
+delights-island-bliss,DELIGHTS ISLAND BLISS,Perfume,active,Gourmand 100; Floral 66; Fruity 43; Musky 42; Fresh & Aquatic 17,Gourmand,Floral,notes: description note lines,
+island-breeze,ISLAND BREEZE,Perfume,active,Gourmand 100; Floral 66; Fruity 43; Musky 42; Fresh & Aquatic 17,Gourmand,Floral,notes: description note lines,
+ombre-dor,OMBRE D'OR,Perfume,active,Amber & Oriental 100; Floral 46; Woody 36; Spicy 32; Musky 18; Citrus 11,Amber & Oriental,,notes: description note lines,
+club-de-nuit-precieux-iv,CLUB DE NUIT PRECIEUX IV,Perfume,active,Gourmand 100; Floral 39; Fruity 26; Patchouli 23; Musky 22; Citrus 11; Fresh & Aquatic 10,Gourmand,,notes: description note lines,
+club-de-nuit-precieux-1-extrait-de-parfum-55ml,CLUB DE NUIT PRECIEUX 1 EXTRAIT DE PARFUM,Perfume,active,Gourmand 100; Floral 39; Fruity 26; Patchouli 23; Musky 22; Citrus 11; Fresh & Aquatic 10,Gourmand,,notes: description note lines,
+delights-yum-yum,YUM YUM,Perfume,active,Gourmand 100; Floral 39; Fruity 26; Patchouli 23; Musky 22; Citrus 11; Fresh & Aquatic 10,Gourmand,,notes: description note lines,
+sweet-oud,SWEET OUD,Perfume,active,Amber & Oriental 100; Spicy 67; Citrus 60; Gourmand 51; Musky 38,Amber & Oriental,"Spicy, Citrus, Gourmand",notes: description prose,
+sehr-al-oud,SEHR AL OUD,Perfume,active,Oud 100; Patchouli 96; Musky 72; Spicy 59,Oud,"Patchouli, Musky, Spicy",notes: earlier extraction (layers not used),"close call, decided by the description"
+kuwaiti-perfume,KUWAITI PERFUME,Perfume,active,Leather & Tobacco 100; Oud 71,Leather & Tobacco,Oud,notes: description prose,
+white-heart,WHITE HEART,Perfume,active,Gourmand 100; Amber & Oriental 96; Musky 93,Gourmand,"Amber & Oriental, Musky",notes: earlier extraction (layers not used),"close call, unsure: Gourmand, Amber & Oriental"
+forsa,FARSAH,Perfume,active,Gourmand 100; Floral 74; Leather & Tobacco 66; Fruity 53; Musky 42; Patchouli 39,Gourmand,"Floral, Leather & Tobacco, Fruity",notes: description prose,
+sama-al-oud,SAMA AL OUD,Perfume,active,Musky 100; Patchouli 94; Floral 90; Woody 88; Oud 75,Musky,"Patchouli, Floral, Woody",notes: description prose,secondary capped at 3 (had 4)
+al-oud-al-azraq,AL OUD AL AZRAQ,Perfume,active,Leather & Tobacco 100; Amber & Oriental 70; Gourmand 58; Oud 54,Leather & Tobacco,"Amber & Oriental, Gourmand, Oud",notes: description prose,
+pomegranate-musk,POMEGRANATE MUSK,Perfume,active,Floral 100; Amber & Oriental 38; Patchouli 29; Musky 26; Woody 22; Gourmand 21; Fruity 11; Citrus 8,Floral,,notes: description prose,
+ameer-al-oud-special-edition,AMEER AL OUD SPECIAL EDITION,Perfume,active,Oud 100; Leather & Tobacco 75; Gourmand 72; Spicy 66; Amber & Oriental 52; Floral 50; Woody 50,Oud,"Leather & Tobacco, Gourmand, Spicy",notes: owner's Fragrantica sheet,secondary capped at 3 (had 6)
+marshmallow-musk,MARSHMALLOW MUSK,Perfume,active,Gourmand 100; Amber & Oriental 87; Musky 60; Floral 50; Woody 50,Gourmand,"Amber & Oriental, Musky, Floral",notes: description prose,secondary capped at 3 (had 4)
+rehal-forest,REHAL FOREST,Perfume,active,Amber & Oriental 100,Amber & Oriental,,notes: description prose,
+ameer-al-oud-gold,AMEER AL OUD GOLD,Perfume,active,Patchouli 100; Amber & Oriental 94; Gourmand 72; Oud 60; Floral 54; Citrus 25,Patchouli,"Amber & Oriental, Gourmand, Oud",notes: description prose,secondary capped at 3 (had 4)
+ameer-al-oud-black-intense,AMEER AL OUD BLACK INTENSE,Perfume,active,Patchouli 100; Woody 66; Spicy 57,Patchouli,"Woody, Spicy",notes: description prose,
+aura-bloom,AURA BLOOM,Perfume,active,Gourmand 100; Amber & Oriental 42; Floral 42; Musky 28,Gourmand,,notes: earlier extraction (layers not used),
+mutheerah,MUTHEERAH,Perfume,active,Musky 100,Musky,,notes: description prose,
+special-musk,SPECIAL MUSK,Perfume,active,Gourmand 100; Musky 93; Floral 69; Spicy 44; Citrus 32,Gourmand,"Musky, Floral",notes: description prose,
+eager,EAGER,Perfume,active,Gourmand 100; Floral 48,Gourmand,,notes: earlier extraction (layers not used),
+scoppio,SCOPPIO,Perfume,active,Musky 100; Amber & Oriental 49; Woody 48; Gourmand 45; Fruity 32,Musky,,notes: earlier extraction (layers not used),
+so-wild-quartez,SO WILD QUARTEZ,Perfume,active,Gourmand 100; Amber & Oriental 61; Spicy 52,Gourmand,"Amber & Oriental, Spicy",notes: description prose,
+so-wild-boulder,SO WILD BOULDER,Perfume,active,Gourmand 100; Patchouli 94; Amber & Oriental 87; Spicy 66; Woody 62; Musky 58; Citrus 55,Gourmand,"Patchouli, Amber & Oriental, Spicy",notes: description prose,secondary capped at 3 (had 6)
+mira-amour,MIRA AMOUR,Perfume,active,Gourmand 100; Fruity 37,Gourmand,,notes: description prose,
+mira-coco,MIRA COCO,Perfume,active,Woody 100; Amber & Oriental 73; Gourmand 67; Spicy 26; Fruity 24; Citrus 24; Floral 20,Woody,"Amber & Oriental, Gourmand",notes: description prose,
+the-story,THE STORY,Perfume,active,Woody 100; Gourmand 99; Amber & Oriental 97; Patchouli 41; Floral 37; Fruity 16; Citrus 15,Woody,"Gourmand, Amber & Oriental",notes: description prose,"close call, decided by the description"
+the-story-copy,THE STORY SPORT,Perfume,active,Amber & Oriental 100; Woody 50; Citrus 43; Floral 31; Fruity 29; Spicy 29,Amber & Oriental,Woody,notes: description prose,
+layaan,LAYAAN,Perfume,active,Floral 100; Woody 77; Musky 63; Fruity 30; Citrus 22,Floral,"Woody, Musky",notes: description prose,
+lattafa-victoria-perfumed-spray-200ml,Victoria Perfumed Spray - 200ml,Deodorant,active,,,,unscored: notes match no family,
+fakhar-lattafa-perfumed-spray-for-men-200ml,Fakhar Lattafa Perfumed Spray For Men - 200ml,Deodorant,active,Patchouli 100; Amber & Oriental 78; Floral 67; Citrus 31; Fresh & Aquatic 28,Patchouli,"Amber & Oriental, Floral",notes: description note lines,
+badee-al-oud-sublime-perfumed-spray-200ml,Bade'e Al Oud Sublime Perfumed Spray - 200ml,Perfume,active,Floral 100; Amber & Oriental 89; Oud 84; Musky 70; Fruity 57,Floral,"Amber & Oriental, Oud, Musky",notes: description note lines,secondary capped at 3 (had 4)
+raghba-perfumed-spray-200ml,Raghba Perfumed Spray - 200ml,Deodorant,active,Gourmand 100; Oud 75; Amber & Oriental 54; Musky 44; Woody 43,Gourmand,"Oud, Amber & Oriental",notes: description note lines,
+enigmatic,ENIGMATIC,Perfume,active,Gourmand 100; Amber & Oriental 98; Patchouli 78; Woody 73; Floral 56; Spicy 39; Citrus 29; Fruity 28,Gourmand,"Amber & Oriental, Patchouli, Woody",notes: description note lines,"close call, unsure: Gourmand, Amber & Oriental; secondary capped at 3 (had 4)"
+qaed-al-fursan-perfumed-spray-200ml,Qaed Al Fursan Perfumed Spray - 200ml,Deodorant,active,Oud 100; Amber & Oriental 69; Woody 66; Floral 50; Spicy 35; Fruity 26,Oud,"Amber & Oriental, Woody, Floral",notes: description note lines,
+ramz-lattafa-gold-perfumed-spray-200ml,Ramz Lattafa Gold Perfumed Spray - 200ml,Deodorant,active,Floral 100; Fruity 94; Patchouli 93; Woody 73; Gourmand 71; Musky 52; Citrus 26,Floral,"Fruity, Patchouli, Woody",notes: description note lines,secondary capped at 3 (had 5)
+asad-perfumed-spray-200ml,Asad Perfumed Spray - 200ml,Deodorant,active,Amber & Oriental 100; Gourmand 66; Woody 29; Patchouli 25; Floral 23; Leather & Tobacco 19; Spicy 18; Fruity 13,Amber & Oriental,Gourmand,notes: description note lines,
+raed-absolu-perfumed-spray-200ml,Raed Luxe Perfumed Spray 200ml,Deodorant,active,Patchouli 100; Floral 90; Woody 79; Gourmand 77; Spicy 63; Citrus 28,Patchouli,"Floral, Woody, Gourmand",notes: description note lines,secondary capped at 3 (had 4)
+fakhar-lattafa-white-perfumed-spray-200ml,Fakhar Lattafa White Perfumed Spray 200ml,Deodorant,active,Floral 100; Patchouli 58; Woody 57,Floral,"Patchouli, Woody",notes: description note lines,
+ajwad-pink-to-pink-perfumed-spray-200ml,Ajwad Pink To Pink Perfumed Spray 200ml,Deodorant,active,Floral 100; Leather & Tobacco 78; Amber & Oriental 58; Musky 50; Gourmand 47; Spicy 18; Fruity 17; Citrus 16,Floral,"Leather & Tobacco, Amber & Oriental, Musky",notes: description prose,
+angham-perfumed-spray-200ml,Angham Perfumed Spray 200ml,Deodorant,active,Gourmand 100; Amber & Oriental 45; Musky 39; Spicy 35; Floral 26; Citrus 14,Gourmand,,notes: description note lines,
+oud-muattar-oud-al-rawda,OUD MUATTAR OUD AL RAWDA,Incense,active,Spicy 100; Woody 58; Floral 57; Patchouli 53; Musky 48,Spicy,"Woody, Floral, Patchouli",notes: description note lines,
+oud-muattar-oud-al-maqaam,OUD MUATTAR OUD AL MAQAAM,Incense,active,Patchouli 100; Woody 98,Patchouli,Woody,notes: earlier extraction (layers not used),"close call, unsure: Patchouli, Woody"
+oud-muattar-oud-al-saada,OUD MUATTAR OUD AL SAADA,Incense,active,Floral 100; Citrus 38; Musky 38; Gourmand 30,Floral,,notes: earlier extraction (layers not used),
+the-kingdom-perfumed-spray-200ml,The Kingdom Perfumed Spray 200ml,Deodorant,active,Amber & Oriental 100; Gourmand 81; Leather & Tobacco 45; Fresh & Aquatic 31; Floral 19,Amber & Oriental,Gourmand,notes: description note lines,
+hawas-malibu,HAWAS MALIBU,Perfume,active,Floral 100; Gourmand 94; Amber & Oriental 76; Musky 71; Woody 69; Patchouli 69; Citrus 47; Fruity 33,Floral,"Gourmand, Amber & Oriental, Musky",notes: description prose,secondary capped at 3 (had 5)
+royale-women-50ml,ROYALE WOMEN 50ML,Perfume,active,Gourmand 100; Musky 35; Woody 34; Fruity 28; Citrus 15,Gourmand,,notes: description prose,
+miss-griss-intense,MISS GRISS INTENSE - 100 ML,Perfume,active,Floral 100; Gourmand 84; Amber & Oriental 73; Woody 69; Spicy 33; Fruity 24,Floral,"Gourmand, Amber & Oriental, Woody",notes: description prose,
+arrogate-comete,ARROGATE COMETE - 200 ML,Perfume,active,Floral 100; Amber & Oriental 91; Woody 69; Spicy 33; Citrus 25,Floral,"Amber & Oriental, Woody",notes: description prose,
+miss-flora,MISS FLORA - 200 ML,Perfume,active,Floral 100; Woody 57; Musky 47; Gourmand 28; Fruity 26,Floral,Woody,notes: description prose,
+risk-comete,RISK COMETE - 150 ML,Perfume,active,Floral 100; Musky 74; Fruity 74; Woody 73,Floral,"Musky, Fruity, Woody",notes: description prose,
+pink-lady,PINK LADY - 200 ML,Perfume,active,Patchouli 100; Gourmand 86; Floral 50; Citrus 28,Patchouli,"Gourmand, Floral",notes: description prose,
+aura,AURA 35 - 150 ML,Perfume,active,Oud 100; Leather & Tobacco 84; Patchouli 67; Amber & Oriental 61; Floral 50; Spicy 32,Oud,"Leather & Tobacco, Patchouli, Amber & Oriental",notes: description prose,secondary capped at 3 (had 4)
+gris-erik,GRIS ERIK - 200 ML,Perfume,active,Woody 100; Floral 54; Patchouli 44; Amber & Oriental 41; Citrus 22,Woody,Floral,notes: description prose,
+morning-girl,MORNING GIRL - 100 ML,Perfume,active,Floral 100; Amber & Oriental 73; Musky 70; Citrus 47; Fruity 24,Floral,"Amber & Oriental, Musky",notes: description prose,
+assaf-eid-bakhur-collection-340-ml,Assaf Eid Bakhur Collection – 340 ml,Incense,active,Amber & Oriental 100,Amber & Oriental,,notes: earlier extraction (layers not used),
+assaf-arrogate-pink-set,ASSAF ARROGATE PINK SET,Perfume,active,Floral 100; Musky 43; Woody 43; Fruity 25; Gourmand 21,Floral,,notes: owner's Fragrantica sheet,
+brazilian-tobacco-200ml,BRAZILIAN TOBACCO 200ml,Perfume,active,Leather & Tobacco 100; Woody 59; Patchouli 46; Oud 41; Fruity 21; Floral 18; Spicy 17; Citrus 14,Leather & Tobacco,Woody,notes: description note lines,
+vintage-tobacco-collection,VINTAGE TOBACCO COLLECTION,Perfume,active,Gourmand 100; Oud 34; Woody 22; Fruity 11,Gourmand,,notes: description note lines,
+nightly-donna,NIGHTLY DONNA,Perfume,active,Fruity 100; Patchouli 90; Musky 65,Fruity,"Patchouli, Musky",notes: description prose,
+qannas,QANNAS,Perfume,active,Gourmand 100; Floral 80; Amber & Oriental 46; Patchouli 38; Spicy 21; Fruity 19; Citrus 11,Gourmand,Floral,notes: description prose,
+bonita-rivera,BONITA RIVERA,Perfume,active,Gourmand 100; Musky 75; Woody 73; Floral 62; Citrus 29,Gourmand,"Musky, Woody, Floral",notes: description prose,
+bonita-hot-pink,BONITA HOT PINK,Perfume,active,Floral 100; Musky 83; Spicy 53; Citrus 44,Floral,"Musky, Spicy",notes: description prose,
+mirsaal-love-leteer,MIRSAAL LOVE LETTER,Perfume,active,Gourmand 100; Floral 73; Woody 58; Fruity 57; Amber & Oriental 42; Spicy 38,Gourmand,"Floral, Woody, Fruity",notes: description prose,
+hayba-royalty,HAYBA ROYALTY,Perfume,active,Gourmand 100; Amber & Oriental 65; Woody 51; Spicy 47; Floral 36; Musky 32; Patchouli 23; Citrus 10,Gourmand,"Amber & Oriental, Woody",notes: description prose,
+hayba-majesty,HAYBA MAJESTY,Perfume,active,Floral 100; Woody 86; Gourmand 85; Patchouli 78; Citrus 47,Floral,"Woody, Gourmand, Patchouli",notes: description prose,
+falcone-dana,FALCONE DANA,Perfume,active,Floral 100; Woody 71; Gourmand 59; Amber & Oriental 51; Musky 44; Fruity 19; Citrus 14,Floral,"Woody, Gourmand, Amber & Oriental",notes: description prose,
+shaheen,SHAHEEN,Perfume,active,Amber & Oriental 100; Leather & Tobacco 86; Citrus 73; Musky 69; Gourmand 69; Patchouli 67; Fruity 62; Woody 57; Floral 46,Amber & Oriental,"Leather & Tobacco, Citrus, Musky",notes: description prose,secondary capped at 3 (had 7)
+juman-exclusive,JUMAN EXCLUSIVE,Perfume,active,Musky 100; Gourmand 72; Floral 68; Spicy 42,Musky,"Gourmand, Floral",notes: description prose,
+juman-precious,JUMAN PRECIOUS,Perfume,active,Gourmand 100; Fruity 75,Gourmand,Fruity,notes: description prose,
+crown-spirit,CROWN SPIRIT - 200 ML,Perfume,active,Woody 100; Amber & Oriental 72; Musky 44; Patchouli 41; Floral 37,Woody,Amber & Oriental,notes: description prose,
+queen-rose,QUEEN ROSE,Perfume,active,Patchouli 100; Musky 89; Woody 78; Fruity 72; Floral 67,Patchouli,"Musky, Woody, Fruity",notes: description note lines,secondary capped at 3 (had 4)
+pink-diamond-sakura,PINK DIAMOND - SAKURA,Perfume,active,Floral 100; Woody 37; Amber & Oriental 35; Musky 30; Citrus 9,Floral,,notes: description note lines,
+ameer-al-arab-imperium,AMEER AL ARAB IMPERIUM,Perfume,active,Woody 100; Amber & Oriental 80; Musky 55; Floral 46; Fruity 31; Spicy 26; Fresh & Aquatic 22; Citrus 22,Woody,"Amber & Oriental, Musky",notes: description note lines,
+purple-heart-diamond,PURPLE HEART DIAMOND,Perfume,active,Floral 100; Patchouli 100; Woody 59; Spicy 38,Floral,"Patchouli, Woody",notes: description prose,"close call, decided by the description"
+grey-pearl-diamond,GREY PEARL DIAMOND,Perfume,active,Amber & Oriental 100; Oud 89; Floral 80; Patchouli 50; Spicy 50; Fresh & Aquatic 24; Fruity 23,Amber & Oriental,"Oud, Floral, Patchouli",notes: description prose,secondary capped at 3 (had 4)
+blue-diamond-aqua,BLUE DIAMOND AQUA,Perfume,active,Amber & Oriental 100; Patchouli 77; Musky 69,Amber & Oriental,"Patchouli, Musky",notes: description prose,
+black-carbon-diamond,BLACK CARBON DIAMOND,Perfume,active,Musky 100; Patchouli 94; Woody 74; Floral 45; Citrus 35; Fruity 34,Musky,"Patchouli, Woody",notes: description prose,
+arabian-tobacco,ARABIAN TOBACCO,Perfume,active,Gourmand 100; Floral 34; Patchouli 34; Amber & Oriental 31; Leather & Tobacco 24; Musky 21; Spicy 16,Gourmand,,notes: description prose,
+musk-powder,POWDER MUSK,Perfume,active,Gourmand 100; Floral 99; Musky 49; Woody 40; Amber & Oriental 38,Gourmand,Floral,notes: description prose,"close call, unsure: Gourmand, Floral"
+abaq-pomegranate-musk,ABAQ POMEGRANATE MUSK,Perfume,active,Amber & Oriental 100; Fruity 87; Musky 85; Patchouli 72; Woody 71; Gourmand 62; Citrus 30,Amber & Oriental,"Fruity, Musky, Patchouli",notes: description prose,secondary capped at 3 (had 5)
+special-musk-1,SPECIAL MUSK,Perfume,active,Floral 100; Gourmand 64; Leather & Tobacco 63; Amber & Oriental 35; Musky 30,Floral,"Gourmand, Leather & Tobacco",notes: description prose,
+pink-lady-1,PINK LADY - 100 ML,Perfume,active,Patchouli 100; Gourmand 86; Floral 50; Citrus 28,Patchouli,"Gourmand, Floral",notes: description prose,
+lady-supreme,LADY SUPREME - 100 ML,Perfume,active,Floral 100; Citrus 29,Floral,,notes: earlier extraction (layers not used),
+miss-gris,MISS GRIS - 100 ML,Perfume,active,Floral 100; Gourmand 84; Amber & Oriental 73; Woody 69; Spicy 33; Fruity 24,Floral,"Gourmand, Amber & Oriental, Woody",notes: description prose,
+miss-flora-1,MISS FLORA - 100 ML,Perfume,active,Floral 100; Woody 57; Musky 47; Gourmand 28; Fruity 26,Floral,Woody,notes: description prose,
+miss-sakura,MISS SAKURA - 100 ML,Perfume,active,Floral 100; Citrus 70; Gourmand 38; Fruity 36; Woody 35; Musky 32,Floral,Citrus,notes: earlier extraction (layers not used),
+oud-muattar-kuwaiti,OUD MUATTAR KUWAITI,Incense,active,Oud 100,Oud,,notes: earlier extraction (layers not used),
+oud-muattar-bahraini,OUD MUATTAR BAHRAINI,Incense,active,Oud 100,Oud,,notes: earlier extraction (layers not used),
+sehr-lattafa-perfume-mist,SEHR LATTAFA PERFUME MIST,Perfume Mist,active,Gourmand 100; Amber & Oriental 46,Gourmand,,notes: earlier extraction (layers not used),
+badee-al-oud-noble-blush-perfume-mist,BADEE AL OUD NOBLE BLUSH PERFUME MIST,Perfume Mist,active,Gourmand 100; Oud 46; Floral 35,Gourmand,,notes: earlier extraction (layers not used),
+mayar-natural-intense-perfume-mist,MAYAR NATURAL INTENSE PERFUME MIST,Perfume Mist,active,Gourmand 100; Floral 93; Musky 74,Gourmand,"Floral, Musky",notes: earlier extraction (layers not used),
+yara-tous-perfume-mist,YARA TOUS PERFUME MIST,Perfume Mist,active,Floral 100; Musky 50,Floral,Musky,notes: earlier extraction (layers not used),
+signature-gold,SIGNATURE GOLD,Perfume,active,Gourmand 100; Patchouli 89; Woody 70,Gourmand,"Patchouli, Woody",notes: description note lines,
+signature-black,SIGNATURE BLACK,Perfume,active,Leather & Tobacco 100; Woody 87; Gourmand 64; Floral 60; Spicy 38; Citrus 28,Leather & Tobacco,"Woody, Gourmand, Floral",notes: description note lines,
+dkhoon-velvet,DKHOON VELVET,Perfume,active,Amber & Oriental 100; Patchouli 87; Woody 63; Floral 35; Spicy 32; Citrus 27,Amber & Oriental,"Patchouli, Woody",notes: description note lines,
+wild-colt-tobacco,WILD COLT TOBACCO - 200 ML,Perfume,active,Leather & Tobacco 100; Amber & Oriental 95; Floral 87; Woody 56; Musky 36; Fruity 29,Leather & Tobacco,"Amber & Oriental, Floral, Woody",notes: description prose,"close call, unsure: Leather & Tobacco, Amber & Oriental"
+bakhoor-oud-moattar-al-nafis,OUDH AL NAFIS INCENSE,Incense,active,Oud 100,Oud,,notes: earlier extraction (layers not used),
+al-nafis-incense,AL NAFIS INCENSE,Incense,active,Oud 100; Amber & Oriental 96,Oud,Amber & Oriental,notes: earlier extraction (layers not used),"close call, decided by the description"
+al-khanjar-incense,AL KHANJAR INCENSE,Incense,active,Oud 100; Woody 81,Oud,Woody,notes: earlier extraction (layers not used),
+oudh-al-khanjar-incense,OUDH AL KHANJAR INCENSE,Incense,active,Oud 100; Woody 81,Oud,Woody,notes: earlier extraction (layers not used),
+angel-musk,ANGEL MUSK,Perfume,active,Gourmand 100; Woody 61; Musky 33,Gourmand,Woody,notes: earlier extraction (layers not used),
+french-tobacco,FRENCH TOBACCO,Perfume,active,Floral 100; Spicy 86; Woody 80; Leather & Tobacco 76; Citrus 46; Fruity 28,Floral,"Spicy, Woody, Leather & Tobacco",notes: description note lines,
+blue-laverne-bakhoor,BLUE LAVERNE BAKHUR,Perfume,active,Amber & Oriental 100; Floral 92; Patchouli 57; Citrus 16; Fruity 15,Amber & Oriental,"Floral, Patchouli",notes: description note lines,
+white-regent-diamond,WHITE REGENT DIAMOND,Perfume,active,Gourmand 100; Woody 52; Patchouli 52; Floral 35; Spicy 22; Fruity 20,Gourmand,"Woody, Patchouli",notes: description note lines,
+musk-al-qamar,AL-QAMAR MUSK,Perfume,active,Woody 100; Floral 52; Amber & Oriental 43; Gourmand 23; Musky 22; Fruity 15; Spicy 13; Citrus 10,Woody,Floral,notes: description note lines,
+musk-al-fajr,AL-FAJR MUSK,Perfume,active,Musky 100; Floral 95; Woody 66; Citrus 21,Musky,"Floral, Woody",notes: description note lines,"close call, unsure: Musky, Floral"
+musk-al-shams,AL-SHAMS MUSK,Perfume,active,Gourmand 100; Amber & Oriental 54; Spicy 52; Musky 47; Woody 40; Floral 21; Citrus 13,Gourmand,"Amber & Oriental, Spicy",notes: description note lines,
+musk-al-lail,AL-LAIL MUSK,Perfume,active,Gourmand 100; Amber & Oriental 30; Floral 15; Musky 14,Gourmand,,notes: description note lines,
+oud-al-sabah,OUD AL SABAH,Perfume,active,Floral 100; Woody 99; Gourmand 90; Amber & Oriental 59; Citrus 35,Floral,"Woody, Gourmand, Amber & Oriental",notes: description note lines,"close call, unsure: Floral, Woody"
+ghadeer-silver,GHADEER SILVER,Perfume,active,Amber & Oriental 100; Floral 96; Woody 94; Musky 68; Citrus 30,Amber & Oriental,"Floral, Woody, Musky",notes: description note lines,"close call, unsure: Amber & Oriental, Floral"
+oud-muattar-ghaliya-1,OUD MUATTAR GHALIYA,Incense,active,Spicy 100; Floral 76; Patchouli 71,Spicy,"Floral, Patchouli",notes: description note lines,
+empire-regent-1,EMPIRE REGENT,Perfume,active,Woody 100; Floral 77; Musky 61; Spicy 57; Patchouli 51; Leather & Tobacco 51; Amber & Oriental 47; Citrus 19,Woody,"Floral, Musky, Spicy",notes: description note lines,secondary capped at 3 (had 5)
+oud-muattar-munawwara,OUD MUATTAR MUNAWWARA,Incense,active,Oud 100; Woody 81; Gourmand 67; Floral 50; Musky 33; Citrus 26,Oud,"Woody, Gourmand, Floral",notes: description note lines,
+club-de-nuit-woman,CLUB DE NUIT WOMAN 250 ML,Perfume,active,Floral 100; Patchouli 58; Musky 51; Gourmand 49; Citrus 47; Woody 39; Fruity 17,Floral,"Patchouli, Musky",notes: description note lines,
+lador-incense-classic,LADOR INCENSE CLASSIC,Perfume,active,Floral 100; Woody 81; Patchouli 62; Citrus 26,Floral,"Woody, Patchouli",notes: description note lines,
+sapphire-leather,SAPPHIRE LEATHER,Perfume,active,Gourmand 100; Spicy 96; Amber & Oriental 92; Leather & Tobacco 87; Floral 53,Gourmand,"Spicy, Amber & Oriental, Leather & Tobacco",notes: description note lines,"close call, decided by the description; secondary capped at 3 (had 4)"
+hawas-kobra,HAWAS KOBRA,Perfume,active,Amber & Oriental 100; Spicy 87; Musky 69; Woody 68; Floral 46; Citrus 27,Amber & Oriental,"Spicy, Musky, Woody",notes: description note lines,
+qasida-al-badr,QASIDA AL BADR 200ML,Perfume,active,Gourmand 100; Woody 86; Spicy 44; Patchouli 43; Floral 37; Fresh & Aquatic 26; Citrus 17,Gourmand,Woody,notes: description note lines,
+qasida-bakhour,QASIDA BAKHOUR 200ML,Perfume,active,Gourmand 100; Floral 97; Leather & Tobacco 76; Woody 75; Spicy 68; Amber & Oriental 53; Fruity 23,Gourmand,"Floral, Leather & Tobacco, Woody",notes: description note lines,"close call, unsure: Gourmand, Floral; secondary capped at 3 (had 5)"
+qasida-signature,QASIDA SIGNATURE 200ML,Perfume,active,Gourmand 100; Woody 52; Amber & Oriental 38; Spicy 30; Floral 27; Fruity 21; Citrus 13,Gourmand,Woody,notes: description note lines,
+qasida-queen,QASIDA QUEEN 200ML,Perfume,active,Gourmand 100; Floral 70; Amber & Oriental 57; Patchouli 49; Spicy 44; Fruity 21,Gourmand,"Floral, Amber & Oriental",notes: description note lines,
+la-di-da-for-him,LA DI DA FOR HIM,Perfume,active,Gourmand 100; Musky 51; Spicy 32; Citrus 30; Floral 25,Gourmand,Musky,notes: description note lines,
+liquid-brun,LIQUID BRUN,Perfume,active,Amber & Oriental 100; Leather & Tobacco 81; Oud 78; Spicy 77; Musky 69; Woody 68; Floral 46,Amber & Oriental,"Leather & Tobacco, Oud, Spicy",notes: description note lines,secondary capped at 3 (had 5)
+tuwaiq,TUWAIQ,Perfume,active,Amber & Oriental 100,Amber & Oriental,,notes: description note lines,
+nude-coral-diamond,NUDE CORAL DIAMOND,Perfume,active,Woody 100; Gourmand 78; Amber & Oriental 76; Fruity 62; Floral 49; Spicy 27; Citrus 23,Woody,"Gourmand, Amber & Oriental, Fruity",notes: description note lines,
+emerald-soul-diamond,EMERALD SOUL DIAMOND,Perfume,active,Gourmand 100; Amber & Oriental 98; Citrus 95; Spicy 66; Musky 33,Gourmand,"Amber & Oriental, Citrus, Spicy",notes: description note lines,"close call, unsure: Gourmand, Amber & Oriental, Citrus"
+hirsh-bakhouri,HIRSH BAKHOURI,Perfume,active,Gourmand 100; Amber & Oriental 72; Musky 50; Patchouli 42,Gourmand,"Amber & Oriental, Musky",notes: description note lines,
+attacks,ATTACKS - 150 ML,Perfume,active,Patchouli 100; Woody 21; Fresh & Aquatic 19; Floral 17,Patchouli,,notes: description note lines,
+arrogate-pink,ARROGATE PINK - 200 ML,Perfume,active,Floral 100; Musky 32; Woody 28; Gourmand 19; Fruity 19,Floral,,notes: description note lines,
+dangerous-arrogate,DANGEROUS ARROGATE - 200 ML,Perfume,active,Woody 100; Amber & Oriental 86; Gourmand 71; Musky 53; Citrus 44; Spicy 28; Fruity 20,Woody,"Amber & Oriental, Gourmand, Musky",notes: description note lines,
+gris-erik-1,GRIS ERIK - 100 ML,Perfume,active,Woody 100; Patchouli 83; Floral 79; Amber & Oriental 69; Citrus 23,Woody,"Patchouli, Floral, Amber & Oriental",notes: description note lines,
+frankel-blue-elixir,FRANKEL BLUE ELIXIR,Perfume,active,Spicy 100; Patchouli 90; Woody 71; Citrus 68; Floral 43,Spicy,"Patchouli, Woody, Citrus",notes: description note lines,
+nomad,NOMADE,Perfume,active,Amber & Oriental 100; Oud 34,Amber & Oriental,,notes: description note lines,
+noble,NOBLE,Perfume,active,Oud 100,Oud,,notes: earlier extraction (layers not used),
+musk-red-berries,MUSK RED BERRIES,Perfume,active,Musky 100; Gourmand 90; Floral 45; Fruity 42,Musky,Gourmand,notes: description note lines,
+leo,LEO,Perfume,active,Leather & Tobacco 100; Gourmand 67; Amber & Oriental 65; Musky 62; Patchouli 47; Floral 31; Spicy 29,Leather & Tobacco,"Gourmand, Amber & Oriental, Musky",notes: description note lines,
+hunter,HUNTER,Perfume,active,Gourmand 100; Floral 56; Musky 30; Woody 28; Patchouli 22; Citrus 20; Fruity 8,Gourmand,Floral,notes: description note lines,
+connoisseur-man,CONNOISSEUR MAN,Perfume,active,Floral 100; Amber & Oriental 91; Gourmand 76; Patchouli 70; Woody 54; Fresh & Aquatic 34; Fruity 30; Spicy 29; Citrus 22,Floral,"Amber & Oriental, Gourmand, Patchouli",notes: description note lines,secondary capped at 3 (had 4)
+atlas,ATLAS,Perfume,active,Woody 100; Amber & Oriental 70; Floral 40; Fresh & Aquatic 19; Citrus 15,Woody,Amber & Oriental,notes: description note lines,
+al-noble-ameer,AL NOBLE AMEER,Perfume,active,Woody 100; Oud 97; Patchouli 73; Amber & Oriental 59; Spicy 31; Fruity 28,Woody,"Oud, Patchouli, Amber & Oriental",notes: description note lines,"close call, unsure: Woody, Oud"
+ajwad,AJWAD,Perfume,active,Amber & Oriental 100; Musky 57; Spicy 45; Oud 43; Floral 38,Amber & Oriental,Musky,notes: description note lines,
+sheikh-al-shuyukh-supreme,SHEIKH AL SHUYUKH SUPREME,Perfume,active,Amber & Oriental 100; Musky 69; Woody 63; Oud 52; Floral 52; Spicy 40,Amber & Oriental,"Musky, Woody, Oud",notes: description note lines,secondary capped at 3 (had 4)
+sugar-me-marshmallow-dream,SUGAR ME MARSHMALLOW DREAM,Perfume,active,Gourmand 100; Musky 38; Floral 32,Gourmand,,notes: description note lines,
+assaf-luxury-gift-set,ASSAF LUXURY GIFT SET,Gift Set,active,Amber & Oriental 100; Fruity 33,Amber & Oriental,,notes: description prose,
+carbon,CARBON,Perfume,active,Woody 100; Patchouli 80; Amber & Oriental 75; Leather & Tobacco 40; Citrus 22,Woody,"Patchouli, Amber & Oriental",notes: description note lines,
+neutron,NEUTRON,Perfume,active,Woody 100; Amber & Oriental 61; Spicy 25; Citrus 18,Woody,Amber & Oriental,notes: description note lines,
+wisal,WISAL,Perfume,active,Floral 100; Amber & Oriental 68; Musky 47,Floral,Amber & Oriental,notes: description note lines,
+wisal-dhahab,WISAL DHAHAB,Perfume,active,Oud 100; Amber & Oriental 96; Floral 89; Musky 59; Spicy 39,Oud,"Amber & Oriental, Floral, Musky",notes: description note lines,"close call, unsure: Oud, Amber & Oriental"
+blu,BLU,Perfume,active,Woody 100; Musky 82; Fresh & Aquatic 33; Citrus 32,Woody,Musky,notes: description note lines,
+sacrifice-for-her,SACRIFICE FOR HER,Perfume,active,Musky 100; Gourmand 77; Floral 76; Woody 64,Musky,"Gourmand, Floral, Woody",notes: description note lines,
+bahar-al-arab,BAHAR AL ARAB,Perfume,active,Fruity 100; Floral 60; Amber & Oriental 56; Musky 48; Fresh & Aquatic 46; Woody 41; Citrus 19,Fruity,"Floral, Amber & Oriental",notes: description note lines,
+bakhoor-oud-azraq,BAKHOOR OUD AZRAQ,Incense,active,Oud 100,Oud,,notes: earlier extraction (layers not used),
+bakhoor-ashiq-al-oud-aswad,BAKHOOR ASHIQ AL OUD ASWAD,Incense,active,Oud 100,Oud,,notes: earlier extraction (layers not used),
+bakhoor-amir-al-oud-special-edition,BAKHOOR AMIR AL OUD SPECIAL EDITION,Incense,active,Oud 100,Oud,,notes: earlier extraction (layers not used),
+bakhoor-kuwaiti,BAKHOOR KUWAITI,Incense,active,Oud 100,Oud,,notes: earlier extraction (layers not used),
+mamoul-kuwaiti,MAMOUL KUWAITI,Incense,active,Oud 100; Amber & Oriental 96,Oud,Amber & Oriental,notes: earlier extraction (layers not used),"close call, unsure: Oud, Amber & Oriental"
+mamoul-oud-azraq,MAMOUL OUD AZRAQ,Incense,active,Amber & Oriental 100; Oud 92,Amber & Oriental,Oud,notes: earlier extraction (layers not used),
+mamoul-ashiq-al-oud,MAMOUL ASHIQ AL OUD,Incense,active,Oud 100; Amber & Oriental 96,Oud,Amber & Oriental,notes: earlier extraction (layers not used),"close call, decided by the description"
+yara-elixir,YARA ELIXIR,Perfume,active,Gourmand 100; Amber & Oriental 46; Floral 33; Musky 31; Fruity 19,Gourmand,,notes: description note lines,
+asad-elixir,ASAD ELIXIR,Perfume,active,Amber & Oriental 100; Woody 78; Patchouli 60; Leather & Tobacco 50; Spicy 48; Gourmand 35; Citrus 13,Amber & Oriental,"Woody, Patchouli, Leather & Tobacco",notes: description note lines,
+odyssey-revolution-ultra-edition,ODYSSEY REVOLUTION ULTRA EDITION,Perfume,active,Floral 100; Gourmand 94; Woody 69; Fresh & Aquatic 31; Citrus 25,Floral,"Gourmand, Woody",notes: description note lines,
+odyssey-homme-white-edition,ODYSSEY HOMME WHITE EDITION,Perfume,active,Woody 100; Fresh & Aquatic 91; Gourmand 87; Spicy 81; Fruity 52,Woody,"Fresh & Aquatic, Gourmand, Spicy",notes: description note lines,secondary capped at 3 (had 4)
+odyssey-lichi-lush,ODYSSEY LI'CHI LUSH,Perfume,active,Floral 100; Gourmand 91; Woody 44; Musky 36; Amber & Oriental 35; Fruity 28; Citrus 16,Floral,Gourmand,notes: description note lines,
+odyssey-pink-pop,ODYSSEY PINK POP,Perfume,active,Fruity 100; Floral 94; Gourmand 63; Woody 52; Amber & Oriental 48; Musky 42; Citrus 18,Fruity,"Floral, Gourmand, Woody",notes: description note lines,
+odyssey-mandarin-sky-vintage-edition,ODYSSEY MANDARIN SKY VINTAGE EDITION,Perfume,active,Amber & Oriental 100; Woody 76; Floral 58; Spicy 55; Citrus 27,Amber & Oriental,"Woody, Floral, Spicy",notes: description note lines,
+club-de-nuit-lionheart-man,CLUB DE NUIT LIONHEART MAN,Perfume,active,Gourmand 100; Leather & Tobacco 36; Amber & Oriental 32; Floral 16; Fresh & Aquatic 12,Gourmand,,notes: description note lines,
+club-de-nuit-bling,CLUB DE NUIT BLING,Perfume,active,Gourmand 100,Gourmand,,notes: description note lines,
+club-de-nuit-urban-man-elixir,CLUB DE NUIT URBAN MAN ELIXIR,Perfume,active,Amber & Oriental 100; Floral 67; Woody 44; Patchouli 31; Spicy 29; Citrus 11,Amber & Oriental,Floral,notes: description note lines,
+luna,LUNA,Perfume,active,Gourmand 100; Floral 55; Fruity 40; Amber & Oriental 17; Patchouli 17; Citrus 14; Musky 13,Gourmand,Floral,notes: description note lines,
+infinity-silver,INFINITY SILVER,Perfume,active,Woody 100; Leather & Tobacco 68; Amber & Oriental 56; Citrus 34; Floral 33; Spicy 26,Woody,"Leather & Tobacco, Amber & Oriental",notes: description note lines,
+infinity-gold,INFINITY GOLD,Perfume,active,Floral 100; Gourmand 79; Musky 59; Fruity 28,Floral,"Gourmand, Musky",notes: description note lines,
+dubai-nights-midnight,DUBAI NIGHTS MIDNIGHT,Perfume,active,Amber & Oriental 100; Patchouli 87; Floral 58; Citrus 51,Amber & Oriental,"Patchouli, Floral, Citrus",notes: description note lines,
+dubai-nights-umbra,DUBAI NIGHTS UMBRA,Perfume,active,Amber & Oriental 100; Woody 68; Citrus 51; Spicy 32,Amber & Oriental,"Woody, Citrus",notes: description note lines,
+the-pride-of-armaf-pour-homme,THE PRIDE OF ARMAF POUR HOMME,Perfume,active,Gourmand 100; Woody 86; Spicy 73; Citrus 33,Gourmand,"Woody, Spicy",notes: description note lines,
+dunescape,DUNESCAPE,Perfume,active,Woody 100; Amber & Oriental 76; Citrus 70; Floral 66; Musky 53; Fruity 22; Spicy 18; Fresh & Aquatic 14,Woody,"Amber & Oriental, Citrus, Floral",notes: description note lines,secondary capped at 3 (had 4)
+club-de-nuit-woman-1,CLUB DE NUIT WOMAN,Perfume,active,Floral 100; Patchouli 58; Musky 51; Gourmand 49; Citrus 47; Woody 39; Fruity 17,Floral,"Patchouli, Musky",notes: description note lines,
+frankel-black-elixir,FRANKEL BLACK ELIXIR,Perfume,active,Woody 100; Amber & Oriental 84; Floral 78; Gourmand 70; Musky 45; Fresh & Aquatic 35; Citrus 23,Woody,"Amber & Oriental, Floral, Gourmand",notes: description note lines,
+no-comment,NO COMMENT,Perfume,active,Spicy 100; Gourmand 98; Woody 81; Amber & Oriental 62; Floral 59; Patchouli 55; Citrus 15,Spicy,"Gourmand, Woody, Amber & Oriental",notes: description note lines,"close call, unsure: Spicy, Gourmand; secondary capped at 3 (had 5)"
+club-de-nuit-sillage-1,CLUB DE NUIT SILLAGE,Perfume,active,Floral 100; Amber & Oriental 91; Musky 63; Woody 62; Patchouli 53; Spicy 37; Citrus 22,Floral,"Amber & Oriental, Musky, Woody",notes: description note lines,secondary capped at 3 (had 4)
+club-de-nuit-iconic,CLUB DE NUIT ICONIC,Perfume,active,Amber & Oriental 100; Spicy 57; Woody 51; Patchouli 23; Citrus 20; Floral 18; Fruity 14; Fresh & Aquatic 10,Amber & Oriental,"Spicy, Woody",notes: description note lines,
+club-de-nuit-man,CLUB DE NUIT MAN,Perfume,active,Amber & Oriental 100; Fruity 85; Gourmand 74; Musky 69; Woody 63; Patchouli 58; Floral 52; Citrus 22,Amber & Oriental,"Fruity, Gourmand, Musky",notes: description note lines,secondary capped at 3 (had 6)
+connoisseur-woman,CONNOISSEUR WOMAN,Perfume,active,Amber & Oriental 100; Floral 87; Gourmand 77; Musky 30; Citrus 15; Fruity 15,Amber & Oriental,"Floral, Gourmand",notes: description note lines,
+kilkat-blue,KILKAT BLUE,Perfume,active,Woody 100; Amber & Oriental 72; Musky 62; Citrus 52; Floral 46; Fruity 26; Spicy 19,Woody,"Amber & Oriental, Musky, Citrus",notes: description prose,
+kilkat-times,KLIKAT,Perfume,active,Amber & Oriental 100; Woody 68; Floral 58; Citrus 27,Amber & Oriental,"Woody, Floral",notes: description prose,
+ibraq-premium-gift-bag-large,IBRAQ Premium Gift Bag – Large,Bag,active,,,,unscored: no notes and no web-search family,
+afnan-gift-bag,AFNAN GIFT BAG,Bag,active,,,,unscored: no notes and no web-search family,
+assaf-gift-bag,ASSAF GIFT BAG,Bag,active,Gourmand 100,Gourmand,,notes: earlier extraction (layers not used),
+afnan-orange-gift-bag,AFNAN ORANGE GIFT BAG,Bag,active,,,,unscored: no notes and no web-search family,
+dolby,Dolby,,active,,,,unscored: no notes and no web-search family,
+vanilla-dreams,Island Dreams + Island Vanilla Dunes Set,Perfume,active,Gourmand 100; Floral 62; Amber & Oriental 46; Spicy 35; Musky 31; Woody 29; Fruity 17; Citrus 15,Gourmand,Floral,notes: owner's Fragrantica sheet,
+island-vanilla-dunes-set,Island + Vanilla Dunes Set,Perfume,active,Gourmand 100; Amber & Oriental 46; Floral 33; Woody 33; Spicy 32; Musky 31; Fresh & Aquatic 16; Citrus 11,Gourmand,,notes: owner's Fragrantica sheet,
+triple-island-set,Triple Island Set,Perfume,active,Floral 100; Fresh & Aquatic 36,Floral,,notes: owner's Fragrantica sheet,
+elizabeth,ELIZABETH 100ML,Perfume,active,Amber & Oriental 100; Musky 85; Patchouli 85; Fruity 73; Woody 66; Floral 64; Citrus 57,Amber & Oriental,"Musky, Patchouli, Fruity",notes: description note lines,secondary capped at 3 (had 6)
+frankel-imagination,FRANKEL IMAGINATION 100ML,Perfume,active,Spicy 100; Patchouli 90; Woody 71; Citrus 68; Floral 43,Spicy,"Patchouli, Woody, Citrus",notes: description note lines,
+frankel-set,FRANKEL SET 3×25ML,Gift Set,active,,,,unscored: no notes and no web-search family,
+lip-stick,LIP STICK 150ML,Perfume,active,Floral 100; Fruity 75; Woody 65; Gourmand 47; Patchouli 44; Musky 24,Floral,"Fruity, Woody",notes: owner's Fragrantica sheet,
+wild-colt-elixir,WILD COLT ELIXIR 200ML,Perfume,active,Amber & Oriental 100; Woody 76; Leather & Tobacco 48; Spicy 41; Patchouli 30; Citrus 13; Fresh & Aquatic 11,Amber & Oriental,Woody,notes: owner's Fragrantica sheet,
+frankel-imagination-1,FRANKEL IMAGINATION 200ML,Perfume,active,Spicy 100; Patchouli 90; Woody 71; Citrus 68; Floral 43,Spicy,"Patchouli, Woody, Citrus",notes: description note lines,
+arrogate-addict,ARROGATE ADDICT 200ML,Perfume,active,Amber & Oriental 100; Floral 58; Gourmand 39; Citrus 27,Amber & Oriental,Floral,notes: description note lines,
+wild-colt-bakhour,WILD COLT BAKHOUR 150ML,Perfume,active,Woody 100; Patchouli 47; Amber & Oriental 37; Leather & Tobacco 32; Gourmand 31; Musky 23; Spicy 18; Citrus 13; Fruity 13,Woody,,notes: description note lines,
+glitch,GLITCH 150ML,Perfume,active,Amber & Oriental 100; Gourmand 83; Floral 58; Woody 57; Fruity 29; Citrus 27,Amber & Oriental,"Gourmand, Floral, Woody",notes: owner's Fragrantica sheet,
+arrogate-collection-set,ARROGATE COLLECTION SET 3×25ML,Gift Set,active,,,,unscored: no notes and no web-search family,
+wild-colt-tobacco-1,WILD COLT TOBACCO 100ML,Perfume,active,Leather & Tobacco 100; Floral 87; Amber & Oriental 81; Oud 77; Woody 51; Fruity 29,Leather & Tobacco,"Floral, Amber & Oriental, Oud",notes: description note lines,secondary capped at 3 (had 4)
+arrogate-blue,ARROGATE BLUE 200ML,Perfume,active,Amber & Oriental 100; Woody 66; Patchouli 38; Citrus 27; Floral 24; Spicy 17,Amber & Oriental,Woody,notes: owner's Fragrantica sheet,
+daily-use-bundle-1,Day & Night Bundle,,draft,,,,unscored: no notes and no web-search family,
+ana-abiyedh-passion-60ml,ANA ABIYEDH PASSION 60ML,Perfume,active,Gourmand 100; Musky 31; Citrus 29,Gourmand,,notes: earlier extraction (layers not used),
+khamrah-gift-set,KHAMRAH GIFT SET,Gift Set,active,Gourmand 100; Spicy 25,Gourmand,,notes: description prose,
+teriaq-gift-set,TERIAQ GIFT SET,Gift Set,active,Gourmand 100; Leather & Tobacco 69; Musky 34,Gourmand,Leather & Tobacco,notes: earlier extraction (layers not used),
+yara-candy-gift-set,YARA CANDY GIFT SET,Gift Set,active,Amber & Oriental 100; Fruity 98; Gourmand 92; Floral 90; Musky 77,Amber & Oriental,"Fruity, Gourmand, Floral",notes: earlier extraction (layers not used),"close call, unsure: Amber & Oriental, Fruity; secondary capped at 3 (had 4)"
+fakhar-man-gift-set,FAKHAR MAN GIFT SET,Gift Set,active,Patchouli 100; Woody 70; Amber & Oriental 62; Floral 56; Citrus 50; Fresh & Aquatic 38,Patchouli,"Woody, Amber & Oriental, Floral",notes: earlier extraction (layers not used),secondary capped at 3 (had 4)
+teriaq-intense-gift-set,TERIAQ INTENSE GIFT SET,Gift Set,active,Amber & Oriental 100; Spicy 52; Gourmand 46,Amber & Oriental,Spicy,notes: earlier extraction (layers not used),
+mayar-cherry-intense-100ml,MAYAR CHERRY INTENSE 100ML,Perfume,active,Gourmand 100; Patchouli 69; Amber & Oriental 54; Fruity 53; Citrus 34,Gourmand,"Patchouli, Amber & Oriental, Fruity",notes: earlier extraction (layers not used),
+dalal-100ml,DALAL 100ML,Perfume,active,Floral 100; Gourmand 28; Musky 23; Citrus 22; Fruity 20,Floral,,notes: earlier extraction (layers not used),
+eternal-vanille-100ml,ETERNAL VANILLE 100ML,Perfume,active,Gourmand 100; Woody 46,Gourmand,,notes: description prose,
+pure-crystal-100ml,PURE CRYSTAL 100ML,Perfume,active,Woody 100; Fruity 52; Amber & Oriental 47; Spicy 45; Fresh & Aquatic 39; Citrus 25,Woody,Fruity,notes: earlier extraction (layers not used),
+queen-of-arabia-100ml,QUEEN OF ARABIA 100ML,Perfume,active,Woody 100; Amber & Oriental 95; Floral 82; Gourmand 65; Fruity 54,Woody,"Amber & Oriental, Floral, Gourmand",notes: earlier extraction (layers not used),"close call, unsure: Woody, Amber & Oriental; secondary capped at 3 (had 4)"
+musamam-black-intense-100ml,MUSAMAM BLACK INTENSE 100ML,Perfume,active,Patchouli 100; Woody 99; Gourmand 72; Floral 70,Patchouli,"Woody, Gourmand, Floral",notes: earlier extraction (layers not used),"close call, unsure: Patchouli, Woody"
+aura-100ml,AURA 100ML,Perfume,active,Floral 100; Fruity 92; Patchouli 62; Gourmand 60; Woody 55; Musky 50; Citrus 35,Floral,"Fruity, Patchouli, Gourmand",notes: earlier extraction (layers not used),secondary capped at 3 (had 5)
+hirsh-lahab-100ml,HIRSH LAHAB 100ML,Perfume,active,Patchouli 100; Citrus 62,Patchouli,Citrus,notes: earlier extraction (layers not used),
+hirsh-lahab-mahwer-100ml,HIRSH LAHAB MAHWER 100ML,Perfume,active,,,,unscored: notes match no family,
+frankel-storm-100ml,FRANKEL STORM 100ML,Perfume,active,Leather & Tobacco 100; Woody 71; Patchouli 67; Floral 48; Citrus 25,Leather & Tobacco,"Woody, Patchouli",notes: description prose,
+your-touch-for-men-100ml,YOUR TOUCH FOR MEN 100ML,Perfume,active,Spicy 100; Gourmand 30; Fruity 28; Woody 27; Floral 25; Fresh & Aquatic 20,Spicy,,notes: earlier extraction (layers not used),
+salvo-elixir-60ml,SALVO ELIXIR 60ML,Perfume,active,Amber & Oriental 100; Patchouli 57; Gourmand 38; Floral 27,Amber & Oriental,Patchouli,notes: earlier extraction (layers not used),
+leonie-100ml,LEONIE 100ML,Perfume,active,Floral 100; Amber & Oriental 45; Citrus 37; Fruity 33; Gourmand 31; Woody 29,Floral,,notes: earlier extraction (layers not used),
+florenza-100ml,FLORENZA 100ML,Perfume,active,Spicy 100; Patchouli 95; Woody 94; Floral 57,Spicy,"Patchouli, Woody, Floral",notes: earlier extraction (layers not used),"close call, unsure: Spicy, Patchouli"
+man-black-edition-100ml,MAN BLACK EDITION 100ML,Perfume,active,Leather & Tobacco 100; Patchouli 99; Floral 63; Woody 61; Gourmand 57,Leather & Tobacco,"Patchouli, Floral, Woody",notes: earlier extraction (layers not used),"close call, decided by the description; secondary capped at 3 (had 4)"
+megara-100ml,MEGARA 100ML,Perfume,active,Amber & Oriental 100; Citrus 81; Woody 51; Fresh & Aquatic 49; Musky 46,Amber & Oriental,"Citrus, Woody",notes: earlier extraction (layers not used),
+island-sun-100ml,ISLAND SUN 100ML,Perfume,active,Floral 100; Gourmand 64; Woody 52; Musky 35,Floral,"Gourmand, Woody",notes: earlier extraction (layers not used),
+shiyaaka-sky-special-edition-100ml,SHIYAAKA SKY SPECIAL EDITION 100ML,Perfume,active,Woody 100; Floral 91; Amber & Oriental 59,Woody,"Floral, Amber & Oriental",notes: earlier extraction (layers not used),
+karus-gold-absolu-100ml,KARUS GOLD ABSOLU 100ML,Perfume,active,Floral 100; Citrus 75; Fruity 51; Gourmand 48; Woody 44; Musky 40,Floral,"Citrus, Fruity",notes: earlier extraction (layers not used),
+french-avenue-imperial-ocean-eau-de-parfum-100ml,IMPERIAL OCEAN 100ML,Perfume,active,Floral 100; Amber & Oriental 65; Musky 56; Woody 48,Floral,"Amber & Oriental, Musky",notes: earlier extraction (layers not used),
+qasida-sahm-200ml,QASIDA SAHM 200ML,Perfume,active,Oud 100; Woody 88; Floral 75; Amber & Oriental 69; Leather & Tobacco 65; Spicy 61; Musky 60; Citrus 35; Fruity 28,Oud,"Woody, Floral, Amber & Oriental",notes: description note lines,secondary capped at 3 (had 6)
+qasida-senses-200ml,QASIDA SENSES 200ML,Perfume,active,Floral 100; Woody 82; Musky 47; Patchouli 47; Gourmand 42; Fruity 42; Spicy 15; Citrus 13,Floral,Woody,notes: description note lines,
+qasida-purity-200ml,QASIDA PURITY 200ML,Perfume,active,Gourmand 100; Musky 49; Fruity 21; Floral 20,Gourmand,,notes: description note lines,
+qasida-dunes-200ml,QASIDA DUNES 200ML,Perfume,active,Woody 100; Gourmand 98; Leather & Tobacco 76; Spicy 43,Woody,"Gourmand, Leather & Tobacco",notes: description note lines,"close call, decided by the description"
+hawas-atlantis-for-him-100ml,HAWAS ATLANTIS FOR HIM 100ML,Perfume,active,Spicy 100; Woody 63,Spicy,Woody,notes: description prose,
+hawas-viper-for-him-100ml,HAWAS VIPER FOR HIM 100ML,Perfume,active,Gourmand 100; Leather & Tobacco 72; Spicy 61; Floral 38,Gourmand,"Leather & Tobacco, Spicy",notes: earlier extraction (layers not used),
+shuhrah-opulence-100ml,SHUHRAH OPULENCE 100ML,Perfume,active,,,,unscored: notes match no family,
+shuhrah-avenoir-100ml,SHUHRAH AVENOIR 100ML,Perfume,active,Gourmand 100; Spicy 26; Floral 20,Gourmand,,notes: description prose,
+daarej-verve-100ml,DAAREJ VERVE 100ML,Perfume,active,Amber & Oriental 100,Amber & Oriental,,notes: description prose,
+daarej-aurelia-100ml,DAAREJ AURELIA 100ML,Perfume,active,Floral 100; Amber & Oriental 54,Floral,Amber & Oriental,notes: description prose,
+fire-on-ice-100ml,FIRE ON ICE 100ML,,active,Amber & Oriental 100; Woody 54; Gourmand 46,Amber & Oriental,Woody,notes: earlier extraction (layers not used),
+amjad-honour-200ml,AMJAD HONOUR 200ML,Perfume,active,Amber & Oriental 100; Gourmand 83; Oud 69; Spicy 65; Floral 54,Amber & Oriental,"Gourmand, Oud, Spicy",notes: earlier extraction (layers not used),secondary capped at 3 (had 4)
+amjad-coral-200ml,AMJAD CORAL 200ML,Perfume,active,Floral 100; Woody 66,Floral,Woody,notes: earlier extraction (layers not used),
+amjad-mystery-200ml,AMJAD MYSTERY 200ML,Perfume,active,,,,unscored: notes match no family,
+amjad-kingdom-200ml,AMJAD KINGDOM 200ML,Perfume,active,Patchouli 100; Leather & Tobacco 90; Woody 79; Amber & Oriental 73; Oud 72; Musky 48,Patchouli,"Leather & Tobacco, Woody, Amber & Oriental",notes: earlier extraction (layers not used),secondary capped at 3 (had 4)
+qasida-signature-100ml,QASIDA SIGNATURE 100ML,Perfume,active,Gourmand 100; Woody 52; Amber & Oriental 38; Spicy 30; Floral 27; Fruity 21; Citrus 13,Gourmand,Woody,notes: description note lines,
+qasida-sahm-100ml,QASIDA SAHM 100ML,Perfume,active,Oud 100; Woody 88; Floral 75; Amber & Oriental 69; Leather & Tobacco 65; Spicy 61; Musky 60; Citrus 35; Fruity 28,Oud,"Woody, Floral, Amber & Oriental",notes: description note lines,secondary capped at 3 (had 6)
+arrogate-pink-diva-200ml,ARROGATE PINK DIVA 200ML,Perfume,active,Floral 100; Patchouli 54; Woody 52; Musky 29,Floral,"Patchouli, Woody",notes: earlier extraction (layers not used),
+qasida-dunes-100ml,QASIDA DUNES 100ML,Perfume,active,Woody 100; Gourmand 98; Leather & Tobacco 76; Spicy 43,Woody,"Gourmand, Leather & Tobacco",notes: description note lines,"close call, decided by the description"
+checkmate-black-knight,CHECKMATE BLACK KNIGHT,Perfume,active,Patchouli 100; Floral 70,Patchouli,Floral,notes: earlier extraction (layers not used),
+checkmate-white-knight,CHECKMATE WHITE KNIGHT,Perfume,active,Woody 100; Patchouli 81; Fresh & Aquatic 47,Woody,Patchouli,notes: earlier extraction (layers not used),
+nuran-mango-100ml,NURAN MANGO 100ML,Perfume,active,Floral 100; Gourmand 31; Amber & Oriental 29; Musky 22,Floral,,notes: earlier extraction (layers not used),
+haneen-marshmallow-100ml,HANEEN MARSHMALLOW 100ML,Perfume,active,Gourmand 100; Amber & Oriental 96; Floral 93; Musky 56; Fruity 55,Gourmand,"Amber & Oriental, Floral, Musky",notes: earlier extraction (layers not used),"close call, decided by the description; secondary capped at 3 (had 4)"
+on-fire-9-100ml,ON FIRE 9 100ML,Perfume,active,Spicy 100,Spicy,,notes: description prose,
+al-hilal-37-100ml,AL HILAL 37 100ML,Perfume,active,Woody 100; Floral 45; Amber & Oriental 39; Spicy 37; Musky 30,Woody,,notes: earlier extraction (layers not used),
+private-december-2nd-100ml,PRIVATE DECEMBER 2ND 100ML,Perfume,active,Woody 100; Patchouli 60; Amber & Oriental 56,Woody,"Patchouli, Amber & Oriental",notes: earlier extraction (layers not used),
+kahilan-100ml,KAHILAN 100ML,Perfume,active,Oud 100; Amber & Oriental 87,Oud,Amber & Oriental,notes: description prose,
+dkhoon-oud-100ml,DKHOON OUD 100ML,Perfume,active,Amber & Oriental 100; Oud 69; Patchouli 64; Floral 31,Amber & Oriental,"Oud, Patchouli",notes: earlier extraction (layers not used),
+couture-100ml,COUTURE 100ML,Perfume,active,Amber & Oriental 100; Musky 69; Citrus 24,Amber & Oriental,Musky,notes: owner's Fragrantica sheet,
+provence-dor-200ml,PROVENCE D'OR 200ML,Perfume,active,Floral 100; Woody 55; Gourmand 47; Amber & Oriental 43,Floral,Woody,notes: earlier extraction (layers not used),
+black-cavalier-surge-100ml,BLACK CAVALIER SURGE 100ML,Perfume,active,Amber & Oriental 100; Woody 45; Spicy 29; Floral 27,Amber & Oriental,,notes: earlier extraction (layers not used),
+qasida-al-badr-100ml,QASIDA AL BADR 100ML,Perfume,active,Gourmand 100; Woody 86; Spicy 44; Patchouli 43; Floral 37; Fresh & Aquatic 26; Citrus 17,Gourmand,Woody,notes: description note lines,
+qasida-bakhour-100ml,QASIDA BAKHOUR 100ML,Perfume,active,Gourmand 100; Floral 97; Leather & Tobacco 76; Woody 75; Spicy 68; Amber & Oriental 53; Fruity 23,Gourmand,"Floral, Leather & Tobacco, Woody",notes: description note lines,"close call, unsure: Gourmand, Floral; secondary capped at 3 (had 5)"
+qasida-senses-100ml,QASIDA SENSES 100ML,Perfume,active,Floral 100; Woody 58; Fruity 49; Musky 35; Patchouli 35; Gourmand 32; Spicy 11; Citrus 10,Floral,Woody,notes: description note lines,
+qasida-purity-100ml,QASIDA PURITY 100ML,Perfume,active,Gourmand 100; Musky 49; Fruity 21; Floral 20,Gourmand,,notes: description note lines,
+qasida-queen-100ml,QASIDA QUEEN 100ML,Perfume,active,Gourmand 100; Floral 70; Amber & Oriental 57; Patchouli 49; Spicy 44; Fruity 21,Gourmand,"Floral, Amber & Oriental",notes: description note lines,
+frankel-chill-200ml,FRANKEL CHILL 200ML,,active,Musky 100; Fruity 94; Fresh & Aquatic 71,Musky,"Fruity, Fresh & Aquatic",notes: earlier extraction (layers not used),
+maahir-honor-100ml,MAAHIR HONOR 100ML,Perfume,active,Floral 100; Woody 71; Amber & Oriental 56; Musky 43,Floral,"Woody, Amber & Oriental",notes: earlier extraction (layers not used),
+strike-black-125ml,STRIKE BLACK 125ML,Perfume,active,Spicy 100; Patchouli 47; Fruity 41; Woody 37; Citrus 28,Spicy,,notes: description prose,
+hook-blue-200ml,HOOK BLUE 200ML,Perfume,active,Woody 100; Patchouli 36; Floral 25; Spicy 23,Woody,,notes: earlier extraction (layers not used),
+odyssey-homme-body-mist,ODYSSEY HOMME BODY MIST,,active,Floral 100; Leather & Tobacco 90; Spicy 75; Gourmand 60,Floral,"Leather & Tobacco, Spicy, Gourmand",notes: earlier extraction (layers not used),
+breeze-100ml,BREEZE 100ML,Perfume,active,Woody 100; Musky 53; Floral 40; Amber & Oriental 31; Spicy 22; Citrus 19,Woody,Musky,notes: description note lines,
+miss-sakura-100-ml-copy,MISS SAKURA - 100 ML,Perfume,active,Floral 100; Citrus 70; Gourmand 38; Fruity 36; Woody 35; Musky 32,Floral,Citrus,notes: earlier extraction (layers not used),

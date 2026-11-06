@@ -91,10 +91,10 @@
             -%}
             <li class="m-guide__step m-guide__step--{{ layer }}">
               <span class="m-guide__step-mark" aria-hidden="true"></span>
-              <p>{{ text_key | t }}</p>
               {%- if layer_notes != blank -%}
                 <p class="m-guide__step-notes">{{ layer_notes | strip | remove_last: '،' | remove_last: ',' }}</p>
               {%- endif -%}
+              <p class="m-guide__step-text">{{ text_key | t }}</p>
             </li>
           {%- endfor -%}
         </ol>
@@ -247,9 +247,21 @@
     opacity: 0.65;
   }
 
+  /* the perfume's own notes lead; the generic layer explanation sits quietly under them (owner request 2026-11-06) */
   .m-guide__step-notes {
     color: var(--m-text) !important;
-    font-weight: 500;
+    font-size: 1.0625rem !important;
+    font-weight: 600;
+    line-height: 1.4;
+  }
+
+  .m-guide__pyramid .m-guide__step-text {
+    font-size: 0.8125rem;
+    line-height: 1.45;
+  }
+
+  .m-guide__step-notes + .m-guide__step-text {
+    margin-block-start: 2px;
   }
 
   .m-guide__skin {

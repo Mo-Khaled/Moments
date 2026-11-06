@@ -2,16 +2,38 @@
 
 {% liquid
   assign max_items = section.settings.max_products
+
+  comment
+    Brand rows (owner request 2026-11-06): with "This page's collection" the list shows the collection being viewed, sorted by
+    newest or best selling. Liquid cannot re-sort a collection, so unless the page already carries that sort, the list is fetched once
+    with the Section Rendering API (?sort_by=...&section_id=...). It shows only on single-brand collections (one vendor).
+  endcomment
+  assign list_collection = section.settings.collection
+  assign deferred = false
+  assign show_list = true
+  if section.settings.source == 'page'
+    assign list_collection = collection
+    if collection == blank or collection.all_vendors.size != 1
+      assign show_list = false
+    elsif section.settings.sort != 'default'
+      unless collection.sort_by == section.settings.sort and current_page == 1
+        assign deferred = true
+      endunless
+    endif
+  endif
 %}
 
+{% if show_list %}
 <div class="section-background color-{{ section.settings.color_scheme }}"></div>
 <div
   data-testid="product-list"
+  {% if deferred %}data-m-sorted-src="{{ collection.url }}?sort_by={{ section.settings.sort }}&section_id={{ section.id }}"{% endif %}
   class="
     section
     section--{{ section.settings.section_width }}
     color-{{ section.settings.color_scheme }}
     section-resource-list
+    {% if section.settings.source == 'page' %}m-brand-row{% endif %}
     spacing-style
     gap-style
   "
@@ -25,15 +47,17 @@
   </div>
 
   {% capture list_items %}
-    {% if section.settings.collection != blank and shop.products_count != 0 %}
+    {% if deferred %}
+      {% comment %} Filled by the script below; the reserved height keeps the page from jumping. {% endcomment %}
+    {% elsif list_collection != blank and shop.products_count != 0 %}
       {% comment %}
         Fetch a larger pool of products than we need to display, so we can
         push sold-out products to the end of the list while still filling
         the requested product count with in-stock items first.
       {% endcomment %}
-      {% paginate section.settings.collection.products by 50 %}
-        {% assign in_stock_products = section.settings.collection.products | where: "available" %}
-        {% assign sold_out_products = section.settings.collection.products | where: "available", false %}
+      {% paginate list_collection.products by 50 %}
+        {% assign in_stock_products = list_collection.products | where: "available" %}
+        {% assign sold_out_products = list_collection.products | where: "available", false %}
         {% assign sorted_products = in_stock_products | concat: sold_out_products %}
 
         {% for product in sorted_products limit: max_items %}
@@ -72,6 +96,9 @@
     assign list_items_array = list_items | strip | split: '<!--@list/split-->'
   %}
 
+  {% if deferred %}
+    <div class="m-sorted-placeholder" aria-hidden="true"></div>
+  {% else %}
   {% render 'resource-list',
     list_items: list_items,
     list_items_array: list_items_array,
@@ -80,6 +107,7 @@
     content_type: 'products',
     test_id: 'resource-list-grid'
   %}
+  {% endif %}
 
   <div
     class="section-resource-list__content"
@@ -88,6 +116,46 @@
     {%- content_for 'blocks' -%}
   </div>
 </div>
+
+{% if deferred %}
+  <script>
+    (() => {
+      const list = document.currentScript.previousElementSibling;
+      const wrapper = list && list.closest('.shopify-section');
+      if (!wrapper) return;
+      const load = () =>
+        fetch(list.dataset.mSortedSrc)
+          .then((r) => (r.ok ? r.text() : Promise.reject(r.status)))
+          .then((html) => {
+            const doc = new DOMParser().parseFromString(html, 'text/html');
+            const fresh = doc.getElementById(wrapper.id);
+            if (!fresh || !fresh.querySelector('.resource-list__item')) { wrapper.hidden = true; return; }
+            wrapper.replaceChildren(...fresh.childNodes);
+            document.dispatchEvent(new CustomEvent('moments:carousels'));
+          })
+          .catch(() => { wrapper.hidden = true; });
+      if (!('IntersectionObserver' in window)) return load();
+      const io = new IntersectionObserver((entries) => {
+        if (!entries.some((e) => e.isIntersecting)) return;
+        io.disconnect();
+        load();
+      }, { rootMargin: '600px 0px' });
+      io.observe(list);
+    })();
+  </script>
+{% endif %}
+{% endif %}
+
+{% stylesheet %}
+  /* Full-width brand rows: the title and arrows keep the same edge as the cards. */
+  .m-brand-row.section--full-width .section-resource-list__header {
+    padding-inline: var(--page-margin);
+  }
+
+  .m-sorted-placeholder {
+    min-block-size: clamp(360px, 70cqw, 520px);
+  }
+{% endstylesheet %}
 
 {% schema %}
 {
@@ -108,6 +176,29 @@
     "groups": ["header", "footer"]
   },
   "settings": [
+    {
+      "type": "select",
+      "id": "source",
+      "label": "Products from",
+      "options": [
+        { "value": "picked", "label": "The collection below" },
+        { "value": "page", "label": "This page's collection (brand pages)" }
+      ],
+      "default": "picked",
+      "info": "This page's collection: shown only when the collection holds a single brand."
+    },
+    {
+      "type": "select",
+      "id": "sort",
+      "label": "Order",
+      "options": [
+        { "value": "default", "label": "Collection's own order" },
+        { "value": "created-descending", "label": "Newest first (New in)" },
+        { "value": "best-selling", "label": "Best selling (Top sellers)" }
+      ],
+      "default": "default",
+      "visible_if": "{{ section.settings.source == 'page' }}"
+    },
     {
       "type": "collection",
       "id": "collection",

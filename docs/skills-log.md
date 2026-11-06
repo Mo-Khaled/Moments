@@ -76,7 +76,7 @@ the same bundle could not load its validator package (see the first entry). **sh
 | ui-ux-pro-max | 44 px targets, escape routes, no hover-only, empty states with a path | Switcher and chips are 44 px; panels show no empty heading; About slots are hidden rather than empty; Escape closes panels. |
 | banner-design | Safe zones and contrast | Hero scrim setting, mark clear of the headline, headline checked against the header bottom. |
 | brand | Voice, confirmed claims only | Copy audited: the old trust badges ("official distributors", 2,000 EGP, an invented returns promise) were rewritten; About text uses only "100% original, sealed", COD, the shipping amount and the returns page link. |
-| impeccable | Detector and the critique rubric | Detector clean on new files; critique recorded in docs/final-report.md. |
+| impeccable | Detector and the critique rubric | Detector clean on new files; critique recorded in docs/final-report-2026-10-25.md. |
 | shopify (CLI) | `theme pull` for a read-only diff, `theme push --only` | Live theme pulled read-only to a scratch folder and compared (no editor-managed file differs from the baseline). Nothing was pushed to or changed on the live theme. |
 
 ## Earlier entries (retro)

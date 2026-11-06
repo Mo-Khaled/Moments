@@ -1,6 +1,6 @@
 {%- doc -%}
   Previous and next buttons for every product carousel (the product-list section set to "carousel"). The buttons are added to the section header,
-  at the inline-end beside "View all". Scrolls one card at a time, keeps the scroll-snap, is operable with the keyboard (real buttons), disables each
+  at the inline-end beside "View all" (or alone when the list has no "View all"). Scrolls one card at a time, keeps the scroll-snap, is operable with the keyboard (real buttons), disables each
   button at its end, and mirrors in right-to-left languages. Safe to render once per page; it finds every carousel itself and does nothing
   when a carousel has no header.
 
@@ -20,13 +20,17 @@
       const slides = section.querySelector('slideshow-slides');
       const header = section.querySelector('.section-resource-list__header .layout-panel-flex');
       const link = header && header.querySelector('a');
-      if (!slides || !header || !link) return;
+      if (!slides || !header) return;
       section.dataset.mCarousel = 'true';
 
       const end = document.createElement('div');
       end.className = 'm-carousel-end';
-      link.replaceWith(end);
-      end.appendChild(link);
+      if (link) {
+        link.replaceWith(end);
+        end.appendChild(link);
+      } else {
+        header.appendChild(end);
+      }
       const controls = document.createElement('div');
       controls.className = 'm-carousel-controls';
       controls.setAttribute('role', 'group');
@@ -59,5 +63,6 @@
     if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', run); else run();
     window.addEventListener('load', run);
     document.addEventListener('shopify:section:load', run);
+    document.addEventListener('moments:carousels', run);
   })();
 {% endjavascript %}

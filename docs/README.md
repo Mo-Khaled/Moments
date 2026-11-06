@@ -1,6 +1,6 @@
 # Docs index
 
-Start here: [final-report.md](final-report.md) (what was done, what passed, what is weak, what is needed), then
+Start here: [final-report.md](final-report.md) (latest run, 2026-11-06; the first unattended run is in [final-report-2026-10-25.md](final-report-2026-10-25.md)) (what was done, what passed, what is weak, what is needed), then
 [needs-from-owner.md](needs-from-owner.md).
 
 | Area | File | What it is |

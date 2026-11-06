@@ -2,6 +2,15 @@
 
 {% assign placeholder = 'content.featured_products' | t %}
 {% assign placeholder = '<h3>' | append: placeholder | append: '</h3>' %}
+{%- comment -%} Brand rows: an empty title falls back to the translated "New in" / "Top sellers" (locales brand_rows). {%- endcomment -%}
+{%- if section.settings.source == 'page' -%}
+  {%- case section.settings.sort -%}
+    {%- when 'created-descending' -%}
+      {%- assign placeholder = 'brand_rows.new_in' | t | prepend: '<h2>' | append: '</h2>' -%}
+    {%- when 'best-selling' -%}
+      {%- assign placeholder = 'brand_rows.top_sellers' | t | prepend: '<h2>' | append: '</h2>' -%}
+  {%- endcase -%}
+{%- endif -%}
 
 {% render 'text', fallback_text: placeholder, block: block %}
 

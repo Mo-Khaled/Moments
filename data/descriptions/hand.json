@@ -1,0 +1,23 @@
+{
+  "_about": "Converted by hand like Lady Collection (sets and Arabic-only bodies). Notes come only from each product's own current text.",
+  "frankel-collection": {
+    "en": "<p>Frankel Collection by Assaf: three perfumes in one box, each with its own character.</p><p>Frankel Silver<br>Notes: Citrus, White Florals, Jasmine<br>Base: Cedarwood, Amber, Vanilla</p><p>Frankel Aventus<br>Top: Pineapple, Bergamot, Green Apple<br>Heart: Damask Rose, Jasmine<br>Base: Oakmoss, Musk, Amber</p><p>Frankel Imagination<br>Notes: Iris, Lemon, Orange Blossom Bud, White Rose<br>Base: Sandalwood, White Musk, Vanilla</p><p>300 ml (3 x 100 ml) · Eau de Parfum · Unisex</p>",
+    "ar": "<p>فرانكل كولكشن من أصاف: ثلاثة عطور في علبة واحدة، كل واحد بطابعه المختلف.</p><p>فرانكل سيلفر<br>المكونات: الحمضيات، الأزهار البيضاء، الياسمين<br>القاعدة: خشب الأرز، العنبر، الفانيليا</p><p>فرانكل أفينتوس<br>المقدمة: الأناناس، البرغموت، التفاح الأخضر<br>القلب: الورد الدمشقي، الياسمين<br>القاعدة: طحلب البلوط، المسك، العنبر</p><p>فرانكل إيماجينيشن<br>المكونات: السوسن، الليمون، برعم زهر البرتقال، الورد الأبيض<br>القاعدة: خشب الصندل، المسك الأبيض، الفانيليا</p><p>300 مل (3 × 100 مل) · أو دو بارفان · للجنسين</p>",
+    "note": "Body was Arabic only. Silver and Imagination: only the base is named ('ends with', 'base of'), the rest on a Notes line. Aventus: first group before an explicit heart and base, read as Top."
+  },
+  "stardust": {
+    "en": "<p>Stardust by Afnan: a sweet, soft glow, like the trace of stars on the skin.</p><p>Top: Bergamot, Mandarin, Grapefruit, Orange, Aldehydes<br>Heart: Caramel, Cinnamon, Cognac<br>Base: Woods, Amber, Sandalwood, Myrrh, Tonka Bean, Oak, Musk</p><p>100 ml · Extrait de Parfum · Unisex</p>",
+    "ar": "<p>ستاردست من أفنان: توهّج حلو وناعم، يشبه أثر النجوم على الجلد.</p><p>المقدمة: البرغموت، الماندرين، الغريب فروت، البرتقال، الألديهيدات<br>القلب: الكراميل، القرفة، الكونياك<br>القاعدة: الخشب، العنبر، الصندل، الميرة، التونكا، الأوك، المسك</p><p>100 مل · إكستريه دو بارفان · للجنسين</p>",
+    "note": "Body was Arabic only. Layers from its own 'النوتات' list (three groups separated by |, in the same order as its prose: citrus opening, caramel heart, rich base). The prose says oud in the base, the list says wood; the list was used."
+  },
+  "frankel-set": {
+    "en": "<p>A curated trio from the iconic Frankel collection: three concentrated 25ml versions of Assaf's most beloved Frankel fragrances, beautifully packaged for gifting or travel.</p><p>75 ml (3 x 25 ml) · Eau de Parfum · Gift set</p>",
+    "ar": "<p>ثلاثية مختارة من مجموعة فرانكل الأيقونية: ثلاث نسخ مركزة بحجم 25 مل من أكثر عطور فرانكل المحبوبة من عساف، معبأة بشكل أنيق للإهداء أو السفر.</p><p>75 مل (3 × 25 مل) · أو دو بارفان · مجموعة هدايا</p>",
+    "note": "The text does not say which three Frankel perfumes are inside, so no notes."
+  },
+  "arrogate-collection-set": {
+    "en": "<p>The perfect introduction to the Arrogate world: three iconic Arrogate fragrances in 25ml concentrated sprays, beautifully packaged for gifting or travel.</p><p>75 ml (3 x 25 ml) · Eau de Parfum · Gift set</p>",
+    "ar": "<p>البداية المثالية لاستكشاف عالم أروجيت: ثلاثة عطور أيقونية من أروجيت في بخاخات مركزة بحجم 25 مل، في تغليف أنيق للإهداء أو السفر.</p><p>75 مل (3 × 25 مل) · أو دو بارفان · مجموعة هدايا</p>",
+    "note": "The text does not say which three Arrogate perfumes are inside, so no notes."
+  }
+}
