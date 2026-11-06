@@ -119,3 +119,11 @@ Before: the 23 files on the copy the live theme came from (#161628979391) equal 
 Issue and fix: the first push uploaded the collection templates before the new section schema, so Shopify dropped the rows' "source" and "sort" settings; the 14 templates were pushed again and now equal the repo.
 Checks on live: smoke PASSED (desktop and mobile); brand rows on Afnan and Lattafa (12 cards each, arrows, sorted View all), none on For her, Arabic titles on /ar; product page description closed, notes first; phone hero autoplay, swipe (mirrored in Arabic), centred bar, no autoplay under reduced motion.
 Rollback: push the files from commit 304f8dc (`git show 304f8dc:<file>`), or each file's "Older versions" in the code editor of #161651720383.
+
+### 2026-11-06 filter panel, set guide, more moments (live, smoke passed after each)
+- snippets/scent-guide-panel.liquid, snippets/moments-set-guide.liquid, sections/moments-scent-guide.liquid: sets show one "Understanding this scent" per perfume with a switcher.
+- blocks/filters.liquid, snippets/list-filter.liquid, snippets/price-filter.liquid (owner: "push filters live"): one panel from an allow list (Moment, Scent family, Key notes, For, Season, Brand, Price, Concentration, Size, Availability), first three open, counts on every choice. The owner added Moment and Size in Search & Discovery and renamed Shop For to For.
+- config/settings_schema.json (moments_handles default; live sets no value), snippets/product-card-meta.liquid (mark only for moments with a drawing), locales (moments.self_care): the cards and the Moment filter also use self-care-moment, gift-moment, all-day-moment (owner: "yes add them"). Most specific first, so existing card labels do not change.
+- Store data: filter.moment values for the three added moments (428, verified, backup filter-metafields-2026-11-06-2258.json); Arabic labels for the filter headings For, Scent Family, Key Notes, Season, Concentration, Moment, Size.
+Before each push the live copies equalled git HEAD. Checks: English and Arabic panels, seven moments in the filter, card labels, smoke PASSED.
+Rollback: `git show aac8ac6^:<file>` for the filter files, `git show <this commit>^:<file>` for the moment files; filter data with `python scripts/apply-filter-data.py --rollback data/backups/filter-metafields-2026-11-06-2158.json`.

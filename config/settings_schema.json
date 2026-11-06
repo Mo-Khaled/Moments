@@ -2364,7 +2364,7 @@
         "id": "moments_handles",
         "label": "t:settings.moments_handles",
         "info": "t:info.moments_handles",
-        "default": "occasions-moment,love-moment,night-moment,winter-moment,fresh-moment,daily-moment"
+        "default": "occasions-moment,love-moment,night-moment,winter-moment,fresh-moment,daily-moment,self-care-moment,gift-moment,all-day-moment"
       }
     ]
   }

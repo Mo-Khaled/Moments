@@ -38,7 +38,8 @@ gql, EXPECTED = ad.gql, ad.EXPECTED_COUNT
 MOMENTS = {  # collection handle -> (English, Arabic), the names the product cards show (locales moments.*)
     "occasions-moment": ("Weddings & Eid", "الأفراح والأعياد"), "love-moment": ("Date night", "ليلة رومانسية"),
     "night-moment": ("Evening out", "سهرة"), "winter-moment": ("Winter nights", "ليالي الشتاء"),
-    "fresh-moment": ("Summer heat", "حر الصيف"), "daily-moment": ("Office", "العمل")}
+    "fresh-moment": ("Summer heat", "حر الصيف"), "daily-moment": ("Office", "العمل"),
+    "self-care-moment": ("Self-care", "عناية بالذات"), "gift-moment": ("Gift", "هدية"), "all-day-moment": ("All day", "طوال اليوم")}
 KEYS = ("family", "notes", "moment")
 # Key notes: the 30 notes already approved in the store's filter.notes definition (its "choices"), a list a shopper
 # recognises. A product is filed under each of them its notes contain; variants count as the note.

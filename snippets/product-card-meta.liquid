@@ -66,7 +66,11 @@
       <span class="card-meta__moment">
         {%- if moment_key != '' -%}
           {%- assign mark_name = moment_key | remove: '_' -%}
-          {% render 'moment-mark', mark: mark_name %}
+          {%- comment -%} only the moments that have a drawing (self-care has a label but no mark) {%- endcomment -%}
+          {%- assign drawn = 'night,gift,allday,daily,fresh,love,occasions,winter' | split: ',' -%}
+          {%- if drawn contains mark_name -%}
+            {% render 'moment-mark', mark: mark_name %}
+          {%- endif -%}
         {%- endif -%}
         <span>{{ moment_label }}</span>
       </span>
