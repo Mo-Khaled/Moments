@@ -16,7 +16,7 @@ const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const OUT = path.join(ROOT, 'docs', 'screenshots', 'cleanup', label);
 fs.mkdirSync(OUT, { recursive: true });
 const BASE = 'https://momentseg.com';
-const THEME = '161294745791';
+const THEME = '161651720383';
 const PAGES = [
   ['home', '/'],
   ['collection', '/collections/night-moment'],

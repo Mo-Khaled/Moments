@@ -4,7 +4,7 @@
 import { chromium } from 'playwright-core';
 
 const BASE = 'https://momentseg.com';
-const THEME = '161294745791';
+const THEME = '161651720383';
 const PAGES = ['/', '/collections/gift-moment', '/collections/gift-bags', '/products/afnan-gift-bag', '/products/9-pm-night-out', '/pages/about-us?view=about', '/pages/about-us',
   '/pages/brands', '/pages/moments', '/collections/all', '/cart', '/search?q=gift', '/pages/contact', '/pages/returns-exchange-policy'];
 const TERMS = [

@@ -10,7 +10,7 @@
 // Exit code 1 when anything fails. Screenshots of each tile (rest and gesture end state) go to
 // docs/screenshots/tiles/ for the viewports in SHOT_WIDTHS.
 //
-// usage: node scripts/check-tiles.mjs [--base https://momentseg.com] [--theme 161294745791]
+// usage: node scripts/check-tiles.mjs [--base https://momentseg.com] [--theme 161651720383]
 // RTL is emulated by setting dir="rtl" and lang="ar" on <html> (Arabic is not a store language yet).
 import { chromium } from 'playwright-core';
 import fs from 'node:fs';
@@ -19,7 +19,7 @@ import { fileURLToPath } from 'node:url';
 
 const args = Object.fromEntries(process.argv.slice(2).reduce((acc, a, i, all) => (a.startsWith('--') ? [...acc, [a.slice(2), all[i + 1]]] : acc), []));
 const BASE = args.base || 'https://momentseg.com';
-const THEME = args.theme || '161294745791';
+const THEME = args.theme || '161651720383';
 const OUT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', 'docs', 'screenshots', 'tiles');
 const WIDTHS = [1920, 1440, 1024, 768, 375];
 const SHOT_WIDTHS = [1440, 375];

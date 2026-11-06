@@ -13,7 +13,7 @@
 // Screenshots of every hero slide (rest) go to docs/screenshots/hero/ at 1920, 1440 and 375, LTR and RTL.
 // Video pause off-screen cannot be tested until footage exists (no hero video is set); that is reported, not faked.
 //
-// usage: node scripts/check-home.mjs [--base https://momentseg.com] [--theme 161294745791]
+// usage: node scripts/check-home.mjs [--base https://momentseg.com] [--theme 161651720383]
 // RTL is emulated with dir="rtl" and lang="ar" on <html> (Arabic is not a store language yet).
 import { chromium } from 'playwright-core';
 import fs from 'node:fs';
@@ -22,7 +22,7 @@ import { fileURLToPath } from 'node:url';
 
 const args = Object.fromEntries(process.argv.slice(2).reduce((acc, a, i, all) => (a.startsWith('--') ? [...acc, [a.slice(2), all[i + 1]]] : acc), []));
 const BASE = args.base || 'https://momentseg.com';
-const THEME = args.theme || '161294745791';
+const THEME = args.theme || '161651720383';
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const SHOTS = path.join(ROOT, 'docs', 'screenshots', 'hero');
 const TICKS = path.join(ROOT, 'docs', 'screenshots', 'tickers');

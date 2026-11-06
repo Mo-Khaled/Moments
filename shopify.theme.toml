@@ -1,7 +1,7 @@
-# LIVE theme: moments-redesign #161294745791 (role main). The owner approved editing it directly (2026-10-26).
-# Backup of the previous live theme: #161251229887 "MOMENTS - Homepage v2" (keep, do not delete).
-# Fresh backup before risky batches: #161334263999 "MOMENTS - Backup 2026-10-26 11-47".
-# Push specific files only: shopify theme push -e live --only <files> --live --allow-live
+# LIVE theme: "moments-redesign + moment pages" #161651720383 (role main), the published theme as of 2026-11-06.
+# Previous live theme: moments-redesign #161294745791 (unpublished, keep). Its copy: #161628979391 "Copy of moments-redesign".
+# Older backups: #161251229887 "MOMENTS - Homepage v2", #161334263999 "MOMENTS - Backup 2026-10-26 11-47" (keep, do not delete).
+# Push specific files only: bash scripts/push.sh --only <files> (it refuses when the published theme is not the one below)
 [environments.live]
 store = "dezrva-2z.myshopify.com"
-theme = "161294745791"
+theme = "161651720383"

@@ -28,7 +28,7 @@ for (const width of [1920, 1440, 1024, 768, 375]) {
     const context = await browser.newContext({ viewport: { width, height: 900 }, reducedMotion: 'reduce' });
     await context.route(/kaspersky-labs|shopifysvc|monorail/, (r) => r.abort());
     const page = await context.newPage();
-    await page.goto('https://momentseg.com/?preview_theme_id=161294745791&pb=0', { waitUntil: 'domcontentloaded', timeout: 60000 });
+    await page.goto('https://momentseg.com/?preview_theme_id=161651720383&pb=0', { waitUntil: 'domcontentloaded', timeout: 60000 });
     await page.waitForSelector('.section-resource-list slideshow-slides product-card', { timeout: 60000 });
     if (dir === 'rtl') { await page.evaluate(() => { document.documentElement.dir = 'rtl'; document.documentElement.lang = 'ar'; }); await page.addStyleTag({ content: rtlFix }); }
     await page.waitForTimeout(2500);

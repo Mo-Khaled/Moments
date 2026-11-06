@@ -3,7 +3,7 @@
 import { chromium } from 'playwright-core';
 
 const BASE = 'https://momentseg.com';
-const THEME = '161294745791';
+const THEME = '161651720383';
 const PAGES = ['/', '/pages/moments', '/pages/about-us?view=about', '/collections/night-moment', '/products/9-pm-night-out'];
 const SYSTEM = ['/cart', '/search?q=oud', '/account/login', '/collections/all', '/this-page-does-not-exist'];
 const browser = await chromium.launch({ channel: 'chrome', headless: true });

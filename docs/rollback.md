@@ -1,3 +1,6 @@
+> **STATUS 2026-11-06 (supersedes the status below).** **Live = "moments-redesign + moment pages" #161651720383 (role main).** Previous live theme: `moments-redesign` #161294745791 (unpublished, keep); "Copy of moments-redesign" #161628979391.
+> Push with `bash scripts/push.sh --only <files>`: it refuses when the published theme is not the one in shopify.theme.toml. To roll back to the previous live theme: Admin, Themes, moments-redesign (#161294745791), Publish.
+
 > **STATUS 2026-10-26 (supersedes the dev/live wording below).** The owner approved editing the LIVE theme directly.
 > **Live = `moments-redesign` #161294745791 (role main).** Previous live theme, kept as a backup, never deleted: #161251229887 "MOMENTS - Homepage v2".
 > Fresh backup of the live theme made before the enhancement pass: #161334263999 "MOMENTS - Backup 2026-10-26 11-47" (refresh before each risky batch).
