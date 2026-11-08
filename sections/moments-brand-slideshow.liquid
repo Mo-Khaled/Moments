@@ -35,7 +35,6 @@
             <div class="m-bslide__copy">
               <span class="m-bslide__tag">{{ tag }}</span>
               <h3 class="m-bslide__title">{{ product.title | escape }}</h3>
-              <p class="m-bslide__vendor">{{ product.vendor | escape }}</p>
               <p class="m-bslide__price">
                 {{ product.price | money }}
                 {%- if product.compare_at_price > product.price -%}
@@ -150,12 +149,9 @@
     line-height: 1.05;
   }
 
-  .m-bslide__vendor {
-    margin: 0;
-    opacity: 0.85;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    font-size: 0.8125rem;
+  :lang(ar) .m-bslide__tag {
+    letter-spacing: 0;
+    text-transform: none;
   }
 
   .m-bslide__price {
@@ -282,34 +278,86 @@
     display: none;
   }
 
+  /* phone: a compact spotlight (photo tile beside the copy) so the first row of products shows on the first screen;
+     the whole slide is the link */
   @media screen and (max-width: 749px) {
     .m-bshow {
-      --m-bshow-h: 520px;
+      --m-bshow-h: 252px;
     }
 
     .m-bslide {
-      grid-template-columns: 1fr;
-      grid-template-rows: 1fr auto;
-      gap: 16px;
-      padding: 20px 20px 56px;
-      background: linear-gradient(0deg, rgb(37 18 36 / 0.6), rgb(37 18 36 / 0.1) 55%, transparent);
+      grid-template-columns: 136px minmax(0, 1fr);
+      align-items: center;
+      gap: 18px;
+      padding: 20px var(--page-margin, 16px) 44px;
+      background: linear-gradient(0deg, rgb(37 18 36 / 0.6), rgb(37 18 36 / 0.25));
     }
 
     .m-bslide__media {
       order: -1;
-      max-block-size: 220px;
+      aspect-ratio: 1;
+      block-size: auto;
+      max-block-size: none;
+      overflow: hidden;
+      border-radius: 12px;
+      /* product photos are shot on white: a white tile hides their edge */
+      background: #fff;
     }
 
     .m-bslide__media img {
-      max-block-size: 220px;
+      inline-size: 100%;
+      block-size: 100%;
+      max-block-size: none;
+      border-radius: 0;
+      background: none;
     }
 
     .m-bslide__copy {
-      gap: 8px;
+      gap: 6px;
+    }
+
+    .m-bslide__tag {
+      padding: 3px 10px;
+      font-size: 0.6875rem;
     }
 
     .m-bslide__title {
-      font-size: 1.75rem;
+      display: -webkit-box;
+      overflow: hidden;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
+      font-size: 1.375rem;
+      line-height: 1.15;
+      text-wrap: balance;
+    }
+
+    :lang(ar) .m-bslide__title {
+      line-height: 1.35;
+    }
+
+    .m-bslide__price {
+      font-size: 1.0625rem;
+    }
+
+    .m-bslide__price s {
+      font-size: 0.8125rem;
+    }
+
+    .m-bslide__cta {
+      min-block-size: 44px;
+      margin-block-start: 4px;
+      padding-inline: 22px;
+      font-size: 0.9375rem;
+    }
+
+    .m-bslide__cta::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+    }
+
+    .m-bshow__dots {
+      inset-block-end: 6px;
     }
 
     .m-bshow__arrow {
