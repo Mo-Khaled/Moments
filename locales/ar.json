@@ -5682,6 +5682,10 @@
   },
   "brand_rows": {
     "new_in": "وصل حديثاً",
-    "top_sellers": "الأكثر مبيعاً"
+    "top_sellers": "الأكثر مبيعاً",
+    "new_in_tag": "وصل حديثاً",
+    "top_seller_tag": "الأكثر مبيعاً",
+    "shop_now": "تسوق الآن",
+    "slideshow_label": "{{ brand }}: وصل حديثاً والأكثر مبيعاً"
   }
 }

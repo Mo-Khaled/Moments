@@ -1448,6 +1448,10 @@
   },
   "brand_rows": {
     "new_in": "New in",
-    "top_sellers": "Top sellers"
+    "top_sellers": "Top sellers",
+    "new_in_tag": "New in",
+    "top_seller_tag": "Top seller",
+    "shop_now": "Shop now",
+    "slideshow_label": "{{ brand }}: new in and top sellers"
   }
 }

@@ -1,0 +1,456 @@
+{%- comment -%}
+  Brand slideshow (owner request 2026-11-08): one full-width slideshow at the top of a brand page, on desktop and phone,
+  made of the brand's New in (newest first) and Top sellers (Shopify's best-selling order). Each slide: the product photo,
+  a New in / Top seller tag, the name, the price and a Shop button, over the brand's background photo (uploaded in the
+  theme editor per brand template; the brand plum until then). Shown only on single-brand collections.
+
+  Liquid cannot re-sort a collection, so the page loads the slides with the Section Rendering API: this section, fetched
+  with ?sort_by=created-descending and ?sort_by=best-selling, returns the first products of that order in a <template>.
+{%- endcomment -%}
+
+{%- liquid
+  assign show = false
+  if collection != blank and collection.all_vendors.size == 1 and collection.products_count > 0
+    assign show = true
+  endif
+  assign new_count = section.settings.new_count
+  assign top_count = section.settings.top_count
+-%}
+
+{%- if show -%}
+  {%- if collection.sort_by == 'created-descending' or collection.sort_by == 'best-selling' -%}
+    {%- liquid
+      # a few more than shown, so Top sellers can skip products already shown as New in
+      assign limit = new_count | plus: top_count | plus: 4
+      if collection.sort_by == 'created-descending'
+        assign tag = 'brand_rows.new_in_tag' | t
+      else
+        assign tag = 'brand_rows.top_seller_tag' | t
+      endif
+    -%}
+    <template data-m-slides="{{ collection.sort_by }}">
+      {%- for product in collection.products limit: limit -%}
+        {%- if product.available -%}
+          <div class="m-bslide" data-handle="{{ product.handle }}">
+            <div class="m-bslide__copy">
+              <span class="m-bslide__tag">{{ tag }}</span>
+              <h3 class="m-bslide__title">{{ product.title | escape }}</h3>
+              <p class="m-bslide__vendor">{{ product.vendor | escape }}</p>
+              <p class="m-bslide__price">
+                {{ product.price | money }}
+                {%- if product.compare_at_price > product.price -%}
+                  <s>{{ product.compare_at_price | money }}</s>
+                {%- endif -%}
+              </p>
+              <a class="m-bslide__cta" href="{{ product.url }}">{{ 'brand_rows.shop_now' | t }}</a>
+            </div>
+            <a class="m-bslide__media" href="{{ product.url }}" tabindex="-1" aria-hidden="true">
+              {%- if product.featured_image -%}
+                {{ product.featured_image | image_url: width: 1000 | image_tag: loading: 'lazy', sizes: '(min-width: 750px) 40vw, 80vw', widths: '400,600,800,1000', alt: '' }}
+              {%- endif -%}
+            </a>
+          </div>
+        {%- endif -%}
+      {%- endfor -%}
+    </template>
+  {%- endif -%}
+
+  <div
+    class="m-bshow"
+    data-m-bshow
+    data-src="{{ collection.url }}?section_id={{ section.id }}&sort_by="
+    data-autoplay="{{ section.settings.autoplay }}"
+    data-new="{{ new_count }}"
+    data-top="{{ top_count }}"
+    style="--m-bshow-bg: {{ section.settings.background_color }};"
+    role="region"
+    aria-roledescription="carousel"
+    aria-label="{{ 'brand_rows.slideshow_label' | t: brand: collection.title }}"
+  >
+    {%- if section.settings.background != blank -%}
+      {{ section.settings.background | image_url: width: 2400 | image_tag: class: 'm-bshow__bg', loading: 'lazy', sizes: '100vw', widths: '750,1200,1800,2400', alt: '' }}
+    {%- endif -%}
+    <div class="m-bshow__track" data-track tabindex="0"></div>
+    <button class="m-bshow__arrow m-bshow__arrow--prev" type="button" data-prev aria-label="{{ 'bundle.prev' | t }}">
+      {%- render 'moments-chevron' -%}
+    </button>
+    <button class="m-bshow__arrow m-bshow__arrow--next" type="button" data-next aria-label="{{ 'bundle.next' | t }}">
+      {%- render 'moments-chevron' -%}
+    </button>
+    <div class="m-bshow__dots" data-dots></div>
+  </div>
+{%- endif -%}
+
+{% stylesheet %}
+  .m-bshow {
+    --m-bshow-h: clamp(420px, 62vh, 620px);
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    inline-size: 100%;
+    block-size: var(--m-bshow-h);
+    background: var(--m-bshow-bg, var(--m-plum));
+    color: var(--m-pearl);
+  }
+
+  .m-bshow__bg {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    inline-size: 100%;
+    block-size: 100%;
+    object-fit: cover;
+  }
+
+  .m-bshow__track {
+    display: flex;
+    block-size: 100%;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    overscroll-behavior-x: contain;
+  }
+
+  .m-bshow__track::-webkit-scrollbar {
+    display: none;
+  }
+
+  .m-bslide {
+    position: relative;
+    flex: 0 0 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 32px;
+    padding: 48px max(var(--page-margin, 16px), calc((100% - 1200px) / 2)) 64px;
+    scroll-snap-align: start;
+    background: linear-gradient(90deg, rgb(37 18 36 / 0.55), rgb(37 18 36 / 0.15) 60%, transparent);
+  }
+
+  .m-bslide__copy {
+    display: grid;
+    justify-items: start;
+    gap: 12px;
+    max-inline-size: 480px;
+  }
+
+  .m-bslide__tag {
+    padding: 6px 14px;
+    border: 1px solid rgb(250 246 242 / 0.6);
+    border-radius: 9999px;
+    font-size: 0.8125rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .m-bslide__title {
+    margin: 0;
+    color: inherit;
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    line-height: 1.05;
+  }
+
+  .m-bslide__vendor {
+    margin: 0;
+    opacity: 0.85;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-size: 0.8125rem;
+  }
+
+  .m-bslide__price {
+    display: flex;
+    gap: 10px;
+    align-items: baseline;
+    margin: 0;
+    font-size: 1.25rem;
+  }
+
+  .m-bslide__price s {
+    opacity: 0.7;
+    font-size: 0.9375rem;
+  }
+
+  .m-bslide__cta {
+    display: inline-flex;
+    align-items: center;
+    min-block-size: 48px;
+    margin-block-start: 8px;
+    padding-inline: 28px;
+    border-radius: 9999px;
+    background: var(--m-berry);
+    color: var(--m-pearl);
+    text-decoration: none;
+    font-weight: 500;
+  }
+
+  .m-bslide__cta:focus-visible,
+  .m-bshow__arrow:focus-visible,
+  .m-bshow__dot:focus-visible,
+  .m-bshow__track:focus-visible {
+    outline: 2px solid var(--m-pearl);
+    outline-offset: 3px;
+  }
+
+  .m-bslide__media {
+    display: grid;
+    place-items: center;
+    block-size: 100%;
+    max-block-size: calc(var(--m-bshow-h) - 112px);
+  }
+
+  .m-bslide__media img {
+    inline-size: auto;
+    max-inline-size: 100%;
+    block-size: 100%;
+    max-block-size: calc(var(--m-bshow-h) - 112px);
+    object-fit: contain;
+    border-radius: 16px;
+    background: var(--m-pearl);
+  }
+
+  .m-bshow__arrow {
+    position: absolute;
+    inset-block-start: 50%;
+    display: grid;
+    place-items: center;
+    inline-size: 48px;
+    block-size: 48px;
+    margin-block-start: -24px;
+    border: 1px solid rgb(250 246 242 / 0.6);
+    border-radius: 9999px;
+    background: rgb(37 18 36 / 0.35);
+    color: var(--m-pearl);
+    cursor: pointer;
+  }
+
+  .m-bshow__arrow--prev {
+    inset-inline-start: 16px;
+  }
+
+  .m-bshow__arrow--prev .m-chevron {
+    transform: scaleX(-1);
+  }
+
+  .m-bshow__arrow--next {
+    inset-inline-end: 16px;
+  }
+
+  [dir='rtl'] .m-bshow__arrow .m-chevron {
+    transform: scaleX(-1);
+  }
+
+  [dir='rtl'] .m-bshow__arrow--prev .m-chevron {
+    transform: none;
+  }
+
+  .m-bshow__dots {
+    position: absolute;
+    inset-inline: 0;
+    inset-block-end: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 4px;
+  }
+
+  .m-bshow__dot {
+    display: grid;
+    place-items: center;
+    inline-size: 28px;
+    block-size: 28px;
+    padding: 0;
+    border: 0;
+    background: none;
+    cursor: pointer;
+  }
+
+  .m-bshow__dot::before {
+    content: '';
+    inline-size: 8px;
+    block-size: 8px;
+    border-radius: 9999px;
+    background: rgb(250 246 242 / 0.45);
+    transition: inline-size 0.2s ease, background-color 0.2s ease;
+  }
+
+  .m-bshow__dot[aria-current='true']::before {
+    inline-size: 22px;
+    background: var(--m-pearl);
+  }
+
+  .m-bshow[data-empty] {
+    display: none;
+  }
+
+  @media screen and (max-width: 749px) {
+    .m-bshow {
+      --m-bshow-h: 520px;
+    }
+
+    .m-bslide {
+      grid-template-columns: 1fr;
+      grid-template-rows: 1fr auto;
+      gap: 16px;
+      padding: 20px 20px 56px;
+      background: linear-gradient(0deg, rgb(37 18 36 / 0.6), rgb(37 18 36 / 0.1) 55%, transparent);
+    }
+
+    .m-bslide__media {
+      order: -1;
+      max-block-size: 220px;
+    }
+
+    .m-bslide__media img {
+      max-block-size: 220px;
+    }
+
+    .m-bslide__copy {
+      gap: 8px;
+    }
+
+    .m-bslide__title {
+      font-size: 1.75rem;
+    }
+
+    .m-bshow__arrow {
+      display: none;
+    }
+  }
+{% endstylesheet %}
+
+{% javascript %}
+  (() => {
+    const setup = (root) => {
+      if (root.dataset.ready) return;
+      root.dataset.ready = 'true';
+      const track = root.querySelector('[data-track]');
+      const dots = root.querySelector('[data-dots]');
+      const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const load = (sort) =>
+        fetch(root.dataset.src + sort)
+          .then((r) => (r.ok ? r.text() : ''))
+          .then((html) => {
+            const doc = new DOMParser().parseFromString(html, 'text/html');
+            const t = doc.querySelector(`template[data-m-slides="${sort}"]`);
+            return t ? [...t.content.children] : [];
+          })
+          .catch(() => []);
+
+      Promise.all([load('created-descending'), load('best-selling')]).then(([fresh, top]) => {
+        // New in: the newest; Top sellers: the best-selling ones not already shown as New in
+        const newest = fresh.slice(0, Number(root.dataset.new));
+        const seen = new Set(newest.map((s) => s.dataset.handle));
+        const best = top.filter((s) => !seen.has(s.dataset.handle)).slice(0, Number(root.dataset.top));
+        const slides = [...newest, ...best];
+        if (!slides.length) {
+          root.dataset.empty = '';
+          return;
+        }
+        slides.forEach((s, i) => {
+          s.setAttribute('role', 'group');
+          s.setAttribute('aria-roledescription', 'slide');
+          s.setAttribute('aria-label', `${i + 1} / ${slides.length}`);
+          track.appendChild(s);
+          const dot = document.createElement('button');
+          dot.type = 'button';
+          dot.className = 'm-bshow__dot';
+          dot.setAttribute('aria-label', `${i + 1} / ${slides.length}`);
+          dot.addEventListener('click', () => go(i));
+          dots.appendChild(dot);
+        });
+
+        const rtl = () => getComputedStyle(track).direction === 'rtl';
+        const current = () => Math.round(Math.abs(track.scrollLeft) / track.clientWidth);
+        const go = (i) => {
+          const n = (i + slides.length) % slides.length;
+          track.scrollTo({ left: (rtl() ? -1 : 1) * n * track.clientWidth, behavior: reduced ? 'auto' : 'smooth' });
+        };
+        const mark = () => [...dots.children].forEach((d, i) => d.setAttribute('aria-current', String(i === current())));
+        let raf = 0;
+        track.addEventListener('scroll', () => { if (!raf) raf = requestAnimationFrame(() => { raf = 0; mark(); }); }, { passive: true });
+        root.querySelector('[data-prev]').addEventListener('click', () => go(current() - 1));
+        root.querySelector('[data-next]').addEventListener('click', () => go(current() + 1));
+        track.addEventListener('keydown', (e) => {
+          const step = { ArrowRight: rtl() ? -1 : 1, ArrowLeft: rtl() ? 1 : -1 }[e.key];
+          if (step) { e.preventDefault(); go(current() + step); }
+        });
+        mark();
+
+        // autoplay: never with reduced motion; held while hovered, touched, focused, or off screen
+        const seconds = parseFloat(root.dataset.autoplay) || 0;
+        if (!seconds || reduced || slides.length < 2) return;
+        let timer = 0, held = false, visible = true;
+        const schedule = () => {
+          clearTimeout(timer);
+          if (!held && visible && !document.hidden) timer = setTimeout(() => { go(current() + 1); schedule(); }, seconds * 1000);
+        };
+        const hold = (on) => () => { held = on; schedule(); };
+        root.addEventListener('pointerenter', hold(true));
+        root.addEventListener('pointerleave', hold(false));
+        root.addEventListener('touchstart', hold(true), { passive: true });
+        root.addEventListener('touchend', () => setTimeout(hold(false), 3000), { passive: true });
+        root.addEventListener('focusin', hold(true));
+        root.addEventListener('focusout', (e) => { if (!root.contains(e.relatedTarget)) hold(false)(); });
+        document.addEventListener('visibilitychange', schedule);
+        new IntersectionObserver((es) => { visible = es.some((e) => e.isIntersecting); schedule(); }).observe(root);
+        schedule();
+      });
+    };
+    const run = () => document.querySelectorAll('[data-m-bshow]').forEach(setup);
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', run); else run();
+    document.addEventListener('shopify:section:load', run);
+  })();
+{% endjavascript %}
+
+{% schema %}
+{
+  "name": "Brand slideshow",
+  "tag": "section",
+  "class": "m-bshow-section",
+  "enabled_on": { "templates": ["collection"] },
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "background",
+      "label": "Background photo",
+      "info": "Shown behind every slide. Wide photos work best (at least 2000 px). Without a photo the background colour is used."
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background colour",
+      "default": "#3B1E3A"
+    },
+    {
+      "type": "range",
+      "id": "new_count",
+      "label": "New in slides",
+      "min": 0,
+      "max": 8,
+      "step": 1,
+      "default": 4
+    },
+    {
+      "type": "range",
+      "id": "top_count",
+      "label": "Top sellers slides",
+      "min": 0,
+      "max": 8,
+      "step": 1,
+      "default": 4
+    },
+    {
+      "type": "range",
+      "id": "autoplay",
+      "label": "Next slide every",
+      "min": 0,
+      "max": 10,
+      "step": 1,
+      "unit": "s",
+      "default": 5,
+      "info": "0 turns it off. Never moves for visitors who reduce motion."
+    }
+  ],
+  "presets": [{ "name": "Brand slideshow" }]
+}
+{% endschema %}
