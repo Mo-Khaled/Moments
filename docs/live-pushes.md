@@ -135,3 +135,6 @@ Rollback: `git show 9addd5c:<file>` for the templates and locales, then push.
 ### 2026-11-08 brand page photo removed; header colours with a menu open (live, smoke passed; owner: "push live")
 Pushed: assets/moments.css (accent link berry and search pill normal while a menu panel is open over the hero), the 14 brand collection templates (image block image_KAdJtB removed from the top section; several pointed at deleted photos and showed Shopify's placeholder). Live copies equalled HEAD before. Checks: accent nude over the hero, berry with Brands open; no image in Afnan's top section; smoke PASSED.
 Rollback: `git show 05b7e99:<file>` and push.
+
+### 2026-11-08 Arabic spacing on the product page (live, smoke passed; owner: "push live")
+Pushed: sections/product-information.liquid (gap between photo and details as padding-inline-start/end), blocks/buy-buttons.liquid (quantity rules), snippets/product-grid.liquid (grid title). Live copies equalled the previous commit before. Check: the gap is 24 px in English and in Arabic. Rollback: `git show 6391825^:<file>` and push.
