@@ -57,7 +57,7 @@
   <div
     class="m-bshow"
     data-m-bshow
-    data-src="{{ collection.url }}?section_id={{ section.id }}&sort_by="
+    data-src="{{ collection.url }}?section_id={{ section.id }}&v=2&sort_by="
     data-autoplay="{{ section.settings.autoplay }}"
     data-new="{{ new_count }}"
     data-top="{{ top_count }}"
@@ -129,6 +129,7 @@
   .m-bslide__copy {
     display: grid;
     justify-items: start;
+    align-content: center;
     gap: 12px;
     max-inline-size: 480px;
   }
@@ -142,11 +143,19 @@
     text-transform: uppercase;
   }
 
+  /* the name always takes two lines' room, so the price and the button sit in the same place on every slide */
   .m-bslide__title {
+    --m-lh: 1.05;
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
     margin: 0;
     color: inherit;
     font-size: clamp(2rem, 4vw, 3.5rem);
-    line-height: 1.05;
+    line-height: var(--m-lh);
+    block-size: calc(2em * var(--m-lh));
+    text-wrap: balance;
   }
 
   :lang(ar) .m-bslide__tag {
@@ -322,20 +331,17 @@
     }
 
     .m-bslide__title {
-      display: -webkit-box;
-      overflow: hidden;
-      -webkit-box-orient: vertical;
-      -webkit-line-clamp: 2;
+      --m-lh: 1.15;
       font-size: 1.375rem;
-      line-height: 1.15;
-      text-wrap: balance;
     }
 
     :lang(ar) .m-bslide__title {
-      line-height: 1.35;
+      --m-lh: 1.35;
     }
 
     .m-bslide__price {
+      flex-wrap: nowrap;
+      white-space: nowrap;
       font-size: 1.0625rem;
     }
 
