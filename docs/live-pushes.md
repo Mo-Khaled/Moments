@@ -138,3 +138,6 @@ Rollback: `git show 05b7e99:<file>` and push.
 
 ### 2026-11-08 Arabic spacing on the product page (live, smoke passed; owner: "push live")
 Pushed: sections/product-information.liquid (gap between photo and details as padding-inline-start/end), blocks/buy-buttons.liquid (quantity rules), snippets/product-grid.liquid (grid title). Live copies equalled the previous commit before. Check: the gap is 24 px in English and in Arabic. Rollback: `git show 6391825^:<file>` and push.
+
+### 2026-11-08 scent guide: layers without notes left out (live, smoke passed; owner: "push live")
+Pushed: snippets/scent-guide-panel.liquid. Live copy equalled the previous commit before. Check: Miss Arrogate (set and own page) shows top and heart only; Wild Colt and Arrogate Pink all three. Rollback: `git show e327d43^:snippets/scent-guide-panel.liquid` and push.
