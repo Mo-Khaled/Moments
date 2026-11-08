@@ -141,3 +141,6 @@ Pushed: sections/product-information.liquid (gap between photo and details as pa
 
 ### 2026-11-08 scent guide: layers without notes left out (live, smoke passed; owner: "push live")
 Pushed: snippets/scent-guide-panel.liquid. Live copy equalled the previous commit before. Check: Miss Arrogate (set and own page) shows top and heart only; Wild Colt and Arrogate Pink all three. Rollback: `git show e327d43^:snippets/scent-guide-panel.liquid` and push.
+
+### 2026-11-09 brand pages on phones: compact slideshow, grid margins (live, smoke passed on re-run; owner: "push live")
+Pushed: sections/moments-brand-slideshow.liquid (phone: photo tile beside the copy, 252 px instead of 520 px; whole slide is the link; brand line removed; Arabic tag without caps), then 9 collection templates (full_width_on_mobile false: afnan, diamond-collection, khadlaj, lattaf-pride, lattafa, le-falcone, nabeel-perfumes, rasasi-per, zimaya). Live copies equalled the previous commit before. Check: on Afnan at 390x844 the products start at 520 px (was 788 px). First smoke run failed mobile add to cart once (product page untouched); the re-run passed. Rollback: `git show 67a3c5d^:<file>` and push.
