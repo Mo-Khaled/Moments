@@ -38,30 +38,6 @@
           },
           "blocks": {}
         },
-        "image_KAdJtB": {
-          "type": "image",
-          "name": "t:names.image",
-          "disabled": true,
-          "settings": {
-            "image": "shopify://shop_images/wep-khadlaj.jpg",
-            "link": "",
-            "image_ratio": "adapt",
-            "width": "custom",
-            "custom_width": 75,
-            "width_mobile": "fill",
-            "custom_width_mobile": 100,
-            "height": "fill",
-            "border": "none",
-            "border_width": 1,
-            "border_opacity": 100,
-            "border_radius": 0,
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {}
-        },
         "text_aBLRVc": {
           "type": "text",
           "name": "t:names.text",
@@ -91,7 +67,6 @@
       },
       "block_order": [
         "text_tqQTNE",
-        "image_KAdJtB",
         "text_aBLRVc"
       ],
       "name": "Collection heading",

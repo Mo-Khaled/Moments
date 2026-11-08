@@ -12,30 +12,6 @@
     "section": {
       "type": "section",
       "blocks": {
-        "image_KAdJtB": {
-          "type": "image",
-          "name": "t:names.image",
-          "disabled": true,
-          "settings": {
-            "image": "shopify://shop_images/sa2_0c43c02f-dd0b-44ef-9e43-e95d293b73c8.png",
-            "link": "",
-            "image_ratio": "adapt",
-            "width": "fill",
-            "custom_width": 100,
-            "width_mobile": "fill",
-            "custom_width_mobile": 100,
-            "height": "fill",
-            "border": "none",
-            "border_width": 1,
-            "border_opacity": 100,
-            "border_radius": 5,
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {}
-        },
         "text_tqQTNE": {
           "type": "text",
           "name": "Title",
@@ -161,7 +137,6 @@
         }
       },
       "block_order": [
-        "image_KAdJtB",
         "text_tqQTNE",
         "group_KwyQPe"
       ],

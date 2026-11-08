@@ -563,6 +563,30 @@ header-menu overflow-list[defer]::part(list) {
   color: var(--m-nude);
 }
 
+/* a menu panel open over the hero turns the header light: the accent link and the search pill go back to their normal colours
+   (owner screenshot 2026-11-08: "Make a bundle" unreadable on the light header) */
+.header[transparent]:not([data-sticky-state='active']):has(
+    .mega-menu__list:hover,
+    .menu-list__link[aria-haspopup]:is(:hover, [aria-expanded='true'], [data-animating])
+  )
+  .menu-list__link--accent
+  .menu-list__link-title {
+  color: var(--m-berry-ink);
+}
+
+@media screen and (min-width: 1100px) {
+  .header[transparent]:not([data-sticky-state='active']):has(
+      .mega-menu__list:hover,
+      .menu-list__link[aria-haspopup]:is(:hover, [aria-expanded='true'], [data-animating])
+    )
+    .search-action
+    .search-modal__button {
+    border-color: var(--m-rule-quiet);
+    background: transparent;
+    color: var(--m-text-muted);
+  }
+}
+
 /* Product cards: the bottle is never cropped. Images sit contained on a backdrop token inside the card frame. */
 html:root {
   --m-card-backdrop: var(--m-surface-raised);
