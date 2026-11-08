@@ -127,7 +127,11 @@
 
   <div class="resource-card__content">
     <p class="resource-card__title{% if style == 'overlay' %} h5{%else %} paragraph{% endif %}">
-      {{- resource.title -}}
+      {%- if resource_type == 'product' -%}
+        {%- render 'product-name', product: resource, plain: true -%}
+      {%- else -%}
+        {{- resource.title -}}
+      {%- endif -%}
     </p>
 
     {% if resource_type == 'product' %}

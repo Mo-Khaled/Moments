@@ -33,8 +33,13 @@
         {%- if product.available -%}
           <div class="m-bslide" data-handle="{{ product.handle }}">
             <div class="m-bslide__copy">
-              <span class="m-bslide__tag">{{ tag }}</span>
-              <h3 class="m-bslide__title">{{ product.title | escape }}</h3>
+              {%- capture size -%}{%- render 'product-name', product: product, size_only: true -%}{%- endcapture -%}
+              <p class="m-bslide__meta">
+                <span class="m-bslide__tag">{{ tag }}</span>
+                {%- if size != blank -%}<span class="m-bslide__size">{{ size }}</span>{%- endif -%}
+              </p>
+              {%- comment -%} the shared clean name: never the bottle size (owner 2026-11-09) {%- endcomment -%}
+              <h3 class="m-bslide__title">{%- render 'product-name', product: product, plain: true -%}</h3>
               <p class="m-bslide__price">
                 {{ product.price | money }}
                 {%- if product.compare_at_price > product.price -%}
@@ -57,7 +62,7 @@
   <div
     class="m-bshow"
     data-m-bshow
-    data-src="{{ collection.url }}?section_id={{ section.id }}&v=2&sort_by="
+    data-src="{{ collection.url }}?section_id={{ section.id }}&v=3&sort_by="
     data-autoplay="{{ section.settings.autoplay }}"
     data-new="{{ new_count }}"
     data-top="{{ top_count }}"
@@ -132,6 +137,18 @@
     align-content: center;
     gap: 12px;
     max-inline-size: 480px;
+  }
+
+  .m-bslide__meta {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0;
+  }
+
+  .m-bslide__size {
+    opacity: 0.8;
+    font-size: 0.875rem;
   }
 
   .m-bslide__tag {

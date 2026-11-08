@@ -86,11 +86,13 @@
 
   # The product title shown through a text block ("{{ closest.product.title }}" on the product page) uses the same clean
   # name as the cards: no bottle size in the name, the size has its own line (owner request 2026-10-31)
-  if closest.product != blank and shown_text contains closest.product.title
+  # closest.product can be empty inside this snippet; the product page's own product is the fallback (2026-11-09)
+  assign title_product = closest.product | default: product
+  if title_product != blank and shown_text contains title_product.title
     capture clean_name
-      render 'product-name', product: closest.product, plain: true
+      render 'product-name', product: title_product, plain: true
     endcapture
-    assign shown_text = shown_text | replace: closest.product.title, clean_name
+    assign shown_text = shown_text | replace: title_product.title, clean_name
   endif
 %}
 

@@ -12,6 +12,7 @@
   @param {object} product - The product.
   @param {string} [class] - Extra classes.
   @param {boolean} [plain] - Output only the name text, no markup and no size line.
+  @param {boolean} [size_only] - Output only the size text ("150 ml"), or nothing.
 
   @example
   {% render 'product-name', product: product %}
@@ -103,7 +104,9 @@
   endcapture
 -%}
 
-{%- if plain -%}
+{%- if size_only -%}
+  {{- size_text -}}
+{%- elsif plain -%}
   {{- name | strip -}}
 {%- else -%}
   <span class="product-name {{ class }}">{{ name | strip }}</span>

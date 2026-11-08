@@ -30,7 +30,7 @@
         >
       {%- endif -%}
       <span class="sticky-atc__info">
-        <span class="sticky-atc__title">{{ product.title }}</span>
+        <span class="sticky-atc__title">{%- render 'product-name', product: product, plain: true -%}</span>
         <span class="sticky-atc__price" data-sticky-atc-price>{{ current_variant.price | money }}</span>
         {%- liquid
           assign show_stock = false

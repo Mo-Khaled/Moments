@@ -231,7 +231,7 @@
         href="{% render 'product-card-variant-url', product: product %}"
         aria-hidden="true"
       >
-        <span class="title-text">{{- product.title -}}</span>
+        <span class="title-text">{%- render 'product-name', product: product, plain: true -%}</span>
       </a>
     </product-title>
   {% elsif product == blank %}

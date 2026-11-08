@@ -96,7 +96,7 @@
 
     <div class="gp-card__body">
       <p class="gp-card__brand">{{ product.vendor }}</p>
-      <h3 class="gp-card__title"><a href="{{ product.url }}">{{ product.title }}</a></h3>
+      <h3 class="gp-card__title"><a href="{{ product.url }}">{%- render 'product-name', product: product, plain: true -%}</a></h3>
       <p class="gp-card__price" data-row="price">
         {%- if variant.compare_at_price > variant.price -%}
           <s class="gp-card__was">{{ variant.compare_at_price | money }}</s>

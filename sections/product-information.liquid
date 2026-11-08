@@ -54,7 +54,7 @@
         </li>
       {% endunless %}
       <li class="breadcrumb-item breadcrumb-item--current" aria-current="page">
-        <span class="breadcrumb-text">{{ closest.product.title }}</span>
+        <span class="breadcrumb-text">{%- render 'product-name', product: closest.product, plain: true -%}</span>
       </li>
     </ol>
   </nav>
