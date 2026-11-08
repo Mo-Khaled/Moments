@@ -97,8 +97,13 @@
     <div class="m-guide__grid">
       <div class="m-guide__card m-guide__card--pyramid">
         <h3>{{ 'scent.pyramid_title' | t }}</h3>
-        <ol class="m-guide__pyramid">
-          {%- for layer in layers -%}
+        {%- comment -%}
+          A layer with no notes is left out (owner 2026-11-08: an empty "What stays" looked broken); a perfume with no
+          layered notes at all still shows the three explanations.
+        {%- endcomment -%}
+        {%- assign steps_with_notes = '' -%}
+        {%- assign steps_all = '' -%}
+        {%- for layer in layers -%}
             {%- liquid
               assign text_key = 'scent.pyramid_' | append: layer
               assign layer_notes = ''
@@ -134,6 +139,7 @@
                 endcase
               endif
             -%}
+            {%- capture step -%}
             <li class="m-guide__step m-guide__step--{{ layer }}">
               <span class="m-guide__step-mark" aria-hidden="true"></span>
               {%- if layer_notes != blank -%}
@@ -141,7 +147,14 @@
               {%- endif -%}
               <p class="m-guide__step-text">{{ text_key | t }}</p>
             </li>
-          {%- endfor -%}
+            {%- endcapture -%}
+            {%- assign steps_all = steps_all | append: step -%}
+            {%- if layer_notes != blank -%}
+              {%- assign steps_with_notes = steps_with_notes | append: step -%}
+            {%- endif -%}
+        {%- endfor -%}
+        <ol class="m-guide__pyramid">
+          {%- if steps_with_notes != blank -%}{{ steps_with_notes }}{%- else -%}{{ steps_all }}{%- endif -%}
         </ol>
       </div>
 
