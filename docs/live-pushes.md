@@ -127,3 +127,7 @@ Rollback: push the files from commit 304f8dc (`git show 304f8dc:<file>`), or eac
 - Store data: filter.moment values for the three added moments (428, verified, backup filter-metafields-2026-11-06-2258.json); Arabic labels for the filter headings For, Scent Family, Key Notes, Season, Concentration, Moment, Size.
 Before each push the live copies equalled git HEAD. Checks: English and Arabic panels, seven moments in the filter, card labels, smoke PASSED.
 Rollback: `git show aac8ac6^:<file>` for the filter files, `git show <this commit>^:<file>` for the moment files; filter data with `python scripts/apply-filter-data.py --rollback data/backups/filter-metafields-2026-11-06-2158.json`.
+
+### 2026-11-08 brand slideshow, availability as one choice (live, smoke passed; owner: "push live")
+Pushed: sections/moments-brand-slideshow.liquid, locales/en.default.json, locales/ar.json, snippets/list-filter.liquid, then the 14 collection templates (brand_slideshow replaces brand_new_in and brand_top_sellers). Before: live copies equalled the last pushed versions. After: templates equal the repo; Afnan, Rasasi, Lattafa (ar) show 8 slides (4 New in, 4 Top seller), For her none; filter panel 10 groups, Availability only "In stock".
+Rollback: `git show 9addd5c:<file>` for the templates and locales, then push.
