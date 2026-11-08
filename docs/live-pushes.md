@@ -131,3 +131,7 @@ Rollback: `git show aac8ac6^:<file>` for the filter files, `git show <this commi
 ### 2026-11-08 brand slideshow, availability as one choice (live, smoke passed; owner: "push live")
 Pushed: sections/moments-brand-slideshow.liquid, locales/en.default.json, locales/ar.json, snippets/list-filter.liquid, then the 14 collection templates (brand_slideshow replaces brand_new_in and brand_top_sellers). Before: live copies equalled the last pushed versions. After: templates equal the repo; Afnan, Rasasi, Lattafa (ar) show 8 slides (4 New in, 4 Top seller), For her none; filter panel 10 groups, Availability only "In stock".
 Rollback: `git show 9addd5c:<file>` for the templates and locales, then push.
+
+### 2026-11-08 brand page photo removed; header colours with a menu open (live, smoke passed; owner: "push live")
+Pushed: assets/moments.css (accent link berry and search pill normal while a menu panel is open over the hero), the 14 brand collection templates (image block image_KAdJtB removed from the top section; several pointed at deleted photos and showed Shopify's placeholder). Live copies equalled HEAD before. Checks: accent nude over the hero, berry with Brands open; no image in Afnan's top section; smoke PASSED.
+Rollback: `git show 05b7e99:<file>` and push.
