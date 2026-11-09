@@ -173,16 +173,18 @@
     }
   }
 
+  /* the card title is the quiet frame; what is particular to this perfume is the largest text in each card (owner 2026-11-09) */
   .m-guide__card h3 {
-    margin: 0 0 14px;
-    font-family: var(--font-heading--family);
-    font-weight: var(--font-heading--weight);
-    font-size: 1.125rem;
+    margin: 0 0 18px;
+    color: var(--m-text-muted);
+    font-family: var(--font-body--family);
+    font-weight: 400;
+    font-size: 0.9375rem;
   }
 
   .m-guide__list {
     display: grid;
-    gap: 12px;
+    gap: 18px;
     margin: 0;
     padding: 0;
     list-style: none;
@@ -190,28 +192,55 @@
 
   .m-guide__list--notes {
     grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    column-gap: 28px;
   }
 
   .m-guide__list li {
     display: grid;
-    gap: 2px;
+    gap: 4px;
   }
 
-  .m-guide__list strong {
-    font-weight: 600;
+  /* this perfume's own family, note, season or time: large, in the heading face */
+  .m-guide__list strong,
+  .m-guide__step-notes {
+    color: var(--m-text);
+    font-family: var(--font-heading--family);
+    font-weight: var(--font-heading--weight);
+    font-size: 1.375rem;
+    line-height: 1.25;
   }
 
+  /* the general explanation, the same on every page: small and quiet */
   .m-guide__list span,
-  .m-guide__pyramid p,
+  .m-guide__step-text,
   .m-guide__skin {
     color: var(--m-text-muted);
-    font-size: 0.9375rem;
+    font-size: 0.8125rem;
     line-height: 1.5;
+  }
+
+  html[lang='ar'] .m-guide__list strong,
+  html[lang='ar'] .m-guide__step-notes {
+    line-height: 1.35;
+  }
+
+  html[lang='ar'] .m-guide__list span,
+  html[lang='ar'] .m-guide__step-text,
+  html[lang='ar'] .m-guide__skin {
+    font-size: 0.875rem;
+    line-height: 1.7;
+  }
+
+  @media screen and (max-width: 749px) {
+    .m-guide__list strong,
+    .m-guide__step-notes {
+      font-size: 1.25rem;
+    }
   }
 
   .m-guide__pyramid {
     display: grid;
-    gap: 14px;
+    gap: 20px;
     margin: 0;
     padding: 0;
     list-style: none;
@@ -232,7 +261,7 @@
     grid-row: span 2;
     inline-size: 14px;
     block-size: 14px;
-    margin-block-start: 4px;
+    margin-block-start: 8px;
     border-radius: 50%;
     background: var(--m-berry-600, currentColor);
   }
@@ -246,20 +275,8 @@
   }
 
   /* the perfume's own notes lead; the generic layer explanation sits quietly under them (owner request 2026-11-06) */
-  .m-guide__step-notes {
-    color: var(--m-text) !important;
-    font-size: 1.0625rem !important;
-    font-weight: 600;
-    line-height: 1.4;
-  }
-
-  .m-guide__pyramid .m-guide__step-text {
-    font-size: 0.8125rem;
-    line-height: 1.45;
-  }
-
   .m-guide__step-notes + .m-guide__step-text {
-    margin-block-start: 2px;
+    margin-block-start: 4px;
   }
 
   .m-guide__skin {
