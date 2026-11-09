@@ -195,9 +195,11 @@
     column-gap: 28px;
   }
 
+  /* a note beside a taller one stretches with its row: keep the description directly under its word (owner 2026-11-09) */
   .m-guide__list li {
     display: grid;
-    gap: 4px;
+    align-content: start;
+    gap: 2px;
   }
 
   /* this perfume's own family, note, season or time: large, in the heading face */
