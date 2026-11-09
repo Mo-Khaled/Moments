@@ -175,6 +175,11 @@
     text-wrap: balance;
   }
 
+  /* Arabic needs the taller line on every screen, or the second line's letters are cut off */
+  :lang(ar) .m-bslide__title {
+    --m-lh: 1.4;
+  }
+
   :lang(ar) .m-bslide__tag {
     letter-spacing: 0;
     text-transform: none;
@@ -350,10 +355,6 @@
     .m-bslide__title {
       --m-lh: 1.15;
       font-size: 1.375rem;
-    }
-
-    :lang(ar) .m-bslide__title {
-      --m-lh: 1.35;
     }
 
     .m-bslide__price {

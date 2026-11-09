@@ -2,7 +2,7 @@
   Arabic pages show every number in Arabic digits (owner request 2026-10-31: "if I am on Arabic, everything must be
   in Arabic"): prices, sizes, counts, page numbers, the ticker. Text is converted in the browser, also for content
   that arrives later (cart drawer, variant prices, filters, pagination), so no template has to know about it.
-  "LE 2,150.00" written by scripts becomes "٢٬١٥٠ ج.م". Form fields, scripts and styles are left alone.
+  "LE 2,150.00" written by scripts becomes "٢١٥٠ ج.م". Form fields, scripts and styles are left alone.
   Rendered only on /ar, at the end of <body> so the first paint already has Arabic digits.
 
   @example
@@ -32,8 +32,9 @@
           .replace(/LE\s?(\d[\d,]*)(?:\.(\d\d))?/g, (m, whole, cents) =>
             whole + (cents && cents !== '00' ? '.' + cents : '') + ' ج.م'
           )
-          // thousands and decimal separators between digits, then the digits themselves
-          .replace(/(\d),(?=\d)/g, '$1٬')
+          // no thousands separator: "١٨٥٠ ج.م", the separator read as a decimal point (owner 2026-11-09); then the decimal
+          // separator, then the digits themselves
+          .replace(/(\d),(?=\d{3}(?!\d))/g, '$1')
           .replace(/(\d)\.(?=\d)/g, '$1٫')
           .replace(/\d/g, (d) => DIGITS[d]);
 
