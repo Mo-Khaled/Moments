@@ -378,7 +378,31 @@
                     </div>
                   {% else %}
                     {%- comment -%} MOMENTS: how many products each choice leads to, e.g. "Floral (163)" {%- endcomment -%}
-                    {%- capture counted_label -%}{{ value.label }} ({{ value.count }}){%- endcapture -%}
+                    {%- liquid
+                      # Arabic pages: values stored in English read in Arabic (owner 2026-11-09): for whom and
+                      # concentration from the scent glossary, the size unit as مل; the name sits in its own span so the
+                      # brand names are put in Arabic by moments-arabic-digits like everywhere else
+                      assign shown_label = value.label
+                      if request.locale.iso_code == 'ar'
+                        case value.label
+                          when 'For Him'
+                            assign shown_label = 'scent.value.men' | t
+                          when 'For Her'
+                            assign shown_label = 'scent.value.women' | t
+                          when 'Unisex'
+                            assign shown_label = 'scent.value.unisex' | t
+                          else
+                            assign value_slug = value.label | handleize
+                            assign value_key = 'scent.value.' | append: value_slug
+                            assign value_ar = value_key | t
+                            unless value_ar contains 'ranslation missing'
+                              assign shown_label = value_ar
+                            endunless
+                        endcase
+                        assign shown_label = shown_label | replace: ' ml', ' مل'
+                      endif
+                    -%}
+                    {%- capture counted_label -%}<span>{{ shown_label }}</span> ({{ value.count }}){%- endcapture -%}
                     {% render 'checkbox',
                       name: value.param_name,
                       value: value.value,

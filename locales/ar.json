@@ -2729,8 +2729,8 @@
     "filters": {
       "availability": {
         "value": {
-          "in_stock": "في الأوراق المالية",
-          "out_of_stock": "إنتهى من المخزن"
+          "in_stock": "متوفر",
+          "out_of_stock": "غير متوفر"
         }
       },
       "boolean": {
