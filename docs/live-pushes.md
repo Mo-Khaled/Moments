@@ -150,3 +150,6 @@ Pushed: sections/moments-brand-slideshow.liquid (af15c8f: the name keeps two lin
 
 ### 2026-11-09 no bottle size in any product name (live, smoke passed; owner: "push live")
 Pushed: snippets product-name (size_only), text (closest.product fallback to product: the product page heading kept the size), cart-products (size on its own line), sticky-add-to-cart, gift-pick-card, card-gallery, resource-card, blocks/_product-card-gallery; then sections product-information (breadcrumb) and moments-brand-slideshow (clean name, size beside the tag, cache key v=3). Shopify titles unchanged (owner chose hide on site). Live copies equalled the previous commit before. Check: 0 sizes in names on the Afnan slideshow and cards, search, product heading and sticky bar, EN and AR. Rollback: `git show c2023a0^:<file>` and push.
+
+### 2026-11-09 scent guide: perfume-specific words large (live, smoke passed; owner: "push live")
+Pushed: sections/moments-scent-guide.liquid (6cb0cc1: family, notes, season, time and layer notes 22 px / 20 px phone in the heading face; general explanation 13-14 px muted; card titles quieter). Live copy equalled the previous commit before. Check: 9 PM Night Out, AR and EN desktop, AR phone. Rollback: `git show 6cb0cc1^:sections/moments-scent-guide.liquid` and push.
