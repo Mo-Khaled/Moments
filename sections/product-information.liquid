@@ -43,10 +43,10 @@
 </script>
 
 {% if template.name == 'product' %}
-  <nav class="breadcrumb-section" aria-label="Breadcrumb">
+  <nav class="breadcrumb-section" aria-label="{{ 'breadcrumb.label' | t }}">
     <ol class="breadcrumb">
       <li class="breadcrumb-item">
-        <a href="/" class="breadcrumb-link">Home</a>
+        <a href="{{ routes.root_url }}" class="breadcrumb-link">{{ 'breadcrumb.home' | t }}</a>
       </li>
       {% unless closest.product.collections.empty %}
         <li class="breadcrumb-item">

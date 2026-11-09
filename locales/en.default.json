@@ -1446,6 +1446,10 @@
       "day-night": "Works from morning to evening."
     }
   },
+  "breadcrumb": {
+    "home": "Home",
+    "label": "Breadcrumb"
+  },
   "brand_rows": {
     "new_in": "New in",
     "top_sellers": "Top sellers",

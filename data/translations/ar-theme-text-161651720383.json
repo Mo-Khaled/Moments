@@ -1,0 +1,98 @@
+[
+ {
+  "resource": "gid://shopify/OnlineStoreThemeJsonTemplate/index?theme_id=161651720383",
+  "key": "section.index.json.moments_shop.tile_fresh.label:npim90l5t9o4",
+  "digest": "6d0a856a1a1086a3781011ec17b7a129561c0d649d7916877a663fcf6f83e77f",
+  "en": "Fresh Moments",
+  "ar": "",
+  "outdated": false
+ },
+ {
+  "resource": "gid://shopify/OnlineStoreThemeJsonTemplate/index?theme_id=161651720383",
+  "key": "section.index.json.moments_shop.tile_daily.label:27odlfgzyhog7",
+  "digest": "2f66652bb588eccfc8eccc3fe4cdb6ca23209f2b757f8deef1e3a019e60f19b3",
+  "en": "Everyday Moments",
+  "ar": "",
+  "outdated": false
+ },
+ {
+  "resource": "gid://shopify/OnlineStoreThemeJsonTemplate/index?theme_id=161651720383",
+  "key": "section.index.json.moments_shop.tile_love.label:wcgykx7erary",
+  "digest": "930ca778b98686794f7e027aa7a926275e31bc64921f8e579ee8737c6244a6a6",
+  "en": "Love Moments",
+  "ar": "",
+  "outdated": false
+ },
+ {
+  "resource": "gid://shopify/OnlineStoreThemeJsonTemplate/index?theme_id=161651720383",
+  "key": "section.index.json.moments_shop.tile_night.label:o0px9ytx0h7m",
+  "digest": "266090c77298a3d0e30a1e267d0c41763c2f42e06f3a0d031aaeb91ef1e9b54a",
+  "en": "Night Moments",
+  "ar": "",
+  "outdated": false
+ },
+ {
+  "resource": "gid://shopify/OnlineStoreThemeJsonTemplate/index?theme_id=161651720383",
+  "key": "section.index.json.moments_shop.tile_gift.label:2x59ryq662t5u",
+  "digest": "f8fd11579c3a9605550fed5e6954d996c7514df2b7b2ecf5ca8f8ff88e438a0a",
+  "en": "Gift Moments",
+  "ar": "",
+  "outdated": false
+ },
+ {
+  "resource": "gid://shopify/OnlineStoreThemeJsonTemplate/index?theme_id=161651720383",
+  "key": "section.index.json.moments_shop.tile_selfcare.label:1obdxq09oyrg7",
+  "digest": "e49ef95916ce2ea91ea6b3320ab3b6729d1089a6ca1ac49756d43ad8ffe01392",
+  "en": "Self-Care Moments",
+  "ar": "",
+  "outdated": false
+ },
+ {
+  "resource": "gid://shopify/OnlineStoreThemeJsonTemplate/index?theme_id=161651720383",
+  "key": "section.index.json.moments_story.row_fresh.label:1x5zs4l4244q5",
+  "digest": "6d0a856a1a1086a3781011ec17b7a129561c0d649d7916877a663fcf6f83e77f",
+  "en": "Fresh Moments",
+  "ar": "",
+  "outdated": false
+ },
+ {
+  "resource": "gid://shopify/OnlineStoreThemeJsonTemplate/index?theme_id=161651720383",
+  "key": "section.index.json.moments_story.row_daily.label:2xipr962hyf8e",
+  "digest": "2f66652bb588eccfc8eccc3fe4cdb6ca23209f2b757f8deef1e3a019e60f19b3",
+  "en": "Everyday Moments",
+  "ar": "",
+  "outdated": false
+ },
+ {
+  "resource": "gid://shopify/OnlineStoreThemeJsonTemplate/index?theme_id=161651720383",
+  "key": "section.index.json.moments_story.row_love.label:2b1gn9i7pux4n",
+  "digest": "930ca778b98686794f7e027aa7a926275e31bc64921f8e579ee8737c6244a6a6",
+  "en": "Love Moments",
+  "ar": "",
+  "outdated": false
+ },
+ {
+  "resource": "gid://shopify/OnlineStoreThemeJsonTemplate/index?theme_id=161651720383",
+  "key": "section.index.json.moments_story.row_night.label:2kvtrga25235n",
+  "digest": "266090c77298a3d0e30a1e267d0c41763c2f42e06f3a0d031aaeb91ef1e9b54a",
+  "en": "Night Moments",
+  "ar": "",
+  "outdated": false
+ },
+ {
+  "resource": "gid://shopify/OnlineStoreThemeJsonTemplate/index?theme_id=161651720383",
+  "key": "section.index.json.moments_story.row_gift.label:1xbfojabj5knv",
+  "digest": "f8fd11579c3a9605550fed5e6954d996c7514df2b7b2ecf5ca8f8ff88e438a0a",
+  "en": "Gift Moments",
+  "ar": "",
+  "outdated": false
+ },
+ {
+  "resource": "gid://shopify/OnlineStoreThemeJsonTemplate/index?theme_id=161651720383",
+  "key": "section.index.json.moments_story.row_selfcare.label:3lpwopp2s5kpa",
+  "digest": "e49ef95916ce2ea91ea6b3320ab3b6729d1089a6ca1ac49756d43ad8ffe01392",
+  "en": "Self-Care Moments",
+  "ar": "",
+  "outdated": false
+ }
+]
