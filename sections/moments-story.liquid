@@ -1,7 +1,7 @@
 {%- comment -%}
   Brand story band, in the plum family (the colour flow has three surface tones only: plum family, pearl, and the nude used inside cards). The active moment still shows in the marks and links through --m-live.
   Left: the confirmed facts and a link. Right: the six moments as large type, each linking to its collection.
-  Only confirmed facts: MOMENTS is a fragrance store in Egypt and sorts its bottles by moment.
+  Each row can carry its own English and Arabic label; empty labels fall back to the moment name in the locale files.
   TODO (shown in the theme editor only): the real brand story, founding year and team photograph.
 {%- endcomment -%}
 
@@ -33,28 +33,38 @@
     <ul class="m-story__index">
       {%- for block in section.blocks -%}
         {%- if block.settings.collection != blank -%}
+          {%- liquid
+            assign row_label = block.settings.label
+            if request.locale.iso_code == 'ar' and block.settings.label_ar != blank
+              assign row_label = block.settings.label_ar
+            endif
+          -%}
           <li {{ block.shopify_attributes }}>
             <a class="m-story__row m-tone--{{ block.settings.mark }}" href="{{ block.settings.collection.url }}" data-moment-host>
               <span class="m-story__chip" aria-hidden="true">{% render 'moment-mark', mark: block.settings.mark, size: 'sm', class: 'm-story__mark' %}</span>
               <span class="m-story__name">
-                {%- case block.settings.mark -%}
-                  {%- when 'night' -%}
-                    {{ 'moments.night' | t }}
-                  {%- when 'gift' -%}
-                    {{ 'moments.gift' | t }}
-                  {%- when 'allday' -%}
-                    {{ 'moments.all_day' | t }}
-                  {%- when 'daily' -%}
-                    {{ 'moments.daily' | t }}
-                  {%- when 'fresh' -%}
-                    {{ 'moments.fresh' | t }}
-                  {%- when 'occasions' -%}
-                    {{ 'moments.occasions' | t }}
-                  {%- when 'winter' -%}
-                    {{ 'moments.winter' | t }}
-                  {%- else -%}
-                    {{ 'moments.love' | t }}
-                {%- endcase -%}
+                {%- if row_label != blank -%}
+                  {{ row_label }}
+                {%- else -%}
+                  {%- case block.settings.mark -%}
+                    {%- when 'night' -%}
+                      {{ 'moments.night' | t }}
+                    {%- when 'gift' -%}
+                      {{ 'moments.gift' | t }}
+                    {%- when 'allday' -%}
+                      {{ 'moments.all_day' | t }}
+                    {%- when 'daily' -%}
+                      {{ 'moments.daily' | t }}
+                    {%- when 'fresh' -%}
+                      {{ 'moments.fresh' | t }}
+                    {%- when 'occasions' -%}
+                      {{ 'moments.occasions' | t }}
+                    {%- when 'winter' -%}
+                      {{ 'moments.winter' | t }}
+                    {%- else -%}
+                      {{ 'moments.love' | t }}
+                  {%- endcase -%}
+                {%- endif -%}
               </span>
               <span class="m-story__count">{{ 'homepage.moments.count' | t: count: block.settings.collection.products_count }}</span>
               <span class="m-story__go" aria-hidden="true"><svg viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10h11M10.5 5l5 5-5 5"/></svg></span>
@@ -114,7 +124,6 @@
     font-size: 0.8125rem;
   }
 
-  /* The six moments as rounded rows: a colour chip with the mark, the name, how many bottles, and an arrow. Same card radius as everything else. */
   .m-story__index {
     display: grid;
     gap: 10px;
@@ -272,17 +281,19 @@
           "id": "mark",
           "label": "Moment mark",
           "options": [
-            { "value": "night", "label": "Evening out" },
+            { "value": "fresh", "label": "Fresh" },
+            { "value": "daily", "label": "Everyday" },
+            { "value": "love", "label": "Love" },
+            { "value": "night", "label": "Night" },
             { "value": "gift", "label": "Gift" },
-            { "value": "allday", "label": "All day" },
-            { "value": "daily", "label": "Office" },
-            { "value": "fresh", "label": "Summer heat" },
-            { "value": "love", "label": "Date night" },
-            { "value": "occasions", "label": "Weddings & Eid" },
-            { "value": "winter", "label": "Winter nights" }
+            { "value": "allday", "label": "Self-Care (sand)" },
+            { "value": "occasions", "label": "Occasions (old)" },
+            { "value": "winter", "label": "Winter (old)" }
           ],
           "default": "night"
-        }
+        },
+        { "type": "text", "id": "label", "label": "Label", "info": "Leave empty to use the moment name." },
+        { "type": "text", "id": "label_ar", "label": "Label (Arabic)", "info": "Shown on the Arabic site." }
       ]
     }
   ],

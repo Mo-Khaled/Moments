@@ -356,22 +356,22 @@
         "slide_gift": {
           "type": "slide",
           "settings": {
-            "moment": "occasions",
+            "moment": "gift",
             "from_hour": 0,
             "to_hour": 0,
             "poster_fit": "fit",
-            "primary_url": "/collections/occasions-moment",
+            "primary_url": "/collections/gift-moment",
             "secondary_url": "/pages/moments"
           }
         },
         "slide_daily": {
           "type": "slide",
           "settings": {
-            "moment": "winter",
+            "moment": "allday",
             "from_hour": 0,
             "to_hour": 0,
             "poster_fit": "fit",
-            "primary_url": "/collections/winter-moment",
+            "primary_url": "/collections/self-care-moment",
             "secondary_url": "/pages/moments"
           }
         },
@@ -403,56 +403,68 @@
     "moments_shop": {
       "type": "moments-shop-by-moment",
       "blocks": {
-        "tile_night": {
+        "tile_fresh": {
           "type": "moment",
           "settings": {
-            "collection": "daily-moment",
-            "mark": "daily"
-          }
-        },
-        "tile_gift": {
-          "type": "moment",
-          "settings": {
-            "collection": "night-moment",
-            "mark": "night"
-          }
-        },
-        "tile_allday": {
-          "type": "moment",
-          "settings": {
-            "collection": "love-moment",
-            "mark": "love"
+            "collection": "fresh-moment",
+            "mark": "fresh",
+            "label": "Fresh Moments",
+            "label_ar": "لحظات فريش"
           }
         },
         "tile_daily": {
           "type": "moment",
           "settings": {
-            "collection": "fresh-moment",
-            "mark": "fresh"
-          }
-        },
-        "tile_fresh": {
-          "type": "moment",
-          "settings": {
-            "collection": "occasions-moment",
-            "mark": "occasions"
+            "collection": "daily-moment",
+            "mark": "daily",
+            "label": "Everyday Moments",
+            "label_ar": "لحظات كل يوم"
           }
         },
         "tile_love": {
           "type": "moment",
           "settings": {
-            "collection": "winter-moment",
-            "mark": "winter"
+            "collection": "love-moment",
+            "mark": "love",
+            "label": "Love Moments",
+            "label_ar": "لحظات حب"
+          }
+        },
+        "tile_night": {
+          "type": "moment",
+          "settings": {
+            "collection": "night-moment",
+            "mark": "night",
+            "label": "Night Moments",
+            "label_ar": "لحظات سهر"
+          }
+        },
+        "tile_gift": {
+          "type": "moment",
+          "settings": {
+            "collection": "gift-moment",
+            "mark": "gift",
+            "label": "Gift Moments",
+            "label_ar": "لحظات تهادي"
+          }
+        },
+        "tile_selfcare": {
+          "type": "moment",
+          "settings": {
+            "collection": "self-care-moment",
+            "mark": "allday",
+            "label": "Self-Care Moments",
+            "label_ar": "لحظات لنفسك"
           }
         }
       },
       "block_order": [
+        "tile_fresh",
+        "tile_daily",
+        "tile_love",
         "tile_night",
         "tile_gift",
-        "tile_allday",
-        "tile_daily",
-        "tile_fresh",
-        "tile_love"
+        "tile_selfcare"
       ],
       "settings": {
         "show_count": false
@@ -461,56 +473,68 @@
     "moments_story": {
       "type": "moments-story",
       "blocks": {
-        "row_night": {
+        "row_fresh": {
           "type": "moment",
           "settings": {
-            "collection": "daily-moment",
-            "mark": "daily"
-          }
-        },
-        "row_gift": {
-          "type": "moment",
-          "settings": {
-            "collection": "night-moment",
-            "mark": "night"
-          }
-        },
-        "row_allday": {
-          "type": "moment",
-          "settings": {
-            "collection": "love-moment",
-            "mark": "love"
+            "collection": "fresh-moment",
+            "mark": "fresh",
+            "label": "Fresh Moments",
+            "label_ar": "لحظات فريش"
           }
         },
         "row_daily": {
           "type": "moment",
           "settings": {
-            "collection": "fresh-moment",
-            "mark": "fresh"
-          }
-        },
-        "row_fresh": {
-          "type": "moment",
-          "settings": {
-            "collection": "occasions-moment",
-            "mark": "occasions"
+            "collection": "daily-moment",
+            "mark": "daily",
+            "label": "Everyday Moments",
+            "label_ar": "لحظات كل يوم"
           }
         },
         "row_love": {
           "type": "moment",
           "settings": {
-            "collection": "winter-moment",
-            "mark": "winter"
+            "collection": "love-moment",
+            "mark": "love",
+            "label": "Love Moments",
+            "label_ar": "لحظات حب"
+          }
+        },
+        "row_night": {
+          "type": "moment",
+          "settings": {
+            "collection": "night-moment",
+            "mark": "night",
+            "label": "Night Moments",
+            "label_ar": "لحظات سهر"
+          }
+        },
+        "row_gift": {
+          "type": "moment",
+          "settings": {
+            "collection": "gift-moment",
+            "mark": "gift",
+            "label": "Gift Moments",
+            "label_ar": "لحظات تهادي"
+          }
+        },
+        "row_selfcare": {
+          "type": "moment",
+          "settings": {
+            "collection": "self-care-moment",
+            "mark": "allday",
+            "label": "Self-Care Moments",
+            "label_ar": "لحظات لنفسك"
           }
         }
       },
       "block_order": [
+        "row_fresh",
+        "row_daily",
+        "row_love",
         "row_night",
         "row_gift",
-        "row_allday",
-        "row_daily",
-        "row_fresh",
-        "row_love"
+        "row_selfcare"
       ],
       "settings": {
         "link_url": "/pages/moments"

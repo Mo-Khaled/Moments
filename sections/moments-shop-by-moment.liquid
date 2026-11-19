@@ -2,11 +2,15 @@
   The six Moment tiles, shared by the homepage and /pages/moments. One tile component (snippets/moment-tile.liquid),
   one strict grid: 3 x 2 on desktop, 2 x 3 on tablet, 2 columns on phones. Six tiles always fill it, so there is
   never an orphan cell. Tiles are colour fields with the large Moment mark. They never hold a cropped photograph.
-  Photography for moments can be added later as a separate, uncropped treatment once normalised images exist.
+  Each tile can carry its own English and Arabic label; empty labels fall back to the moment name in the locale files.
 {%- endcomment -%}
 
 {%- liquid
   assign tag = section.settings.heading_level | default: 'h2'
+  assign is_ar = false
+  if request.locale.iso_code == 'ar'
+    assign is_ar = true
+  endif
   assign tile_count = 0
   for block in section.blocks
     if block.settings.collection != blank
@@ -40,8 +44,14 @@
     <ul class="m-moments__grid">
       {%- for block in section.blocks -%}
         {%- if block.settings.collection != blank -%}
+          {%- liquid
+            assign tile_label = block.settings.label
+            if is_ar and block.settings.label_ar != blank
+              assign tile_label = block.settings.label_ar
+            endif
+          -%}
           <li class="m-tile-item" {{ block.shopify_attributes }}>
-            {% render 'moment-tile', collection: block.settings.collection, mark: block.settings.mark, label: block.settings.label, packshot: block.settings.packshot %}
+            {% render 'moment-tile', collection: block.settings.collection, mark: block.settings.mark, label: tile_label, packshot: block.settings.packshot %}
           </li>
         {%- endif -%}
       {%- endfor -%}
@@ -145,23 +155,24 @@
           "id": "mark",
           "label": "Moment mark and colour",
           "options": [
-            { "value": "night", "label": "Evening out" },
+            { "value": "fresh", "label": "Fresh" },
+            { "value": "daily", "label": "Everyday" },
+            { "value": "love", "label": "Love" },
+            { "value": "night", "label": "Night" },
             { "value": "gift", "label": "Gift" },
-            { "value": "allday", "label": "All day" },
-            { "value": "daily", "label": "Office (briefcase)" },
-            { "value": "fresh", "label": "Summer heat" },
-            { "value": "love", "label": "Date night" },
-            { "value": "occasions", "label": "Weddings & Eid" },
-            { "value": "winter", "label": "Winter nights" }
+            { "value": "allday", "label": "Self-Care (sand)" },
+            { "value": "occasions", "label": "Occasions (old)" },
+            { "value": "winter", "label": "Winter (old)" }
           ],
           "default": "night"
         },
         { "type": "text", "id": "label", "label": "Label", "info": "Leave empty to use the moment name." },
+        { "type": "text", "id": "label_ar", "label": "Label (Arabic)", "info": "Shown on the Arabic site." },
         {
           "type": "image_picker",
           "id": "packshot",
           "label": "Bottle packshot (optional)",
-          "info": "A normalised, uncropped packshot of a real best seller of this moment (for example 9 PM for Night). Leave empty until such an image exists."
+          "info": "A normalised, uncropped packshot of a real best seller of this moment. Leave empty until such an image exists."
         }
       ]
     }
@@ -171,12 +182,12 @@
     {
       "name": "MOMENTS shop by moment",
       "blocks": [
+        { "type": "moment", "settings": { "mark": "fresh" } },
+        { "type": "moment", "settings": { "mark": "daily" } },
+        { "type": "moment", "settings": { "mark": "love" } },
         { "type": "moment", "settings": { "mark": "night" } },
         { "type": "moment", "settings": { "mark": "gift" } },
-        { "type": "moment", "settings": { "mark": "allday" } },
-        { "type": "moment", "settings": { "mark": "daily" } },
-        { "type": "moment", "settings": { "mark": "fresh" } },
-        { "type": "moment", "settings": { "mark": "love" } }
+        { "type": "moment", "settings": { "mark": "allday" } }
       ]
     }
   ]
