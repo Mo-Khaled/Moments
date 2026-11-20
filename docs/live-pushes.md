@@ -184,3 +184,9 @@ Rollback: deactivate the two automatic discounts in admin; `git show <this commi
 Pushed: snippets/moments-tabbar.liquid, layout/theme.liquid, locales en/ar (tab bar: Home, Moments, Bundle, Cart with live count opening the drawer, Account; phones only; sticky add-to-cart and bundle bar sit above it). Then sections/moments-bundle.liquid: the free-delivery hint uses the total after the 10% (owner: keep 3,000 counted after discount).
 Checks: 390x844 live (count 1, drawer opens); cart bar at 3,198 bundle says "Add LE 121.80 more" (cart total 2,878.20) and checkout charges 118; at 3,650 "You have free shipping" and checkout free; bundle page hint "Add LE 121.80 more" for the same bundle.
 Rollback: `git show 887ca00^:<file>` for the tab bar files, `git show <bundle hint commit>^:sections/moments-bundle.liquid`, and push.
+
+### 2026-11-20 B + C: MOMENTS mark in the tab bar, page structure, card image tint (live, smoke passed; owner: approved "PUSH B + C")
+Pushed: assets/moments-mark.svg (brand kit small icon), snippets/moments-tabbar.liquid, assets/moments.css (header divider #E6DDE3,
+soft shadow once scrolled, homepage sections 48/80px, hairlines between white sections, product image area #F7F3F5). Merge a092d48.
+Live copies equalled the base before. Checks: live 390 and 1440 (D:\MOMENTS_Content\06_Website\review\2026-11-20-BC-live), smoke PASSED.
+Rollback: `git show a092d48^1:<file>` and push.
