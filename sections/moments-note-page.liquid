@@ -1,0 +1,74 @@
+{%- comment -%}
+  Standalone page for one fragrance note (metaobject type "note", URL /pages/notes/<handle>). It is the server-rendered version for
+  search engines and direct links (a reload of a note opened on the Notes page lands here); the interactive grid and sheet are on /pages/notes. Texts are the owner's approved ones (EN and AR fields).
+{%- endcomment -%}
+{%- liquid
+  assign n = metaobject
+  assign is_ar = false
+  if request.locale.iso_code == 'ar'
+    assign is_ar = true
+  endif
+  if is_ar
+    assign name = n.name_ar.value | default: n.name.value
+    assign family = n.family_ar.value
+    assign longevity = n.longevity_ar.value
+    assign simple = n.simple_ar.value
+    assign source = n.source_ar.value
+    assign story = n.story_ar.value
+  else
+    assign name = n.name.value
+    assign family = n.family_en.value
+    assign longevity = n.longevity_en.value
+    assign simple = n.simple_en.value
+    assign source = n.source_en.value
+    assign story = n.story_en.value
+  endif
+  assign notes_url = routes.root_url | append: '/pages/notes' | replace: '//', '/'
+  assign img_asset = 'note-' | append: n.system.handle | append: '-1024.webp'
+-%}
+<article class="m-notepage">
+  <div class="m-wrap m-notepage__grid">
+    <div class="m-notepage__img">
+      {%- if n.image.value != blank -%}
+        {{ n.image.value | image_url: width: 1024 | image_tag: alt: name, loading: 'eager', sizes: '(min-width: 750px) 480px, 100vw' }}
+      {%- else -%}
+        <img src="{{ img_asset | asset_url }}" alt="{{ name | escape }}" width="1024" height="1024" loading="eager">
+      {%- endif -%}
+    </div>
+    <div class="m-notepage__body">
+      <p class="m-notepage__eyebrow">{% if is_ar %}نوتة عطرية{% else %}Fragrance note{% endif %}{% if family != blank %} · {{ family }}{% endif %}</p>
+      <h1 class="m-notepage__title">{{ name }}</h1>
+      {%- if simple != blank -%}<p class="m-notepage__lead">{{ simple }}</p>{%- endif -%}
+      {%- if longevity != blank -%}
+        <h2 class="m-notepage__h">{% if is_ar %}الثبات{% else %}How long it lasts{% endif %}</h2>
+        <p>{{ longevity }}</p>
+      {%- endif -%}
+      {%- if source != blank -%}
+        <h2 class="m-notepage__h">{% if is_ar %}من أين تأتي{% else %}Where it comes from{% endif %}</h2>
+        <p>{{ source }}</p>
+      {%- endif -%}
+      {%- if story != blank -%}
+        <h2 class="m-notepage__h">{% if is_ar %}حكايتها{% else %}Its story{% endif %}</h2>
+        <p>{{ story }}</p>
+      {%- endif -%}
+      <a class="m-btn" href="{{ notes_url }}">{% if is_ar %}استكشف كل النوتات{% else %}Explore all notes{% endif %}</a>
+    </div>
+  </div>
+</article>
+
+{% stylesheet %}
+  .m-notepage { padding-block: clamp(24px, 5vw, 64px); }
+  .m-notepage__grid { display: grid; gap: 24px; align-items: start; }
+  .m-notepage__img img { inline-size: 100%; block-size: auto; border-radius: 16px; background: #F7F3F5; }
+  .m-notepage__body { display: flex; flex-direction: column; gap: 12px; align-items: flex-start; }
+  .m-notepage__eyebrow { margin: 0; font-size: .875rem; opacity: .75; }
+  .m-notepage__title { margin: 0; font-size: var(--m-h2); line-height: 1.1; }
+  .m-notepage__lead { margin: 0; font-size: 1.125rem; }
+  .m-notepage__h { margin: 12px 0 0; font-size: 1rem; }
+  .m-notepage__body p { margin: 0; }
+  @media screen and (min-width: 750px) { .m-notepage__grid { grid-template-columns: minmax(0, 480px) minmax(0, 1fr); gap: 48px; } }
+{% endstylesheet %}
+
+{% schema %}
+{ "name": "Note page", "settings": [] }
+{% endschema %}

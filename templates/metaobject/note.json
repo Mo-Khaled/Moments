@@ -1,0 +1,11 @@
+{
+  "sections": {
+    "main": {
+      "type": "moments-note-page",
+      "settings": {}
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

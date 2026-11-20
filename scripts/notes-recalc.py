@@ -142,6 +142,7 @@ def main():
     ap.add_argument('--base', default='https://momentseg.com')
     ap.add_argument('--sales', help='optional CSV handle,units (last 365 days)')
     ap.add_argument('--members', help='optional JSON {collection: {product handle: available}} from the Admin API')
+    ap.add_argument('--exclude-unconfirmed', help='NOTES_FILL_REVIEW.csv: products whose status starts with UNCONFIRMED are left out of every list and count (owner decision 2026-11-20)')
     ap.add_argument('--apply', action='store_true')
     a = ap.parse_args()
 
@@ -161,10 +162,14 @@ def main():
     if a.sales:
         sales = {r['handle']: float(r['units']) for r in csv.DictReader(open(a.sales, encoding='utf-8'))}
 
+    skip = set()
+    if a.exclude_unconfirmed:
+        skip = {r['handle'] for r in csv.DictReader(open(a.exclude_unconfirmed, encoding='utf-8-sig')) if r['status'].upper().startswith('UNCONFIRMED')}
+        print('excluded UNCONFIRMED products:', len(skip))
     per_note = collections.defaultdict(list)
     strength_rows = []
     for h, n in prods.items():
-        if n['status'] != 'ACTIVE' or n['productType'] not in FRAG:
+        if n['status'] != 'ACTIVE' or n['productType'] not in FRAG or h in skip:
             continue
         layers = {L: [x for x in (norm(val(n, '%s%d' % (L[0], i))) for i in range(1, 7)) if x] for L in ('top', 'heart', 'base')}
         try:
