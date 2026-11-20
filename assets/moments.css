@@ -1430,8 +1430,13 @@ html:root {
 }
 
 /* (a) header divider, always visible: 1px brand purple (was #E6DDE3, read as a pink/red line on phones) */
+/* owner 2026-11-20: one thin line in the brand purple. Drawn on the header rows (inset), because the opaque row paints over a border on #header-component. */
 html:root:root #header-component {
-  border-block-end: 1px solid var(--m-plum); /* owner 2026-11-20: one thin line in the brand purple (announcement bar / headings) */
+  border-block-end: 0;
+}
+
+html:root:root #header-component .header__row--top {
+  box-shadow: inset 0 -1px 0 var(--m-plum);
 }
 
 /* (b) soft shadow only once the page has scrolled (Horizon sets data-sticky-state="active" then) */
