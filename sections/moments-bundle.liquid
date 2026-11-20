@@ -193,6 +193,7 @@
     list-style: none;
     overflow-x: auto;
     scroll-snap-type: x proximity;
+    scroll-padding-inline: var(--m-gutter, 16px);
     scrollbar-width: thin;
   }
 
@@ -368,24 +369,37 @@
     gap: 12px;
   }
 
+  /* one calm row that scrolls sideways (was a wrapped stack of big pink pills) */
   .m-bundle__chips {
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     gap: 8px;
+    overflow-x: auto;
+    margin-inline: calc(var(--m-gutter, 16px) * -1);
+    padding-inline: var(--m-gutter, 16px);
+    padding-block: 2px;
+    scrollbar-width: none;
+    scroll-snap-type: x proximity;
+    scroll-padding-inline: var(--m-gutter, 16px);
   }
+
+  .m-bundle__chips::-webkit-scrollbar { display: none; }
 
   .m-chip {
     display: inline-flex;
     align-items: center;
-    gap: 8px;
-    min-block-size: 44px;
-    padding-inline: 16px;
-    border: 1px solid var(--m-rule-quiet);
+    gap: 6px;
+    flex: none;
+    scroll-snap-align: start;
+    white-space: nowrap;
+    min-block-size: 40px;
+    padding-inline: 14px;
+    border: 1px solid rgb(59 30 58 / 0.22);
     border-radius: 9999px;
     background: transparent;
     color: var(--m-text);
     font: inherit;
-    font-size: 0.9375rem;
+    font-size: 0.875rem;
     cursor: pointer;
   }
 
@@ -404,9 +418,9 @@
 
   .m-bundle__search input {
     inline-size: 100%;
-    min-block-size: 48px;
-    padding-inline: 20px;
-    border: 1px solid var(--m-rule-quiet);
+    min-block-size: 44px;
+    padding-inline: 18px;
+    border: 1px solid rgb(59 30 58 / 0.22);
     border-radius: 9999px;
     background: var(--m-surface-raised);
     color: inherit;
