@@ -41,7 +41,7 @@
     <span>{{ 'tabbar.home' | t }}</span>
   </a>
   <a class="m-tabbar__tab" href="{{ moments_url }}"{% if active == 'moments' %} aria-current="page"{% endif %}>
-    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3c.6 4.4 2.6 6.4 7 7-4.4.6-6.4 2.6-7 7-.6-4.4-2.6-6.4-7-7 4.4-.6 6.4-2.6 7-7z"/><path d="M12 19.5v1.5M12 1.5V3" /></svg>
+    <span class="m-tabbar__mark">{{ 'moments-mark.svg' | inline_asset_content }}</span>
     <span>{{ 'tabbar.moments' | t }}</span>
   </a>
   <a class="m-tabbar__tab" href="{{ bundle_url }}"{% if active == 'bundle' %} aria-current="page"{% endif %}>
@@ -157,6 +157,21 @@
       block-size: 3px;
       border-radius: 0 0 3px 3px;
       background: #E68BA2;
+    }
+
+    /* The MOMENTS mark (assets/moments-mark.svg, the brand kit's small icon): a filled shape, so it fills instead of stroking. */
+    .m-tabbar__mark {
+      display: grid;
+      place-items: center;
+      inline-size: 24px;
+      block-size: 24px;
+    }
+
+    .m-tabbar__tab .m-tabbar__mark svg {
+      inline-size: 24px;
+      block-size: 24px;
+      fill: currentcolor;
+      stroke: none;
     }
 
     .m-tabbar__icon {
