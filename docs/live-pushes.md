@@ -179,3 +179,8 @@ Store data: smart collection "Bundle perfumes" (bundle-perfumes, product type Pe
 Theme: sections/moments-bundle.liquid, snippets/product-card.liquid, locales en/ar, templates/page.bundle.json (pushed after live = HEAD).
 Test checkouts (Egypt address, stopped before payment): 2 bottles 2,400 -> 2,518; 2,950 -> 3,068; 3,025 -> 3,025; 3 bottles 3,650 -> 3,285; 3 bottles + incense 4,200 -> 3,835 (incense full price); 3 bottles 3,198 -> 2,996.20 (2,878.20 after 10% is under 3,000, so delivery is charged).
 Rollback: deactivate the two automatic discounts in admin; `git show <this commit>^:<file>` for the theme files and push.
+
+### 2026-11-20 phone tab bar; bundle page delivery hint after discount (live; owner: "push the tab bar")
+Pushed: snippets/moments-tabbar.liquid, layout/theme.liquid, locales en/ar (tab bar: Home, Moments, Bundle, Cart with live count opening the drawer, Account; phones only; sticky add-to-cart and bundle bar sit above it). Then sections/moments-bundle.liquid: the free-delivery hint uses the total after the 10% (owner: keep 3,000 counted after discount).
+Checks: 390x844 live (count 1, drawer opens); cart bar at 3,198 bundle says "Add LE 121.80 more" (cart total 2,878.20) and checkout charges 118; at 3,650 "You have free shipping" and checkout free; bundle page hint "Add LE 121.80 more" for the same bundle.
+Rollback: `git show 887ca00^:<file>` for the tab bar files, `git show <bundle hint commit>^:sections/moments-bundle.liquid`, and push.
