@@ -190,7 +190,12 @@
 
                       {%- for property in item.properties -%}
                         {%- assign property_first_char = property.first | slice: 0 -%}
-                        {%- if property.last != blank and property_first_char != '_' -%}
+                        {%- assign property_is_bundle_id = false -%}
+                        {%- if property.first == 'Bundle' and property.last contains 'MOMENTS bundle' -%}
+                          {%- comment -%}Easy Bundles' internal bundle id ("MOMENTS bundle JWXLJD"): not for customers (owner 2026-11-20).{%- endcomment -%}
+                          {%- assign property_is_bundle_id = true -%}
+                        {%- endif -%}
+                        {%- if property.last != blank and property_first_char != '_' and property_is_bundle_id == false -%}
                           <div class="cart-items__properties">
                             <dt>{{ property.first }}:</dt>
                             <dd>

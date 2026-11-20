@@ -90,7 +90,7 @@
           {%- assign lc = l.iso_code | split: '-' | first -%}
           {%- assign row_flag = 'flag-gb.svg' -%}
           {%- if lc == 'ar' -%}{%- assign row_flag = 'flag-eg.svg' -%}{%- endif -%}
-          <button class="m-langsheet__row" type="submit" name="language_code" value="{{ l.iso_code }}" lang="{{ l.iso_code }}"{% if l.iso_code == localization.language.iso_code %} aria-current="true"{% endif %}>
+          <button class="m-langsheet__row" type="submit" name="language_code" value="{{ l.iso_code }}" lang="{{ l.iso_code }}" dir="{% if lc == 'ar' %}rtl{% else %}ltr{% endif %}"{% if l.iso_code == localization.language.iso_code %} aria-current="true"{% endif %}>
             <img src="{{ row_flag | asset_url }}" alt="" width="40" height="40" loading="lazy" decoding="async">
             <span class="m-langsheet__name">{{ l.endonym_name }}</span>
           </button>
@@ -252,7 +252,21 @@
 
     .m-langsheet__head { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-block-end: 8px; }
     .m-langsheet__title { margin: 0; font-size: 1.375rem; line-height: 1.2; }
-    .m-langsheet__close { display: grid; place-items: center; inline-size: 44px; block-size: 44px; border: 0; background: none; color: inherit; cursor: pointer; }
+    .m-langsheet__close {
+      display: grid;
+      place-items: center;
+      flex: none;
+      inline-size: 44px;
+      block-size: 44px;
+      padding: 0;
+      -webkit-appearance: none;
+      appearance: none;
+      border: 1px solid rgb(59 30 58 / 0.2);
+      border-radius: 14px;
+      background: transparent;
+      color: inherit;
+      cursor: pointer;
+    }
     .m-langsheet__list { display: grid; gap: 10px; margin-block-start: 12px; }
 
     .m-langsheet__row {
@@ -269,6 +283,8 @@
       font: inherit;
       font-size: 1.0625rem;
       text-align: start;
+      -webkit-appearance: none;
+      appearance: none;
       cursor: pointer;
     }
 
