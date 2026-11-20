@@ -373,4 +373,47 @@
     let tries = 0;
     const t = setInterval(() => { sync(); if (watch() || ++tries > 20) clearInterval(t); }, 400);
   })();
+
+  // Wishlist Guru shows its popup in English only (one language per app). On Arabic pages we swap its fixed texts for Arabic here, in the theme.
+  // Only exact known strings are replaced (case-insensitive); the app's settings are not touched. Unknown strings stay English.
+  (() => {
+    if (document.documentElement.lang !== 'ar') return;
+    const AR = {
+      'your wishlist': 'قائمة مفضلتك',
+      'wishlist is not saved permanently yet. please': 'قائمتك غير محفوظة بشكل دائم بعد. يرجى',
+      'login': 'تسجيل الدخول',
+      'or': 'أو',
+      'create account': 'إنشاء حساب',
+      'clear wishlist': 'مسح القائمة',
+      'view as:': 'عرض كـ:',
+      'share': 'مشاركة',
+      'your wishlist is empty': 'قائمة مفضلتك فارغة',
+      'continue shopping': 'تابع التسوق',
+      'view cart': 'عرض السلة',
+      'powered by': 'بدعم من',
+      'search here': 'ابحث هنا'
+    };
+    const swap = (root) => {
+      const w = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
+      let n;
+      while ((n = w.nextNode())) {
+        const t = n.nodeValue.replace(/\s+/g, ' ').trim();
+        const a = AR[t.toLowerCase()];
+        if (a && a !== t) n.nodeValue = n.nodeValue.replace(t, a);
+      }
+      root.querySelectorAll('input[placeholder]').forEach((i) => {
+        const a = AR[i.placeholder.trim().toLowerCase()];
+        if (a && a !== i.placeholder) i.placeholder = a;
+      });
+    };
+    const watch = () => {
+      const m = document.getElementById('wg-myModal');
+      if (!m) return false;
+      swap(m);
+      new MutationObserver(() => swap(m)).observe(m, { childList: true, subtree: true, characterData: true });
+      return true;
+    };
+    let tries = 0;
+    const t = setInterval(() => { if (watch() || ++tries > 40) clearInterval(t); }, 500);
+  })();
 {% endjavascript %}

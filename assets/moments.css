@@ -1471,3 +1471,20 @@ html:root:root product-card .card-gallery {
 html[dir='rtl'] .cart-title {
   text-align: start;
 }
+
+/* Wishlist Guru's heart on product cards: it sat on top of the "Save LE x" badge (badge spans most of the card). Move it below the badge,
+   keep it in the corner, and give it the card-button look (owner 2026-11-21). */
+.card-gallery .wf-wishlist-collection-icon {
+  inset-block-start: 50px !important;
+}
+
+/* Wishlist Guru popup in Arabic: right-to-left, Arabic font (the text is swapped by locale in snippets/header-actions.liquid). */
+html[dir='rtl'] #wg-myModal,
+html[dir='rtl'] #wg-myModal * {
+  font-family: var(--font-body--family);
+}
+
+html[dir='rtl'] #wg-myModal {
+  direction: rtl;
+  text-align: start;
+}
