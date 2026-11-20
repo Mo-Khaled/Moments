@@ -168,3 +168,8 @@ Rollback: `git show 6d7cdad^:<file>` for each file above and push.
 The published theme had changed to "MOMENTS - Hero fix" #162384347327 (published outside the repo). Synced it into the repo first (b2852dc: 18 changed and 2 new files; where both sides changed, the live text was kept and the headline full stops re-applied); shopify.theme.toml now targets it.
 Pushed 27 files (assets moments.css, rtl.css; locales en/ar; 7 sections; snippets brand-fonts, moments-search-chips; 14 templates). Checks: EN and AR, desktop 1440 and phone 390 on momentseg.com (screenshots in "Claude outputs/2026-11-20-fonts-live"); smoke PASSED.
 Rollback: push the same files from b2852dc^ merged with the live versions in the Hero fix theme (or `git show 6d7cdad:<file>` for files the sync did not touch).
+
+### 2026-11-20 hero photo layout, Arabic signup, sharper Winter photo (live; owner: "push the hero and signup fixes live now")
+Pushed: blocks/email-signup.liquid (button at the reading-direction end, text-align start), sections/moments-hero.liquid (split photo hero: photo on the end side, copy on its reading side, Arabic right-aligned on the right; plum field blends into the photo; setting "Product position in the photo" aims the crop), templates/index.json (Winter desktop photo Midnight_Serpent_Perfume_2880.jpg: Lanczos 2x + sharpen of the 1672 px original). A first version that moved Arabic copy to the left was live for a few minutes and rejected by the owner.
+Store data: Arabic label "سجّل الآن" for the signup button on index, index.hero-box, about-us, about, skin-body (translationsRegister).
+Checks: EN/AR desktop 1440 and phone 390 (Claude outputs/2026-11-20-hero-signup-live). Rollback: `git show 8335516^:<file>` and push.
