@@ -68,24 +68,35 @@
         endif
       endfor
     -%}
-    {%- form 'localization', class: 'm-tabbar__form', return_to: request.path -%}
-      <button
-        class="m-tabbar__tab"
-        type="submit"
-        name="language_code"
-        value="{{ other_code | default: other }}"
-        aria-label="{% if cur == 'ar' %}اللغة: عربي. التبديل إلى English{% else %}Language: English. Switch to العربية{% endif %}"
-      >
-        <span class="m-tabbar__flag" aria-hidden="true">
-          {%- if cur == 'ar' -%}
-            <img src="{{ 'flag-eg.svg' | asset_url }}" alt="" width="24" height="24" loading="eager" decoding="async">
-          {%- else -%}
-            <img src="{{ 'flag-gb.svg' | asset_url }}" alt="" width="24" height="24" loading="eager" decoding="async">
-          {%- endif -%}
-        </span>
-        <span>{% if cur == 'ar' %}عربي{% else %}English{% endif %}</span>
-      </button>
-    {%- endform -%}
+    {%- assign cur_flag = 'flag-gb.svg' -%}
+    {%- if cur == 'ar' -%}{%- assign cur_flag = 'flag-eg.svg' -%}{%- endif -%}
+    <button class="m-tabbar__tab" type="button" data-m-lang-open aria-haspopup="dialog"
+      aria-label="{% if cur == 'ar' %}اللغة: عربي. اختيار اللغة{% else %}Language: English. Choose language{% endif %}">
+      <span class="m-tabbar__flag" aria-hidden="true">
+        <img src="{{ cur_flag | asset_url }}" alt="" width="24" height="24" loading="eager" decoding="async">
+      </span>
+      <span>{% if cur == 'ar' %}عربي{% else %}English{% endif %}</span>
+    </button>
+    <dialog class="m-langsheet" data-m-lang-sheet aria-labelledby="m-langsheet-title">
+      <div class="m-langsheet__grip" aria-hidden="true"></div>
+      <div class="m-langsheet__head">
+        <h2 class="m-langsheet__title" id="m-langsheet-title">{% if cur == 'ar' %}اختر اللغة{% else %}Choose your language{% endif %}</h2>
+        <button class="m-langsheet__close" type="button" data-m-lang-close aria-label="{% if cur == 'ar' %}إغلاق{% else %}Close{% endif %}">
+          <svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"><path d="M5 5l14 14M19 5L5 19" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        </button>
+      </div>
+      {%- form 'localization', class: 'm-langsheet__list', return_to: request.path -%}
+        {%- for l in localization.available_languages -%}
+          {%- assign lc = l.iso_code | split: '-' | first -%}
+          {%- assign row_flag = 'flag-gb.svg' -%}
+          {%- if lc == 'ar' -%}{%- assign row_flag = 'flag-eg.svg' -%}{%- endif -%}
+          <button class="m-langsheet__row" type="submit" name="language_code" value="{{ l.iso_code }}" lang="{{ l.iso_code }}"{% if l.iso_code == localization.language.iso_code %} aria-current="true"{% endif %}>
+            <img src="{{ row_flag | asset_url }}" alt="" width="40" height="40" loading="lazy" decoding="async">
+            <span class="m-langsheet__name">{{ l.endonym_name }}</span>
+          </button>
+        {%- endfor -%}
+      {%- endform -%}
+    </dialog>
   {%- endif -%}
   {%- if account_url -%}
     <a class="m-tabbar__tab" href="{{ account_url }}"{% if active == 'account' %} aria-current="page"{% endif %}>
@@ -99,6 +110,14 @@
   (() => {
     const bar = document.querySelector('[data-m-tabbar]');
     if (!bar) return;
+    // Language sheet (owner 2026-11-20): the language tab opens a bottom sheet with the language choices.
+    const lang = document.querySelector('[data-m-lang-sheet]');
+    const langOpen = bar.querySelector('[data-m-lang-open]');
+    if (lang && langOpen) {
+      langOpen.addEventListener('click', () => lang.showModal());
+      lang.querySelector('[data-m-lang-close]').addEventListener('click', () => lang.close());
+      lang.addEventListener('click', (e) => { if (e.target === lang) lang.close(); });
+    }
     const count = bar.querySelector('[data-m-tabbar-count]');
     if (!count) return; // the Cart tab was replaced by the language switch (2026-11-20)
     // Live count: the theme fires 'cart:update' with the new cart (or an item count) after every change.
@@ -206,6 +225,56 @@
       fill: currentcolor;
       stroke: none;
     }
+
+    .m-langsheet {
+      position: fixed;
+      inset: auto 0 0 0;
+      inline-size: 100%;
+      max-inline-size: none;
+      margin: 0;
+      padding: 8px 20px calc(28px + env(safe-area-inset-bottom));
+      border: 0;
+      border-radius: 24px 24px 0 0;
+      background: var(--m-pearl);
+      color: var(--m-plum);
+      box-shadow: 0 -8px 32px rgb(59 30 58 / 0.18);
+    }
+
+    .m-langsheet::backdrop { background: rgb(37 18 36 / 0.45); }
+
+    .m-langsheet__grip {
+      inline-size: 40px;
+      block-size: 4px;
+      margin: 4px auto 12px;
+      border-radius: 9999px;
+      background: rgb(59 30 58 / 0.2);
+    }
+
+    .m-langsheet__head { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-block-end: 8px; }
+    .m-langsheet__title { margin: 0; font-size: 1.375rem; line-height: 1.2; }
+    .m-langsheet__close { display: grid; place-items: center; inline-size: 44px; block-size: 44px; border: 0; background: none; color: inherit; cursor: pointer; }
+    .m-langsheet__list { display: grid; gap: 10px; margin-block-start: 12px; }
+
+    .m-langsheet__row {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      inline-size: 100%;
+      min-block-size: 64px;
+      padding-inline: 16px;
+      border: 1px solid rgb(59 30 58 / 0.2);
+      border-radius: 16px;
+      background: transparent;
+      color: inherit;
+      font: inherit;
+      font-size: 1.0625rem;
+      text-align: start;
+      cursor: pointer;
+    }
+
+    .m-langsheet__row img { inline-size: 40px; block-size: 40px; border-radius: 50%; object-fit: cover; box-shadow: 0 0 0 1px rgb(59 30 58 / 0.2); }
+    .m-langsheet__row[aria-current='true'] { border: 2px solid var(--m-plum); background: #F7F3F5; }
+    .m-langsheet__row:focus-visible, .m-langsheet__close:focus-visible { outline: 2px solid var(--m-plum); outline-offset: 2px; }
 
     .m-tabbar__form {
       display: contents;
