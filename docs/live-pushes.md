@@ -220,3 +220,9 @@ Live smoke: Notes template at /pages/about-us?view=notes (EN/AR, 390 + 1440): gr
 scripts/notes-publish.py --apply: note definition got the EN/AR text fields, 37 images uploaded to Files (first attempt hit a transient CLI error after some uploads, so a few images exist twice in Files), 37 entries ACTIVE, page /pages/notes created (template notes).
 Verified live: /pages/notes (37 tiles, EN/AR, 390 + 1440) and /pages/notes/<handle> (standalone note page). Undo: delete the page "Notes" and set the entries to DRAFT.
 Also live (0f2f6c6): real flag files, language bottom sheet, bundle chips row, product gallery dots. On staging only (61e4c9f): Arabic row RTL + rounded close button, Easy Bundles id hidden in cart lines.
+
+### 2026-11-21 pushes (owner: "push everything")
+1. Notes card (6faa2a2) + Arabic cart title (184b3e6): live, smoke OK (Notes card EN/AR 390 + 1440).
+2. Wishlist 6d5d9fb (+ earlier 1f16c68 one-heart header): card heart below the Save badge, Arabic popup swap by locale, RTL popup, /pages/wishlist opens the app list. Live smoke: one header heart, no floating heart, no app header icon, no overlap, no horizontal scroll (360/390/430 + 390 for home, product, Notes, wishlist; EN + AR). Not checked: 1440 collection pages (Shopify bot check page).
+3. Cart ea540cb: free-shipping box restyle, one type system, claims row, hidden bundle id (JWXLJD), Arabic discount line from locales (moments_cart.bundle_discount), drawer uses the theme threshold (3,000; live since 1f16c68). Cart pages NOT viewed (bot check, not bypassed). Add to cart via /cart/add.js OK; no Liquid errors on home/product EN+AR.
+Rollback: `git revert <commit>` or push the previous file versions (git show <commit>^:<file>).
