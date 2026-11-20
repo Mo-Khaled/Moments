@@ -1466,3 +1466,8 @@ html:root:root {
 html:root:root product-card .card-gallery {
   background: var(--m-card-backdrop);
 }
+
+/* Arabic cart: the title block was left-aligned (theme setting "left") so the title sat indented from the right edge; align it to the start side (owner 2026-11-21). */
+html[dir='rtl'] .cart-title {
+  text-align: start;
+}
