@@ -676,50 +676,42 @@
   }
   .m-slide--photo .m-slide__scrim { display: block; }
 
-  /* Photo slides on desktop (2026-11-20): the text sits on the side AWAY from the product, in both languages. The side is a physical
-     one (the photo is not mirrored in Arabic), so "start"/"end" are chosen per direction. Arabic keeps right-aligned text inside the
-     box. The photo keeps the product in frame at every width (object-position on the product's side) and the scrim darkens the text side. */
+  /* Photo slides on desktop (2026-11-20, v2): a split hero. The photo fills the END side (right in English, left in Arabic) and the
+     copy keeps its reading-start side (left in English, RIGHT in Arabic), so the text is never on the product and Arabic is never
+     pushed to the left. The photo is not mirrored (the bottle carries a brand name). The rest of the hero is a deep plum field that
+     melts into the photo through a soft edge, so it reads as one picture, not a box. "Product position in the photo" only aims the
+     crop (object-position) so the bottle stays in frame. Phones keep the stacked layout: photo on top, text under it. */
   @media screen and (min-width: 750px) {
-    .m-slide--photo[data-subject='right'] .m-slide__poster { object-position: 70% 50%; }
-    .m-slide--photo[data-subject='left'] .m-slide__poster { object-position: 30% 50%; }
-
-    /* text on the physical left (English already starts there) */
-    html[dir='rtl'] .m-slide--photo[data-subject='right'] .m-slide__copy {
-      justify-items: end;
+    .m-slide--photo {
+      background: #1d0f1c;
     }
 
-    html[dir='rtl'] .m-slide--photo[data-subject='right'] .m-slide__copy > * {
-      text-align: right;
+    .m-slide--photo .m-slide__media {
+      inset-inline-start: auto;
+      inline-size: 64%;
     }
 
-    /* text on the physical right */
-    html:not([dir='rtl']) .m-slide--photo[data-subject='left'] .m-slide__copy {
-      justify-items: end;
-      text-align: left;
+    .m-slide--photo[data-subject='right'] .m-slide__poster { object-position: 72% 50%; }
+    .m-slide--photo[data-subject='center'] .m-slide__poster { object-position: 50% 50%; }
+    .m-slide--photo[data-subject='left'] .m-slide__poster { object-position: 28% 50%; }
+
+    .m-slide--photo .m-slide__copy > * {
+      max-inline-size: min(100%, 30rem);
     }
 
-    /* centered product: text centered, the scrim is the bottom fade only */
-    .m-slide--photo[data-subject='center'] .m-slide__copy {
-      justify-items: center;
-      text-align: center;
-    }
-
-    .m-slide--photo[data-subject='right'] .m-slide__scrim,
-    html[dir='rtl'] .m-slide--photo[data-subject='right'] .m-slide__scrim {
+    /* One overlay over the whole slide: solid plum on the text side, running a little past the photo's edge (36% + 2%), then
+       fading into the photo. Drawing it on the slide, not on the photo box, means no photo edge can show as a line. The bottom
+       lift keeps the switcher readable. */
+    .m-slide--photo .m-slide__scrim {
       background:
-        linear-gradient(to top, rgb(37 18 36 / calc(var(--m-hero-scrim, 78%) + 8%)) 0%, rgb(37 18 36 / 0.3) 34%, rgb(37 18 36 / 0) 60%),
-        linear-gradient(to right, rgb(37 18 36 / 0.62), rgb(37 18 36 / 0) 58%);
+        linear-gradient(to top, rgb(29 15 28 / 0.55) 0%, rgb(29 15 28 / 0) 28%),
+        linear-gradient(to right, #1d0f1c 0%, #1d0f1c 38%, rgb(29 15 28 / 0.7) 46%, rgb(29 15 28 / 0) 64%);
     }
 
-    .m-slide--photo[data-subject='left'] .m-slide__scrim,
-    html[dir='rtl'] .m-slide--photo[data-subject='left'] .m-slide__scrim {
+    html[dir='rtl'] .m-slide--photo .m-slide__scrim {
       background:
-        linear-gradient(to top, rgb(37 18 36 / calc(var(--m-hero-scrim, 78%) + 8%)) 0%, rgb(37 18 36 / 0.3) 34%, rgb(37 18 36 / 0) 60%),
-        linear-gradient(to left, rgb(37 18 36 / 0.62), rgb(37 18 36 / 0) 58%);
-    }
-
-    .m-slide--photo[data-subject='center'] .m-slide__scrim {
-      background: linear-gradient(to top, rgb(37 18 36 / calc(var(--m-hero-scrim, 78%) + 8%)) 0%, rgb(37 18 36 / 0.4) 40%, rgb(37 18 36 / 0) 70%);
+        linear-gradient(to top, rgb(29 15 28 / 0.55) 0%, rgb(29 15 28 / 0) 28%),
+        linear-gradient(to left, #1d0f1c 0%, #1d0f1c 38%, rgb(29 15 28 / 0.7) 46%, rgb(29 15 28 / 0) 64%);
     }
   }
   .m-slide--photo .m-slide__copy, .m-slide--photo .m-slide__title, .m-slide--photo .m-slide__text, .m-slide--photo .m-slide__tag { color: #fff; }
@@ -1064,7 +1056,7 @@
           "type": "select",
           "id": "subject_side",
           "label": "Product position in the photo",
-          "info": "Desktop: the text goes on the other side, in English and in Arabic, so it never covers the product. Phones put the text under the photo.",
+          "info": "Aims the crop so the product stays in frame. Desktop: the photo sits opposite the text (right in English, left in Arabic). Phones: the photo is above the text.",
           "options": [
             { "value": "right", "label": "Right" },
             { "value": "center", "label": "Center" },
