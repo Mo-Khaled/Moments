@@ -15,6 +15,30 @@
     {% render 'account-drawer' %}
   {% endif %}
 
+  {%- comment -%}
+    Wishlist heart (2026-11-20, owner): next to the cart, phone and desktop. Signed-out visitors go to sign in first and come
+    back to the wishlist (new customer accounts: /account/login?return_url= becomes return_to). The wishlist page itself is
+    /pages/wishlist (Zooomy template; the app is not active, see PROGRESS.md).
+  {%- endcomment -%}
+  {%- liquid
+    assign wl_url = routes.root_url | append: '/pages/wishlist' | replace: '//', '/'
+    if customer
+      assign wl_href = wl_url
+    else
+      assign login_base = routes.root_url | append: '/account/login' | replace: '//', '/'
+      assign wl_href = login_base | append: '?return_url=' | append: wl_url
+    endif
+  -%}
+  <a
+    href="{{ wl_href }}"
+    class="header-actions__action m-wishlist-action"
+    aria-label="{% if request.locale.iso_code == 'ar' %}المفضلة{% else %}Wishlist{% endif %}"
+  >
+    <span class="svg-wrapper" aria-hidden="true">
+      <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg>
+    </span>
+  </a>
+
   {% if settings.cart_type == 'drawer' and template.name != 'cart' %}
     {% render 'cart-drawer' %}
   {% else %}
@@ -212,6 +236,20 @@
     cursor: pointer;
     display: flex;
     justify-content: center;
+  }
+
+  /* Phone: no profile icon in the header (it is in the bottom tab bar); the wishlist heart takes its place next to the cart. */
+  @media screen and (max-width: 749px) {
+    header-actions .account-drawer,
+    header-actions account-drawer-component,
+    header-actions [class*='account-drawer'] {
+      display: none;
+    }
+  }
+
+  .m-wishlist-action svg {
+    inline-size: 22px;
+    block-size: 22px;
   }
 
   .header-actions__action .svg-wrapper {

@@ -915,12 +915,24 @@ html:root {
   }
 }
 
-main + .shopify-section-group-footer-group::before {
+/* Footer step (owner 2026-11-20): NO fade. One solid middle tone (the footer plum lightened with white) sits between the white page and
+   the plum footer, so the page never jumps from white to plum in one edge. Where the last section of the page is the email signup,
+   that section IS the middle band (full width, tinted). On pages without a signup, a plain tinted strip does the same job. */
+html:root {
+  --m-step: #E9E1E7;
+  --m-step-strip: 40px;
+}
+
+.shopify-section:has(email-signup-block) > .section-background,
+.shopify-section:has(email-signup-block) > .section {
+  background-color: var(--m-step) !important;
+}
+
+main:not(:has(> .shopify-section:last-child email-signup-block)) + .shopify-section-group-footer-group::before {
   content: '';
   display: block;
-  block-size: var(--blend);
-  background: linear-gradient(var(--s-pearl), var(--s-plum));
-  background: linear-gradient(in oklab, var(--s-pearl), var(--s-plum));
+  block-size: var(--m-step-strip);
+  background: var(--m-step);
 }
 
 @media (forced-colors: active) {
@@ -1417,9 +1429,9 @@ html:root {
   }
 }
 
-/* (a) header divider, always visible */
+/* (a) header divider, always visible: 1px brand purple (was #E6DDE3, read as a pink/red line on phones) */
 html:root:root #header-component {
-  border-block-end: 1px solid var(--m-hairline);
+  border-block-end: 1px solid var(--m-plum); /* owner 2026-11-20: one thin line in the brand purple (announcement bar / headings) */
 }
 
 /* (b) soft shadow only once the page has scrolled (Horizon sets data-sticky-state="active" then) */
