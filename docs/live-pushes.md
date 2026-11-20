@@ -196,3 +196,12 @@ Pushed: sections/moments-hero.liquid (full-width photo, bottle centred, copy-sid
 (Winter poster hero-winter-desktop-3840.jpg, subject_side center). Merge 46aeec3. Live copies equalled the base before.
 Photo: Higgsfield 21:9 (2688x1152) -> Real-ESRGAN x4plus -> Lanczos 3840x1646, JPG q92. Screenshots: D:\MOMENTS_Content\06_Website\review\2026-11-20-hero-live\.
 Rollback: `git show 46aeec3^1:<file>` and push.
+
+### 2026-11-20 header + wishlist + language tab + footer step (live; owner: "push" for both)
+Pushed: assets/moments.css (purple header divider, footer step band), snippets/header-actions.liquid (wishlist heart, phone: no profile icon),
+snippets/moments-tabbar.liquid (Cart tab -> language switch with round flag), sections/moments-wishlist.liquid + templates/page.zooomywishlist.json
+("Your wishlist is coming soon", EN/AR). Fast-forward of main to 6f86b58 (staging-ui-2). Live copies equalled the base before.
+Smoke: EN/AR home, product, Moments, wishlist, cart at 390 and 1440: no horizontal scroll; flag switches language on the same page (EN<->AR).
+Known, pre-existing: in Arabic the header is not sticky (rtl.css overflow-x:hidden); fixed in the Notes push (overflow-x: clip).
+Screenshots: D:\MOMENTS_Content\06_Website\review\push\live-header-*.png.
+Rollback: `git revert 6f86b58` range 483115e..6f86b58, or `git show 483115e:<file>` and push.
