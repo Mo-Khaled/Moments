@@ -1439,3 +1439,13 @@ main:has(.m-hero) > .shopify-section > :is(.m-moments, .m-gift, .m-story, .secti
 main:has(.m-hero) > .shopify-section + .shopify-section:not(:has(> .m-brands)):not(.shopify-section:has(> .m-brands) + .shopify-section) {
   border-block-start: 1px solid var(--m-hairline);
 }
+
+/* Product image area (owner choice 2026-11-20, option 2): every product card's photo sits on one soft plum-tinted panel
+   (#F7F3F5), so photos shot on white and on light grey look the same. The photo is still multiplied onto it (rule above). */
+html:root:root {
+  --m-card-backdrop: #F7F3F5;
+}
+
+html:root:root product-card .card-gallery {
+  background: var(--m-card-backdrop);
+}
