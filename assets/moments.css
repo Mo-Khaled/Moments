@@ -59,12 +59,14 @@ html:root {
   --m-card-name-rest: var(--m-text-muted);
   --m-card-meta: var(--m-text-muted);
 
-  /* Type: one face per script for the whole site (owner decision 2026-10-30). Marcellus for Latin; it has no Arabic letters, so the
-     browser takes Arabic from El Messiri (snippets/brand-fonts.liquid), then Readex Pro's Arabic file. */
-  --m-font: 'Marcellus', 'El Messiri Arabic', 'Readex Pro', Georgia, serif;
-  --font-body--family: var(--m-font);
-  --font-subheading--family: var(--m-font);
-  --font-accent--family: var(--m-font);
+  /* Type, per the 2026 brand guide (2026-11-20): Marcellus for headlines, Readex Pro for body and UI, El Messiri for Arabic.
+     El Messiri comes first in both stacks: its file covers Arabic letters only (unicode-range), so Latin falls through to
+     Marcellus or Readex Pro and Arabic never uses Readex Pro's Arabic cut. */
+  --m-font: 'Marcellus', 'El Messiri Arabic', Georgia, serif;
+  --m-font-body: 'El Messiri Arabic', 'Readex Pro', system-ui, sans-serif;
+  --font-body--family: var(--m-font-body);
+  --font-subheading--family: var(--m-font-body);
+  --font-accent--family: var(--m-font-body);
   --font-heading--family: var(--m-font);
   --font-heading--weight: 400;
 
@@ -123,13 +125,13 @@ html[lang="ar"] body :is(h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6) {
   line-height: 1.35;
 }
 
-/* English headings follow the brand guide: Marcellus, uppercase, 0.04em letter-spacing (Arabic: no case, no spacing, above).
-   Specific enough to win over each section's own title rule; sizes come from --m-h1 and --m-h2 in each section. */
+/* Headings follow the 2026 brand guide: Marcellus, one weight, sentence case as written, no tracking, ending with a full stop
+   (in the copy). Specific enough to win over each section's own title rule; sizes come from --m-h1 and --m-h2 in each section. */
 html:not([lang="ar"]) :is(h1, h2, .h1, .h2, [role="heading"]:is([aria-level="1"], [aria-level="2"])) {
   font-family: var(--font-heading--family);
   font-weight: var(--font-heading--weight);
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
+  text-transform: none;
+  letter-spacing: 0;
   line-height: 1.15;
 }
 

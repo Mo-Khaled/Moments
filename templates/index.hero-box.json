@@ -1,13 +1,22 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "hero_box": {
       "type": "hero-gift-box",
       "settings": {
         "animate": true,
-        "box_tone": "plum",
-        "logo_tone": "white",
+        "show_on_phones": false,
         "model_3d": true,
-        "show_on_phones": false
+        "box_tone": "plum",
+        "logo_tone": "white"
       }
     },
     "moments_hero": {
@@ -207,7 +216,7 @@
         "tile_night": {
           "type": "moment",
           "settings": {
-            "collection": "daily-moment",
+            "collection": "winter-moment",
             "mark": "daily"
           }
         },
@@ -497,7 +506,7 @@
         "row_night": {
           "type": "moment",
           "settings": {
-            "collection": "daily-moment",
+            "collection": "winter-moment",
             "mark": "daily"
           }
         },
@@ -556,7 +565,7 @@
           "type": "text",
           "name": "t:names.heading",
           "settings": {
-            "text": "<h2>Skin Moments - Coming Soon</h2>",
+            "text": "<h2>Skin Moments, coming soon.</h2>",
             "width": "100%",
             "max_width": "normal",
             "alignment": "center",

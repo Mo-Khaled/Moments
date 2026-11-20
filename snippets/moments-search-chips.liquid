@@ -22,7 +22,7 @@
 -%}
 
 <div class="m-chips">
-  <h4 class="predictive-search-results__title m-chips__title">{{ 'homepage.moments.heading' | t }}</h4>
+  <h4 class="predictive-search-results__title m-chips__title">{{ 'homepage.moments.heading' | t | remove_last: '.' }}</h4>
   <ul class="m-chips__list">
     {%- for handle in chip_handles -%}
       {%- assign chip_collection = collections[handle] -%}

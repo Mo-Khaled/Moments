@@ -572,7 +572,7 @@
           "type": "text",
           "name": "t:names.header",
           "settings": {
-            "text": "<h2>Related products</h2>",
+            "text": "<h2>Related products.</h2>",
             "width": "fit-content",
             "max_width": "normal",
             "alignment": "left",

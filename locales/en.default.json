@@ -248,7 +248,7 @@
     "unavailable": "Unavailable",
     "use_fewer_filters_html": "Try using fewer filters, or <a class=\"{{ class }}\" href=\"{{ link }}\">clear all filters</a>.",
     "view_more_details": "View more details",
-    "your_cart_is_empty": "Your cart is empty",
+    "your_cart_is_empty": "Your cart is empty.",
     "product_count": "Product count",
     "errors": "Errors",
     "wrong_password": "Wrong password",
@@ -477,35 +477,35 @@
       "shop_moment": "Shop {{ moment }}",
       "slides": {
         "night": {
-          "headline": "Made for the evening out",
+          "headline": "Made for the evening out.",
           "text": "Deep, warm and unmistakable. For dinners, outings and late nights."
         },
         "gift": {
-          "headline": "Give a moment",
+          "headline": "Give a moment.",
           "text": "Fragrance sets, ready to hand over."
         },
         "allday": {
-          "headline": "Bright from first light",
+          "headline": "Bright from first light.",
           "text": "Easy fragrance that keeps up with your whole day."
         },
         "daily": {
-          "headline": "Ready for the office",
+          "headline": "Ready for the office.",
           "text": "Clean and polished, close to the skin. Right for work and university."
         },
         "fresh": {
-          "headline": "Cool in the summer heat",
+          "headline": "Cool in the summer heat.",
           "text": "Fresh, light and bright. Made for hot days that stay fresh."
         },
         "love": {
-          "headline": "Set for date night",
+          "headline": "Set for date night.",
           "text": "Soft, warm and a little bold. For the two of you."
         },
         "occasions": {
-          "headline": "For weddings and Eid",
+          "headline": "For weddings and Eid.",
           "text": "Rich, long-lasting and festive. For the days everyone remembers."
         },
         "winter": {
-          "headline": "Warm for winter nights",
+          "headline": "Warm for winter nights.",
           "text": "Oud, amber and spice that stay with you on cool evenings."
         }
       }
@@ -521,13 +521,13 @@
       "returns_text": "Read the full policy before you order."
     },
     "moments": {
-      "heading": "Shop by Moment",
+      "heading": "Shop by Moment.",
       "text": "Six ways to wear a fragrance. Start with the one you are dressing for.",
       "count": "{{ count }} products",
       "total": "{{ count }} moments"
     },
     "story": {
-      "heading": "Fragrance, sorted by the moment",
+      "heading": "Fragrance, sorted by the moment.",
       "text": "MOMENTS is a fragrance store in Egypt. We sort every bottle by when you will wear it, so you can start from the moment you are dressing for instead of a brand name.",
       "link": "Explore the moments",
       "todo": "TODO: add the real brand story, founding year and team photograph. Only confirmed facts."
@@ -539,7 +539,7 @@
       "label": "Our brands"
     },
     "gift": {
-      "heading": "Give a moment",
+      "heading": "Give a moment.",
       "text": "Fragrance sets, ready to hand over. Pick the moment, we have the scent.",
       "cta": "Shop gifts"
     },
@@ -752,7 +752,7 @@
     "pause": "Pause video",
     "play_loop": "Play video",
     "inside_todo": "TODO: headline for the inside look, once there is real footage.",
-    "brands": "Original bottles from {{ count }} fragrance houses",
+    "brands": "Original bottles from {{ count }} fragrance houses.",
     "explore_light": "Explore our",
     "explore_accent": "fragrances.",
     "tile": "Shop by moment.",
@@ -793,7 +793,7 @@
     "group_type": "Strength",
     "group_size": "Bottle size",
     "show_all_notes": "Show all notes",
-    "explain_title": "Understanding this scent",
+    "explain_title": "Understanding this scent.",
     "explain_intro": "New to perfume? Here is what this one smells like, in plain words.",
     "pyramid_title": "How a perfume unfolds",
     "pyramid_top": "First minutes: the light notes you smell first. They fade within about 15 to 30 minutes.",

@@ -15,7 +15,7 @@
         "tile_night": {
           "type": "moment",
           "settings": {
-            "collection": "daily-moment",
+            "collection": "winter-moment",
             "mark": "daily"
           }
         },
@@ -64,7 +64,7 @@
         "tile_love"
       ],
       "settings": {
-        "heading": "Find your moment",
+        "heading": "Find your moment.",
         "heading_level": "h1",
         "show_count": true
       }

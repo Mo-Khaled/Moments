@@ -1,6 +1,6 @@
 {%- doc -%}
-  Self-hosted fonts. The site uses one face per script (2026-10-30): Marcellus for Latin, which comes from Shopify's font system
-  through the theme font settings, and El Messiri for Arabic (assets/el-messiri-arabic.woff2: an Arabic-only cut of the variable
+  Self-hosted fonts, per the 2026 brand guide (2026-11-20): Marcellus for headlines (Shopify's font system, theme font settings),
+  Readex Pro for body and UI (assets/readex-pro-latin.woff2, variable 300 to 600), and El Messiri for Arabic (assets/el-messiri-arabic.woff2: an Arabic-only cut of the variable
   font, weights 400 to 700, SIL Open Font License 1.1, by Mohamed Gaber). It stands in for Mirsal, which the owner asked for but
   which has no public source; to switch, replace the file and the family name in --m-font (assets/moments.css).
   Readex Pro's Arabic file stays as the last fallback. unicode-range makes the browser fetch a file only when a page uses
@@ -10,11 +10,21 @@
   {% render 'brand-fonts' %}
 {%- enddoc -%}
 
+{{ 'readex-pro-latin.woff2' | asset_url | preload_tag: as: 'font', type: 'font/woff2', crossorigin: 'anonymous' }}
 {%- if request.locale.iso_code == 'ar' -%}
   {{ 'el-messiri-arabic.woff2' | asset_url | preload_tag: as: 'font', type: 'font/woff2', crossorigin: 'anonymous' }}
 {%- endif -%}
 
 {% style %}
+  @font-face {
+    font-family: 'Readex Pro';
+    font-style: normal;
+    font-weight: 300 600;
+    font-display: swap;
+    src: url('{{ 'readex-pro-latin.woff2' | asset_url }}') format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  }
+
   @font-face {
     font-family: 'El Messiri Arabic';
     font-style: normal;
