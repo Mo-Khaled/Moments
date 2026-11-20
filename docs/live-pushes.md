@@ -215,3 +215,8 @@ Main 18db353 (merge of notes-page). Pushed: sections/moments-notes.liquid, templ
 snippets/notes-image-map.liquid, assets/rtl.css (overflow-x: clip, Arabic sticky fixed), 74 assets/note-*.webp, templates/metaobject/note.json, sections/moments-note-page.liquid, snippets/moments-tabbar.liquid (larger eagle).
 Live smoke: Notes template at /pages/about-us?view=notes (EN/AR, 390 + 1440): grid, sheet opens, header sticky in Arabic, no horizontal scroll; home/product/Moments/wishlist/cart OK.
 /pages/notes itself does not exist until scripts/notes-publish.py --apply runs (waiting on the owner's CLI approval). Rollback: `git show 972391b:<file>` and push.
+
+### 2026-11-20 Notes published (data, not theme)
+scripts/notes-publish.py --apply: note definition got the EN/AR text fields, 37 images uploaded to Files (first attempt hit a transient CLI error after some uploads, so a few images exist twice in Files), 37 entries ACTIVE, page /pages/notes created (template notes).
+Verified live: /pages/notes (37 tiles, EN/AR, 390 + 1440) and /pages/notes/<handle> (standalone note page). Undo: delete the page "Notes" and set the entries to DRAFT.
+Also live (0f2f6c6): real flag files, language bottom sheet, bundle chips row, product gallery dots. On staging only (61e4c9f): Arabic row RTL + rounded close button, Easy Bundles id hidden in cart lines.
