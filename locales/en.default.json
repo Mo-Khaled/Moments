@@ -355,15 +355,15 @@
     }
   },
   "moments": {
-    "night": "Evening out",
-    "gift": "Gift",
-    "all_day": "All day",
+    "night": "Night Moments",
+    "gift": "Gift Moments",
+    "all_day": "Self-Care Moments",
     "daily": "Office",
-    "fresh": "Summer heat",
-    "love": "Date night",
+    "fresh": "Fresh Moments",
+    "love": "Love Moments",
     "occasions": "Weddings & Eid",
-    "winter": "Winter nights",
-    "self_care": "Self-care"
+    "winter": "Winter Moments",
+    "self_care": "Self-Care Moments"
   },
   "hero_box": {
     "label": "Welcome",
@@ -485,8 +485,8 @@
           "text": "Fragrance sets, ready to hand over."
         },
         "allday": {
-          "headline": "Bright from first light.",
-          "text": "Easy fragrance that keeps up with your whole day."
+          "headline": "A moment just for you.",
+          "text": "Skincare, body care and fragrance for taking care of yourself."
         },
         "daily": {
           "headline": "Ready for the office.",
@@ -505,8 +505,8 @@
           "text": "Rich, long-lasting and festive. For the days everyone remembers."
         },
         "winter": {
-          "headline": "Warm for winter nights.",
-          "text": "Oud, amber and spice that stay with you on cool evenings."
+          "headline": "Warm for winter.",
+          "text": "Oud, amber and spice that stay with you through cold days and nights."
         }
       }
     },
@@ -555,7 +555,7 @@
   },
   "about": {
     "hero": {
-      "headline": "Fragrance for every moment",
+      "headline": "Fragrance for every moment.",
       "text": "MOMENTS is a fragrance store in Egypt. We sort every bottle by when you will wear it.",
       "play": "Play our story",
       "play_close": "Close video"

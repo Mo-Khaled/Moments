@@ -9,6 +9,321 @@
  */
 {
   "sections": {
+    "moments_hero": {
+      "type": "moments-hero",
+      "blocks": {
+        "slide_allday": {
+          "type": "slide",
+          "settings": {
+            "moment": "winter",
+            "from_hour": 5,
+            "to_hour": 18,
+            "poster": "shopify://shop_images/Midnight_Serpent_Perfume.png",
+            "poster_mobile": "shopify://shop_images/Snake-wrapped_perfume_bottle.png",
+            "poster_fit": "fill",
+            "packshot_alt": "",
+            "tint": "moment",
+            "headline": "",
+            "subline": "",
+            "primary_label": "",
+            "primary_url": "/collections/winter-moment",
+            "secondary_label": "",
+            "secondary_url": "/pages/moments"
+          }
+        },
+        "slide_gift": {
+          "type": "slide",
+          "settings": {
+            "moment": "gift",
+            "from_hour": 0,
+            "to_hour": 0,
+            "poster_fit": "fit",
+            "packshot_alt": "",
+            "tint": "moment",
+            "headline": "",
+            "subline": "",
+            "primary_label": "",
+            "primary_url": "/collections/gift-moment",
+            "secondary_label": "",
+            "secondary_url": "/pages/moments"
+          }
+        },
+        "slide_love": {
+          "type": "slide",
+          "settings": {
+            "moment": "love",
+            "from_hour": 0,
+            "to_hour": 0,
+            "poster_fit": "fit",
+            "packshot_alt": "",
+            "tint": "moment",
+            "headline": "",
+            "subline": "",
+            "primary_label": "",
+            "primary_url": "/collections/love-moment",
+            "secondary_label": "",
+            "secondary_url": "/pages/moments"
+          }
+        },
+        "slide_night": {
+          "type": "slide",
+          "settings": {
+            "moment": "night",
+            "from_hour": 18,
+            "to_hour": 5,
+            "poster_fit": "fit",
+            "packshot_alt": "",
+            "tint": "moment",
+            "headline": "",
+            "subline": "",
+            "primary_label": "",
+            "primary_url": "/collections/night-moment",
+            "secondary_label": "",
+            "secondary_url": "/pages/moments"
+          }
+        },
+        "slide_fresh": {
+          "type": "slide",
+          "settings": {
+            "moment": "fresh",
+            "from_hour": 0,
+            "to_hour": 0,
+            "poster_fit": "fit",
+            "packshot_alt": "",
+            "tint": "moment",
+            "headline": "",
+            "subline": "",
+            "primary_label": "",
+            "primary_url": "/collections/fresh-moment",
+            "secondary_label": "",
+            "secondary_url": "/pages/moments"
+          }
+        },
+        "slide_daily": {
+          "type": "slide",
+          "settings": {
+            "moment": "allday",
+            "from_hour": 0,
+            "to_hour": 0,
+            "poster_fit": "fit",
+            "packshot_alt": "",
+            "tint": "moment",
+            "headline": "",
+            "subline": "",
+            "primary_label": "",
+            "primary_url": "/collections/self-care-moment",
+            "secondary_label": "",
+            "secondary_url": "/pages/moments"
+          }
+        }
+      },
+      "block_order": [
+        "slide_allday",
+        "slide_gift",
+        "slide_love",
+        "slide_night",
+        "slide_fresh",
+        "slide_daily"
+      ],
+      "settings": {
+        "override": "auto",
+        "scrim_strength": 74,
+        "autoplay_seconds": 6
+      }
+    },
+    "moments_brands": {
+      "type": "moments-brand-marquee",
+      "blocks": {
+        "brand_afnan": {
+          "type": "brand",
+          "settings": {
+            "collection": "afnan"
+          }
+        },
+        "brand_khadlaj": {
+          "type": "brand",
+          "settings": {
+            "collection": "khadlaj"
+          }
+        },
+        "brand_lattafa": {
+          "type": "brand",
+          "settings": {
+            "collection": "lattafa"
+          }
+        },
+        "brand_faan": {
+          "type": "brand",
+          "settings": {
+            "collection": "faan"
+          }
+        },
+        "brand_assaf": {
+          "type": "brand",
+          "settings": {
+            "collection": "assaf"
+          }
+        },
+        "brand_rasasi_perfumes": {
+          "type": "brand",
+          "settings": {
+            "collection": "rasasi-perfumes"
+          }
+        },
+        "brand_laverne": {
+          "type": "brand",
+          "settings": {
+            "collection": "laverne"
+          }
+        },
+        "brand_nabeel_perfumes": {
+          "type": "brand",
+          "settings": {
+            "collection": "nabeel-perfumes"
+          }
+        },
+        "brand_ibraq": {
+          "type": "brand",
+          "settings": {
+            "collection": "ibraq"
+          }
+        },
+        "brand_le_falcone": {
+          "type": "brand",
+          "settings": {
+            "collection": "le-falcone"
+          }
+        },
+        "brand_lattafa_pride": {
+          "type": "brand",
+          "settings": {
+            "collection": "lattafa-pride"
+          }
+        },
+        "brand_armaf": {
+          "type": "brand",
+          "settings": {
+            "collection": "armaf"
+          }
+        },
+        "brand_zimaya": {
+          "type": "brand",
+          "settings": {
+            "collection": "zimaya"
+          }
+        },
+        "brand_dkhoon_emirates": {
+          "type": "brand",
+          "settings": {
+            "collection": "dkhoon-emirates"
+          }
+        }
+      },
+      "block_order": [
+        "brand_afnan",
+        "brand_khadlaj",
+        "brand_lattafa",
+        "brand_faan",
+        "brand_assaf",
+        "brand_rasasi_perfumes",
+        "brand_laverne",
+        "brand_nabeel_perfumes",
+        "brand_ibraq",
+        "brand_le_falcone",
+        "brand_lattafa_pride",
+        "brand_armaf",
+        "brand_zimaya",
+        "brand_dkhoon_emirates"
+      ],
+      "settings": {
+        "speed": 40
+      }
+    },
+    "moments_shop": {
+      "type": "moments-shop-by-moment",
+      "blocks": {
+        "tile_fresh": {
+          "type": "moment",
+          "settings": {
+            "collection": "fresh-moment",
+            "mark": "fresh",
+            "label": "Fresh Moments",
+            "label_ar": "لحظات فريش"
+          }
+        },
+        "tile_daily": {
+          "type": "moment",
+          "settings": {
+            "collection": "winter-moment",
+            "mark": "winter",
+            "label": "Winter Moments",
+            "label_ar": "لحظات الشتا"
+          }
+        },
+        "tile_love": {
+          "type": "moment",
+          "settings": {
+            "collection": "love-moment",
+            "mark": "love",
+            "label": "Love Moments",
+            "label_ar": "لحظات حب"
+          }
+        },
+        "tile_night": {
+          "type": "moment",
+          "settings": {
+            "collection": "night-moment",
+            "mark": "night",
+            "label": "Night Moments",
+            "label_ar": "لحظات سهر"
+          }
+        },
+        "tile_gift": {
+          "type": "moment",
+          "settings": {
+            "collection": "gift-moment",
+            "mark": "gift",
+            "label": "Gift Moments",
+            "label_ar": "لحظات تهادي"
+          }
+        },
+        "tile_selfcare": {
+          "type": "moment",
+          "settings": {
+            "collection": "self-care-moment",
+            "mark": "allday",
+            "label": "Self-Care Moments",
+            "label_ar": "لحظات لنفسك"
+          }
+        }
+      },
+      "block_order": [
+        "tile_fresh",
+        "tile_daily",
+        "tile_love",
+        "tile_night",
+        "tile_gift",
+        "tile_selfcare"
+      ],
+      "settings": {
+        "heading": "",
+        "heading_level": "h2",
+        "text": "",
+        "show_count": false
+      }
+    },
+    "gift_strip": {
+      "type": "gift-finder",
+      "disabled": true,
+      "settings": {
+        "layout": "strip",
+        "heading": "",
+        "intro": "",
+        "results_page": "",
+        "collection": "",
+        "max_picks": 3
+      }
+    },
     "product_list_CYd9gQ": {
       "type": "product-list",
       "blocks": {
@@ -130,6 +445,9 @@
               "type": "product-title",
               "name": "t:names.product_title",
               "settings": {
+                "split_name": true,
+                "show_moment": true,
+                "show_brand": true,
                 "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
@@ -184,6 +502,8 @@
       },
       "name": "t:names.products_grid",
       "settings": {
+        "source": "picked",
+        "sort": "default",
         "collection": "best-sellers",
         "layout_type": "carousel",
         "carousel_on_mobile": true,
@@ -201,6 +521,111 @@
         "color_scheme": "scheme-1",
         "padding-block-start": 72,
         "padding-block-end": 72
+      }
+    },
+    "moments_gift": {
+      "type": "moments-gift-block",
+      "blocks": {
+        "set_1": {
+          "type": "gift_set",
+          "settings": {
+            "product": "khamrah-gift-set"
+          }
+        },
+        "set_2": {
+          "type": "gift_set",
+          "settings": {
+            "product": "fakhar-man-gift-set"
+          }
+        },
+        "set_3": {
+          "type": "gift_set",
+          "settings": {
+            "product": "yara-candy-gift-set"
+          }
+        }
+      },
+      "block_order": [
+        "set_1",
+        "set_2",
+        "set_3"
+      ],
+      "settings": {
+        "heading": "",
+        "text": "",
+        "collection": "gift-moment"
+      }
+    },
+    "moments_story": {
+      "type": "moments-story",
+      "blocks": {
+        "row_fresh": {
+          "type": "moment",
+          "settings": {
+            "collection": "fresh-moment",
+            "mark": "fresh",
+            "label": "Fresh Moments",
+            "label_ar": "لحظات فريش"
+          }
+        },
+        "row_daily": {
+          "type": "moment",
+          "settings": {
+            "collection": "winter-moment",
+            "mark": "winter",
+            "label": "Winter Moments",
+            "label_ar": "لحظات الشتا"
+          }
+        },
+        "row_love": {
+          "type": "moment",
+          "settings": {
+            "collection": "love-moment",
+            "mark": "love",
+            "label": "Love Moments",
+            "label_ar": "لحظات حب"
+          }
+        },
+        "row_night": {
+          "type": "moment",
+          "settings": {
+            "collection": "night-moment",
+            "mark": "night",
+            "label": "Night Moments",
+            "label_ar": "لحظات سهر"
+          }
+        },
+        "row_gift": {
+          "type": "moment",
+          "settings": {
+            "collection": "gift-moment",
+            "mark": "gift",
+            "label": "Gift Moments",
+            "label_ar": "لحظات تهادي"
+          }
+        },
+        "row_selfcare": {
+          "type": "moment",
+          "settings": {
+            "collection": "self-care-moment",
+            "mark": "allday",
+            "label": "Self-Care Moments",
+            "label_ar": "لحظات لنفسك"
+          }
+        }
+      },
+      "block_order": [
+        "row_fresh",
+        "row_daily",
+        "row_love",
+        "row_night",
+        "row_gift",
+        "row_selfcare"
+      ],
+      "settings": {
+        "heading": "",
+        "text": "",
+        "link_url": "/pages/moments"
       }
     },
     "section_xCc7xR": {
@@ -315,375 +740,6 @@
         "gradient_direction": "to top",
         "padding-block-start": 64,
         "padding-block-end": 64
-      }
-    },
-    "moments_hero": {
-      "type": "moments-hero",
-      "blocks": {
-        "slide_night": {
-          "type": "slide",
-          "settings": {
-            "moment": "night",
-            "from_hour": 18,
-            "to_hour": 5,
-            "poster_fit": "fit",
-            "primary_url": "/collections/night-moment",
-            "secondary_url": "/pages/moments"
-          }
-        },
-        "slide_fresh": {
-          "type": "slide",
-          "settings": {
-            "moment": "fresh",
-            "from_hour": 0,
-            "to_hour": 0,
-            "poster_fit": "fit",
-            "primary_url": "/collections/fresh-moment",
-            "secondary_url": "/pages/moments"
-          }
-        },
-        "slide_allday": {
-          "type": "slide",
-          "settings": {
-            "moment": "daily",
-            "from_hour": 5,
-            "to_hour": 18,
-            "poster_fit": "fit",
-            "primary_url": "/collections/daily-moment",
-            "secondary_url": "/pages/moments"
-          }
-        },
-        "slide_gift": {
-          "type": "slide",
-          "settings": {
-            "moment": "gift",
-            "from_hour": 0,
-            "to_hour": 0,
-            "poster_fit": "fit",
-            "primary_url": "/collections/gift-moment",
-            "secondary_url": "/pages/moments"
-          }
-        },
-        "slide_daily": {
-          "type": "slide",
-          "settings": {
-            "moment": "allday",
-            "from_hour": 0,
-            "to_hour": 0,
-            "poster_fit": "fit",
-            "primary_url": "/collections/self-care-moment",
-            "secondary_url": "/pages/moments"
-          }
-        },
-        "slide_love": {
-          "type": "slide",
-          "settings": {
-            "moment": "love",
-            "from_hour": 0,
-            "to_hour": 0,
-            "poster_fit": "fit",
-            "primary_url": "/collections/love-moment",
-            "secondary_url": "/pages/moments"
-          }
-        }
-      },
-      "block_order": [
-        "slide_night",
-        "slide_fresh",
-        "slide_allday",
-        "slide_gift",
-        "slide_daily",
-        "slide_love"
-      ],
-      "settings": {
-        "override": "auto",
-        "scrim_strength": 74
-      }
-    },
-    "moments_shop": {
-      "type": "moments-shop-by-moment",
-      "blocks": {
-        "tile_fresh": {
-          "type": "moment",
-          "settings": {
-            "collection": "fresh-moment",
-            "mark": "fresh",
-            "label": "Fresh Moments",
-            "label_ar": "لحظات فريش"
-          }
-        },
-        "tile_daily": {
-          "type": "moment",
-          "settings": {
-            "collection": "winter-moment",
-            "mark": "daily",
-            "label": "Everyday Moments",
-            "label_ar": "لحظات كل يوم"
-          }
-        },
-        "tile_love": {
-          "type": "moment",
-          "settings": {
-            "collection": "love-moment",
-            "mark": "love",
-            "label": "Love Moments",
-            "label_ar": "لحظات حب"
-          }
-        },
-        "tile_night": {
-          "type": "moment",
-          "settings": {
-            "collection": "night-moment",
-            "mark": "night",
-            "label": "Night Moments",
-            "label_ar": "لحظات سهر"
-          }
-        },
-        "tile_gift": {
-          "type": "moment",
-          "settings": {
-            "collection": "gift-moment",
-            "mark": "gift",
-            "label": "Gift Moments",
-            "label_ar": "لحظات تهادي"
-          }
-        },
-        "tile_selfcare": {
-          "type": "moment",
-          "settings": {
-            "collection": "self-care-moment",
-            "mark": "allday",
-            "label": "Self-Care Moments",
-            "label_ar": "لحظات لنفسك"
-          }
-        }
-      },
-      "block_order": [
-        "tile_fresh",
-        "tile_daily",
-        "tile_love",
-        "tile_night",
-        "tile_gift",
-        "tile_selfcare"
-      ],
-      "settings": {
-        "show_count": false
-      }
-    },
-    "moments_story": {
-      "type": "moments-story",
-      "blocks": {
-        "row_fresh": {
-          "type": "moment",
-          "settings": {
-            "collection": "fresh-moment",
-            "mark": "fresh",
-            "label": "Fresh Moments",
-            "label_ar": "لحظات فريش"
-          }
-        },
-        "row_daily": {
-          "type": "moment",
-          "settings": {
-            "collection": "winter-moment",
-            "mark": "daily",
-            "label": "Everyday Moments",
-            "label_ar": "لحظات كل يوم"
-          }
-        },
-        "row_love": {
-          "type": "moment",
-          "settings": {
-            "collection": "love-moment",
-            "mark": "love",
-            "label": "Love Moments",
-            "label_ar": "لحظات حب"
-          }
-        },
-        "row_night": {
-          "type": "moment",
-          "settings": {
-            "collection": "night-moment",
-            "mark": "night",
-            "label": "Night Moments",
-            "label_ar": "لحظات سهر"
-          }
-        },
-        "row_gift": {
-          "type": "moment",
-          "settings": {
-            "collection": "gift-moment",
-            "mark": "gift",
-            "label": "Gift Moments",
-            "label_ar": "لحظات تهادي"
-          }
-        },
-        "row_selfcare": {
-          "type": "moment",
-          "settings": {
-            "collection": "self-care-moment",
-            "mark": "allday",
-            "label": "Self-Care Moments",
-            "label_ar": "لحظات لنفسك"
-          }
-        }
-      },
-      "block_order": [
-        "row_fresh",
-        "row_daily",
-        "row_love",
-        "row_night",
-        "row_gift",
-        "row_selfcare"
-      ],
-      "settings": {
-        "link_url": "/pages/moments"
-      }
-    },
-    "gift_strip": {
-      "type": "gift-finder",
-      "disabled": true,
-      "settings": {
-        "layout": "strip"
-      }
-    },
-    "moments_brands": {
-      "type": "moments-brand-marquee",
-      "blocks": {
-        "brand_afnan": {
-          "type": "brand",
-          "settings": {
-            "collection": "afnan"
-          }
-        },
-        "brand_khadlaj": {
-          "type": "brand",
-          "settings": {
-            "collection": "khadlaj"
-          }
-        },
-        "brand_lattafa": {
-          "type": "brand",
-          "settings": {
-            "collection": "lattafa"
-          }
-        },
-        "brand_faan": {
-          "type": "brand",
-          "settings": {
-            "collection": "faan"
-          }
-        },
-        "brand_assaf": {
-          "type": "brand",
-          "settings": {
-            "collection": "assaf"
-          }
-        },
-        "brand_rasasi_perfumes": {
-          "type": "brand",
-          "settings": {
-            "collection": "rasasi-perfumes"
-          }
-        },
-        "brand_laverne": {
-          "type": "brand",
-          "settings": {
-            "collection": "laverne"
-          }
-        },
-        "brand_nabeel_perfumes": {
-          "type": "brand",
-          "settings": {
-            "collection": "nabeel-perfumes"
-          }
-        },
-        "brand_ibraq": {
-          "type": "brand",
-          "settings": {
-            "collection": "ibraq"
-          }
-        },
-        "brand_le_falcone": {
-          "type": "brand",
-          "settings": {
-            "collection": "le-falcone"
-          }
-        },
-        "brand_lattafa_pride": {
-          "type": "brand",
-          "settings": {
-            "collection": "lattafa-pride"
-          }
-        },
-        "brand_armaf": {
-          "type": "brand",
-          "settings": {
-            "collection": "armaf"
-          }
-        },
-        "brand_zimaya": {
-          "type": "brand",
-          "settings": {
-            "collection": "zimaya"
-          }
-        },
-        "brand_dkhoon_emirates": {
-          "type": "brand",
-          "settings": {
-            "collection": "dkhoon-emirates"
-          }
-        }
-      },
-      "block_order": [
-        "brand_afnan",
-        "brand_khadlaj",
-        "brand_lattafa",
-        "brand_faan",
-        "brand_assaf",
-        "brand_rasasi_perfumes",
-        "brand_laverne",
-        "brand_nabeel_perfumes",
-        "brand_ibraq",
-        "brand_le_falcone",
-        "brand_lattafa_pride",
-        "brand_armaf",
-        "brand_zimaya",
-        "brand_dkhoon_emirates"
-      ],
-      "settings": {
-        "speed": 40
-      }
-    },
-    "moments_gift": {
-      "type": "moments-gift-block",
-      "blocks": {
-        "set_1": {
-          "type": "gift_set",
-          "settings": {
-            "product": "khamrah-gift-set"
-          }
-        },
-        "set_2": {
-          "type": "gift_set",
-          "settings": {
-            "product": "fakhar-man-gift-set"
-          }
-        },
-        "set_3": {
-          "type": "gift_set",
-          "settings": {
-            "product": "yara-candy-gift-set"
-          }
-        }
-      },
-      "block_order": [
-        "set_1",
-        "set_2",
-        "set_3"
-      ],
-      "settings": {
-        "collection": "gift-moment"
       }
     }
   },

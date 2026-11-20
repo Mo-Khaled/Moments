@@ -155,6 +155,7 @@
         if poster == blank and key == 'allday'
           assign poster = images['island-sun-grid_05.png']
         endif
+        assign poster_m = block.settings.poster_mobile
         assign video = block.settings.video
         assign video_mobile = block.settings.video_mobile
         assign poster_loading = 'lazy'
@@ -166,7 +167,7 @@
       -%}
 
       <article
-        class="m-slide m-tone--{{ tint }}"
+        class="m-slide m-tone--{{ tint }}{% if poster != blank and block.settings.poster_fit == 'fill' %} m-slide--photo{% endif %}"
         data-moment="{{ key }}"
         data-has-video="{% if video != blank %}true{% else %}false{% endif %}"
         {{ block.shopify_attributes }}
@@ -182,6 +183,10 @@
                 | image_tag: class: 'm-slide__blur', loading: 'lazy', alt: '', widths: '480'
               }}
             {%- endif -%}
+            {%- if poster_m != blank and block.settings.poster_fit == 'fill' -%}
+              <picture style="display: contents">
+                <source media="(max-width: 749px)" srcset="{{ poster_m | image_url: width: 780 }} 780w, {{ poster_m | image_url: width: 1170 }} 1170w" sizes="100vw">
+            {%- endif -%}
             {{
               poster
               | image_url: width: 2000
@@ -193,6 +198,9 @@
                 loading: poster_loading,
                 fetchpriority: poster_priority
             }}
+            {%- if poster_m != blank and block.settings.poster_fit == 'fill' -%}
+              </picture>
+            {%- endif -%}
             {%- if video != blank -%}
               <video
                 class="m-slide__video"
@@ -230,7 +238,7 @@
           <p class="m-slide__text">{{ subline }}</p>
           <div class="m-slide__actions">
             <a class="m-btn" href="{{ block.settings.primary_url | default: routes.collections_url }}">{{ primary_label }}</a>
-            {%- if block.settings.secondary_url != blank -%}
+            {%- if block.settings.secondary_label != blank and block.settings.secondary_url != blank -%}
               <a class="m-btn m-btn--outline" href="{{ block.settings.secondary_url }}">{{ secondary_label }}</a>
             {%- endif -%}
           </div>
@@ -314,6 +322,7 @@
   html[data-moment='allday'] .m-slide[data-moment='allday'],
   html[data-moment='daily'] .m-slide[data-moment='daily'],
   html[data-moment='fresh'] .m-slide[data-moment='fresh'],
+  html[data-moment='winter'] .m-slide[data-moment='winter'],
   html[data-moment='love'] .m-slide[data-moment='love'] {
     display: block;
     opacity: 1;
@@ -651,17 +660,114 @@
     }
 
     .m-slide__art {
-      inset-block-start: 8%;
+      inset-block-start: 0;
       inset-block-end: auto;
     }
 
     .m-slide__art moment-mark {
-      --mm-size: min(56vw, 260px);
+      --mm-size: min(30vw, 112px);
     }
 
     .m-slide__packshot {
       block-size: 40%;
       inset-block-end: 30%;
+    }
+  }
+  .m-slide--photo .m-slide__scrim { display: block; }
+  .m-slide--photo .m-slide__copy, .m-slide--photo .m-slide__title, .m-slide--photo .m-slide__text, .m-slide--photo .m-slide__tag { color: #fff; }
+  .m-slide--photo .m-btn--outline { color: #fff; border-color: #fff; }
+  .m-slide--photo .m-btn--outline:hover { background: #fff; color: var(--m-plum); }
+
+  /* Phones: the moment switcher becomes pagination dots (the active one is a longer pill). */
+  @media screen and (max-width: 749px) {
+    .m-switch {
+      gap: 0;
+      padding: 0;
+      border: 0;
+      background: transparent;
+    }
+
+    .m-switch__btn {
+      position: relative;
+      min-inline-size: 26px;
+      min-block-size: 44px;
+      padding: 0;
+      background: transparent;
+    }
+
+    .m-switch__btn > :not(.m-switch__label) {
+      display: none;
+    }
+
+    .m-switch__btn .m-switch__label,
+    .m-switch__btn[aria-pressed='true'] .m-switch__label {
+      position: absolute;
+      inline-size: 1px;
+      block-size: 1px;
+      margin: -1px;
+      clip-path: inset(50%);
+    }
+
+    .m-switch__btn::before {
+      content: '';
+      inline-size: 8px;
+      block-size: 8px;
+      border-radius: 9999px;
+      background: rgb(59 30 58 / 0.28);
+      transition: inline-size var(--m-dur-2) var(--m-ease), background-color var(--m-dur-2) var(--m-ease);
+    }
+
+    .m-switch__btn[aria-pressed='true'] {
+      background: transparent;
+    }
+
+    .m-switch__btn[aria-pressed='true']::before {
+      inline-size: 22px;
+      background: var(--m-plum);
+    }
+
+  }
+
+  /* Phones: copy sits lower and smaller, so the photograph keeps the stage. */
+  @media screen and (max-width: 749px) {
+    .m-slide__copy {
+      gap: 10px;
+      padding-block-end: 50px;
+    }
+
+    .m-slide__tag {
+      padding: 5px 12px;
+      font-size: 0.6875rem;
+    }
+
+    .m-slide__title {
+      max-inline-size: 100%;
+      font-size: clamp(1.625rem, 8vw, 2rem);
+      line-height: 1.02;
+    }
+
+    .m-slide__text {
+      max-inline-size: 34ch;
+      font-size: 0.875rem;
+      line-height: 1.45;
+    }
+
+    .m-slide__actions .m-btn {
+      min-block-size: 40px;
+      padding-inline: 20px;
+      font-size: 0.875rem;
+    }
+
+    .m-hero__controls {
+      inset-block-end: 4px;
+    }
+
+    html[data-moment='winter'] .m-switch__btn::before {
+      background: rgb(255 255 255 / 0.4);
+    }
+
+    html[data-moment='winter'] .m-switch__btn[aria-pressed='true']::before {
+      background: #fff;
     }
   }
 {% endstylesheet %}
@@ -905,6 +1011,7 @@
         },
         { "type": "video", "id": "video_mobile", "label": "Mobile video (optional)", "info": "9:16. Not used on phones yet: phones show the poster." },
         { "type": "image_picker", "id": "poster", "label": "Poster image", "info": "The first thing shown and the LCP image. The All day slide falls back to the Island Sun Khadlaj photo (EXPERIMENTAL placeholder)." },
+        { "type": "image_picker", "id": "poster_mobile", "label": "Mobile poster (optional)", "info": "Used on phones only, with Poster fit set to Fill. 1170x1920 (about 9:16). Desktop keeps the main poster." },
         {
           "type": "select",
           "id": "poster_fit",
@@ -941,7 +1048,7 @@
         { "type": "textarea", "id": "subline", "label": "Subline" },
         { "type": "text", "id": "primary_label", "label": "Button label" },
         { "type": "url", "id": "primary_url", "label": "Button link" },
-        { "type": "text", "id": "secondary_label", "label": "Outlined button label" },
+        { "type": "text", "id": "secondary_label", "label": "Outlined button label", "info": "Leave empty to hide the outlined button." },
         { "type": "url", "id": "secondary_url", "label": "Outlined button link" }
       ]
     }

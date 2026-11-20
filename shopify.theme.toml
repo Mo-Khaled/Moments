@@ -1,7 +1,8 @@
-# LIVE theme: "moments-redesign + moment pages" #161651720383 (role main), the published theme as of 2026-11-06.
+# LIVE theme: "MOMENTS - Hero fix" #162384347327 (role main), published 2026-11-20 outside this repo (synced the same day).
+# Before it: "moments-redesign + moment pages" #161651720383 (live 2026-11-06 to 2026-11-20, unpublished, keep).
 # Previous live theme: moments-redesign #161294745791 (unpublished, keep). Its copy: #161628979391 "Copy of moments-redesign".
 # Older backups: #161251229887 "MOMENTS - Homepage v2", #161334263999 "MOMENTS - Backup 2026-10-26 11-47" (keep, do not delete).
 # Push specific files only: bash scripts/push.sh --only <files> (it refuses when the published theme is not the one below)
 [environments.live]
 store = "dezrva-2z.myshopify.com"
-theme = "161651720383"
+theme = "162384347327"

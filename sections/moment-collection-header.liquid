@@ -1,0 +1,217 @@
+{%- comment -%}
+  Moment collection header (template collection.moment).
+  A compact band in the moment's colour, then a small centred two-way toggle: For Him / For Her.
+  The page itself shows the whole moment (<key>-moment). For Him and For Her are their own collections
+  (<key>-moment-for-him, <key>-moment-for-her) and Unisex is its own collection (<key>-moment-unisex).
+  Tapping the active option again goes back to the whole moment.
+  Tone and mark come from the key (fresh, daily, love, night, gift); self-care uses the light sand tone.
+{%- endcomment -%}
+
+{%- liquid
+  assign is_ar = false
+  if request.locale.iso_code == 'ar'
+    assign is_ar = true
+  endif
+
+  assign current = collection.handle
+  assign base = current | remove: '-for-him' | remove: '-for-her' | remove: '-unisex'
+  assign key = base | remove: '-moment'
+
+  case key
+    when 'self-care'
+      assign tone = 'allday'
+    when 'fresh', 'daily', 'love', 'night', 'gift', 'winter'
+      assign tone = key
+    else
+      assign tone = 'night'
+  endcase
+
+  assign all_c = collections[base]
+  assign him_h = base | append: '-for-him'
+  assign her_h = base | append: '-for-her'
+  assign him_c = collections[him_h]
+  assign her_c = collections[her_h]
+  assign uni_h = base | append: '-unisex'
+  assign uni_c = collections[uni_h]
+
+  assign moment_title = collection.title
+  if all_c != blank
+    assign moment_title = all_c.title
+  endif
+  assign moment_text = collection.description
+  if all_c != blank and all_c.description != blank
+    assign moment_text = all_c.description
+  endif
+
+  assign him_url = him_c.url
+  if current == him_h and all_c != blank
+    assign him_url = all_c.url
+  endif
+  assign her_url = her_c.url
+  if current == her_h and all_c != blank
+    assign her_url = all_c.url
+  endif
+
+  assign uni_url = uni_c.url
+  if current == uni_h and all_c != blank
+    assign uni_url = all_c.url
+  endif
+
+  if is_ar
+    assign l_him = 'رجالي'
+    assign l_her = 'حريمي'
+    assign l_nav = 'رجالي أو حريمي'
+    assign l_uni = 'للجنسين'
+  else
+    assign l_him = 'For Him'
+    assign l_her = 'For Her'
+    assign l_nav = 'For him or for her'
+    assign l_uni = 'Unisex'
+  endif
+-%}
+
+<section class="m-mc" aria-labelledby="m-mc-title-{{ section.id }}">
+  <div class="m-mc__band m-tone--{{ tone }}" data-moment-host>
+    <div class="m-wrap m-mc__inner">
+      <div class="m-mc__text">
+        <h1 class="m-mc__title" id="m-mc-title-{{ section.id }}">{{ moment_title }}</h1>
+        {%- if moment_text != blank -%}
+          <div class="m-mc__desc">{{ moment_text }}</div>
+        {%- endif -%}
+      </div>
+      <div class="m-mc__art">
+        {% render 'moment-mark', mark: tone, size: 'lg' %}
+      </div>
+    </div>
+  </div>
+
+  {%- if him_c != blank or her_c != blank or uni_c != blank -%}
+    <nav class="m-mc__nav" aria-label="{{ l_nav }}">
+      <div class="m-wrap m-mc__nav-inner">
+        <ul class="m-mc__toggle" role="list">
+          {%- if him_c != blank and him_c.products_count > 0 -%}
+            <li><a class="m-mc__opt{% if current == him_h %} is-active{% endif %}" href="{{ him_url }}"{% if current == him_h %} aria-current="page"{% endif %}>{{ l_him }}</a></li>
+          {%- endif -%}
+          {%- if uni_c != blank and uni_c.products_count > 0 -%}
+            <li><a class="m-mc__opt{% if current == uni_h %} is-active{% endif %}" href="{{ uni_url }}"{% if current == uni_h %} aria-current="page"{% endif %}>{{ l_uni }}</a></li>
+          {%- endif -%}
+          {%- if her_c != blank and her_c.products_count > 0 -%}
+            <li><a class="m-mc__opt{% if current == her_h %} is-active{% endif %}" href="{{ her_url }}"{% if current == her_h %} aria-current="page"{% endif %}>{{ l_her }}</a></li>
+          {%- endif -%}
+        </ul>
+      </div>
+    </nav>
+  {%- endif -%}
+</section>
+
+{% stylesheet %}
+  .m-mc__band {
+    background: var(--tile-bg);
+    color: var(--tile-ink);
+    overflow: clip;
+  }
+
+  .m-mc__inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 24px;
+    padding-block: 40px;
+  }
+
+  .m-mc__text { display: grid; gap: 8px; max-inline-size: 40rem; }
+
+  .m-mc__title {
+    margin: 0;
+    color: var(--tile-ink);
+    font-size: clamp(1.75rem, 4vw, 3rem);
+    line-height: 1.1;
+  }
+
+  html[lang='ar'] .m-mc__title { line-height: 1.35; }
+
+  .m-mc__desc, .m-mc__desc p {
+    margin: 0;
+    color: var(--tile-ink);
+    font-size: 1rem;
+    line-height: 1.55;
+    opacity: 0.9;
+  }
+
+  .m-mc__art {
+    inline-size: clamp(64px, 10vw, 120px);
+    aspect-ratio: 1;
+    --m-mark-ink: var(--tile-ink);
+    --m-mark-body: var(--tile-body);
+    --m-mark-accent: var(--tile-accent);
+    --m-mark-gold: var(--tile-gold);
+  }
+
+  .m-mc__art moment-mark { --mm-size: 100%; }
+
+  /* Small centred two-way toggle under the band. */
+  .m-mc__nav { padding-block: 16px 0; }
+
+  .m-mc__nav-inner {
+    display: flex;
+    justify-content: center;
+  }
+
+  .m-mc__toggle {
+    display: inline-flex;
+    gap: 2px;
+    margin: 0;
+    padding: 3px;
+    border: 1px solid var(--m-plum);
+    border-radius: 9999px;
+    list-style: none;
+  }
+
+  .m-mc__opt {
+    display: inline-flex;
+    align-items: center;
+    min-block-size: 34px;
+    padding-inline: 18px;
+    border-radius: 9999px;
+    color: var(--m-plum);
+    font-size: 0.875rem;
+    line-height: 1;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: background-color var(--m-dur-1) var(--m-ease), color var(--m-dur-1) var(--m-ease);
+  }
+
+  .m-mc__opt:hover { background: var(--m-nude); }
+
+  .m-mc__opt.is-active {
+    background: var(--m-plum);
+    color: var(--m-pearl);
+  }
+
+  .m-mc__opt:focus-visible { outline: 2px solid var(--m-focus); outline-offset: 2px; }
+
+  @media screen and (max-width: 749px) {
+    .m-mc__inner {
+      gap: 16px;
+      padding-block: 24px;
+    }
+
+    .m-mc__desc, .m-mc__desc p { font-size: 0.9375rem; }
+
+    .m-mc__art { inline-size: 56px; }
+
+    .m-mc__nav { padding-block: 12px 0; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .m-mc__opt { transition: none; }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "MOMENTS moment header",
+  "settings": [],
+  "presets": [{ "name": "MOMENTS moment header" }]
+}
+{% endschema %}

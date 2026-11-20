@@ -12,65 +12,16 @@
     "moments_page": {
       "type": "moments-shop-by-moment",
       "blocks": {
-        "tile_night": {
-          "type": "moment",
-          "settings": {
-            "collection": "winter-moment",
-            "mark": "daily"
-          }
-        },
-        "tile_gift": {
-          "type": "moment",
-          "settings": {
-            "collection": "night-moment",
-            "mark": "night"
-          }
-        },
-        "tile_allday": {
-          "type": "moment",
-          "settings": {
-            "collection": "love-moment",
-            "mark": "love"
-          }
-        },
-        "tile_daily": {
-          "type": "moment",
-          "settings": {
-            "collection": "fresh-moment",
-            "mark": "fresh"
-          }
-        },
-        "tile_fresh": {
-          "type": "moment",
-          "settings": {
-            "collection": "occasions-moment",
-            "mark": "occasions"
-          }
-        },
-        "tile_love": {
-          "type": "moment",
-          "settings": {
-            "collection": "winter-moment",
-            "mark": "winter"
-          }
-        }
+        "tile_fresh": {"type": "moment", "settings": {"collection": "fresh-moment", "mark": "fresh", "label": "Fresh Moments", "label_ar": "لحظات فريش"}},
+        "tile_winter": {"type": "moment", "settings": {"collection": "winter-moment", "mark": "winter", "label": "Winter Moments", "label_ar": "لحظات الشتا"}},
+        "tile_love": {"type": "moment", "settings": {"collection": "love-moment", "mark": "love", "label": "Love Moments", "label_ar": "لحظات حب"}},
+        "tile_night": {"type": "moment", "settings": {"collection": "night-moment", "mark": "night", "label": "Night Moments", "label_ar": "لحظات سهر"}},
+        "tile_gift": {"type": "moment", "settings": {"collection": "gift-moment", "mark": "gift", "label": "Gift Moments", "label_ar": "لحظات تهادي"}},
+        "tile_selfcare": {"type": "moment", "settings": {"collection": "self-care-moment", "mark": "allday", "label": "Self-Care Moments", "label_ar": "لحظات لنفسك"}}
       },
-      "block_order": [
-        "tile_night",
-        "tile_gift",
-        "tile_allday",
-        "tile_daily",
-        "tile_fresh",
-        "tile_love"
-      ],
-      "settings": {
-        "heading": "Find your moment.",
-        "heading_level": "h1",
-        "show_count": true
-      }
+      "block_order": ["tile_fresh", "tile_winter", "tile_love", "tile_night", "tile_gift", "tile_selfcare"],
+      "settings": {"heading": "Find your moment.", "heading_level": "h1", "show_count": true}
     }
   },
-  "order": [
-    "moments_page"
-  ]
+  "order": ["moments_page"]
 }
