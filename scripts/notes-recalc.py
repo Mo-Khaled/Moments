@@ -1,0 +1,191 @@
+"""Recalculate the Notes page data (metaobject type "note") from our catalogue. PREVIEW by default; writes only with --apply.
+
+What it computes per note (the 37 approved notes, merges approved 2026-11-20):
+  - perfume_count, season_share, gender_share, moment_share (Moments from the six *-moment COLLECTIONS, not filter.moment),
+  - filter_tags (winter / summer / men / women / unisex / <moment handles>), by the rules below,
+  - top_products: up to 6 perfumes (strength first, in stock, full pyramid, at most 2 per brand; real sales replace this
+    ranking automatically once the store has a year of sales: pass --sales sales.csv with columns handle,units),
+  and per product: the note strength (star / supporting / touch), an estimate shown as dots, never a percentage.
+
+Inputs:
+  --export DIR   Admin API product pages (page*.json: handle, title, vendor, productType, status, custom.top/heart/base_notes_1..6
+                 as t1..t6/h1..h6/b1..b6, filter.notes as fnotes, filter.season as fseason, filter.gender as gender).
+  storefront     https://momentseg.com/collections/<handle>/products.json (public): moment membership and availability.
+Outputs (--out DIR): notes-preview.json, notes-preview.csv, product-strength.csv.
+--apply needs SHOPIFY_ADMIN_TOKEN (a custom-app Admin API token; allowed on Basic) and writes ONLY the CALC fields of each note.
+
+Rules
+  Strength points = layer (base +2, heart +1, top 0) + order in that layer (1st +2, 2nd +1) + note in the product name (+3)
+                    + note in our key notes filter.notes (+2). 5+ = star, 3-4 = supporting, 0-2 = touch.
+  Season tag   : winter (or summer) when it is >= 50% of the note's perfumes and >= 15 points above the other season.
+  Gender tag   : men / women when that gender is >= 45%; otherwise unisex.
+  Moment tags  : the two moment collections with the largest share (ties broken by count).
+"""
+import argparse, collections, csv, glob, json, os, re, sys, time, urllib.error, urllib.request
+
+NOTES = ['Musk', 'Vanilla', 'Amber', 'Patchouli', 'Bergamot', 'Jasmine', 'Sandalwood', 'Rose', 'Cedarwood', 'Oud', 'Tonka Bean', 'Saffron',
+         'Lavender', 'Vetiver', 'Leather', 'Cinnamon', 'Orange Blossom', 'Cardamom', 'Pink Pepper', 'Incense', 'Apple', 'Lemon', 'Geranium',
+         'Mandarin', 'Caramel', 'Lily of the Valley', 'Orange', 'Ambergris', 'Pineapple', 'Raspberry', 'Oakmoss', 'Grapefruit', 'Iris',
+         'Nutmeg', 'Ginger', 'Black Pepper', 'Pear']
+ALIAS = {
+    'agarwood': 'Oud', 'oud wood': 'Oud', 'white musk': 'Musk', 'cedar': 'Cedarwood', 'virginia cedar': 'Cedarwood', 'oak moss': 'Oakmoss',
+    'moss': 'Oakmoss', 'pepper': 'Black Pepper', 'damask rose': 'Rose', 'bulgarian rose': 'Rose', 'turkish rose': 'Rose', 'red rose': 'Rose',
+    'frankincense': 'Incense', 'olibanum': 'Incense', 'orris': 'Iris', 'orange flower': 'Orange Blossom', 'mandarin orange': 'Mandarin',
+    'tangerine': 'Mandarin', 'green mandarin': 'Mandarin', 'jasmine sambac': 'Jasmine', 'suede': 'Leather', 'leather accord': 'Leather',
+    'bourbon vanilla': 'Vanilla', 'madagascar vanilla': 'Vanilla', 'vanilla bean': 'Vanilla', 'vanilla absolute': 'Vanilla',
+    'green apple': 'Apple', 'red apple': 'Apple', 'muguet': 'Lily of the Valley', 'calabrian bergamot': 'Bergamot',
+    'italian bergamot': 'Bergamot', 'tonka': 'Tonka Bean', 'pink peppercorn': 'Pink Pepper', 'indonesian patchouli': 'Patchouli',
+    'patchouli leaf': 'Patchouli', 'haitian vetiver': 'Vetiver', 'sicilian lemon': 'Lemon', 'lavandin': 'Lavender',
+    'guaiacwood': 'Guaiac Wood', 'grey amber': 'Ambergris', 'geranium accord': 'Geranium', 'siam benzoin': 'Benzoin',
+}
+MOMENTS = ['fresh-moment', 'winter-moment', 'love-moment', 'night-moment', 'gift-moment', 'self-care-moment']
+FRAG = {'Perfume', 'Extrait de Parfum', 'Perfume Oil', 'Perfume Mist', 'Body Spray', 'Perfume Set', 'Eau de Parfum', 'Gift Set', 'Deodorant'}
+EMO = re.compile('[\U0001F000-\U0001FFFF☀-➿️‍]')
+
+
+def norm(raw):
+    c = re.sub(r'\s+', ' ', EMO.sub('', raw or '')).strip(' .')
+    if not c:
+        return None
+    k = c.lower()
+    return ALIAS.get(k) or ' '.join(w if w in ('of', 'the', 'de') else w[:1].upper() + w[1:] for w in k.split())
+
+
+def val(n, k):
+    x = n.get(k)
+    return x.get('value') if isinstance(x, dict) else None
+
+
+def storefront(base, handle):
+    """All product handles (and availability) of a collection, from the public products.json."""
+    out, page = {}, 1
+    while True:
+        url = '%s/collections/%s/products.json?limit=250&page=%d' % (base, handle, page)
+        for attempt in range(8):
+            try:
+                with urllib.request.urlopen(urllib.request.Request(url, headers={'User-Agent': 'notes-recalc'}), timeout=60) as r:
+                    ps = json.load(r)['products']
+                break
+            except urllib.error.HTTPError as e:
+                if e.code != 429 or attempt == 7:
+                    raise
+                time.sleep(int(e.headers.get('Retry-After') or 0) or 5 * (attempt + 1))
+        for p in ps:
+            out[p['handle']] = any(v.get('available') for v in p.get('variants', []))
+        if len(ps) < 250:
+            return out
+        page += 1
+        time.sleep(2)
+
+
+def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument('--export', required=True)
+    ap.add_argument('--out', required=True)
+    ap.add_argument('--base', default='https://momentseg.com')
+    ap.add_argument('--sales', help='optional CSV handle,units (last 365 days)')
+    ap.add_argument('--members', help='optional JSON {collection: {product handle: available}} from the Admin API')
+    ap.add_argument('--apply', action='store_true')
+    a = ap.parse_args()
+
+    prods = {}
+    for f in sorted(glob.glob(os.path.join(a.export, 'page*.json'))):
+        for n in json.load(open(f, encoding='utf-8'))['data']['products']['nodes']:
+            prods.setdefault(n['handle'], n)
+    if a.members:
+        # Admin API export {collection_handle: {product_handle: available}} (the public products.json is rate limited)
+        mem = json.load(open(a.members, encoding='utf-8'))
+        member = {m: mem.get(m, {}) for m in MOMENTS}
+        avail = mem.get('bundle-perfumes', {})
+    else:
+        member = {m: storefront(a.base, m) for m in MOMENTS}
+        avail = storefront(a.base, 'bundle-perfumes')
+    sales = {}
+    if a.sales:
+        sales = {r['handle']: float(r['units']) for r in csv.DictReader(open(a.sales, encoding='utf-8'))}
+
+    per_note = collections.defaultdict(list)
+    strength_rows = []
+    for h, n in prods.items():
+        if n['status'] != 'ACTIVE' or n['productType'] not in FRAG:
+            continue
+        layers = {L: [x for x in (norm(val(n, '%s%d' % (L[0], i))) for i in range(1, 7)) if x] for L in ('top', 'heart', 'base')}
+        try:
+            key = [x for x in (norm(y) for y in json.loads(val(n, 'fnotes') or '[]')) if x]
+        except ValueError:
+            key = []
+        full = all(layers.values())
+        present = set(sum(layers.values(), [])) or set(key)
+        title = n['title'].lower()
+        for note in NOTES:
+            if note not in present:
+                continue
+            pts = 0
+            for L, w in (('base', 2), ('heart', 1), ('top', 0)):
+                if note in layers[L]:
+                    pts = max(pts, w + {0: 2, 1: 1}.get(layers[L].index(note), 0))
+            pts += 3 if re.search(r'\b%s\b' % re.escape(note.lower()), title) else 0
+            pts += 2 if note in key else 0
+            level = 'star' if pts >= 5 else 'supporting' if pts >= 3 else 'touch'
+            moms = [m for m in MOMENTS if h in member[m]]
+            rec = {'handle': h, 'title': n['title'], 'brand': n['vendor'].upper(), 'points': pts, 'level': level, 'full': full,
+                   'available': avail.get(h, False), 'season': val(n, 'fseason') or '', 'gender': val(n, 'gender') or '', 'moments': moms,
+                   'sales': sales.get(h, 0)}
+            per_note[note].append(rec)
+            strength_rows.append({'note': note, 'handle': h, 'title': n['title'], 'points': pts, 'level': level})
+
+    preview = {}
+    for note in NOTES:
+        rs = per_note.get(note, [])
+        n = len(rs) or 1
+        season = collections.Counter(r['season'] or 'unknown' for r in rs)
+        gender = collections.Counter(r['gender'] or 'unknown' for r in rs)
+        moment = collections.Counter(m for r in rs for m in r['moments'])
+        pct = lambda c: {k: round(100 * v / n) for k, v in c.most_common()}
+        sp, gp = pct(season), pct(gender)
+        tags = []
+        w, s = sp.get('Winter', 0), sp.get('Summer', 0)
+        if w >= 50 and w - s >= 15:
+            tags.append('winter')
+        elif s >= 50 and s - w >= 15:
+            tags.append('summer')
+        if gp.get('For Him', 0) >= 45:
+            tags.append('men')
+        if gp.get('For Her', 0) >= 45:
+            tags.append('women')
+        if 'men' not in tags and 'women' not in tags:
+            tags.append('unisex')
+        tags += [m for m, _ in moment.most_common(2)]
+        cands = [r for r in rs if r['available'] and r['level'] in ('star', 'supporting')]
+        cands.sort(key=lambda r: (-r['sales'], -r['points'], not r['full'], r['handle']))
+        top, per_brand = [], collections.Counter()
+        for r in cands:
+            if per_brand[r['brand']] >= 2:
+                continue
+            top.append(r)
+            per_brand[r['brand']] += 1
+            if len(top) == 6:
+                break
+        preview[note] = {'perfume_count': len(rs), 'season_share': sp, 'gender_share': gp, 'moment_share': pct(moment),
+                         'filter_tags': tags, 'top_products': [(r['title'], r['brand'], r['level']) for r in top],
+                         'levels': dict(collections.Counter(r['level'] for r in rs))}
+
+    os.makedirs(a.out, exist_ok=True)
+    json.dump(preview, open(os.path.join(a.out, 'notes-preview.json'), 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
+    with open(os.path.join(a.out, 'notes-preview.csv'), 'w', newline='', encoding='utf-8-sig') as f:
+        w = csv.writer(f)
+        w.writerow(['note', 'perfumes', 'season %', 'gender %', 'moment %', 'filter tags', 'top 6'])
+        for k, p in preview.items():
+            w.writerow([k, p['perfume_count'], p['season_share'], p['gender_share'], p['moment_share'], ' '.join(p['filter_tags']),
+                        ' | '.join('%s (%s, %s)' % t for t in p['top_products'])])
+    with open(os.path.join(a.out, 'product-strength.csv'), 'w', newline='', encoding='utf-8-sig') as f:
+        w = csv.DictWriter(f, fieldnames=['note', 'handle', 'title', 'points', 'level'])
+        w.writeheader()
+        w.writerows(strength_rows)
+    print('preview written to', a.out, '| notes:', len(preview), '| moment members:', {m: len(v) for m, v in member.items()})
+    if a.apply:
+        sys.exit('--apply is not enabled yet: the owner has not approved writing (2026-11-20). Nothing was written.')
+
+
+if __name__ == '__main__':
+    main()
