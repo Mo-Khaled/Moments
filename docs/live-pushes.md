@@ -205,3 +205,7 @@ Smoke: EN/AR home, product, Moments, wishlist, cart at 390 and 1440: no horizont
 Known, pre-existing: in Arabic the header is not sticky (rtl.css overflow-x:hidden); fixed in the Notes push (overflow-x: clip).
 Screenshots: D:\MOMENTS_Content\06_Website\review\push\live-header-*.png.
 Rollback: `git revert 6f86b58` range 483115e..6f86b58, or `git show 483115e:<file>` and push.
+
+### 2026-11-20 header fix: divider + flags (live, smoke passed)
+Pushed assets/moments.css + snippets/moments-tabbar.liquid (main e78d2d8). The purple divider was painted under the opaque `.header__row--top`; now drawn inset on the row (phone + desktop, EN/AR).
+Flags: proper Union Jack and Egypt (eagle) in the round language tab. Rollback: `git show 972391b:<file>` and push.
