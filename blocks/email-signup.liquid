@@ -207,7 +207,7 @@
     padding-inline-end: calc(var(--button-size) + var(--padding-sm));
 
     @media screen and (max-width: 749px) {
-      text-align: left;
+      text-align: start;
     }
   }
 
@@ -215,7 +215,7 @@
     padding-inline-end: calc(var(--button-actual-width) + var(--padding-xs) + var(--margin-xs));
 
     @media screen and (max-width: 749px) {
-      text-align: left;
+      text-align: start;
     }
   }
 
@@ -246,7 +246,7 @@
 
     position: absolute;
     height: calc(100% - (var(--button-offset) * 2) - (var(--border-width) * 2));
-    right: calc(var(--button-offset) + var(--border-width));
+    inset-inline-end: calc(var(--button-offset) + var(--border-width)); /* logical: on the left in Arabic, where the input leaves its room */
     top: calc(var(--button-offset) + var(--border-width));
     width: max-content;
 
@@ -274,7 +274,7 @@
   .email-signup__input--underline + .email-signup__button--integrated {
     --button-offset: calc(10% - var(--border-width));
 
-    right: 0;
+    inset-inline-end: 0;
 
     &.email-signup__button--text.button-unstyled {
       padding: 0;

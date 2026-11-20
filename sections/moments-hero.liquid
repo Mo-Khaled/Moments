@@ -169,6 +169,7 @@
       <article
         class="m-slide m-tone--{{ tint }}{% if poster != blank and block.settings.poster_fit == 'fill' %} m-slide--photo{% endif %}"
         data-moment="{{ key }}"
+        data-subject="{{ block.settings.subject_side | default: 'right' }}"
         data-has-video="{% if video != blank %}true{% else %}false{% endif %}"
         {{ block.shopify_attributes }}
       >
@@ -674,6 +675,53 @@
     }
   }
   .m-slide--photo .m-slide__scrim { display: block; }
+
+  /* Photo slides on desktop (2026-11-20): the text sits on the side AWAY from the product, in both languages. The side is a physical
+     one (the photo is not mirrored in Arabic), so "start"/"end" are chosen per direction. Arabic keeps right-aligned text inside the
+     box. The photo keeps the product in frame at every width (object-position on the product's side) and the scrim darkens the text side. */
+  @media screen and (min-width: 750px) {
+    .m-slide--photo[data-subject='right'] .m-slide__poster { object-position: 70% 50%; }
+    .m-slide--photo[data-subject='left'] .m-slide__poster { object-position: 30% 50%; }
+
+    /* text on the physical left (English already starts there) */
+    html[dir='rtl'] .m-slide--photo[data-subject='right'] .m-slide__copy {
+      justify-items: end;
+    }
+
+    html[dir='rtl'] .m-slide--photo[data-subject='right'] .m-slide__copy > * {
+      text-align: right;
+    }
+
+    /* text on the physical right */
+    html:not([dir='rtl']) .m-slide--photo[data-subject='left'] .m-slide__copy {
+      justify-items: end;
+      text-align: left;
+    }
+
+    /* centered product: text centered, the scrim is the bottom fade only */
+    .m-slide--photo[data-subject='center'] .m-slide__copy {
+      justify-items: center;
+      text-align: center;
+    }
+
+    .m-slide--photo[data-subject='right'] .m-slide__scrim,
+    html[dir='rtl'] .m-slide--photo[data-subject='right'] .m-slide__scrim {
+      background:
+        linear-gradient(to top, rgb(37 18 36 / calc(var(--m-hero-scrim, 78%) + 8%)) 0%, rgb(37 18 36 / 0.3) 34%, rgb(37 18 36 / 0) 60%),
+        linear-gradient(to right, rgb(37 18 36 / 0.62), rgb(37 18 36 / 0) 58%);
+    }
+
+    .m-slide--photo[data-subject='left'] .m-slide__scrim,
+    html[dir='rtl'] .m-slide--photo[data-subject='left'] .m-slide__scrim {
+      background:
+        linear-gradient(to top, rgb(37 18 36 / calc(var(--m-hero-scrim, 78%) + 8%)) 0%, rgb(37 18 36 / 0.3) 34%, rgb(37 18 36 / 0) 60%),
+        linear-gradient(to left, rgb(37 18 36 / 0.62), rgb(37 18 36 / 0) 58%);
+    }
+
+    .m-slide--photo[data-subject='center'] .m-slide__scrim {
+      background: linear-gradient(to top, rgb(37 18 36 / calc(var(--m-hero-scrim, 78%) + 8%)) 0%, rgb(37 18 36 / 0.4) 40%, rgb(37 18 36 / 0) 70%);
+    }
+  }
   .m-slide--photo .m-slide__copy, .m-slide--photo .m-slide__title, .m-slide--photo .m-slide__text, .m-slide--photo .m-slide__tag { color: #fff; }
   .m-slide--photo .m-btn--outline { color: #fff; border-color: #fff; }
   .m-slide--photo .m-btn--outline:hover { background: #fff; color: var(--m-plum); }
@@ -1012,6 +1060,18 @@
         { "type": "video", "id": "video_mobile", "label": "Mobile video (optional)", "info": "9:16. Not used on phones yet: phones show the poster." },
         { "type": "image_picker", "id": "poster", "label": "Poster image", "info": "The first thing shown and the LCP image. The All day slide falls back to the Island Sun Khadlaj photo (EXPERIMENTAL placeholder)." },
         { "type": "image_picker", "id": "poster_mobile", "label": "Mobile poster (optional)", "info": "Used on phones only, with Poster fit set to Fill. 1170x1920 (about 9:16). Desktop keeps the main poster." },
+        {
+          "type": "select",
+          "id": "subject_side",
+          "label": "Product position in the photo",
+          "info": "Desktop: the text goes on the other side, in English and in Arabic, so it never covers the product. Phones put the text under the photo.",
+          "options": [
+            { "value": "right", "label": "Right" },
+            { "value": "center", "label": "Center" },
+            { "value": "left", "label": "Left" }
+          ],
+          "default": "right"
+        },
         {
           "type": "select",
           "id": "poster_fit",
