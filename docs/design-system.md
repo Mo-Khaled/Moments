@@ -18,6 +18,8 @@ Page background and text colors still come from the theme color schemes (Customi
 
 ## 2. Color rules and contrast
 
+**Page surface (2026-11-20):** the whole page is white (#FCFCFA, brand guide 2026); the footer is the only dark surface and opens with a fade from white into plum. Pearl below now means #FCFCFA.
+
 | Pair | Ratio | Use |
 |---|---|---|
 | Plum on pearl | 13.6:1 | Body text, headings |

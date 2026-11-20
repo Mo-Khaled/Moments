@@ -292,8 +292,8 @@
     position: relative;
     isolation: isolate;
     overflow: hidden;
-    background: var(--m-plum-900);
-    color: var(--m-text-on-dark);
+    background: var(--m-surface);
+    color: var(--m-text);
     block-size: max(520px, 75svh);
   }
 
@@ -328,15 +328,16 @@
   .m-slide__bg {
     position: absolute;
     inset: 0;
-    background: var(--tile-bg);
+    background: transparent; /* white page (2026-11-20): the moment shows in its mark, not as a full-bleed colour */
     transform-origin: 70% 60%;
   }
 
   .m-slide__art {
-    --m-mark-ink: var(--tile-ink);
-    --m-mark-body: color-mix(in srgb, var(--tile-ink) 16%, transparent);
-    --m-mark-accent: var(--tile-accent);
-    --m-mark-gold: var(--tile-gold);
+    /* On white: plum line, the moment's mid tone as the body, the moment's deep colour (--m-live, set for the active slide) as accent */
+    --m-mark-ink: var(--m-plum);
+    --m-mark-body: var(--tile-body);
+    --m-mark-accent: var(--m-live);
+    --m-mark-gold: var(--m-live);
 
     position: absolute;
     inset-block-end: 16%;
@@ -371,7 +372,7 @@
     block-size: 116%;
     object-fit: cover;
     filter: blur(32px) saturate(1.1);
-    opacity: 0.9;
+    opacity: 0; /* white page: the photograph sits on white, no blurred field behind it */
   }
 
   .m-slide__media--fit .m-slide__poster {
@@ -402,7 +403,9 @@
     filter: drop-shadow(0 12px 18px rgb(37 18 36 / 0.28));
   }
 
+  /* White page (2026-11-20): no scrim, the copy sits on white beside the mark or photograph. */
   .m-slide__scrim {
+    display: none;
     position: absolute;
     inset: 0;
     background:
@@ -425,7 +428,7 @@
     gap: 16px;
     margin-inline: auto;
     padding-block-end: 112px;
-    color: var(--m-pearl);
+    color: var(--m-text);
   }
 
   .m-slide__tag {
@@ -451,6 +454,15 @@
     font-size: clamp(1rem, 1.4vw, 1.25rem);
     line-height: 1.5;
     text-wrap: pretty;
+  }
+
+  .m-hero .m-btn--outline {
+    color: var(--m-plum);
+  }
+
+  .m-hero .m-btn--outline:hover {
+    background: var(--m-plum);
+    color: var(--m-pearl);
   }
 
   .m-slide__actions {
@@ -486,16 +498,16 @@
     display: flex;
     gap: 4px;
     padding: 4px;
-    border: 1px solid rgb(250 246 242 / 0.4);
+    border: 1px solid rgb(59 30 58 / 0.18);
     border-radius: 9999px;
-    background: rgb(37 18 36 / 0.5);
+    background: var(--m-surface);
   }
 
   .m-switch__btn {
-    --m-mark-ink: var(--m-pearl);
+    --m-mark-ink: var(--m-plum);
     --m-mark-body: transparent;
-    --m-mark-accent: var(--m-nude);
-    --m-mark-gold: var(--m-nude);
+    --m-mark-accent: var(--m-berry-ink);
+    --m-mark-gold: var(--m-berry-ink);
     --mm-size: 22px;
 
     display: inline-flex;
@@ -508,7 +520,7 @@
     border: 0;
     border-radius: 9999px;
     background: transparent;
-    color: var(--m-pearl);
+    color: var(--m-plum);
     font: inherit;
     font-size: 0.8125rem;
     cursor: pointer;
@@ -527,12 +539,12 @@
   }
 
   .m-switch__btn[aria-pressed='true'] {
-    background: var(--m-pearl);
-    color: var(--m-plum);
-    --m-mark-ink: var(--m-plum);
-    --m-mark-body: var(--m-nude);
-    --m-mark-accent: var(--m-berry);
-    --m-mark-gold: var(--m-berry-ink);
+    background: var(--m-plum);
+    color: var(--m-pearl);
+    --m-mark-ink: var(--m-pearl);
+    --m-mark-body: transparent;
+    --m-mark-accent: var(--m-nude);
+    --m-mark-gold: var(--m-nude);
   }
 
   .m-switch__btn[aria-pressed='true'] .m-switch__label {
@@ -563,10 +575,10 @@
     place-items: center;
     inline-size: 44px;
     block-size: 44px;
-    border: 1px solid rgb(250 246 242 / 0.5);
+    border: 1px solid rgb(59 30 58 / 0.3);
     border-radius: 9999px;
-    background: rgb(37 18 36 / 0.5);
-    color: var(--m-pearl);
+    background: var(--m-surface);
+    color: var(--m-plum);
     cursor: pointer;
   }
 
@@ -593,7 +605,7 @@
 
   @media screen and (min-width: 750px) {
     .m-hero {
-      block-size: clamp(560px, 88svh, 960px);
+      block-size: clamp(540px, 74svh, 780px); /* white page (2026-11-20): shorter, no colour field to fill */
     }
 
     .m-slide__copy {

@@ -197,3 +197,10 @@ The owner was away and asked for the most reasonable, least destructive reading 
 - Slides: the 4 newest available products, then the 4 best-selling (Shopify's order) not already shown as New in. Shopify's best-selling order currently equals newest first for these brands, so Top sellers are the next products in that order.
 - The 14 collection templates: brand_new_in and brand_top_sellers removed, brand_slideshow added in their place. Labels brand_rows.new_in_tag, top_seller_tag, shop_now, slideshow_label (en, ar).
 - The owner's desktop browser showed an older preview theme (old filters, no rows); the live site was correct for visitors.
+
+## 2026-11-20 White page, plum footer with a fade
+- Owner (with the 2026 brand guidelines PDF): the website background white except the footer; the footer keeps its current colour with the fading effect. Owner away: "approve everything you find suitable".
+- White = Soft Off-White #FCFCFA, the guide's base (was pearl #FAF6F2): --m-pearl, --s-pearl, colour schemes 1, 2, 8 and the product card.
+- Dark bands made light: hero (moment shown by its mark on white, no colour field or scrim, shorter on desktop), brand strip (logos recoloured plum by an SVG filter), Shop by Moment, story, about steps, the empty hero photo slot. Sections set to scheme-3/scheme-5 inside main take scheme-1 (snippets/color-schemes.liquid); the footer group keeps scheme-3.
+- The footer opens with a 160 px (112 px phone) oklab fade from the page white into plum; the other band-to-band fades are gone. Homepage header no longer transparent (its pearl text would vanish on white).
+- Kept: plum announcement strip (guide: plum for thin bands), the coloured moment tiles, Give a moment card, brand-page slideshow, plum buttons and chips. The guide's new palette (plum #542747, rose buttons, new moment colours) is NOT applied: the owner asked for the background only.
