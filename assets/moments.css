@@ -1400,3 +1400,42 @@ html:root:root product-card .product-badges__badge--save {
   border-radius: 9999px;
   white-space: nowrap;
 }
+
+/* ---------- Page structure on a white page (2026-11-20, staging UI; owner task C) ----------
+   The page stays white; structure comes from one hairline colour (#E6DDE3, a plum-tinted grey), a divider under the header,
+   a very soft shadow under the sticky header once the page scrolls, and ONE vertical rhythm for every homepage section
+   (48px phone / 80px desktop each side). Where two white sections meet, a hairline marks the join (not inside the hero and
+   not after the brand strip, which carries its own lines). */
+html:root {
+  --m-hairline: #E6DDE3;
+  --m-home-y: 48px;
+}
+
+@media screen and (min-width: 750px) {
+  html:root {
+    --m-home-y: 80px;
+  }
+}
+
+/* (a) header divider, always visible */
+html:root:root #header-component {
+  border-block-end: 1px solid var(--m-hairline);
+}
+
+/* (b) soft shadow only once the page has scrolled (Horizon sets data-sticky-state="active" then) */
+html:root:root #header-component {
+  transition: box-shadow var(--m-dur-2) var(--m-ease);
+}
+
+html:root:root #header-component[data-sticky-state='active'] {
+  box-shadow: 0 2px 12px rgb(84 39 71 / 0.06);
+}
+
+/* (e) homepage: equal spacing for every section, hairline where two white sections touch */
+main:has(.m-hero) > .shopify-section > :is(.m-moments, .m-gift, .m-story, .section) {
+  padding-block: var(--m-home-y);
+}
+
+main:has(.m-hero) > .shopify-section + .shopify-section:not(:has(> .m-brands)):not(.shopify-section:has(> .m-brands) + .shopify-section) {
+  border-block-start: 1px solid var(--m-hairline);
+}
