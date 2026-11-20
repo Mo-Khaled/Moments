@@ -78,6 +78,63 @@ def storefront(base, handle):
         time.sleep(2)
 
 
+# "Famous" shortlist (owner, 2026-11-20): handle -> line. Within a line the list order is the "better-known" order; only one perfume
+# per line is shown in a note's list. Matched by product title against the catalogue; sold-out / non-perfume items are skipped at runtime.
+SHORTLIST = [
+    ('khamrah', 'khamrah'), ('khamrah-qahwa', 'khamrah'), ('yara-pink', 'yara'), ('bara-yellow', 'yara'), ('asad', 'asad'),
+    ('fakhar-black-fakhar-lattafa-black', 'fakhar'), ('fakhar-lattafa-white', 'fakhar'), ('ana-abiyedh-black-60-ml', 'ana-abiyedh'),
+    ('qaoed-al-forsan-gold', 'qaed-al-fursan'), ('badee-al-oud-white', 'badee'), ('badee-al-oud-amethyst', 'badee'),
+    ('badee-al-oud-red', 'badee'), ('badee-al-oud-oud-for-glory', 'badee'), ('oud-mood-yellow', 'oud-mood'), ('raghba-women', 'raghba'),
+    ('tariq-perfume', 'teriaq'), ('eclair', 'eclaire'), ('hayati-black', 'hayaati'), ('angham-lattafa', 'angham'),
+    ('ramz-lattafa-gold', 'ramz'), ('nebras-pride', 'nebras'), ('his-confession-black', 'his-confession'),
+    ('her-confession-white', 'her-confession'),
+    ('club-de-nuit-intense-man', 'cdn-intense-man'), ('club-de-nuit-iconic', 'cdn-iconic'), ('club-de-nuit-milestone', 'cdn-milestone'),
+    ('club-de-nuit-sillage', 'cdn-sillage'), ('club-de-nuit-sillage-1', 'cdn-sillage'), ('club-de-nuit-woman-1', 'cdn-woman'),
+    ('club-de-nuit-woman', 'cdn-woman'), ('club-de-nuit-urban-man-elixir', 'cdn-urban-elixir'),
+    ('odyssey-mandarin-sky-man', 'mandarin-sky'),
+    ('pm-9-black', '9pm'), ('9pm-elixir', '9pm'), ('bm-9-rebel-red', '9pm'), ('supremacy-silver-1', 'supremacy'),
+    ('supremacy-silver', 'supremacy'), ('supremacy-noir', 'supremacy'),
+    ('hawas-men', 'hawas'), ('hawas-ice', 'hawas'), ('hawas-elixir', 'hawas'), ('hawas-black', 'hawas'),
+    ('shiyaaka-blue', 'shiyaaka-blue'), ('island-vanilla-dunes-100ml', 'island-vanilla-dunes'),
+    ('ameer-al-oud-gold', 'ameer-al-oud'), ('liquid-brun', 'liquid-brun'),
+]
+LIST_TYPES = {'Perfume', 'Extrait de Parfum', 'Perfume Oil', 'Eau de Parfum'}
+NOT_A_BOTTLE = re.compile(r'set|perfumed spray|gift|mist|deodorant', re.I)
+LEVEL_RANK = {'star': 0, 'supporting': 1, 'touch': 2}
+
+
+def famous_lists(per_note, count=6):
+    """note handle -> ordered product handles: shortlist (strongest note first, one per line) then calculated fill (max 2 per brand)."""
+    order = {h: i for i, (h, _) in enumerate(SHORTLIST)}
+    line = dict(SHORTLIST)
+    out, detail = {}, {}
+    for note in NOTES:
+        rs = [r for r in per_note.get(note, []) if r['available'] and r['type'] in LIST_TYPES and not NOT_A_BOTTLE.search(r['title'])]
+        fam = sorted((r for r in rs if r['handle'] in line), key=lambda r: (LEVEL_RANK[r['level']], -r['points'], order[r['handle']]))
+        picked, used_lines = [], set()
+        for r in fam:
+            if line[r['handle']] in used_lines:
+                continue
+            used_lines.add(line[r['handle']])
+            picked.append(dict(r, badge=True))
+            if len(picked) == count:
+                break
+        per_brand = collections.Counter(r['brand'] for r in picked)
+        fill = sorted((r for r in rs if r['handle'] not in line and r['level'] in ('star', 'supporting')),
+                      key=lambda r: (-r['sales'], -r['points'], not r['full'], r['handle']))
+        for r in fill:
+            if len(picked) == count:
+                break
+            if per_brand[r['brand']] >= 2 or any(p['handle'] == r['handle'] for p in picked):
+                continue
+            picked.append(dict(r, badge=False))
+            per_brand[r['brand']] += 1
+        key = re.sub(r'[^a-z0-9]+', '-', note.lower()).strip('-')
+        out[key] = [r['handle'] for r in picked]
+        detail[key] = [(r['title'], r['level'], 'Most loved' if r['badge'] else 'calculated') for r in picked]
+    return out, detail
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--export', required=True)
@@ -128,7 +185,7 @@ def main():
             pts += 2 if note in key else 0
             level = 'star' if pts >= 5 else 'supporting' if pts >= 3 else 'touch'
             moms = [m for m in MOMENTS if h in member[m]]
-            rec = {'handle': h, 'title': n['title'], 'brand': n['vendor'].upper(), 'points': pts, 'level': level, 'full': full,
+            rec = {'handle': h, 'title': n['title'], 'type': n['productType'], 'brand': n['vendor'].upper(), 'points': pts, 'level': level, 'full': full,
                    'available': avail.get(h, False), 'season': val(n, 'fseason') or '', 'gender': val(n, 'gender') or '', 'moments': moms,
                    'sales': sales.get(h, 0)}
             per_note[note].append(rec)
@@ -182,6 +239,9 @@ def main():
         w = csv.DictWriter(f, fieldnames=['note', 'handle', 'title', 'points', 'level'])
         w.writeheader()
         w.writerows(strength_rows)
+    fam, fam_detail = famous_lists(per_note)
+    json.dump(fam, open(os.path.join(a.out, 'notes_famous.json'), 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
+    json.dump(fam_detail, open(os.path.join(a.out, 'notes_famous_preview.json'), 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
     print('preview written to', a.out, '| notes:', len(preview), '| moment members:', {m: len(v) for m, v in member.items()})
     if a.apply:
         sys.exit('--apply is not enabled yet: the owner has not approved writing (2026-11-20). Nothing was written.')
