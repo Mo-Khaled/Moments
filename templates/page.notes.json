@@ -1,0 +1,9 @@
+{
+  "sections": {
+    "notes": {
+      "type": "moments-notes",
+      "settings": {}
+    }
+  },
+  "order": ["notes"]
+}

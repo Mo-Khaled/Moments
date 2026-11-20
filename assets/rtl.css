@@ -24,6 +24,7 @@ html[dir='rtl'],
 html[dir='rtl'] body {
   max-width: 100%;
   overflow-x: hidden;
+  overflow-x: clip; /* 2026-11-20: clip, not hidden, so the body is not a scroll container and position: sticky works in Arabic */
 }
 
 html[dir='rtl'] body {

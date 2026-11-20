@@ -1,0 +1,673 @@
+{%- comment -%}
+  Notes page (2026-11-20, staging): a grid of the 37 fragrance notes. Tapping a note opens its card: a bottom sheet on phones
+  (closes with the X, a tap outside, Esc or a swipe down) and a centred window on desktop. The page behind does not scroll while it
+  is open; the URL becomes /pages/notes/<handle> and the browser back button closes it.
+  Data: assets/notes-data.json, built by scripts/notes-build-data.py from the owner's approved texts (notes_content.json, copied
+  as is) and the calculated data (scripts/notes-recalc.py). Perfume cards are read from /products/<handle>.js when a card opens.
+  Note strength dots are an estimate (labelled); no percentages anywhere.
+{%- endcomment -%}
+
+{%- liquid
+  assign is_ar = false
+  if request.locale.iso_code == 'ar'
+    assign is_ar = true
+  endif
+  assign root = routes.root_url
+  if root == '/'
+    assign root = ''
+  endif
+-%}
+
+<section
+  class="m-notes"
+  data-m-notes
+  data-src="{{ 'notes-data.json' | asset_url }}"
+  data-lang="{% if is_ar %}ar{% else %}en{% endif %}"
+  data-root="{{ root }}"
+  data-base="{{ routes.root_url | append: '/pages/notes' | replace: '//', '/' }}"
+  data-money="{{ shop.money_format | escape }}"
+  data-see-all="{{ routes.collections_url }}/bundle-perfumes?filter.p.m.filter.notes="
+>
+  <div class="m-wrap">
+    <header class="m-notes__head">
+      <h1 class="m-notes__title">{% if is_ar %}النوتات.{% else %}Notes.{% endif %}</h1>
+      <p class="m-notes__lede">
+        {%- if is_ar -%}اكتشف المكوّنات التي تصنع العطور: ما رائحتها، ومن أين تأتي، وأي عطورنا تحملها.
+        {%- else -%}Meet the ingredients behind every perfume: what each one smells like, where it comes from, and which of our perfumes carry it.
+        {%- endif -%}
+      </p>
+    </header>
+  </div>
+
+  <div class="m-notes__filters" role="toolbar" aria-label="{% if is_ar %}تصفية النوتات{% else %}Filter notes{% endif %}">
+    <div class="m-notes__chips" data-chips>
+      <button type="button" class="m-notes__chip m-notes__chip--reset" data-reset aria-pressed="true">{% if is_ar %}الكل{% else %}All{% endif %}</button>
+      <button type="button" class="m-notes__chip" data-f="season:summer" aria-pressed="false">{% if is_ar %}صيف{% else %}Summer{% endif %}</button>
+      <button type="button" class="m-notes__chip" data-f="season:winter" aria-pressed="false">{% if is_ar %}شتاء{% else %}Winter{% endif %}</button>
+      <button type="button" class="m-notes__chip" data-f="gender:men" aria-pressed="false">{% if is_ar %}رجالي{% else %}Men{% endif %}</button>
+      <button type="button" class="m-notes__chip" data-f="gender:women" aria-pressed="false">{% if is_ar %}نسائي{% else %}Women{% endif %}</button>
+      <button type="button" class="m-notes__chip" data-f="gender:unisex" aria-pressed="false">{% if is_ar %}للجنسين{% else %}Unisex{% endif %}</button>
+      {%- assign mh = 'fresh-moment,winter-moment,love-moment,night-moment,gift-moment,self-care-moment' | split: ',' -%}
+      {%- for h in mh -%}
+        {%- assign c = collections[h] -%}
+        {%- if c != blank -%}
+          <button type="button" class="m-notes__chip" data-f="moment:{{ h }}" aria-pressed="false">{{ c.title }}</button>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  </div>
+
+  <div class="m-wrap">
+    <p class="m-notes__count" data-count aria-live="polite"></p>
+    <ul class="m-notes__grid" data-grid></ul>
+    <noscript><p>{% if is_ar %}فعّل جافاسكربت لعرض النوتات.{% else %}Turn on JavaScript to see the notes.{% endif %}</p></noscript>
+  </div>
+
+  <dialog class="m-note" data-sheet aria-labelledby="m-note-title">
+    <div class="m-note__panel" data-panel>
+      <div class="m-note__grip" data-grip aria-hidden="true"><span></span></div>
+      <button type="button" class="m-note__close" data-close aria-label="{% if is_ar %}إغلاق{% else %}Close{% endif %}">
+        <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+      </button>
+      <div class="m-note__body" data-body></div>
+    </div>
+  </dialog>
+
+  <template data-t-labels>
+    {%- if is_ar -%}
+      {"learn":"اعرف أكثر","family":"العائلة","position":"موقعها في العطر","longevity":"الثبات","source":"المصدر","story":"حكاية قصيرة","pairs":"تتناغم مع","loved":"الأكثر حبًا","perfumes":"عطور تحمل هذه النوتة","seeAll":"عرض الكل","related":"نوتات قريبة","badge":"الأكثر حبًا","estimate":"قوة النوتة (تقدير)","star":"نجمة العطر","supporting":"داعمة","touch":"لمسة","top":"المقدمة","heart":"القلب","base":"القاعدة","shown":"نوتات","none":"لا توجد نوتات بهذه التصفية."}
+    {%- else -%}
+      {"learn":"Learn more","family":"Family","position":"Where it sits","longevity":"Longevity","source":"Where it comes from","story":"A short story","pairs":"Pairs well with","loved":"Most loved","perfumes":"Perfumes with this note","seeAll":"See all","related":"Related notes","badge":"Most loved","estimate":"Note strength (estimate)","star":"Star of the scent","supporting":"Supporting","touch":"A touch","top":"Top","heart":"Heart","base":"Base","shown":"notes","none":"No notes match these filters."}
+    {%- endif -%}
+  </template>
+</section>
+
+<script>
+  (() => {
+    const root = document.querySelector('[data-m-notes]');
+    if (!root) return;
+    const L = JSON.parse(root.querySelector('[data-t-labels]').innerHTML);
+    const ar = root.dataset.lang === 'ar';
+    const grid = root.querySelector('[data-grid]');
+    const sheet = root.querySelector('[data-sheet]');
+    const panel = root.querySelector('[data-panel]');
+    const body = root.querySelector('[data-body]');
+    const countEl = root.querySelector('[data-count]');
+    const base = root.dataset.base.replace(/\/$/, '');
+    const pageUrl = location.pathname + location.search;
+    const isPhone = () => matchMedia('(max-width: 749px)').matches;
+    const esc = (s) => String(s || '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
+    const name = (n) => (ar ? n.name_ar : n.name_en);
+    let notes = [], byHandle = {}, active = { season: new Set(), gender: new Set(), moment: new Set() }, openHandle = null;
+
+    const dots = (level) => {
+      const n = { star: 3, supporting: 2, touch: 1 }[level] || 1;
+      return `<span class="m-dots" role="img" aria-label="${esc(L.estimate + ': ' + L[level])}">${'●'.repeat(n)}${'○'.repeat(3 - n)}</span>`;
+    };
+    const tile = (n) => `<span class="m-notes__pic" aria-hidden="true"><span class="m-notes__ph">${esc(name(n).slice(0, 1))}</span></span>`;
+
+    const render = () => {
+      const shown = notes.filter((n) =>
+        (!active.season.size || active.season.has(n.season)) &&
+        (!active.gender.size || active.gender.has(n.gender)) &&
+        (!active.moment.size || n.moments.some((m) => active.moment.has(m))));
+      grid.innerHTML = shown.map((n) => `<li><a class="m-notes__item" href="${base}/${n.handle}" data-open="${n.handle}">${tile(n)}<span class="m-notes__name">${esc(name(n))}</span></a></li>`).join('');
+      countEl.textContent = shown.length ? `${shown.length} ${L.shown}` : L.none;
+      root.querySelector('[data-reset]').setAttribute('aria-pressed', String(!active.season.size && !active.gender.size && !active.moment.size));
+    };
+
+    const money = (cents) => {
+      const fmt = root.dataset.money || '{{amount}}';
+      const v = (cents / 100).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+      return fmt.replace(/\{\{\s*\w+\s*\}\}/, v);
+    };
+    const cache = {};
+    const product = (h) => cache[h] || (cache[h] = fetch(`${root.dataset.root}/products/${h}.js`).then((r) => (r.ok ? r.json() : null)).catch(() => null));
+
+    const fillPerfumes = async (n, row) => {
+      const max = isPhone() ? 4 : 6;
+      const items = n.loved.slice(0, max);
+      const data = await Promise.all(items.map((x) => product(x.h)));
+      row.innerHTML = items.map((x, i) => {
+        const p = data[i];
+        if (!p) return '';
+        const img = p.featured_image ? `${p.featured_image.replace(/^\/\//, 'https://')}${p.featured_image.includes('?') ? '&' : '?'}width=360` : '';
+        return `<li class="m-pcard"><a href="${root.dataset.root}/products/${p.handle}">
+          <span class="m-pcard__img">${img ? `<img src="${img}" alt="" loading="lazy" width="360" height="360">` : ''}${x.badge ? `<span class="m-pcard__badge">${esc(L.badge)}</span>` : ''}</span>
+          <span class="m-pcard__name">${esc(p.title)}</span>
+          <span class="m-pcard__price">${money(p.price)}</span>
+          ${dots(x.level)}</a></li>`;
+      }).join('');
+    };
+
+    const cardHtml = (n) => `
+      <div class="m-note__hero">${tile(n)}</div>
+      <h2 class="m-note__title" id="m-note-title">${esc(name(n))}.</h2>
+      <p class="m-note__simple">${esc(ar ? n.simple_ar : n.simple_en)}</p>
+      <details class="m-note__more">
+        <summary>${esc(L.learn)}</summary>
+        <dl class="m-note__facts">
+          <div><dt>${esc(L.family)}</dt><dd>${esc(ar ? n.family_ar : n.family_en)}</dd></div>
+          <div><dt>${esc(L.position)}</dt><dd>${esc(L[n.position] || n.position)}</dd></div>
+          <div><dt>${esc(L.longevity)}</dt><dd>${esc(ar ? n.longevity_ar : n.longevity_en)}</dd></div>
+        </dl>
+        <h3>${esc(L.source)}</h3><p>${esc(ar ? n.source_ar : n.source_en)}</p>
+        <h3>${esc(L.story)}</h3><p>${esc(ar ? n.story_ar : n.story_en)}</p>
+      </details>
+      <div class="m-note__row-head"><h3>${esc(L.loved)}</h3><a href="${root.dataset.seeAll}${encodeURIComponent(n.name_en)}">${esc(L.seeAll)} ${ar ? '‹' : '›'}</a></div>
+      <p class="m-note__legend">${esc(L.estimate)}: ${dots('star')} ${esc(L.star)} · ${dots('supporting')} ${esc(L.supporting)} · ${dots('touch')} ${esc(L.touch)}</p>
+      <ul class="m-note__row" data-row aria-label="${esc(L.perfumes)}"></ul>
+      <h3 class="m-note__rel-head">${esc(L.related)}</h3>
+      <ul class="m-note__related">${(n.pairs || []).filter((h) => byHandle[h]).map((h) => `<li><a href="${base}/${h}" data-open="${h}">${esc(name(byHandle[h]))}</a></li>`).join('')}</ul>`;
+
+    let lastFocus = null;
+    const open = (h, push = true) => {
+      const n = byHandle[h];
+      if (!n) return;
+      openHandle = h;
+      body.innerHTML = cardHtml(n);
+      body.scrollTop = 0;
+      fillPerfumes(n, body.querySelector('[data-row]'));
+      if (!sheet.open) {
+        lastFocus = document.activeElement;
+        document.documentElement.classList.add('m-notes-lock');
+        sheet.showModal();
+        panel.style.transform = '';
+      }
+      document.title = `${name(n)} · MOMENTS`;
+      if (push) history.pushState({ note: h }, '', `${base}/${h}`);
+    };
+    const close = (pop = false) => {
+      if (!sheet.open) return;
+      sheet.close();
+      document.documentElement.classList.remove('m-notes-lock');
+      openHandle = null;
+      if (!pop && history.state && history.state.note) history.back();
+      if (lastFocus) lastFocus.focus();
+    };
+
+    root.addEventListener('click', (e) => {
+      const a = e.target.closest('[data-open]');
+      if (a) { e.preventDefault(); open(a.dataset.open, !sheet.open || openHandle !== a.dataset.open); return; }
+      const chip = e.target.closest('[data-f]');
+      if (chip) {
+        const [g, v] = chip.dataset.f.split(':');
+        active[g].has(v) ? active[g].delete(v) : active[g].add(v);
+        chip.setAttribute('aria-pressed', String(active[g].has(v)));
+        render();
+        return;
+      }
+      if (e.target.closest('[data-reset]')) {
+        Object.values(active).forEach((s) => s.clear());
+        root.querySelectorAll('[data-f]').forEach((c) => c.setAttribute('aria-pressed', 'false'));
+        render();
+      }
+    });
+    root.querySelector('[data-close]').addEventListener('click', () => close());
+    sheet.addEventListener('click', (e) => { if (e.target === sheet) close(); });
+    sheet.addEventListener('cancel', (e) => { e.preventDefault(); close(); });
+    window.addEventListener('popstate', (e) => {
+      const h = e.state && e.state.note;
+      if (h) open(h, false); else close(true);
+    });
+
+    // swipe down to close (phone): only from the grip or when the body is scrolled to the top
+    let y0 = null, dy = 0;
+    panel.addEventListener('touchstart', (e) => {
+      if (!isPhone()) return;
+      if (e.target.closest('[data-grip]') || body.scrollTop <= 0) { y0 = e.touches[0].clientY; dy = 0; }
+    }, { passive: true });
+    panel.addEventListener('touchmove', (e) => {
+      if (y0 === null) return;
+      dy = Math.max(0, e.touches[0].clientY - y0);
+      if (dy > 0) panel.style.transform = `translateY(${dy}px)`;
+    }, { passive: true });
+    panel.addEventListener('touchend', () => {
+      if (y0 === null) return;
+      if (dy > 110) close(); else panel.style.transform = '';
+      y0 = null;
+    });
+
+    fetch(root.dataset.src).then((r) => r.json()).then((d) => {
+      notes = d.notes.slice().sort((a, b) => b.count - a.count);
+      notes.forEach((n) => (byHandle[n.handle] = n));
+      render();
+      const m = location.pathname.match(/\/pages\/notes\/([a-z0-9-]+)/) || location.search.match(/[?&]note=([a-z0-9-]+)/);
+      if (m && byHandle[m[1]]) open(m[1], false);
+    });
+  })();
+</script>
+
+{% stylesheet %}
+  .m-notes {
+    padding-block: var(--m-home-y, 48px);
+  }
+
+  .m-notes__head {
+    display: grid;
+    gap: 8px;
+    margin-block-end: 16px;
+  }
+
+  .m-notes__title {
+    margin: 0;
+    font-size: var(--m-h1);
+  }
+
+  .m-notes__lede {
+    margin: 0;
+    max-inline-size: 52ch;
+    color: var(--m-text-muted);
+  }
+
+  /* Filters: one horizontally scrolling row of chips, sticky under the header, no wrapping. */
+  .m-notes__filters {
+    position: sticky;
+    inset-block-start: var(--header-height, 64px);
+    z-index: 5;
+    background: var(--m-surface);
+    border-block-end: 1px solid var(--m-hairline, #E6DDE3);
+  }
+
+  .m-notes__chips {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    padding: 10px var(--m-gutter, 16px);
+    scrollbar-width: none;
+    overscroll-behavior-x: contain;
+  }
+
+  .m-notes__chips::-webkit-scrollbar {
+    display: none;
+  }
+
+  .m-notes__chip {
+    flex: 0 0 auto;
+    min-block-size: 44px;
+    padding-inline: 16px;
+    border: 1px solid var(--m-hairline, #E6DDE3);
+    border-radius: 9999px;
+    background: var(--m-surface);
+    color: var(--m-plum);
+    font: inherit;
+    font-size: 0.875rem;
+    white-space: nowrap;
+    cursor: pointer;
+  }
+
+  .m-notes__chip[aria-pressed='true'] {
+    background: var(--m-plum);
+    border-color: var(--m-plum);
+    color: var(--m-pearl);
+  }
+
+  .m-notes__count {
+    margin: 16px 0 12px;
+    font-size: 0.875rem;
+    color: var(--m-text-muted);
+  }
+
+  .m-notes__grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  @media screen and (min-width: 750px) {
+    .m-notes__grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 20px;
+    }
+  }
+
+  @media screen and (min-width: 1100px) {
+    .m-notes__grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+  }
+
+  .m-notes__item {
+    display: grid;
+    gap: 8px;
+    min-block-size: 44px;
+    color: var(--m-plum);
+    text-decoration: none;
+  }
+
+  /* Fixed square, so pictures never shift the layout. Until the owner's pictures arrive, a tinted tile with the initial. */
+  .m-notes__pic {
+    display: grid;
+    place-items: center;
+    aspect-ratio: 1 / 1;
+    border-radius: 16px;
+    background: #F7F3F5;
+    overflow: hidden;
+  }
+
+  .m-notes__pic img {
+    inline-size: 100%;
+    block-size: 100%;
+    object-fit: cover;
+  }
+
+  .m-notes__ph {
+    font-family: var(--font-heading--family);
+    font-size: clamp(2rem, 9vw, 3.5rem);
+    color: color-mix(in srgb, var(--m-plum) 45%, transparent);
+  }
+
+  .m-notes__name {
+    font-family: var(--font-heading--family);
+    font-size: 1.125rem;
+    text-align: center;
+  }
+
+  /* The card: bottom sheet on phones, centred window on desktop. */
+  html.m-notes-lock,
+  html.m-notes-lock body {
+    overflow: hidden;
+  }
+
+  .m-note {
+    padding: 0;
+    border: 0;
+    background: transparent;
+    max-inline-size: none;
+    max-block-size: none;
+    inline-size: 100%;
+    block-size: 100%;
+    margin: 0;
+  }
+
+  .m-note::backdrop {
+    background: rgb(29 15 28 / 0.45);
+  }
+
+  .m-note__panel {
+    position: absolute;
+    inset-inline: 0;
+    inset-block-end: 0;
+    display: flex;
+    flex-direction: column;
+    max-block-size: 88dvh;
+    border-radius: 20px 20px 0 0;
+    background: var(--m-surface);
+    color: var(--m-plum);
+    transition: transform var(--m-dur-2) var(--m-ease);
+  }
+
+  .m-note[open] .m-note__panel {
+    animation: m-note-up var(--m-dur-3) var(--m-ease);
+  }
+
+  @keyframes m-note-up {
+    from { transform: translateY(100%); }
+  }
+
+  @media screen and (min-width: 750px) {
+    .m-note__panel {
+      inset: 50% auto auto 50%;
+      transform: translate(-50%, -50%);
+      inline-size: min(720px, 92vw);
+      max-block-size: 86vh;
+      border-radius: 20px;
+    }
+
+    html[dir='rtl'] .m-note__panel {
+      inset: 50% 50% auto auto;
+      transform: translate(50%, -50%);
+    }
+
+    .m-note[open] .m-note__panel {
+      animation: none;
+    }
+
+    .m-note__grip {
+      display: none;
+    }
+  }
+
+  .m-note__grip {
+    display: grid;
+    place-items: center;
+    block-size: 24px;
+    flex: none;
+  }
+
+  .m-note__grip span {
+    inline-size: 40px;
+    block-size: 4px;
+    border-radius: 4px;
+    background: var(--m-hairline, #E6DDE3);
+  }
+
+  .m-note__close {
+    position: absolute;
+    inset-block-start: 8px;
+    inset-inline-end: 8px;
+    z-index: 1;
+    display: grid;
+    place-items: center;
+    inline-size: 44px;
+    block-size: 44px;
+    border: 0;
+    border-radius: 9999px;
+    background: var(--m-surface);
+    color: var(--m-plum);
+    cursor: pointer;
+  }
+
+  .m-note__body {
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    padding: 4px 20px calc(24px + env(safe-area-inset-bottom, 0px));
+  }
+
+  .m-note__hero .m-notes__pic {
+    inline-size: min(180px, 46vw);
+    margin-inline: auto;
+  }
+
+  .m-note__title {
+    margin: 16px 0 8px;
+    text-align: center;
+    font-size: var(--m-h2);
+  }
+
+  .m-note__simple {
+    margin: 0 auto 16px;
+    max-inline-size: 46ch;
+    text-align: center;
+    font-size: 1.0625rem;
+    line-height: 1.55;
+  }
+
+  .m-note__more {
+    border-block: 1px solid var(--m-hairline, #E6DDE3);
+    margin-block: 8px 20px;
+  }
+
+  .m-note__more summary {
+    display: flex;
+    align-items: center;
+    min-block-size: 48px;
+    cursor: pointer;
+    font-weight: 600;
+  }
+
+  .m-note__more h3 {
+    margin: 16px 0 4px;
+    font-size: 1rem;
+  }
+
+  .m-note__more p {
+    margin: 0;
+    line-height: 1.6;
+    color: var(--m-text-muted);
+  }
+
+  .m-note__facts {
+    display: grid;
+    gap: 8px;
+    margin: 0 0 8px;
+  }
+
+  .m-note__facts div {
+    display: grid;
+    grid-template-columns: 9.5em 1fr;
+    gap: 8px;
+  }
+
+  .m-note__facts dt {
+    color: var(--m-text-muted);
+  }
+
+  .m-note__facts dd {
+    margin: 0;
+  }
+
+  .m-note__row-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  .m-note__row-head h3,
+  .m-note__rel-head {
+    margin: 0;
+    font-family: var(--font-heading--family);
+    font-size: 1.375rem;
+    font-weight: 400;
+  }
+
+  .m-note__row-head a {
+    min-block-size: 44px;
+    display: inline-flex;
+    align-items: center;
+    color: var(--m-berry-ink);
+  }
+
+  .m-note__legend {
+    margin: 2px 0 10px;
+    font-size: 0.75rem;
+    color: var(--m-text-muted);
+  }
+
+  /* Perfume row: swipes sideways with snap on phones; a 3-column grid on desktop. */
+  .m-note__row {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: 44%;
+    gap: 12px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    margin: 0 -20px 24px;
+    padding: 0 20px 6px;
+    list-style: none;
+    scrollbar-width: none;
+  }
+
+  @media screen and (min-width: 750px) {
+    .m-note__row {
+      grid-auto-flow: row;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      overflow: visible;
+      margin-inline: 0;
+      padding-inline: 0;
+    }
+  }
+
+  .m-pcard {
+    scroll-snap-align: start;
+  }
+
+  .m-pcard a {
+    display: grid;
+    gap: 4px;
+    color: var(--m-plum);
+    text-decoration: none;
+  }
+
+  .m-pcard__img {
+    position: relative;
+    display: block;
+    aspect-ratio: 1 / 1;
+    border-radius: 12px;
+    background: #F7F3F5;
+    overflow: hidden;
+  }
+
+  .m-pcard__img img {
+    inline-size: 100%;
+    block-size: 100%;
+    object-fit: contain;
+    mix-blend-mode: multiply;
+  }
+
+  .m-pcard__badge {
+    position: absolute;
+    inset-block-start: 8px;
+    inset-inline-start: 8px;
+    padding: 3px 8px;
+    border-radius: 9999px;
+    background: var(--m-plum);
+    color: var(--m-pearl);
+    font-size: 0.6875rem;
+  }
+
+  .m-pcard__name {
+    font-family: var(--font-heading--family);
+    font-size: 0.9375rem;
+    line-height: 1.25;
+  }
+
+  .m-pcard__price {
+    font-size: 0.875rem;
+  }
+
+  .m-dots {
+    color: var(--m-berry-ink);
+    letter-spacing: 1px;
+    font-size: 0.8125rem;
+  }
+
+  .m-note__related {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 10px 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .m-note__related a {
+    display: inline-flex;
+    align-items: center;
+    min-block-size: 44px;
+    padding-inline: 16px;
+    border: 1px solid var(--m-hairline, #E6DDE3);
+    border-radius: 9999px;
+    color: var(--m-plum);
+    text-decoration: none;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .m-note[open] .m-note__panel {
+      animation: none;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "MOMENTS notes",
+  "limit": 1,
+  "settings": [],
+  "presets": [{ "name": "MOMENTS notes" }]
+}
+{% endschema %}
