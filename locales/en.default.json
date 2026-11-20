@@ -706,6 +706,8 @@
     "title": "Bundle",
     "line": "Choose {{ count }} or more bottles. Pay once.",
     "line_tiers": "Choose {{ count }} or more bottles. {{ first }} from bottle {{ n1 }}, {{ second }} from bottle {{ n2 }}.",
+    "offer": "Pick 3 or more bottles and get 10% off all of them. Free delivery over EGP 3,000.",
+    "perk_discount": "10% off",
     "slot": "Slot {{ n }}",
     "empty_slot": "Empty slot {{ n }}, add a bottle",
     "remove": "Remove {{ title }} from the bundle",

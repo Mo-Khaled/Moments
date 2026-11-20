@@ -99,6 +99,17 @@
   class="product-card"
   data-moment-host
   data-product-id="{{ product.id }}"
+  {%- comment -%} Bundle eligibility by collection handle (handles are not translated; product types are). {%- endcomment -%}
+  {%- liquid
+    assign in_bundle = false
+    for c in product.collections
+      if c.handle == 'bundle-perfumes'
+        assign in_bundle = true
+        break
+      endif
+    endfor
+  -%}
+  data-bundle-eligible="{{ in_bundle }}"
   data-product-variants-size="{{ product.variants.size }}"
   id="product-card-{{ block.id }}"
   data-product-transition="{{ settings.transition_to_main_product }}"

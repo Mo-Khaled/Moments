@@ -16,6 +16,10 @@
 
 {%- liquid
   assign min_items = section.settings.min_items
+  assign tier1_label = section.settings.tier1_label | default: 'bundle.perk_discount'
+  if tier1_label == 'bundle.perk_discount'
+    assign tier1_label = 'bundle.perk_discount' | t
+  endif
   assign max_items = section.settings.max_items
   capture chips
     render 'moments-config', part: 'handles'
@@ -39,7 +43,7 @@
   data-max="{{ max_items }}"
   data-threshold="{{ settings.moments_free_shipping | times: 100 }}"
   data-tiers="{{ section.settings.tiers_enabled }}"
-  data-perks="{%- if section.settings.tiers_enabled -%}{{ section.settings.tier1_count }}|{{ section.settings.tier1_label | escape }}~{{ section.settings.tier2_count }}|{{ section.settings.tier2_label | escape }}{%- endif -%}"
+  data-perks="{%- if section.settings.tiers_enabled -%}{{ section.settings.tier1_count }}|{{ tier1_label | escape }}~{{ section.settings.tier2_count }}|{{ section.settings.tier2_label | escape }}{%- endif -%}"
   data-tiers-confirmed="{{ section.settings.discount_confirmed }}"
   data-tier-percent="{{ section.settings.tier_percent }}"
   data-t-added="{{ 'bundle.added' | t: title: '__T__' | escape }}"
@@ -58,7 +62,11 @@
       <header class="m-bundle__head">
         <h1 class="m-bundle__title">{{ 'bundle.title' | t }}<span class="m-bundle__dot">.</span></h1>
         <p class="m-bundle__line">
-          {%- if section.settings.tiers_enabled and section.settings.tier1_label != blank and section.settings.tier2_label != blank -%}
+          {%- comment -%} The real offer (2026-11-20): automatic discounts "Bundle: 10% off 3+ bottles" (collection bundle-perfumes)
+            and "Free delivery over EGP 3,000 (Egypt)". Shown only when "Discount mechanism confirmed" is on. {%- endcomment -%}
+          {%- if section.settings.tiers_enabled and section.settings.discount_confirmed -%}
+            {{ 'bundle.offer' | t }}
+          {%- elsif section.settings.tiers_enabled and section.settings.tier1_label != blank and section.settings.tier2_label != blank -%}
             {{ 'bundle.line_tiers' | t: count: min_items, first: section.settings.tier1_label, n1: section.settings.tier1_count, second: section.settings.tier2_label, n2: section.settings.tier2_count }}
           {%- else -%}
             {{ 'bundle.line' | t: count: min_items }}
@@ -88,7 +96,7 @@
 
     <div class="m-bundle__tools">
       <div class="m-bundle__chips" role="group" aria-label="{{ 'bundle.filters' | t }}">
-        <button class="m-chip" type="button" data-m-chip="/collections/all" aria-pressed="true">{{ 'bundle.all' | t }}</button>
+        <button class="m-chip" type="button" data-m-chip="{{ routes.collections_url }}/{{ section.settings.pool | default: 'bundle-perfumes' }}" aria-pressed="true">{{ 'bundle.all' | t }}</button>
         {%- for handle in chips -%}
           {%- assign c = collections[handle] -%}
           {%- if c != blank -%}
@@ -622,7 +630,9 @@
       });
 
       // ---- grid: real product cards from the collection and search pages
-      let source = '/collections/all';
+      // The pool (2026-11-20): only bottles in the "Bundle perfumes" collection count toward the 10% discount, so the grid keeps
+      // only those cards, whichever chip or search produced them (product-card carries data-bundle-eligible from the collection).
+      let source = root.querySelector('[data-m-chip]').dataset.mChip;
       let page = 1;
       let sectionId = '';
       let query = '';
@@ -636,6 +646,8 @@
       const decorate = (li) => {
         const link = li.querySelector('a[href*="/products/"]');
         if (!link) return null;
+        const card = li.querySelector('product-card');
+        if (card && card.dataset.bundleEligible === 'false') return null;
         const handle = (link.getAttribute('href').split('/products/')[1] || '').split('?')[0];
         const sold = /sold out/i.test(li.textContent);
         const btn = document.createElement('button');
