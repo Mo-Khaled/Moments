@@ -24,9 +24,9 @@
   <div class="m-ship{% if remaining <= 0 %} m-ship--done{% endif %}" role="status">
     <p class="m-ship__text">
       {%- if remaining > 0 -%}
-        {{ 'cart_page.ship_more' | t: amount: remaining_money }}
+        <svg class="m-ship__icon" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 6.5h11v9h-11z"/><path d="M13.5 9.5h4l3 3.2v2.8h-7z"/><circle cx="7" cy="17.5" r="1.8"/><circle cx="17" cy="17.5" r="1.8"/></svg><span>{{ 'cart_page.ship_more' | t: amount: remaining_money }}</span>
       {%- else -%}
-        {{ 'cart_page.ship_done' | t }}
+        <svg class="m-ship__icon" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.5"/><path d="M7.8 12.4l3 3 5.4-6"/></svg><span>{{ 'cart_page.ship_done' | t }}</span>
       {%- endif -%}
     </p>
     <span class="m-ship__track" aria-hidden="true"><span class="m-ship__fill" style="--m-ship: {{ percent }}%"></span></span>
@@ -34,27 +34,36 @@
 {%- endif -%}
 
 {% stylesheet %}
+  /* Free-shipping box: truck + message on one row, thick rounded bar, soft tint, same card radius and border as the cart cards.
+     Progress is brand berry; when reached the bar is full in the brand plum with a check (green looked out of place). */
   .m-ship {
     display: grid;
-    gap: 8px;
-    padding: 12px 14px;
+    gap: 12px;
+    padding: 14px 16px;
     border: 1px solid var(--m-card-border);
-    border-radius: 12px;
-    background: var(--m-card-frame);
+    border-radius: 16px;
+    background: #F7F3F5;
   }
 
   .m-ship__text {
+    display: flex;
+    align-items: center;
+    gap: 10px;
     margin: 0;
-    font-size: 0.875rem;
+    font-family: var(--font-body--family);
+    font-size: 0.9375rem;
+    font-weight: 500;
     line-height: 1.35;
     color: var(--m-plum);
   }
 
+  .m-ship__icon { flex: none; color: var(--m-plum); }
+
   .m-ship__track {
     display: block;
-    block-size: 6px;
+    block-size: 10px;
     border-radius: 9999px;
-    background: color-mix(in srgb, var(--m-plum) 12%, transparent);
+    background: color-mix(in srgb, var(--m-plum) 14%, transparent);
     overflow: hidden;
   }
 
@@ -64,20 +73,12 @@
     block-size: 100%;
     border-radius: inherit;
     background: var(--m-berry);
-    transform-origin: left;
   }
 
-  html[dir='rtl'] .m-ship__fill {
-    margin-inline-start: auto;
-  }
-
-  .m-ship--done .m-ship__fill {
-    background: var(--moment-fresh-field);
-  }
+  html[dir='rtl'] .m-ship__fill { margin-inline-start: auto; }
+  .m-ship--done .m-ship__fill { background: var(--m-plum); }
 
   @media (prefers-reduced-motion: no-preference) {
-    .m-ship__fill {
-      transition: inline-size var(--m-dur-3) var(--m-ease);
-    }
+    .m-ship__fill { transition: inline-size var(--m-dur-3) var(--m-ease); }
   }
 {% endstylesheet %}

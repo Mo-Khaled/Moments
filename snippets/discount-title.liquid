@@ -1,0 +1,11 @@
+{%- doc -%}
+  Shows a discount title. The store's own automatic discount "Bundle: 10% off 3+ bottles" is shown from the theme translations
+  (moments_cart.bundle_discount) so it reads correctly in Arabic (right-to-left, Arabic numerals) and without the "Bundle:" prefix.
+  Any other discount title is shown as it is. The discount itself is not changed.
+  @param {string} title - the discount application title
+{%- enddoc -%}
+{%- if title contains '10% off 3+ bottles' -%}
+  {{- 'moments_cart.bundle_discount' | t -}}
+{%- else -%}
+  {{- title | escape -}}
+{%- endif -%}

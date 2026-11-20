@@ -1488,3 +1488,46 @@ html[dir='rtl'] #wg-myModal {
   direction: rtl;
   text-align: start;
 }
+
+/* ---------------------------------------------------------------------------------------------------------------------------
+   Cart summary (page + drawer), 2026-11-21: one type system. Body font for labels and text, serif for the total.
+   The checkout and express buttons are drawn by Shopify / the payment provider and are NOT restyled; only the space around them is.
+   --------------------------------------------------------------------------------------------------------------------------- */
+html:root:root :is(.cart__summary-totals, .cart__total-container, .cart-actions, .cart-discount, .cart__original-total-container) {
+  font-family: var(--font-body--family);
+  font-style: normal;
+}
+
+html:root:root :is(.cart-discount, .cart-discount *, .cart__total-label, .cart__original-total-label) {
+  font-family: var(--font-body--family);
+  font-weight: 500;
+  font-size: 1rem;
+  letter-spacing: normal;
+  text-transform: none;
+}
+
+html:root:root :is(.cart__total-value, .cart__original-total-value) {
+  font-family: var(--font-heading--family);
+  font-weight: 400;
+}
+
+html:root:root .cart__total-value { font-size: 1.75rem; line-height: 1.1; }
+
+html:root:root .cart__ctas { display: grid; gap: 12px; inline-size: 100%; }
+html:root:root .cart__ctas .additional-checkout-buttons { inline-size: 100%; margin: 0; }
+
+html:root:root .m-cart-claims {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+  margin-block-start: 20px;
+  padding-block-start: 16px;
+  border-block-start: 1px solid var(--m-hairline, #E6DDE3);
+  font-family: var(--font-body--family);
+  font-size: 0.875rem;
+  color: var(--m-plum);
+}
+
+@media screen and (min-width: 750px) {
+  html:root:root .m-cart-claims { grid-template-columns: repeat(auto-fit, minmax(max-content, 1fr)); gap: 10px 16px; }
+}

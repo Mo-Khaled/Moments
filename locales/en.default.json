@@ -1460,6 +1460,9 @@
     "shop_now": "Shop now",
     "slideshow_label": "{{ brand }}: new in and top sellers"
   },
+  "moments_cart": {
+    "bundle_discount": "10% off 3+ bottles"
+  },
   "tabbar": {
     "label": "Main",
     "home": "Home",

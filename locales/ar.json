@@ -5694,6 +5694,9 @@
     "shop_now": "تسوق الآن",
     "slideshow_label": "{{ brand }}: وصل حديثاً والأكثر مبيعاً"
   },
+  "moments_cart": {
+    "bundle_discount": "خصم ١٠٪ على ٣ زجاجات أو أكثر"
+  },
   "tabbar": {
     "label": "التنقل الرئيسي",
     "home": "الرئيسية",

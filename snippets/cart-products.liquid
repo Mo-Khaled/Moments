@@ -221,7 +221,7 @@
                       role="list"
                     >
                       {%- for discount in item.line_level_discount_allocations -%}
-                        <li>{{ discount.discount_application.title | escape }}</li>
+                        <li class="m-discount-title">{% render 'discount-title', title: discount.discount_application.title %}</li>
                       {%- endfor -%}
                     </ul>
                   {% endif %}
@@ -764,6 +764,8 @@
       transform: translate(0, 0);
     }
   }
+
+  .m-discount-title { unicode-bidi: plaintext; text-align: start; }
 
   .cart-items__properties {
     display: block;
