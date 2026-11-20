@@ -608,7 +608,10 @@
         const need = Math.max(0, min - count);
         let hint = '';
         if (need > 0) hint = T('tAddMore', { __C__: need });
-        else if (threshold && subtotal < threshold) hint = T('tShippingHint', { __A__: money(threshold - subtotal) });
+        // Free delivery is checked AFTER the bundle discount (Shopify's automatic free-shipping minimum counts the discounted
+        // subtotal), so the hint uses the same figure the cart and checkout use (2026-11-20).
+        const discounted = tiersOn && confirmed && tierPercent > 0 && count >= min ? subtotal - Math.round(subtotal * tierPercent / 100) : subtotal;
+        if (need === 0 && threshold && discounted < threshold) hint = T('tShippingHint', { __A__: money(threshold - discounted) });
         $('[data-m-hint]').textContent = hint;
         const saving = $('[data-m-saving]');
         if (tiersOn && confirmed && tierPercent > 0 && count >= min) { saving.hidden = false; saving.textContent = T('tSaving', { __A__: money(Math.round(subtotal * tierPercent / 100)) }); } else { saving.hidden = true; }
