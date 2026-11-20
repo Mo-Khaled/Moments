@@ -15,7 +15,7 @@ Outputs (--out DIR): notes-preview.json, notes-preview.csv, product-strength.csv
 --apply needs SHOPIFY_ADMIN_TOKEN (a custom-app Admin API token; allowed on Basic) and writes ONLY the CALC fields of each note.
 
 Rules
-  Strength points = layer (base +2, heart +1, top 0) + order in that layer (1st +2, 2nd +1) + note in the product name (+3)
+  Strength points = layer (base +2, heart +1, top +1; owner 2026-11-20) + order in that layer (1st +2, 2nd +1) + note in the product name (+3)
                     + note in our key notes filter.notes (+2). 5+ = star, 3-4 = supporting, 0-2 = touch.
   Season tag   : winter (or summer) when it is >= 50% of the note's perfumes and >= 15 points above the other season.
   Gender tag   : men / women when that gender is >= 45%; otherwise unisex.
@@ -121,7 +121,7 @@ def main():
             if note not in present:
                 continue
             pts = 0
-            for L, w in (('base', 2), ('heart', 1), ('top', 0)):
+            for L, w in (('base', 2), ('heart', 1), ('top', 1)):
                 if note in layers[L]:
                     pts = max(pts, w + {0: 2, 1: 1}.get(layers[L].index(note), 0))
             pts += 3 if re.search(r'\b%s\b' % re.escape(note.lower()), title) else 0
