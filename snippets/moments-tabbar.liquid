@@ -1,0 +1,213 @@
+{%- doc -%}
+  Phone tab bar (2026-11-20, owner request): a fixed bottom navigation on phones only (under 750px). Five tabs, the ones a
+  shopper needs to move around MOMENTS with one thumb: Home, Moments (the "find your moment" page), Bundle, Cart (with the live
+  count; opens the cart drawer) and Account. No wishlist (the store has none) and no AI.
+
+  Look: the page white with one hairline, plum line icons and labels (Readex Pro 11px), the active tab marked in rose (brand guide:
+  "Rose marks the active tab"). RTL follows the document direction. It respects the iPhone home indicator (safe-area inset).
+  The product page's sticky add-to-cart bar and the bundle page's summary bar sit just above it (see the stylesheet).
+
+  @example
+  {% render 'moments-tabbar' %}
+{%- enddoc -%}
+
+{%- liquid
+  assign active = ''
+  if template.name == 'index'
+    assign active = 'home'
+  elsif template.name == 'cart'
+    assign active = 'cart'
+  elsif template.name contains 'customers'
+    assign active = 'account'
+  elsif template.name == 'page' and page.handle == 'make-a-bundle'
+    assign active = 'bundle'
+  elsif template.name == 'page' and page.handle == 'moments'
+    assign active = 'moments'
+  elsif template.name == 'collection' and collection.handle contains '-moment'
+    assign active = 'moments'
+  endif
+  assign moments_page = pages['moments']
+  assign moments_url = moments_page.url | default: routes.collections_url
+  assign bundle_page = pages['make-a-bundle']
+  assign bundle_url = bundle_page.url | default: routes.collections_url
+  if shop.customer_accounts_enabled
+    assign account_url = routes.account_url
+  endif
+-%}
+
+<nav class="m-tabbar" aria-label="{{ 'tabbar.label' | t }}" data-m-tabbar>
+  <a class="m-tabbar__tab" href="{{ routes.root_url }}"{% if active == 'home' %} aria-current="page"{% endif %}>
+    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 10.5 12 4l8 6.5V20a1 1 0 0 1-1 1h-4.5v-6h-5v6H5a1 1 0 0 1-1-1z"/></svg>
+    <span>{{ 'tabbar.home' | t }}</span>
+  </a>
+  <a class="m-tabbar__tab" href="{{ moments_url }}"{% if active == 'moments' %} aria-current="page"{% endif %}>
+    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3c.6 4.4 2.6 6.4 7 7-4.4.6-6.4 2.6-7 7-.6-4.4-2.6-6.4-7-7 4.4-.6 6.4-2.6 7-7z"/><path d="M12 19.5v1.5M12 1.5V3" /></svg>
+    <span>{{ 'tabbar.moments' | t }}</span>
+  </a>
+  <a class="m-tabbar__tab" href="{{ bundle_url }}"{% if active == 'bundle' %} aria-current="page"{% endif %}>
+    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 9h16v11a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1zM3 6h18v3H3zM12 6v15M12 6c-1.5-3-5-3.2-5-1.2C7 6 9.5 6 12 6zm0 0c1.5-3 5-3.2 5-1.2C17 6 14.5 6 12 6z"/></svg>
+    <span>{{ 'tabbar.bundle' | t }}</span>
+  </a>
+  <a class="m-tabbar__tab" href="{{ routes.cart_url }}" data-m-tabbar-cart{% if active == 'cart' %} aria-current="page"{% endif %}>
+    <span class="m-tabbar__icon">
+      <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 8h14l-1 12.2a1 1 0 0 1-1 .8H7a1 1 0 0 1-1-.8zM9 8V6.5a3 3 0 0 1 6 0V8"/></svg>
+      <span class="m-tabbar__count" data-m-tabbar-count{% if cart.item_count == 0 %} hidden{% endif %}>{{ cart.item_count }}</span>
+    </span>
+    <span>{{ 'tabbar.cart' | t }}</span>
+  </a>
+  {%- if account_url -%}
+    <a class="m-tabbar__tab" href="{{ account_url }}"{% if active == 'account' %} aria-current="page"{% endif %}>
+      <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="8.5" r="4"/><path d="M4.5 20.5c1.2-3.6 4-5.5 7.5-5.5s6.3 1.9 7.5 5.5"/></svg>
+      <span>{{ 'tabbar.account' | t }}</span>
+    </a>
+  {%- endif -%}
+</nav>
+
+<script>
+  (() => {
+    const bar = document.querySelector('[data-m-tabbar]');
+    if (!bar) return;
+    const count = bar.querySelector('[data-m-tabbar-count]');
+    // Live count: the theme fires 'cart:update' with the new cart (or an item count) after every change.
+    document.addEventListener('cart:update', (e) => {
+      const d = e.detail || {};
+      const n = d.resource && typeof d.resource.item_count === 'number' ? d.resource.item_count : d.data && d.data.itemCount;
+      if (typeof n !== 'number') return;
+      count.textContent = n;
+      count.hidden = n === 0;
+    });
+    // Cart opens the drawer when the theme has one (Horizon's cart-drawer-component); otherwise the link goes to /cart.
+    bar.querySelector('[data-m-tabbar-cart]').addEventListener('click', (e) => {
+      const drawer = document.querySelector('cart-drawer-component');
+      if (drawer && typeof drawer.open === 'function' && !document.documentElement.matches('[data-template="cart"]')) {
+        e.preventDefault();
+        drawer.open();
+      }
+    });
+  })();
+</script>
+
+{% stylesheet %}
+  .m-tabbar {
+    display: none;
+  }
+
+  @media screen and (max-width: 749px) {
+    :root {
+      --m-tabbar-h: 60px;
+      --m-tabbar-space: calc(var(--m-tabbar-h) + env(safe-area-inset-bottom, 0px));
+    }
+
+    body {
+      padding-block-end: var(--m-tabbar-space);
+    }
+
+    .m-tabbar {
+      position: fixed;
+      inset-inline: 0;
+      inset-block-end: 0;
+      z-index: 40;
+      display: grid;
+      grid-auto-flow: column;
+      grid-auto-columns: 1fr;
+      block-size: var(--m-tabbar-space);
+      padding-block-end: env(safe-area-inset-bottom, 0px);
+      background: var(--m-surface);
+      border-block-start: 1px solid rgb(59 30 58 / 0.1);
+      box-shadow: 0 -8px 20px -16px rgb(59 30 58 / 0.25);
+    }
+
+    .m-tabbar__tab {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 3px;
+      min-block-size: 44px;
+      color: var(--m-plum);
+      font-family: var(--font-body--family);
+      font-size: 0.6875rem;
+      line-height: 1.1;
+      text-decoration: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .m-tabbar__tab svg {
+      inline-size: 24px;
+      block-size: 24px;
+      fill: none;
+      stroke: currentcolor;
+      stroke-width: 1.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    /* Active tab: a rose pill above the icon, the label in berry ink (rose as text fails contrast on white). */
+    .m-tabbar__tab[aria-current='page'] {
+      color: var(--m-berry-ink);
+      font-weight: 600;
+    }
+
+    .m-tabbar__tab[aria-current='page']::before {
+      content: '';
+      position: absolute;
+      inset-block-start: 0;
+      inline-size: 28px;
+      block-size: 3px;
+      border-radius: 0 0 3px 3px;
+      background: #E68BA2;
+    }
+
+    .m-tabbar__icon {
+      position: relative;
+      display: grid;
+    }
+
+    .m-tabbar__count {
+      position: absolute;
+      inset-block-start: -5px;
+      inset-inline-end: -9px;
+      min-inline-size: 17px;
+      block-size: 17px;
+      padding-inline: 4px;
+      border-radius: 9999px;
+      background: var(--m-berry);
+      color: #fff;
+      font-size: 0.625rem;
+      font-weight: 600;
+      line-height: 17px;
+      text-align: center;
+    }
+
+    .m-tabbar__count[hidden] {
+      display: none;
+    }
+
+    .m-tabbar__tab:focus-visible {
+      outline: 2px solid var(--m-focus);
+      outline-offset: -4px;
+      border-radius: 8px;
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      .m-tabbar__tab:hover {
+        color: var(--m-berry-ink);
+      }
+    }
+
+    /* Bars that were pinned to the bottom of the screen now sit on top of the tab bar. */
+    html body .sticky-atc,
+    html body .m-bundle__bar {
+      bottom: var(--m-tabbar-space);
+      inset-block-end: var(--m-tabbar-space);
+      padding-bottom: 10px;
+    }
+  }
+
+  @media print {
+    .m-tabbar {
+      display: none;
+    }
+  }
+{% endstylesheet %}
