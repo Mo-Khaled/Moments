@@ -163,3 +163,8 @@ Pushed: locales/ar.json (filters availability in_stock متوفر, out_of_stock 
 ### 2026-11-20 white page, plum footer with a fade (live, smoke passed; owner: "approve everything", "push to live")
 Pushed: assets/moments.css, config/settings_data.json, sections/header-group.json, sections moments-brand-marquee, moments-hero, moments-shop-by-moment, moments-steps, moments-story, snippets color-schemes, product-card-badges, hero-image-slot (6d7cdad). Before: live copies equalled 042447d (which synced index.json, moments-shop-by-moment and moments-story from live: they had been edited outside the repo). Checks: body #FCFCFA on home, /ar, collection, product, about-us; footer plum with a white-to-plum fade; logos plum; EN desktop and AR phone on momentseg.com; smoke PASSED.
 Rollback: `git show 6d7cdad^:<file>` for each file above and push.
+
+### 2026-11-20 typography per the 2026 brand guide (live, smoke passed; owner: "push the fonts live now")
+The published theme had changed to "MOMENTS - Hero fix" #162384347327 (published outside the repo). Synced it into the repo first (b2852dc: 18 changed and 2 new files; where both sides changed, the live text was kept and the headline full stops re-applied); shopify.theme.toml now targets it.
+Pushed 27 files (assets moments.css, rtl.css; locales en/ar; 7 sections; snippets brand-fonts, moments-search-chips; 14 templates). Checks: EN and AR, desktop 1440 and phone 390 on momentseg.com (screenshots in "Claude outputs/2026-11-20-fonts-live"); smoke PASSED.
+Rollback: push the same files from b2852dc^ merged with the live versions in the Hero fix theme (or `git show 6d7cdad:<file>` for files the sync did not touch).
