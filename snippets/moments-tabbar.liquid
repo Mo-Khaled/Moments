@@ -3,6 +3,7 @@
   shopper needs to move around MOMENTS with one thumb: Home, Moments (the "find your moment" page), Bundle, Cart (with the live
   count; opens the cart drawer) and Account. No wishlist (the store has none) and no AI.
 
+  2026-11-20 (owner): Cart left the bar (it is in the header); a Language switch with a round flag took its place.
   Look: the page white with one hairline, plum line icons and labels (Readex Pro 11px), the active tab marked in rose (brand guide:
   "Rose marks the active tab"). RTL follows the document direction. It respects the iPhone home indicator (safe-area inset).
   The product page's sticky add-to-cart bar and the bundle page's summary bar sit just above it (see the stylesheet).
@@ -48,13 +49,44 @@
     <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 9h16v11a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1zM3 6h18v3H3zM12 6v15M12 6c-1.5-3-5-3.2-5-1.2C7 6 9.5 6 12 6zm0 0c1.5-3 5-3.2 5-1.2C17 6 14.5 6 12 6z"/></svg>
     <span>{{ 'tabbar.bundle' | t }}</span>
   </a>
-  <a class="m-tabbar__tab" href="{{ routes.cart_url }}" data-m-tabbar-cart{% if active == 'cart' %} aria-current="page"{% endif %}>
-    <span class="m-tabbar__icon">
-      <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 8h14l-1 12.2a1 1 0 0 1-1 .8H7a1 1 0 0 1-1-.8zM9 8V6.5a3 3 0 0 1 6 0V8"/></svg>
-      <span class="m-tabbar__count" data-m-tabbar-count{% if cart.item_count == 0 %} hidden{% endif %}>{{ cart.item_count }}</span>
-    </span>
-    <span>{{ 'tabbar.cart' | t }}</span>
-  </a>
+  {%- comment -%}
+    Language (owner 2026-11-20): replaces Cart (the cart is in the header). Shows the CURRENT language as a round flag
+    (English: UK, Arabic: Egypt) and switches to the other one on the same page through Shopify's localization form
+    (return_to is rewritten to the address bar by snippets/moments-language-toggle.liquid). Inline SVG, no image requests.
+  {%- endcomment -%}
+  {%- if localization.available_languages.size > 1 -%}
+    {%- liquid
+      assign cur = localization.language.iso_code | split: '-' | first
+      assign other = 'ar'
+      if cur == 'ar'
+        assign other = 'en'
+      endif
+      for l in localization.available_languages
+        assign lc = l.iso_code | split: '-' | first
+        if lc == other
+          assign other_code = l.iso_code
+        endif
+      endfor
+    -%}
+    {%- form 'localization', class: 'm-tabbar__form', return_to: request.path -%}
+      <button
+        class="m-tabbar__tab"
+        type="submit"
+        name="language_code"
+        value="{{ other_code | default: other }}"
+        aria-label="{% if cur == 'ar' %}اللغة: عربي. التبديل إلى English{% else %}Language: English. Switch to العربية{% endif %}"
+      >
+        <span class="m-tabbar__flag" aria-hidden="true">
+          {%- if cur == 'ar' -%}
+            <svg viewBox="0 0 24 24"><defs><clipPath id="m-flag-eg"><circle cx="12" cy="12" r="11"/></clipPath></defs><g clip-path="url(#m-flag-eg)"><rect width="24" height="8" fill="#CE1126"/><rect y="8" width="24" height="8" fill="#FFFFFF"/><rect y="16" width="24" height="8" fill="#000000"/><path d="M12 9.2l1.4 1.1-.5 2.6h-1.8l-.5-2.6z" fill="#C09300"/></g><circle cx="12" cy="12" r="11" fill="none" stroke="rgb(59 30 58 / 0.25)"/></svg>
+          {%- else -%}
+            <svg viewBox="0 0 24 24"><defs><clipPath id="m-flag-uk"><circle cx="12" cy="12" r="11"/></clipPath></defs><g clip-path="url(#m-flag-uk)"><rect width="24" height="24" fill="#012169"/><path d="M0 0L24 24M24 0L0 24" stroke="#FFFFFF" stroke-width="4.5"/><path d="M0 0L24 24M24 0L0 24" stroke="#C8102E" stroke-width="1.6"/><path d="M12 0V24M0 12H24" stroke="#FFFFFF" stroke-width="6.5"/><path d="M12 0V24M0 12H24" stroke="#C8102E" stroke-width="3.6"/></g><circle cx="12" cy="12" r="11" fill="none" stroke="rgb(59 30 58 / 0.25)"/></svg>
+          {%- endif -%}
+        </span>
+        <span>{% if cur == 'ar' %}عربي{% else %}English{% endif %}</span>
+      </button>
+    {%- endform -%}
+  {%- endif -%}
   {%- if account_url -%}
     <a class="m-tabbar__tab" href="{{ account_url }}"{% if active == 'account' %} aria-current="page"{% endif %}>
       <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="8.5" r="4"/><path d="M4.5 20.5c1.2-3.6 4-5.5 7.5-5.5s6.3 1.9 7.5 5.5"/></svg>
@@ -68,6 +100,7 @@
     const bar = document.querySelector('[data-m-tabbar]');
     if (!bar) return;
     const count = bar.querySelector('[data-m-tabbar-count]');
+    if (!count) return; // the Cart tab was replaced by the language switch (2026-11-20)
     // Live count: the theme fires 'cart:update' with the new cart (or an item count) after every change.
     document.addEventListener('cart:update', (e) => {
       const d = e.detail || {};
@@ -172,6 +205,40 @@
       block-size: 24px;
       fill: currentcolor;
       stroke: none;
+    }
+
+    .m-tabbar__form {
+      display: contents;
+    }
+
+    button.m-tabbar__tab {
+      -webkit-appearance: none;
+      appearance: none;
+      margin: 0;
+      padding: 0;
+      border: 0;
+      background: transparent;
+      color: var(--m-plum);
+      font: inherit;
+      font-family: var(--font-body--family);
+      font-size: 0.6875rem;
+      line-height: 1.1;
+      cursor: pointer;
+    }
+
+    .m-tabbar__flag {
+      display: grid;
+      inline-size: 24px;
+      block-size: 24px;
+    }
+
+    .m-tabbar__flag svg {
+      inline-size: 24px;
+      block-size: 24px;
+    }
+
+    .m-tabbar__tab span:last-child {
+      white-space: nowrap;
     }
 
     .m-tabbar__icon {
