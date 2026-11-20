@@ -209,3 +209,9 @@ Rollback: `git revert 6f86b58` range 483115e..6f86b58, or `git show 483115e:<fil
 ### 2026-11-20 header fix: divider + flags (live, smoke passed)
 Pushed assets/moments.css + snippets/moments-tabbar.liquid (main e78d2d8). The purple divider was painted under the opaque `.header__row--top`; now drawn inset on the row (phone + desktop, EN/AR).
 Flags: proper Union Jack and Egypt (eagle) in the round language tab. Rollback: `git show 972391b:<file>` and push.
+
+### 2026-11-20 Notes page files (live, smoke passed; owner: "push" for both)
+Main 18db353 (merge of notes-page). Pushed: sections/moments-notes.liquid, templates/page.notes.json, assets/notes-data.json (UNCONFIRMED products excluded, counts/strengths/Most loved re-checked),
+snippets/notes-image-map.liquid, assets/rtl.css (overflow-x: clip, Arabic sticky fixed), 74 assets/note-*.webp, templates/metaobject/note.json, sections/moments-note-page.liquid, snippets/moments-tabbar.liquid (larger eagle).
+Live smoke: Notes template at /pages/about-us?view=notes (EN/AR, 390 + 1440): grid, sheet opens, header sticky in Arabic, no horizontal scroll; home/product/Moments/wishlist/cart OK.
+/pages/notes itself does not exist until scripts/notes-publish.py --apply runs (waiting on the owner's CLI approval). Rollback: `git show 972391b:<file>` and push.
