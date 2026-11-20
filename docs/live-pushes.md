@@ -190,3 +190,9 @@ Pushed: assets/moments-mark.svg (brand kit small icon), snippets/moments-tabbar.
 soft shadow once scrolled, homepage sections 48/80px, hairlines between white sections, product image area #F7F3F5). Merge a092d48.
 Live copies equalled the base before. Checks: live 390 and 1440 (D:\MOMENTS_Content\06_Website\review\2026-11-20-BC-live), smoke PASSED.
 Rollback: `git show a092d48^1:<file>` and push.
+
+### 2026-11-20 full-width Winter hero (live, smoke passed; owner: "Hero: PUSH")
+Pushed: sections/moments-hero.liquid (full-width photo, bottle centred, copy-side gradient only, srcset to 3840w), templates/index.json
+(Winter poster hero-winter-desktop-3840.jpg, subject_side center). Merge 46aeec3. Live copies equalled the base before.
+Photo: Higgsfield 21:9 (2688x1152) -> Real-ESRGAN x4plus -> Lanczos 3840x1646, JPG q92. Screenshots: D:\MOMENTS_Content\06_Website\review\2026-11-20-hero-live\.
+Rollback: `git show 46aeec3^1:<file>` and push.
