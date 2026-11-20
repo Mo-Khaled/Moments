@@ -124,9 +124,9 @@
 
   <template data-t-labels>
     {%- if is_ar -%}
-      {"learn":"اعرف أكثر","family":"العائلة","position":"موقعها في العطر","longevity":"الثبات","source":"المصدر","story":"حكاية قصيرة","pairs":"تتناغم مع","seeAll":"شوف كل العطور اللي فيها","withNote":"عطور فيها","explain":"كم ستشمّ من هذه النوتة في كل عطر","estimate":"تقدير","star":"النوتة الأساسية","supporting":"نوتة داعمة","touch":"لمسة خفيفة","related":"نوتات قريبة","top":"المقدمة","heart":"القلب","base":"القاعدة","none":"لا توجد نوتات بهذه التصفية.","clear":"إزالة"}
+      {"learn":"اعرف أكثر","family":"العائلة","position":"موقعها في العطر","longevity":"الثبات","source":"المصدر","story":"حكاية قصيرة","pairs":"تتناغم مع","seeAll":"شوف كل العطور اللي فيها","withNote":"عطور فيها","explain":"كم ستشمّ من هذه النوتة في كل عطر","keyTitle":"كيف تقرأ الأشرطة","starDesc":"أول ما تشمّه في العطر","supportingDesc":"تضيف عمقًا ودفئًا","touchDesc":"لمحة خفيفة في الخلفية","estNote":"تقدير تقريبي وليس قياسًا دقيقًا.","star":"النوتة الأساسية","supporting":"نوتة داعمة","touch":"لمسة خفيفة","related":"نوتات قريبة","top":"المقدمة","heart":"القلب","base":"القاعدة","none":"لا توجد نوتات بهذه التصفية.","clear":"إزالة"}
     {%- else -%}
-      {"learn":"Learn more","family":"Family","position":"Where it sits","longevity":"Longevity","source":"Where it comes from","story":"A short story","pairs":"Pairs well with","seeAll":"See all perfumes with","withNote":"Perfumes with","explain":"How much of this note you'll smell in each perfume","estimate":"estimate","star":"Star of the scent","supporting":"Supporting","touch":"A touch","related":"Related notes","top":"Top","heart":"Heart","base":"Base","none":"No notes match these filters.","clear":"Remove"}
+      {"learn":"Learn more","family":"Family","position":"Where it sits","longevity":"Longevity","source":"Where it comes from","story":"A short story","pairs":"Pairs well with","seeAll":"See all perfumes with","withNote":"Perfumes with","explain":"How much of this note you'll smell in each perfume","keyTitle":"How to read the bars","starDesc":"the first thing you smell","supportingDesc":"adds depth and warmth","touchDesc":"a light hint in the background","estNote":"An estimate, not an exact measurement.","star":"Star of the scent","supporting":"Supporting","touch":"A touch","related":"Related notes","top":"Top","heart":"Heart","base":"Base","none":"No notes match these filters.","clear":"Remove"}
     {%- endif -%}
     </template>
 </section>
@@ -149,10 +149,11 @@
     const name = (n) => (ar ? n.name_ar : n.name_en);
     let notes = [], byHandle = {}, active = { season: '', gender: '', moment: '' }, openHandle = null;
 
-    const strength = (level) => {
+    const bars = (level) => {
       const k = level === 'star' ? 3 : level === 'supporting' ? 2 : 1;
-      return `<span class="m-str"><span class="m-str__bar" aria-hidden="true">${[1, 2, 3].map((i) => `<i${i <= k ? ' class="on"' : ''}></i>`).join('')}</span><span class="m-str__w">${esc(L[level])}</span></span>`;
+      return `<span class="m-str__bar" aria-hidden="true">${[1, 2, 3].map((i) => `<i${i <= k ? ' class="on"' : ''}></i>`).join('')}</span>`;
     };
+    const strength = (level) => `<span class="m-str">${bars(level)}<span class="m-str__w">${esc(L[level])}</span></span>`;
     const countText = (c) => {
       if (!ar) return `${c} ${c === 1 ? 'note' : 'notes'}`;
       const d = c.toLocaleString('ar-EG');
@@ -225,7 +226,7 @@
           <span class="m-pcard__name">${esc(p.title)}</span>
           <span class="m-pcard__price">${money(p.price)}</span>
           ${strength(x.level)}</a></li>`;
-      }).join('') + `<li class="m-pcard m-pcard--all"><a href="${root.dataset.seeAll}${encodeURIComponent(n.name_en)}"><span class="m-pcard__allbtn">${esc(L.seeAll)} ${esc(name(n))} ${ar ? '‹' : '›'}</span></a></li>`;
+      }).join('');
     };
 
     const cardHtml = (n) => `
@@ -242,8 +243,12 @@
         <h3>${esc(L.source)}</h3><p>${esc(ar ? n.source_ar : n.source_en)}</p>
         <h3>${esc(L.story)}</h3><p>${esc(ar ? n.story_ar : n.story_en)}</p>
       </details>
-      <div class="m-note__row-head"><h3>${esc(L.withNote)} ${esc(name(n))}</h3><a href="${root.dataset.seeAll}${encodeURIComponent(n.name_en)}">${esc(L.seeAll)} ${esc(name(n))} ${ar ? '‹' : '›'}</a></div>
-      <p class="m-note__legend">${esc(L.explain)} <span class="m-note__tag">${esc(L.estimate)}</span></p>
+      <div class="m-note__row-head"><h3>${esc(L.withNote)} ${esc(name(n))}</h3></div>
+      <p class="m-note__legend">${esc(L.explain)}</p>
+      <ul class="m-key" aria-label="${esc(L.keyTitle)}">
+        ${['star', 'supporting', 'touch'].map((k) => `<li>${bars(k)}<span><b>${esc(L[k])}</b> ${esc(L[k + 'Desc'])}</span></li>`).join('')}
+      </ul>
+      <p class="m-note__est">${esc(L.estNote)}</p>
       <ul class="m-note__row" data-row aria-label="${esc(L.withNote)} ${esc(name(n))}"></ul>
       <h3 class="m-note__rel-head">${esc(L.related)}</h3>
       <ul class="m-note__related">${(n.pairs || []).filter((h) => byHandle[h]).map((h) => `<li><a href="${base}/${h}" data-open="${h}">${esc(name(byHandle[h]))}</a></li>`).join('')}</ul>`;
@@ -800,6 +805,12 @@
     color: var(--m-text-muted);
   }
 
+  .m-key { display: grid; gap: 8px; margin: 0 0 8px; padding: 12px 14px; list-style: none; border-radius: 12px; background: #F7F3F5; }
+  .m-key li { display: flex; align-items: center; gap: 12px; font-size: 0.875rem; line-height: 1.35; }
+  .m-key .m-str__bar { flex: none; }
+  .m-key b { font-weight: 600; }
+  .m-note__est { margin: 0 0 14px; font-size: 0.8125rem; color: var(--m-text-muted); }
+
   .m-note__tag {
     display: inline-block;
     margin-inline-start: 6px;
@@ -883,7 +894,6 @@
   .m-str__bar i.on { background: var(--m-plum); }
   .m-str__w { font-size: 0.8125rem; line-height: 1.3; color: var(--m-text-muted); }
 
-  .m-pcard--all a { block-size: 100%; align-content: center; }
   .m-pcard__allbtn { display: grid; place-items: center; min-block-size: 120px; padding: 12px; border: 1px solid rgb(59 30 58 / 0.22); border-radius: 12px; text-align: center; font-size: 0.9375rem; color: var(--m-berry-ink); }
 
   .m-note__related {
