@@ -31,11 +31,11 @@
   -%}
   <a
     href="{{ wl_href }}"
-    class="header-actions__action m-wishlist-action"
+    class="header-actions__action m-wishlist-action" data-m-wishlist data-signed-in="{% if customer %}true{% else %}false{% endif %}"
     aria-label="{% if request.locale.iso_code == 'ar' %}المفضلة{% else %}Wishlist{% endif %}"
   >
     <span class="svg-wrapper" aria-hidden="true">
-      <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg>
+      <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg><span class="m-wishlist-count" data-m-wishlist-count hidden></span>
     </span>
   </a>
 
@@ -309,4 +309,68 @@
   .cart-bubble--animating .cart-bubble__text {
     animation: cartBubbleSlideIn var(--animation-speed) var(--animation-easing);
   }
+
+  /* Wishlist Guru shows its own header heart and a floating pink heart. We keep ONE heart (ours) and hide both (owner 2026-11-21). */
+  .wg-tinker-headerIcon-desktop,
+  #wf-float-heart-bottom-right,
+  .wf-floating-launcher {
+    display: none !important;
+  }
+
+  .m-wishlist-action { position: relative; }
+
+  .m-wishlist-count {
+    position: absolute;
+    inset-block-start: 2px;
+    inset-inline-end: 0;
+    display: grid;
+    place-items: center;
+    min-inline-size: 18px;
+    block-size: 18px;
+    padding-inline: 4px;
+    border-radius: 9999px;
+    background: var(--m-berry);
+    color: #fff;
+    font-size: 0.6875rem;
+    font-weight: 600;
+    line-height: 1;
+  }
+
+  .m-wishlist-count[hidden] { display: none; }
 {% endstylesheet %}
+
+{% javascript %}
+  // Our header heart is the only one. Signed in: it opens the wishlist app's own list. Signed out: it goes to sign-in first (the link).
+  // The count is copied from the app (its own header icon is hidden by CSS but still keeps the number up to date).
+  (() => {
+    const heart = document.querySelector('[data-m-wishlist]');
+    if (!heart || heart.dataset.mWired) return;
+    heart.dataset.mWired = '1';
+    heart.addEventListener('click', (e) => {
+      if (heart.dataset.signedIn === 'true' && typeof window.heartButtonHandle === 'function') {
+        e.preventDefault();
+        window.heartButtonHandle();
+      }
+    });
+    const badge = heart.querySelector('[data-m-wishlist-count]');
+    let last = null;
+    const sync = () => {
+      const src = document.querySelector('.wg-tinker-headerIcon-desktop .show-count b');
+      const n = src ? parseInt(src.textContent, 10) || 0 : 0;
+      if (n === last) return; // never write when nothing changed (writing re-triggers the observer)
+      last = n;
+      badge.textContent = document.documentElement.lang === 'ar' ? n.toLocaleString('ar-EG') : String(n);
+      badge.hidden = n === 0;
+    };
+    sync();
+    // watch only the app's own counter, not the whole page
+    const watch = () => {
+      const host = document.querySelector('.wg-tinker-headerIcon-desktop');
+      if (!host) return false;
+      new MutationObserver(sync).observe(host, { childList: true, subtree: true, characterData: true });
+      return true;
+    };
+    let tries = 0;
+    const t = setInterval(() => { sync(); if (watch() || ++tries > 20) clearInterval(t); }, 400);
+  })();
+{% endjavascript %}
