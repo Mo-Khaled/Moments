@@ -194,7 +194,7 @@
               | image_tag:
                 class: 'm-slide__poster',
                 alt: '',
-                widths: '768, 1280, 1920, 2560',
+                widths: '768, 1280, 1920, 2560, 3200, 3840',
                 sizes: '100vw',
                 loading: poster_loading,
                 fetchpriority: poster_priority
@@ -676,42 +676,30 @@
   }
   .m-slide--photo .m-slide__scrim { display: block; }
 
-  /* Photo slides on desktop (2026-11-20, v2): a split hero. The photo fills the END side (right in English, left in Arabic) and the
-     copy keeps its reading-start side (left in English, RIGHT in Arabic), so the text is never on the product and Arabic is never
-     pushed to the left. The photo is not mirrored (the bottle carries a brand name). The rest of the hero is a deep plum field that
-     melts into the photo through a soft edge, so it reads as one picture, not a box. "Product position in the photo" only aims the
-     crop (object-position) so the bottle stays in frame. Phones keep the stacked layout: photo on top, text under it. */
+  /* Photo slides on desktop (2026-11-20, v3, owner): full-width photo with the product in the CENTRE (the Winter photo was extended
+     to 21:9 for this), so the English copy sits on the left third and the Arabic copy on the right third with no change of layout.
+     Readability comes from a soft dark gradient on the copy side only; it is fully transparent before the centre, so the bottle is
+     never darkened. "Product position in the photo" aims the crop for photos that are not centred. Phones keep their own photo,
+     stacked above the copy. */
   @media screen and (min-width: 750px) {
-    .m-slide--photo {
-      background: #1d0f1c;
-    }
-
-    .m-slide--photo .m-slide__media {
-      inset-inline-start: auto;
-      inline-size: 64%;
-    }
-
-    .m-slide--photo[data-subject='right'] .m-slide__poster { object-position: 72% 50%; }
-    .m-slide--photo[data-subject='center'] .m-slide__poster { object-position: 50% 50%; }
-    .m-slide--photo[data-subject='left'] .m-slide__poster { object-position: 28% 50%; }
+    .m-slide--photo .m-slide__poster { object-position: 50% 50%; }
+    .m-slide--photo[data-subject='right'] .m-slide__poster { object-position: 70% 50%; }
+    .m-slide--photo[data-subject='left'] .m-slide__poster { object-position: 30% 50%; }
 
     .m-slide--photo .m-slide__copy > * {
       max-inline-size: min(100%, 30rem);
     }
 
-    /* One overlay over the whole slide: solid plum on the text side, running a little past the photo's edge (36% + 2%), then
-       fading into the photo. Drawing it on the slide, not on the photo box, means no photo edge can show as a line. The bottom
-       lift keeps the switcher readable. */
     .m-slide--photo .m-slide__scrim {
       background:
-        linear-gradient(to top, rgb(29 15 28 / 0.55) 0%, rgb(29 15 28 / 0) 28%),
-        linear-gradient(to right, #1d0f1c 0%, #1d0f1c 38%, rgb(29 15 28 / 0.7) 46%, rgb(29 15 28 / 0) 64%);
+        linear-gradient(to top, rgb(29 15 28 / 0.5) 0%, rgb(29 15 28 / 0) 26%),
+        linear-gradient(to right, rgb(29 15 28 / 0.72) 0%, rgb(29 15 28 / 0.45) 20%, rgb(29 15 28 / 0) 40%);
     }
 
     html[dir='rtl'] .m-slide--photo .m-slide__scrim {
       background:
-        linear-gradient(to top, rgb(29 15 28 / 0.55) 0%, rgb(29 15 28 / 0) 28%),
-        linear-gradient(to left, #1d0f1c 0%, #1d0f1c 38%, rgb(29 15 28 / 0.7) 46%, rgb(29 15 28 / 0) 64%);
+        linear-gradient(to top, rgb(29 15 28 / 0.5) 0%, rgb(29 15 28 / 0) 26%),
+        linear-gradient(to left, rgb(29 15 28 / 0.72) 0%, rgb(29 15 28 / 0.45) 20%, rgb(29 15 28 / 0) 40%);
     }
   }
   .m-slide--photo .m-slide__copy, .m-slide--photo .m-slide__title, .m-slide--photo .m-slide__text, .m-slide--photo .m-slide__tag { color: #fff; }
