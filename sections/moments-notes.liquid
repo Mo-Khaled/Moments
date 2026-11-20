@@ -39,26 +39,73 @@
     </header>
   </div>
 
-  <div class="m-notes__filters" role="toolbar" aria-label="{% if is_ar %}تصفية النوتات{% else %}Filter notes{% endif %}">
-    <div class="m-notes__chips" data-chips>
-      <button type="button" class="m-notes__chip m-notes__chip--reset" data-reset aria-pressed="true">{% if is_ar %}الكل{% else %}All{% endif %}</button>
-      <button type="button" class="m-notes__chip" data-f="season:summer" aria-pressed="false">{% if is_ar %}صيف{% else %}Summer{% endif %}</button>
-      <button type="button" class="m-notes__chip" data-f="season:winter" aria-pressed="false">{% if is_ar %}شتاء{% else %}Winter{% endif %}</button>
-      <button type="button" class="m-notes__chip" data-f="gender:men" aria-pressed="false">{% if is_ar %}رجالي{% else %}Men{% endif %}</button>
-      <button type="button" class="m-notes__chip" data-f="gender:women" aria-pressed="false">{% if is_ar %}نسائي{% else %}Women{% endif %}</button>
-      <button type="button" class="m-notes__chip" data-f="gender:unisex" aria-pressed="false">{% if is_ar %}للجنسين{% else %}Unisex{% endif %}</button>
-      {%- assign mh = 'fresh-moment,winter-moment,love-moment,night-moment,gift-moment,self-care-moment' | split: ',' -%}
-      {%- for h in mh -%}
-        {%- assign c = collections[h] -%}
-        {%- if c != blank -%}
-          <button type="button" class="m-notes__chip" data-f="moment:{{ h }}" aria-pressed="false">{{ c.title }}</button>
-        {%- endif -%}
-      {%- endfor -%}
+  <div class="m-wrap">
+   <div data-nf-inline>
+    <div class="m-nf" data-filters role="group" aria-label="{% if is_ar %}تصفية النوتات{% else %}Filter notes{% endif %}">
+      <div class="m-nf__group">
+        <span class="m-nf__label">{% if is_ar %}الموسم{% else %}Season{% endif %}</span>
+        <div class="m-nf__seg" data-seg="season">
+          <button type="button" class="m-nf__b" data-g="season" data-v="" aria-pressed="true"><span class="m-nf__l">{% if is_ar %}الكل{% else %}All{% endif %}</span><span class="m-nf__n"></span></button>
+          <button type="button" class="m-nf__b" data-g="season" data-v="summer" aria-pressed="false"><span class="m-nf__l">{% if is_ar %}صيف{% else %}Summer{% endif %}</span><span class="m-nf__n"></span></button>
+          <button type="button" class="m-nf__b" data-g="season" data-v="winter" aria-pressed="false"><span class="m-nf__l">{% if is_ar %}شتاء{% else %}Winter{% endif %}</span><span class="m-nf__n"></span></button>
+        </div>
+      </div>
+      <div class="m-nf__group">
+        <span class="m-nf__label">{% if is_ar %}لمن{% else %}For{% endif %}</span>
+        <div class="m-nf__seg" data-seg="gender">
+          <button type="button" class="m-nf__b" data-g="gender" data-v="" aria-pressed="true"><span class="m-nf__l">{% if is_ar %}الكل{% else %}All{% endif %}</span><span class="m-nf__n"></span></button>
+          <button type="button" class="m-nf__b" data-g="gender" data-v="men" aria-pressed="false"><span class="m-nf__l">{% if is_ar %}رجالي{% else %}Men{% endif %}</span><span class="m-nf__n"></span></button>
+          <button type="button" class="m-nf__b" data-g="gender" data-v="women" aria-pressed="false"><span class="m-nf__l">{% if is_ar %}نسائي{% else %}Women{% endif %}</span><span class="m-nf__n"></span></button>
+          <button type="button" class="m-nf__b" data-g="gender" data-v="unisex" aria-pressed="false"><span class="m-nf__l">{% if is_ar %}للجنسين{% else %}Unisex{% endif %}</span><span class="m-nf__n"></span></button>
+        </div>
+      </div>
+      <div class="m-nf__group">
+        <span class="m-nf__label">{% if is_ar %}اللحظة{% else %}Moment{% endif %}</span>
+        <div class="m-nf__chips" data-seg="moment">
+          <button type="button" class="m-nf__chip" data-g="moment" data-v="" aria-pressed="true"><span class="m-nf__l">{% if is_ar %}الكل{% else %}All{% endif %}</span><span class="m-nf__n"></span></button>
+          {%- assign mh = 'fresh-moment,winter-moment,love-moment,night-moment,gift-moment,self-care-moment' | split: ',' -%}
+          {%- for h in mh -%}
+            {%- assign c = collections[h] -%}
+            {%- if c != blank -%}
+              <button type="button" class="m-nf__chip" data-g="moment" data-v="{{ h }}" aria-pressed="false"><span class="m-nf__l">{{ c.title }}</span><span class="m-nf__n"></span></button>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      </div>
+    </div>
+   </div>
+  </div>
+
+  <dialog class="m-fsheet" data-fsheet aria-labelledby="m-fsheet-title">
+    <div class="m-fsheet__panel">
+      <div class="m-fsheet__head">
+        <h2 id="m-fsheet-title" class="m-fsheet__title">{% if is_ar %}التصفية{% else %}Filters{% endif %}</h2>
+        <button type="button" class="m-fsheet__x" data-fclose aria-label="{% if is_ar %}إغلاق{% else %}Close{% endif %}"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></button>
+      </div>
+      <div class="m-fsheet__slot" data-nf-sheet></div>
+      <div class="m-fsheet__foot">
+        <button type="button" class="m-btn m-fsheet__apply" data-fapply></button>
+      </div>
+    </div>
+  </dialog>
+
+  <div class="m-notes__bar" data-bar>
+    <div class="m-wrap m-notes__barin">
+      <button type="button" class="m-notes__fbtn" data-fopen aria-haspopup="dialog">
+        <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M4 7h10M18 7h2M4 17h2M10 17h10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" fill="none"/><circle cx="16" cy="7" r="2" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="8" cy="17" r="2" fill="none" stroke="currentColor" stroke-width="1.8"/></svg>
+        <span>{% if is_ar %}التصفية{% else %}Filters{% endif %}</span><span class="m-notes__fn" data-fn hidden></span>
+      </button>
+      <p class="m-notes__count" data-count aria-live="polite"></p>
+      <div class="m-notes__active" data-active></div>
+      <button type="button" class="m-notes__reset" data-reset hidden>{% if is_ar %}إعادة ضبط{% else %}Reset{% endif %}</button>
     </div>
   </div>
 
   <div class="m-wrap">
-    <p class="m-notes__count" data-count aria-live="polite"></p>
+    <div class="m-notes__empty" data-empty hidden>
+      <p>{% if is_ar %}لا توجد نوتات بهذه التصفية.{% else %}No notes match these filters.{% endif %}</p>
+      <button type="button" class="m-btn m-btn--ghost" data-reset-empty>{% if is_ar %}إعادة ضبط{% else %}Reset{% endif %}</button>
+    </div>
     <ul class="m-notes__grid" data-grid></ul>
     <noscript><p>{% if is_ar %}فعّل جافاسكربت لعرض النوتات.{% else %}Turn on JavaScript to see the notes.{% endif %}</p></noscript>
   </div>
@@ -77,11 +124,11 @@
 
   <template data-t-labels>
     {%- if is_ar -%}
-      {"learn":"اعرف أكثر","family":"العائلة","position":"موقعها في العطر","longevity":"الثبات","source":"المصدر","story":"حكاية قصيرة","pairs":"تتناغم مع","loved":"الأكثر حبًا","perfumes":"عطور تحمل هذه النوتة","seeAll":"عرض الكل","related":"نوتات قريبة","badge":"الأكثر حبًا","estimate":"قوة النوتة (تقدير)","star":"نجمة العطر","supporting":"داعمة","touch":"لمسة","top":"المقدمة","heart":"القلب","base":"القاعدة","shown":"نوتات","none":"لا توجد نوتات بهذه التصفية."}
+      {"learn":"اعرف أكثر","family":"العائلة","position":"موقعها في العطر","longevity":"الثبات","source":"المصدر","story":"حكاية قصيرة","pairs":"تتناغم مع","seeAll":"شوف كل العطور اللي فيها","withNote":"عطور فيها","explain":"كم ستشمّ من هذه النوتة في كل عطر","estimate":"تقدير","star":"النوتة الأساسية","supporting":"نوتة داعمة","touch":"لمسة خفيفة","related":"نوتات قريبة","top":"المقدمة","heart":"القلب","base":"القاعدة","none":"لا توجد نوتات بهذه التصفية.","clear":"إزالة"}
     {%- else -%}
-      {"learn":"Learn more","family":"Family","position":"Where it sits","longevity":"Longevity","source":"Where it comes from","story":"A short story","pairs":"Pairs well with","loved":"Most loved","perfumes":"Perfumes with this note","seeAll":"See all","related":"Related notes","badge":"Most loved","estimate":"Note strength (estimate)","star":"Star of the scent","supporting":"Supporting","touch":"A touch","top":"Top","heart":"Heart","base":"Base","shown":"notes","none":"No notes match these filters."}
+      {"learn":"Learn more","family":"Family","position":"Where it sits","longevity":"Longevity","source":"Where it comes from","story":"A short story","pairs":"Pairs well with","seeAll":"See all perfumes with","withNote":"Perfumes with","explain":"How much of this note you'll smell in each perfume","estimate":"estimate","star":"Star of the scent","supporting":"Supporting","touch":"A touch","related":"Related notes","top":"Top","heart":"Heart","base":"Base","none":"No notes match these filters.","clear":"Remove"}
     {%- endif -%}
-  </template>
+    </template>
 </section>
 
 <script>
@@ -100,31 +147,61 @@
     const isPhone = () => matchMedia('(max-width: 749px)').matches;
     const esc = (s) => String(s || '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
     const name = (n) => (ar ? n.name_ar : n.name_en);
-    let notes = [], byHandle = {}, active = { season: new Set(), gender: new Set(), moment: new Set() }, openHandle = null;
+    let notes = [], byHandle = {}, active = { season: '', gender: '', moment: '' }, openHandle = null;
 
-    const dots = (level) => {
-      const n = { star: 3, supporting: 2, touch: 1 }[level] || 1;
-      return `<span class="m-dots" role="img" aria-label="${esc(L.estimate + ': ' + L[level])}">${'●'.repeat(n)}${'○'.repeat(3 - n)}</span>`;
+    const strength = (level) => {
+      const k = level === 'star' ? 3 : level === 'supporting' ? 2 : 1;
+      return `<span class="m-str"><span class="m-str__bar" aria-hidden="true">${[1, 2, 3].map((i) => `<i${i <= k ? ' class="on"' : ''}></i>`).join('')}</span><span class="m-str__w">${esc(L[level])}</span></span>`;
+    };
+    const countText = (c) => {
+      if (!ar) return `${c} ${c === 1 ? 'note' : 'notes'}`;
+      const d = c.toLocaleString('ar-EG');
+      if (c === 1) return 'نوتة واحدة';
+      if (c === 2) return 'نوتتان';
+      return `${d} ${c >= 3 && c <= 10 ? 'نوتات' : 'نوتة'}`;
     };
     const imgMap = JSON.parse(root.querySelector('[data-img-map]').textContent || '{}');
     // Square picture, fixed aspect ratio (no layout shift), lazy, 512 / 1024 px WebP; the initial-letter tile is the fallback.
     // Grid tiles use the 512 px file only (sharp enough up to 3x phones, ~18 KB each); the open card uses the 1024 px file for its larger picture.
-    const tile = (n, big = false) => {
+    const tile = (n, big = false, eager = false) => {
       const m = imgMap[n.handle];
       const ph = `<span class="m-notes__ph">${esc(name(n).slice(0, 1))}</span>`;
       if (!m) return `<span class="m-notes__pic" aria-hidden="true">${ph}</span>`;
       const src = big ? `src="${m[1]}"` : `src="${m[0]}"`;
-      return `<span class="m-notes__pic" aria-hidden="true"><img ${src} width="${big ? 1024 : 512}" height="${big ? 1024 : 512}" loading="${big ? 'eager' : 'lazy'}" decoding="async" alt=""></span>`;
+      return `<span class="m-notes__pic" aria-hidden="true"><img ${src} width="${big ? 1024 : 512}" height="${big ? 1024 : 512}" loading="${big || eager ? 'eager' : 'lazy'}"${eager && !big ? ' fetchpriority="high"' : ''} decoding="async" alt=""></span>`;
     };
 
     const render = () => {
       const shown = notes.filter((n) =>
-        (!active.season.size || active.season.has(n.season)) &&
-        (!active.gender.size || active.gender.has(n.gender)) &&
-        (!active.moment.size || n.moments.some((m) => active.moment.has(m))));
-      grid.innerHTML = shown.map((n) => `<li><a class="m-notes__item" href="${base}/${n.handle}" data-open="${n.handle}">${tile(n)}<span class="m-notes__name">${esc(name(n))}</span></a></li>`).join('');
-      countEl.textContent = shown.length ? `${shown.length} ${L.shown}` : L.none;
-      root.querySelector('[data-reset]').setAttribute('aria-pressed', String(!active.season.size && !active.gender.size && !active.moment.size));
+        (!active.season || active.season === n.season) &&
+        (!active.gender || active.gender === n.gender) &&
+        (!active.moment || n.moments.includes(active.moment)));
+      const anyActive = !!(active.season || active.gender || active.moment);
+      grid.innerHTML = shown.map((n, i) => `<li><a class="m-notes__item" href="${base}/${n.handle}" data-open="${n.handle}">${tile(n, false, i < 6)}<span class="m-notes__name">${esc(name(n))}</span></a></li>`).join('');
+      countEl.textContent = countText(shown.length);
+      root.querySelector('[data-empty]').hidden = shown.length > 0;
+      root.querySelector('[data-reset]').hidden = !anyActive;
+      root.querySelector('[data-active]').innerHTML = ['season', 'gender', 'moment'].filter((g) => active[g]).map((g) => {
+        const b = root.querySelector(`[data-g="${g}"][data-v="${active[g]}"]`);
+        const lab = b.querySelector('.m-nf__l').textContent;
+        return `<button type="button" class="m-notes__tag" data-clear="${g}" aria-label="${esc(L.clear)}: ${esc(lab)}">${esc(lab)}<svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>`;
+      }).join('');
+      const fmt = (c) => (ar ? c.toLocaleString('ar-EG') : String(c));
+      const matches = (n, a) => (!a.season || a.season === n.season) && (!a.gender || a.gender === n.gender) && (!a.moment || n.moments.includes(a.moment));
+      root.querySelectorAll('[data-g]').forEach((b) => {
+        const g = b.dataset.g, v = b.dataset.v;
+        b.setAttribute('aria-pressed', String(active[g] === v));
+        const c = notes.filter((n) => matches(n, { ...active, [g]: v })).length;
+        b.querySelector('.m-nf__n').textContent = fmt(c);
+        const dead = c === 0 && v !== '' && active[g] !== v;
+        b.classList.toggle('is-dead', dead);
+        b.setAttribute('aria-disabled', String(dead));
+      });
+      const nAct = ['season', 'gender', 'moment'].filter((g) => active[g]).length;
+      const fn = root.querySelector('[data-fn]');
+      fn.hidden = !nAct;
+      fn.textContent = fmt(nAct);
+      root.querySelector('[data-fapply]').textContent = ar ? `عرض ${countText(shown.length)}` : `Show ${countText(shown.length)}`;
     };
 
     const money = (cents) => {
@@ -137,18 +214,18 @@
 
     const fillPerfumes = async (n, row) => {
       const max = isPhone() ? 4 : 6;
-      const items = n.loved.slice(0, max);
+      const items = n.perfumes.slice(0, max);
       const data = await Promise.all(items.map((x) => product(x.h)));
       row.innerHTML = items.map((x, i) => {
         const p = data[i];
         if (!p) return '';
         const img = p.featured_image ? `${p.featured_image.replace(/^\/\//, 'https://')}${p.featured_image.includes('?') ? '&' : '?'}width=360` : '';
         return `<li class="m-pcard"><a href="${root.dataset.root}/products/${p.handle}">
-          <span class="m-pcard__img">${img ? `<img src="${img}" alt="" loading="lazy" width="360" height="360">` : ''}${x.badge ? `<span class="m-pcard__badge">${esc(L.badge)}</span>` : ''}</span>
+          <span class="m-pcard__img">${img ? `<img src="${img}" alt="" loading="lazy" width="360" height="360">` : ''}</span>
           <span class="m-pcard__name">${esc(p.title)}</span>
           <span class="m-pcard__price">${money(p.price)}</span>
-          ${dots(x.level)}</a></li>`;
-      }).join('');
+          ${strength(x.level)}</a></li>`;
+      }).join('') + `<li class="m-pcard m-pcard--all"><a href="${root.dataset.seeAll}${encodeURIComponent(n.name_en)}"><span class="m-pcard__allbtn">${esc(L.seeAll)} ${esc(name(n))} ${ar ? '‹' : '›'}</span></a></li>`;
     };
 
     const cardHtml = (n) => `
@@ -165,9 +242,9 @@
         <h3>${esc(L.source)}</h3><p>${esc(ar ? n.source_ar : n.source_en)}</p>
         <h3>${esc(L.story)}</h3><p>${esc(ar ? n.story_ar : n.story_en)}</p>
       </details>
-      <div class="m-note__row-head"><h3>${esc(L.loved)}</h3><a href="${root.dataset.seeAll}${encodeURIComponent(n.name_en)}">${esc(L.seeAll)} ${ar ? '‹' : '›'}</a></div>
-      <p class="m-note__legend">${esc(L.estimate)}: ${dots('star')} ${esc(L.star)} · ${dots('supporting')} ${esc(L.supporting)} · ${dots('touch')} ${esc(L.touch)}</p>
-      <ul class="m-note__row" data-row aria-label="${esc(L.perfumes)}"></ul>
+      <div class="m-note__row-head"><h3>${esc(L.withNote)} ${esc(name(n))}</h3><a href="${root.dataset.seeAll}${encodeURIComponent(n.name_en)}">${esc(L.seeAll)} ${esc(name(n))} ${ar ? '‹' : '›'}</a></div>
+      <p class="m-note__legend">${esc(L.explain)} <span class="m-note__tag">${esc(L.estimate)}</span></p>
+      <ul class="m-note__row" data-row aria-label="${esc(L.withNote)} ${esc(name(n))}"></ul>
       <h3 class="m-note__rel-head">${esc(L.related)}</h3>
       <ul class="m-note__related">${(n.pairs || []).filter((h) => byHandle[h]).map((h) => `<li><a href="${base}/${h}" data-open="${h}">${esc(name(byHandle[h]))}</a></li>`).join('')}</ul>`;
 
@@ -185,7 +262,7 @@
         sheet.showModal();
         panel.style.transform = '';
       }
-      document.title = `${name(n)} · MOMENTS`;
+      document.title = ar ? `${name(n)} – لحظات` : `${name(n)} – MOMENTS`;
       if (push) history.pushState({ note: h }, '', `${base}/${h}`);
     };
     const close = (pop = false) => {
@@ -200,17 +277,13 @@
     root.addEventListener('click', (e) => {
       const a = e.target.closest('[data-open]');
       if (a) { e.preventDefault(); open(a.dataset.open, !sheet.open || openHandle !== a.dataset.open); return; }
-      const chip = e.target.closest('[data-f]');
-      if (chip) {
-        const [g, v] = chip.dataset.f.split(':');
-        active[g].has(v) ? active[g].delete(v) : active[g].add(v);
-        chip.setAttribute('aria-pressed', String(active[g].has(v)));
-        render();
-        return;
-      }
-      if (e.target.closest('[data-reset]')) {
-        Object.values(active).forEach((s) => s.clear());
-        root.querySelectorAll('[data-f]').forEach((c) => c.setAttribute('aria-pressed', 'false'));
+      const fb = e.target.closest('[data-g]');
+      if (fb && fb.getAttribute('aria-disabled') === 'true') return;
+      if (fb) { active[fb.dataset.g] = fb.dataset.v; render(); return; }
+      const clr = e.target.closest('[data-clear]');
+      if (clr) { active[clr.dataset.clear] = ''; render(); return; }
+      if (e.target.closest('[data-reset], [data-reset-empty]')) {
+        active = { season: '', gender: '', moment: '' };
         render();
       }
     });
@@ -238,6 +311,19 @@
       if (dy > 110) close(); else panel.style.transform = '';
       y0 = null;
     });
+
+    // Filters: the three groups sit inline on desktop and move into a bottom sheet on phones.
+    const nf = root.querySelector('[data-filters]');
+    const slotInline = root.querySelector('[data-nf-inline]');
+    const slotSheet = root.querySelector('[data-nf-sheet]');
+    const fsheet = root.querySelector('[data-fsheet]');
+    const placeFilters = () => { const t = isPhone() ? slotSheet : slotInline; if (nf.parentNode !== t) t.appendChild(nf); };
+    placeFilters();
+    matchMedia('(max-width: 749px)').addEventListener('change', () => { if (fsheet.open) fsheet.close(); placeFilters(); });
+    root.querySelector('[data-fopen]').addEventListener('click', () => fsheet.showModal());
+    root.querySelector('[data-fclose]').addEventListener('click', () => fsheet.close());
+    root.querySelector('[data-fapply]').addEventListener('click', () => fsheet.close());
+    fsheet.addEventListener('click', (e) => { if (e.target === fsheet) fsheet.close(); });
 
     fetch(root.dataset.src).then((r) => r.json()).then((d) => {
       notes = d.notes.slice().sort((a, b) => b.count - a.count);
@@ -271,33 +357,70 @@
     color: var(--m-text-muted);
   }
 
-  /* Filters: one horizontally scrolling row of chips, sticky under the header, no wrapping. */
-  .m-notes__filters {
-    position: sticky;
-    inset-block-start: var(--header-height, 64px);
-    z-index: 5;
-    background: var(--m-surface);
-    border-block-end: 1px solid var(--m-hairline, #E6DDE3);
+  /* One vertical rhythm on the page: 24px between title, description, filters, count bar and grid. */
+  .m-notes { --m-nrh: 24px; }
+
+  .m-notes__head { margin-block-end: var(--m-nrh); }
+
+  /* Filters: three labelled groups in one card (Season / For: segmented, Moment: one scrolling row of chips). */
+  .m-nf {
+    display: grid;
+    gap: 14px;
+    padding: 16px;
+    border: 1px solid var(--m-hairline, #E6DDE3);
+    border-radius: 16px;
+    background: #F7F3F5;
   }
 
-  .m-notes__chips {
+  .m-nf__l { pointer-events: none; }
+  .m-nf__n { margin-inline-start: 6px; font-size: 0.75rem; opacity: 0.6; pointer-events: none; }
+  .m-nf__b.is-dead, .m-nf__chip.is-dead { opacity: 0.4; cursor: not-allowed; }
+  .m-nf__b[aria-pressed='true'] .m-nf__n, .m-nf__chip[aria-pressed='true'] .m-nf__n { opacity: 0.8; }
+
+  .m-nf__group { display: grid; gap: 6px; min-inline-size: 0; }
+  .m-nf__label { font-size: 0.8125rem; font-weight: 600; letter-spacing: 0.02em; color: var(--m-text-muted); }
+
+  .m-nf__seg {
+    display: flex;
+    padding: 3px;
+    border: 1px solid var(--m-hairline, #E6DDE3);
+    border-radius: 9999px;
+    background: var(--m-surface);
+  }
+
+  .m-nf__b {
+    flex: 1 1 0;
+    min-block-size: 44px;
+    padding-inline: 8px;
+    border: 0;
+    border-radius: 9999px;
+    background: transparent;
+    color: var(--m-plum);
+    font: inherit;
+    font-size: 0.875rem;
+    white-space: nowrap;
+    cursor: pointer;
+  }
+
+  .m-nf__b[aria-pressed='true'] { background: var(--m-plum); color: var(--m-pearl); }
+
+  .m-nf__chips {
     display: flex;
     gap: 8px;
     overflow-x: auto;
-    padding: 10px var(--m-gutter, 16px);
+    margin-inline: -16px;
+    padding-inline: 16px;
     scrollbar-width: none;
     overscroll-behavior-x: contain;
   }
 
-  .m-notes__chips::-webkit-scrollbar {
-    display: none;
-  }
+  .m-nf__chips::-webkit-scrollbar { display: none; }
 
-  .m-notes__chip {
-    flex: 0 0 auto;
+  .m-nf__chip {
+    flex: none;
     min-block-size: 44px;
     padding-inline: 16px;
-    border: 1px solid var(--m-hairline, #E6DDE3);
+    border: 1px solid rgb(59 30 58 / 0.22);
     border-radius: 9999px;
     background: var(--m-surface);
     color: var(--m-plum);
@@ -307,23 +430,131 @@
     cursor: pointer;
   }
 
-  .m-notes__chip[aria-pressed='true'] {
-    background: var(--m-plum);
-    border-color: var(--m-plum);
-    color: var(--m-pearl);
+  .m-nf__chip[aria-pressed='true'] { background: var(--m-plum); border-color: var(--m-plum); color: var(--m-pearl); }
+  .m-nf__b:focus-visible, .m-nf__chip:focus-visible { outline: 2px solid var(--m-plum); outline-offset: 2px; }
+
+  @media screen and (min-width: 750px) {
+    .m-nf { grid-template-columns: auto auto minmax(0, 1fr); align-items: end; gap: 24px; }
+    .m-nf__b { padding-inline: 18px; }
   }
 
-  .m-notes__count {
-    margin: 16px 0 12px;
-    font-size: 0.875rem;
-    color: var(--m-text-muted);
+  .m-notes__fbtn {
+    flex: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-block-size: 44px;
+    padding-inline: 16px;
+    border: 1px solid rgb(59 30 58 / 0.3);
+    border-radius: 9999px;
+    background: var(--m-surface);
+    color: var(--m-plum);
+    font: inherit;
+    font-size: 0.9375rem;
+    cursor: pointer;
   }
+
+  .m-notes__fn {
+    display: inline-grid;
+    place-items: center;
+    min-inline-size: 20px;
+    block-size: 20px;
+    border-radius: 9999px;
+    background: var(--m-plum);
+    color: var(--m-pearl);
+    font-size: 0.75rem;
+  }
+
+  .m-notes__fn[hidden] { display: none; }
+
+  @media screen and (min-width: 750px) {
+    .m-notes__fbtn { display: none; }
+  }
+
+  .m-fsheet {
+    position: fixed;
+    inset: auto 0 0 0;
+    inline-size: 100%;
+    max-inline-size: none;
+    max-block-size: 88dvh;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    border-radius: 20px 20px 0 0;
+    background: var(--m-surface);
+    color: var(--m-plum);
+    box-shadow: 0 -8px 32px rgb(59 30 58 / 0.18);
+  }
+
+  .m-fsheet::backdrop { background: rgb(29 15 28 / 0.45); }
+  .m-fsheet__panel { display: flex; flex-direction: column; max-block-size: 88dvh; }
+  .m-fsheet__head { display: flex; align-items: center; justify-content: space-between; padding: 12px 16px 4px 16px; }
+  .m-fsheet__title { margin: 0; font-size: var(--m-h3, 1.375rem); }
+  .m-fsheet__x { display: grid; place-items: center; inline-size: 44px; block-size: 44px; border: 1px solid rgb(59 30 58 / 0.2); border-radius: 14px; background: transparent; color: inherit; cursor: pointer; }
+  .m-fsheet__slot { overflow-y: auto; padding: 8px 16px; }
+  .m-fsheet__slot .m-nf { border: 0; padding: 0; background: transparent; }
+  .m-fsheet__foot { padding: 12px 16px calc(16px + env(safe-area-inset-bottom, 0px)); border-block-start: 1px solid var(--m-hairline, #E6DDE3); }
+  .m-fsheet__apply { inline-size: 100%; }
+
+  @media screen and (min-width: 750px) {
+    .m-fsheet { display: none; }
+  }
+
+  /* Slim sticky bar (about 52px): the count, the active filters as removable chips, Reset. */
+  [data-nf-inline]:empty { display: none; }
+
+  .m-notes__bar {
+    position: sticky;
+    inset-block-start: var(--header-height, 64px);
+    z-index: 5;
+    margin-block: var(--m-nrh) 0;
+    background: var(--m-surface);
+    border-block: 1px solid var(--m-hairline, #E6DDE3);
+  }
+
+  .m-notes__barin { display: flex; align-items: center; gap: 12px; min-block-size: 52px; }
+  .m-notes__count { margin: 0; flex: none; font-size: 0.9375rem; color: var(--m-text-muted); }
+  .m-notes__active { display: flex; gap: 8px; flex: 1 1 auto; min-inline-size: 0; overflow-x: auto; scrollbar-width: none; }
+  .m-notes__active::-webkit-scrollbar { display: none; }
+
+  .m-notes__tag {
+    flex: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    min-block-size: 44px;
+    padding-inline: 12px;
+    border: 0;
+    border-radius: 9999px;
+    background: var(--m-plum);
+    color: var(--m-pearl);
+    font: inherit;
+    font-size: 0.8125rem;
+    cursor: pointer;
+  }
+
+  .m-notes__reset {
+    flex: none;
+    min-block-size: 44px;
+    padding-inline: 4px;
+    border: 0;
+    background: none;
+    color: var(--m-berry-ink);
+    font: inherit;
+    font-size: 0.875rem;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+
+  .m-notes__empty { display: grid; justify-items: center; gap: 12px; padding-block: 40px; text-align: center; }
+  .m-notes__empty[hidden] { display: none; }
+  .m-notes__empty p { margin: 0; }
 
   .m-notes__grid {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 14px;
-    margin: 0;
+    margin: var(--m-nrh) 0 0;
     padding: 0;
     list-style: none;
   }
@@ -458,9 +689,10 @@
 
   .m-note__close {
     position: absolute;
-    inset-block-start: 8px;
+    inset-block-start: 6px;
     inset-inline-end: 8px;
-    z-index: 1;
+    z-index: 2;
+    box-shadow: 0 0 0 1px var(--m-hairline, #E6DDE3);
     display: grid;
     place-items: center;
     inline-size: 44px;
@@ -475,7 +707,7 @@
   .m-note__body {
     overflow-y: auto;
     overscroll-behavior: contain;
-    padding: 4px 20px calc(24px + env(safe-area-inset-bottom, 0px));
+    padding: 4px 20px calc(40px + env(safe-area-inset-bottom, 0px));
   }
 
   .m-note__hero .m-notes__pic {
@@ -542,10 +774,8 @@
   }
 
   .m-note__row-head {
-    display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-    gap: 12px;
+    display: grid;
+    gap: 0;
   }
 
   .m-note__row-head h3,
@@ -564,19 +794,32 @@
   }
 
   .m-note__legend {
-    margin: 2px 0 10px;
-    font-size: 0.75rem;
+    margin: 4px 0 12px;
+    font-size: 0.9375rem;
+    line-height: 1.4;
     color: var(--m-text-muted);
+  }
+
+  .m-note__tag {
+    display: inline-block;
+    margin-inline-start: 6px;
+    padding: 1px 8px;
+    border-radius: 9999px;
+    background: #F7F3F5;
+    border: 1px solid var(--m-hairline, #E6DDE3);
+    font-size: 0.75rem;
+    white-space: nowrap;
   }
 
   /* Perfume row: swipes sideways with snap on phones; a 3-column grid on desktop. */
   .m-note__row {
     display: grid;
     grid-auto-flow: column;
-    grid-auto-columns: 44%;
+    grid-auto-columns: 42%;
     gap: 12px;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
+    scroll-padding-inline: 20px;
     margin: 0 -20px 24px;
     padding: 0 20px 6px;
     list-style: none;
@@ -620,45 +863,46 @@
     mix-blend-mode: multiply;
   }
 
-  .m-pcard__badge {
-    position: absolute;
-    inset-block-start: 8px;
-    inset-inline-start: 8px;
-    padding: 3px 8px;
-    border-radius: 9999px;
-    background: var(--m-plum);
-    color: var(--m-pearl);
-    font-size: 0.6875rem;
-  }
-
   .m-pcard__name {
     font-family: var(--font-heading--family);
     font-size: 0.9375rem;
     line-height: 1.25;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
   }
 
   .m-pcard__price {
     font-size: 0.875rem;
   }
 
-  .m-dots {
-    color: var(--m-berry-ink);
-    letter-spacing: 1px;
-    font-size: 0.8125rem;
-  }
+  .m-str { display: grid; gap: 4px; margin-block-start: 2px; }
+  .m-str__bar { display: flex; gap: 3px; inline-size: 54px; }
+  .m-str__bar i { flex: 1; block-size: 5px; border-radius: 3px; background: #E9DFE6; }
+  .m-str__bar i.on { background: var(--m-plum); }
+  .m-str__w { font-size: 0.8125rem; line-height: 1.3; color: var(--m-text-muted); }
+
+  .m-pcard--all a { block-size: 100%; align-content: center; }
+  .m-pcard__allbtn { display: grid; place-items: center; min-block-size: 120px; padding: 12px; border: 1px solid rgb(59 30 58 / 0.22); border-radius: 12px; text-align: center; font-size: 0.9375rem; color: var(--m-berry-ink); }
 
   .m-note__related {
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 8px;
     margin: 10px 0 0;
     padding: 0;
     list-style: none;
   }
 
+  @media screen and (min-width: 750px) {
+    .m-note__related { display: flex; flex-wrap: wrap; }
+  }
+
   .m-note__related a {
-    display: inline-flex;
+    display: flex;
     align-items: center;
+    justify-content: center;
     min-block-size: 44px;
     padding-inline: 16px;
     border: 1px solid var(--m-hairline, #E6DDE3);

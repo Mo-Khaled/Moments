@@ -101,11 +101,21 @@
   content="{{ og_description | escape }}"
 >
 
+{%- liquid
+  assign m_title = page_title
+  if request.locale.iso_code == 'ar'
+    if request.page_type == 'page' and page.handle == 'notes'
+      assign m_title = 'النوتات – لحظات'
+    elsif request.page_type == 'metaobject' and metaobject.type == 'note' and metaobject.name_ar.value != blank
+      assign m_title = metaobject.name_ar.value | append: ' – لحظات'
+    endif
+  endif
+-%}
 <title>
-  {{ page_title }}
+  {{ m_title }}
   {%- if current_tags %} &ndash; tagged "{{ current_tags | join: ', ' }}"{% endif -%}
   {%- if current_page != 1 %} &ndash; Page {{ current_page }}{% endif -%}
-  {%- unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless -%}
+  {%- unless m_title contains shop.name or m_title contains 'لحظات' %} &ndash; {{ shop.name }}{% endunless -%}
 </title>
 
 <link
