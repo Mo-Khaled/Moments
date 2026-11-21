@@ -248,3 +248,5 @@ f45a1de pushed to live #162418163903 (live files equalled the base first): bundl
 Not changed: the English bits inside the Arabic product description (product content; owner decision needed).
 
 ### 2026-11-21 fb6e8dd (live): bundle card photos side by side; one number font in the cart (page, drawer, sheet, summary). Rollback: git show fb6e8dd^:assets/moments.css and push.
+
+### 2026-11-21 live: 7f396b4/76c928e + transform fix (dropdown divider; Brands row centred, 44px above and below), c533d9b (no Moment label on cart lines; note name variants use existing pictures). Missing note pictures: about 70 notes in the catalogue have no picture (see chat); new pictures need Higgsfield credits (owner to decide).
