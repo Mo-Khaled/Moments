@@ -1938,3 +1938,7 @@ html:root:root :is(.m-bbox__now, .cart__total-value, .m-bsheet__total dd) { font
 
 html:root .menu-list__submenu .m-mega--brands { transform: translateY(18px); } /* the panel measures its own height, so the row is moved visually only: equal space above and below */
 html:root .menu-list__submenu { box-shadow: inset 0 -1px 0 var(--m-plum); }
+
+/* cart (page + drawer): no Moment label on item lines (owner 2026-11-21), only the brand */
+.cart-items .card-meta__moment { display: none !important; }
+.cart-items .card-meta__brand::before { display: none !important; }
