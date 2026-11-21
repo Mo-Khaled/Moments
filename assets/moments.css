@@ -1920,3 +1920,15 @@ html:root .m-guide .m-guide__card h3 {
 }
 html:root .m-guide .m-guide__note { display: flex !important; flex-direction: row; align-items: flex-start; gap: 12px; }
 html:root .m-guide .m-guide__note-img { flex: none; inline-size: 44px; block-size: 44px; margin: 2px 0 0; border-radius: 12px; background: #F7F3F5; object-fit: cover; }
+
+/* bundle card: bottle photos side by side, no overlap (owner 2026-11-21) */
+html:root .m-bbox .m-bbox__thumbs { gap: 6px; }
+html:root .m-bbox .m-bbox__thumb + .m-bbox__thumb { margin-inline-start: 0 !important; }
+html:root .m-bbox .m-bbox__thumb { box-shadow: none; }
+
+/* one number style in the cart (page, drawer, bundle sheet, summary): body font, even digits (owner 2026-11-21) */
+html:root:root :is(.m-bbox__now, .m-bbox__was, .m-bbox__save, .m-bbox__title, .m-bsheet__title, .m-bsheet__price, .m-bsheet__totals, .m-sumlines, .cart-items__price, .cart__total-value, .cart__original-total-value, .m-cart-bar__total, .m-ship__text, .m-unitprice, .m-was, .cart-title .cart-bubble__text) {
+  font-family: var(--font-body--family) !important;
+  font-variant-numeric: lining-nums tabular-nums;
+}
+html:root:root :is(.m-bbox__now, .cart__total-value, .m-bsheet__total dd) { font-weight: 600; }
