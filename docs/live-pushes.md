@@ -233,3 +233,9 @@ Rollback: `git revert <commit>` or push the previous file versions (git show <co
 
 ### 2026-11-21 Notes menu link (live)
 8427945: "Notes" between Brands and Make a bundle in the desktop menu, the phone menu sheet and the phone drawer list; label from locales (notes_nav.label: Notes / النوتات). Live check: desktop EN+AR order "Shop by Moment | Brands | Notes | Make a bundle", href /pages/notes (/ar/pages/notes), active on /pages/notes; phone menu EN+AR shows it, aria-current on the Notes page. The admin Navigation was not changed (the visible items come from theme code).
+
+### 2026-11-21 cart rebuild: bundle box + details sheet (live)
+Commit 5bbcfbe (+ sync 77c4e31). NOTE: the published theme changed during this work: live is now "MOMENTS - Gift banner + fonts (Claude)" #162418163903 (a copy of Hero fix #162384347327 with a font-variable edit and a hero headline edit, made outside this repo). Verified it contained all earlier work, merged its two edits into the repo, pointed shopify.theme.toml at it, and pushed the cart files there.
+Pushed: snippets/moments-bundle-box.liquid (new), snippets/cart-products.liquid, locales/en.default.json + ar.json (moments_cart keys, bundle page text), sections/moments-bundle.liquid (LE 3,000, "Add bundle to cart", Edit bundle loads picks, replaces old lines), assets/moments.css.
+Checked in the owner's real Chrome (staging, then live): bundle card EN/AR, details sheet (Esc, scroll lock, focus), remove bundle + Undo, drawer, desktop two columns, bundle/outside-bottle scenarios (1, 2, 3 outside; bundle 3/4/5; qty 2; bundle + 1 and + 3 outside; empty). Not checked: 360px (Chrome window minimum is about 500px), 430px, very long names visually, Edit bundle end to end (add back to cart).
+Rollback: previous files = git show 77c4e31^:<file> (before 5bbcfbe) and push to #162418163903; or remove the render line for moments-bundle-box in snippets/cart-products.liquid and the hidden-row attributes.
