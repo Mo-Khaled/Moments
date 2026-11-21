@@ -423,7 +423,17 @@
       const b = watchEl(document.getElementById('wg-myModal'));
       return a && b;
     };
-    let tries = 0;
-    const t = setInterval(() => { if (watch() || ++tries > 40) clearInterval(t); }, 500);
+    watch();
+    // The app can add or rebuild its button and popup at any time (slow load, variant change): keep watching the page,
+    // cheaply (one check per animation frame at most), and never stop.
+    let queued = false;
+    new MutationObserver(() => {
+      if (queued) return;
+      queued = true;
+      requestAnimationFrame(() => {
+        queued = false;
+        ['inject_wish_button', 'wg-myModal'].forEach((id) => { const el = document.getElementById(id); if (el) { watchEl(el); swap(el); } });
+      });
+    }).observe(document.body, { childList: true, subtree: true });
   })();
 {% endjavascript %}
