@@ -246,3 +246,5 @@ f45a1de pushed to live #162418163903 (live files equalled the base first): bundl
 ### 2026-11-21 owner fixes batch (live)
 1a5b7ff (cart arrow + airy price block) and d2d9f52 pushed to live #162418163903: Notes card title centred + Learn more toggle; hero buttons keep /ar (merged with the live hero edits from another session: Arabic poster, scrim option); scent guide bold card titles + note pictures; product description open by default (3 product templates); Arabic Add to wishlist text + outline style; Arabic cart drawer opens from the left; brands logo row centred; About dropdown card; cart link/stepper on the end side. Footer link "ABOUT MOMENTS" Arabic translation set to "عن لحظات" (Translate data, LINK 645255790783).
 Not changed: the English bits inside the Arabic product description (product content; owner decision needed).
+
+### 2026-11-21 fb6e8dd (live): bundle card photos side by side; one number font in the cart (page, drawer, sheet, summary). Rollback: git show fb6e8dd^:assets/moments.css and push.
