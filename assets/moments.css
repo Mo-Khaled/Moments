@@ -62,8 +62,8 @@ html:root {
   /* Type, per the 2026 brand guide (2026-11-20): Marcellus for headlines, Readex Pro for body and UI, El Messiri for Arabic.
      El Messiri comes first in both stacks: its file covers Arabic letters only (unicode-range), so Latin falls through to
      Marcellus or Readex Pro and Arabic never uses Readex Pro's Arabic cut. */
-  --m-font: 'Marcellus', 'El Messiri Arabic', Georgia, serif;
-  --m-font-body: 'El Messiri Arabic', 'Readex Pro', system-ui, sans-serif;
+  --m-font: 'Marcellus', 'Readex Pro', system-ui, sans-serif; /* 2026-11-21: English headings Marcellus; Marcellus has no Arabic letters, so Arabic headings use Readex Pro */
+  --m-font-body: 'Readex Pro', system-ui, sans-serif;
   --font-body--family: var(--m-font-body);
   --font-subheading--family: var(--m-font-body);
   --font-accent--family: var(--m-font-body);

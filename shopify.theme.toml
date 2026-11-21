@@ -1,3 +1,4 @@
+# LIVE theme (2026-11-21): "MOMENTS - Gift banner + fonts (Claude)" #162418163903, published outside this repo (a copy of Hero fix #162384347327 plus a font and headline edit, merged here). Hero fix #162384347327 is the previous live theme (unpublished, keep).
 # LIVE theme: "MOMENTS - Hero fix" #162384347327 (role main), published 2026-11-20 outside this repo (synced the same day).
 # Before it: "moments-redesign + moment pages" #161651720383 (live 2026-11-06 to 2026-11-20, unpublished, keep).
 # Previous live theme: moments-redesign #161294745791 (unpublished, keep). Its copy: #161628979391 "Copy of moments-redesign".
@@ -5,4 +6,4 @@
 # Push specific files only: bash scripts/push.sh --only <files> (it refuses when the published theme is not the one below)
 [environments.live]
 store = "dezrva-2z.myshopify.com"
-theme = "162384347327"
+theme = "162418163903"
