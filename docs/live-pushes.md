@@ -252,3 +252,5 @@ Not changed: the English bits inside the Arabic product description (product con
 ### 2026-11-21 live: 7f396b4/76c928e + transform fix (dropdown divider; Brands row centred, 44px above and below), c533d9b (no Moment label on cart lines; note name variants use existing pictures). Missing note pictures: about 70 notes in the catalogue have no picture (see chat); new pictures need Higgsfield credits (owner to decide).
 
 ### 2026-11-21 bb01c26 (live): Notes card without full stop, soft close button (no focus ring on open); cart See your bottles + quantity controls on the end side, delete before the count. Live checked (AR): title "مسك", close button tint, close not focused on open, controls row-reverse on the end side, no Liquid errors. Rollback: git show bb01c26^:<file> for assets/moments.css and sections/moments-notes.liquid.
+
+### 2026-11-21 86978d9 (live): Arabic bundle title "باقتك من ٣ زجاجات" (the middle dot looked like ٠, so it read as ٣٠). Rollback: git show 86978d9^:locales/ar.json and push.
