@@ -242,3 +242,7 @@ Rollback: previous files = git show 77c4e31^:<file> (before 5bbcfbe) and push to
 
 ### 2026-11-21 cart design pass (live)
 f45a1de pushed to live #162418163903 (live files equalled the base first): bundle card desktop row layout, one price per item (struck price in the price column), summary lines (bundle, items, shipping Free / at checkout), claims aligned. Checked live in the owner Chrome at desktop EN + AR: one box, summary lines right, no Liquid errors, no horizontal scroll. Not checked on live: phone width (Chrome window would not go below ~500px). Rollback: git show f45a1de^:<file> for the 6 files and push.
+
+### 2026-11-21 owner fixes batch (live)
+1a5b7ff (cart arrow + airy price block) and d2d9f52 pushed to live #162418163903: Notes card title centred + Learn more toggle; hero buttons keep /ar (merged with the live hero edits from another session: Arabic poster, scrim option); scent guide bold card titles + note pictures; product description open by default (3 product templates); Arabic Add to wishlist text + outline style; Arabic cart drawer opens from the left; brands logo row centred; About dropdown card; cart link/stepper on the end side. Footer link "ABOUT MOMENTS" Arabic translation set to "عن لحظات" (Translate data, LINK 645255790783).
+Not changed: the English bits inside the Arabic product description (product content; owner decision needed).
