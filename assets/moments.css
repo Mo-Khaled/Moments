@@ -1935,6 +1935,6 @@ html:root:root :is(.m-bbox__now, .cart__total-value, .m-bsheet__total dd) { font
 
 /* Header dropdowns (owner 2026-11-21): brand logo row centred (the panel's own bottom padding pushed it up);
    a purple divider along the bottom edge of every dropdown, the same as under the header. */
-html:root .menu-list__submenu-inner:has(.m-mega--brands) { padding-block-end: 0 !important; }
-html:root .menu-list__submenu .m-mega--brands { padding-block: 22px !important; }
+
+html:root .menu-list__submenu .m-mega--brands { padding-block: 34px 6px !important; } /* same total height as before, row moved to the middle */
 html:root .menu-list__submenu { box-shadow: inset 0 -1px 0 var(--m-plum); }
