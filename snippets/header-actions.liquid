@@ -391,7 +391,11 @@
       'continue shopping': 'تابع التسوق',
       'view cart': 'عرض السلة',
       'powered by': 'بدعم من',
-      'search here': 'ابحث هنا'
+      'search here': 'ابحث هنا',
+      'add to wishlist': 'أضف إلى المفضلة',
+      'added to wishlist': 'في المفضلة',
+      'remove from wishlist': 'إزالة من المفضلة',
+      'view wishlist': 'عرض المفضلة'
     };
     const swap = (root) => {
       const w = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
@@ -406,12 +410,18 @@
         if (a && a !== i.placeholder) i.placeholder = a;
       });
     };
-    const watch = () => {
-      const m = document.getElementById('wg-myModal');
-      if (!m) return false;
-      swap(m);
-      new MutationObserver(() => swap(m)).observe(m, { childList: true, subtree: true, characterData: true });
+    const watched = new WeakSet();
+    const watchEl = (el) => {
+      if (!el || watched.has(el)) return !!el;
+      watched.add(el);
+      swap(el);
+      new MutationObserver(() => swap(el)).observe(el, { childList: true, subtree: true, characterData: true });
       return true;
+    };
+    const watch = () => {
+      const a = watchEl(document.getElementById('inject_wish_button'));
+      const b = watchEl(document.getElementById('wg-myModal'));
+      return a && b;
     };
     let tries = 0;
     const t = setInterval(() => { if (watch() || ++tries > 40) clearInterval(t); }, 500);

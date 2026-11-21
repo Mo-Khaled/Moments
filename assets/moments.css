@@ -1805,3 +1805,118 @@ html[dir='rtl'] .m-bbox__chev svg { transform: scaleX(-1); }
   .cart-page .m-bbox__now { font-size: 1.625rem; }
   .cart-page .m-bbox__see { margin-block-start: 12px; padding-block-start: 14px; }
 }
+
+/* ---------------------------------------------------------------------------------------------------------------------------
+   Owner fixes 2026-11-21 (batch)
+   --------------------------------------------------------------------------------------------------------------------------- */
+/* Notes card: title and line centred in Arabic too; "Learn more" as a centred, clear toggle */
+html:root .m-note__title,
+html:root .m-note__simple { text-align: center; margin-inline: auto; }
+.m-note__more summary {
+  justify-content: center;
+  gap: 8px;
+  list-style: none;
+  color: var(--m-berry-ink);
+  font-weight: 600;
+}
+.m-note__more summary::-webkit-details-marker { display: none; }
+.m-note__more summary::after {
+  content: '';
+  inline-size: 8px;
+  block-size: 8px;
+  border-inline-end: 2px solid currentColor;
+  border-block-end: 2px solid currentColor;
+  transform: rotate(45deg) translateY(-2px);
+  transition: transform var(--m-dur-2, 0.2s) var(--m-ease, ease);
+}
+.m-note__more[open] summary::after { transform: rotate(-135deg) translateY(-2px); }
+
+/* Scent guide on the product page: bigger, bolder card titles; a small note picture beside each note */
+.m-guide__card h3 {
+  font-family: var(--font-heading--family);
+  font-size: 1.25rem;
+  font-weight: 600;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--m-plum);
+}
+.m-guide__note { display: flex; align-items: flex-start; gap: 12px; }
+.m-guide__note-img { flex: none; inline-size: 48px; block-size: 48px; border-radius: 12px; background: #F7F3F5; object-fit: cover; }
+.m-guide__note-text { display: grid; gap: 2px; min-inline-size: 0; }
+
+/* Wishlist Guru "Add to wishlist" on the product page: the site's outline button, not black */
+#inject_wish_button .buttonStyleHead {
+  background: transparent !important;
+  color: var(--m-plum) !important;
+  border: 1.5px solid var(--m-plum) !important;
+  border-radius: 9999px !important;
+  min-block-size: 48px;
+  font-family: var(--font-body--family) !important;
+  font-weight: 600 !important;
+}
+#inject_wish_button .buttonStyleHead * { color: inherit !important; font-family: inherit !important; }
+#inject_wish_button .buttonStyleHead img,
+#inject_wish_button .buttonStyleHead [class*='heart'] { filter: brightness(0) saturate(100%) invert(12%) sepia(23%) saturate(1432%) hue-rotate(264deg) brightness(92%) !important; }
+
+/* Arabic: the cart drawer opens from the left (the cart icon is on the left) */
+html[dir='rtl'] cart-drawer-component .dialog-drawer {
+  margin-inline-start: auto;
+  margin-inline-end: 0;
+  margin-left: 0;
+  margin-right: auto;
+  --dialog-drawer-opening-animation: slideInLeft;
+  --dialog-drawer-closing-animation: slideOutLeft;
+}
+
+/* Brands dropdown: the logo row centred in the white panel */
+.m-mega--brands { padding-block: 14px 6px; }
+
+/* About dropdown: a soft card */
+html:root .m-about-menu__panel {
+  gap: 8px 28px;
+  min-inline-size: 380px;
+  padding: 20px;
+  border: 1px solid var(--m-hairline, #E6DDE3);
+  border-radius: 16px;
+  box-shadow: 0 16px 40px rgb(59 30 58 / 0.14);
+}
+html:root .m-about-menu__heading { color: var(--m-berry-ink); font-weight: 600; margin-block-end: 6px; }
+html:root .m-about-menu__panel a {
+  padding: 10px 12px;
+  margin-inline: -12px;
+  border-radius: 10px;
+  color: var(--m-plum);
+  text-decoration: none;
+  transition: background var(--m-dur-2, 0.2s) var(--m-ease, ease);
+}
+html:root .m-about-menu__panel a:hover,
+html:root .m-about-menu__panel a:focus-visible { background: #F7F3F5; }
+
+/* Cart page, desktop: "See your bottles" on the end side; quantity stepper under the price on the end side */
+@media screen and (min-width: 750px) {
+  .cart-page .m-bbox__see { justify-content: flex-end !important; }
+}
+@container cart-items (min-width: 720px) {
+  html:root:root .cart-page .cart-items__table-row {
+    grid-template-columns: 7.5rem minmax(0, 1fr) auto;
+    grid-template-rows: auto 1fr auto;
+    grid-template-areas:
+      'media details price'
+      'media details quantity'
+      'media details error';
+  }
+  html:root:root .cart-page .cart-items__price { grid-area: price; }
+  html:root:root .cart-page .cart-items__quantity { grid-area: quantity; align-self: end; justify-self: end; }
+}
+
+/* scent guide: stronger selectors (the section's own styles won) */
+html:root .m-guide .m-guide__card h3 {
+  font-family: var(--font-body--family);
+  font-size: 1.125rem;
+  font-weight: 700;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--m-plum);
+}
+html:root .m-guide .m-guide__note { display: flex !important; flex-direction: row; align-items: flex-start; gap: 12px; }
+html:root .m-guide .m-guide__note-img { flex: none; inline-size: 44px; block-size: 44px; margin: 2px 0 0; border-radius: 12px; background: #F7F3F5; object-fit: cover; }

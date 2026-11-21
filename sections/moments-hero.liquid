@@ -152,6 +152,9 @@
         endif
 
         assign poster = block.settings.poster
+        if request.locale.iso_code == 'ar' and block.settings.poster_ar != blank
+          assign poster = block.settings.poster_ar
+        endif
         if poster == blank and key == 'allday'
           assign poster = images['island-sun-grid_05.png']
         endif
@@ -171,6 +174,7 @@
         data-moment="{{ key }}"
         data-subject="{{ block.settings.subject_side | default: 'right' }}"
         data-has-video="{% if video != blank %}true{% else %}false{% endif %}"
+        data-scrim="{% if block.settings.text_scrim == false %}off{% else %}on{% endif %}"
         {{ block.shopify_attributes }}
       >
         <div class="m-slide__bg" aria-hidden="true"></div>
@@ -238,9 +242,29 @@
           <div class="m-slide__title" role="heading" aria-level="1">{{ headline }}</div>
           <p class="m-slide__text">{{ subline }}</p>
           <div class="m-slide__actions">
-            <a class="m-btn" href="{{ block.settings.primary_url | default: routes.collections_url }}">{{ primary_label }}</a>
+            {%- liquid
+              assign hero_root = routes.root_url
+              if hero_root == '/'
+                assign hero_root = ''
+              endif
+              assign hero_p = block.settings.primary_url | default: routes.collections_url
+              assign hero_p_first = hero_p | slice: 0
+              if hero_p_first == '/' and hero_root != blank
+                unless hero_p contains hero_root
+                  assign hero_p = hero_root | append: hero_p
+                endunless
+              endif
+              assign hero_s = block.settings.secondary_url
+              assign hero_s_first = hero_s | slice: 0
+              if hero_s_first == '/' and hero_root != blank
+                unless hero_s contains hero_root
+                  assign hero_s = hero_root | append: hero_s
+                endunless
+              endif
+            -%}
+            <a class="m-btn" href="{{ hero_p }}">{{ primary_label }}</a>
             {%- if block.settings.secondary_label != blank and block.settings.secondary_url != blank -%}
-              <a class="m-btn m-btn--outline" href="{{ block.settings.secondary_url }}">{{ secondary_label }}</a>
+              <a class="m-btn m-btn--outline" href="{{ hero_s }}">{{ secondary_label }}</a>
             {%- endif -%}
           </div>
         </div>
@@ -388,7 +412,7 @@
   .m-slide__media--fit .m-slide__poster {
     inset-inline-start: auto;
     inline-size: auto;
-    aspect-ratio: 1 / 1;
+    aspect-ratio: auto; /* 2026-11-21: keep the photo own shape (wide banners were squeezed into a square) */
     max-inline-size: 100%;
     object-fit: contain;
   }
@@ -675,6 +699,7 @@
     }
   }
   .m-slide--photo .m-slide__scrim { display: block; }
+  .m-slide--photo[data-scrim='off'] .m-slide__scrim { display: none; } /* 2026-11-21: banners with their own plain area for the text need no gradient */
 
   /* Photo slides on desktop (2026-11-20, v3, owner): full-width photo with the product in the CENTRE (the Winter photo was extended
      to 21:9 for this), so the English copy sits on the left third and the Arabic copy on the right third with no change of layout.
@@ -692,14 +717,14 @@
 
     .m-slide--photo .m-slide__scrim {
       background:
-        linear-gradient(to top, rgb(29 15 28 / 0.5) 0%, rgb(29 15 28 / 0) 26%),
-        linear-gradient(to right, rgb(29 15 28 / 0.72) 0%, rgb(29 15 28 / 0.45) 20%, rgb(29 15 28 / 0) 40%);
+        linear-gradient(to top, rgb(29 15 28 / 0.3) 0%, rgb(29 15 28 / 0) 18%),
+        linear-gradient(to right, rgb(29 15 28 / 0.55) 0%, rgb(29 15 28 / 0.3) 18%, rgb(29 15 28 / 0) 34%);
     }
 
     html[dir='rtl'] .m-slide--photo .m-slide__scrim {
       background:
-        linear-gradient(to top, rgb(29 15 28 / 0.5) 0%, rgb(29 15 28 / 0) 26%),
-        linear-gradient(to left, rgb(29 15 28 / 0.72) 0%, rgb(29 15 28 / 0.45) 20%, rgb(29 15 28 / 0) 40%);
+        linear-gradient(to top, rgb(29 15 28 / 0.3) 0%, rgb(29 15 28 / 0) 18%),
+        linear-gradient(to left, rgb(29 15 28 / 0.55) 0%, rgb(29 15 28 / 0.3) 18%, rgb(29 15 28 / 0) 34%);
     }
   }
   .m-slide--photo .m-slide__copy, .m-slide--photo .m-slide__title, .m-slide--photo .m-slide__text, .m-slide--photo .m-slide__tag { color: #fff; }
@@ -1039,6 +1064,8 @@
         },
         { "type": "video", "id": "video_mobile", "label": "Mobile video (optional)", "info": "9:16. Not used on phones yet: phones show the poster." },
         { "type": "image_picker", "id": "poster", "label": "Poster image", "info": "The first thing shown and the LCP image. The All day slide falls back to the Island Sun Khadlaj photo (EXPERIMENTAL placeholder)." },
+        { "type": "image_picker", "id": "poster_ar", "label": "Arabic desktop poster (optional)", "info": "Used on the Arabic site on desktop, where the text sits on the right: put the photos on the left. Phones use the Mobile poster." },
+        { "type": "checkbox", "id": "text_scrim", "label": "Dark gradient behind the text", "info": "Turn off when the poster already has a plain area for the text.", "default": true },
         { "type": "image_picker", "id": "poster_mobile", "label": "Mobile poster (optional)", "info": "Used on phones only, with Poster fit set to Fill. 1170x1920 (about 9:16). Desktop keeps the main poster." },
         {
           "type": "select",
