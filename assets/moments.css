@@ -1942,3 +1942,33 @@ html:root .menu-list__submenu { box-shadow: inset 0 -1px 0 var(--m-plum); }
 /* cart (page + drawer): no Moment label on item lines (owner 2026-11-21), only the brand */
 .cart-items .card-meta__moment { display: none !important; }
 .cart-items .card-meta__brand::before { display: none !important; }
+
+/* Notes card close button (owner 2026-11-21): a soft round button, no dark ring; the ring only for keyboard focus */
+html:root .m-note__close {
+  inset-block-start: 12px;
+  inset-inline-end: 12px;
+  inline-size: 40px;
+  block-size: 40px;
+  border: 0;
+  border-radius: 9999px;
+  background: #F2ECF0;
+  color: var(--m-plum);
+  box-shadow: none;
+}
+html:root .m-note__close svg { inline-size: 18px; block-size: 18px; }
+html:root .m-note__close:hover { background: #E9E1E7; }
+html:root .m-note__close:focus { outline: none; }
+html:root .m-note__close:focus-visible { outline: 2px solid var(--m-plum); outline-offset: 2px; }
+
+/* cart (owner 2026-11-21): "See your bottles" on the end side at every width; on item cards the quantity
+   controls sit on the end side, delete first then the count */
+html:root .m-bbox__see { justify-content: flex-end !important; }
+html:root:root .cart-items__quantity {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 12px;
+  inline-size: 100%;
+}
+html:root .m-note__body:focus { outline: none; }

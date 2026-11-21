@@ -235,7 +235,7 @@
 
     const cardHtml = (n) => `
       <div class="m-note__hero">${tile(n, true)}</div>
-      <h2 class="m-note__title" id="m-note-title">${esc(name(n))}.</h2>
+      <h2 class="m-note__title" id="m-note-title">${esc(name(n))}</h2>
       <p class="m-note__simple">${esc(ar ? n.simple_ar : n.simple_en)}</p>
       <details class="m-note__more">
         <summary>${esc(L.learn)}</summary>
@@ -269,6 +269,8 @@
         lastFocus = document.activeElement;
         document.documentElement.classList.add('m-notes-lock');
         sheet.showModal();
+        body.setAttribute('tabindex', '-1');
+        body.focus({ preventScroll: true }); // start focus in the card, not on the close button (no ring on open)
         panel.style.transform = '';
       }
       document.title = ar ? `${name(n)} – لحظات` : `${name(n)} – MOMENTS`;
