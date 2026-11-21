@@ -5716,7 +5716,10 @@
     "edit_bundle": "تعديل الباقة",
     "remove_bundle": "حذف الباقة",
     "remove_bottle": "احذف هذه الزجاجة",
-    "close": "إغلاق"
+    "close": "إغلاق",
+    "shipping": "الشحن",
+    "ship_free": "مجاني",
+    "ship_later": "يُحسب عند الدفع"
   },
   "notes_nav": {
     "label": "النوتات"

@@ -6,6 +6,60 @@
 
 <div class="cart__summary-totals">
   {% render 'moments-free-shipping-bar' %}
+
+{%- unless cart.empty? -%}
+  {%- liquid
+    assign is_ar = false
+    if request.locale.iso_code == 'ar'
+      assign is_ar = true
+    endif
+    assign sum_ids = ''
+    for item in cart.items
+      assign bp = item.properties['Bundle']
+      if bp contains 'MOMENTS bundle'
+        unless sum_ids contains bp
+          assign sum_ids = sum_ids | append: bp | append: '|'
+        endunless
+      endif
+    endfor
+    assign sum_list = sum_ids | split: '|'
+    assign ship_cents = settings.moments_free_shipping | times: 100
+  -%}
+  <ul class="m-sumlines" role="list">
+    {%- for bid in sum_list -%}
+      {%- liquid
+        assign s_count = 0
+        assign s_final = 0
+        for item in cart.items
+          if item.properties['Bundle'] == bid
+            assign s_count = s_count | plus: item.quantity
+            assign s_final = s_final | plus: item.final_line_price
+          endif
+        endfor
+        capture s_n
+          echo s_count
+        endcapture
+        if is_ar
+          assign s_n = s_n | replace: '0', '٠' | replace: '1', '١' | replace: '2', '٢' | replace: '3', '٣' | replace: '4', '٤' | replace: '5', '٥' | replace: '6', '٦' | replace: '7', '٧' | replace: '8', '٨' | replace: '9', '٩'
+        endif
+      -%}
+      <li><span>{{ 'moments_cart.bundle_title' | t: count: s_count, n: s_n }}</span><span><bdi>{{ s_final | money }}</bdi></span></li>
+    {%- endfor -%}
+    {%- for item in cart.items -%}
+      {%- unless item.properties['Bundle'] contains 'MOMENTS bundle' -%}
+        <li><span>{%- render 'product-name', product: item.product, plain: true -%}{%- if item.quantity > 1 %} × {{ item.quantity }}{%- endif -%}</span><span><bdi>{{ item.final_line_price | money }}</bdi></span></li>
+      {%- endunless -%}
+    {%- endfor -%}
+    <li class="m-sumlines__ship">
+      <span>{{ 'moments_cart.shipping' | t }}</span>
+      {%- if ship_cents > 0 and cart.total_price >= ship_cents -%}
+        <span class="m-sumlines__free">{{ 'moments_cart.ship_free' | t }}</span>
+      {%- else -%}
+        <span class="m-sumlines__later">{{ 'moments_cart.ship_later' | t }}</span>
+      {%- endif -%}
+    </li>
+  </ul>
+{%- endunless -%}
   {% # We need to keep this node in place to allow morphing to work properly # %}
   <div class="cart__original-total-container cart-primary-typography">
     {%- if cart.cart_level_discount_applications.size > 0 -%}

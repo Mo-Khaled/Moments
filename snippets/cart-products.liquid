@@ -235,7 +235,7 @@
                     </ul>
                   {% endif %}
 
-                  <div>
+                  <div class="m-unitprice"{% if item.quantity < 2 %} hidden{% endif %}>
                     {% if item.original_price != item.final_price %}
                       <span class="visually-hidden">{{ 'content.price_sale' | t }}</span>
                       <span>{{ item.final_price | money }}</span>
@@ -328,6 +328,15 @@
                       assign unit_price = item.unit_price | money
                     endif
                   -%}
+                  {%- liquid
+                    assign was_line = item.original_line_price
+                    if item.variant.compare_at_price > item.original_price
+                      assign was_line = item.variant.compare_at_price | times: item.quantity
+                    endif
+                  -%}
+                  {%- if was_line > item.final_line_price -%}
+                    <s class="m-was"><bdi>{{ was_line | money }}</bdi></s>
+                  {%- endif -%}
                   <text-component value="{{ price | strip_html }}">{{ price }}</text-component>
                   {%- if item.unit_price_measurement -%}
                     <div class="cart-items__price-unit cart-secondary-typography">

@@ -1479,7 +1479,10 @@
     "edit_bundle": "Edit bundle",
     "remove_bundle": "Remove bundle",
     "remove_bottle": "Remove this bottle",
-    "close": "Close"
+    "close": "Close",
+    "shipping": "Shipping",
+    "ship_free": "Free",
+    "ship_later": "Calculated at checkout"
   },
   "notes_nav": {
     "label": "Notes"

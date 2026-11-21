@@ -81,8 +81,10 @@
           <span class="m-bbox__pill"><svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>{{ 'moments_cart.pill' | t }}</span>
         {%- endif -%}
       </span>
+      <span class="m-bbox__text">
       <span class="m-bbox__title">{{ 'moments_cart.bundle_title' | t: count: b_count, n: n_txt }}</span>
       <span class="m-bbox__names">{{ b_names }}</span>
+      </span>
       <span class="m-bbox__prices">
         <span class="m-bbox__amounts">
           {%- if b_saved > 0 -%}<s class="m-bbox__was"><bdi>{{ b_full | money }}</bdi></s>{%- endif -%}

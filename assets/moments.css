@@ -1687,3 +1687,72 @@ html:root:root cart-drawer-component .cart__summary-totals { gap: 8px; }
 html:root:root cart-drawer-component .m-ship { padding: 10px 14px; gap: 8px; }
 html:root:root cart-drawer-component .cart__ctas { gap: 8px; }
 html:root:root cart-drawer-component .cart__total-value { font-size: 1.5rem; }
+
+/* ---------------------------------------------------------------------------------------------------------------------------
+   Cart design pass (2026-11-21): bundle card desktop layout, one price per item (struck above, in the price column),
+   summary lines (bundle, items, shipping), claims aligned to the card.
+   --------------------------------------------------------------------------------------------------------------------------- */
+.m-unitprice[hidden] { display: none !important; }
+
+.m-was {
+  display: block;
+  font-size: 0.8125rem;
+  font-weight: 400;
+  color: var(--m-text-muted);
+}
+
+.cart-items__price { text-align: end; }
+
+.m-bbox__text { display: grid; gap: 4px; min-inline-size: 0; }
+.m-bbox__thumb { inline-size: 56px; block-size: 56px; }
+
+@media screen and (min-width: 750px) {
+  .cart-page .m-bbox__main {
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    grid-template-areas:
+      "thumbs text pill"
+      "thumbs text prices"
+      "see see see";
+    column-gap: 20px;
+    row-gap: 6px;
+    padding: 20px 24px;
+    align-items: center;
+  }
+  .cart-page .m-bbox__top { display: contents; }
+  .cart-page .m-bbox__thumbs { grid-area: thumbs; align-self: center; }
+  .cart-page .m-bbox__thumb { inline-size: 72px; block-size: 72px; border-radius: 14px; }
+  .cart-page .m-bbox__thumb + .m-bbox__thumb { margin-inline-start: -18px; }
+  .cart-page .m-bbox__pill { grid-area: pill; justify-self: end; align-self: end; }
+  .cart-page .m-bbox__text { grid-area: text; align-self: center; }
+  .cart-page .m-bbox__title { font-size: 1.5rem; }
+  .cart-page .m-bbox__prices { grid-area: prices; flex-direction: column; align-items: flex-end; gap: 2px; align-self: start; }
+  .cart-page .m-bbox__amounts { margin: 0; }
+  .cart-page .m-bbox__see { grid-area: see; margin-block-start: 8px; justify-content: space-between; }
+}
+
+/* summary lines */
+.m-sumlines {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+  padding: 4px 0 14px;
+  list-style: none;
+  border-block-end: 1px solid var(--m-hairline, #E6DDE3);
+  font-family: var(--font-body--family);
+  font-size: 0.9375rem;
+  color: var(--m-plum);
+}
+.m-sumlines li { display: flex; justify-content: space-between; gap: 16px; }
+.m-sumlines li > span:first-child { min-inline-size: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.m-sumlines li > span:last-child { flex: none; }
+.m-sumlines__free { color: #1E7A45; font-weight: 600; }
+.m-sumlines__later { color: var(--m-text-muted); font-size: 0.8125rem; }
+cart-drawer-component .m-sumlines { display: none; }
+
+/* claims: aligned to the card, one tidy list with a full-width rule */
+html:root:root .cart-page .m-cart-claims {
+  justify-items: start;
+  text-align: start;
+  inline-size: 100%;
+  margin-inline: 0;
+}
