@@ -1756,3 +1756,27 @@ html:root:root .cart-page .m-cart-claims {
   inline-size: 100%;
   margin-inline: 0;
 }
+
+/* phone: bundle card price area with room to breathe (owner 2026-11-21: "very crowded").
+   Bundle price first and large, the struck full price small next to it, "You save" on its own line as a soft green tag. */
+@media screen and (max-width: 749px) {
+  .m-bbox__main { gap: 10px; padding: 16px 16px 14px; }
+  .m-bbox__names { -webkit-line-clamp: 1; }
+  .m-bbox__prices { display: grid; justify-items: start; gap: 8px; padding-block-start: 12px; border-block-start: 1px solid var(--m-hairline, #E6DDE3); }
+  .m-bbox__amounts { display: flex; align-items: baseline; gap: 10px; margin: 0; text-align: start; }
+  .m-bbox__now { order: 1; font-size: 1.5rem; }
+  .m-bbox__was { order: 2; font-size: 0.875rem; }
+  .m-bbox__save { display: inline-flex; gap: 0.35em; padding: 4px 10px; border-radius: 9999px; background: #E7F4EC; font-size: 0.8125rem; }
+  .m-bbox__see { padding-block-start: 12px; }
+}
+
+/* the 10% tag on an item card: small, one line */
+html:root:root .cart-items .m-discount-title {
+  display: inline-block;
+  margin-block-start: 6px;
+  padding: 3px 10px;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  line-height: 1.4;
+  white-space: nowrap;
+}
