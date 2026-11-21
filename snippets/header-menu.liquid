@@ -82,6 +82,14 @@
       {% endif %}
     {% endfor %}
   {% endfor %}
+  {%- assign notes_page = pages['notes'] -%}
+  {%- if notes_page != blank -%}
+    <li role="presentation" class="menu-list__list-item">
+      <a href="{{ notes_page.url }}" data-skip-node-update="true" class="menu-list__link{% if request.path contains '/pages/notes' %} menu-list__link--active{% endif %}" ref="menuitem">
+        <span class="menu-list__link-title">{{ 'notes_nav.label' | t }}</span>
+      </a>
+    </li>
+  {%- endif -%}
   {%- if settings.moments_page_bundle != blank and bundle_listed == false -%}
     <li role="presentation" class="menu-list__list-item">
       <a href="{{ settings.moments_page_bundle.url }}" data-skip-node-update="true" class="menu-list__link menu-list__link--accent{% if request.path == settings.moments_page_bundle.url %} menu-list__link--active{% endif %}" ref="menuitem">

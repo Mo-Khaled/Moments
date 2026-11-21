@@ -96,10 +96,15 @@
         </ul>
       </section>
 
-      {%- if settings.moments_page_bundle != blank or has_about -%}
+      {%- if settings.moments_page_bundle != blank or has_about or pages['notes'] != blank -%}
         <section class="mm__group">
           <h2 class="mm__title mm-reveal" style="--i: {{ step | plus: 4 }};">{{ 'mobile_menu.more_ways' | t }}</h2>
           <ul role="list">
+            {%- if pages['notes'] != blank -%}
+              <li class="mm-reveal" style="--i: {{ step | plus: 5 }};">
+                <a class="mm-link" href="{{ pages['notes'].url }}"{% if request.path contains '/pages/notes' %} aria-current="page"{% endif %}>{{ 'notes_nav.label' | t }}</a>
+              </li>
+            {%- endif -%}
             {%- if settings.moments_page_bundle != blank -%}
               <li class="mm-reveal" style="--i: {{ step | plus: 5 }};">
                 <a class="mm-link mm-link--accent" href="{{ settings.moments_page_bundle.url }}">{{ 'bundle.nav' | t }}</a>

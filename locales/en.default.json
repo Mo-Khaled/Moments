@@ -1463,6 +1463,9 @@
   "moments_cart": {
     "bundle_discount": "10% off 3+ bottles"
   },
+  "notes_nav": {
+    "label": "Notes"
+  },
   "tabbar": {
     "label": "Main",
     "home": "Home",

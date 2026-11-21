@@ -49,6 +49,16 @@
   {%- endfor -%}
 {%- endfor -%}
 
+{%- assign notes_page = pages['notes'] -%}
+{%- if notes_page != blank -%}
+  {%- assign index = index | plus: 1 -%}
+  <li class="menu-drawer__list-item--flat" style="--menu-drawer-animation-index: {{ index }};">
+    <a href="{{ notes_page.url }}" class="menu-drawer__menu-item menu-drawer__menu-item--mainlist menu-drawer__animated-element focus-inset">
+      <span class="menu-drawer__menu-item-text wrap-text">{{ 'notes_nav.label' | t }}</span>
+    </a>
+  </li>
+{%- endif -%}
+
 {%- if settings.moments_page_bundle != blank -%}
   {%- assign index = index | plus: 1 -%}
   <li class="menu-drawer__list-item--flat menu-drawer__list-item--divider" style="--menu-drawer-animation-index: {{ index }};">
