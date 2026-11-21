@@ -1780,3 +1780,28 @@ html:root:root .cart-items .m-discount-title {
   line-height: 1.4;
   white-space: nowrap;
 }
+
+/* bundle card, all widths (owner 2026-11-21): the arrow sits right after "See your bottles" and points forward
+   (left in Arabic); the price block is airy: bundle price first, struck price small beside it, "You save" as a green tag. */
+.m-bbox__see { justify-content: flex-start !important; gap: 6px; }
+.m-bbox__chev { display: inline-flex; }
+html[dir='rtl'] .m-bbox__chev svg { transform: scaleX(-1); }
+.m-bbox__amounts { display: flex; align-items: baseline; gap: 10px; margin: 0; }
+.m-bbox__now { order: 1; }
+.m-bbox__was { order: 2; font-size: 0.875rem; }
+.m-bbox__save { display: inline-flex; gap: 0.35em; padding: 4px 10px; border-radius: 9999px; background: #E7F4EC; font-size: 0.8125rem; }
+
+@media screen and (min-width: 750px) {
+  .cart-page .m-bbox__main {
+    grid-template-areas:
+      "thumbs text pill"
+      "thumbs text prices"
+      "see see see";
+    row-gap: 10px;
+    padding: 24px 28px 20px;
+  }
+  .cart-page .m-bbox__pill { align-self: end; }
+  .cart-page .m-bbox__prices { align-items: flex-end; gap: 8px; align-self: start; }
+  .cart-page .m-bbox__now { font-size: 1.625rem; }
+  .cart-page .m-bbox__see { margin-block-start: 12px; padding-block-start: 14px; }
+}
