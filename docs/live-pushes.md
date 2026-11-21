@@ -230,3 +230,6 @@ Rollback: `git revert <commit>` or push the previous file versions (git show <co
 ### 2026-11-21 drawer + Notes bar (live)
 - 480aab0: cart drawer shows ONE free-shipping box (removed the duplicate render at the top of cart-drawer.liquid; the summary one stays). Staging then live test: 1 item / 4 items / empty, EN+AR, 360/390/430/1440: one box, summary in view, no overlap, no JWXLJD. Not tested: bundle lines in the drawer (Easy Bundles needs its own page/gates), list scroll with 4+ items beyond the check that the summary stays in view.
 - 904548a: Notes bar: 52px, count at start / Filters button at end, zero gap when stuck (measured header offset), one bottom border, chips row only when filters are active. Live: gap 0 stuck, 24px under description before scrolling, EN+AR at 360/390/430, 1440 desktop count bar.
+
+### 2026-11-21 Notes menu link (live)
+8427945: "Notes" between Brands and Make a bundle in the desktop menu, the phone menu sheet and the phone drawer list; label from locales (notes_nav.label: Notes / النوتات). Live check: desktop EN+AR order "Shop by Moment | Brands | Notes | Make a bundle", href /pages/notes (/ar/pages/notes), active on /pages/notes; phone menu EN+AR shows it, aria-current on the Notes page. The admin Navigation was not changed (the visible items come from theme code).
