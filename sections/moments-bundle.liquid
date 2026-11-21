@@ -585,6 +585,7 @@
       };
       let items = [];
       let id = '';
+      let editingId = '';
       try { const s = JSON.parse(localStorage.getItem(KEY) || 'null'); if (s && Array.isArray(s.items)) { items = s.items; id = s.id || ''; } } catch (e) { /* storage unavailable: this visit only */ }
       if (!id) id = Math.random().toString(36).slice(2, 8).toUpperCase();
       const save = () => { try { localStorage.setItem(KEY, JSON.stringify({ id, items })); } catch (e) { /* ignore */ } };
@@ -725,6 +726,15 @@
       const checkout = async (btn) => {
         if (items.length < min) return;
         showError(''); btn.disabled = true;
+        if (editingId) {
+          // editing a bundle from the cart: take the old lines of that bundle out first, so the new picks replace them
+          try {
+            const cart = await fetch('/cart.js').then((r) => r.json());
+            const updates = {};
+            cart.items.filter((i) => i.properties && i.properties.Bundle === 'MOMENTS bundle ' + editingId).forEach((i) => { updates[i.key] = 0; });
+            if (Object.keys(updates).length) await fetch('/cart/update.js', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ updates }) });
+          } catch (err) { /* if this fails the old lines stay; the cart still shows both bundles */ }
+        }
         const lines = {};
         items.forEach((i) => { lines[i.variantId] = (lines[i.variantId] || 0) + 1; });
         const payload = { items: Object.entries(lines).map(([vid, q]) => ({ id: Number(vid), quantity: q, properties: { Bundle: 'MOMENTS bundle ' + id } })) };
@@ -744,6 +754,28 @@
         new IntersectionObserver((entries) => { root.dataset.summaryVisible = entries.some((en) => en.isIntersecting) ? 'true' : 'false'; const bar = $('[data-m-bar]'); bar.style.display = root.dataset.summaryVisible === 'true' ? 'none' : ''; }).observe($('[data-m-summary]'));
       }
 
+      // Edit bundle from the cart: /pages/make-a-bundle?edit=<id>&p=handle~variantId~qty,... loads those picks into the builder.
+      (async () => {
+        try {
+          const q = new URLSearchParams(location.search);
+          const p = q.get('p');
+          if (!q.get('edit') || !p) return;
+          const next = [];
+          for (const part of p.split(',')) {
+            const [handle, vid, qty] = part.split('~');
+            if (!handle) continue;
+            const res = await fetch('/products/' + handle + '.js');
+            if (!res.ok) continue;
+            const pr = await res.json();
+            const v = pr.variants.find((x) => String(x.id) === vid) || pr.variants.find((x) => x.available);
+            if (!v) continue;
+            let img = (v.featured_image && v.featured_image.src) || pr.featured_image || (pr.images && pr.images[0]) || '';
+            if (img) img += (img.includes('?') ? '&' : '?') + 'width=240';
+            for (let n = 0; n < (Number(qty) || 1); n++) next.push({ handle: pr.handle, title: pr.title, vendor: pr.vendor, variantId: v.id, price: v.price, image: img });
+          }
+          if (next.length) { items = next; id = q.get('edit') || id; editingId = id; save(); render(); history.replaceState(null, '', location.pathname); }
+        } catch (err) { /* keep the saved picks */ }
+      })();
       render();
       load(true);
     })();

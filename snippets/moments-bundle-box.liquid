@@ -1,0 +1,208 @@
+{%- doc -%}
+  Cart bundle boxes (page + drawer). Lines that carry the property Bundle = "MOMENTS bundle <id>" (written by the bundle builder at
+  /pages/make-a-bundle) are grouped into ONE card per id: overlapping bottle thumbnails, a "10% off" pill (only when the lines
+  really carry a discount), the title, the bottle names, the struck full price, the bundle price, "You save", "See your bottles".
+  Tapping the card opens the details sheet (bottom sheet on phones, centred window on desktop).
+  Every price is the cart line's own final price / original price. Nothing is hard-coded and nothing is hidden: the 10% on a
+  bottle outside the bundle is shown by the normal item card.
+  The bundle's own table rows stay in the cart table (hidden) so the theme's line-index logic keeps working.
+{%- enddoc -%}
+
+{%- liquid
+  assign is_ar = false
+  if request.locale.iso_code == 'ar'
+    assign is_ar = true
+  endif
+  assign bundle_ids = ''
+  for item in cart.items
+    assign bp = item.properties['Bundle']
+    if bp contains 'MOMENTS bundle'
+      unless bundle_ids contains bp
+        assign bundle_ids = bundle_ids | append: bp | append: '|'
+      endunless
+    endif
+  endfor
+  assign bundle_list = bundle_ids | split: '|'
+  assign ship_threshold = settings.moments_free_shipping | times: 100
+  assign ship_amt = ship_threshold | money_without_trailing_zeros
+-%}
+
+{%- for bid in bundle_list -%}
+  {%- liquid
+    assign b_count = 0
+    assign b_full = 0
+    assign b_final = 0
+    assign b_keys = ''
+    assign b_names = ''
+    assign b_edit = ''
+    assign thumbs = ''
+    assign thumb_n = 0
+    for item in cart.items
+      if item.properties['Bundle'] == bid
+        assign b_count = b_count | plus: item.quantity
+        assign b_full = b_full | plus: item.original_line_price
+        assign b_final = b_final | plus: item.final_line_price
+        assign b_keys = b_keys | append: item.key | append: ','
+        capture nm
+          render 'product-name', product: item.product, plain: true
+        endcapture
+        assign b_names = b_names | append: nm | append: ' · '
+        assign b_edit = b_edit | append: item.product.handle | append: '~' | append: item.variant_id | append: '~' | append: item.quantity | append: ','
+      endif
+    endfor
+    assign b_saved = b_full | minus: b_final
+    assign b_id = bid | remove: 'MOMENTS bundle ' | strip
+    assign b_names = b_names | strip | remove_last: '·' | strip
+    assign b_keys = b_keys | remove_last: ','
+    assign b_edit = b_edit | remove_last: ','
+    capture n_txt
+      echo b_count
+    endcapture
+    if is_ar
+      assign n_txt = n_txt | replace: '0', '٠' | replace: '1', '١' | replace: '2', '٢' | replace: '3', '٣' | replace: '4', '٤' | replace: '5', '٥' | replace: '6', '٦' | replace: '7', '٧' | replace: '8', '٨' | replace: '9', '٩'
+    endif
+    assign edit_url = settings.moments_page_bundle.url | default: routes.root_url | append: '?'
+    if settings.moments_page_bundle != blank
+      assign edit_url = settings.moments_page_bundle.url | append: '?edit=' | append: b_id | append: '&p=' | append: b_edit
+    endif
+  -%}
+  <div class="m-bbox" data-m-bbox data-keys="{{ b_keys }}">
+    <button type="button" class="m-bbox__main" data-m-bopen aria-haspopup="dialog">
+      <span class="m-bbox__top">
+        <span class="m-bbox__thumbs" aria-hidden="true">
+          {%- for item in cart.items -%}
+            {%- if item.properties['Bundle'] == bid and item.image and thumb_n < 4 -%}
+              {%- assign thumb_n = thumb_n | plus: 1 -%}
+              <span class="m-bbox__thumb">{{ item.image | image_url: width: 160 | image_tag: loading: 'lazy', alt: '' }}</span>
+            {%- endif -%}
+          {%- endfor -%}
+        </span>
+        {%- if b_saved > 0 -%}
+          <span class="m-bbox__pill"><svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>{{ 'moments_cart.pill' | t }}</span>
+        {%- endif -%}
+      </span>
+      <span class="m-bbox__title">{{ 'moments_cart.bundle_title' | t: count: b_count, n: n_txt }}</span>
+      <span class="m-bbox__names">{{ b_names }}</span>
+      <span class="m-bbox__prices">
+        <span class="m-bbox__amounts">
+          {%- if b_saved > 0 -%}<s class="m-bbox__was"><bdi>{{ b_full | money }}</bdi></s>{%- endif -%}
+          <strong class="m-bbox__now"><bdi>{{ b_final | money }}</bdi></strong>
+        </span>
+        {%- if b_saved > 0 -%}<span class="m-bbox__save">{{ 'moments_cart.you_save' | t }} <bdi>{{ b_saved | money }}</bdi></span>{%- endif -%}
+      </span>
+      <span class="m-bbox__see">{{ 'moments_cart.see_bottles' | t }}<span class="m-bbox__chev" aria-hidden="true">{% if is_ar %}‹{% else %}›{% endif %}</span></span>
+    </button>
+
+    <dialog class="m-bsheet" data-m-bsheet aria-labelledby="m-bsheet-title-{{ b_id }}">
+      <div class="m-bsheet__panel">
+        <div class="m-bsheet__grip" aria-hidden="true"><span></span></div>
+        <div class="m-bsheet__head">
+          <h2 class="m-bsheet__title" id="m-bsheet-title-{{ b_id }}">{{ 'moments_cart.bundle_title' | t: count: b_count, n: n_txt }}</h2>
+          <button type="button" class="m-bsheet__x" data-m-bclose aria-label="{{ 'moments_cart.close' | t }}">
+            <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+          </button>
+        </div>
+        <div class="m-bsheet__body">
+          <ul class="m-bsheet__rows" role="list">
+            {%- for item in cart.items -%}
+              {%- if item.properties['Bundle'] == bid -%}
+                {%- capture row_size -%}{%- render 'product-name', product: item.product, size_only: true -%}{%- endcapture -%}
+                <li class="m-bsheet__row">
+                  <span class="m-bsheet__img">{%- if item.image -%}{{ item.image | image_url: width: 160 | image_tag: loading: 'lazy', alt: '' }}{%- endif -%}</span>
+                  <span class="m-bsheet__info">
+                    <span class="m-bsheet__name">{%- render 'product-name', product: item.product, plain: true -%}{%- if item.quantity > 1 %} × {{ item.quantity }}{%- endif -%}</span>
+                    <span class="m-bsheet__meta">{% if row_size != blank %}{{ row_size | strip }} &middot; {% endif %}{{ item.product.vendor }}</span>
+                  </span>
+                  <span class="m-bsheet__price">
+                    {%- if item.original_line_price != item.final_line_price -%}<s><bdi>{{ item.original_line_price | money }}</bdi></s>{%- endif -%}
+                    <strong><bdi>{{ item.final_line_price | money }}</bdi></strong>
+                  </span>
+                  <button type="button" class="m-bsheet__rm" data-m-bremove="{{ item.key }}" aria-label="{{ 'moments_cart.remove_bottle' | t }}">
+                    <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+                  </button>
+                </li>
+              {%- endif -%}
+            {%- endfor -%}
+          </ul>
+
+          <div class="m-bsheet__rewards">
+            <p class="m-bsheet__rewards-title">{{ 'moments_cart.rewards' | t }}</p>
+            <ul role="list">
+              <li><span class="m-bsheet__tick" aria-hidden="true"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>{{ 'moments_cart.reward_delivery' | t: amount: ship_amt }}</li>
+              <li><span class="m-bsheet__tick" aria-hidden="true"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>{{ 'moments_cart.reward_off' | t }}</li>
+            </ul>
+          </div>
+
+          <dl class="m-bsheet__totals">
+            <div><dt>{{ 'moments_cart.full_price' | t }}</dt><dd>{%- if b_saved > 0 -%}<s><bdi>{{ b_full | money }}</bdi></s>{%- else -%}<bdi>{{ b_full | money }}</bdi>{%- endif -%}</dd></div>
+            {%- if b_saved > 0 -%}<div class="m-bsheet__saved"><dt>{{ 'moments_cart.you_save_row' | t }}</dt><dd><bdi>{{ b_saved | money }}</bdi></dd></div>{%- endif -%}
+            <div class="m-bsheet__total"><dt>{{ 'moments_cart.bundle_total' | t }}</dt><dd><bdi>{{ b_final | money }}</bdi></dd></div>
+          </dl>
+
+          <div class="m-bsheet__actions">
+            <a class="m-btn m-bsheet__edit" href="{{ edit_url }}">{{ 'moments_cart.edit_bundle' | t }}</a>
+            <button type="button" class="m-btn m-btn--ghost m-bsheet__remove" data-m-bremove-all>{{ 'moments_cart.remove_bundle' | t }}</button>
+          </div>
+        </div>
+      </div>
+    </dialog>
+  </div>
+{%- endfor -%}
+
+{% javascript %}
+  // Bundle box: open / close the details sheet, remove one bottle or the whole bundle (with an Undo toast).
+  (() => {
+    if (window.__mBundleBox) return;
+    window.__mBundleBox = true;
+    const lock = (on) => document.documentElement.classList.toggle('m-bsheet-lock', on);
+    document.addEventListener('click', (e) => {
+      const open = e.target.closest('[data-m-bopen]');
+      if (open) {
+        const d = open.closest('[data-m-bbox]').querySelector('dialog');
+        if (d && !d.open) { d.showModal(); lock(true); }
+        return;
+      }
+      const d = e.target.closest('dialog[data-m-bsheet]');
+      if (e.target.matches && e.target.matches('dialog[data-m-bsheet]')) { e.target.close(); return; }
+      if (e.target.closest('[data-m-bclose]')) { d && d.close(); return; }
+      const one = e.target.closest('[data-m-bremove]');
+      if (one) {
+        one.disabled = true;
+        fetch('/cart/change.js', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ id: one.dataset.mBremove, quantity: 0 }) })
+          .then(() => location.reload()).catch(() => { one.disabled = false; });
+        return;
+      }
+      if (e.target.closest('[data-m-bremove-all]')) {
+        const box = e.target.closest('[data-m-bbox]');
+        const keys = box.dataset.keys.split(',');
+        fetch('/cart.js').then((r) => r.json()).then((cart) => {
+          const undo = cart.items.filter((i) => keys.includes(i.key)).map((i) => ({ id: i.variant_id, quantity: i.quantity, properties: i.properties }));
+          try { sessionStorage.setItem('m-bundle-undo', JSON.stringify(undo)); } catch (err) { /* ignore */ }
+          const updates = {}; keys.forEach((k) => { updates[k] = 0; });
+          return fetch('/cart/update.js', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ updates }) });
+        }).then(() => location.reload()).catch(() => {});
+      }
+    });
+    document.addEventListener('close', (e) => { if (e.target.matches && e.target.matches('dialog[data-m-bsheet]')) lock(false); }, true);
+
+    // Undo toast after "Remove bundle"
+    const showUndo = () => {
+      let undo = null;
+      try { undo = JSON.parse(sessionStorage.getItem('m-bundle-undo') || 'null'); sessionStorage.removeItem('m-bundle-undo'); } catch (err) { /* ignore */ }
+      if (!undo || !undo.length) return;
+      const ar = document.documentElement.lang === 'ar';
+      const t = document.createElement('div');
+      t.className = 'm-btoast'; t.setAttribute('role', 'status');
+      t.innerHTML = '<span></span><button type="button"></button>';
+      t.firstChild.textContent = ar ? 'تم حذف الباقة' : 'Bundle removed';
+      t.lastChild.textContent = ar ? 'تراجع' : 'Undo';
+      t.lastChild.addEventListener('click', () => {
+        t.lastChild.disabled = true;
+        fetch('/cart/add.js', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ items: undo }) }).then(() => location.reload());
+      });
+      document.body.appendChild(t);
+      setTimeout(() => t.remove(), 12000);
+    };
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', showUndo); else showUndo();
+  })();
+{% endjavascript %}

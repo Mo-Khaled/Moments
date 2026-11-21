@@ -706,7 +706,7 @@
     "title": "Bundle",
     "line": "Choose {{ count }} or more bottles. Pay once.",
     "line_tiers": "Choose {{ count }} or more bottles. {{ first }} from bottle {{ n1 }}, {{ second }} from bottle {{ n2 }}.",
-    "offer": "Pick 3 or more bottles and get 10% off all of them. Free delivery over EGP 3,000.",
+    "offer": "Pick 3 or more bottles and get 10% off all of them. Free delivery over LE 3,000.",
     "perk_discount": "10% off",
     "slot": "Slot {{ n }}",
     "empty_slot": "Empty slot {{ n }}, add a bottle",
@@ -719,7 +719,7 @@
     "ready": "Your bundle is ready",
     "shipping_hint": "Add {{ amount }} more to reach free shipping",
     "shipping_done": "Your bundle ships free",
-    "checkout": "Checkout",
+    "checkout": "Add bundle to cart",
     "add": "Add to bundle",
     "sold_out": "Sold out",
     "added": "{{ title }} added to the bundle",
@@ -1461,7 +1461,25 @@
     "slideshow_label": "{{ brand }}: new in and top sellers"
   },
   "moments_cart": {
-    "bundle_discount": "10% off 3+ bottles"
+    "bundle_discount": "10% off 3+ bottles",
+    "pill": "10% off",
+    "bundle_title": {
+      "one": "Your bundle · {{ count }} bottle",
+      "other": "Your bundle · {{ count }} bottles"
+    },
+    "you_save": "You save",
+    "you_save_row": "You save",
+    "see_bottles": "See your bottles",
+    "not_in_bundle": "Not in the bundle",
+    "rewards": "Bundle rewards",
+    "reward_delivery": "Free delivery over {{ amount }}",
+    "reward_off": "10% off every bottle from 3 bottles",
+    "full_price": "Full price",
+    "bundle_total": "Bundle total",
+    "edit_bundle": "Edit bundle",
+    "remove_bundle": "Remove bundle",
+    "remove_bottle": "Remove this bottle",
+    "close": "Close"
   },
   "notes_nav": {
     "label": "Notes"

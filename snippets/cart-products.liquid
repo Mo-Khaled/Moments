@@ -49,6 +49,7 @@
         class="cart-items spacing-style{% if block_settings.dividers %} cart-items--dividers{% endif %}"
         style="{%  render 'spacing-style', settings: block_settings %} --cart-items-gap:{{ block_settings.gap | append: "px" }};"
       >
+        {%- render 'moments-bundle-box' -%}
         <table
           class="cart-items__table"
           role="table"
@@ -101,10 +102,15 @@
           </thead>
 
           <tbody role="rowgroup">
+            {%- assign has_bundle_box = false -%}
+            {%- for it in cart.items -%}
+              {%- if it.properties['Bundle'] contains 'MOMENTS bundle' -%}{%- assign has_bundle_box = true -%}{%- endif -%}
+            {%- endfor -%}
             {% for item in cart.items %}
               <tr
                 role="row"
-                class="cart-items__table-row{% if item.parent_relationship.parent != null %} cart-items__nested-line{% endif %}"
+                class="cart-items__table-row{% if item.parent_relationship.parent != null %} cart-items__nested-line{% endif %}{% if item.properties['Bundle'] contains 'MOMENTS bundle' %} m-row-bundled{% endif %}"
+                {% if item.properties['Bundle'] contains 'MOMENTS bundle' %}hidden data-m-bundled{% endif %}
                 ref="cartItemRows[]"
                 data-parent-key="{{ item.parent_relationship.parent.key }}"
                 data-key="{{ item.key }}"
@@ -157,6 +163,9 @@
                     </a>
                   </p>
                   {%- render 'product-card-meta', product: item.product -%}
+                  {%- if has_bundle_box and item.properties['Bundle'] == blank -%}
+                    <p class="m-notin">{{ 'moments_cart.not_in_bundle' | t }}</p>
+                  {%- endif -%}
 
                   {%- if item.item_components.size != 0 -%}
                     <ul class="cart-items__bundle list-unstyled">
