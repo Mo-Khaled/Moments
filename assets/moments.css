@@ -1869,7 +1869,7 @@ html[dir='rtl'] cart-drawer-component .dialog-drawer {
 }
 
 /* Brands dropdown: the logo row centred in the white panel */
-.m-mega--brands { padding-block: 14px 6px; }
+.m-mega--brands { padding-block: 10px; } /* equal space above and below the logo row */
 
 /* About dropdown: a soft card */
 html:root .m-about-menu__panel {
