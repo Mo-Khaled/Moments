@@ -9,7 +9,8 @@ import json, os, re, sys
 sys.path.insert(0, os.path.dirname(__file__))
 import importlib
 ad = importlib.import_module('apply-descriptions')
-gql, norm = ad.gql, ad.norm
+gql = ad.gql
+norm = lambda t: re.sub(r'\s+', '', ad.norm(t))  # Shopify re-spaces HTML between tags when it saves; compare without whitespace
 D = os.path.join(ad.OUT, 'em-dash-2026-11-22')
 BEFORE = os.path.join(D, 'live-before.json')
 LOG = os.path.join(D, 'apply-log.jsonl')
