@@ -401,6 +401,15 @@
                         endcase
                         assign shown_label = shown_label | replace: ' ml', ' مل'
                       endif
+                      # the native Product type filter (2026-11-23): Incense and Air Freshener read Bakhoor / Air fresheners
+                      if filter.param_name == 'filter.p.product_type'
+                        case value.value
+                          when 'Incense', 'بخور'
+                            assign shown_label = 'home_bakhoor.type_bakhoor' | t
+                          when 'Air Freshener', 'معطر جو'
+                            assign shown_label = 'home_bakhoor.type_air' | t
+                        endcase
+                      endif
                     -%}
                     {%- capture counted_label -%}<span>{{ shown_label }}</span> ({{ value.count }}){%- endcapture -%}
                     {% render 'checkbox',

@@ -41,11 +41,13 @@
         assign mark_gesture = 'tie'
       when 'winter'
         assign mark_gesture = 'rise'
+      when 'home'
+        assign mark_gesture = 'rise'
       else
         assign mark_gesture = 'swing'
     endcase
   endif
-  assign known = 'night gift allday daily fresh love occasions winter' | split: ' '
+  assign known = 'night gift allday daily fresh love occasions winter home' | split: ' '
 -%}
 
 <moment-mark

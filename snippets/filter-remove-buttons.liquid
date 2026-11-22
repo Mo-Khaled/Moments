@@ -74,10 +74,21 @@
             {% render 'swatch', swatch: value.swatch, mode: 'pill' %}
           {% endif %}
 
+          {%- liquid
+            assign chip_label = value.label
+            if filter.param_name == 'filter.p.product_type'
+              case value.value
+                when 'Incense', 'بخور'
+                  assign chip_label = 'home_bakhoor.type_bakhoor' | t
+                when 'Air Freshener', 'معطر جو'
+                  assign chip_label = 'home_bakhoor.type_air' | t
+              endcase
+            endif
+          -%}
           {% if filter.type == 'boolean' or show_filter_label %}
-            {{ filter.label | escape }}: {{ value.label | escape }}
+            {{ filter.label | escape }}: {{ chip_label | escape }}
           {% else %}
-            {{ value.label | escape }}
+            {{ chip_label | escape }}
           {% endif %}
 
           <span class="svg-wrapper svg-wrapper--smaller">

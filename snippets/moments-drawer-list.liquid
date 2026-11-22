@@ -34,6 +34,15 @@
     </li>
   {%- endif -%}
 {%- endfor -%}
+{%- comment -%} after the six moments: Home & Bakhoor (not a moment) {%- endcomment -%}
+{%- if collections['home-and-ambiance'] != blank -%}
+  {%- assign index = index | plus: 1 -%}
+  <li class="menu-drawer__list-item--flat menu-drawer__list-item--divider" style="--menu-drawer-animation-index: {{ index }};">
+    <a href="{{ collections['home-and-ambiance'].url }}" class="menu-drawer__menu-item menu-drawer__menu-item--mainlist menu-drawer__animated-element focus-inset">
+      <span class="menu-drawer__menu-item-text wrap-text">{{ 'home_bakhoor.title' | t }}</span>
+    </a>
+  </li>
+{%- endif -%}
 
 {%- for key in order -%}
   {%- for link in linklist.links -%}

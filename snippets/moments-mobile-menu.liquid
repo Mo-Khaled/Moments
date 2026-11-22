@@ -65,6 +65,18 @@
             </li>
           {%- endif -%}
         {%- endfor -%}
+        {%- comment -%} 7th tile: Home & Bakhoor, not a moment (own tone, censer mark), full width {%- endcomment -%}
+        {%- assign home_collection = collections['home-and-ambiance'] -%}
+        {%- if home_collection != blank -%}
+          {%- assign step = step | plus: 1 -%}
+          <li class="mm-reveal mm__tiles-item--home" style="--i: {{ step | plus: 2 }};">
+            <a class="mm-tile mm-tile--home m-tone--home" href="{{ home_collection.url }}" data-moment-host>
+              <span class="mm-tile__mark" aria-hidden="true">{% render 'moment-mark', mark: 'home', size: 'lg' %}</span>
+              <span class="mm-tile__name">{{ 'home_bakhoor.title' | t }}</span>
+              <span class="mm-tile__count">{{ 'mobile_menu.products' | t: count: home_collection.products_count }}</span>
+            </a>
+          </li>
+        {%- endif -%}
       </ul>
     </section>
 
@@ -410,6 +422,31 @@
     overflow: clip;
     transition: transform 160ms var(--m-ease);
     -webkit-tap-highlight-color: transparent;
+  }
+
+  .mm__tiles-item--home {
+    grid-column: 1 / -1;
+  }
+
+  .mm-tile--home {
+    min-block-size: 96px;
+    grid-template-columns: 1fr auto;
+    grid-template-rows: auto auto;
+    align-content: center;
+    column-gap: 12px;
+  }
+
+  .mm-tile--home .mm-tile__mark {
+    grid-column: 2;
+    grid-row: 1 / span 2;
+    inline-size: 64px;
+    block-size: 64px;
+    align-self: center;
+  }
+
+  .mm-tile--home .mm-tile__name,
+  .mm-tile--home .mm-tile__count {
+    grid-column: 1;
   }
 
   .mm-tile:active {

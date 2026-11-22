@@ -1506,5 +1506,6 @@
     "all_description": "Every perfume at MOMENTS in one place: 100% original, sealed bottles from Afnan, Lattafa, Khadlaj and more, with cash on delivery across Egypt.",
     "product_description": "{{ title }} by {{ vendor }}: 100% original and sealed at MOMENTS Egypt. Cash on delivery and free shipping on orders over LE 3,000.",
     "breadcrumb_home": "Home"
-  }
+  },
+  "home_bakhoor": {"title": "Home & Bakhoor", "type_bakhoor": "Bakhoor", "type_air": "Air fresheners"}
 }

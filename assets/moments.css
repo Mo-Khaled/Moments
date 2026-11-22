@@ -359,6 +359,17 @@ html:root {
   --moment-winter-body: color-mix(in oklab, #2266a4 62%, var(--m-pearl));
   --moment-winter-accent: var(--m-nude);
   --moment-winter-gold: var(--m-nude);
+
+  /* Home & Bakhoor (2026-11-23): not a moment, its own tone, a smoky resin olive (hue ~70), pearl on field 5.3:1 */
+  --moment-home: linear-gradient(155deg, #6f6230, #4f4520);
+  --moment-home-field: #6f6230;
+  --moment-home-deep: #4f4520;
+  --moment-home-soft: #efe9cf;
+  --moment-home-soft-ink: #322b10;
+  --moment-home-ink: var(--m-pearl);
+  --moment-home-body: color-mix(in oklab, #6f6230 62%, var(--m-pearl));
+  --moment-home-accent: var(--m-nude);
+  --moment-home-gold: var(--m-nude);
 }
 
 /* The active moment. The hero script sets data-moment on <html>; everything that should follow the moment reads
@@ -454,6 +465,14 @@ html[data-moment='winter'] { --m-live: var(--moment-winter-deep); --m-live-ink: 
   --tile-body: var(--moment-occasions-body);
   --tile-accent: var(--moment-occasions-accent);
   --tile-gold: var(--moment-occasions-gold);
+}
+
+.m-tone--home {
+  --tile-bg: var(--moment-home);
+  --tile-ink: var(--moment-home-ink);
+  --tile-body: var(--moment-home-body);
+  --tile-accent: var(--moment-home-accent);
+  --tile-gold: var(--moment-home-gold);
 }
 
 .m-tone--winter {

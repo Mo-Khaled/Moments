@@ -85,6 +85,17 @@
           </li>
         {%- endif -%}
       {%- endfor -%}
+      {%- comment -%} 7th tile (2026-11-23): Home & Bakhoor. Not a moment (not in moments-config): own tone and censer mark {%- endcomment -%}
+      {%- assign home_collection = collections['home-and-ambiance'] -%}
+      {%- if home_collection != blank -%}
+        <li class="m-mega__moment-item m-mega__moment-item--home">
+          <a class="m-mega__moment m-mega__moment--home m-tone--home" href="{{ home_collection.url }}" data-moment-host>
+            <span class="m-mega__moment-art" aria-hidden="true">{% render 'moment-mark', mark: 'home', size: 'lg' %}</span>
+            <span class="m-mega__moment-name">{{ 'home_bakhoor.title' | t }}</span>
+            <span class="m-mega__moment-count">{{ 'homepage.moments.count' | t: count: home_collection.products_count }}</span>
+          </a>
+        </li>
+      {%- endif -%}
     </ul>
 
     <div class="m-mega__columns">
@@ -190,6 +201,29 @@
     background: var(--tile-bg);
     color: var(--tile-ink);
     box-shadow: inset 0 0 0 1px rgb(250 246 242 / 0.12);
+  }
+
+  /* the 7th tile spans the row and lies flat: mark on the end side, name and count on the start side */
+  .m-mega__moment-item--home {
+    grid-column: 1 / -1;
+  }
+
+  .m-mega__moment--home {
+    aspect-ratio: auto;
+    min-block-size: 84px;
+    padding: 16px 20px;
+    align-content: center;
+  }
+
+  .m-mega__moment--home .m-mega__moment-art {
+    inset-block: 50% auto;
+    translate: 0 -50%;
+    inline-size: 72px;
+    block-size: 72px;
+  }
+
+  .m-mega__moment--home .m-mega__moment-name {
+    font-size: 1.375rem;
   }
 
   .m-mega__moment-art {
