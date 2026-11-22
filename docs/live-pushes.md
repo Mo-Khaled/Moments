@@ -271,3 +271,5 @@ ac957f9 pushed (notes-data.json, notes-image-map.liquid, moments-notes.liquid). 
 ### 2026-11-22 65f34ca (live): Google site verification meta tag in layout/theme.liquid (Search Console, for the Google sign-in branding check). Rollback: git show 65f34ca^:layout/theme.liquid and push (only after Google verification is no longer needed).
 
 ### 2026-11-22 a3d4a7a (live): notes pill sits above the phone sticky add-to-cart bar. Rollback: git show 054d201:sections/moments-scent-guide.liquid and push.
+
+### 2026-11-22 00a1bac + d2081dd (live): wishlist header count follows add/remove live and reads Arabic digits; Arabic popup buttons; AR checkout "إجمالي التوفير". Files: snippets/header-actions.liquid, locales/ar.json. Rollback: git show 00a1bac^:snippets/header-actions.liquid and d2081dd^:locales/ar.json, push.
