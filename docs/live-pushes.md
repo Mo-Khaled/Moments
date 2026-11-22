@@ -275,3 +275,5 @@ ac957f9 pushed (notes-data.json, notes-image-map.liquid, moments-notes.liquid). 
 ### 2026-11-22 00a1bac + d2081dd (live): wishlist header count follows add/remove live and reads Arabic digits; Arabic popup buttons; AR checkout "إجمالي التوفير". Files: snippets/header-actions.liquid, locales/ar.json. Rollback: git show 00a1bac^:snippets/header-actions.liquid and d2081dd^:locales/ar.json, push.
 
 ### 2026-11-22 d5114cd + b37022b (live): AR account popup opens from the icon (was off screen); AR cart drawer slides from the left; scent guide notes card full width on top, 3 cards below. Files: snippets/account-popover.liquid, assets/moments.css, sections/moments-scent-guide.liquid. Rollback: git show d5114cd^:<file> for the first two and a3d4a7a:sections/moments-scent-guide.liquid, push.
+
+### 2026-11-22 store data (live): the 6 moment collections and their 15 For him/For her/Unisex versions sorted Best selling (were manual; winter already was). Backup of the manual order: data/backups/moment-collections-order-2026-11-22.json and moment-sub-collections-order-2026-11-22.json.
