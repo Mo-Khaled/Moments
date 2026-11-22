@@ -20,11 +20,13 @@ def gql(q, variables=None, mutate=False):
         cmd += ['--variables', json.dumps(variables)]
     if mutate:
         cmd.append('--allow-mutations')
-    r = subprocess.run(cmd, capture_output=True, text=True, timeout=600)
-    i = r.stdout.find('{\n')
-    if i < 0:
-        raise SystemExit('CLI error: ' + (r.stderr or r.stdout)[:600])
-    return json.loads(r.stdout[i:])
+    for attempt in range(8):
+        r = subprocess.run(cmd, capture_output=True, text=True, timeout=600)
+        j = r.stdout.find(chr(123) + chr(10))
+        if j >= 0:
+            return json.loads(r.stdout[j:])
+        time.sleep(5 * (attempt + 1))  # sign-in check or rate limit failed: wait and retry
+    raise SystemExit('CLI error: ' + (r.stderr or r.stdout)[-600:])
 
 
 def multiline(k):
@@ -33,6 +35,17 @@ def multiline(k):
 
 def main():
     notes = json.load(open(SRC + '/notes_content.json', encoding='utf-8'))['notes']
+    # only notes that have no entry yet (the first 37 were published on 2026-11-20; never re-upload their pictures)
+    have_h, after = set(), None
+    while True:
+        q = '{ metaobjects(type:"note", first:250%s){ pageInfo{hasNextPage endCursor} nodes{ handle } } }' % (', after:"%s"' % after if after else '')
+        r = gql(q)['metaobjects']
+        have_h |= {n['handle'] for n in r['nodes']}
+        if not r['pageInfo']['hasNextPage']:
+            break
+        after = r['pageInfo']['endCursor']
+    notes = [n for n in notes if n['handle'] not in have_h]
+    print('existing entries:', len(have_h), '| to publish:', len(notes))
     d = gql('{ metaobjectDefinitionByType(type:"note"){ id capabilities{ onlineStore{enabled} } fieldDefinitions{ key type{name} } } }')
     mdef = d.get('metaobjectDefinitionByType')
     if not mdef:
@@ -77,6 +90,9 @@ def main():
         r = gql('mutation($h:MetaobjectHandleInput!,$m:MetaobjectUpsertInput!){ metaobjectUpsert(handle:$h, metaobject:$m){ metaobject{ handle } userErrors{message} } }',
                 {'h': {'type': 'note', 'handle': n['handle']}, 'm': {'capabilities': {'publishable': {'status': 'ACTIVE'}}, 'fields': fields}}, True)
         print('entry', n['handle'], r['metaobjectUpsert']['userErrors'])
+    if gql('{ pages(first:1, query:"handle:notes"){ nodes{ id } } }')['pages']['nodes']:
+        print('page /pages/notes exists: not created again')
+        return
     r = gql('mutation($p:PageCreateInput!){ pageCreate(page:$p){ page{ id handle } userErrors{message} } }',
             {'p': {'title': 'Notes', 'handle': 'notes', 'templateSuffix': 'notes', 'isPublished': True, 'body': ''}}, True)
     print('page:', r['pageCreate'])
