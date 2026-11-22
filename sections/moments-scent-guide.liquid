@@ -306,8 +306,23 @@
     background: var(--m-surface, transparent);
   }
 
+  /* "What you'll smell" (the note pictures) leads, full width; the other cards sit in one row under it, so no card is
+     stretched to the notes list's height (owner 2026-11-22) */
   .m-guide__card--notes {
-    grid-column: span 2;
+    grid-column: 1 / -1;
+    order: -1;
+  }
+
+  @media screen and (min-width: 750px) {
+    .m-guide__grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+
+  @media screen and (min-width: 1200px) {
+    .m-guide__card--notes .m-guide__list--notes {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
   }
 
   @media screen and (max-width: 749px) {
