@@ -12,7 +12,7 @@
 
 {{ 'readex-pro-latin.woff2' | asset_url | preload_tag: as: 'font', type: 'font/woff2', crossorigin: 'anonymous' }}
 {%- if request.locale.iso_code == 'ar' -%}
-  {{ 'el-messiri-arabic.woff2' | asset_url | preload_tag: as: 'font', type: 'font/woff2', crossorigin: 'anonymous' }}
+  {{ 'readex-pro-arabic.woff2' | asset_url | preload_tag: as: 'font', type: 'font/woff2', crossorigin: 'anonymous' }}
 {%- endif -%}
 
 {% style %}

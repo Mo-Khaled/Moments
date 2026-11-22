@@ -67,7 +67,35 @@
     "variant_button_border_width": 1,
     "variant_button_radius": 40,
     "variant_button_width": "default-width-buttons",
+    "moments_page_about": "about-us",
+    "moments_page_contact": "contact",
+    "moments_page_bundle": "make-a-bundle",
     "content_for_index": [],
+    "blocks": {
+      "16428855274652595211": {
+        "type": "shopify://apps/wishlist-guru/blocks/heart_button/2c17f518-d350-4883-a154-c9a194a4a585",
+        "disabled": false,
+        "settings": {}
+      },
+      "11224365712497073626": {
+        "type": "shopify://apps/wishlist-guru/blocks/collection-heart/2c17f518-d350-4883-a154-c9a194a4a585",
+        "disabled": false,
+        "settings": {
+          "selectCurrentFilter": "none",
+          "afterIcon": false,
+          "appendIconCheck": false,
+          "buttonPrependBeforeElemnt": false,
+          "productGridElement": "",
+          "productAnchorElement": "",
+          "iconElement": "",
+          "modalGridElement": "",
+          "modalOpenElement": "",
+          "modalButtonAppend": "",
+          "modalVariantSelector": "",
+          "modalVariantSubSelector": ""
+        }
+      }
+    },
     "color_schemes": {
       "scheme-1": {
         "settings": {
@@ -381,10 +409,7 @@
           "selected_variant_hover_border_color": "#251224"
         }
       }
-    },
-    "moments_page_about": "about-us",
-    "moments_page_contact": "contact",
-    "moments_page_bundle": "make-a-bundle"
+    }
   },
   "presets": {
     "Tinker": {}
