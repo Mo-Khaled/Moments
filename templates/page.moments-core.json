@@ -13,7 +13,7 @@
       "type": "moments-shop-by-moment",
       "blocks": {
         "tile_fresh": {"type": "moment", "settings": {"collection": "fresh-moment", "mark": "fresh", "label": "Fresh Moments", "label_ar": "لحظات فريش"}},
-        "tile_winter": {"type": "moment", "settings": {"collection": "winter-moment", "mark": "winter", "label": "Winter Moments", "label_ar": "لحظات الشتا"}},
+        "tile_winter": {"type": "moment", "settings": {"collection": "winter-moment", "mark": "winter", "label": "Winter Moments", "label_ar": "لحظات الشتاء"}},
         "tile_love": {"type": "moment", "settings": {"collection": "love-moment", "mark": "love", "label": "Love Moments", "label_ar": "لحظات حب"}},
         "tile_night": {"type": "moment", "settings": {"collection": "night-moment", "mark": "night", "label": "Night Moments", "label_ar": "لحظات سهر"}},
         "tile_gift": {"type": "moment", "settings": {"collection": "gift-moment", "mark": "gift", "label": "Gift Moments", "label_ar": "لحظات تهادي"}},

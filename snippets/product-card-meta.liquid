@@ -1,5 +1,5 @@
 {%- doc -%}
-  The small label row above a product name on a card: the moment mark and word, then the brand.
+  The small label rows under a product name on a card: the brand, then the moment mark and word.
 
   The moment comes from the six moment collections. They are manual collections (not tag based), so the
   product's collection handles are compared with the ordered list in the theme setting "Moment collections".
@@ -62,6 +62,9 @@
 
 {%- if moment_label != blank or want_brand and product.vendor != blank -%}
   <div class="card-meta">
+    {%- if want_brand and product.vendor != blank -%}
+      <span class="card-meta__brand">{% render 'vendor-name', vendor: product.vendor %}</span>
+    {%- endif -%}
     {%- if moment_label != blank -%}
       <span class="card-meta__moment">
         {%- if moment_key != '' -%}
@@ -76,9 +79,6 @@
         {%- endif -%}
         <span>{{ moment_label }}</span>
       </span>
-    {%- endif -%}
-    {%- if want_brand and product.vendor != blank -%}
-      <span class="card-meta__brand">{% render 'vendor-name', vendor: product.vendor %}</span>
     {%- endif -%}
   </div>
 {%- endif -%}
@@ -101,12 +101,18 @@
     gap: 6px;
   }
 
+  /* the drawing sits inside empty space in its box; pull it out so the moment lines up with the name and the brand
+     (left edge in English, right edge in Arabic; owner 2026-11-22) */
+  .card-meta__moment moment-mark {
+    margin-inline: -7px -2px;
+  }
+
   .card-meta__brand {
     color: var(--m-card-meta);
   }
 
-  /* A thin rule between the moment and the brand, not a dot. */
-  .card-meta__moment + .card-meta__brand {
+  /* A thin rule between the brand and the moment, not a dot (brand first, owner 2026-11-22). */
+  .card-meta__brand + .card-meta__moment {
     padding-inline-start: 12px;
     border-inline-start: 1px solid var(--m-rule-quiet);
   }
@@ -119,7 +125,7 @@
       gap: 2px;
     }
 
-    .card-meta__moment + .card-meta__brand {
+    .card-meta__brand + .card-meta__moment {
       padding-inline-start: 0;
       border-inline-start: 0;
     }
