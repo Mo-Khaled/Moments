@@ -148,9 +148,7 @@
   </div>
 
   <div class="mm__bar">
-    {%- if settings.moments_free_shipping > 0 -%}
-      <p class="mm__ship">{{ 'homepage.ticker.shipping' | t: amount: threshold }}</p>
-    {%- endif -%}
+    {%- comment -%} the free-shipping line was removed from the menu (owner 2026-11-23: out of place; it is in the ticker) {%- endcomment -%}
     <div class="mm__bar-row">
       <a class="mm__util" href="{{ routes.account_url }}">
         <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="8.5" r="3.5"/><path d="M5 20c.8-3.6 3.6-5.5 7-5.5s6.2 1.9 7 5.5"/></svg>
