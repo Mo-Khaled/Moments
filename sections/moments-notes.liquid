@@ -220,6 +220,7 @@
     const fillPerfumes = async (n, row) => {
       const max = isPhone() ? 4 : 6;
       const items = n.perfumes.slice(0, max);
+      if (!items.length) { row.closest('[data-body]').querySelectorAll('.m-note__row-head, .m-note__legend, .m-key, .m-note__est, [data-row]').forEach((el) => (el.hidden = true)); return; }
       const data = await Promise.all(items.map((x) => product(x.h)));
       row.innerHTML = items.map((x, i) => {
         const p = data[i];

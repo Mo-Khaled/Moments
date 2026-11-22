@@ -4,7 +4,7 @@ Inputs (D:\\MOMENTS_Content\\06_Website\\notes\\):
   notes_content.json            owner-approved texts (EN/AR). NOT rewritten here, copied as is.
   preview\\notes-preview.json    season / gender / moment shares and filter tags (scripts/notes-recalc.py)
   preview\\product-strength.csv  note strength per perfume (star / supporting / touch)
-  notes_famous.json + preview\\notes_famous_preview.json  the "Most loved" lists (shortlist first, calculated fill)
+  notes_famous.json + preview\\notes_famous_preview.json  the perfume lists (shortlist first, calculated fill)
 Output: assets/notes-data.json (theme asset, fetched by sections/moments-notes.liquid).
 """
 import csv, json, os, re, sys
@@ -35,8 +35,9 @@ for c in content:
         'gender': next((t for t in tags if t in ('men', 'women', 'unisex')), ''),
         'moments': [t for t in tags if t.endswith('-moment')],
         'count': p.get('perfume_count', 0),
-        'loved': [{'h': ph, 'badge': (det[i][2] == 'Most loved') if i < len(det) else False, 'level': strength.get((h, ph), 'touch')}
+        'perfumes': [{'h': ph, 'level': strength.get((h, ph), 'touch')}
                   for i, ph in enumerate(fam)],
     })
+notes = [n for n in notes if n['count'] > 0]  # a note no perfume carries is left off the page
 json.dump({'version': 1, 'notes': notes}, open(OUT, 'w', encoding='utf-8'), ensure_ascii=False, separators=(',', ':'))
 print('wrote', OUT, len(notes), 'notes', os.path.getsize(OUT), 'bytes')

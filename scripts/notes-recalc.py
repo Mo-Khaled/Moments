@@ -38,6 +38,13 @@ ALIAS = {
     'patchouli leaf': 'Patchouli', 'haitian vetiver': 'Vetiver', 'sicilian lemon': 'Lemon', 'lavandin': 'Lavender',
     'guaiacwood': 'Guaiac Wood', 'grey amber': 'Ambergris', 'geranium accord': 'Geranium', 'siam benzoin': 'Benzoin',
 }
+# the 79 notes added on 2026-11-22 (texts in scripts/notes_new_content.py); their tag spellings map to one display name
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import notes_new_content as _new
+for _h, _names in _new.tags().items():
+    NOTES.append(_names[0])
+    for _n in _names:
+        ALIAS[_n.lower()] = _names[0]
 MOMENTS = ['fresh-moment', 'winter-moment', 'love-moment', 'night-moment', 'gift-moment', 'self-care-moment']
 FRAG = {'Perfume', 'Extrait de Parfum', 'Perfume Oil', 'Perfume Mist', 'Body Spray', 'Perfume Set', 'Eau de Parfum', 'Gift Set', 'Deodorant'}
 EMO = re.compile('[\U0001F000-\U0001FFFF☀-➿️‍]')
@@ -129,6 +136,17 @@ def famous_lists(per_note, count=6):
                 continue
             picked.append(dict(r, badge=False))
             per_brand[r['brand']] += 1
+        # a note no perfume carries strongly still shows up to 3 perfumes where it is "a touch" (2026-11-22, so no card is empty)
+        if len(picked) < 3:
+            touch = sorted((r for r in rs if r['handle'] not in line and r['level'] == 'touch' and not any(p['handle'] == r['handle'] for p in picked)),
+                           key=lambda r: (-r['sales'], -r['points'], not r['full'], r['handle']))
+            for r in touch:
+                if len(picked) >= 3:
+                    break
+                if per_brand[r['brand']] >= 2:
+                    continue
+                picked.append(dict(r, badge=False))
+                per_brand[r['brand']] += 1
         key = re.sub(r'[^a-z0-9]+', '-', note.lower()).strip('-')
         out[key] = [r['handle'] for r in picked]
         detail[key] = [(r['title'], r['level'], 'Most loved' if r['badge'] else 'calculated') for r in picked]
