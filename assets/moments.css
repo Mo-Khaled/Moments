@@ -2046,3 +2046,52 @@ html:root:root:root :is(cart-drawer-component, .cart-page) :is(.m-bbox__was, .m-
   font-weight: 400 !important;
   font-size: 0.8125rem !important;
 }
+
+/* Cart type scale v2 (owner 2026-11-22), cart page and drawer, EN and AR. Replaces the mixed 12/13/14px and 400/500/600 bits.
+   titles      Marcellus 400 (cart heading, bundle title, perfume names) - unchanged
+   labels      Readex 500 16px (View cart, See your bottles, free shipping, Discount, Estimated total, Check out)
+   secondary   Readex 500 14px (You save, 10% off pill, Not in the bundle, 10% off 3+ bottles tag, size, brand)
+   fine print  Readex 400 12px (Duties and taxes ...)
+   prices      Readex 600: item prices 18px, struck prices 14px, total 24px drawer / 28px page
+   The PayPal button is drawn by PayPal inside its own frame and cannot be restyled. */
+html:root:root:root:root :is(cart-drawer-component, .cart-page) :is(.m-bbox__save, .m-bbox__pill, .m-notin, .m-discount-title, .m-discount-title *, .product-name__size, .card-meta__brand) {
+  font-family: var(--font-body--family) !important;
+  font-weight: 500 !important;
+  font-size: 14px !important;
+  line-height: 1.4 !important;
+  letter-spacing: normal !important;
+}
+html:root:root:root:root :is(cart-drawer-component, .cart-page) :is(.m-bbox__pill, .m-discount-title) {
+  padding-block: 4px !important;
+  white-space: nowrap;
+  overflow: visible !important;
+}
+html:root:root:root:root :is(cart-drawer-component, .cart-page) :is(.tax-note, .tax-note *) {
+  font-family: var(--font-body--family) !important;
+  font-weight: 400 !important;
+  font-size: 12px !important;
+  line-height: 1.5 !important;
+}
+html:root:root:root:root :is(cart-drawer-component, .cart-page) :is(.m-bbox__now, .cart-items__price, .cart-items__price .price) {
+  font-family: var(--font-body--family) !important;
+  font-weight: 600 !important;
+  font-size: 18px !important;
+  line-height: 1.3 !important;
+}
+html:root:root:root:root :is(cart-drawer-component, .cart-page) :is(.m-bbox__was, .m-was, .cart-items__price .compare-at-price) {
+  font-family: var(--font-body--family) !important;
+  font-weight: 600 !important;
+  font-size: 14px !important;
+  line-height: 1.3 !important;
+}
+html:root:root:root:root cart-drawer-component .cart__total-value { font-weight: 600 !important; font-size: 24px !important; line-height: 1.3 !important; }
+html:root:root:root:root .cart-page .cart__total-value { font-weight: 600 !important; font-size: 28px !important; line-height: 1.3 !important; }
+/* Arabic glyphs sit taller: a little more line height so nothing clips */
+html[dir='rtl']:root:root:root :is(cart-drawer-component, .cart-page) :is(.m-bbox__save, .m-bbox__pill, .m-notin, .m-discount-title, .product-name__size, .card-meta__brand, .m-bbox__see, .m-ship__text, .disclosure-trigger__label, .cart__total-label) { line-height: 1.6 !important; }
+html[dir='rtl']:root:root:root :is(cart-drawer-component, .cart-page) :is(.tax-note, .tax-note *) { line-height: 1.7 !important; }
+
+html:root:root:root:root :is(cart-drawer-component, .cart-page) .m-bbox__names {
+  font-family: var(--font-body--family) !important; font-weight: 500 !important; font-size: 14px !important; line-height: 1.4 !important;
+}
+html:root:root:root:root .m-sumlines li > span:first-child { font-family: var(--font-body--family) !important; font-weight: 500 !important; font-size: 16px !important; }
+html:root:root:root:root .m-sumlines li > span:last-child { font-family: var(--font-body--family) !important; font-weight: 600 !important; font-size: 16px !important; }
