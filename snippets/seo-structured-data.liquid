@@ -64,7 +64,7 @@
   {%- liquid
     assign p = product
     assign p_url = request.origin | append: p.url
-    assign desc = p.description | replace: '&lt;', '<' | replace: '&gt;', '>' | replace: '<', ' <' | strip_html | replace: '&nbsp;', ' ' | replace: '&amp;', '&' | strip_newlines | split: ' ' | join: ' ' | strip | truncate: 5000
+    assign desc = p.description | newline_to_br | replace: '&lt;', '<' | replace: '&gt;', '>' | replace: '<', ' <' | strip_html | replace: '&nbsp;', ' ' | replace: '&amp;', '&' | strip_newlines | split: ' ' | join: ' ' | strip | truncate: 5000
     if desc == blank
       assign desc = 'seo.product_description' | t: title: p.title, vendor: p.vendor
     endif
