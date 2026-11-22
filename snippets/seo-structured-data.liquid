@@ -141,7 +141,7 @@
             "availability": "https://schema.org/{% if v.available %}InStock{% else %}OutOfStock{% endif %}",
             "itemCondition": "https://schema.org/NewCondition",
             {%- if v.sku != blank -%}"sku": {{ v.sku | json }},{%- endif -%}
-            {%- if gtin_ok -%}"gtin": {{ gtin | json }},{%- endif -%}
+            {%- if gtin_ok -%}{%- if gtin.size == 13 -%}"gtin13": {{ gtin | json }},{%- else -%}"gtin": {{ gtin | json }},{%- endif -%}{%- endif -%}
             "seller": { "@id": {{ request.origin | append: '/#organization' | json }} },
             "shippingDetails": {
               "@type": "OfferShippingDetails",

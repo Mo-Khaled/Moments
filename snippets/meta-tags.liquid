@@ -43,6 +43,90 @@
         because several products hold Arabic text there, which showed on English pages
       endcomment
       assign m_desc = product.description
+
+      comment
+        Product title (owner 2026-11-22). EN: "{vendor} {name} {size} | Original Perfume in Egypt – MOMENTS";
+        AR: "{name} {vendor} {size} | عطر أصلي في مصر – MOMENTS". The name and size come from snippets/product-name (the
+        translated title on /ar, size from the title, the size tag or custom.volume; nothing is invented), the vendor from
+        snippets/vendor-name. The vendor is left out when the name already starts with it. "Original Perfume" only for
+        perfumes; other products end "in Egypt – MOMENTS". About 60 characters at most: first the "| …" part goes, then the
+        size; words are never cut. The visible H1 does not change.
+      endcomment
+      capture t_name
+        render 'product-name', product: product, plain: true
+      endcapture
+      capture t_size
+        render 'product-name', product: product, size_only: true
+      endcapture
+      capture t_vendor
+        render 'vendor-name', vendor: product.vendor
+      endcapture
+      assign t_name = t_name | strip_html | replace: '&amp;', '&' | replace: '&#39;', "'" | replace: '&quot;', '"' | strip | split: ' ' | join: ' '
+      assign t_size = t_size | strip_html | strip
+      assign t_vendor = t_vendor | strip_html | strip
+      assign t_name_dc = t_name | downcase
+      assign t_vendor_dc = t_vendor | downcase
+      assign t_vlen = t_vendor_dc.size
+      assign t_start = t_name_dc | slice: 0, t_vlen
+      if t_vendor == blank or t_start == t_vendor_dc
+        assign t_vendor = ''
+      endif
+      assign t_is_perfume = false
+      assign t_type = product.type | downcase
+      comment
+        product.type is translated on /ar (Perfume = عطر), so both spellings count
+      endcomment
+      if t_type == 'perfume' or t_type == 'extrait de parfum' or t_type == 'perfume oil' or t_type == 'eau de parfum' or t_type == 'eau de toilette' or t_type == 'عطر' or t_type == 'زيت عطري' or t_type == 'إكسترية دو بارفان'
+        assign t_is_perfume = true
+      endif
+      if t_name_dc contains ' set' or t_name_dc contains 'طقم' or t_name_dc contains 'collection' or t_name_dc contains 'مجموعة'
+        assign t_is_perfume = false
+      endif
+      if request.locale.iso_code == 'ar'
+        comment
+          the Arabic brand name, the same list snippets/moments-arabic-digits uses on the page
+        endcomment
+        assign t_brands = 'AFNAN:أفنان|AJMAL:أجمل|ALMAS PERFUMES:عطور ألماس|AMARAH PERFUMES:عطور أمارة|ARABIYAT SUGAR:عربيات شوجر|ARABIYAT PRESTIGE:عربيات بريستيج|ARMAF:أرماف|ASDAF:أصداف|ASSAF:عساف|AL EZZ FOR OUD:العز للعود|BANAFA FOR OUD:بنافع للعود|DKHOON EMIRATES:دخون الإمارات|FAAN:فان|FRENCH AVENUE:فرنش أفينيو|GULF ORCHID:جلف أوركيد|IBRAQ:إبراق|JEAN ANTOINE:جان أنطوان|KHADLAJ:خدلج|LATTAFA:لطافة|LATTAFA PRIDE:لطافة برايد|LAVERNE:لافيرن|LE BONHEUR:لو بونور|LE FALCONE:لو فالكون|MAISON ALHAMBRA:ميزون الحمراء|MAISON ASRAR:ميزون أسرار|NABEEL PERFUMES:عطور نبيل|NABEEL:نبيل|NASEEM:نسيم|RASASI PERFUMES:عطور الرصاصي|RASASI:الرصاصي|SAINTE VALERE:سانت فاليري|ZIMAYA:زيمايا' | split: '|'
+        assign t_vendor_up = t_vendor | upcase | append: ':'
+        for pair in t_brands
+          assign pair_start = pair | slice: 0, t_vendor_up.size
+          if pair_start == t_vendor_up
+            assign t_vendor = pair | remove_first: t_vendor_up
+            break
+          endif
+        endfor
+        if t_vendor != blank
+          assign t_vdc = t_vendor | downcase
+          if t_name_dc contains t_vdc
+            assign t_vendor = ''
+          endif
+        endif
+        assign t_base = t_name | append: ' ' | append: t_vendor | strip
+        if t_is_perfume
+          assign t_tail = ' | عطر أصلي في مصر – MOMENTS'
+        else
+          assign t_tail = ' في مصر – MOMENTS'
+        endif
+      else
+        assign t_base = t_vendor | append: ' ' | append: t_name | strip
+        if t_is_perfume
+          assign t_tail = ' | Original Perfume in Egypt – MOMENTS'
+        else
+          assign t_tail = ' in Egypt – MOMENTS'
+        endif
+      endif
+      assign t_sized = t_base
+      if t_size != blank
+        assign t_sized = t_base | append: ' ' | append: t_size
+      endif
+      assign p_title = t_sized | append: t_tail
+      if p_title.size > 60
+        assign p_title = t_sized | append: ' – MOMENTS'
+      endif
+      if p_title.size > 60
+        assign p_title = t_base | append: ' – MOMENTS'
+      endif
+      assign og_title = p_title
       assign og_img = product.featured_image | default: page_image
     when 'collection'
       assign m_desc = collection.metafields.global.description_tag.value | default: collection.metafields.global.description_tag
@@ -189,6 +273,8 @@
   assign m_title = page_title
   if request.page_type == 'index'
     assign m_title = 'seo.home_title' | t
+  elsif request.page_type == 'product'
+    assign m_title = og_title
   elsif request.page_type == 'collection' and collection.handle == 'all'
     assign m_title = 'seo.all_title' | t
   endif
