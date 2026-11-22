@@ -291,3 +291,5 @@ ac957f9 pushed (notes-data.json, notes-image-map.liquid, moments-notes.liquid). 
 ### 2026-11-22 b8da842 (live): SEO descriptions keep a space where a tag is removed (Muse "100 ML EDP Refined", AR "100 مل أناقة"). Live check: Muse/9PM EN+AR 155 chars, og=twitter=description, no escaped HTML, 1 Product JSON-LD each. Rollback: git checkout 66dc8a7 -- snippets/meta-tags.liquid snippets/seo-structured-data.liquid and push both.
 
 ### 2026-11-22 d71b434 + 632441d (live): SEO descriptions: line breaks become spaces, blog/page fallback collapses spaces and decodes entities (d71b434); English home description 152 chars, 155 cut also after the fallback (632441d). Live check on 10 pages (home, Muse, Night, Afnan, blog, About us; EN+AR): all pass. Rollback: git checkout b8da842 -- snippets/meta-tags.liquid snippets/seo-structured-data.liquid locales/en.default.json and push those three.
+
+### 2026-11-22 4ac9a28 (live): cart type scale v2, page + drawer EN/AR (labels 500/16, secondary 500/14, fine print 400/12, prices 600: items 18, struck 14, total 24/28). Owner checks phone widths. Rollback: git checkout 4ac9a28^ -- assets/moments.css and push it.
