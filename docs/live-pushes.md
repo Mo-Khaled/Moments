@@ -283,3 +283,5 @@ ac957f9 pushed (notes-data.json, notes-image-map.liquid, moments-notes.liquid). 
 ### 2026-11-22 translations (live): Arabic titles of winter-moment and its 3 variants were "لحظات كل يوم" (old title); now "لحظات الشتا" (+ للرجال / للنساء / للجنسين). Other 20 moment titles checked, correct. Before: MOMENTS_Content/06_Website/moments/collection-ar-titles-before-2026-11-22.json
 
 ### 2026-11-22 76d455c (live): type rule (names Marcellus, prices Readex); cards brand above moment, moment icon aligned; AR «الشتاء» (theme texts + 4 Winter collection title translations). Files: assets/moments.css, snippets/product-card-meta.liquid, locales/ar.json, templates/index.json, templates/page.moments-core.json. Rollback: git show <commit>^:<file> and push.
+
+### 2026-11-22 d03e36d (live): cart type scale (titles Marcellus, labels/buttons Readex 500, prices Readex 600), page + drawer. Rollback: git show d03e36d^:assets/moments.css and push.
