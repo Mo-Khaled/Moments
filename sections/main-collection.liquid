@@ -58,7 +58,75 @@
       {% assign sold_out_products = collection.products | where: "available", false %}
       {% assign sorted_page_products = in_stock_products | concat: sold_out_products %}
 
+      {% comment %}
+        Pictured perfumes (owner 2026-11-22): a home page slide shows a perfume and links to its moment; that perfume is shown
+        2nd (and the next ones 3rd, 4th) on page 1, after the moment's best seller, so it is easy to find but not the only choice.
+        The list is the theme setting "Pictured perfumes per moment" (one line per collection: handle: product, product).
+        Only on page 1 in the default order without filters; the pinned perfumes are left out further down so nothing repeats.
+      {% endcomment %}
+      {%- liquid
+        assign pinned = ''
+        assign pin_lines = settings.moment_pinned | newline_to_br | split: '<br />'
+        assign pin_key = collection.handle | append: ':'
+        for pin_line in pin_lines
+          assign pl = pin_line | strip
+          assign pl_start = pl | slice: 0, pin_key.size
+          if pl_start == pin_key
+            assign pinned = pl | remove_first: pin_key | remove: ' '
+          endif
+        endfor
+        assign pinned_list = pinned | split: ','
+        assign pin_on = false
+        if pinned != blank and paginate.current_page == 1 and collection.current_vendor == blank and collection.current_type == blank
+          assign sort_now = collection.sort_by | default: collection.default_sort_by
+          if sort_now == collection.default_sort_by
+            assign pin_on = true
+            for f in collection.filters
+              if f.active_values.size > 0 or f.min_value.value != nil or f.max_value.value != nil
+                assign pin_on = false
+              endif
+            endfor
+          endif
+        endif
+      -%}
       {% capture children %}
+        {%- if pinned != blank -%}
+          {%- assign shown = 0 -%}
+          {%- for product in sorted_page_products -%}
+            {%- if pinned_list contains product.handle -%}{%- continue -%}{%- endif -%}
+            {%- assign shown = shown | plus: 1 -%}
+            <li
+              id="{{ section.id }}-{{ product.id }}"
+              class="product-grid__item product-grid__item--{{ forloop.index0 }}"
+              data-page="{{ paginate.current_page }}"
+              data-product-id="{{ product.id }}"
+              ref="cards[]"
+            >
+              {% # theme-check-disable %}
+              {% content_for 'block', type: '_product-card', id: 'product-card', closest.product: product %}
+              {% # theme-check-enable %}
+            </li>
+            {%- if shown == 1 and pin_on -%}
+              {%- for ph in pinned_list -%}
+                {%- assign pp = all_products[ph] -%}
+                {%- if pp != blank and pp.available -%}
+                  <li
+                    id="{{ section.id }}-{{ pp.id }}"
+                    class="product-grid__item product-grid__item--pinned"
+                    data-page="{{ paginate.current_page }}"
+                    data-product-id="{{ pp.id }}"
+                    data-m-pinned
+                    ref="cards[]"
+                  >
+                    {% # theme-check-disable %}
+                    {% content_for 'block', type: '_product-card', id: 'product-card', closest.product: pp %}
+                    {% # theme-check-enable %}
+                  </li>
+                {%- endif -%}
+              {%- endfor -%}
+            {%- endif -%}
+          {%- endfor -%}
+        {%- else -%}
         {% for product in sorted_page_products %}
           <li
             id="{{ section.id }}-{{ product.id }}"
@@ -72,6 +140,7 @@
             {% # theme-check-enable %}
           </li>
         {% endfor %}
+        {%- endif -%}
       {% endcapture %}
 
       {% render 'product-grid',

@@ -2365,6 +2365,13 @@
         "label": "t:settings.moments_handles",
         "info": "t:info.moments_handles",
         "default": "love-moment,night-moment,winter-moment,fresh-moment,self-care-moment,gift-moment"
+      },
+      {
+        "type": "textarea",
+        "id": "moment_pinned",
+        "label": "Pictured perfumes per moment",
+        "info": "One line per moment page: collection handle, a colon, then product handles. They show 2nd, 3rd, 4th on page 1 (the home page slide pictures them). Example: night-moment: 9-pm-night-out",
+        "default": "night-moment: 9-pm-night-out\nlove-moment: arrogate-pink, muse-100ml, yara-pink\nwinter-moment: musamam-black-intense-100ml\ngift-moment: lady-collection"
       }
     ]
   }
