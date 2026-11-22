@@ -52,6 +52,13 @@
       /collections/all (every product): Shopify names it "Products"; it gets its own H1 and a short description
       (seo.all_title / seo.all_description), and the template's title line is hidden so the page keeps one H1 (2026-11-22).
     {%- endcomment -%}
+    {%- comment -%}
+      collections on the default template (e.g. Home & Bakhoor): its title block is switched off in the theme editor, so the
+      page had no H1. A hidden H1 with the collection name keeps the look (brand and moment templates have their own H1).
+    {%- endcomment -%}
+    {%- if template.suffix == blank and collection.handle != 'all' -%}
+      <h1 class="visually-hidden">{{ collection.title }}</h1>
+    {%- endif -%}
     {%- if collection.handle == 'all' -%}
       <div class="m-all-intro">
         <h1 class="m-all-intro__title">{{ 'seo.all_title' | t }}</h1>
