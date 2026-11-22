@@ -2005,3 +2005,17 @@ html[dir='rtl'] .text-block--align-center > :is(p, h1, h2, h3, h4, h5, h6, li) {
   text-align: center;
 }
 html[dir='rtl'] .text-block--align-center { margin-inline: auto; align-self: center; }
+
+/* One type rule for the whole site (owner 2026-11-22): perfume names in the heading font (Marcellus), every price in the
+   body font (Readex Pro) with lining numbers. Before: the cart drawer set names in Readex, and the product page and the
+   home page cards set prices in Marcellus while moment pages, the bundle page and the cart used Readex. */
+html:root:root cart-drawer-component .cart-items__title {
+  color: var(--m-plum);
+  font-family: var(--font-heading--family);
+  font-size: 1.125rem;
+  line-height: 1.2;
+}
+html:root:root :is(product-price, .price-container, .price-container *, .price, .compare-at-price) {
+  font-family: var(--font-body--family) !important;
+  font-variant-numeric: lining-nums tabular-nums;
+}
