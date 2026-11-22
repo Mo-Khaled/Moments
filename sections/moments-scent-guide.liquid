@@ -77,12 +77,12 @@
     <a class="m-hint" href="#ScentGuide-{{ section.id }}" data-m-hint-card>
       <span class="m-hint__imgs" data-m-hint-imgs></span>
       <span class="m-hint__text">
+        <span class="m-hint__cta">{{ 'scent.hint_cta' | t }}</span>
         <span class="m-hint__notes" data-m-hint-notes></span>
-        <span class="m-hint__cta">{{ 'scent.hint_cta' | t }} <span class="m-hint__arrow" aria-hidden="true">↓</span></span>
       </span>
     </a>
     <a class="m-hintpill" href="#ScentGuide-{{ section.id }}" data-m-hint-pill hidden>
-      {{ 'scent.hint_pill' | t }} <span aria-hidden="true">↓</span>
+      {{- 'scent.hint_pill' | t -}}
     </a>
   </template>
   <script>
@@ -165,8 +165,6 @@
 
   .m-hint__cta { font-weight: 600; }
 
-  .m-hint__arrow { display: inline-block; animation: m-hint-bob 1.6s ease-in-out infinite; }
-
   .m-hintpill {
     position: fixed;
     inset-inline: 0;
@@ -196,12 +194,8 @@
     100% { box-shadow: 0 10px 28px rgb(59 30 58 / 0.25), 0 0 0 0 rgb(184 64 106 / 0); }
   }
 
-  .m-hintpill span { display: inline-block; animation: m-hint-bob 1.6s ease-in-out infinite; }
-
-  @keyframes m-hint-bob { 50% { transform: translateY(3px); } }
-
   @media (prefers-reduced-motion: reduce) {
-    .m-hint__arrow, .m-hintpill, .m-hintpill span { animation: none; }
+    .m-hintpill { animation: none; }
   }
 
   .m-guide__set {
