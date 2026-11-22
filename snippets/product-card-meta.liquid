@@ -66,8 +66,10 @@
       <span class="card-meta__moment">
         {%- if moment_key != '' -%}
           {%- assign mark_name = moment_key | remove: '_' -%}
-          {%- comment -%} only the moments that have a drawing (self-care has a label but no mark) {%- endcomment -%}
-          {%- assign drawn = 'night,gift,allday,daily,fresh,love,occasions,winter' | split: ',' -%}
+          {%- comment -%} self-care uses the sun-over-waves mark, the same as its collection header (owner 2026-11-22) {%- endcomment -%}
+          {%- if mark_name == 'selfcare' -%}{%- assign mark_name = 'allday' -%}{%- endif -%}
+          {%- comment -%} only the moments that have a drawing (self-care borrows the allday mark) {%- endcomment -%}
+          {%- assign drawn = 'night,gift,allday,daily,fresh,love,occasions,winter,selfcare' | split: ',' -%}
           {%- if drawn contains mark_name -%}
             {% render 'moment-mark', mark: mark_name %}
           {%- endif -%}

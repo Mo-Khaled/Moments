@@ -1976,3 +1976,32 @@ html:root:root .cart-items__quantity {
   inline-size: 100%;
 }
 html:root .m-note__body:focus { outline: none; }
+
+/* cart lines (owner 2026-11-22): delete first, then the count; the pair sits at the end of the card (left in Arabic, right
+   in English), under the price, on the cart page and in the drawer */
+html:root:root:root .cart-items__quantity {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 12px;
+  inline-size: auto;
+  justify-self: stretch;
+}
+html:root:root:root .cart-items__quantity .cart-items__remove { order: -1; }
+@container cart-items (max-width: 719px) {
+  html:root:root:root .cart-items__table-row {
+    grid-template-areas:
+      'media details price'
+      'media quantity quantity'
+      'media error error';
+  }
+}
+
+/* Arabic: rtl.css pushes every heading and paragraph to the right; text boxes set to "center" in the editor stay centred
+   (owner 2026-11-22: the "Skin Moments, coming soon" box on the home page sat to the right) */
+html[dir='rtl'] .text-block--align-center,
+html[dir='rtl'] .text-block--align-center > :is(p, h1, h2, h3, h4, h5, h6, li) {
+  text-align: center;
+}
+html[dir='rtl'] .text-block--align-center { margin-inline: auto; align-self: center; }

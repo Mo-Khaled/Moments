@@ -31,9 +31,6 @@
   {% assign product_title = '<p>' | append: text | append: '</p>' %}
   {% render 'text', fallback_text: product_title, block: block %}
 {% elsif closest.product != blank %}
-  {%- unless is_main_product -%}
-    {% render 'product-card-meta', product: closest.product, show_moment: card_moment, show_brand: card_brand %}
-  {%- endunless -%}
   {%- if split -%}
     {%- capture name_html -%}{% render 'product-name', product: closest.product %}{%- endcapture -%}
     {%- assign product_title = '<p>' | append: name_html | append: '</p>' -%}
@@ -47,6 +44,10 @@
   >
     {% render 'text', fallback_text: product_title, block: block %}
   </a>
+  {%- comment -%} owner 2026-11-22: the perfume name first, then the moment and brand row {%- endcomment -%}
+  {%- unless is_main_product -%}
+    {% render 'product-card-meta', product: closest.product, show_moment: card_moment, show_brand: card_brand %}
+  {%- endunless -%}
 {% endif %}
 
 {% schema %}
