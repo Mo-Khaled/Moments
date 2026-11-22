@@ -65,9 +65,9 @@
         assign name_key = 'scent.note.' | append: slug | append: '.name'
         assign label = name_key | t
         capture item
-          assign note_known = ',musk,vanilla,amber,patchouli,bergamot,jasmine,sandalwood,rose,cedarwood,oud,tonka-bean,saffron,lavender,vetiver,leather,cinnamon,orange-blossom,cardamom,pink-pepper,incense,apple,lemon,geranium,mandarin,caramel,lily-of-the-valley,orange,ambergris,pineapple,raspberry,oakmoss,grapefruit,iris,nutmeg,ginger,black-pepper,pear,'
+          assign note_known = ',amber,ambergris,apple,bergamot,black-pepper,caramel,cardamom,cedarwood,cinnamon,geranium,ginger,grapefruit,incense,iris,jasmine,lavender,leather,lemon,lily-of-the-valley,mandarin,musk,nutmeg,oakmoss,orange,orange-blossom,oud,patchouli,pear,pineapple,pink-pepper,raspberry,rose,saffron,sandalwood,tonka-bean,vanilla,vetiver,woody-notes,'
           assign note_pic = slug
-          assign note_aliases = 'white-musk:musk,warm-musk:musk,orange-flower:orange-blossom,oak-moss:oakmoss,moss:oakmoss,orris:iris,oud-wood:oud,tangerine:mandarin,muguet:lily-of-the-valley,dry-amber:amber' | split: ','
+          assign note_aliases = 'white-musk:musk,warm-musk:musk,orange-flower:orange-blossom,oak-moss:oakmoss,moss:oakmoss,orris:iris,oud-wood:oud,tangerine:mandarin,muguet:lily-of-the-valley,dry-amber:amber,precious-woods:woody-notes,white-wood:woody-notes' | split: ','
           for pair in note_aliases
             assign pp = pair | split: ':'
             if pp[0] == slug
