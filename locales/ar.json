@@ -4351,7 +4351,7 @@
     "taxes_at_checkout_shipping_at_checkout_with_policy_without_discounts_html": "تُحسب الضرائب <a href=\"{{ link }}\">والشحن</a> عند إتمام الطلب.",
     "taxes_at_checkout_shipping_at_checkout_without_policy": "تُحسب الضرائب والخصومات والشحن عند إتمام الطلب.",
     "taxes_at_checkout_shipping_at_checkout_without_policy_without_discounts": "تُحسب الضرائب والشحن عند إتمام الطلب.",
-    "taxes_included": "الضرائب متضمنة.",
+    "taxes_included": "السعر شامل الضريبة",
     "taxes_included_shipping_at_checkout_with_policy_html": "شامل الضرائب. يتم احتساب الخصومات <a href=\"{{ link }}\">والشحن</a> عند الدفع.",
     "taxes_included_shipping_at_checkout_with_policy_without_discounts_html": "الضرائب مشمولة. يتم احتساب رسوم الشحن عند الدفع.",
     "taxes_included_shipping_at_checkout_without_policy": "شامل الضرائب. يتم احتساب الخصومات والشحن عند الدفع.",
