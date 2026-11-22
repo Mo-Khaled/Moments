@@ -356,22 +356,35 @@
     let last = null;
     const sync = () => {
       const src = document.querySelector('.wg-tinker-headerIcon-desktop .show-count b');
-      const n = src ? parseInt(src.textContent, 10) || 0 : 0;
+      // on Arabic pages the count comes in Arabic digits (١), which parseInt cannot read
+      const digits = src ? src.textContent.replace(/[٠-٩]/g, (d) => String(d.charCodeAt(0) - 1632)) : '';
+      const n = parseInt(digits, 10) || 0;
       if (n === last) return; // never write when nothing changed (writing re-triggers the observer)
       last = n;
       badge.textContent = document.documentElement.lang === 'ar' ? n.toLocaleString('ar-EG') : String(n);
       badge.hidden = n === 0;
     };
     sync();
-    // watch only the app's own counter, not the whole page
+    // watch only the app's own counter, not the whole page. The app replaces that element when the list changes
+    // (found 2026-11-22: the heart kept the old number until a reload), so watch its parent and re-attach when it is swapped.
+    let watched = null;
+    const mo = new MutationObserver(() => { sync(); watch(); });
     const watch = () => {
       const host = document.querySelector('.wg-tinker-headerIcon-desktop');
-      if (!host) return false;
-      new MutationObserver(sync).observe(host, { childList: true, subtree: true, characterData: true });
-      return true;
+      const target = host && (host.parentElement || host);
+      if (!target || target === watched) return;
+      mo.disconnect();
+      watched = target;
+      mo.observe(target, { childList: true, subtree: true, characterData: true });
     };
+    // add/remove buttons anywhere on the page: read the count again once the app has answered
+    document.addEventListener('click', (e) => {
+      if (e.target.closest && e.target.closest('#inject_wish_button, [class*="wishlist"], [id*="wishlist"], [class*="wg-"]')) {
+        [600, 1500, 3000].forEach((ms) => setTimeout(() => { sync(); watch(); }, ms));
+      }
+    });
     let tries = 0;
-    const t = setInterval(() => { sync(); if (watch() || ++tries > 20) clearInterval(t); }, 400);
+    const t = setInterval(() => { sync(); watch(); if (++tries > 25) clearInterval(t); }, 400);
   })();
 
   // Wishlist Guru shows its popup in English only (one language per app). On Arabic pages we swap its fixed texts for Arabic here, in the theme.
@@ -395,7 +408,11 @@
       'add to wishlist': 'أضف إلى المفضلة',
       'added to wishlist': 'في المفضلة',
       'remove from wishlist': 'إزالة من المفضلة',
-      'view wishlist': 'عرض المفضلة'
+      'view wishlist': 'عرض المفضلة',
+      'move to cart': 'انقل إلى السلة',
+      'add all items to cart': 'أضف الكل إلى السلة',
+      'add to cart': 'أضف إلى السلة',
+      'out of stock': 'غير متوفر'
     };
     const swap = (root) => {
       const w = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
