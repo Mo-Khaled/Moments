@@ -65,9 +65,9 @@
         assign name_key = 'scent.note.' | append: slug | append: '.name'
         assign label = name_key | t
         capture item
-          assign note_known = ',amber,ambergris,apple,bergamot,black-pepper,caramel,cardamom,cedarwood,cinnamon,geranium,ginger,grapefruit,incense,iris,jasmine,lavender,leather,lemon,lily-of-the-valley,mandarin,musk,nutmeg,oakmoss,orange,orange-blossom,oud,patchouli,pear,pineapple,pink-pepper,raspberry,rose,saffron,sandalwood,tonka-bean,vanilla,vetiver,woody-notes,'
+          assign note_known = ',akigalawood,almond,amber,ambergris,amberwood,ambroxan,apple,apricot,aquatic-notes,artemisia,basil,benzoin,bergamot,birch,black-pepper,black-tea,blackcurrant,caramel,cardamom,cashmeran,cedarwood,cherry,cinnamon,clary-sage,clove,cocoa,coconut,coffee,cypress,dates,davana,elemi,fig,floral-notes,freesia,gardenia,geranium,ginger,grapefruit,green-notes,guaiac-wood,heliotrope,herbal,honey,incense,iris,jasmine,labdanum,lavender,leather,lemon,lily,lily-of-the-valley,lime,lychee,magnolia,mandarin,mango,milk,mint,musk,myrrh,nagarmotha,neroli,nutmeg,oakmoss,orange,orange-blossom,orchid,osmanthus,oud,patchouli,peach,pear,peony,pineapple,pink-pepper,plum,praline,raspberry,red-berries,rose,rosemary,saffron,sage,sandalwood,smoke,spicy-notes,strawberry,suede,sugar,tobacco,tonka-bean,tuberose,vanilla,vetiver,violet,violet-leaf,white-flowers,woody-notes,ylang-ylang,'
           assign note_pic = slug
-          assign note_aliases = 'white-musk:musk,warm-musk:musk,orange-flower:orange-blossom,oak-moss:oakmoss,moss:oakmoss,orris:iris,oud-wood:oud,tangerine:mandarin,muguet:lily-of-the-valley,dry-amber:amber,precious-woods:woody-notes,white-wood:woody-notes' | split: ','
+          assign note_aliases = 'white-musk:musk,warm-musk:musk,orange-flower:orange-blossom,oak-moss:oakmoss,moss:oakmoss,orris:iris,oud-wood:oud,tangerine:mandarin,muguet:lily-of-the-valley,dry-amber:amber,precious-woods:woody-notes,white-wood:woody-notes,cistus:labdanum,black-currant:blackcurrant,cassis:blackcurrant,cananga:ylang-ylang,guaiacwood:guaiac-wood,ambrofix:ambroxan,cashmere:cashmeran,marine:aquatic-notes,white-florals:white-flowers,litchi:lychee,spice:spicy-notes,cypriol:nagarmotha,florals:floral-notes,cacao:cocoa' | split: ','
           for pair in note_aliases
             assign pp = pair | split: ':'
             if pp[0] == slug
