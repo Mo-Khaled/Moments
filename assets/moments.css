@@ -2019,3 +2019,30 @@ html:root:root :is(product-price, .price-container, .price-container *, .price, 
   font-family: var(--font-body--family) !important;
   font-variant-numeric: lining-nums tabular-nums;
 }
+
+/* Cart type scale, page and drawer (owner 2026-11-22, "fix all these inconsistent fonts"):
+   titles   Marcellus 400  (cart heading, bundle title, perfume names)
+   labels   Readex 500 1rem (View cart, See your bottles, free shipping, Discount, Estimated total, Check out)
+   prices   Readex 600      (bundle price, line prices, total)
+   small    Readex 400 0.8125rem (struck prices, tax note) */
+html:root:root:root :is(cart-drawer-component, .cart-page) :is(.m-bbox__title, .cart-items__title) {
+  font-family: var(--font-heading--family) !important;
+  font-weight: 400 !important;
+  letter-spacing: 0;
+}
+html:root:root:root :is(cart-drawer-component, .cart-page) :is(.cart-drawer__view-cart, .m-bbox__see, .m-ship__text, .disclosure-trigger__label, .cart__total-label, .cart__checkout-button, #checkout, button[name='checkout']) {
+  font-family: var(--font-body--family) !important;
+  font-weight: 500 !important;
+  font-size: 1rem !important;
+  letter-spacing: normal !important;
+  text-transform: none !important;
+}
+html:root:root:root :is(cart-drawer-component, .cart-page) :is(.m-bbox__now, .cart-items__price, .cart-items__price .price, .cart__total-value) {
+  font-family: var(--font-body--family) !important;
+  font-weight: 600 !important;
+}
+html:root:root:root :is(cart-drawer-component, .cart-page) :is(.m-bbox__was, .m-was, .cart-items__price .compare-at-price, .cart__tax-note, [class*='tax-note']) {
+  font-family: var(--font-body--family) !important;
+  font-weight: 400 !important;
+  font-size: 0.8125rem !important;
+}
