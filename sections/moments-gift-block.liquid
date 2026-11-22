@@ -64,12 +64,13 @@
           <ul class="m-gift__sets" role="list">
             {%- for handle in gift_handles limit: 3 -%}
               {%- assign gift_product = all_products[handle] -%}
+              {%- assign gift_alt = gift_product.featured_image.alt | default: gift_product.title -%}
               <li class="m-gift__set">
                 <span class="m-gift__frame">
                   {{
                     gift_product.featured_image
                     | image_url: width: 480
-                    | image_tag: class: 'm-gift__packshot', alt: '', loading: 'lazy', widths: '240, 360, 480', sizes: '(min-width: 990px) 16vw, 28vw'
+                    | image_tag: class: 'm-gift__packshot', alt: gift_alt, loading: 'lazy', widths: '240, 360, 480', sizes: '(min-width: 990px) 16vw, 28vw'
                   }}
                 </span>
               </li>

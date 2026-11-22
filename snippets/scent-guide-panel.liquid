@@ -79,7 +79,8 @@
           if note_known contains note_probe
             assign note_file = 'note-' | append: note_pic | append: '-512.webp'
             assign note_src = note_file | asset_url
-            assign note_img = '<img class="m-guide__note-img" src="' | append: note_src | append: '" alt="" width="48" height="48" loading="lazy" decoding="async">'
+            assign label_alt = label | strip_html | escape
+            assign note_img = '<img class="m-guide__note-img" src="' | append: note_src | append: '" alt="' | append: label_alt | append: '" width="48" height="48" loading="lazy" decoding="async">'
           endif
           echo '<li class="m-guide__note">' | append: note_img | append: '<span class="m-guide__note-text"><strong>' | append: label | append: '</strong><span>' | append: about | append: '</span></span></li>'
         endcapture

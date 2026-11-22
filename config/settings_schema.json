@@ -2372,6 +2372,47 @@
         "label": "Pictured perfumes per moment",
         "info": "One line per moment page: collection handle, a colon, then product handles. They show 2nd, 3rd, 4th on page 1 (the home page slide pictures them). Example: night-moment: 9-pm-night-out",
         "default": "night-moment: 9-pm-night-out\nlove-moment: arrogate-pink, muse-100ml, yara-pink\nwinter-moment: musamam-black-intense-100ml\ngift-moment: lady-collection"
+      },
+      {
+        "type": "header",
+        "content": "SEO"
+      },
+      {
+        "type": "image_picker",
+        "id": "seo_share_image",
+        "label": "Share image",
+        "info": "Shown when a page is shared on WhatsApp, Facebook or X and the page has no image of its own (home page, pages without a picture). 1200 x 630 works best."
+      },
+      {
+        "type": "number",
+        "id": "seo_shipping_rate",
+        "label": "Standard shipping price (EGP), for Google",
+        "default": 118
+      },
+      {
+        "type": "number",
+        "id": "seo_free_shipping_min",
+        "label": "Free shipping from (EGP), for Google",
+        "info": "Leave empty if there is no free shipping.",
+        "default": 3000
+      },
+      {
+        "type": "number",
+        "id": "seo_delivery_min_days",
+        "label": "Delivery time, fewest business days",
+        "default": 3
+      },
+      {
+        "type": "number",
+        "id": "seo_delivery_max_days",
+        "label": "Delivery time, most business days",
+        "default": 5
+      },
+      {
+        "type": "textarea",
+        "id": "seo_same_as",
+        "label": "Social profiles (for Google)",
+        "info": "One full link per line, e.g. https://www.instagram.com/yourpage. Used as the brand's profiles in search results."
       }
     ]
   }

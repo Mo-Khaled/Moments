@@ -17,7 +17,7 @@
           "name": "Title",
           "disabled": true,
           "settings": {
-            "text": "<p>Discover {{ closest.collection.title }}</p>",
+            "text": "<h1>{{ closest.collection.title }}</h1>",
             "width": "100%",
             "max_width": "none",
             "alignment": "left",

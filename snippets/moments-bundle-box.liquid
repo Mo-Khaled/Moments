@@ -73,7 +73,7 @@
           {%- for item in cart.items -%}
             {%- if item.properties['Bundle'] == bid and item.image and thumb_n < 4 -%}
               {%- assign thumb_n = thumb_n | plus: 1 -%}
-              <span class="m-bbox__thumb">{{ item.image | image_url: width: 160 | image_tag: loading: 'lazy', alt: '' }}</span>
+              <span class="m-bbox__thumb">{{ item.image | image_url: width: 160 | image_tag: loading: 'lazy', alt: item.product.title }}</span>
             {%- endif -%}
           {%- endfor -%}
         </span>
@@ -110,7 +110,7 @@
               {%- if item.properties['Bundle'] == bid -%}
                 {%- capture row_size -%}{%- render 'product-name', product: item.product, size_only: true -%}{%- endcapture -%}
                 <li class="m-bsheet__row">
-                  <span class="m-bsheet__img">{%- if item.image -%}{{ item.image | image_url: width: 160 | image_tag: loading: 'lazy', alt: '' }}{%- endif -%}</span>
+                  <span class="m-bsheet__img">{%- if item.image -%}{{ item.image | image_url: width: 160 | image_tag: loading: 'lazy', alt: item.product.title }}{%- endif -%}</span>
                   <span class="m-bsheet__info">
                     <span class="m-bsheet__name">{%- render 'product-name', product: item.product, plain: true -%}{%- if item.quantity > 1 %} × {{ item.quantity }}{%- endif -%}</span>
                     <span class="m-bsheet__meta">{% if row_size != blank %}{{ row_size | strip }} &middot; {% endif %}{{ item.product.vendor }}</span>

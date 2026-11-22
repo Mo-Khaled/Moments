@@ -52,7 +52,8 @@
     {% render 'moment-mark', mark: tone, size: 'lg' %}
   </span>
   {%- if packshot != blank -%}
-    {{ packshot | image_url: width: 500 | image_tag: class: 'm-tile__packshot', alt: '', loading: 'lazy', widths: '200, 300, 500', sizes: '30vw' }}
+    {%- assign tile_alt = packshot.alt | default: tile_label -%}
+    {{ packshot | image_url: width: 500 | image_tag: class: 'm-tile__packshot', alt: tile_alt, loading: 'lazy', widths: '200, 300, 500', sizes: '30vw' }}
   {%- endif -%}
   <span class="m-tile__label">
     <span class="m-tile__name">{{ tile_label }}</span>

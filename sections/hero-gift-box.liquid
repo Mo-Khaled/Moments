@@ -179,7 +179,8 @@
               {%- else -%}
                 {{ front_image | image_url: width: 600 | image_tag: class: 'hgb-bottle__img hgb-bottle__img--front', alt: bottle_alt, widths: '300, 450, 600', sizes: '(min-width: 750px) 200px, 120px', loading: 'lazy', fetchpriority: 'low', decoding: 'async' }}
                 {%- if angle_image != blank -%}
-                  {{ angle_image | image_url: width: 600 | image_tag: class: 'hgb-bottle__img hgb-bottle__img--angle', alt: '', widths: '300, 450, 600', sizes: '(min-width: 750px) 200px, 120px', loading: 'lazy', fetchpriority: 'low', decoding: 'async' }}
+                  {%- assign angle_alt = angle_image.alt | default: bottle_alt -%}
+                  {{ angle_image | image_url: width: 600 | image_tag: class: 'hgb-bottle__img hgb-bottle__img--angle', alt: angle_alt, widths: '300, 450, 600', sizes: '(min-width: 750px) 200px, 120px', loading: 'lazy', fetchpriority: 'low', decoding: 'async' }}
                 {%- endif -%}
               {%- endif -%}
             </div>

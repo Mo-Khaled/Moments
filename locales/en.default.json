@@ -550,7 +550,7 @@
       "new": "New arrivals",
       "gifts": "Gifts",
       "all_brands": "All brands",
-      "shop_by": "Shop by"
+      "shop_by": "Shop for him or her"
     }
   },
   "about": {
@@ -633,7 +633,7 @@
     }
   },
   "mobile_menu": {
-    "shop_by": "Shop by",
+    "shop_by": "Shop for him or her",
     "more_ways": "More ways to shop",
     "search": "Search",
     "moments": "Shop by moment",
@@ -1496,5 +1496,15 @@
     "bundle": "Bundle",
     "cart": "Cart",
     "account": "Account"
+  },
+  "seo": {
+    "home_title": "MOMENTS | Original Perfumes in Egypt, Chosen by Moment",
+    "home_description": "Shop 100% original perfumes in Egypt, chosen by moment: evening out, date night, summer, winter and gifts. Cash on delivery and free shipping over LE 3,000.",
+    "home_h1": "MOMENTS: original perfumes in Egypt, chosen by moment",
+    "collection_description": "Shop {{ title }} at MOMENTS: 100% original, sealed perfumes in Egypt, with cash on delivery and free shipping on orders over LE 3,000.",
+    "all_title": "All perfumes",
+    "all_description": "Every perfume at MOMENTS in one place: 100% original, sealed bottles from Afnan, Lattafa, Khadlaj and more, with cash on delivery across Egypt.",
+    "product_description": "{{ title }} by {{ vendor }}: 100% original and sealed at MOMENTS Egypt. Cash on delivery and free shipping on orders over LE 3,000.",
+    "breadcrumb_home": "Home"
   }
 }

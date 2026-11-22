@@ -472,6 +472,7 @@
                   {% endif %}
                 >
                   {% liquid
+                    assign media_alt = media.alt | default: closest.product.title | default: product.title
                     assign focal_point_style = ''
                     if media.presentation.focal_point != blank
                       assign focal_point_style = 'object-position: ' | append: media.presentation.focal_point | append: ';'
@@ -484,7 +485,7 @@
                       loading: 'lazy',
                       sizes: 'auto, 110, (min-width: 750px) 160',
                       widths: '240, 352, 832, 1200',
-                      alt: media.alt,
+                      alt: media_alt,
                       style: focal_point_style
                     | escape
                   }}

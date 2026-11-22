@@ -86,7 +86,8 @@
     <div class="gp-card__frame">
       {%- if product.featured_media -%}
         <a class="gp-card__image-link" href="{{ product.url }}" tabindex="-1" aria-hidden="true">
-          {{- product.featured_media.preview_image | image_url: width: 640 | image_tag: loading: 'lazy', alt: product.featured_media.alt | default: product.title, widths: '240, 360, 480, 640', sizes: '(min-width: 990px) 28vw, 80vw', class: 'gp-card__image' -}}
+          {%- assign gp_alt = product.featured_media.alt | default: product.title -%}
+          {{- product.featured_media.preview_image | image_url: width: 640 | image_tag: loading: 'lazy', alt: gp_alt, widths: '240, 360, 480, 640', sizes: '(min-width: 990px) 28vw, 80vw', class: 'gp-card__image' -}}
         </a>
       {%- endif -%}
       {%- if is_safe -%}

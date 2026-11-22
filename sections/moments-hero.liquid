@@ -161,6 +161,7 @@
         assign poster_m = block.settings.poster_mobile
         assign video = block.settings.video
         assign video_mobile = block.settings.video_mobile
+        assign poster_alt = poster.alt | default: headline | strip_html | strip_newlines | strip
         assign poster_loading = 'lazy'
         assign poster_priority = 'auto'
         if forloop.first
@@ -197,7 +198,7 @@
               | image_url: width: 2000
               | image_tag:
                 class: 'm-slide__poster',
-                alt: '',
+                alt: poster_alt,
                 widths: '768, 1280, 1920, 2560, 3200, 3840',
                 sizes: '100vw',
                 loading: poster_loading,

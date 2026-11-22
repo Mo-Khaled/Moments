@@ -1,0 +1,219 @@
+{%- doc -%}
+  Structured data (JSON-LD) for search engines, owner request 2026-11-22. Rendered once in the <head> of every page.
+  Every page: Organization (name, url, logo, sameAs from the theme setting "Social profiles").
+  Home page: WebSite with a SearchAction (the store search).
+  Product page: Product (availability, price per variant, sku and gtin only when the variant has them, brand, images,
+    shippingDetails from the theme's SEO settings) and a BreadcrumbList. No rating: the store has no review data.
+    No return policy: the store has no refund policy set (it is added automatically once one exists in Settings > Policies).
+  Collection page: BreadcrumbList and an ItemList of the products on the page.
+  Replaces Shopify's `structured_data` filter on product pages and the Organization block that sat in the header.
+{%- enddoc -%}
+
+{%- liquid
+  assign home_url = request.origin | append: routes.root_url
+  assign home_name = 'seo.breadcrumb_home' | t
+  assign same_as = settings.seo_same_as | newline_to_br | split: '<br />'
+-%}
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "@id": {{ request.origin | append: '/#organization' | json }},
+    "name": {{ shop.name | json }},
+    "url": {{ request.origin | json }}
+    {%- if settings.logo != blank -%}
+      ,"logo": {{ settings.logo | image_url: width: 600 | prepend: 'https:' | json }}
+    {%- endif -%}
+    {%- assign sa_count = 0 -%}
+    {%- for s in same_as -%}{%- assign s = s | strip -%}{%- if s != blank -%}{%- assign sa_count = sa_count | plus: 1 -%}{%- endif -%}{%- endfor -%}
+    {%- if sa_count > 0 -%}
+      ,"sameAs": [
+        {%- assign first = true -%}
+        {%- for s in same_as -%}
+          {%- assign s = s | strip -%}
+          {%- if s != blank -%}{%- unless first -%},{%- endunless -%}{{ s | json }}{%- assign first = false -%}{%- endif -%}
+        {%- endfor -%}
+      ]
+    {%- endif -%}
+  }
+</script>
+
+{%- if request.page_type == 'index' -%}
+  {%- capture search_tpl -%}{{ request.origin }}{{ routes.search_url }}?q={search_term_string}{%- endcapture -%}
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": {{ shop.name | json }},
+      "url": {{ home_url | json }},
+      "inLanguage": {{ request.locale.iso_code | json }},
+      "publisher": { "@id": {{ request.origin | append: '/#organization' | json }} },
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": {
+          "@type": "EntryPoint",
+          "urlTemplate": {{ search_tpl | json }}
+        },
+        "query-input": "required name=search_term_string"
+      }
+    }
+  </script>
+{%- endif -%}
+
+{%- if request.page_type == 'product' and product != blank -%}
+  {%- liquid
+    assign p = product
+    assign p_url = request.origin | append: p.url
+    assign desc = p.description | replace: '&lt;', '<' | replace: '&gt;', '>' | strip_html | replace: '&nbsp;', ' ' | replace: '&amp;', '&' | strip_newlines | split: ' ' | join: ' ' | strip | truncate: 5000
+    if desc == blank
+      assign desc = 'seo.product_description' | t: title: p.title, vendor: p.vendor
+    endif
+
+    comment
+      breadcrumb: the product's first moment (same order as the card label), else its brand collection
+    endcomment
+    assign crumb = null
+    if settings.moments_handles != blank
+      assign handles = settings.moments_handles | split: ','
+      for h in handles
+        assign h = h | strip
+        assign hit = p.collections | where: 'handle', h | first
+        if hit != blank
+          assign crumb = hit
+          break
+        endif
+      endfor
+    endif
+    if crumb == blank
+      assign vendor_handle = p.vendor | handleize
+      assign crumb = collections[vendor_handle]
+    endif
+
+    assign free_min = settings.seo_free_shipping_min
+    assign currency = cart.currency.iso_code
+  -%}
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "@id": {{ p_url | append: '#product' | json }},
+      "name": {{ p.title | json }},
+      "url": {{ p_url | json }},
+      "description": {{ desc | json }},
+      {%- if p.images.size > 0 -%}
+        "image": [
+          {%- for img in p.images limit: 5 -%}
+            {{ img | image_url: width: 1200 | prepend: 'https:' | json }}{%- unless forloop.last -%},{%- endunless -%}
+          {%- endfor -%}
+        ],
+      {%- endif -%}
+      {%- if p.type != blank -%}
+        "category": {{ p.type | json }},
+      {%- endif -%}
+      "brand": { "@type": "Brand", "name": {{ p.vendor | json }} },
+      {%- assign fv = p.selected_or_first_available_variant -%}
+      {%- if fv.sku != blank -%}
+        "sku": {{ fv.sku | json }},
+      {%- endif -%}
+      "offers": [
+        {%- for v in p.variants -%}
+          {%- liquid
+            assign v_price = v.price | money_without_currency | remove: ','
+            assign v_major = v.price | divided_by: 100
+            assign ship_rate = settings.seo_shipping_rate | default: 0
+            if free_min != blank and v_major >= free_min
+              assign ship_rate = 0
+            endif
+            assign gtin = v.barcode | strip
+            assign gtin_digits = gtin | remove: '0' | remove: '1' | remove: '2' | remove: '3' | remove: '4' | remove: '5' | remove: '6' | remove: '7' | remove: '8' | remove: '9'
+            assign gtin_ok = false
+            if gtin != blank and gtin_digits == blank
+              if gtin.size == 8 or gtin.size == 12 or gtin.size == 13 or gtin.size == 14
+                assign gtin_ok = true
+              endif
+            endif
+          -%}
+          {
+            "@type": "Offer",
+            "url": {{ p_url | append: '?variant=' | append: v.id | json }},
+            "price": {{ v_price | json }},
+            "priceCurrency": {{ currency | json }},
+            "availability": "https://schema.org/{% if v.available %}InStock{% else %}OutOfStock{% endif %}",
+            "itemCondition": "https://schema.org/NewCondition",
+            {%- if v.sku != blank -%}"sku": {{ v.sku | json }},{%- endif -%}
+            {%- if gtin_ok -%}"gtin": {{ gtin | json }},{%- endif -%}
+            "seller": { "@id": {{ request.origin | append: '/#organization' | json }} },
+            "shippingDetails": {
+              "@type": "OfferShippingDetails",
+              "shippingRate": { "@type": "MonetaryAmount", "value": {{ ship_rate | json }}, "currency": {{ currency | json }} },
+              "shippingDestination": { "@type": "DefinedRegion", "addressCountry": "EG" },
+              "deliveryTime": {
+                "@type": "ShippingDeliveryTime",
+                "handlingTime": { "@type": "QuantitativeValue", "minValue": 0, "maxValue": 1, "unitCode": "DAY" },
+                "transitTime": { "@type": "QuantitativeValue", "minValue": {{ settings.seo_delivery_min_days | default: 3 }}, "maxValue": {{ settings.seo_delivery_max_days | default: 5 }}, "unitCode": "DAY" }
+              }
+            }
+            {%- if shop.refund_policy.body != blank -%}
+              ,"hasMerchantReturnPolicy": {
+                "@type": "MerchantReturnPolicy",
+                "applicableCountry": "EG",
+                "url": {{ request.origin | append: shop.refund_policy.url | json }}
+              }
+            {%- endif -%}
+          }{%- unless forloop.last -%},{%- endunless -%}
+        {%- endfor -%}
+      ]
+    }
+  </script>
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": {{ home_name | json }}, "item": {{ home_url | json }} },
+        {%- if crumb != blank -%}
+          { "@type": "ListItem", "position": 2, "name": {{ crumb.title | json }}, "item": {{ request.origin | append: crumb.url | json }} },
+          { "@type": "ListItem", "position": 3, "name": {{ p.title | json }}, "item": {{ p_url | json }} }
+        {%- else -%}
+          { "@type": "ListItem", "position": 2, "name": {{ p.title | json }}, "item": {{ p_url | json }} }
+        {%- endif -%}
+      ]
+    }
+  </script>
+{%- endif -%}
+
+{%- if request.page_type == 'collection' and collection != blank -%}
+  {%- liquid
+    assign c_url = request.origin | append: collection.url
+    assign c_title = collection.title
+    if collection.handle == 'all'
+      assign c_title = 'seo.all_title' | t
+    endif
+  -%}
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": {{ home_name | json }}, "item": {{ home_url | json }} },
+        { "@type": "ListItem", "position": 2, "name": {{ c_title | json }}, "item": {{ c_url | json }} }
+      ]
+    }
+  </script>
+  {%- if collection.products.size > 0 -%}
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "ItemList",
+        "name": {{ c_title | json }},
+        "url": {{ c_url | json }},
+        "numberOfItems": {{ collection.products_count | json }},
+        "itemListElement": [
+          {%- for item in collection.products limit: 24 -%}
+            { "@type": "ListItem", "position": {{ forloop.index }}, "url": {{ request.origin | append: item.url | json }}, "name": {{ item.title | json }} }{%- unless forloop.last -%},{%- endunless -%}
+          {%- endfor -%}
+        ]
+      }
+    </script>
+  {%- endif -%}
+{%- endif -%}

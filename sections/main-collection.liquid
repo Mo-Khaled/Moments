@@ -48,6 +48,23 @@
       {% assign products_per_page = section.settings.products_per_page %}
     {% endif %}
 
+    {%- comment -%}
+      /collections/all (every product): Shopify names it "Products"; it gets its own H1 and a short description
+      (seo.all_title / seo.all_description), and the template's title line is hidden so the page keeps one H1 (2026-11-22).
+    {%- endcomment -%}
+    {%- if collection.handle == 'all' -%}
+      <div class="m-all-intro">
+        <h1 class="m-all-intro__title">{{ 'seo.all_title' | t }}</h1>
+        <p class="m-all-intro__text">{{ 'seo.all_description' | t }}</p>
+      </div>
+      <style>
+        [class*='__text_tqQTNE'] { display: none !important; }
+        .m-all-intro { display: grid; gap: 8px; max-inline-size: 720px; margin-block: 8px 24px; }
+        .m-all-intro__title { margin: 0; font-family: var(--font-heading--family); font-weight: 400; font-size: clamp(1.75rem, 4vw, 2.5rem); color: var(--m-plum); }
+        .m-all-intro__text { margin: 0; color: var(--m-text-muted); }
+      </style>
+    {%- endif -%}
+
     {% paginate collection.products by products_per_page %}
       {% comment %}
         Keep the collection's sort order (e.g. Best Selling) within each group,
