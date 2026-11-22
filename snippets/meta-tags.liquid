@@ -78,6 +78,12 @@
   if m_desc == blank
     assign m_desc = 'seo.home_description' | t
   endif
+  comment
+    the cut also covers a fallback, so no page other than the home page can go over 155 characters
+  endcomment
+  if request.page_type != 'index'
+    assign m_desc = m_desc | truncate: 155
+  endif
   if og_img == blank
     assign og_img = settings.seo_share_image
   endif
