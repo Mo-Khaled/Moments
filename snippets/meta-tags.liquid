@@ -56,7 +56,7 @@
       assign og_url = request.origin
   endcase
 
-  assign m_desc = m_desc | replace: '&lt;', '<' | replace: '&gt;', '>' | strip_html | replace: '&nbsp;', ' ' | replace: '&amp;', '&' | replace: '&#39;', "'" | replace: '&quot;', '"' | strip_newlines | split: ' ' | join: ' ' | strip
+  assign m_desc = m_desc | replace: '&lt;', '<' | replace: '&gt;', '>' | replace: '<', ' <' | strip_html | replace: '&nbsp;', ' ' | replace: '&amp;', '&' | replace: '&#39;', "'" | replace: '&quot;', '"' | strip_newlines | split: ' ' | join: ' ' | strip
   if m_desc == blank
     case request.page_type
       when 'product'
@@ -70,7 +70,7 @@
     endcase
   endif
   if m_desc == blank
-    assign m_desc = page_description | replace: '&lt;', '<' | replace: '&gt;', '>' | strip_html | strip_newlines | strip
+    assign m_desc = page_description | replace: '&lt;', '<' | replace: '&gt;', '>' | replace: '<', ' <' | strip_html | strip_newlines | strip
   endif
   if request.page_type != 'index'
     assign m_desc = m_desc | truncate: 155
