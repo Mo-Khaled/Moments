@@ -69,9 +69,141 @@
       {{ panels }}
     {%- endif -%}
   </section>
+  {%- comment -%}
+    Hint near the buy button that the scent story is further down (owner request 2026-11-22; owner chose both): a card under
+    the buy buttons, and a pulsing floating pill shown until the visitor reaches the notes.
+  {%- endcomment -%}
+  <template data-m-hint-tpl>
+    <a class="m-hint" href="#ScentGuide-{{ section.id }}" data-m-hint-card>
+      <span class="m-hint__imgs" data-m-hint-imgs></span>
+      <span class="m-hint__text">
+        <span class="m-hint__notes" data-m-hint-notes></span>
+        <span class="m-hint__cta">{{ 'scent.hint_cta' | t }} <span class="m-hint__arrow" aria-hidden="true">↓</span></span>
+      </span>
+    </a>
+    <a class="m-hintpill" href="#ScentGuide-{{ section.id }}" data-m-hint-pill hidden>
+      {{ 'scent.hint_pill' | t }} <span aria-hidden="true">↓</span>
+    </a>
+  </template>
+  <script>
+    (() => {
+      const tpl = document.currentScript.previousElementSibling;
+      const guide = tpl.previousElementSibling;
+      const buy = document.querySelector('.product-information .buy-buttons-block, .buy-buttons-block');
+      if (!guide || !buy) return;
+      const frag = tpl.content.cloneNode(true);
+      const card = frag.querySelector('[data-m-hint-card]');
+      const pill = frag.querySelector('[data-m-hint-pill]');
+      // scroll to whichever comes first on the page: the Scent Notes chips or this guide
+      const sn = document.querySelector('.sn');
+      const target = sn && sn.compareDocumentPosition(guide) & Node.DOCUMENT_POSITION_FOLLOWING ? sn : guide;
+      const go = (e) => { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth', block: 'start' }); };
+      {
+        // the perfume's own notes (named in the top/heart/base text) first, and only notes with a picture
+        const own = [...guide.querySelectorAll('.m-guide__step-notes')].map((p) => p.textContent.toLowerCase()).join(' ');
+        const notes = [...guide.querySelectorAll('.m-guide__note')].filter((li) => li.querySelector('img'))
+          .map((li, i) => ({ li, i, name: li.querySelector('strong')?.textContent.trim() || '' }))
+          .sort((a, b) => (own.includes(b.name.toLowerCase()) - own.includes(a.name.toLowerCase())) || a.i - b.i)
+          .slice(0, 3);
+        if (notes.length) notes.forEach(({ li }) => { const c = li.querySelector('img').cloneNode(); c.className = 'm-hint__img'; c.loading = 'eager'; card.querySelector('[data-m-hint-imgs]').append(c); });
+        const sep = document.documentElement.lang.startsWith('ar') ? '، ' : ', ';
+        card.querySelector('[data-m-hint-notes]').textContent = notes.map((n) => n.name).join(sep);
+        if (notes.length) { card.addEventListener('click', go); buy.after(card); }
+      }
+      {
+        // shown until the visitor reaches the notes; gone for good after that
+        pill.addEventListener('click', go);
+        document.body.append(pill);
+        new IntersectionObserver(([e], io) => {
+          const reached = e.isIntersecting || e.boundingClientRect.top < 0;
+          pill.hidden = reached;
+          if (reached) io.disconnect();
+        }).observe(target);
+      }
+    })();
+  </script>
 {%- endif -%}
 
 {% stylesheet %}
+  .m-hint {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-block-start: 16px;
+    padding: 14px 16px;
+    border: 1px solid var(--m-hairline, #E6DDE3);
+    border-radius: 16px;
+    background: #F7F3F5;
+    color: var(--m-plum, #3B1E3A);
+    text-decoration: none;
+  }
+
+  .m-hint:hover { border-color: var(--m-plum, #3B1E3A); }
+
+  .m-hint__imgs { display: flex; flex: none; }
+
+  .m-hint__img {
+    inline-size: 44px;
+    block-size: 44px;
+    border: 2px solid #F7F3F5;
+    border-radius: 50%;
+    background: #fff;
+    object-fit: cover;
+  }
+
+  .m-hint__img + .m-hint__img { margin-inline-start: -12px; }
+
+  .m-hint__text { display: grid; gap: 2px; min-inline-size: 0; }
+
+  .m-hint__notes {
+    overflow: hidden;
+    font-size: 0.8125rem;
+    color: var(--m-text-muted);
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .m-hint__cta { font-weight: 600; }
+
+  .m-hint__arrow { display: inline-block; animation: m-hint-bob 1.6s ease-in-out infinite; }
+
+  .m-hintpill {
+    position: fixed;
+    inset-inline: 0;
+    inset-block-end: calc(var(--m-tabbar-space, 0px) + 16px);
+    z-index: 20;
+    inline-size: max-content;
+    margin-inline: auto;
+    padding: 12px 20px;
+    border-radius: 9999px;
+    background: var(--m-plum, #3B1E3A);
+    box-shadow: 0 10px 28px rgb(59 30 58 / 0.25);
+    color: #fff;
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .m-hintpill[hidden] { display: none; }
+
+  /* a soft pulse ring so the pill catches the eye (owner request 2026-11-22) */
+  .m-hintpill { animation: m-hint-pulse 2s ease-out infinite; }
+
+  @keyframes m-hint-pulse {
+    0% { box-shadow: 0 10px 28px rgb(59 30 58 / 0.25), 0 0 0 0 rgb(184 64 106 / 0.55); transform: scale(1); }
+    15% { transform: scale(1.05); }
+    30% { transform: scale(1); }
+    70% { box-shadow: 0 10px 28px rgb(59 30 58 / 0.25), 0 0 0 14px rgb(184 64 106 / 0); }
+    100% { box-shadow: 0 10px 28px rgb(59 30 58 / 0.25), 0 0 0 0 rgb(184 64 106 / 0); }
+  }
+
+  .m-hintpill span { display: inline-block; animation: m-hint-bob 1.6s ease-in-out infinite; }
+
+  @keyframes m-hint-bob { 50% { transform: translateY(3px); } }
+
+  @media (prefers-reduced-motion: reduce) {
+    .m-hint__arrow, .m-hintpill, .m-hintpill span { animation: none; }
+  }
+
   .m-guide__set {
     display: grid;
     gap: 32px;
