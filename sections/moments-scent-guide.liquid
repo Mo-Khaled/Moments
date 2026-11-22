@@ -114,6 +114,27 @@
         // shown until the visitor reaches the notes; gone for good after that
         pill.addEventListener('click', go);
         document.body.append(pill);
+        // sit above the sticky add-to-cart bar when it is showing (owner 2026-11-22: they overlapped on phone)
+        const lift = () => {
+          const bar = document.querySelector('[data-sticky-atc]');
+          const r = bar && !bar.hidden && getComputedStyle(bar).display !== 'none' ? bar.getBoundingClientRect() : null;
+          const up = r && r.height && r.top < innerHeight ? innerHeight - r.top + 20 : 0;
+          pill.style.insetBlockEnd = up ? up + 'px' : '';
+        };
+        let raf = 0;
+        const queue = () => { if (!raf) raf = requestAnimationFrame(() => { raf = 0; lift(); }); };
+        addEventListener('scroll', queue, { passive: true });
+        addEventListener('resize', queue);
+        // the bar slides in: measure again once its animation has finished
+        const later = () => { queue(); setTimeout(queue, 350); setTimeout(queue, 800); };
+        const bar = document.querySelector('[data-sticky-atc]');
+        if (bar) {
+          new MutationObserver(later).observe(bar, { attributes: true });
+          bar.addEventListener('transitionend', queue);
+          bar.addEventListener('animationend', queue);
+        }
+        later();
+        setInterval(queue, 1000);
         new IntersectionObserver(([e], io) => {
           const reached = e.isIntersecting || e.boundingClientRect.top < 0;
           pill.hidden = reached;
