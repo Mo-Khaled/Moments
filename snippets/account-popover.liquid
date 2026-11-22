@@ -74,6 +74,18 @@
     }
   }
 
+  /* Arabic: the account icon sits on the left, so the panel opens from its left edge towards the page
+     (it was pinned by its right edge and ran off the screen; owner 2026-11-22) */
+  html[dir='rtl'] .account-popover__panel {
+    right: auto;
+    left: anchor(left);
+
+    @supports not (position-anchor: --account-button-trigger) {
+      right: auto;
+      left: calc(var(--anchor-left) * 1px);
+    }
+  }
+
   @starting-style {
     .account-popover__panel {
       --account-popover-opacity: 0.7;

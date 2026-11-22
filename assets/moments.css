@@ -1864,9 +1864,13 @@ html[dir='rtl'] cart-drawer-component .dialog-drawer {
   margin-inline-end: 0;
   margin-left: 0;
   margin-right: auto;
-  --dialog-drawer-opening-animation: slideInLeft;
-  --dialog-drawer-closing-animation: slideOutLeft;
+  /* it sits on the left edge, so it slides in from the left and out to the left (it used the right-side slide and crossed the page) */
+  --dialog-drawer-opening-animation: slideInRight;
+  --dialog-drawer-closing-animation: slideOutRight;
+  --custom-transform-to: -100%;
 }
+html[dir='rtl'] cart-drawer-component .dialog-drawer[open] { --custom-transform-to: 0; }
+html[dir='rtl'] cart-drawer-component .dialog-drawer.dialog-closing { --custom-transform-to: -100%; }
 
 /* Brands dropdown: the logo row centred in the white panel */
 
