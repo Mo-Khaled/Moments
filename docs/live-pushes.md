@@ -308,3 +308,6 @@ ac957f9 pushed (notes-data.json, notes-image-map.liquid, moments-notes.liquid). 
 ### 2026-11-23 8a711e3 + 2cac4bb (live): Type filter = metafield filter.kind ("Product Type"), first and open on Home & Bakhoor only, labels Bakhoor / Air fresheners, بخور / معطرات جو; absent on moments, brands, all products, search. Live check EN/AR passed. Rollback: git checkout 8a711e3^ -- blocks/filters.liquid and git checkout 7ab396e -- snippets/list-filter.liquid snippets/filter-remove-buttons.liquid, push the three.
 
 ### 2026-11-23 store data (live): product type set on 4 products that had none: Odyssey Homme Body Mist = Perfume Mist; Fire on Ice 100ml, Dolby, Frankel Chill 200ml = Perfume. Brands unchanged. Backup: MOMENTS_Content/06_Website/seo/BACKUP_PRODUCT_TYPES_4.json (all four were empty). Rollback: productUpdate productType "" for those 4.
+
+### 2026-11-23 754eeb5 (live): dropdown heading "More ways to shop" / «المزيد من طرق التسوّق». Rollback: git checkout 754eeb5^ -- locales/en.default.json locales/ar.json, push both.
+### 2026-11-23 8af91d4 (live): phone cards brand | moment on one row with the rule; a wrapped line starts flush. Rollback: git checkout 8af91d4^ -- snippets/product-card-meta.liquid, push.
