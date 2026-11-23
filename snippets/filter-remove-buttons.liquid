@@ -76,11 +76,11 @@
 
           {%- liquid
             assign chip_label = value.label
-            if filter.param_name == 'filter.p.product_type'
+            if filter.param_name == 'filter.p.m.filter.kind'
               case value.value
-                when 'Incense', 'بخور'
+                when 'Incense'
                   assign chip_label = 'home_bakhoor.type_bakhoor' | t
-                when 'Air Freshener', 'معطر جو'
+                when 'Home Fragrance'
                   assign chip_label = 'home_bakhoor.type_air' | t
               endcase
             endif

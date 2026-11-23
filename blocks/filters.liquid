@@ -24,13 +24,14 @@
   # switched on in the Search & Discovery app; Season is read from either field the app may use.
   assign moments_filters = 'filter.p.m.filter.moment,filter.p.m.filter.family,filter.p.m.filter.notes,filter.p.m.filter.gender,filter.p.m.custom.season,filter.p.m.filter.season,filter.p.vendor,filter.v.price,filter.p.m.filter.conc,filter.p.m.filter.size,filter.v.availability' | split: ','
   assign moments_open = 'filter.p.m.filter.moment,filter.p.m.filter.family,filter.p.m.filter.notes' | split: ','
-  # Home & Bakhoor (2026-11-23): the native Product type filter is global in Search & Discovery; it is shown, first and open,
-  # only on this collection and stays hidden everywhere else (moments, brands, all products, search)
+  # Home & Bakhoor (2026-11-23): the "Product Type" filter (metafield filter.kind: Incense, Home Fragrance, Perfume) is global in
+  # Search & Discovery; it is shown, first and open, only on this collection and stays hidden everywhere else (it is not in the
+  # list above, so moments, brands, all products and search never show it)
   if collection.handle == 'home-and-ambiance'
     assign mf_joined = moments_filters | join: ','
-    assign moments_filters = 'filter.p.product_type,' | append: mf_joined | split: ','
+    assign moments_filters = 'filter.p.m.filter.kind,' | append: mf_joined | split: ','
     assign mo_joined = moments_open | join: ','
-    assign moments_open = 'filter.p.product_type,' | append: mo_joined | split: ','
+    assign moments_open = 'filter.p.m.filter.kind,' | append: mo_joined | split: ','
   endif
 
   # Calculate facets margin style

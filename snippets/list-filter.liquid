@@ -401,12 +401,13 @@
                         endcase
                         assign shown_label = shown_label | replace: ' ml', ' مل'
                       endif
-                      # the native Product type filter (2026-11-23): Incense and Air Freshener read Bakhoor / Air fresheners
-                      if filter.param_name == 'filter.p.product_type'
+                      # the Product Type filter (metafield filter.kind, 2026-11-23): Incense and Home Fragrance read
+                      # Bakhoor / Air fresheners (بخور / معطرات جو)
+                      if filter.param_name == 'filter.p.m.filter.kind'
                         case value.value
-                          when 'Incense', 'بخور'
+                          when 'Incense'
                             assign shown_label = 'home_bakhoor.type_bakhoor' | t
-                          when 'Air Freshener', 'معطر جو'
+                          when 'Home Fragrance'
                             assign shown_label = 'home_bakhoor.type_air' | t
                         endcase
                       endif
