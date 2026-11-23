@@ -35,7 +35,7 @@
     aria-label="{% if request.locale.iso_code == 'ar' %}المفضلة{% else %}Wishlist{% endif %}"
   >
     <span class="svg-wrapper" aria-hidden="true">
-      <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg><span class="m-wishlist-count" data-m-wishlist-count hidden></span>
+      <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg><span class="cart-bubble m-wishlist-count" data-m-wishlist-count hidden><span class="cart-bubble__background"></span><span class="cart-bubble__text" data-m-wishlist-num></span></span>
     </span>
   </a>
 
@@ -317,23 +317,35 @@
     display: none !important;
   }
 
-  .m-wishlist-action { position: relative; }
+  /* The wishlist number is built and placed exactly like the cart number (owner 2026-11-23): same bubble, same top-right corner of
+     its own icon in English and Arabic (physical right, like the cart), same cut-out ring in the icon. */
+  .m-wishlist-action {
+    --cart-bubble-size: 20px;
+    --cart-bubble-top: 4.5px;
+    --cart-bubble-right: 2.5px;
 
-  .m-wishlist-count {
+    position: relative;
+  }
+
+  .m-wishlist-action .m-wishlist-count {
     position: absolute;
-    inset-block-start: 2px;
-    inset-inline-end: 0;
-    display: grid;
-    place-items: center;
-    min-inline-size: 18px;
-    block-size: 18px;
-    padding-inline: 4px;
-    border-radius: 9999px;
-    background: var(--m-berry);
-    color: #fff;
-    font-size: 0.6875rem;
-    font-weight: 600;
-    line-height: 1;
+    width: var(--cart-bubble-size);
+    top: var(--cart-bubble-top);
+    right: var(--cart-bubble-right);
+  }
+
+  .m-wishlist-action .cart-bubble__text {
+    font-family: var(--font-paragraph--family);
+    font-weight: var(--font-paragraph--weight);
+  }
+
+  .m-wishlist-action:has(.m-wishlist-count:not([hidden])) svg {
+    mask: radial-gradient(
+      calc(var(--cart-bubble-size) + 2px) at calc(100% - var(--cart-bubble-right)) var(--cart-bubble-top),
+      transparent 45.45%,
+      #fff 45.45%,
+      #fff 100%
+    );
   }
 
   .m-wishlist-count[hidden] { display: none; }
@@ -361,7 +373,7 @@
       const n = parseInt(digits, 10) || 0;
       if (n === last) return; // never write when nothing changed (writing re-triggers the observer)
       last = n;
-      badge.textContent = document.documentElement.lang === 'ar' ? n.toLocaleString('ar-EG') : String(n);
+      badge.querySelector('[data-m-wishlist-num]').textContent = document.documentElement.lang === 'ar' ? n.toLocaleString('ar-EG') : String(n);
       badge.hidden = n === 0;
     };
     sync();
