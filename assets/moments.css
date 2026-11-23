@@ -2115,3 +2115,30 @@ html:root:root:root:root :is(cart-drawer-component, .cart-page) .m-bbox__names {
 }
 html:root:root:root:root .m-sumlines li > span:first-child { font-family: var(--font-body--family) !important; font-weight: 500 !important; font-size: 16px !important; }
 html:root:root:root:root .m-sumlines li > span:last-child { font-family: var(--font-body--family) !important; font-weight: 600 !important; font-size: 16px !important; }
+
+/* Product page "What you'll smell": a note with a card is a real button that opens it (2026-11-23). Same layout as before;
+   a soft hover / press state, pointer cursor and a visible focus ring. */
+html:root .m-guide .m-guide__note--card { display: block !important; }
+html:root .m-guide .m-guide__note-btn {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  inline-size: calc(100% + 12px);
+  margin: -6px;
+  padding: 6px;
+  border: 0;
+  border-radius: 14px;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  text-align: start;
+  cursor: pointer;
+  transition: background-color var(--m-dur-2, 0.2s) var(--m-ease, ease), transform var(--m-dur-1, 0.12s) var(--m-ease, ease);
+  -webkit-tap-highlight-color: transparent;
+}
+html:root .m-guide .m-guide__note-btn:hover { background: #F7F3F5; }
+html:root .m-guide .m-guide__note-btn:active { transform: scale(0.985); }
+html:root .m-guide .m-guide__note-btn:focus-visible { outline: 2px solid var(--m-plum); outline-offset: 2px; }
+
+/* The note card: "Go to the notes page", the site's primary button, centred under the card content */
+.m-note__go { display: flex; justify-content: center; margin-block: 24px 8px; }

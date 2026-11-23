@@ -40,4 +40,7 @@ for c in content:
     })
 notes = [n for n in notes if n['count'] > 0]  # a note no perfume carries is left off the page
 json.dump({'version': 1, 'notes': notes}, open(OUT, 'w', encoding='utf-8'), ensure_ascii=False, separators=(',', ':'))
+# the handles that have a note card, for Liquid (product page note tiles are only clickable for these); one line, commas around
+HANDLES = os.path.join(os.path.dirname(OUT), '..', 'snippets', 'notes-card-handles.liquid')
+open(HANDLES, 'w', encoding='utf-8').write(',' + ','.join(sorted(n['handle'] for n in notes)) + ',')
 print('wrote', OUT, len(notes), 'notes', os.path.getsize(OUT), 'bytes')

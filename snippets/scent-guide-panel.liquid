@@ -82,7 +82,17 @@
             assign label_alt = label | strip_html | escape
             assign note_img = '<img class="m-guide__note-img" src="' | append: note_src | append: '" alt="' | append: label_alt | append: '" width="48" height="48" loading="lazy" decoding="async">'
           endif
-          echo '<li class="m-guide__note">' | append: note_img | append: '<span class="m-guide__note-text"><strong>' | append: label | append: '</strong><span>' | append: about | append: '</span></span></li>'
+          # clickable (2026-11-23) when the note has a card on the Notes page: a real button that opens the shared card
+          # (snippets/note-card); notes without a card stay as they were
+          capture card_handles
+            render 'notes-card-handles'
+          endcapture
+          assign card_probe = ',' | append: note_pic | append: ','
+          if card_handles contains card_probe
+            echo '<li class="m-guide__note m-guide__note--card"><button type="button" class="m-guide__note-btn" data-note-open="' | append: note_pic | append: '" aria-haspopup="dialog">' | append: note_img | append: '<span class="m-guide__note-text"><strong>' | append: label | append: '</strong><span>' | append: about | append: '</span></span></button></li>'
+          else
+            echo '<li class="m-guide__note">' | append: note_img | append: '<span class="m-guide__note-text"><strong>' | append: label | append: '</strong><span>' | append: about | append: '</span></span></li>'
+          endif
         endcapture
         assign notes = notes | append: item
         assign note_count = note_count | plus: 1

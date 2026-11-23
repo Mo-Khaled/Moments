@@ -1,0 +1,218 @@
+{%- doc -%}
+  The note card (2026-11-23): one shared card for the Notes page and the product page ("What you'll smell" tiles). It is the card
+  the Notes page has used since 2026-11-20, moved here unchanged so both pages use the same markup, data and script, plus a
+  "Go to the notes page" button that links to the note's own page (/pages/notes/<handle>, /ar/... on Arabic).
+  A bottom sheet on phones (closes with the X, a tap outside, Esc or a swipe down), a centred window on desktop; the page does not
+  scroll while it is open; focus moves into the card and back to the tile that opened it.
+  Data: assets/notes-data.json, fetched once, on the first open (or by the Notes page grid, which shares the same request).
+  Styles: the .m-note* rules in sections/moments-notes.liquid (theme-wide stylesheet).
+  Script API: window.MNoteCard.load() -> Promise (data), .open(handle, { history, push }), .close(pop), .ready, .byHandle,
+  .tile(note, big, eager), .name(note), .labels, .ar, .base, .isOpen(), .onOpen / .onClose hooks (the Notes page uses them for the
+  URL and the page title).
+  Render once per page.
+  @example
+  {% render 'note-card' %}
+{%- enddoc -%}
+
+{%- liquid
+  assign is_ar = false
+  if request.locale.iso_code == 'ar'
+    assign is_ar = true
+  endif
+  assign root = routes.root_url
+  if root == '/'
+    assign root = ''
+  endif
+-%}
+
+<div
+  class="m-notecard"
+  data-m-notecard
+  data-src="{{ 'notes-data.json' | asset_url }}"
+  data-lang="{% if is_ar %}ar{% else %}en{% endif %}"
+  data-root="{{ root }}"
+  data-base="{{ routes.root_url | append: '/pages/notes' | replace: '//', '/' }}"
+  data-money="{{ shop.money_format | escape }}"
+>
+  <dialog class="m-note" data-sheet aria-modal="true" aria-labelledby="m-note-title">
+    <div class="m-note__panel" data-panel>
+      <div class="m-note__grip" data-grip aria-hidden="true"><span></span></div>
+      <button type="button" class="m-note__close" data-close aria-label="{% if is_ar %}إغلاق{% else %}Close{% endif %}">
+        <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+      </button>
+      <div class="m-note__body" data-body></div>
+    </div>
+  </dialog>
+
+  <script type="application/json" data-img-map>{%- render 'notes-image-map' -%}</script>
+
+  <template data-t-labels>
+    {%- if is_ar -%}
+      {"learn":"اعرف أكثر","family":"العائلة","position":"موقعها في العطر","longevity":"الثبات","source":"المصدر","story":"حكاية قصيرة","pairs":"تتناغم مع","seeAll":"شوف كل العطور اللي فيها","withNote":"عطور فيها","explain":"كم ستشمّ من هذه النوتة في كل عطر","keyTitle":"كيف تقرأ الأشرطة","starDesc":"أول ما تشمّه في العطر","supportingDesc":"تضيف عمقًا ودفئًا","touchDesc":"لمحة خفيفة في الخلفية","estNote":"تقدير تقريبي وليس قياسًا دقيقًا.","star":"النوتة الأساسية","supporting":"نوتة داعمة","touch":"لمسة خفيفة","related":"نوتات قريبة","top":"المقدمة","heart":"القلب","base":"القاعدة","none":"لا توجد نوتات بهذه التصفية.","clear":"إزالة","goPage":"اذهب إلى صفحة النوتة"}
+    {%- else -%}
+      {"learn":"Learn more","family":"Family","position":"Where it sits","longevity":"Longevity","source":"Where it comes from","story":"A short story","pairs":"Pairs well with","seeAll":"See all perfumes with","withNote":"Perfumes with","explain":"How much of this note you'll smell in each perfume","keyTitle":"How to read the bars","starDesc":"the first thing you smell","supportingDesc":"adds depth and warmth","touchDesc":"a light hint in the background","estNote":"An estimate, not an exact measurement.","star":"Star of the scent","supporting":"Supporting","touch":"A touch","related":"Related notes","top":"Top","heart":"Heart","base":"Base","none":"No notes match these filters.","clear":"Remove","goPage":"Go to the notes page"}
+    {%- endif -%}
+  </template>
+</div>
+
+<script>
+  (() => {
+    if (window.MNoteCard) return;
+    const root = document.querySelector('[data-m-notecard]');
+    if (!root) return;
+    const L = JSON.parse(root.querySelector('[data-t-labels]').innerHTML);
+    const ar = root.dataset.lang === 'ar';
+    const sheet = root.querySelector('[data-sheet]');
+    const panel = root.querySelector('[data-panel]');
+    const body = root.querySelector('[data-body]');
+    const base = root.dataset.base.replace(/\/$/, '');
+    const isPhone = () => matchMedia('(max-width: 749px)').matches;
+    const esc = (s) => String(s || '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
+    const name = (n) => (ar ? n.name_ar : n.name_en);
+    const byHandle = {};
+    let dataP = null, openHandle = null, useHistory = false, lastFocus = null;
+
+    const bars = (level) => {
+      const k = level === 'star' ? 3 : level === 'supporting' ? 2 : 1;
+      return `<span class="m-str__bar" aria-hidden="true">${[1, 2, 3].map((i) => `<i${i <= k ? ' class="on"' : ''}></i>`).join('')}</span>`;
+    };
+    const strength = (level) => `<span class="m-str">${bars(level)}<span class="m-str__w">${esc(L[level])}</span></span>`;
+    const imgMap = JSON.parse(root.querySelector('[data-img-map]').textContent || '{}');
+    // Square picture, fixed aspect ratio (no layout shift), lazy, 512 / 1024 px WebP; the initial-letter tile is the fallback.
+    const tile = (n, big = false, eager = false) => {
+      const m = imgMap[n.handle];
+      const ph = `<span class="m-notes__ph">${esc(name(n).slice(0, 1))}</span>`;
+      if (!m) return `<span class="m-notes__pic" aria-hidden="true">${ph}</span>`;
+      const src = big ? `src="${m[1]}"` : `src="${m[0]}"`;
+      return `<span class="m-notes__pic" aria-hidden="true"><img ${src} width="${big ? 1024 : 512}" height="${big ? 1024 : 512}" loading="${big || eager ? 'eager' : 'lazy'}"${eager && !big ? ' fetchpriority="high"' : ''} decoding="async" alt=""></span>`;
+    };
+
+    const load = () => dataP || (dataP = fetch(root.dataset.src).then((r) => r.json()).then((d) => {
+      d.notes.forEach((n) => (byHandle[n.handle] = n));
+      return d;
+    }));
+
+    const money = (cents) => {
+      const fmt = root.dataset.money || '{{amount}}';
+      const v = (cents / 100).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+      return fmt.replace(/\{\{\s*\w+\s*\}\}/, v);
+    };
+    const cache = {};
+    const product = (h) => cache[h] || (cache[h] = fetch(`${root.dataset.root}/products/${h}.js`).then((r) => (r.ok ? r.json() : null)).catch(() => null));
+
+    const fillPerfumes = async (n, row) => {
+      const max = isPhone() ? 4 : 6;
+      const items = n.perfumes.slice(0, max);
+      if (!items.length) { row.closest('[data-body]').querySelectorAll('.m-note__row-head, .m-note__legend, .m-key, .m-note__est, [data-row]').forEach((el) => (el.hidden = true)); return; }
+      const data = await Promise.all(items.map((x) => product(x.h)));
+      row.innerHTML = items.map((x, i) => {
+        const p = data[i];
+        if (!p) return '';
+        const img = p.featured_image ? `${p.featured_image.replace(/^\/\//, 'https://')}${p.featured_image.includes('?') ? '&' : '?'}width=360` : '';
+        return `<li class="m-pcard"><a href="${root.dataset.root}/products/${p.handle}">
+          <span class="m-pcard__img">${img ? `<img src="${img}" alt="" loading="lazy" width="360" height="360">` : ''}</span>
+          <span class="m-pcard__name">${esc(p.title)}</span>
+          <span class="m-pcard__price">${money(p.price)}</span>
+          ${strength(x.level)}</a></li>`;
+      }).join('');
+    };
+
+    const cardHtml = (n) => `
+      <div class="m-note__hero">${tile(n, true)}</div>
+      <h2 class="m-note__title" id="m-note-title">${esc(name(n))}</h2>
+      <p class="m-note__simple">${esc(ar ? n.simple_ar : n.simple_en)}</p>
+      <details class="m-note__more">
+        <summary>${esc(L.learn)}</summary>
+        <dl class="m-note__facts">
+          <div><dt>${esc(L.family)}</dt><dd>${esc(ar ? n.family_ar : n.family_en)}</dd></div>
+          <div><dt>${esc(L.position)}</dt><dd>${esc(L[n.position] || n.position)}</dd></div>
+          <div><dt>${esc(L.longevity)}</dt><dd>${esc(ar ? n.longevity_ar : n.longevity_en)}</dd></div>
+        </dl>
+        <h3>${esc(L.source)}</h3><p>${esc(ar ? n.source_ar : n.source_en)}</p>
+        <h3>${esc(L.story)}</h3><p>${esc(ar ? n.story_ar : n.story_en)}</p>
+      </details>
+      <div class="m-note__row-head"><h3>${esc(L.withNote)} ${esc(name(n))}</h3></div>
+      <p class="m-note__legend">${esc(L.explain)}</p>
+      <ul class="m-key" aria-label="${esc(L.keyTitle)}">
+        ${['star', 'supporting', 'touch'].map((k) => `<li>${bars(k)}<span><b>${esc(L[k])}</b> ${esc(L[k + 'Desc'])}</span></li>`).join('')}
+      </ul>
+      <p class="m-note__est">${esc(L.estNote)}</p>
+      <ul class="m-note__row" data-row aria-label="${esc(L.withNote)} ${esc(name(n))}"></ul>
+      <h3 class="m-note__rel-head">${esc(L.related)}</h3>
+      <ul class="m-note__related">${(n.pairs || []).filter((h) => byHandle[h]).map((h) => `<li><a href="${base}/${h}" data-open="${h}">${esc(name(byHandle[h]))}</a></li>`).join('')}</ul>
+      <div class="m-note__go"><a class="m-btn m-note__go-btn" href="${base}/${n.handle}">${esc(L.goPage)}</a></div>`;
+
+    const api = {
+      labels: L, ar, base, byHandle, tile, name, load,
+      onOpen: null, onClose: null,
+      isOpen: () => sheet.open,
+      current: () => openHandle,
+      // history: true on the Notes page (the URL follows the open card); push: false when the browser already moved (back/forward)
+      open: async (h, opts = {}) => {
+        await load();
+        const n = byHandle[h];
+        if (!n) return false;
+        useHistory = !!opts.history;
+        openHandle = h;
+        body.innerHTML = cardHtml(n);
+        body.scrollTop = 0;
+        fillPerfumes(n, body.querySelector('[data-row]'));
+        if (!sheet.open) {
+          lastFocus = opts.trigger || document.activeElement;
+          document.documentElement.classList.add('m-notes-lock');
+          sheet.showModal();
+          body.setAttribute('tabindex', '-1');
+          body.focus({ preventScroll: true }); // start focus in the card, not on the close button (no ring on open)
+          panel.style.transform = '';
+        }
+        if (api.onOpen) api.onOpen(n, opts.push !== false);
+        return true;
+      },
+      close: (pop = false) => {
+        if (!sheet.open) return;
+        sheet.close();
+        document.documentElement.classList.remove('m-notes-lock');
+        openHandle = null;
+        if (api.onClose) api.onClose(pop, useHistory);
+        if (lastFocus && lastFocus.focus) lastFocus.focus();
+      },
+    };
+    window.MNoteCard = api;
+
+    // a related note inside the card opens in the same card
+    body.addEventListener('click', (e) => {
+      const a = e.target.closest('[data-open]');
+      if (!a) return;
+      e.preventDefault();
+      api.open(a.dataset.open, { history: useHistory, push: openHandle !== a.dataset.open });
+    });
+    root.querySelector('[data-close]').addEventListener('click', () => api.close());
+    sheet.addEventListener('click', (e) => { if (e.target === sheet) api.close(); });
+    sheet.addEventListener('cancel', (e) => { e.preventDefault(); api.close(); });
+
+    // swipe down to close (phone): only from the grip or when the body is scrolled to the top
+    let y0 = null, dy = 0;
+    panel.addEventListener('touchstart', (e) => {
+      if (!isPhone()) return;
+      if (e.target.closest('[data-grip]') || body.scrollTop <= 0) { y0 = e.touches[0].clientY; dy = 0; }
+    }, { passive: true });
+    panel.addEventListener('touchmove', (e) => {
+      if (y0 === null) return;
+      dy = Math.max(0, e.touches[0].clientY - y0);
+      if (dy > 0) panel.style.transform = `translateY(${dy}px)`;
+    }, { passive: true });
+    panel.addEventListener('touchend', () => {
+      if (y0 === null) return;
+      if (dy > 110) api.close(); else panel.style.transform = '';
+      y0 = null;
+    });
+
+    // any element with data-note-open (product page note tiles) opens its card; the tile gets focus back on close
+    document.addEventListener('click', (e) => {
+      const t = e.target.closest('[data-note-open]');
+      if (!t) return;
+      e.preventDefault();
+      api.open(t.dataset.noteOpen, { trigger: t });
+    });
+  })();
+</script>

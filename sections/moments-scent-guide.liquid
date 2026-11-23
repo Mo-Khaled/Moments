@@ -69,6 +69,10 @@
       {{ panels }}
     {%- endif -%}
   </section>
+  {%- comment -%} notes with a card open the shared note card (snippets/note-card): rendered only when a tile can use it {%- endcomment -%}
+  {%- if panels contains 'data-note-open' -%}
+    {% render 'note-card' %}
+  {%- endif -%}
   {%- comment -%}
     Hint near the buy button that the scent story is further down (owner request 2026-11-22; owner chose both): a card under
     the buy buttons, and a pulsing floating pill shown until the visitor reaches the notes.
@@ -88,7 +92,7 @@
   <script>
     (() => {
       const tpl = document.currentScript.previousElementSibling;
-      const guide = tpl.previousElementSibling;
+      const guide = tpl.parentElement.querySelector('section.m-guide');
       const buy = document.querySelector('.product-information .buy-buttons-block, .buy-buttons-block');
       if (!guide || !buy) return;
       const frag = tpl.content.cloneNode(true);

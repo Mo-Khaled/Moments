@@ -113,66 +113,33 @@
     <noscript><p>{% if is_ar %}فعّل جافاسكربت لعرض النوتات.{% else %}Turn on JavaScript to see the notes.{% endif %}</p></noscript>
   </div>
 
-  <dialog class="m-note" data-sheet aria-labelledby="m-note-title">
-    <div class="m-note__panel" data-panel>
-      <div class="m-note__grip" data-grip aria-hidden="true"><span></span></div>
-      <button type="button" class="m-note__close" data-close aria-label="{% if is_ar %}إغلاق{% else %}Close{% endif %}">
-        <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
-      </button>
-      <div class="m-note__body" data-body></div>
-    </div>
-  </dialog>
-
-  <script type="application/json" data-img-map>{%- render 'notes-image-map' -%}</script>
-
-  <template data-t-labels>
-    {%- if is_ar -%}
-      {"learn":"اعرف أكثر","family":"العائلة","position":"موقعها في العطر","longevity":"الثبات","source":"المصدر","story":"حكاية قصيرة","pairs":"تتناغم مع","seeAll":"شوف كل العطور اللي فيها","withNote":"عطور فيها","explain":"كم ستشمّ من هذه النوتة في كل عطر","keyTitle":"كيف تقرأ الأشرطة","starDesc":"أول ما تشمّه في العطر","supportingDesc":"تضيف عمقًا ودفئًا","touchDesc":"لمحة خفيفة في الخلفية","estNote":"تقدير تقريبي وليس قياسًا دقيقًا.","star":"النوتة الأساسية","supporting":"نوتة داعمة","touch":"لمسة خفيفة","related":"نوتات قريبة","top":"المقدمة","heart":"القلب","base":"القاعدة","none":"لا توجد نوتات بهذه التصفية.","clear":"إزالة"}
-    {%- else -%}
-      {"learn":"Learn more","family":"Family","position":"Where it sits","longevity":"Longevity","source":"Where it comes from","story":"A short story","pairs":"Pairs well with","seeAll":"See all perfumes with","withNote":"Perfumes with","explain":"How much of this note you'll smell in each perfume","keyTitle":"How to read the bars","starDesc":"the first thing you smell","supportingDesc":"adds depth and warmth","touchDesc":"a light hint in the background","estNote":"An estimate, not an exact measurement.","star":"Star of the scent","supporting":"Supporting","touch":"A touch","related":"Related notes","top":"Top","heart":"Heart","base":"Base","none":"No notes match these filters.","clear":"Remove"}
-    {%- endif -%}
-    </template>
 </section>
+
+{%- comment -%} the note card (dialog, labels, picture map, card script) is shared with the product page {%- endcomment -%}
+{% render 'note-card' %}
 
 <script>
   (() => {
     const root = document.querySelector('[data-m-notes]');
     if (!root) return;
-    const L = JSON.parse(root.querySelector('[data-t-labels]').innerHTML);
-    const ar = root.dataset.lang === 'ar';
+    const C = window.MNoteCard;
+    if (!C) return;
+    const L = C.labels;
+    const ar = C.ar;
     const grid = root.querySelector('[data-grid]');
-    const sheet = root.querySelector('[data-sheet]');
-    const panel = root.querySelector('[data-panel]');
-    const body = root.querySelector('[data-body]');
     const countEl = root.querySelector('[data-count]');
     const base = root.dataset.base.replace(/\/$/, '');
-    const pageUrl = location.pathname + location.search;
     const isPhone = () => matchMedia('(max-width: 749px)').matches;
     const esc = (s) => String(s || '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
-    const name = (n) => (ar ? n.name_ar : n.name_en);
-    let notes = [], byHandle = {}, active = { season: '', gender: '', moment: '' }, openHandle = null;
-
-    const bars = (level) => {
-      const k = level === 'star' ? 3 : level === 'supporting' ? 2 : 1;
-      return `<span class="m-str__bar" aria-hidden="true">${[1, 2, 3].map((i) => `<i${i <= k ? ' class="on"' : ''}></i>`).join('')}</span>`;
-    };
-    const strength = (level) => `<span class="m-str">${bars(level)}<span class="m-str__w">${esc(L[level])}</span></span>`;
+    const name = C.name;
+    const tile = C.tile;
+    let notes = [], byHandle = C.byHandle, active = { season: '', gender: '', moment: '' };
     const countText = (c) => {
       if (!ar) return `${c} ${c === 1 ? 'note' : 'notes'}`;
       const d = c.toLocaleString('ar-EG');
       if (c === 1) return 'نوتة واحدة';
       if (c === 2) return 'نوتتان';
       return `${d} ${c >= 3 && c <= 10 ? 'نوتات' : 'نوتة'}`;
-    };
-    const imgMap = JSON.parse(root.querySelector('[data-img-map]').textContent || '{}');
-    // Square picture, fixed aspect ratio (no layout shift), lazy, 512 / 1024 px WebP; the initial-letter tile is the fallback.
-    // Grid tiles use the 512 px file only (sharp enough up to 3x phones, ~18 KB each); the open card uses the 1024 px file for its larger picture.
-    const tile = (n, big = false, eager = false) => {
-      const m = imgMap[n.handle];
-      const ph = `<span class="m-notes__ph">${esc(name(n).slice(0, 1))}</span>`;
-      if (!m) return `<span class="m-notes__pic" aria-hidden="true">${ph}</span>`;
-      const src = big ? `src="${m[1]}"` : `src="${m[0]}"`;
-      return `<span class="m-notes__pic" aria-hidden="true"><img ${src} width="${big ? 1024 : 512}" height="${big ? 1024 : 512}" loading="${big || eager ? 'eager' : 'lazy'}"${eager && !big ? ' fetchpriority="high"' : ''} decoding="async" alt=""></span>`;
     };
 
     const render = () => {
@@ -209,86 +176,20 @@
       root.querySelector('[data-fapply]').textContent = ar ? `عرض ${countText(shown.length)}` : `Show ${countText(shown.length)}`;
     };
 
-    const money = (cents) => {
-      const fmt = root.dataset.money || '{{amount}}';
-      const v = (cents / 100).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-      return fmt.replace(/\{\{\s*\w+\s*\}\}/, v);
-    };
-    const cache = {};
-    const product = (h) => cache[h] || (cache[h] = fetch(`${root.dataset.root}/products/${h}.js`).then((r) => (r.ok ? r.json() : null)).catch(() => null));
-
-    const fillPerfumes = async (n, row) => {
-      const max = isPhone() ? 4 : 6;
-      const items = n.perfumes.slice(0, max);
-      if (!items.length) { row.closest('[data-body]').querySelectorAll('.m-note__row-head, .m-note__legend, .m-key, .m-note__est, [data-row]').forEach((el) => (el.hidden = true)); return; }
-      const data = await Promise.all(items.map((x) => product(x.h)));
-      row.innerHTML = items.map((x, i) => {
-        const p = data[i];
-        if (!p) return '';
-        const img = p.featured_image ? `${p.featured_image.replace(/^\/\//, 'https://')}${p.featured_image.includes('?') ? '&' : '?'}width=360` : '';
-        return `<li class="m-pcard"><a href="${root.dataset.root}/products/${p.handle}">
-          <span class="m-pcard__img">${img ? `<img src="${img}" alt="" loading="lazy" width="360" height="360">` : ''}</span>
-          <span class="m-pcard__name">${esc(p.title)}</span>
-          <span class="m-pcard__price">${money(p.price)}</span>
-          ${strength(x.level)}</a></li>`;
-      }).join('');
-    };
-
-    const cardHtml = (n) => `
-      <div class="m-note__hero">${tile(n, true)}</div>
-      <h2 class="m-note__title" id="m-note-title">${esc(name(n))}</h2>
-      <p class="m-note__simple">${esc(ar ? n.simple_ar : n.simple_en)}</p>
-      <details class="m-note__more">
-        <summary>${esc(L.learn)}</summary>
-        <dl class="m-note__facts">
-          <div><dt>${esc(L.family)}</dt><dd>${esc(ar ? n.family_ar : n.family_en)}</dd></div>
-          <div><dt>${esc(L.position)}</dt><dd>${esc(L[n.position] || n.position)}</dd></div>
-          <div><dt>${esc(L.longevity)}</dt><dd>${esc(ar ? n.longevity_ar : n.longevity_en)}</dd></div>
-        </dl>
-        <h3>${esc(L.source)}</h3><p>${esc(ar ? n.source_ar : n.source_en)}</p>
-        <h3>${esc(L.story)}</h3><p>${esc(ar ? n.story_ar : n.story_en)}</p>
-      </details>
-      <div class="m-note__row-head"><h3>${esc(L.withNote)} ${esc(name(n))}</h3></div>
-      <p class="m-note__legend">${esc(L.explain)}</p>
-      <ul class="m-key" aria-label="${esc(L.keyTitle)}">
-        ${['star', 'supporting', 'touch'].map((k) => `<li>${bars(k)}<span><b>${esc(L[k])}</b> ${esc(L[k + 'Desc'])}</span></li>`).join('')}
-      </ul>
-      <p class="m-note__est">${esc(L.estNote)}</p>
-      <ul class="m-note__row" data-row aria-label="${esc(L.withNote)} ${esc(name(n))}"></ul>
-      <h3 class="m-note__rel-head">${esc(L.related)}</h3>
-      <ul class="m-note__related">${(n.pairs || []).filter((h) => byHandle[h]).map((h) => `<li><a href="${base}/${h}" data-open="${h}">${esc(name(byHandle[h]))}</a></li>`).join('')}</ul>`;
-
-    let lastFocus = null;
-    const open = (h, push = true) => {
-      const n = byHandle[h];
-      if (!n) return;
-      openHandle = h;
-      body.innerHTML = cardHtml(n);
-      body.scrollTop = 0;
-      fillPerfumes(n, body.querySelector('[data-row]'));
-      if (!sheet.open) {
-        lastFocus = document.activeElement;
-        document.documentElement.classList.add('m-notes-lock');
-        sheet.showModal();
-        body.setAttribute('tabindex', '-1');
-        body.focus({ preventScroll: true }); // start focus in the card, not on the close button (no ring on open)
-        panel.style.transform = '';
-      }
+    // the URL and the page title follow the open card (back closes it), as before the card moved to snippets/note-card
+    C.onOpen = (n, push) => {
       document.title = ar ? `${name(n)} – لحظات` : `${name(n)} – MOMENTS`;
-      if (push) history.pushState({ note: h }, '', `${base}/${h}`);
+      if (push) history.pushState({ note: n.handle }, '', `${base}/${n.handle}`);
     };
-    const close = (pop = false) => {
-      if (!sheet.open) return;
-      sheet.close();
-      document.documentElement.classList.remove('m-notes-lock');
-      openHandle = null;
+    C.onClose = (pop) => {
       if (!pop && history.state && history.state.note) history.back();
-      if (lastFocus) lastFocus.focus();
     };
+    const open = (h, push = true) => C.open(h, { history: true, push });
+    const close = (pop = false) => C.close(pop);
 
     root.addEventListener('click', (e) => {
       const a = e.target.closest('[data-open]');
-      if (a) { e.preventDefault(); open(a.dataset.open, !sheet.open || openHandle !== a.dataset.open); return; }
+      if (a) { e.preventDefault(); open(a.dataset.open, !C.isOpen() || C.current() !== a.dataset.open); return; }
       const fb = e.target.closest('[data-g]');
       if (fb && fb.getAttribute('aria-disabled') === 'true') return;
       if (fb) { active[fb.dataset.g] = fb.dataset.v; render(); return; }
@@ -299,29 +200,9 @@
         render();
       }
     });
-    root.querySelector('[data-close]').addEventListener('click', () => close());
-    sheet.addEventListener('click', (e) => { if (e.target === sheet) close(); });
-    sheet.addEventListener('cancel', (e) => { e.preventDefault(); close(); });
     window.addEventListener('popstate', (e) => {
       const h = e.state && e.state.note;
       if (h) open(h, false); else close(true);
-    });
-
-    // swipe down to close (phone): only from the grip or when the body is scrolled to the top
-    let y0 = null, dy = 0;
-    panel.addEventListener('touchstart', (e) => {
-      if (!isPhone()) return;
-      if (e.target.closest('[data-grip]') || body.scrollTop <= 0) { y0 = e.touches[0].clientY; dy = 0; }
-    }, { passive: true });
-    panel.addEventListener('touchmove', (e) => {
-      if (y0 === null) return;
-      dy = Math.max(0, e.touches[0].clientY - y0);
-      if (dy > 0) panel.style.transform = `translateY(${dy}px)`;
-    }, { passive: true });
-    panel.addEventListener('touchend', () => {
-      if (y0 === null) return;
-      if (dy > 110) close(); else panel.style.transform = '';
-      y0 = null;
     });
 
     // The count bar sticks directly under the header: its offset is the header's real height (+ the header's own sticky top), measured, never a fixed number.
@@ -351,9 +232,8 @@
     root.querySelector('[data-fapply]').addEventListener('click', () => fsheet.close());
     fsheet.addEventListener('click', (e) => { if (e.target === fsheet) fsheet.close(); });
 
-    fetch(root.dataset.src).then((r) => r.json()).then((d) => {
+    C.load().then((d) => {
       notes = d.notes.slice().sort((a, b) => b.count - a.count);
-      notes.forEach((n) => (byHandle[n.handle] = n));
       render();
       const m = location.pathname.match(/\/pages\/notes\/([a-z0-9-]+)/) || location.search.match(/[?&]note=([a-z0-9-]+)/);
       if (m && byHandle[m[1]]) open(m[1], false);
