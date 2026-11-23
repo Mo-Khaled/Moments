@@ -117,17 +117,30 @@
     border-inline-start: 1px solid var(--m-rule-quiet);
   }
 
-  /* Two-column cards are too narrow for one row: the brand drops to its own line and the rule goes. */
+  /* Phones (owner 2026-11-23): the same one-row style as desktop, brand | moment with the thin rule. Every item carries the
+     rule and 8px on its start side, and the first 9px of the row are cut off: the item that starts a line (the brand, or the
+     moment when a long English pair wraps) starts flush with the name above, with no rule; items on the same line keep the
+     rule between them. No script. */
   @media screen and (max-width: 749px) {
     .card-meta {
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 2px;
+      column-gap: 0;
+      row-gap: 2px;
+      margin-inline-start: -9px;
+      clip-path: inset(-4px -4px -4px 9px);
+    }
+
+    html[dir='rtl'] .card-meta {
+      clip-path: inset(-4px 9px -4px -4px);
+    }
+
+    .card-meta > * {
+      padding-inline-start: 8px;
+      margin-inline-end: 8px;
+      border-inline-start: 1px solid var(--m-rule-quiet);
     }
 
     .card-meta__brand + .card-meta__moment {
-      padding-inline-start: 0;
-      border-inline-start: 0;
+      padding-inline-start: 8px;
     }
   }
 {% endstylesheet %}
