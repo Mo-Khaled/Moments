@@ -1843,8 +1843,9 @@ html:root .m-note__simple { text-align: center; margin-inline: auto; }
   content: '';
   inline-size: 8px;
   block-size: 8px;
-  border-inline-end: 2px solid currentColor;
-  border-block-end: 2px solid currentColor;
+  /* physical sides (not logical): the chevron must point down when closed and up when open in Arabic too (owner 2026-11-23) */
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
   transform: rotate(45deg) translateY(-2px);
   transition: transform var(--m-dur-2, 0.2s) var(--m-ease, ease);
 }
