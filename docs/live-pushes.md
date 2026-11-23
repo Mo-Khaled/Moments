@@ -313,3 +313,5 @@ ac957f9 pushed (notes-data.json, notes-image-map.liquid, moments-notes.liquid). 
 ### 2026-11-23 8af91d4 (live): phone cards brand | moment on one row with the rule; a wrapped line starts flush. Rollback: git checkout 8af91d4^ -- snippets/product-card-meta.liquid, push.
 
 ### 2026-11-23 fc05ca7 (live): notes card "Learn more" chevron points down/up in Arabic too. Rollback: git checkout fc05ca7^ -- assets/moments.css, push.
+
+### 2026-11-23 6556e84 (live): header wishlist number built and placed like the cart number (top-right of its icon in EN and AR). Rollback: git checkout 6556e84^ -- snippets/header-actions.liquid, push.
