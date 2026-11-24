@@ -370,16 +370,25 @@
     margin-block-start: 26px;
   }
 
-  /* primary level: the section titles are bigger and bold (the specificity beats the theme's own h2 rule) */
-  .menu-drawer--moments .mm .mm__title {
+  /* primary level: the section titles are bigger and bold. Specificity beats moments.css (English: Marcellus h2 rule;
+     Arabic: the global one-weight rule, which needs !important). Menu-only exception, owner request 2026-11-24. */
+  html:root .menu-drawer--moments .mm .mm__title,
+  html[lang='ar']:root body .menu-drawer--moments .mm .mm__title {
     margin: 0 0 6px;
     font-family: var(--font-body--family);
     font-size: 1.375rem;
-    font-weight: 600;
     line-height: 1.3;
     letter-spacing: 0;
     text-transform: none;
     color: var(--m-plum);
+  }
+
+  html:root .menu-drawer--moments .mm .mm__title {
+    font-weight: 600;
+  }
+
+  html[lang='ar']:root body .menu-drawer--moments .mm .mm__title {
+    font-weight: 600 !important;
   }
 
   .mm__group {
