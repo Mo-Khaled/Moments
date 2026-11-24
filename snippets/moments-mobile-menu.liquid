@@ -108,7 +108,7 @@
         </ul>
       </section>
 
-      {%- if settings.moments_page_bundle != blank or has_about or pages['notes'] != blank -%}
+      {%- if settings.moments_page_bundle != blank or pages['notes'] != blank -%}
         <section class="mm__group">
           <h2 class="mm__title mm-reveal" style="--i: {{ step | plus: 4 }};">{{ 'mobile_menu.more_ways' | t }}</h2>
           <ul role="list">
@@ -122,7 +122,13 @@
                 <a class="mm-link mm-link--accent" href="{{ settings.moments_page_bundle.url }}">{{ 'bundle.nav' | t }}</a>
               </li>
             {%- endif -%}
-            {%- if has_about -%}
+          </ul>
+        </section>
+      {%- endif -%}
+
+      {%- if has_about -%}
+        <section class="mm__group mm__group--about">
+          <ul role="list">
               <li class="mm-reveal" style="--i: {{ step | plus: 6 }};">
                 <button class="mm-link mm-acc" type="button" aria-expanded="false" aria-controls="mm-about" data-mm-acc>
                   <span>{{ 'mobile_menu.about' | t }}</span>
@@ -140,7 +146,6 @@
                   </ul>
                 </div>
               </li>
-            {%- endif -%}
           </ul>
         </section>
       {%- endif -%}
@@ -391,8 +396,18 @@
     font-weight: 600 !important;
   }
 
+  /* each group is set off by a hairline, and its links hang under the title on a thin guide line, so it is clear what belongs to what */
   .mm__group {
-    margin-block-start: 26px;
+    margin-block-start: 22px;
+    padding-block-start: 20px;
+    border-block-start: 1px solid rgb(59 30 58 / 0.14);
+  }
+
+  .mm__group > ul:not(:only-child),
+  .mm__group > .mm__title + ul {
+    margin-inline-start: 3px;
+    padding-inline-start: 16px;
+    border-inline-start: 2px solid rgb(59 30 58 / 0.16);
   }
 
   /* ---- the six moments ---- */
@@ -573,6 +588,28 @@
   .mm-panel > ul {
     min-block-size: 0;
     overflow: hidden;
+  }
+
+  /* "About" is a collapsible section of its own: it reads like a title, and what opens under it hangs on the guide line */
+  .mm__group--about .mm-acc {
+    min-block-size: 40px;
+    padding-inline: 0;
+    font-size: 1.375rem;
+    line-height: 1.3;
+  }
+
+  html:root .menu-drawer--moments .mm .mm__group--about .mm-acc {
+    font-weight: 600;
+  }
+
+  html[lang='ar']:root body .menu-drawer--moments .mm .mm__group--about .mm-acc {
+    font-weight: 600 !important;
+  }
+
+  .mm__group--about .mm-panel > ul {
+    margin-inline-start: 3px;
+    padding-inline-start: 16px;
+    border-inline-start: 2px solid rgb(59 30 58 / 0.16);
   }
 
   .mm-sublink {

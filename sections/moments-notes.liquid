@@ -810,6 +810,13 @@
 
   .m-pcard__allbtn { display: grid; place-items: center; min-block-size: 120px; padding: 12px; border: 1px solid rgb(59 30 58 / 0.22); border-radius: 12px; text-align: center; font-size: 0.9375rem; color: var(--m-berry-ink); }
 
+  /* hairline dividers between the card's sections (the Learn more block already has its own) */
+  .m-note__rel-head {
+    margin-block-start: 8px;
+    padding-block-start: 20px;
+    border-block-start: 1px solid var(--m-hairline, #E6DDE3);
+  }
+
   .m-note__related {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));

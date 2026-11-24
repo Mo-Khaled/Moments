@@ -2141,4 +2141,4 @@ html:root .m-guide .m-guide__note-btn:active { transform: scale(0.985); }
 html:root .m-guide .m-guide__note-btn:focus-visible { outline: 2px solid var(--m-plum); outline-offset: 2px; }
 
 /* The note card: "Go to the notes page", the site's primary button, centred under the card content */
-.m-note__go { display: flex; justify-content: center; margin-block: 24px 8px; }
+.m-note__go { display: flex; justify-content: center; margin-block: 24px 8px; padding-block-start: 24px; border-block-start: 1px solid var(--m-hairline, #E6DDE3); }

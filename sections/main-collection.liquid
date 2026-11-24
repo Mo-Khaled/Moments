@@ -67,6 +67,9 @@
       <style>
         [class*='__text_tqQTNE'] { display: none !important; }
         .m-all-intro { display: grid; gap: 8px; max-inline-size: 720px; margin-block: 8px 24px; }
+        /* its own row above the filters bar: left to auto-placement it took a one-column cell beside the filters, which stacked the title
+           one word per line and pushed the products ~1,600px down the page */
+        .collection-wrapper > .m-all-intro { grid-column: column-1 / column-12; grid-row: 1; }
         .m-all-intro__title { margin: 0; font-family: var(--font-heading--family); font-weight: 400; font-size: clamp(1.75rem, 4vw, 2.5rem); color: var(--m-plum); }
         .m-all-intro__text { margin: 0; color: var(--m-text-muted); }
       </style>

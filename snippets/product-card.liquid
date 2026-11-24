@@ -162,7 +162,28 @@
       {% if block_settings.padding-block-end > 0 %}--zoom-out-padding-block-end: min(var(--padding-xs), {{ block_settings.padding-block-end | times: 0.7}}px);{% endif %}
     "
   >
-    {{ children }}
+    {%- liquid
+      comment
+        The title and image links come from the child blocks; when the card is listed in a collection they are pointed inside it too,
+        so the product page breadcrumb follows the visitor's path (content_for 'blocks' cannot pass the collection down).
+      endcomment
+      assign card_children = children
+      if from_collection != blank
+        assign card_url = variant_to_link.url | within: from_collection
+        assign plain_href = 'href="' | append: variant_to_link.url | append: '"'
+        assign collection_href = 'href="' | append: card_url | append: '"'
+        assign card_children = children | replace: plain_href, collection_href
+      endif
+    -%}
+    {% capture nl %}
+{% endcapture %}
+    {%- liquid
+      if from_collection != blank
+        assign nl_href = 'href="' | append: nl | append: variant_to_link.url | append: '"'
+        assign card_children = card_children | replace: nl_href, collection_href
+      endif
+    -%}
+    {{ card_children }}
   </div>
 </product-card>
 {%- if settings.transition_to_main_product -%}
