@@ -2185,3 +2185,16 @@ html:root:root .cart-discount__panel .cart-discount__content { block-size: auto;
 html:root:root .cart-discount__panel .cart-discount__form { gap: 10px; block-size: auto; }
 html:root:root .cart-discount__panel .cart-discount__input { min-block-size: 48px; flex: 1 1 auto; }
 html:root:root .cart-discount__panel .cart-discount__button { min-block-size: 48px; flex: none; padding-inline: 20px; }
+
+/* Always light (owner 2026-11-24): the page never follows the phone's dark mode. Also set in layout/theme.liquid (meta + inline). */
+html:root,
+html:root body {
+  color-scheme: only light;
+}
+@media (prefers-color-scheme: dark) {
+  html:root,
+  html:root body {
+    color-scheme: only light;
+    background-color: var(--m-pearl, #FCFCFA);
+  }
+}
