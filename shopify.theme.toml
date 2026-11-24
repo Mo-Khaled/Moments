@@ -6,4 +6,4 @@
 # Push specific files only: bash scripts/push.sh --only <files> (it refuses when the published theme is not the one below)
 [environments.live]
 store = "dezrva-2z.myshopify.com"
-theme = "162418163903"
+theme = "162553200831"
