@@ -46,11 +46,17 @@
       <li class="breadcrumb-item">
         <a href="{{ routes.root_url }}" class="breadcrumb-link">{{ 'breadcrumb.home' | t }}</a>
       </li>
-      {% unless closest.product.collections.empty %}
-        <li class="breadcrumb-item">
-          <a href="{{ closest.product.collections.first.url }}" class="breadcrumb-link">{{ closest.product.collections.first.title }}</a>
-        </li>
-      {% endunless %}
+      {%- comment -%}
+        Follows the visitor's path: `collection` is set when the product was opened from a list (Home carousel, a collection page);
+        otherwise the neutral "All perfumes" instead of whichever collection happens to be first on the product.
+      {%- endcomment -%}
+      <li class="breadcrumb-item">
+        {%- if collection != blank -%}
+          <a href="{{ collection.url }}" class="breadcrumb-link">{{ collection.title }}</a>
+        {%- else -%}
+          <a href="{{ routes.all_products_collection_url }}" class="breadcrumb-link">{{ 'breadcrumb.all_perfumes' | t }}</a>
+        {%- endif -%}
+      </li>
       <li class="breadcrumb-item breadcrumb-item--current" aria-current="page">
         <span class="breadcrumb-text">{%- render 'product-name', product: closest.product, plain: true -%}</span>
       </li>

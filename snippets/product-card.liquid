@@ -7,6 +7,7 @@
   @param {object} children - The children of the product card
   @param {object} [block] - The block object
   @param {number} [product_card_gap] - The gap between the product card children (overrides block settings)
+  @param {object} [from_collection] - The collection the card is listed in; the link is built inside it so the product page breadcrumb follows the visitor's path
 {%- enddoc -%}
 
 {% assign block_settings = block.settings %}
@@ -124,7 +125,11 @@
   <a
     id="{{ product_card_id | md5 }}"
     {% unless onboarding %}
-      href="{{ variant_to_link.url }}"
+      {%- if from_collection != blank -%}
+        href="{{ variant_to_link.url | within: from_collection }}"
+      {%- else -%}
+        href="{{ variant_to_link.url }}"
+      {%- endif -%}
     {% endunless %}
     class="product-card__link"
     ref="productCardLink"

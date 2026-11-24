@@ -65,7 +65,7 @@
             class="resource-list__item"
           >
             {% # theme-check-disable UniqueStaticBlockId %}
-              {% content_for 'block', type: '_product-card', id: 'static-product-card', closest.product: product %}
+              {% content_for 'block', type: '_product-card', id: 'static-product-card', closest.product: product, from_collection: list_collection %}
             {% # theme-check-enable UniqueStaticBlockId %}
           </div>
 
