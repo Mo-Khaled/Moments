@@ -208,6 +208,9 @@
 
   .m-hintpill[hidden] { display: none; }
 
+  /* never over the side menu, the cart drawer or another open sheet (owner request 2026-11-24) */
+  body:has(header-drawer .menu-open, dialog[open]) .m-hintpill { display: none; }
+
   /* a soft pulse ring so the pill catches the eye (owner request 2026-11-22) */
   .m-hintpill { animation: m-hint-pulse 2s ease-out infinite; }
 
