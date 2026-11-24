@@ -157,6 +157,36 @@
     line-height: 1.35;
   }
 
+  /* The wide tile (Home & Bakhoor): a full-width band under the six, sized by fixed lengths, not by its own width */
+  .m-tile-item--home {
+    grid-column: 1 / -1;
+  }
+
+  .m-tile--wide {
+    --wide-art: clamp(88px, 18vw, 152px);
+
+    aspect-ratio: auto;
+    block-size: calc(var(--wide-art) + 24px);
+  }
+
+  .m-tile--wide .m-tile__art {
+    inset-block-start: 12px;
+    inset-inline-end: clamp(12px, 3vw, 32px);
+    inline-size: var(--wide-art);
+    block-size: var(--wide-art);
+  }
+
+  .m-tile--wide .m-tile__label {
+    inset-inline-start: clamp(18px, 3vw, 36px);
+    inset-block-end: auto;
+    inset-block-start: 50%;
+    transform: translateY(-50%);
+  }
+
+  .m-tile--wide .m-tile__name {
+    font-size: clamp(1.5rem, 5vw, 2.25rem);
+  }
+
   @media (prefers-reduced-motion: reduce) {
     .m-tile {
       transition: none;

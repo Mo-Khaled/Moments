@@ -55,6 +55,14 @@
           </li>
         {%- endif -%}
       {%- endfor -%}
+      {%- comment -%} 7th tile: Home & Bakhoor, not a moment (own tone, censer mark), full width under the six {%- endcomment -%}
+      {%- assign home_collection = collections['home-and-ambiance'] -%}
+      {%- if home_collection != blank -%}
+        <li class="m-tile-item m-tile-item--home">
+          {%- assign home_label = 'home_bakhoor.title' | t -%}
+          {% render 'moment-tile', collection: home_collection, mark: 'home', label: home_label, class: 'm-tile--wide' %}
+        </li>
+      {%- endif -%}
     </ul>
   </div>
 </section>

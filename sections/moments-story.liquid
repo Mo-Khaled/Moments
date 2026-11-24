@@ -72,6 +72,18 @@
           </li>
         {%- endif -%}
       {%- endfor -%}
+      {%- comment -%} 7th row: Home & Bakhoor, not a moment (own tone, censer mark) {%- endcomment -%}
+      {%- assign home_collection = collections['home-and-ambiance'] -%}
+      {%- if home_collection != blank -%}
+        <li>
+          <a class="m-story__row m-tone--home" href="{{ home_collection.url }}" data-moment-host>
+            <span class="m-story__chip" aria-hidden="true">{% render 'moment-mark', mark: 'home', size: 'sm', class: 'm-story__mark' %}</span>
+            <span class="m-story__name">{{ 'home_bakhoor.title' | t }}</span>
+            <span class="m-story__count">{{ 'homepage.moments.count' | t: count: home_collection.products_count }}</span>
+            <span class="m-story__go" aria-hidden="true"><svg viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10h11M10.5 5l5 5-5 5"/></svg></span>
+          </a>
+        </li>
+      {%- endif -%}
     </ul>
   </div>
 </section>

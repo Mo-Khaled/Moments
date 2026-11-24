@@ -30,7 +30,7 @@
     render 'moments-config', part: 'labels'
   endcapture
   assign moment_keys = moment_keys | strip | split: ','
-  assign link_order = 'brands,for her,for him' | split: ','
+  assign link_order = 'brands,for-her,for-him' | split: ','
   assign threshold = settings.moments_free_shipping | times: 100 | money_without_trailing_zeros
   assign step = 0
 -%}
@@ -96,7 +96,7 @@
         <ul role="list">
           {%- for key in link_order -%}
             {%- for link in linklist.links -%}
-              {%- assign link_key = link.title | downcase | strip -%}
+              {%- assign link_key = link.url | split: '?' | first | split: '/' | last -%}
               {%- if link_key == key -%}
                 {%- assign step = step | plus: 1 -%}
                 <li class="mm-reveal" style="--i: {{ step | plus: 3 }};">
