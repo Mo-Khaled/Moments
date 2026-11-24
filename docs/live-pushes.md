@@ -318,3 +318,7 @@ ac957f9 pushed (notes-data.json, notes-image-map.liquid, moments-notes.liquid). 
 
 ### 2026-11-24 live theme is now #162553200831 "MOMENTS - Menu heading spacing (Claude)" (published from another session)
 Includes c5ac09c (product page notes open the note card + "Go to the notes page"), 9ed26cc, c4191c6, 6e07af6/c9e962b, 7eb5987, 5293fc4, 9367459, 02276fa, plus edits made on the live theme and brought into the repo as 6d1019d (brand strip, story link, promo code field always shown, phone menu, price spacing, phone footer). Live = repo after 6d1019d (checked file by file). Rollback: publish the previous live theme #162552185023 ("Breadcrumb, menu and notes") or #162418163903 ("Gift banner + fonts") in Online Store > Themes.
+
+### 2026-11-24 staging #162401091775 refreshed from live (copy of #162553200831, sections/zz-syntax-test.liquid deleted). Live untouched.
+
+### 2026-11-24 19b9401 (live): always light. color-scheme "only light" (meta, inline on <html>, CSS), supported-color-schemes, theme-color #FCFCFA, so phones in dark mode no longer darken the site (Chrome; Samsung Internet's own dark mode may still apply). Live check: page served by #162553200831 has all four signals, computed color-scheme "light only". Also shopify.theme.toml live environment now #162553200831. Rollback: git checkout 19b9401^ -- layout/theme.liquid snippets/meta-tags.liquid assets/moments.css and push the three.
