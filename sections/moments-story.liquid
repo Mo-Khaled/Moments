@@ -22,9 +22,6 @@
           {{ 'homepage.story.text' | t }}
         {%- endif -%}
       </p>
-      {%- if section.settings.link_url != blank -%}
-        <a class="m-link" href="{{ section.settings.link_url }}">{{ 'homepage.story.link' | t }}</a>
-      {%- endif -%}
       {%- if request.design_mode -%}
         <p class="m-story__todo">{{ 'homepage.story.todo' | t }}</p>
       {%- endif -%}

@@ -2142,3 +2142,46 @@ html:root .m-guide .m-guide__note-btn:focus-visible { outline: 2px solid var(--m
 
 /* The note card: "Go to the notes page", the site's primary button, centred under the card content */
 .m-note__go { display: flex; justify-content: center; margin-block: 24px 8px; padding-block-start: 24px; border-block-start: 1px solid var(--m-hairline, #E6DDE3); }
+
+/* Product page price block: the struck-through price and the tax note were set on the heading's tight line height, so the old
+   price touched the tax note and the Save pill sat right against the price. Roomier rows and gaps, product page only (cards untouched). */
+html:root:root:root .product-information product-price .price-container { gap: 8px; }
+html:root:root:root .product-information product-price .price-wrapper--sale { column-gap: 14px; row-gap: 8px; }
+html:root:root:root .product-information product-price .price-wrapper--original .compare-at-price--strikethrough { line-height: 1.7 !important; }
+html:root:root:root .product-information product-price .tax-note { margin-block-start: 12px; line-height: 1.8; }
+
+/* Footer accordion groups on the phone (owner 2026-11-24): the last link of a group ran straight into the next heading, and the rows had
+   different heights in each group. Now every group has the same padding and a hairline under it, every heading the same height, and every
+   link the same row height. */
+@media (max-width: 749px) {
+  html:root:root .shopify-section-group-footer-group .menu .menu__details {
+    padding-block: 6px 14px;
+    border-block-end: 1px solid rgb(250 246 242 / 0.18);
+  }
+  html:root:root .shopify-section-group-footer-group .menu .menu__heading {
+    align-items: center;
+    min-block-size: 48px;
+  }
+  html:root:root .shopify-section-group-footer-group .menu .details-content {
+    margin-block-start: 4px;
+    padding-block-end: 0;
+  }
+  html:root:root .shopify-section-group-footer-group .menu .menu__item,
+  html:root:root .shopify-section-group-footer-group .menu .menu__item + .menu__item {
+    margin-block: 0;
+  }
+  html:root:root .shopify-section-group-footer-group .menu .menu__item a {
+    display: flex;
+    align-items: center;
+    min-block-size: 38px;
+    line-height: 1.4;
+  }
+}
+
+/* Cart discount code field (owner 2026-11-24: "no part where I can write the promo code", then "it only opened once"). The field is always
+   shown now: the open/close row got out of step after the cart drawer redrew itself. Roomy 48px field and Apply button. */
+html:root:root .cart-discount__panel { display: block; padding-block-end: 12px; }
+html:root:root .cart-discount__panel .cart-discount__content { block-size: auto; }
+html:root:root .cart-discount__panel .cart-discount__form { gap: 10px; block-size: auto; }
+html:root:root .cart-discount__panel .cart-discount__input { min-block-size: 48px; flex: 1 1 auto; }
+html:root:root .cart-discount__panel .cart-discount__button { min-block-size: 48px; flex: none; padding-inline: 20px; }

@@ -196,13 +196,57 @@
     else run();
     document.addEventListener('shopify:section:load', run);
   })();
+
+  // Touch screens have no hover: highlight the logo nearest the middle of the screen while the strip moves (same look as the mouse hover).
+  // Only runs on touch devices, only while the strip is on screen, about ten checks a second, and not under reduced motion.
+  (() => {
+    if (!window.matchMedia('(hover: none)').matches || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const init = (ticker) => {
+      if (ticker.dataset.focusReady) return;
+      ticker.dataset.focusReady = 'true';
+      const items = [...ticker.querySelectorAll('.m-brands__item')];
+      let visible = false;
+      let last = 0;
+      let raf = 0;
+      const tick = (time) => {
+        raf = 0;
+        if (!visible) return;
+        if (time - last > 90) {
+          last = time;
+          const mid = window.innerWidth / 2;
+          let best = null;
+          let bestDistance = Infinity;
+          items.forEach((item) => {
+            const box = item.getBoundingClientRect();
+            if (box.right < 0 || box.left > window.innerWidth) return;
+            const distance = Math.abs(box.left + box.width / 2 - mid);
+            if (distance < bestDistance) {
+              bestDistance = distance;
+              best = item;
+            }
+          });
+          items.forEach((item) => item.classList.toggle('is-center', item === best));
+          ticker.classList.add('has-focus');
+        }
+        raf = requestAnimationFrame(tick);
+      };
+      new IntersectionObserver((entries) => {
+        visible = entries[0].isIntersecting;
+        if (visible && !raf) raf = requestAnimationFrame(tick);
+      }).observe(ticker);
+    };
+    const run = () => document.querySelectorAll('.m-brands .m-ticker').forEach(init);
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', run);
+    else run();
+    document.addEventListener('shopify:section:load', run);
+  })();
 {% endjavascript %}
 
 {% stylesheet %}
   .m-brands {
     margin: 0;
     background: var(--m-surface);
-    border-block: 1px solid var(--m-rule-soft, rgb(59 30 58 / 0.08));
+    border-block: 1px solid rgb(59 30 58 / 0.24); /* was 8%: a clearer line above and below the strip */
   }
 
   .m-brands__defs {
@@ -293,6 +337,62 @@
   @media (prefers-reduced-motion: reduce) {
     .m-brands .m-ticker__list {
       gap: 24px 8px;
+    }
+  }
+
+  /* Hover and touch feel (owner 2026-11-24). Mouse: the strip dims, the logo under the pointer lifts, grows and gets a plum underline.
+     Touch has no hover, so the logo nearest the middle of the screen takes that same highlight as the strip moves (set by the script below),
+     and a tapped logo presses in. */
+  .m-brands .m-brands__link {
+    position: relative;
+    transition: opacity 0.25s var(--m-ease, ease), transform 0.25s var(--m-ease, ease);
+  }
+
+  .m-brands .m-brands__link::after {
+    content: '';
+    position: absolute;
+    inset-inline: 0;
+    inset-block-end: -10px;
+    block-size: 2px;
+    border-radius: 2px;
+    background: var(--m-plum);
+    transform: scaleX(0);
+    transition: transform 0.25s var(--m-ease, ease);
+  }
+
+  .m-brands .m-brands__link:active {
+    transform: scale(0.94);
+  }
+
+  @media (hover: hover) {
+    .m-brands .m-ticker:hover .m-brands__link {
+      opacity: 0.4;
+    }
+
+    .m-brands .m-ticker:hover .m-brands__link:hover,
+    .m-brands .m-brands__link:focus-visible {
+      opacity: 1;
+      transform: translateY(-2px) scale(1.1);
+    }
+
+    .m-brands .m-brands__link:hover::after,
+    .m-brands .m-brands__link:focus-visible::after {
+      transform: scaleX(1);
+    }
+  }
+
+  @media (hover: none) {
+    .m-brands .m-ticker.has-focus .m-brands__link {
+      opacity: 0.5;
+    }
+
+    .m-brands .m-ticker.has-focus .m-brands__item.is-center .m-brands__link {
+      opacity: 1;
+      transform: scale(1.12);
+    }
+
+    .m-brands .m-brands__item.is-center .m-brands__link::after {
+      transform: scaleX(1);
     }
   }
 {% endstylesheet %}

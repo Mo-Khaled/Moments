@@ -23,13 +23,11 @@
     assign disclosure_expanded = true
   endif
 %}
-<disclosure-custom class="cart-discount">
-  {% render 'disclosure-trigger',
-    controls_id: 'cart-discount-disclosure',
-    is_expanded: disclosure_expanded,
-    disclosure_name: 'accessibility.discount_menu',
-    label_text: 'content.discount'
-  %}
+<div class="cart-discount cart-discount--open">
+  {%- comment -%}
+    The promo code field is always shown. It used to sit behind an open/close row; after the cart drawer redrew itself (any cart change,
+    the bundle app too) the row said "open" while the field stayed hidden, so it opened only once. No open/closed state, nothing to get out of step.
+  {%- endcomment -%}
   {% capture discount_content %}
     <cart-discount-component
       data-section-id="{{ section_id }}"
@@ -107,12 +105,10 @@
     </cart-discount-component>
   {% endcapture %}
 
-  {% render 'disclosure-content',
-    content: discount_content,
-    is_expanded: disclosure_expanded,
-    content_id: 'cart-discount-disclosure'
-  %}
-</disclosure-custom>
+  <div id="cart-discount-disclosure" class="cart-discount__panel">
+    {{ discount_content }}
+  </div>
+</div>
 
 {% stylesheet %}
   .cart-discount__input {
