@@ -3,7 +3,7 @@
   class="no-js{% if request.design_mode %} shopify-design-mode{% endif %}"
   lang="{{ request.locale.iso_code }}"
   {% if request.locale.iso_code == 'ar' %}dir="rtl"{% else %}dir="ltr"{% endif %}
-  style="color-scheme: only light; background-color: #FCFCFA;"
+  style="color-scheme: only light;"
 >
   <head>
     <meta name="google-site-verification" content="Ym_gwUTJ5ppM3CJl1aq9jZoj4CRCmkypjt_8eGiLKXE">
@@ -12,6 +12,8 @@
       color-scheme "only light" here, inline on <html> and in assets/moments.css; the older "supported-color-schemes" for older
       browsers; a light theme-color (snippets/meta-tags). Chrome's auto-dark respects these; some browsers (Samsung Internet's
       own dark mode) may still darken pages from their own settings.
+      Never give <html> a background colour: body's background would then paint above every .section-background (z-index -2)
+      and the plum footer disappears (2026-11-26).
     {%- endcomment -%}
     <meta name="color-scheme" content="only light">
     <meta name="supported-color-schemes" content="light only">

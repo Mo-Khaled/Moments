@@ -2191,10 +2191,11 @@ html:root,
 html:root body {
   color-scheme: only light;
 }
+/* No background colour on html or body here: a background on html makes body paint above every .section-background
+   (z-index -2), which hid the plum footer (2026-11-26). body's own page colour already covers the canvas. */
 @media (prefers-color-scheme: dark) {
   html:root,
   html:root body {
     color-scheme: only light;
-    background-color: var(--m-pearl, #FCFCFA);
   }
 }
