@@ -126,17 +126,28 @@
   {% endif %}
 
   <ul class="ai-footer-contact__list-{{ ai_gen_id }}">
-    {%- comment -%} TODO placeholders are visible in the theme editor only; shoppers never see TODO text. {%- endcomment -%}
+    {%- comment -%}
+      Shoppers only see a phone with digits in it and an email with an @. Placeholders (TODO_PHONE) and their translations
+      stay in the theme editor only: the Arabic translation of the email placeholder was shown to customers (2026-11-26).
+    {%- endcomment -%}
 {%- liquid
   assign phone_value = block.settings.phone
   assign email_value = block.settings.email
   unless request.design_mode
-    if phone_value contains 'TODO'
+    assign has_digit = false
+    assign digits = '0 1 2 3 4 5 6 7 8 9 ٠ ١ ٢ ٣ ٤ ٥ ٦ ٧ ٨ ٩' | split: ' '
+    for digit in digits
+      if phone_value contains digit
+        assign has_digit = true
+        break
+      endif
+    endfor
+    if phone_value contains 'TODO' or has_digit == false
       assign phone_value = ''
     endif
-    if email_value contains 'TODO'
+    unless email_value contains '@'
       assign email_value = ''
-    endif
+    endunless
   endunless
 -%}
 {% if phone_value != blank %}
