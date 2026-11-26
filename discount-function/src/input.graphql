@@ -1,0 +1,24 @@
+# Replace COLLECTION_ID with the number of the "Bundle perfumes" collection
+# (Shopify admin, Products, Collections, Bundle perfumes: the number at the end of the page address).
+query CartInput {
+  cart {
+    lines {
+      id
+      quantity
+      bundle: attribute(key: "Bundle") {
+        value
+      }
+      merchandise {
+        __typename
+        ... on ProductVariant {
+          product {
+            inAnyCollection(ids: ["gid://shopify/Collection/COLLECTION_ID"])
+          }
+        }
+      }
+    }
+  }
+  discount {
+    discountClasses
+  }
+}
