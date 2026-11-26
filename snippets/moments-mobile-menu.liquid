@@ -205,7 +205,7 @@
       const open = details.classList.contains('menu-open');
       behind().forEach((el) => { if (open) { el.setAttribute('inert', ''); } else { el.removeAttribute('inert'); } });
       if (open) {
-        fetch('/cart.js').then((r) => r.json()).then((c) => setCount(c.item_count)).catch(() => {});
+        fetch('{{ routes.cart_url }}.js').then((r) => r.json()).then((c) => setCount(c.item_count)).catch(() => {});
       } else {
         if (acc && acc.getAttribute('aria-expanded') === 'true') setAcc(false);
         // focus goes back to the menu button when the sheet closes (the theme's trap does not always restore it)

@@ -34,7 +34,7 @@
 
   assign target_url = section.settings.results_page.url
   if target_url == blank
-    assign target_url = routes.root_url | append: 'pages/gift-finder'
+    assign target_url = routes.root_url | append: '/pages/gift-finder' | replace: '//', '/'
   endif
 
   assign who_options = 'wife|her partner,husband|him partner,mother|mother,father|father,friend|friend,colleague|colleague' | split: ','

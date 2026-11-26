@@ -55,7 +55,7 @@ async function dispatchCartUpdate(response) {
  * @returns {Promise<Response | null>}
  */
 async function removeAllBagLines(sections) {
-  const cartRes = await fetch('/cart.js');
+  const cartRes = await fetch(`${Theme.routes.cart_url}.js`);
   const cart = await cartRes.json();
   const bagItems = cart.items.filter((item) => item.properties && item.properties._gift_bag === 'true');
 

@@ -172,7 +172,7 @@
           var originalText = addButton.textContent;
           addButton.textContent = '...';
 
-          fetch('/cart/add.js', {
+          fetch('{{ routes.cart_add_url }}.js', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',

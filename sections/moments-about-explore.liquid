@@ -24,6 +24,12 @@
   endcapture
   assign chip_keys = chip_keys | strip | split: ','
   assign explore_target = section.settings.moments_url | default: '/pages/moments'
+  assign locale_prefix = routes.root_url | append: '/' | replace: '//', '/'
+  assign url_start = explore_target | slice: 0
+  assign url_head = explore_target | append: '/' | slice: 0, locale_prefix.size
+  if url_start == '/' and url_head != locale_prefix
+    assign explore_target = routes.root_url | append: explore_target
+  endif
 -%}
 
 <section class="m-aex" aria-label="{{ 'about2.eyebrow' | t }}">

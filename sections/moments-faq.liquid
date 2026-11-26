@@ -106,8 +106,17 @@
                 <div class="m-faq__answer">
                   {%- if show -%}
                     <p>{{ a }}</p>
-                    {%- if link_to_returns and section.settings.returns_url != blank -%}
-                      <p><a href="{{ section.settings.returns_url }}">{{ 'faq.topic_returns_link' | t }}</a></p>
+                    {%- liquid
+                      assign returns_url = section.settings.returns_url
+                      assign locale_prefix = routes.root_url | append: '/' | replace: '//', '/'
+                      assign url_start = returns_url | slice: 0
+                      assign url_head = returns_url | append: '/' | slice: 0, locale_prefix.size
+                      if url_start == '/' and url_head != locale_prefix
+                        assign returns_url = routes.root_url | append: returns_url
+                      endif
+                    -%}
+                    {%- if link_to_returns and returns_url != blank -%}
+                      <p><a href="{{ returns_url }}">{{ 'faq.topic_returns_link' | t }}</a></p>
                     {%- endif -%}
                   {%- else -%}
                     <p>{{ 'faq.todo' | t }}</p>

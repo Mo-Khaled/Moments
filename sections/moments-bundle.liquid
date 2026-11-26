@@ -656,8 +656,10 @@
       let query = '';
       let loading = false;
       let more = false;
+      // Language root ('/' or '/ar/'): keeps every request and redirect in the visitor's language.
+      const localeRoot = (window.Shopify && window.Shopify.routes && window.Shopify.routes.root) || '/';
       const buildUrl = (p) => {
-        const base = query ? '/search?q=' + encodeURIComponent(query) + '&type=product' : source;
+        const base = query ? localeRoot + 'search?q=' + encodeURIComponent(query) + '&type=product' : source;
         const sep = base.includes('?') ? '&' : '?';
         return base + sep + 'page=' + p + (sectionId ? '&section_id=' + encodeURIComponent(sectionId) : '');
       };
@@ -711,7 +713,7 @@
         if (items.length >= max) { showError(T('tLimit')); return; }
         btn.disabled = true;
         try {
-          const res = await fetch('/products/' + btn.dataset.handle + '.js');
+          const res = await fetch(localeRoot + 'products/' + btn.dataset.handle + '.js');
           if (!res.ok) throw new Error('product');
           const p = await res.json();
           const v = p.variants.find((x) => x.available);
@@ -729,21 +731,21 @@
         if (editingId) {
           // editing a bundle from the cart: take the old lines of that bundle out first, so the new picks replace them
           try {
-            const cart = await fetch('/cart.js').then((r) => r.json());
+            const cart = await fetch(localeRoot + 'cart.js').then((r) => r.json());
             const updates = {};
             cart.items.filter((i) => i.properties && i.properties.Bundle === 'MOMENTS bundle ' + editingId).forEach((i) => { updates[i.key] = 0; });
-            if (Object.keys(updates).length) await fetch('/cart/update.js', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ updates }) });
+            if (Object.keys(updates).length) await fetch(localeRoot + 'cart/update.js', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ updates }) });
           } catch (err) { /* if this fails the old lines stay; the cart still shows both bundles */ }
         }
         const lines = {};
         items.forEach((i) => { lines[i.variantId] = (lines[i.variantId] || 0) + 1; });
         const payload = { items: Object.entries(lines).map(([vid, q]) => ({ id: Number(vid), quantity: q, properties: { Bundle: 'MOMENTS bundle ' + id } })) };
         try {
-          const res = await fetch('/cart/add.js', { method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' }, body: JSON.stringify(payload) });
+          const res = await fetch(localeRoot + 'cart/add.js', { method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' }, body: JSON.stringify(payload) });
           if (res.status === 422) { showError(labels.unavailable); btn.disabled = false; return; }
           if (!res.ok) throw new Error('cart');
           items = []; save();
-          window.location.href = '/cart';
+          window.location.href = localeRoot + 'cart';
         } catch (err) { showError(labels.error); btn.disabled = false; }
       };
       $('[data-m-checkout]').addEventListener('click', (e) => checkout(e.currentTarget));
@@ -764,7 +766,7 @@
           for (const part of p.split(',')) {
             const [handle, vid, qty] = part.split('~');
             if (!handle) continue;
-            const res = await fetch('/products/' + handle + '.js');
+            const res = await fetch(localeRoot + 'products/' + handle + '.js');
             if (!res.ok) continue;
             const pr = await res.json();
             const v = pr.variants.find((x) => String(x.id) === vid) || pr.variants.find((x) => x.available);

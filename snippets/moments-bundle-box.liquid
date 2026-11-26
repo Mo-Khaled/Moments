@@ -170,18 +170,18 @@
       const one = e.target.closest('[data-m-bremove]');
       if (one) {
         one.disabled = true;
-        fetch('/cart/change.js', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ id: one.dataset.mBremove, quantity: 0 }) })
+        fetch(((window.Shopify && window.Shopify.routes && window.Shopify.routes.root) || '/') + 'cart/change.js', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ id: one.dataset.mBremove, quantity: 0 }) })
           .then(() => location.reload()).catch(() => { one.disabled = false; });
         return;
       }
       if (e.target.closest('[data-m-bremove-all]')) {
         const box = e.target.closest('[data-m-bbox]');
         const keys = box.dataset.keys.split(',');
-        fetch('/cart.js').then((r) => r.json()).then((cart) => {
+        fetch(((window.Shopify && window.Shopify.routes && window.Shopify.routes.root) || '/') + 'cart.js').then((r) => r.json()).then((cart) => {
           const undo = cart.items.filter((i) => keys.includes(i.key)).map((i) => ({ id: i.variant_id, quantity: i.quantity, properties: i.properties }));
           try { sessionStorage.setItem('m-bundle-undo', JSON.stringify(undo)); } catch (err) { /* ignore */ }
           const updates = {}; keys.forEach((k) => { updates[k] = 0; });
-          return fetch('/cart/update.js', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ updates }) });
+          return fetch(((window.Shopify && window.Shopify.routes && window.Shopify.routes.root) || '/') + 'cart/update.js', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ updates }) });
         }).then(() => location.reload()).catch(() => {});
       }
     });
@@ -200,7 +200,7 @@
       t.lastChild.textContent = ar ? 'تراجع' : 'Undo';
       t.lastChild.addEventListener('click', () => {
         t.lastChild.disabled = true;
-        fetch('/cart/add.js', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ items: undo }) }).then(() => location.reload());
+        fetch(((window.Shopify && window.Shopify.routes && window.Shopify.routes.root) || '/') + 'cart/add.js', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ items: undo }) }).then(() => location.reload());
       });
       document.body.appendChild(t);
       setTimeout(() => t.remove(), 12000);
