@@ -115,8 +115,9 @@
             {%- for link in linklist.links -%}
               {%- assign link_key = link.url | split: '?' | first | split: '/' | last -%}
               {%- if link_key == 'brands' -%}
+                {%- assign brands_title = 'brands_index.title' | t -%}
                 <li class="mm-reveal" style="--i: {{ step | plus: 5 }};">
-                  <a class="mm-link" href="{{ link.url }}"{% if link.current %} aria-current="page"{% endif %}>{% render 'title-case', text: link.title %}</a>
+                  <a class="mm-link" href="{{ link.url }}"{% if link.current %} aria-current="page"{% endif %}>{{ brands_title }}</a>
                 </li>
               {%- endif -%}
             {%- endfor -%}

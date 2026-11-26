@@ -14,7 +14,7 @@
 <section class="m-bidx" aria-labelledby="m-bidx-title-{{ section.id }}">
   <div class="m-wrap">
     <header class="m-bidx__head">
-      <h1 class="m-bidx__title" id="m-bidx-title-{{ section.id }}">{%- if page.title != blank -%}{{ page.title }}{%- else -%}{{ 'brands_index.title' | t }}{%- endif -%}</h1>
+      <h1 class="m-bidx__title" id="m-bidx-title-{{ section.id }}">{{ 'brands_index.title' | t }}</h1>
       <p class="m-bidx__text">
         {%- if section.settings.text != blank -%}{{ section.settings.text }}{%- else -%}{{ 'brands_index.text' | t }}{%- endif -%}
       </p>
