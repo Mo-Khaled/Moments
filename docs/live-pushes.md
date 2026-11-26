@@ -332,3 +332,11 @@ Includes c5ac09c (product page notes open the note card + "Go to the notes page"
 ### 2026-11-26 f1f4cb9 (live #162553200831): every new bundle gets its own id (two built one after the other showed as one box). Live file read back equal to the commit. Rollback: git revert --no-edit f1f4cb9 && bash scripts/push-commit.sh HEAD
 
 ### 2026-11-26 092cdea (live #162553200831): editing a bundle survives a reload of the builder (it left the old bundle and added a second). Live file read back equal to the commit. Rollback: git revert --no-edit 092cdea && bash scripts/push-commit.sh HEAD
+
+### 2026-11-26 store decisions 1 to 4 (live #162553200831, owner approved). All files read back equal to the commits; checked at phone width AR+EN (product, footer, brands, notes data).
+- c838f49 delivery "2 to 5 business days depending on your governorate": product accordions now use the new block moments-shipping-returns (text in locales, both languages), journey template "2 to 5", FAQ topic "time" (no FAQ page exists on the store yet: /pages/faq is 404), Google transit 2 to 4 after 0-1 day handling. Rollback: git revert --no-edit c838f49 && bash scripts/push-commit.sh HEAD (then the new block stays unused on the theme).
+- acbddcf footer: phone only with digits, email only with @. Rollback: git revert --no-edit acbddcf && bash scripts/push-commit.sh HEAD
+- 725278d + b54e4f3 "Brands" / «العلامات التجارية»: heading, phone menu, desktop menu. Rollback: git revert --no-edit b54e4f3 && bash scripts/push-commit.sh HEAD && git revert --no-edit 725278d && bash scripts/push-commit.sh HEAD
+- feda628 Amber «عنبر», Tonka bean «فول التونكا»; ambergris «عنبر رمادي», amberwood «خشب العنبر» so no two notes share a name. Rollback: git revert --no-edit feda628 && bash scripts/push-commit.sh HEAD
+- Note: feda628 and 725278d both touch locales/ar.json, as does c838f49: roll back in reverse order if more than one.
+- scripts/notes-build-data.py would rebuild notes-data.json from the old source names: check names after any rebuild.
