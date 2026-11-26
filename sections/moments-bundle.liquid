@@ -590,7 +590,8 @@
       // adding the new bundle takes them out of the loose lines.
       let loose = null;
       try { const s = JSON.parse(localStorage.getItem(KEY) || 'null'); if (s && Array.isArray(s.items)) { items = s.items; id = s.id || ''; loose = s.loose || null; } } catch (e) { /* storage unavailable: this visit only */ }
-      if (!id) id = Math.random().toString(36).slice(2, 8).toUpperCase();
+      const newId = () => Math.random().toString(36).slice(2, 8).toUpperCase();
+      if (!id) id = newId();
       const save = () => { try { localStorage.setItem(KEY, JSON.stringify({ id, items, loose })); } catch (e) { /* ignore */ } };
       const say = (msg) => { $('[data-m-status]').textContent = ''; setTimeout(() => { $('[data-m-status]').textContent = msg; }, 30); };
       const showError = (msg) => { const el = $('[data-m-error]'); el.textContent = msg || ''; el.hidden = !msg; };
@@ -740,6 +741,8 @@
             if (Object.keys(updates).length) await fetch(localeRoot + 'cart/update.js', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ updates }) });
           } catch (err) { /* if this fails the old lines stay; the cart still shows both bundles */ }
         }
+        // Every new bundle gets its own id, or two built one after the other show as one box. Editing keeps its id.
+        if (!editingId) id = newId();
         const lines = {};
         items.forEach((i) => { lines[i.variantId] = (lines[i.variantId] || 0) + 1; });
         const payload = { items: Object.entries(lines).map(([vid, q]) => ({ id: Number(vid), quantity: q, properties: { Bundle: 'MOMENTS bundle ' + id } })) };
