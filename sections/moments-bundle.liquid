@@ -753,7 +753,8 @@
               const updates = {};
               Object.entries(loose).forEach(([vid, n]) => {
                 let left = Math.min(n, lines[vid] || 0);
-                cart.items.filter((i) => String(i.variant_id) === vid && !(i.properties && i.properties.Bundle)).forEach((i) => {
+                const was = (i) => (i.properties && i.properties.Bundle === '' ? 0 : 1); // ex bundle lines (empty label) go first
+                cart.items.filter((i) => String(i.variant_id) === vid && !(i.properties && i.properties.Bundle)).sort((a, b) => was(a) - was(b)).forEach((i) => {
                   const take = Math.min(left, i.quantity);
                   if (take) { updates[i.key] = i.quantity - take; left -= take; }
                 });
