@@ -367,29 +367,8 @@
                   },
                   "blocks": {
                     "text_ztpMbt": {
-                      "type": "text",
-                      "settings": {
-                        "text": "<p><strong>🚚 How We Deliver</strong></p><p>Once you place your order, here's what happens:</p><p><strong>1. Order Confirmed</strong> — You'll receive a WhatsApp confirmation shortly after placing your order.</p><p><strong>2. Prepared &amp; Dispatched</strong> — Your order is carefully packed and handed to our courier within 1 business day.</p><p><strong>3. Out for Delivery</strong> — Our courier will contact you before arrival. Delivery takes <strong>2 to 5 business days</strong> depending on your governorate.</p><p>📍 We deliver to <strong>all governorates across Egypt</strong>.</p><p>🎁 Free shipping on orders over <strong>2,500 EGP</strong>.</p><p><strong>↩️ Returns</strong> — Accepted only for items that arrived damaged or are not as described. Requests must be submitted within a few hours of delivery.</p>",
-                        "width": "100%",
-                        "max_width": "normal",
-                        "alignment": "left",
-                        "type_preset": "rte",
-                        "font": "var(--font-primary--family)",
-                        "font_size": "",
-                        "line_height": "normal",
-                        "letter_spacing": "normal",
-                        "case": "none",
-                        "wrap": "pretty",
-                        "color": "",
-                        "background": false,
-                        "background_color": "#00000026",
-                        "corner_radius": 0,
-                        "padding-block-start": 0,
-                        "padding-block-end": 0,
-                        "padding-inline-start": 0,
-                        "padding-inline-end": 0
-                      },
-                      "blocks": {}
+                      "type": "moments-delivery-journey",
+                      "settings": {}
                     }
                   },
                   "block_order": [

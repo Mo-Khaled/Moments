@@ -1,0 +1,21 @@
+{%- doc -%}
+  "How we deliver" on the journey product template, from the translations in both languages. The free shipping amount is the
+  theme setting "Free shipping above", so the text cannot promise a different threshold from the rest of the site.
+{%- enddoc -%}
+
+{%- liquid
+  assign amount = settings.moments_free_shipping | times: 100 | money_without_trailing_zeros
+-%}
+
+<div class="rte moments-shipping" {{ block.shopify_attributes }}>
+  {{ 'moments_shipping.journey_html' | t: amount: amount }}
+</div>
+
+{% schema %}
+{
+  "name": "Moments delivery journey",
+  "tag": null,
+  "settings": [],
+  "presets": [{ "name": "Moments delivery journey" }]
+}
+{% endschema %}

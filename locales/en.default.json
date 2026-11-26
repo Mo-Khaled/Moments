@@ -624,6 +624,7 @@
     "toast_view": "View cart"
   },
   "moments_shipping": {
+    "journey_html": "<p><strong>🚚 How We Deliver</strong></p><p>Once you place your order, here's what happens:</p><p><strong>1. Order Confirmed</strong> — You'll receive a WhatsApp confirmation shortly after placing your order.</p><p><strong>2. Prepared &amp; Dispatched</strong> — Your order is carefully packed and handed to our courier within 1 business day.</p><p><strong>3. Out for Delivery</strong> — Our courier will contact you before arrival. Delivery takes <strong>2 to 5 business days</strong> depending on your governorate.</p><p>📍 We deliver to <strong>all governorates across Egypt</strong>.</p><p>🎁 Free shipping on orders over <strong>{{ amount }}</strong>.</p><p><strong>↩️ Returns</strong> — Accepted only for items that arrived damaged or are not as described. Requests must be submitted within a few hours of delivery.</p>",
     "delivery_html": "Delivery takes <strong>2 to 5 business days</strong> depending on your governorate.",
     "returns_html": "Returns are accepted only for items that are not as described or arrived damaged. Requests must be submitted <strong>within a few hours of delivery</strong> and will be reviewed by our team promptly."
   },
