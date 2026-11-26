@@ -65,7 +65,13 @@
             {%- endif -%}
             ref="menuitem"
           >
-            <span class="menu-list__link-title">{% render 'title-case', text: link.title %}</span>
+            {%- liquid
+              assign link_label = link.title
+              if url_key == 'brands'
+                assign link_label = 'brands_index.title' | t
+              endif
+            -%}
+            <span class="menu-list__link-title">{% render 'title-case', text: link_label %}</span>
           </a>
           {%- if panel_mode != 'none' -%}
             <div class="menu-list__submenu{{ color_scheme_classes }}" ref="submenu[]">
