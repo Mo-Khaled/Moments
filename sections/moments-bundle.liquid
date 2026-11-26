@@ -766,7 +766,8 @@
             } catch (err) { /* if this fails the loose bottles stay; the cart shows them and they can be removed */ }
             loose = null;
           }
-          items = []; save();
+          items = []; editingId = ''; save();
+          history.replaceState(null, '', location.pathname); // going back here starts a new bundle
           window.location.href = localeRoot + 'cart';
         } catch (err) { showError(labels.error); btn.disabled = false; }
       };
@@ -785,6 +786,8 @@
           const q = new URLSearchParams(location.search);
           const p = q.get('p');
           const again = q.get('again');
+          // After a reload only ?edit=<id> is left: stay in edit mode for the picks that were saved for that bundle.
+          if (q.get('edit') && !p) { if (q.get('edit') === id && items.length) editingId = id; return; }
           if (!(q.get('edit') || again) || !p) return;
           const next = [];
           for (const part of p.split(',')) {
@@ -804,7 +807,7 @@
             id = q.get('edit') || again || id;
             editingId = again ? '' : id;
             loose = again ? next.reduce((m, i) => { m[i.variantId] = (m[i.variantId] || 0) + 1; return m; }, {}) : null;
-            save(); render(); history.replaceState(null, '', location.pathname);
+            save(); render(); history.replaceState(null, '', location.pathname + (editingId ? '?edit=' + encodeURIComponent(editingId) : ''));
           }
         } catch (err) { /* keep the saved picks */ }
       })();
