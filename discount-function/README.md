@@ -1,5 +1,7 @@
 # Stricter bundle discount: plan (nothing in Shopify has been changed)
 
+**Owner decision, 2026-11-26:** keep today's discount (option D). Revisit option A after the first real orders.
+
 **Rule:** 10% only on the bottles of an intact "Make a bundle" bundle (3 or more with the same `Bundle` label, from the
 "Bundle perfumes" collection). Loose bottles and former bundle bottles get nothing. Free delivery over LE 3,000 stays.
 
