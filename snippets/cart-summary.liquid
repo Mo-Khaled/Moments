@@ -43,10 +43,25 @@
           assign s_n = s_n | replace: '0', '٠' | replace: '1', '١' | replace: '2', '٢' | replace: '3', '٣' | replace: '4', '٤' | replace: '5', '٥' | replace: '6', '٦' | replace: '7', '٧' | replace: '8', '٨' | replace: '9', '٩'
         endif
       -%}
+      {%- if s_count < 3 -%}{%- continue -%}{%- endif -%}
       <li><span>{{ 'moments_cart.bundle_title' | t: count: s_count, n: s_n }}</span><span><bdi>{{ s_final | money }}</bdi></span></li>
     {%- endfor -%}
     {%- for item in cart.items -%}
-      {%- unless item.properties['Bundle'] contains 'MOMENTS bundle' -%}
+      {%- liquid
+        assign in_bundle = false
+        if item.properties['Bundle'] contains 'MOMENTS bundle'
+          assign group_count = 0
+          for other in cart.items
+            if other.properties['Bundle'] == item.properties['Bundle']
+              assign group_count = group_count | plus: other.quantity
+            endif
+          endfor
+          if group_count >= 3
+            assign in_bundle = true
+          endif
+        endif
+      -%}
+      {%- unless in_bundle -%}
         <li><span>{%- render 'product-name', product: item.product, plain: true -%}{%- if item.quantity > 1 %} × {{ item.quantity }}{%- endif -%}</span><span><bdi>{{ item.final_line_price | money }}</bdi></span></li>
       {%- endunless -%}
     {%- endfor -%}

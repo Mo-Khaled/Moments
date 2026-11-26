@@ -586,9 +586,12 @@
       let items = [];
       let id = '';
       let editingId = '';
-      try { const s = JSON.parse(localStorage.getItem(KEY) || 'null'); if (s && Array.isArray(s.items)) { items = s.items; id = s.id || ''; } } catch (e) { /* storage unavailable: this visit only */ }
+      // Bottles that came back from a bundle cut below 3 (variant id -> quantity): they already sit loose in the cart, so
+      // adding the new bundle takes them out of the loose lines.
+      let loose = null;
+      try { const s = JSON.parse(localStorage.getItem(KEY) || 'null'); if (s && Array.isArray(s.items)) { items = s.items; id = s.id || ''; loose = s.loose || null; } } catch (e) { /* storage unavailable: this visit only */ }
       if (!id) id = Math.random().toString(36).slice(2, 8).toUpperCase();
-      const save = () => { try { localStorage.setItem(KEY, JSON.stringify({ id, items })); } catch (e) { /* ignore */ } };
+      const save = () => { try { localStorage.setItem(KEY, JSON.stringify({ id, items, loose })); } catch (e) { /* ignore */ } };
       const say = (msg) => { $('[data-m-status]').textContent = ''; setTimeout(() => { $('[data-m-status]').textContent = msg; }, 30); };
       const showError = (msg) => { const el = $('[data-m-error]'); el.textContent = msg || ''; el.hidden = !msg; };
 
@@ -744,6 +747,21 @@
           const res = await fetch(localeRoot + 'cart/add.js', { method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' }, body: JSON.stringify(payload) });
           if (res.status === 422) { showError(labels.unavailable); btn.disabled = false; return; }
           if (!res.ok) throw new Error('cart');
+          if (loose) {
+            try {
+              const cart = await fetch(localeRoot + 'cart.js').then((r) => r.json());
+              const updates = {};
+              Object.entries(loose).forEach(([vid, n]) => {
+                let left = Math.min(n, lines[vid] || 0);
+                cart.items.filter((i) => String(i.variant_id) === vid && !(i.properties && i.properties.Bundle)).forEach((i) => {
+                  const take = Math.min(left, i.quantity);
+                  if (take) { updates[i.key] = i.quantity - take; left -= take; }
+                });
+              });
+              if (Object.keys(updates).length) await fetch(localeRoot + 'cart/update.js', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ updates }) });
+            } catch (err) { /* if this fails the loose bottles stay; the cart shows them and they can be removed */ }
+            loose = null;
+          }
           items = []; save();
           window.location.href = localeRoot + 'cart';
         } catch (err) { showError(labels.error); btn.disabled = false; }
@@ -757,11 +775,13 @@
       }
 
       // Edit bundle from the cart: /pages/make-a-bundle?edit=<id>&p=handle~variantId~qty,... loads those picks into the builder.
+      // ?again=<id>&p=... is the same for a bundle that fell below 3: its bottles are loose lines in the cart by now.
       (async () => {
         try {
           const q = new URLSearchParams(location.search);
           const p = q.get('p');
-          if (!q.get('edit') || !p) return;
+          const again = q.get('again');
+          if (!(q.get('edit') || again) || !p) return;
           const next = [];
           for (const part of p.split(',')) {
             const [handle, vid, qty] = part.split('~');
@@ -775,7 +795,13 @@
             if (img) img += (img.includes('?') ? '&' : '?') + 'width=240';
             for (let n = 0; n < (Number(qty) || 1); n++) next.push({ handle: pr.handle, title: pr.title, vendor: pr.vendor, variantId: v.id, price: v.price, image: img });
           }
-          if (next.length) { items = next; id = q.get('edit') || id; editingId = id; save(); render(); history.replaceState(null, '', location.pathname); }
+          if (next.length) {
+            items = next;
+            id = q.get('edit') || again || id;
+            editingId = again ? '' : id;
+            loose = again ? next.reduce((m, i) => { m[i.variantId] = (m[i.variantId] || 0) + 1; return m; }, {}) : null;
+            save(); render(); history.replaceState(null, '', location.pathname);
+          }
         } catch (err) { /* keep the saved picks */ }
       })();
       render();

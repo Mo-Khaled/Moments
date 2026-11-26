@@ -1485,7 +1485,10 @@
     "close": "Close",
     "shipping": "Shipping",
     "ship_free": "Free",
-    "ship_later": "Calculated at checkout"
+    "ship_later": "Calculated at checkout",
+    "broken_note": "Your bundle changed. Its bottles are now individual items.",
+    "broken_more_one": "Add one more bottle to make a bundle again",
+    "broken_more_two": "Add two more bottles to make a bundle again"
   },
   "notes_nav": {
     "label": "Notes"

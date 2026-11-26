@@ -103,14 +103,36 @@
 
           <tbody role="rowgroup">
             {%- assign has_bundle_box = false -%}
+            {%- comment -%}MOMENTS: a group below 3 bottles is not a bundle (see moments-bundle-box).{%- endcomment -%}
+            {%- assign short_ids = '|' -%}
             {%- for it in cart.items -%}
-              {%- if it.properties['Bundle'] contains 'MOMENTS bundle' -%}{%- assign has_bundle_box = true -%}{%- endif -%}
+              {%- assign bp = it.properties['Bundle'] -%}
+              {%- if bp contains 'MOMENTS bundle' -%}
+                {%- assign bp_count = 0 -%}
+                {%- for other in cart.items -%}
+                  {%- if other.properties['Bundle'] == bp -%}{%- assign bp_count = bp_count | plus: other.quantity -%}{%- endif -%}
+                {%- endfor -%}
+                {%- if bp_count < 3 -%}
+                  {%- assign short_ids = short_ids | append: bp | append: '|' -%}
+                {%- else -%}
+                  {%- assign has_bundle_box = true -%}
+                {%- endif -%}
+              {%- endif -%}
             {%- endfor -%}
             {% for item in cart.items %}
+              {%- liquid
+                assign row_bundled = false
+                if item.properties['Bundle'] contains 'MOMENTS bundle'
+                  assign row_key = '|' | append: item.properties['Bundle'] | append: '|'
+                  unless short_ids contains row_key
+                    assign row_bundled = true
+                  endunless
+                endif
+              -%}
               <tr
                 role="row"
-                class="cart-items__table-row{% if item.parent_relationship.parent != null %} cart-items__nested-line{% endif %}{% if item.properties['Bundle'] contains 'MOMENTS bundle' %} m-row-bundled{% endif %}"
-                {% if item.properties['Bundle'] contains 'MOMENTS bundle' %}hidden data-m-bundled{% endif %}
+                class="cart-items__table-row{% if item.parent_relationship.parent != null %} cart-items__nested-line{% endif %}{% if row_bundled %} m-row-bundled{% endif %}"
+                {% if row_bundled %}hidden data-m-bundled{% endif %}
                 ref="cartItemRows[]"
                 data-parent-key="{{ item.parent_relationship.parent.key }}"
                 data-key="{{ item.key }}"
@@ -164,7 +186,7 @@
                     </a>
                   </p>
                   {%- render 'product-card-meta', product: item.product -%}
-                  {%- if has_bundle_box and item.properties['Bundle'] == blank -%}
+                  {%- if has_bundle_box and row_bundled == false -%}
                     <p class="m-notin">{{ 'moments_cart.not_in_bundle' | t }}</p>
                   {%- endif -%}
 

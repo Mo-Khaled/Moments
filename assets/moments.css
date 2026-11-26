@@ -1615,6 +1615,9 @@ html.m-bsheet-lock body { overflow: hidden; }
 .m-bbox__see { display: inline-flex; align-items: center; gap: 6px; padding-block-start: 10px; border-block-start: 1px solid var(--m-hairline, #E6DDE3); color: var(--m-berry-ink); font-weight: 600; font-size: 0.9375rem; }
 
 .m-notin { margin: 4px 0 0; font-size: 0.8125rem; color: var(--m-text-muted); }
+.m-bnotice { margin-block-end: 16px; padding: 12px 14px; border: 1px solid var(--m-card-border); border-radius: 12px; background: var(--m-card-surface); font-size: 0.875rem; }
+.m-bnotice p { margin: 0; }
+.m-bnotice a { display: inline-flex; align-items: center; min-block-size: 44px; color: var(--m-berry-ink); font-weight: 600; text-decoration: underline; }
 .m-discount-title { display: inline-block; margin-block-start: 4px; padding: 2px 8px; border-radius: 9999px; background: #F9E4EC; color: var(--m-berry-ink); font-size: 0.75rem; font-weight: 600; list-style: none; }
 
 /* sheet: bottom sheet on phones, centred window on desktop */

@@ -6,6 +6,8 @@
   Every price is the cart line's own final price / original price. Nothing is hard-coded and nothing is hidden: the 10% on a
   bottle outside the bundle is shown by the normal item card.
   The bundle's own table rows stay in the cart table (hidden) so the theme's line-index logic keeps working.
+  A group with fewer than 3 bottles is not a bundle any more: no box here, normal rows in cart-products and cart-summary, and the
+  script below clears the lines' Bundle property and shows one calm notice (2026-11-26).
 {%- enddoc -%}
 
 {%- liquid
@@ -26,6 +28,14 @@
   assign ship_threshold = settings.moments_free_shipping | times: 100
   assign ship_amt = ship_threshold | money_without_trailing_zeros
 -%}
+
+<template
+  data-m-bnotice-t
+  data-note="{{ 'moments_cart.broken_note' | t | escape }}"
+  data-one="{{ 'moments_cart.broken_more_one' | t | escape }}"
+  data-two="{{ 'moments_cart.broken_more_two' | t | escape }}"
+  data-url="{{ settings.moments_page_bundle.url }}"
+></template>
 
 {%- for bid in bundle_list -%}
   {%- liquid
@@ -55,6 +65,12 @@
     assign b_names = b_names | strip | remove_last: '·' | strip
     assign b_keys = b_keys | remove_last: ','
     assign b_edit = b_edit | remove_last: ','
+  -%}
+  {%- if b_count < 3 -%}
+    <span hidden data-m-bundle-short></span>
+    {%- continue -%}
+  {%- endif -%}
+  {%- liquid
     capture n_txt
       echo b_count
     endcapture
@@ -152,11 +168,101 @@
 {%- endfor -%}
 
 {% javascript %}
-  // Bundle box: open / close the details sheet, remove one bottle or the whole bundle (with an Undo toast).
+  // Bundle box: open / close the details sheet, remove one bottle or the whole bundle (with an Undo toast), and end a bundle
+  // that drops below 3 bottles.
   (() => {
     if (window.__mBundleBox) return;
     window.__mBundleBox = true;
+    const MIN = 3;
+    const PREFIX = 'MOMENTS bundle ';
+    const NOTICE_KEY = 'm-bundle-broken';
     const lock = (on) => document.documentElement.classList.toggle('m-bsheet-lock', on);
+    const url = (path) => ((window.Shopify && window.Shopify.routes && window.Shopify.routes.root) || '/') + path;
+    const getCart = () => fetch(url('cart.js'), { headers: { Accept: 'application/json' } }).then((r) => {
+      if (!r.ok) throw new Error('cart');
+      return r.json();
+    });
+    const post = (path, body) => fetch(url(path), { method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' }, body: JSON.stringify(body) }).then((r) => {
+      if (!r.ok) throw new Error(path);
+      return r.json();
+    });
+    const bundleOf = (item) => {
+      const value = item.properties && item.properties.Bundle;
+      return value && value.indexOf(PREFIX) === 0 ? value : '';
+    };
+    // Redraw the cart page and the drawer from the server. The discount event is used on purpose: a cart:update event
+    // would also open the drawer, and would reset the header count.
+    const refresh = (cart) => {
+      document.dispatchEvent(new CustomEvent('discount:update', { detail: { data: {} } }));
+      document.querySelectorAll('cart-icon').forEach((icon) => icon.renderCartBubble && icon.renderCartBubble(cart.item_count, false, false));
+    };
+
+    // The one-time notice, with a link that reloads the remaining bottles into the builder.
+    let notice = null;
+    try { notice = JSON.parse(sessionStorage.getItem(NOTICE_KEY) || 'null'); } catch (err) { /* ignore */ }
+    let watcher = null;
+    const paint = () => {
+      if (!notice) return;
+      document.querySelectorAll('.cart-items').forEach((host) => {
+        let el = host.querySelector(':scope > .m-bnotice');
+        if (!el) {
+          const t = host.querySelector('[data-m-bnotice-t]');
+          if (!t) return;
+          el = document.createElement('div');
+          el.className = 'm-bnotice';
+          el.setAttribute('role', 'status');
+          const text = document.createElement('p');
+          text.textContent = t.dataset.note;
+          el.appendChild(text);
+          if (t.dataset.url) {
+            const link = document.createElement('a');
+            link.href = t.dataset.url + '?again=' + encodeURIComponent(notice.id) + '&p=' + encodeURIComponent(notice.p);
+            link.textContent = notice.need > 1 ? t.dataset.two : t.dataset.one;
+            el.appendChild(link);
+          }
+          host.prepend(el);
+        }
+        // Shown once: after it has really been on screen, a reload does not bring it back.
+        if (el.getClientRects().length) { try { sessionStorage.removeItem(NOTICE_KEY); } catch (err) { /* ignore */ } }
+      });
+    };
+    const showNotice = () => {
+      paint();
+      if (watcher) return;
+      watcher = new MutationObserver(paint);
+      watcher.observe(document.body, { subtree: true, childList: true, attributes: true, attributeFilter: ['open'] });
+    };
+
+    const settleOnce = async () => {
+      let cart = await getCart();
+      const counts = {};
+      cart.items.forEach((i) => { const b = bundleOf(i); if (b) counts[b] = (counts[b] || 0) + i.quantity; });
+      const short = Object.keys(counts).filter((b) => counts[b] < MIN);
+      if (!short.length) return cart;
+      const lines = cart.items.filter((i) => short.includes(bundleOf(i)));
+      for (const line of lines) {
+        // An empty value is what clears the label; an empty properties object is ignored by Shopify.
+        cart = await post('cart/change.js', { id: line.key, quantity: line.quantity, properties: { Bundle: '' } });
+      }
+      const first = short[0];
+      notice = {
+        id: first.slice(PREFIX.length),
+        need: MIN - counts[first],
+        p: lines.filter((i) => bundleOf(i) === first).map((i) => [i.handle, i.variant_id, i.quantity].join('~')).join(','),
+      };
+      try { sessionStorage.setItem(NOTICE_KEY, JSON.stringify(notice)); } catch (err) { /* ignore */ }
+      refresh(cart);
+      showNotice();
+      return cart;
+    };
+    // One run at a time; a change that lands during a run is checked again after it.
+    let queue = Promise.resolve();
+    const settle = () => {
+      queue = queue.then(settleOnce).catch(() => null);
+      return queue;
+    };
+    document.addEventListener('cart:update', () => { settle(); });
+
     document.addEventListener('click', (e) => {
       const open = e.target.closest('[data-m-bopen]');
       if (open) {
@@ -170,18 +276,24 @@
       const one = e.target.closest('[data-m-bremove]');
       if (one) {
         one.disabled = true;
-        fetch(((window.Shopify && window.Shopify.routes && window.Shopify.routes.root) || '/') + 'cart/change.js', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ id: one.dataset.mBremove, quantity: 0 }) })
-          .then(() => location.reload()).catch(() => { one.disabled = false; });
+        post('cart/change.js', { id: one.dataset.mBremove, quantity: 0 })
+          .then(() => {
+            if (d && d.open) d.close();
+            lock(false);
+            return settle();
+          })
+          .then((cart) => { if (cart) refresh(cart); else location.reload(); })
+          .catch(() => { one.disabled = false; });
         return;
       }
       if (e.target.closest('[data-m-bremove-all]')) {
         const box = e.target.closest('[data-m-bbox]');
         const keys = box.dataset.keys.split(',');
-        fetch(((window.Shopify && window.Shopify.routes && window.Shopify.routes.root) || '/') + 'cart.js').then((r) => r.json()).then((cart) => {
+        getCart().then((cart) => {
           const undo = cart.items.filter((i) => keys.includes(i.key)).map((i) => ({ id: i.variant_id, quantity: i.quantity, properties: i.properties }));
           try { sessionStorage.setItem('m-bundle-undo', JSON.stringify(undo)); } catch (err) { /* ignore */ }
           const updates = {}; keys.forEach((k) => { updates[k] = 0; });
-          return fetch(((window.Shopify && window.Shopify.routes && window.Shopify.routes.root) || '/') + 'cart/update.js', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ updates }) });
+          return post('cart/update.js', { updates });
         }).then(() => location.reload()).catch(() => {});
       }
     });
@@ -200,11 +312,18 @@
       t.lastChild.textContent = ar ? 'تراجع' : 'Undo';
       t.lastChild.addEventListener('click', () => {
         t.lastChild.disabled = true;
-        fetch(((window.Shopify && window.Shopify.routes && window.Shopify.routes.root) || '/') + 'cart/add.js', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ items: undo }) }).then(() => location.reload());
+        post('cart/add.js', { items: undo }).then(() => location.reload());
       });
       document.body.appendChild(t);
       setTimeout(() => t.remove(), 12000);
     };
-    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', showUndo); else showUndo();
+
+    // On load: finish a bundle that was cut short elsewhere (another tab, a closed page), and show a notice not yet seen.
+    const start = () => {
+      showUndo();
+      if (notice) showNotice();
+      if (document.querySelector('[data-m-bundle-short]')) settle();
+    };
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start); else start();
   })();
 {% endjavascript %}
