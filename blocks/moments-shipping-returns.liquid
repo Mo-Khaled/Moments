@@ -1,0 +1,18 @@
+{%- doc -%}
+  The product page "Shipping & Returns" text, from the translations (both languages live in the theme, so a change here changes
+  Arabic and English together). Used by the product templates' accordion row.
+{%- enddoc -%}
+
+<div class="rte moments-shipping" {{ block.shopify_attributes }}>
+  <p>{{ 'moments_shipping.delivery_html' | t }}</p>
+  <p>{{ 'moments_shipping.returns_html' | t }}</p>
+</div>
+
+{% schema %}
+{
+  "name": "Moments shipping text",
+  "tag": null,
+  "settings": [],
+  "presets": [{ "name": "Moments shipping text" }]
+}
+{% endschema %}

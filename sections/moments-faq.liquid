@@ -3,7 +3,7 @@
   filters on the client, and FAQPage structured data for the answered questions only.
   Answers are written only from claims the store can stand behind: 100% original and sealed, cash on delivery, the free shipping amount
   (theme setting "Free shipping above"), and a link to the returns and exchange policy page. A question with no answer (a TODO slot) is
-  hidden on the storefront and shown in the theme editor. Nothing here states a return window or any delivery time.
+  hidden on the storefront and shown in the theme editor. Nothing here states a return window. The delivery time is the store's own: 2 to 5 business days by governorate (2026-11-26).
   Standard topics have translated question and answer text; "Custom" blocks carry their own.
 {%- endcomment -%}
 
@@ -34,6 +34,10 @@
           assign q = 'faq.topic_returns_q' | t
           assign a = 'faq.topic_returns_a' | t
           assign g = 'returns'
+        when 'time'
+          assign q = 'faq.topic_time_q' | t
+          assign a = 'faq.topic_time_a' | t
+          assign g = 'orders'
         when 'gift'
           assign q = 'faq.topic_gift_q' | t
           assign a = 'faq.topic_gift_a' | t
@@ -88,6 +92,10 @@
                 assign a = 'faq.topic_returns_a' | t
                 assign g = 'returns'
                 assign link_to_returns = true
+              when 'time'
+                assign q = 'faq.topic_time_q' | t
+                assign a = 'faq.topic_time_a' | t
+                assign g = 'orders'
               when 'gift'
                 assign q = 'faq.topic_gift_q' | t
                 assign a = 'faq.topic_gift_a' | t
@@ -325,6 +333,7 @@
           "info": "Standard topics have translated, confirmed answers. Choose Custom to write your own.",
           "options": [
             { "value": "ship", "label": "Shipping cost (from theme setting)" },
+            { "value": "time", "label": "Delivery time" },
             { "value": "cod", "label": "Cash on delivery" },
             { "value": "orig", "label": "Original and sealed" },
             { "value": "returns", "label": "Returns policy (link only)" },

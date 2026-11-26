@@ -2400,13 +2400,13 @@
         "type": "number",
         "id": "seo_delivery_min_days",
         "label": "Transit time, fewest business days (after 0-1 day handling)",
-        "default": 1
+        "default": 2
       },
       {
         "type": "number",
         "id": "seo_delivery_max_days",
         "label": "Transit time, most business days",
-        "default": 2
+        "default": 4
       },
       {
         "type": "textarea",

@@ -623,6 +623,10 @@
     "toast_added": "Added to cart",
     "toast_view": "View cart"
   },
+  "moments_shipping": {
+    "delivery_html": "Delivery takes <strong>2 to 5 business days</strong> depending on your governorate.",
+    "returns_html": "Returns are accepted only for items that are not as described or arrived damaged. Requests must be submitted <strong>within a few hours of delivery</strong> and will be reviewed by our team promptly."
+  },
   "brands_index": {
     "title": "Brands",
     "text": "100% original, sealed. Find the scent that fits your moment.",
@@ -655,6 +659,8 @@
     "group_returns": "Returns",
     "group_payment": "Payment",
     "group_gifting": "Gifting",
+    "topic_time_q": "How long does delivery take?",
+    "topic_time_a": "Delivery takes 2 to 5 business days depending on your governorate.",
     "topic_ship_q": "How much is shipping?",
     "topic_ship_a": "Shipping is free on orders over {{ amount }}.",
     "topic_cod_q": "Can I pay on delivery?",

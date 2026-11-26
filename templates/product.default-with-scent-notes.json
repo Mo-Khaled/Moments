@@ -344,29 +344,8 @@
                   },
                   "blocks": {
                     "text_ship": {
-                      "type": "text",
-                      "settings": {
-                        "text": "<p>Orders are processed and delivered within <strong>2–3 business days</strong>.</p><p>Returns are accepted only for items that are not as described or arrived damaged. Requests must be submitted <strong>within a few hours of delivery</strong> and will be reviewed by our team promptly.</p>",
-                        "width": "100%",
-                        "max_width": "normal",
-                        "alignment": "left",
-                        "type_preset": "rte",
-                        "font": "var(--font-primary--family)",
-                        "font_size": "",
-                        "line_height": "normal",
-                        "letter_spacing": "normal",
-                        "case": "none",
-                        "wrap": "pretty",
-                        "color": "",
-                        "background": false,
-                        "background_color": "#00000026",
-                        "corner_radius": 0,
-                        "padding-block-start": 0,
-                        "padding-block-end": 0,
-                        "padding-inline-start": 0,
-                        "padding-inline-end": 0
-                      },
-                      "blocks": {}
+                      "type": "moments-shipping-returns",
+                      "settings": {}
                     }
                   },
                   "block_order": [

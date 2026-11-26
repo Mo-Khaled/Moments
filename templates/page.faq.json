@@ -53,9 +53,7 @@
         "q_time": {
           "type": "question",
           "settings": {
-            "topic": "custom",
-            "group": "orders",
-            "question": "How long does delivery take?"
+            "topic": "time"
           }
         },
         "q_source": {

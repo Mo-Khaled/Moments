@@ -150,7 +150,7 @@
               "deliveryTime": {
                 "@type": "ShippingDeliveryTime",
                 "handlingTime": { "@type": "QuantitativeValue", "minValue": 0, "maxValue": 1, "unitCode": "DAY" },
-                "transitTime": { "@type": "QuantitativeValue", "minValue": {{ settings.seo_delivery_min_days | default: 1 }}, "maxValue": {{ settings.seo_delivery_max_days | default: 2 }}, "unitCode": "DAY" }
+                "transitTime": { "@type": "QuantitativeValue", "minValue": {{ settings.seo_delivery_min_days | default: 2 }}, "maxValue": {{ settings.seo_delivery_max_days | default: 4 }}, "unitCode": "DAY" }
               }
             }
             {%- if shop.refund_policy.body != blank -%}
