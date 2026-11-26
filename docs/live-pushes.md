@@ -340,3 +340,5 @@ Includes c5ac09c (product page notes open the note card + "Go to the notes page"
 - feda628 Amber «عنبر», Tonka bean «فول التونكا»; ambergris «عنبر رمادي», amberwood «خشب العنبر» so no two notes share a name. Rollback: git revert --no-edit feda628 && bash scripts/push-commit.sh HEAD
 - Note: feda628 and 725278d both touch locales/ar.json, as does c838f49: roll back in reverse order if more than one.
 - scripts/notes-build-data.py would rebuild notes-data.json from the old source names: check names after any rebuild.
+
+### 2026-11-26 f42d2a3 (live #162553200831): one free shipping threshold, 3,000. Journey product template now uses block moments-delivery-journey (both languages from the translations, amount from the theme setting); unused snippet free-shipping-progress default too. Live files read back equal; checked at 390 EN+AR (journey view shows LE 3,000 / ٣٠٠٠, no 2,500). Rollback: git revert --no-edit f42d2a3 && bash scripts/push-commit.sh HEAD
