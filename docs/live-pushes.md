@@ -342,3 +342,8 @@ Includes c5ac09c (product page notes open the note card + "Go to the notes page"
 - scripts/notes-build-data.py would rebuild notes-data.json from the old source names: check names after any rebuild.
 
 ### 2026-11-26 f42d2a3 (live #162553200831): one free shipping threshold, 3,000. Journey product template now uses block moments-delivery-journey (both languages from the translations, amount from the theme setting); unused snippet free-shipping-progress default too. Live files read back equal; checked at 390 EN+AR (journey view shows LE 3,000 / ٣٠٠٠, no 2,500). Rollback: git revert --no-edit f42d2a3 && bash scripts/push-commit.sh HEAD
+
+### 2026-11-27 2b41051 (live #162553200831): note page "Perfumes with <note>" section (key, perfume row, See all), shared with the note card. 820e8c1 and 4ad809a were already live (both note files read back equal to 4ad809a before the push), so they were skipped. Live files read back equal to 2b41051. Checked EN+AR at 390 and 1280: card Vanilla and Bergamot (View all beside the heading, See all button, X 36 px round with 1 px ring), /pages/notes/vanilla section (3 key rows, 4 perfumes phone, 6 desktop, See all), Arabic See all Vanilla lists about 270 perfumes (12 pages), Bergamot opens a search with results, intoxicate-mystique description shows no raw tags. Rollback, newest first:
+- git revert --no-edit 2b41051 && bash scripts/push-commit.sh HEAD
+- git revert --no-edit 4ad809a && bash scripts/push-commit.sh HEAD
+- git revert --no-edit 820e8c1 && bash scripts/push-commit.sh HEAD
