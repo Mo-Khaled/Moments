@@ -114,6 +114,8 @@
   .m-notepage__perfumes { margin-block-start: clamp(28px, 4vw, 48px); }
   .m-notepage__perfumes .m-note__legend { margin-block-end: 8px; }
   .m-notepage__perfumes .m-note__all { margin-block-start: 16px; }
+  /* The row bleeds to the screen edge by the card's 20 px; the page's own edge is 16 px (20 px made the page scroll sideways by 4 px). */
+  .m-notepage__perfumes .m-note__row { margin-inline: -16px; padding-inline: 16px; }
   .m-notepage__perfumes .m-note__row-head h3 { font-size: var(--m-h3, 1.75rem); }
   @media screen and (min-width: 750px) { .m-notepage__perfumes .m-note__row { grid-template-columns: repeat(6, minmax(0, 1fr)); } .m-notepage__perfumes .m-key { display: flex; flex-wrap: wrap; gap: 8px 28px; inline-size: fit-content; max-inline-size: 100%; } }
   @media screen and (min-width: 750px) { .m-notepage__ctas { flex-direction: row; flex-wrap: wrap; inline-size: auto; } .m-notepage__ctas .m-btn { align-self: auto; inline-size: auto; } }
