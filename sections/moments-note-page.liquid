@@ -53,17 +53,19 @@
       <p class="m-notepage__eyebrow">{% if is_ar %}نوتة عطرية{% else %}Fragrance note{% endif %}{% if family != blank %} · {{ family }}{% endif %}</p>
       <h1 class="m-notepage__title">{{ name }}</h1>
       {%- if simple != blank -%}<p class="m-notepage__lead">{{ simple }}</p>{%- endif -%}
-      {%- if longevity != blank -%}
-        <h2 class="m-notepage__h">{% if is_ar %}الثبات{% else %}How long it lasts{% endif %}</h2>
-        <p>{{ longevity }}</p>
-      {%- endif -%}
-      {%- if source != blank -%}
-        <h2 class="m-notepage__h">{% if is_ar %}من أين تأتي{% else %}Where it comes from{% endif %}</h2>
-        <p>{{ source }}</p>
-      {%- endif -%}
-      {%- if story != blank -%}
-        <h2 class="m-notepage__h">{% if is_ar %}حكايتها{% else %}Its story{% endif %}</h2>
-        <p>{{ story }}</p>
+      {%- comment -%} The three facts as one compact list (owner 2026-11-27: less empty space). {%- endcomment -%}
+      {%- if longevity != blank or source != blank or story != blank -%}
+        <dl class="m-notepage__facts">
+          {%- if longevity != blank -%}
+            <div class="m-notepage__fact"><dt class="m-notepage__h">{% if is_ar %}الثبات{% else %}How long it lasts{% endif %}</dt><dd>{{ longevity }}</dd></div>
+          {%- endif -%}
+          {%- if source != blank -%}
+            <div class="m-notepage__fact"><dt class="m-notepage__h">{% if is_ar %}من أين تأتي{% else %}Where it comes from{% endif %}</dt><dd>{{ source }}</dd></div>
+          {%- endif -%}
+          {%- if story != blank -%}
+            <div class="m-notepage__fact"><dt class="m-notepage__h">{% if is_ar %}حكايتها{% else %}Its story{% endif %}</dt><dd>{{ story }}</dd></div>
+          {%- endif -%}
+        </dl>
       {%- endif -%}
       <div class="m-notepage__ctas">
         <a class="m-btn" href="{{ all_url }}">{% if is_ar %}اكتشف كل العطور التي تحتوي على {{ name }}{% else %}See all perfumes with {{ name }}{% endif %}</a>
@@ -91,24 +93,35 @@
 </script>
 
 {% stylesheet %}
-  .m-notepage { padding-block: clamp(24px, 5vw, 64px); }
-  .m-notepage__grid { display: grid; gap: 24px; align-items: start; }
+  .m-notepage { padding-block: clamp(16px, 3vw, 40px); }
+  /* One column on phones that never grows past the screen (a long fact line would widen an auto track). */
+  .m-notepage__grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: 24px; align-items: start; }
+  .m-notepage__body { min-inline-size: 0; }
   .m-notepage__img img { inline-size: 100%; block-size: auto; border-radius: 16px; background: #F7F3F5; }
   .m-notepage__body { display: flex; flex-direction: column; gap: 12px; align-items: flex-start; }
   .m-notepage__eyebrow { margin: 0; font-size: .875rem; opacity: .75; }
   .m-notepage__title { margin: 0; font-size: var(--m-h2); line-height: 1.1; }
-  .m-notepage__lead { margin: 0; font-size: 1.125rem; }
-  .m-notepage__h { margin: 12px 0 0; font-size: 1rem; }
+  .m-notepage__lead { margin: 0; font-size: 1.1875rem; line-height: 1.5; }
   .m-notepage__body p { margin: 0; }
+  .m-notepage__facts { inline-size: 100%; margin: 8px 0 0; border-block-start: 1px solid var(--m-hairline, #E6DDE3); }
+  .m-notepage__fact { display: grid; gap: 2px; padding-block: 12px; border-block-end: 1px solid var(--m-hairline, #E6DDE3); }
+  .m-notepage__fact dt { margin: 0; font-size: .8125rem; font-weight: 600; line-height: 1.4; opacity: .7; }
+  .m-notepage__fact dd { margin: 0; font-size: 1rem; line-height: 1.55; }
   .m-notepage__body .m-btn { align-self: center; margin-block-start: 12px; }
   .m-notepage__ctas { display: flex; flex-direction: column; gap: 12px; inline-size: 100%; margin-block-start: 16px; }
   .m-notepage__ctas .m-btn { align-self: stretch; inline-size: 100%; max-inline-size: none; margin: 0; justify-content: center; text-align: center; min-block-size: 48px; }
   .m-notepage__perfumes[hidden] { display: none; }
-  .m-notepage__perfumes { margin-block-start: clamp(32px, 6vw, 64px); padding-block-start: clamp(24px, 4vw, 40px); border-block-start: 1px solid var(--m-hairline, #E6DDE3); }
+  .m-notepage__perfumes { margin-block-start: clamp(28px, 4vw, 48px); }
+  .m-notepage__perfumes .m-note__legend { margin-block-end: 8px; }
+  .m-notepage__perfumes .m-note__all { margin-block-start: 16px; }
   .m-notepage__perfumes .m-note__row-head h3 { font-size: var(--m-h3, 1.75rem); }
-  @media screen and (min-width: 750px) { .m-notepage__perfumes .m-note__row { grid-template-columns: repeat(6, minmax(0, 1fr)); } .m-notepage__perfumes .m-key { max-inline-size: 560px; } }
+  @media screen and (min-width: 750px) { .m-notepage__perfumes .m-note__row { grid-template-columns: repeat(6, minmax(0, 1fr)); } .m-notepage__perfumes .m-key { display: flex; flex-wrap: wrap; gap: 8px 28px; inline-size: fit-content; max-inline-size: 100%; } }
   @media screen and (min-width: 750px) { .m-notepage__ctas { flex-direction: row; flex-wrap: wrap; inline-size: auto; } .m-notepage__ctas .m-btn { align-self: auto; inline-size: auto; } }
-  @media screen and (min-width: 750px) { .m-notepage__grid { grid-template-columns: minmax(0, 480px) minmax(0, 1fr); gap: 48px; } }
+  @media screen and (min-width: 750px) {
+    .m-notepage__grid { grid-template-columns: minmax(0, 440px) minmax(0, 1fr); gap: 56px; align-items: center; }
+    /* Wide screens: each fact's label beside its text, one line each where it fits. */
+    .m-notepage__fact { grid-template-columns: 180px minmax(0, 1fr); gap: 16px; align-items: baseline; }
+  }
 {% endstylesheet %}
 
 {% schema %}
