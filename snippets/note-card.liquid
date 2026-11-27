@@ -48,9 +48,9 @@
 
   <template data-t-labels>
     {%- if is_ar -%}
-      {"learn":"اعرف أكثر","family":"العائلة","position":"موقعها في العطر","longevity":"الثبات","source":"المصدر","story":"حكاية قصيرة","pairs":"تتناغم مع","seeAll":"شوف كل العطور اللي فيها","withNote":"عطور فيها","explain":"كم ستشمّ من هذه النوتة في كل عطر","keyTitle":"كيف تقرأ الأشرطة","starDesc":"أول ما تشمّه في العطر","supportingDesc":"تضيف عمقًا ودفئًا","touchDesc":"لمحة خفيفة في الخلفية","estNote":"تقدير تقريبي وليس قياسًا دقيقًا.","star":"النوتة الأساسية","supporting":"نوتة داعمة","touch":"لمسة خفيفة","related":"نوتات قريبة","top":"المقدمة","heart":"القلب","base":"القاعدة","none":"لا توجد نوتات بهذه التصفية.","clear":"إزالة","goPage":"اذهب إلى صفحة النوتة"}
+      {"learn":"اعرف أكثر","family":"العائلة","position":"موقعها في العطر","longevity":"الثبات","source":"المصدر","story":"حكاية قصيرة","pairs":"تتناغم مع","seeAll":"شوف كل العطور اللي فيها","withNote":"عطور فيها","explain":"كم ستشمّ من هذه النوتة في كل عطر","keyTitle":"كيف تقرأ الأشرطة","starDesc":"أول ما تشمّه في العطر","supportingDesc":"تضيف عمقًا ودفئًا","touchDesc":"لمحة خفيفة في الخلفية","estNote":"تقدير تقريبي وليس قياسًا دقيقًا.","star":"النوتة الأساسية","supporting":"نوتة داعمة","touch":"لمسة خفيفة","related":"نوتات قريبة","top":"المقدمة","heart":"القلب","base":"القاعدة","none":"لا توجد نوتات بهذه التصفية.","clear":"إزالة","goPage":"اذهب إلى صفحة النوتة","viewAll":"عرض الكل"}
     {%- else -%}
-      {"learn":"Learn more","family":"Family","position":"Where it sits","longevity":"Longevity","source":"Where it comes from","story":"A short story","pairs":"Pairs well with","seeAll":"See all perfumes with","withNote":"Perfumes with","explain":"How much of this note you'll smell in each perfume","keyTitle":"How to read the bars","starDesc":"the first thing you smell","supportingDesc":"adds depth and warmth","touchDesc":"a light hint in the background","estNote":"An estimate, not an exact measurement.","star":"Star of the scent","supporting":"Supporting","touch":"A touch","related":"Related notes","top":"Top","heart":"Heart","base":"Base","none":"No notes match these filters.","clear":"Remove","goPage":"Go to the notes page"}
+      {"learn":"Learn more","family":"Family","position":"Where it sits","longevity":"Longevity","source":"Where it comes from","story":"A short story","pairs":"Pairs well with","seeAll":"See all perfumes with","withNote":"Perfumes with","explain":"How much of this note you'll smell in each perfume","keyTitle":"How to read the bars","starDesc":"the first thing you smell","supportingDesc":"adds depth and warmth","touchDesc":"a light hint in the background","estNote":"An estimate, not an exact measurement.","star":"Star of the scent","supporting":"Supporting","touch":"A touch","related":"Related notes","top":"Top","heart":"Heart","base":"Base","none":"No notes match these filters.","clear":"Remove","goPage":"Go to the notes page","viewAll":"View all"}
     {%- endif -%}
   </template>
 </div>
@@ -69,6 +69,11 @@
     const isPhone = () => matchMedia('(max-width: 749px)').matches;
     const esc = (s) => String(s || '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
     const name = (n) => (ar ? n.name_ar : n.name_en);
+    // "See all": the ~30 Key Notes that are a storefront filter open the filtered perfume collection; every other note opens a product search (product descriptions name their notes).
+    const KEY_NOTES = ['Vanilla', 'Oud', 'Rose', 'Musk', 'Amber', 'Saffron', 'Jasmine', 'Sandalwood', 'Patchouli', 'Tonka Bean', 'Tobacco', 'Leather', 'Coffee', 'Caramel', 'Honey', 'Lavender', 'Incense', 'Iris', 'Coconut', 'Cherry', 'Chocolate', 'Pistachio', 'Orange Blossom', 'Citrus', 'Marine', 'Vetiver', 'Apple', 'Berries', 'Pineapple', 'Cinnamon'];
+    const allUrl = (n) => (KEY_NOTES.includes(n.name_en)
+      ? `${root.dataset.root}/collections/bundle-perfumes?filter.p.m.filter.notes=${encodeURIComponent(n.name_en)}`
+      : `${root.dataset.root}/search?type=product&q=${encodeURIComponent(n.name_en)}`);
     const byHandle = {};
     let dataP = null, openHandle = null, useHistory = false, lastFocus = null;
 
@@ -103,7 +108,7 @@
     const fillPerfumes = async (n, row) => {
       const max = isPhone() ? 4 : 6;
       const items = n.perfumes.slice(0, max);
-      if (!items.length) { row.closest('[data-body]').querySelectorAll('.m-note__row-head, .m-note__legend, .m-key, .m-note__est, [data-row]').forEach((el) => (el.hidden = true)); return; }
+      if (!items.length) { row.closest('[data-body]').querySelectorAll('.m-note__row-head, .m-note__legend, .m-key, .m-note__est, .m-note__all-link, .m-note__all, [data-row]').forEach((el) => (el.hidden = true)); return; }
       const data = await Promise.all(items.map((x) => product(x.h)));
       row.innerHTML = items.map((x, i) => {
         const p = data[i];
@@ -131,13 +136,14 @@
         <h3>${esc(L.source)}</h3><p>${esc(ar ? n.source_ar : n.source_en)}</p>
         <h3>${esc(L.story)}</h3><p>${esc(ar ? n.story_ar : n.story_en)}</p>
       </details>
-      <div class="m-note__row-head"><h3>${esc(L.withNote)} ${esc(name(n))}</h3></div>
+      <div class="m-note__row-head"><h3>${esc(L.withNote)} ${esc(name(n))}</h3><a class="m-note__all-link" href="${allUrl(n)}">${esc(L.viewAll)}<span aria-hidden="true">→</span></a></div>
       <p class="m-note__legend">${esc(L.explain)}</p>
       <ul class="m-key" aria-label="${esc(L.keyTitle)}">
         ${['star', 'supporting', 'touch'].map((k) => `<li>${bars(k)}<span><b>${esc(L[k])}</b> ${esc(L[k + 'Desc'])}</span></li>`).join('')}
       </ul>
       <p class="m-note__est">${esc(L.estNote)}</p>
       <ul class="m-note__row" data-row aria-label="${esc(L.withNote)} ${esc(name(n))}"></ul>
+      <div class="m-note__all"><a class="m-btn m-btn--ghost m-note__all-btn" href="${allUrl(n)}">${esc(L.seeAll)} ${esc(name(n))}</a></div>
       <h3 class="m-note__rel-head">${esc(L.related)}</h3>
       <ul class="m-note__related">${(n.pairs || []).filter((h) => byHandle[h]).map((h) => `<li><a href="${base}/${h}" data-open="${h}">${esc(name(byHandle[h]))}</a></li>`).join('')}</ul>
       <div class="m-note__go"><a class="m-btn m-note__go-btn" href="${base}/${n.handle}">${esc(L.goPage)}</a></div>`;

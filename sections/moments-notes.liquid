@@ -810,6 +810,35 @@
 
   .m-pcard__allbtn { display: grid; place-items: center; min-block-size: 120px; padding: 12px; border: 1px solid rgb(59 30 58 / 0.22); border-radius: 12px; text-align: center; font-size: 0.9375rem; color: var(--m-berry-ink); }
 
+  /* "See all perfumes with <note>" (owner 2026-11-27): a link beside the heading, plus a full button under the perfumes. */
+  .m-note__row-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    column-gap: 16px;
+  }
+  .m-note__row-head .m-note__all-link {
+    gap: 6px;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    white-space: nowrap;
+    text-decoration: none;
+  }
+  .m-note__all-link span { display: inline-block; transition: transform 0.15s ease; }
+  html[dir='rtl'] .m-note__all-link span { transform: scaleX(-1); }
+  @media (hover: hover) {
+    .m-note__all-link:hover { text-decoration: underline; text-underline-offset: 3px; }
+    .m-note__all-link:hover span { transform: translateX(3px); }
+    html[dir='rtl'] .m-note__all-link:hover span { transform: scaleX(-1) translateX(3px); }
+  }
+  .m-note__all { margin: -8px 0 24px; }
+  .m-note__all-btn { inline-size: 100%; min-block-size: 48px; justify-content: center; text-align: center; }
+  @media screen and (min-width: 750px) {
+    .m-note__all { display: flex; justify-content: center; }
+    .m-note__all-btn { inline-size: auto; min-inline-size: 320px; }
+  }
+
   /* hairline dividers between the card's sections (the Learn more block already has its own) */
   .m-note__rel-head {
     margin-block-start: 8px;

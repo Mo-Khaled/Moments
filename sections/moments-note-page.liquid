@@ -25,6 +25,14 @@
   endif
   assign notes_url = routes.root_url | append: '/pages/notes' | replace: '//', '/'
   assign img_asset = 'note-' | append: n.system.handle | append: '-1024.webp'
+  assign key_notes = 'Vanilla,Oud,Rose,Musk,Amber,Saffron,Jasmine,Sandalwood,Patchouli,Tonka Bean,Tobacco,Leather,Coffee,Caramel,Honey,Lavender,Incense,Iris,Coconut,Cherry,Chocolate,Pistachio,Orange Blossom,Citrus,Marine,Vetiver,Apple,Berries,Pineapple,Cinnamon' | split: ','
+  assign en_name = n.name.value
+  if key_notes contains en_name
+    assign all_url = routes.collections_url | append: '/bundle-perfumes?filter.p.m.filter.notes=' | append: en_name
+  else
+    assign all_url = routes.search_url | append: '?type=product&q=' | append: en_name
+  endif
+  assign all_url = all_url | replace: ' ', '+'
 -%}
 <article class="m-notepage">
   <div class="m-wrap m-notepage__grid">
@@ -51,7 +59,10 @@
         <h2 class="m-notepage__h">{% if is_ar %}حكايتها{% else %}Its story{% endif %}</h2>
         <p>{{ story }}</p>
       {%- endif -%}
-      <a class="m-btn" href="{{ notes_url }}">{% if is_ar %}استكشف كل النوتات{% else %}Explore all notes{% endif %}</a>
+      <div class="m-notepage__ctas">
+        <a class="m-btn" href="{{ all_url }}">{% if is_ar %}شوف كل العطور اللي فيها {{ name }}{% else %}See all perfumes with {{ name }}{% endif %}</a>
+        <a class="m-btn m-btn--ghost" href="{{ notes_url }}">{% if is_ar %}استكشف كل النوتات{% else %}Explore all notes{% endif %}</a>
+      </div>
     </div>
   </div>
 </article>
@@ -67,6 +78,9 @@
   .m-notepage__h { margin: 12px 0 0; font-size: 1rem; }
   .m-notepage__body p { margin: 0; }
   .m-notepage__body .m-btn { align-self: center; margin-block-start: 12px; }
+  .m-notepage__ctas { display: flex; flex-direction: column; gap: 12px; inline-size: 100%; margin-block-start: 16px; }
+  .m-notepage__ctas .m-btn { align-self: stretch; inline-size: 100%; max-inline-size: none; margin: 0; justify-content: center; text-align: center; min-block-size: 48px; }
+  @media screen and (min-width: 750px) { .m-notepage__ctas { flex-direction: row; flex-wrap: wrap; inline-size: auto; } .m-notepage__ctas .m-btn { align-self: auto; inline-size: auto; } }
   @media screen and (min-width: 750px) { .m-notepage__grid { grid-template-columns: minmax(0, 480px) minmax(0, 1fr); gap: 48px; } }
 {% endstylesheet %}
 
