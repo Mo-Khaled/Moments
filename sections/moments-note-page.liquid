@@ -26,12 +26,18 @@
   assign notes_url = routes.root_url | append: '/pages/notes' | replace: '//', '/'
   assign img_asset = 'note-' | append: n.system.handle | append: '-1024.webp'
   assign key_notes = 'Vanilla,Oud,Rose,Musk,Amber,Saffron,Jasmine,Sandalwood,Patchouli,Tonka Bean,Tobacco,Leather,Coffee,Caramel,Honey,Lavender,Incense,Iris,Coconut,Cherry,Chocolate,Pistachio,Orange Blossom,Citrus,Marine,Vetiver,Apple,Berries,Pineapple,Cinnamon' | split: ','
+  assign key_ar = 'فانيليا,عود,ورد,مسك,عنبر,زعفران,ياسمين,خشب الصندل,باتشولي,حبوب التونكا,تبغ,جلد,قهوة,كراميل,عسل,خزامى,بخور,سوسن,جوز الهند,كرز,شوكولاتة,فستق,زهر البرتقال,الحمضيات,نفحات بحرية,نجيل الهند,تفاح,التوت,أناناس,قرفة' | split: ','
   assign en_name = n.name.value
-  if key_notes contains en_name
-    assign all_url = routes.collections_url | append: '/bundle-perfumes?filter.p.m.filter.notes=' | append: en_name
-  else
-    assign all_url = routes.search_url | append: '?type=product&q=' | append: en_name
-  endif
+  assign all_url = routes.search_url | append: '?type=product&q=' | append: en_name
+  for k in key_notes
+    if k == en_name
+      assign filter_value = k
+      if is_ar
+        assign filter_value = key_ar[forloop.index0]
+      endif
+      assign all_url = routes.collections_url | append: '/bundle-perfumes?filter.p.m.filter.notes=' | append: filter_value
+    endif
+  endfor
   assign all_url = all_url | replace: ' ', '+'
 -%}
 <article class="m-notepage">

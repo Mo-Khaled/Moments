@@ -69,10 +69,11 @@
     const isPhone = () => matchMedia('(max-width: 749px)').matches;
     const esc = (s) => String(s || '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
     const name = (n) => (ar ? n.name_ar : n.name_en);
-    // "See all": the ~30 Key Notes that are a storefront filter open the filtered perfume collection; every other note opens a product search (product descriptions name their notes).
-    const KEY_NOTES = ['Vanilla', 'Oud', 'Rose', 'Musk', 'Amber', 'Saffron', 'Jasmine', 'Sandalwood', 'Patchouli', 'Tonka Bean', 'Tobacco', 'Leather', 'Coffee', 'Caramel', 'Honey', 'Lavender', 'Incense', 'Iris', 'Coconut', 'Cherry', 'Chocolate', 'Pistachio', 'Orange Blossom', 'Citrus', 'Marine', 'Vetiver', 'Apple', 'Berries', 'Pineapple', 'Cinnamon'];
-    const allUrl = (n) => (KEY_NOTES.includes(n.name_en)
-      ? `${root.dataset.root}/collections/bundle-perfumes?filter.p.m.filter.notes=${encodeURIComponent(n.name_en)}`
+    // "See all": the 30 Key Notes are a storefront filter; on Arabic the filter value is the Arabic translation (an English value finds nothing there).
+    // Every other note opens a product search (product descriptions name their notes).
+    const KEY_NOTES = { 'Vanilla': 'فانيليا', 'Oud': 'عود', 'Rose': 'ورد', 'Musk': 'مسك', 'Amber': 'عنبر', 'Saffron': 'زعفران', 'Jasmine': 'ياسمين', 'Sandalwood': 'خشب الصندل', 'Patchouli': 'باتشولي', 'Tonka Bean': 'حبوب التونكا', 'Tobacco': 'تبغ', 'Leather': 'جلد', 'Coffee': 'قهوة', 'Caramel': 'كراميل', 'Honey': 'عسل', 'Lavender': 'خزامى', 'Incense': 'بخور', 'Iris': 'سوسن', 'Coconut': 'جوز الهند', 'Cherry': 'كرز', 'Chocolate': 'شوكولاتة', 'Pistachio': 'فستق', 'Orange Blossom': 'زهر البرتقال', 'Citrus': 'الحمضيات', 'Marine': 'نفحات بحرية', 'Vetiver': 'نجيل الهند', 'Apple': 'تفاح', 'Berries': 'التوت', 'Pineapple': 'أناناس', 'Cinnamon': 'قرفة' };
+    const allUrl = (n) => (KEY_NOTES[n.name_en]
+      ? `${root.dataset.root}/collections/bundle-perfumes?filter.p.m.filter.notes=${encodeURIComponent(ar ? KEY_NOTES[n.name_en] : n.name_en)}`
       : `${root.dataset.root}/search?type=product&q=${encodeURIComponent(n.name_en)}`);
     const byHandle = {};
     let dataP = null, openHandle = null, useHistory = false, lastFocus = null;
