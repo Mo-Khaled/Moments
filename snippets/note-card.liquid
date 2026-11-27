@@ -109,7 +109,7 @@
     const fillPerfumes = async (n, row) => {
       const max = isPhone() ? 4 : 6;
       const items = n.perfumes.slice(0, max);
-      if (!items.length) { row.closest('[data-body]').querySelectorAll('.m-note__row-head, .m-note__legend, .m-key, .m-note__est, .m-note__all-link, .m-note__all, [data-row]').forEach((el) => (el.hidden = true)); return; }
+      if (!items.length) { row.closest('[data-body], [data-note-perfumes]').querySelectorAll('.m-note__row-head, .m-note__legend, .m-key, .m-note__est, .m-note__all-link, .m-note__all, [data-row]').forEach((el) => (el.hidden = true)); return; }
       const data = await Promise.all(items.map((x) => product(x.h)));
       row.innerHTML = items.map((x, i) => {
         const p = data[i];
@@ -122,6 +122,18 @@
           ${strength(x.level)}</a></li>`;
       }).join('');
     };
+
+    // The perfumes part of the card (heading, how-to-read key, perfume row, See all), shared with the note page.
+    const perfumesHtml = (n) => `
+      <div class="m-note__row-head"><h3>${esc(L.withNote)} ${esc(name(n))}</h3><a class="m-note__all-link" href="${allUrl(n)}">${esc(L.viewAll)}<span aria-hidden="true">→</span></a></div>
+      <p class="m-note__legend">${esc(L.explain)}</p>
+      <ul class="m-key" aria-label="${esc(L.keyTitle)}">
+        ${['star', 'supporting', 'touch'].map((k) => `<li>${bars(k)}<span><b>${esc(L[k])}</b> ${esc(L[k + 'Desc'])}</span></li>`).join('')}
+      </ul>
+      <p class="m-note__est">${esc(L.estNote)}</p>
+      <ul class="m-note__row" data-row aria-label="${esc(L.withNote)} ${esc(name(n))}"></ul>
+      <div class="m-note__all"><a class="m-btn m-btn--ghost m-note__all-btn" href="${allUrl(n)}">${esc(L.seeAll)} ${esc(name(n))}</a></div>
+`;
 
     const cardHtml = (n) => `
       <div class="m-note__hero">${tile(n, true)}</div>
@@ -137,20 +149,13 @@
         <h3>${esc(L.source)}</h3><p>${esc(ar ? n.source_ar : n.source_en)}</p>
         <h3>${esc(L.story)}</h3><p>${esc(ar ? n.story_ar : n.story_en)}</p>
       </details>
-      <div class="m-note__row-head"><h3>${esc(L.withNote)} ${esc(name(n))}</h3><a class="m-note__all-link" href="${allUrl(n)}">${esc(L.viewAll)}<span aria-hidden="true">→</span></a></div>
-      <p class="m-note__legend">${esc(L.explain)}</p>
-      <ul class="m-key" aria-label="${esc(L.keyTitle)}">
-        ${['star', 'supporting', 'touch'].map((k) => `<li>${bars(k)}<span><b>${esc(L[k])}</b> ${esc(L[k + 'Desc'])}</span></li>`).join('')}
-      </ul>
-      <p class="m-note__est">${esc(L.estNote)}</p>
-      <ul class="m-note__row" data-row aria-label="${esc(L.withNote)} ${esc(name(n))}"></ul>
-      <div class="m-note__all"><a class="m-btn m-btn--ghost m-note__all-btn" href="${allUrl(n)}">${esc(L.seeAll)} ${esc(name(n))}</a></div>
+      ${perfumesHtml(n)}
       <h3 class="m-note__rel-head">${esc(L.related)}</h3>
       <ul class="m-note__related">${(n.pairs || []).filter((h) => byHandle[h]).map((h) => `<li><a href="${base}/${h}" data-open="${h}">${esc(name(byHandle[h]))}</a></li>`).join('')}</ul>
       <div class="m-note__go"><a class="m-btn m-note__go-btn" href="${base}/${n.handle}">${esc(L.goPage)}</a></div>`;
 
     const api = {
-      labels: L, ar, base, byHandle, tile, name, load,
+      labels: L, ar, base, byHandle, tile, name, load, perfumesHtml, fillPerfumes,
       onOpen: null, onClose: null,
       isOpen: () => sheet.open,
       current: () => openHandle,
