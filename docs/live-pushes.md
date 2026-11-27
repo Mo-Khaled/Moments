@@ -347,3 +347,9 @@ Includes c5ac09c (product page notes open the note card + "Go to the notes page"
 - git revert --no-edit 2b41051 && bash scripts/push-commit.sh HEAD
 - git revert --no-edit 4ad809a && bash scripts/push-commit.sh HEAD
 - git revert --no-edit 820e8c1 && bash scripts/push-commit.sh HEAD
+
+### 2026-11-27 f4c22a8, 5fe6b1a, 1a92306 (live #162553200831, owner asked). Live files read back equal.
+- f4c22a8 product description text block max width None (was Normal, 455 px) in product.json, product.default-with-f-journey.json, product.default-with-scent-notes.json: the first line of Intoxicate Mystique now fits on one line at 1920 (EN and AR). Rollback: git revert --no-edit f4c22a8 && bash scripts/push-commit.sh HEAD
+- 5fe6b1a note page less empty space: the three facts as a compact list (label beside text on desktop, under it on phones), image centred with the text, perfumes section closer with the key in one row; previewed on staging #162401091775 first. Rollback: git revert --no-edit 5fe6b1a && bash scripts/push-commit.sh HEAD (after reverting 1a92306)
+- 1a92306 note page perfume row bleeds by 16 px (was 20 px, which made phones scroll sideways by 4 px since 2b41051). Rollback: git revert --no-edit 1a92306 && bash scripts/push-commit.sh HEAD
+- Checked live: guaiac-wood EN and AR at 1920 and 390 (no sideways scroll, 3 facts), intoxicate-mystique EN and AR at 1920 (first line one line).
